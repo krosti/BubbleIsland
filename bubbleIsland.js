@@ -125,6 +125,8 @@ var backgroundImage;
 var logoImage;
 
 var game;
+var frameBuffer;
+var animNav;
 var fps = 24;
 var pointExplode = 3;
 var pointDrop = 25;
@@ -132,6 +134,10 @@ var pointDrop = 25;
 
 function bubble(l){
 	// flavors = blue, red, purple, yellow
+	this.element = document.createElement('div');
+	this.element.style.minHeight = l.bubbleRadius + 'px';
+	this.element.style.minWidth = l.bubbleRadius + 'px';
+	this.element.style.position = 'absolute';
 	this.lvl = l;
 	this.flavor = "nula";
 	this.marked = false;
@@ -168,12 +174,15 @@ function bubble(l){
 				this.meinBild = bubbleOrangeImage;
 				break;
 		};
+		this.element.style.backgroundImage = 'url(' + this.meinBild.src+')';
 	};
 	
 	this.move = function(){
 		if((this.dx == 0) && (this.dy == 0)) return;
 		this.x += this.dx;
 		this.y += this.dy;
+		this.element.style.top = this.y + 'px';
+		this.element.style.left = this.x + 'px';
 		if((this.x <= this.lvl.leftBound) || (this.x > this.lvl.width)) this.dx = -this.dx;
 		if(this.y <= this.lvl.topBound) this.stopMove();
 	};
@@ -182,6 +191,7 @@ function bubble(l){
 		//hacer calculos
 		//painter.drawImage(this.meinBild, Math.floor(this.x), Math.floor(this.y), this.lvl.bubbleRadius, this.lvl.bubbleRadius);
 		painter.drawImage(this.meinBild, this.x, this.y, this.lvl.bubbleRadius, this.lvl.bubbleRadius);
+		//painter.drawImage(this.meinBild, this.x, this.y);
 		//painter.drawImage(this.meinBild, this.x, this.y, 28, 28);
 	};
 	
@@ -286,6 +296,9 @@ function bubbleCannon(lvl){
 		this.currentBubble.makeItRandom();
 		this.currentBubble.x = ((lvl.width / 2) - (this.lvl.bubbleRadius / 2)) + this.lvl.leftBound;
 		this.currentBubble.y = (lvl.height - lvl.bubbleRadius) + this.lvl.topBound;
+		this.currentBubble.element.style.y = this.currentBubble.y;
+		this.currentBubble.element.style.x = this.currentBubble.x;
+		$('#'+animNav).append(this.currentBubble.element);
 		this.readyShoot = true;
 	}
 };
@@ -516,7 +529,7 @@ function bubbleLevel(w, h, bubblesWidth, bubblesHeight){
 	
 	this.moveBalls = function(){
 		//debug('length: ' + this.bubbles_array.length);
-		//performance.check('move balls');
+		performance.check('move balls');
 		this.fpscount++;
 		this.fpscount = Math.round(this.fpscount % (fps / this.fallvelocity));
 
@@ -525,7 +538,7 @@ function bubbleLevel(w, h, bubblesWidth, bubblesHeight){
 		for(i = 0; i < this.bubbles_array.length; ++i){
 			this.bubbles_array[i].move();
 		};
-		//performance.check('move balls');
+		performance.check('move balls');
 		//si esta ocupado, evitar movimiento (normalmente no se mueve, solo evita check de mas)
 		if(this.mutex == true){
 			//debug("MUTED!");
@@ -533,9 +546,9 @@ function bubbleLevel(w, h, bubblesWidth, bubblesHeight){
 		};
 
 		//check colisions
-		//performance.check('colisiones');
+		performance.check('colisiones');
 		if(this.shootedBubble == null){
-			//performance.check('colisiones');
+			performance.check('colisiones');
 			return;	
 		} 
 		this.shootedBubble.move();
@@ -563,7 +576,7 @@ function bubbleLevel(w, h, bubblesWidth, bubblesHeight){
 			};
 		};
 
-		//performance.check('colisiones');
+		performance.check('colisiones');
 
 		//si la pelota disparada llego al techo y freno sola
 		//debug(this.shootedBubble.isMoving());
@@ -582,18 +595,19 @@ function bubbleLevel(w, h, bubblesWidth, bubblesHeight){
 	this.drawBalls = function(painter){
 		//alert(painter);
 		//if((this.bubbles_array.length) != 0) alert(this.bubbles_array.length);
-		//performance.check('draw balls');
+		performance.check('draw balls');
 		for(i = 0; i < this.bubbles_array.length; ++i){
 			//draw each ball
 			this.bubbles_array[i].draw(painter);
+			//setTimeout('game.level.bubbles_array['+i+'].draw(frameBuffer)', 1);
 		};
 
-		//performance.check('draw balls');
+		performance.check('draw balls');
 		if(this.shootedBubble != null) this.shootedBubble.draw(painter);
 	};
 	
 	this.addBubble = function(b){
-		this.bubbles_array.push(b);		
+		this.bubbles_array.push(b);	
 	};
 	
 	this.removeBubble = function(b){
@@ -632,6 +646,7 @@ function bubbleLevel(w, h, bubblesWidth, bubblesHeight){
 				this.grilla.Table[i][j] = b;
 				b.recalcXY();				
 				this.addBubble(b);
+				$('#'+animNav).append(b.element);
 			};
 		};
 	};
@@ -661,6 +676,7 @@ function bubbleLevel(w, h, bubblesWidth, bubblesHeight){
 			b.recalcXY();
 			newrow[i] = b;
 			this.addBubble(b);
+			$('#'+animNav).append(b.element);
 		};				
 	};
 }
@@ -677,7 +693,7 @@ function gameUI(w, h){
 	this.restorePoints = function(){ this.points = this.acumuledPoints;}
 	
 	this.draw = function(painter){
-		//performance.check('draw ui');
+		performance.check('draw ui');
 		painter.save();
 		painter.fillStyle = '#fff';
 		painter.fillRect(0, 0, 100, 25);
@@ -686,32 +702,36 @@ function gameUI(w, h){
 		if(this.pointsCounter < this.points) this.pointsCounter++;
 		painter.fillText(this.pointsCounter , 10, 10);
 		painter.restore();
-		//performance.check('draw ui');
+		performance.check('draw ui');
 	};
 	
 	this.addPoints = function(p){ this.points += p; };
 };
 
-function appEnviroment(canvasObj, menuObj, backgroundCanvasObj, size){
+function appEnviroment(canvasObj, menuObj, navObj, size){
 	this.level;
 	this.animTimer;
 	this.canvas = document.getElementById(canvasObj);//$(canvasObj)
 	this.painter = document.getElementById(canvasObj).getContext('2d');
-	this.backgroundCanvas = document.getElementById(backgroundCanvasObj);
-	this.backgroundPainter = document.getElementById(backgroundCanvasObj).getContext('2d');
+	/*this.backgroundCanvas = document.getElementById(backgroundCanvasObj);
+	this.backgroundPainter = document.getElementById(backgroundCanvasObj).getContext('2d');*/
 	this.buffercanvas = document.createElement('canvas');
 	this.frameBuffer = this.buffercanvas.getContext('2d');
+	//frameBuffer = this.frameBuffer;
+	frameBuffer = this.painter;
 	this.menu = document.getElementById(menuObj);
 	this.backgroundImage = backgroundImage;
 	this.lvlFrame = lvlFrame;
+	animNav = navObj;
+
 	this.clock = new Timeline(fps);
 	this.clock.connect(tick, 'tick');
-	/*performance = new performanceStatus(5, this.painter);
+	performance = new performanceStatus(5, this.painter);
 	performance.addChecker('clear painter');
 	performance.addChecker('move balls');
 	performance.addChecker('colisiones');
 	performance.addChecker('draw balls');
-	performance.addChecker('draw ui');*/
+	performance.addChecker('draw ui');
 	
 	switch(size){
 		case "320x480":
@@ -743,8 +763,8 @@ function appEnviroment(canvasObj, menuObj, backgroundCanvasObj, size){
 			break;
 	};
 
-	this.backgroundCanvas.height = this.canvas.height;
-	this.backgroundCanvas.width = this.canvas.width;
+	/*this.backgroundCanvas.height = this.canvas.height;
+	this.backgroundCanvas.width = this.canvas.width;*/
 	this.buffercanvas.height = this.canvas.height;
 	this.buffercanvas.width = this.canvas.width;
 	
@@ -823,14 +843,22 @@ function appEnviroment(canvasObj, menuObj, backgroundCanvasObj, size){
 	this.draw = function(){
 		//this.canvas.style.display = 'none';
 		//performance.check('clear painter');
-		this.clearPainter(this.frameBuffer);
+		/*this.clearPainter(this.frameBuffer);
 		//performance.check('clear painter');
 		this.drawBackground(this.frameBuffer);
 		this.drawCannon(this.frameBuffer);
 		this.drawBalls(this.frameBuffer);
-		this.ui.draw(this.frameBuffer);
+		this.ui.draw(this.frameBuffer);*/
+
+		this.clearPainter(this.painter);
+		//performance.check('clear painter');
+		this.drawBackground(this.painter);
+		this.drawCannon(this.painter);
+		//this.drawBalls(this.painter);
+		this.ui.draw(this.painter);
+
 		//this.clearPainter(this.painter);
-		this.painter.putImageData(this.frameBuffer.getImageData(0, 0, this.buffercanvas.width, this.buffercanvas.height), 0, 0);
+		//this.painter.putImageData(this.frameBuffer.getImageData(0, 0, this.buffercanvas.width, this.buffercanvas.height), 0, 0);
 		//this.canvas.style.display = 'block';
 	}
 	//$(canvasObj).
@@ -854,14 +882,16 @@ function appEnviroment(canvasObj, menuObj, backgroundCanvasObj, size){
 	
 	this.level.makeMeRandom(5);
 	this.cannon.setReadyShoot();
-	this.drawBackground(this.backgroundPainter);
+	//this.drawBackground(this.backgroundPainter);
 
 
 	//$('#'+canvasObj).click(shoot);
-	$('#'+canvasObj).click(this.mouseClick);
+	//$('#'+canvasObj).click(this.mouseClick);
+	$('#'+navObj).click(this.mouseClick);
 }
 
 function tick(){
 	game.startAnimation();
-	//performance.update();
+	performance.update();
+	//setTimeout("tick()", 1);
 }

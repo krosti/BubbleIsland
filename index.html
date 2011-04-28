@@ -2,24 +2,32 @@
 <html>
 <head>
 	<title>Bubble Island Fork</title>
+
+    <!--meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" /-->
+
 	<script src="jquery.js" type="text/javascript" charset="utf-8"></script> 
 	<script src="side.js" type="text/javascript" charset="utf-8"></script> 
 	<script src="bubbleIsland.js" type="text/javascript" charset="utf-8"></script> 	
 	<style type="text/css">
 		body, html { 
 			width: 320px;
-			height: 480px;
+			height: 480px
 		}
+
 	</style>
 </head>
 <body>
-<!--nav style="width: 320px; min-height: 480px; background-image: url('background.png'); position: absolute; top: 0px; left: 0px">
+<nav style="width: 320px; min-height: 480px; background-image: url('background.png'); position: absolute; top: 0px; left: 0px">
 </nav>
 <nav id="frameBackground" style="width: 320px; min-height: 480px; background-image: url('lvlboundering.png'); position: absolute; top: 0px; left: 0px;">
 </nav>
- background-image: url('background.png')-->
+ <!--background-image: url('background.png')-->
 <!--canvas id="gameBackgroundCanvas" style="position: absolute; top: 0px; left: 0px"></canvas-->
-<canvas id="gameCanvas" style="position: absolute; top: 0px; left: 0px;" ></canvas>
+<canvas id="gameCanvas" style="position: absolute; top: 0px; left: 0px; display:none" ></canvas>
+<nav id="animCanvas" style="position: absolute; top: 0px; left: 0px; width: 320px; min-height: 480px;"></nav>
 <nav id="gameMenu" style="width: 320px; min-height: 480px; position: absolute; top: 0px; left: 0px; text-align: center; ;">
 	<div style="position: absolute; display: table; top: 20%; bottom: auto; margin: auto; width: 100%">
 	<span style="font: bold 20px verdana, sans-serif; text-align: center">Bubble Paradise</span><br>
@@ -59,7 +67,7 @@ loader.readyLoad = function(){
 			$(this).fadeOut(900, function(){
 				$("#initScreen").remove();		
 				//game = new appEnviroment("gameCanvas", "gameMenu", "gameBackgroundCanvas", "320x480");
-				game = new appEnviroment("gameCanvas", "gameMenu", "gameCanvas", "320x480");
+				game = new appEnviroment("gameCanvas", "gameMenu", "animCanvas", "320x480");
 				//clock.connect(game.startAnimation, 'tick')
 				//clock.start();				
 				

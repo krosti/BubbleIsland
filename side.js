@@ -38,6 +38,13 @@ function Loader(progress){
 	bubbleRedImage.src = 'redbubble.png';
 	bubblePurpleImage.src = 'purplebubble.png';
 	bubbleYellowImage.src = 'yellowbubble.png';
+
+	/*bubbleSilverImage.src = 'silverbubble.jpg';
+	bubbleOrangeImage.src = 'orangebubble.jpg';
+	bubbleRedImage.src = 'redbubble.jpg';
+	bubblePurpleImage.src = 'purplebubble.jpg';
+	bubbleYellowImage.src = 'yellowbubble.jpg';*/
+
 	lvlFrame.src = 'lvlboundering.png';
 	backgroundImage.src = 'background.png';
 	logoImage.src = 'logo.jpg';
@@ -60,6 +67,7 @@ function Timeline(fps){
 		//empieza la animacion
 		this.trigger(this.onStart);
 		this.timerId = setInterval("this.tick()", 1000/this.fps);
+		//this.timerId = setTimeout("this.tick()", 1);
 	};
 	
 	this.stop = function(){

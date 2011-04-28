@@ -127,13 +127,47 @@ function Animation(duration, fps){
 	
 };
 
-function performanceStatus(updateTime){
+function performanceStatus(updateTime, painter){
 	this.updateEvery = updateTime;
-	this.checkers = new Array();
-	
+	this.checkers = {};
+	this.painter = painter;
+	this.fpsCount = 0;
+	this.timer = new Date();
+
 	this.addChecker = function(name){
-		
+		this.checkers[name] = new Object();
+		this.checkers[name].lastStamp = this.timer.getTime();
+		this.checkers[name].span = 0;
 	};
-	//Init
+
+	this.check = function(name){
+		stop = new Date().getTime();
+		/*alert(this.checkers[name].lastStamp);
+		alert(stop);*/
+		this.checkers[name].span = stop - this.checkers[name].lastStamp;
+		this.checkers[name].lastStamp = stop;
+	};
+
+	this.update = function(){
+		/*this.fpsCount++;
+		this.fpsCount = this.fpsCount % this.updateEvery;
+		if(this.fpsCount == 0) this.draw();	*/
+		this.draw();
+	};
+
+	this.draw = function(){
+		this.painter.save();
+		base = 10;
+		//alert('performance draw');
+		for(i in this.checkers){
+			//alert(i);
+			current = this.checkers[i];
+			this.painter.font = "bold 12px sans-serif";
+			this.painter.fillStyle = '#000';
+			this.painter.fillText(i + ' : ' + current.span , 100, base);
+			base += 15
+		};
+		this.painter.restore();
+	};
 	
 };

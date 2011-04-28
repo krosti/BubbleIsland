@@ -125,9 +125,10 @@ var backgroundImage;
 var logoImage;
 
 var game;
-var fps = 16;
+var fps = 24;
 var pointExplode = 3;
 var pointDrop = 25;
+//var performance;
 
 function bubble(l){
 	// flavors = blue, red, purple, yellow
@@ -174,12 +175,14 @@ function bubble(l){
 		this.x += this.dx;
 		this.y += this.dy;
 		if((this.x <= this.lvl.leftBound) || (this.x > this.lvl.width)) this.dx = -this.dx;
-		if(this.y <= this.lvl.topBound) this.stopMove()
+		if(this.y <= this.lvl.topBound) this.stopMove();
 	};
 	
 	this.draw = function(painter){
 		//hacer calculos
+		//painter.drawImage(this.meinBild, Math.floor(this.x), Math.floor(this.y), this.lvl.bubbleRadius, this.lvl.bubbleRadius);
 		painter.drawImage(this.meinBild, this.x, this.y, this.lvl.bubbleRadius, this.lvl.bubbleRadius);
+		//painter.drawImage(this.meinBild, this.x, this.y, 28, 28);
 	};
 	
 	this.stopMove = function(){
@@ -229,6 +232,8 @@ function bubble(l){
 		this.y = (this.i * h);
 		this.x += this.lvl.leftBound;
 		this.y += this.lvl.topBound;
+		this.x = Math.floor(this.x);
+		this.y = Math.floor(this.y);
 		//alert(this.x + ' : ' + this.y);*/
 	};
 
@@ -237,6 +242,7 @@ function bubble(l){
 		h = Math.sqrt((this.lvl.bubbleRadius*this.lvl.bubbleRadius) - ((this.lvl.bubbleRadius / 2) * (this.lvl.bubbleRadius / 2)));
 		y = (thisBubble.i * h) + this.lvl.topBound;
 		this.y += thisBubble.y - y; 
+		this.y = Math.floor(this.y);
 	};
 	
 	this.isMoving = function(){
@@ -510,6 +516,7 @@ function bubbleLevel(w, h, bubblesWidth, bubblesHeight){
 	
 	this.moveBalls = function(){
 		//debug('length: ' + this.bubbles_array.length);
+		//performance.check('move balls');
 		this.fpscount++;
 		this.fpscount = Math.round(this.fpscount % (fps / this.fallvelocity));
 
@@ -518,7 +525,7 @@ function bubbleLevel(w, h, bubblesWidth, bubblesHeight){
 		for(i = 0; i < this.bubbles_array.length; ++i){
 			this.bubbles_array[i].move();
 		};
-		
+		//performance.check('move balls');
 		//si esta ocupado, evitar movimiento (normalmente no se mueve, solo evita check de mas)
 		if(this.mutex == true){
 			//debug("MUTED!");
@@ -526,9 +533,13 @@ function bubbleLevel(w, h, bubblesWidth, bubblesHeight){
 		};
 
 		//check colisions
-		if(this.shootedBubble == null) return;
+		//performance.check('colisiones');
+		if(this.shootedBubble == null){
+			//performance.check('colisiones');
+			return;	
+		} 
 		this.shootedBubble.move();
-		if(this.shootedBubble == null) return;
+
 		for(i = 0; i < this.bubbles_array.length; ++i){			
 			currentBubble = this.bubbles_array[i];
 			// check radius
@@ -552,6 +563,8 @@ function bubbleLevel(w, h, bubblesWidth, bubblesHeight){
 			};
 		};
 
+		//performance.check('colisiones');
+
 		//si la pelota disparada llego al techo y freno sola
 		//debug(this.shootedBubble.isMoving());
 		if(this.shootedBubble == null) return;
@@ -569,10 +582,13 @@ function bubbleLevel(w, h, bubblesWidth, bubblesHeight){
 	this.drawBalls = function(painter){
 		//alert(painter);
 		//if((this.bubbles_array.length) != 0) alert(this.bubbles_array.length);
+		//performance.check('draw balls');
 		for(i = 0; i < this.bubbles_array.length; ++i){
 			//draw each ball
 			this.bubbles_array[i].draw(painter);
 		};
+
+		//performance.check('draw balls');
 		if(this.shootedBubble != null) this.shootedBubble.draw(painter);
 	};
 	
@@ -661,6 +677,7 @@ function gameUI(w, h){
 	this.restorePoints = function(){ this.points = this.acumuledPoints;}
 	
 	this.draw = function(painter){
+		//performance.check('draw ui');
 		painter.save();
 		painter.fillStyle = '#fff';
 		painter.fillRect(0, 0, 100, 25);
@@ -669,20 +686,32 @@ function gameUI(w, h){
 		if(this.pointsCounter < this.points) this.pointsCounter++;
 		painter.fillText(this.pointsCounter , 10, 10);
 		painter.restore();
+		//performance.check('draw ui');
 	};
 	
 	this.addPoints = function(p){ this.points += p; };
 };
 
-function appEnviroment(canvasObj, menuObj, size){
+function appEnviroment(canvasObj, menuObj, backgroundCanvasObj, size){
 	this.level;
 	this.animTimer;
 	this.canvas = document.getElementById(canvasObj);//$(canvasObj)
 	this.painter = document.getElementById(canvasObj).getContext('2d');
+	this.backgroundCanvas = document.getElementById(backgroundCanvasObj);
+	this.backgroundPainter = document.getElementById(backgroundCanvasObj).getContext('2d');
+	this.buffercanvas = document.createElement('canvas');
+	this.frameBuffer = this.buffercanvas.getContext('2d');
 	this.menu = document.getElementById(menuObj);
 	this.backgroundImage = backgroundImage;
-	this.clock = new Timeline(24);
+	this.lvlFrame = lvlFrame;
+	this.clock = new Timeline(fps);
 	this.clock.connect(tick, 'tick');
+	/*performance = new performanceStatus(5, this.painter);
+	performance.addChecker('clear painter');
+	performance.addChecker('move balls');
+	performance.addChecker('colisiones');
+	performance.addChecker('draw balls');
+	performance.addChecker('draw ui');*/
 	
 	switch(size){
 		case "320x480":
@@ -713,6 +742,11 @@ function appEnviroment(canvasObj, menuObj, size){
 			this.level = new bubbleLevel(854, 480, 25, 20)
 			break;
 	};
+
+	this.backgroundCanvas.height = this.canvas.height;
+	this.backgroundCanvas.width = this.canvas.width;
+	this.buffercanvas.height = this.canvas.height;
+	this.buffercanvas.width = this.canvas.width;
 	
 	this.cannon = new bubbleCannon(this.level);
 	this.level.cannon = this.cannon;
@@ -745,6 +779,7 @@ function appEnviroment(canvasObj, menuObj, size){
 		//hide menu
 		this.clock.start();
 		this.menu.style.zIndex = this.menu.style.zIndex - 1;
+		this.menu.style.display = 'none';
 		//alert('hola');
 	};
 	
@@ -758,38 +793,45 @@ function appEnviroment(canvasObj, menuObj, size){
 	
 	//animation functions
 	this.clearPainter = function(){
-		this.painter.save();
+		//this.painter.save();
 		//this.painter.fillStyle = '#fff';
 		//this.painter.fillRect(0, 0, this.width, this.height);
 		this.painter.clearRect(0, 0, this.width, this.height);
-		this.painter.restore();
+		//this.painter.restore();
 	}
 	
-	this.drawCannon = function(){
+	this.drawCannon = function(painter){
 		if(this.cannon.currentBubble == null) return;
-		this.painter.save();
-		this.painter.drawImage(this.cannon.currentBubble.meinBild, this.width / 2, (this.height - this.level.bubbleRadius));
-		this.painter.restore();
+		painter.save();
+		painter.drawImage(this.cannon.currentBubble.meinBild, this.width / 2, (this.height - this.level.bubbleRadius));
+		painter.restore();
 	}
 	
-	this.drawBalls = function(){
-		this.level.drawBalls(this.painter);
+	this.drawBalls = function(painter){
+		this.level.drawBalls(painter);
 	}
 	
-	this.drawBackground = function(){
-		this.painter.save();
-		this.painter.drawImage(this.backgroundImage, 0, 0);
-		this.painter.drawImage(lvlFrame, (this.canvas.width - lvlFrame.width) / 2, this.canvas.height - lvlFrame.height);
-		this.painter.fillRect(this.level.leftBound, this.level.topBound, this.level.width, this.level.height);
-		this.painter.restore();
+	this.drawBackground = function(painter){
+		//painter.save();
+		painter.drawImage(this.backgroundImage, 0, 0);
+		painter.drawImage(this.lvlFrame, 0, 0);
+		//painter.drawImage(lvlFrame, (this.canvas.width - lvlFrame.width) / 2, this.canvas.height - lvlFrame.height);
+		//painter.fillRect(this.level.leftBound, this.level.topBound, this.level.width, this.level.height);
+		//painter.restore();
 	}
 	
 	this.draw = function(){
-		this.clearPainter();
-		//this.drawBackground();
-		this.drawCannon();
-		this.drawBalls();
-		this.ui.draw(this.painter);
+		//this.canvas.style.display = 'none';
+		//performance.check('clear painter');
+		this.clearPainter(this.frameBuffer);
+		//performance.check('clear painter');
+		this.drawBackground(this.frameBuffer);
+		this.drawCannon(this.frameBuffer);
+		this.drawBalls(this.frameBuffer);
+		this.ui.draw(this.frameBuffer);
+		//this.clearPainter(this.painter);
+		this.painter.putImageData(this.frameBuffer.getImageData(0, 0, this.buffercanvas.width, this.buffercanvas.height), 0, 0);
+		//this.canvas.style.display = 'block';
 	}
 	//$(canvasObj).
 	this.startAnimation = function(){
@@ -812,10 +854,14 @@ function appEnviroment(canvasObj, menuObj, size){
 	
 	this.level.makeMeRandom(5);
 	this.cannon.setReadyShoot();
+	this.drawBackground(this.backgroundPainter);
+
+
 	//$('#'+canvasObj).click(shoot);
 	$('#'+canvasObj).click(this.mouseClick);
 }
 
 function tick(){
 	game.startAnimation();
+	//performance.update();
 }

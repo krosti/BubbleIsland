@@ -3,12 +3,12 @@
 <head>
 	<title>Bubble Island Fork</title>
 
-    <!--meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
+    <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
     <meta name="apple-mobile-web-app-capable" content="yes" />
-
-    <meta name="apple-mobile-web-app-status-bar-style" content="black" /-->
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
 
 	<script src="jquery.js" type="text/javascript" charset="utf-8"></script> 
+	<script src="jqueryMobile.js" type="text/javascript" charset="utf-8"></script> 
 	<script src="side.js" type="text/javascript" charset="utf-8"></script> 
 	<script src="bubbleIsland.js" type="text/javascript" charset="utf-8"></script> 	
 	<style type="text/css">
@@ -27,7 +27,7 @@
  <!--background-image: url('background.png')-->
 <!--canvas id="gameBackgroundCanvas" style="position: absolute; top: 0px; left: 0px"></canvas-->
 <canvas id="gameCanvas" style="position: absolute; top: 0px; left: 0px; display:none" ></canvas>
-<nav id="animCanvas" style="position: absolute; top: 0px; left: 0px; width: 320px; min-height: 480px;"></nav>
+<nav id="animCanvas" style="position: absolute; top: 0px; left: 0px;"></nav>
 <nav id="gameMenu" style="width: 320px; min-height: 480px; position: absolute; top: 0px; left: 0px; text-align: center; ;">
 	<div style="position: absolute; display: table; top: 20%; bottom: auto; margin: auto; width: 100%">
 	<span style="font: bold 20px verdana, sans-serif; text-align: center">Bubble Paradise</span><br>
@@ -35,7 +35,7 @@
 	<nav style="font: bold 15px verdana, sans-serif; margin-top: 10px" onClick="game.startNewGame()">New Game</nav>
 	<nav style="font: bold 15px verdana, sans-serif; margin-top: 10px">Continue Game</nav>
 	<nav style="font: bold 15px verdana, sans-serif; margin-top: 10px">Options</nav>
-	<nav style="font: bold 15px verdana, sans-serif; margin-top: 10px">Leave Paradise :(</nav>
+	<nav style="font: bold 15px verdana, sans-serif; margin-top: 10px" onClick="ww = window.open(window.location, '_self'); 	ww.close();">Leave Paradise :(</nav>
 	</div>
 	</div>
 </nav>
@@ -57,17 +57,26 @@ $(window).load(function () {
 	/*game = new appEnviroment("gameCanvas", "320x480");
 	setDebugEnv('debug-div');
 	var animTimer = setInterval(tick, 42);*/
+	 /*$(window).bind('orientationchange', function(e){
+		//alert(window.orientation);
+		alert(e.orientation);
+        //setOrientation();
+    });
+
+    $(window).trigger('orientationchange');*/
 });
+
+
 loader = new Loader('progress');
 loader.readyLoad = function(){	
 	//toda la intro del juego
 	
 	$('#loadingScreen').fadeOut('fast', function(){
-		$('#logoImg').fadeIn(900, function(){
-			$(this).fadeOut(900, function(){
+		$('#logoImg').fadeIn(1900, function(){
+			$(this).fadeOut(1900, function(){
 				$("#initScreen").remove();		
 				//game = new appEnviroment("gameCanvas", "gameMenu", "gameBackgroundCanvas", "320x480");
-				game = new appEnviroment("gameCanvas", "gameMenu", "animCanvas", "320x480");
+				game = new appEnviroment("gameCanvas", "gameMenu", "animCanvas", "854x480");
 				//clock.connect(game.startAnimation, 'tick')
 				//clock.start();				
 				
@@ -76,6 +85,37 @@ loader.readyLoad = function(){
 		//$('#logoImg').fadeIn();
 	});
 };
+/*alert(screen.width + ' : ' + screen.height);
+
+	*switch(size){
+		case "320x480":
+			this.canvas.width = 320;
+			this.canvas.height = 480;
+			this.level = new bubbleLevel(240, 400, 10, 20)
+			break;
+		case "360x480":
+			this.canvas.width = 360;
+			this.canvas.height = 480;
+			this.level = new bubbleLevel(360, 480, 12, 20)
+			break;
+		case "640x960":
+			this.canvas.width = 640;
+			this.canvas.height = 960;
+			this.level = new bubbleLevel(640, 960, 15, 30)
+			break;
+		case "480x800":
+			this.canvas.width = 480;
+			this.canvas.height = 800;
+			this.level = new bubbleLevel(480, 800, 13, 25)
+			break;
+		case "854x480":
+			//$('#'+canvasObj).width(854);
+			//$('#'+canvasObj).height(480);
+			this.canvas.height = 480; 
+			this.canvas.width = 854;
+			this.level = new bubbleLevel(854, 480, 25, 20)
+			break;
+	};*/
 
 loader.init();
 var s = document.createElement('script');
@@ -91,6 +131,7 @@ s.onload = function() {
     document.body.appendChild(stats.domElement);
     setInterval(stats.update, 1000 / 60);
 }
+
 
 </script> 
 </body>

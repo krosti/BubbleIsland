@@ -4,29 +4,30 @@ ToDo
 RC:
 [ ] animaciones
 [ ] sonido (html5 o por flash)
+[ ] api facebook
 
 beta:
 [x] un disparo por tiempo
-[-] optimizar draw
+[x] optimizar draw
 [ ] dibujar cañon
-[ ] api facebook
+[ ] api pago
 
 alpha:
 [-] ui
-[-] interfaz de menu
+[x] interfaz de menu
 [ ] multiples resoluciones 
 [x] puntuacion
 [ ] diferentes niveles
 [ ] carga de niveles por ajax desde archivo
 [x] generar level random
-[b] lvl que aumente linea de bubbles
-[-] bubbles bajen lentamente
+[x] lvl que aumente linea de bubbles
+[x] bubbles bajen lentamente
 [ ] linea de perdida variable
-[-] bolas mas escurridisa (tener cierto margen de error para dejar pasar mas facil las pelotas entre otras)
+[x] bolas mas escurridisa (tener cierto margen de error para dejar pasar mas facil las pelotas entre otras)
 
 pre-alpha:
 [b] ubicar bola en grilla
-[b] mostrar correctamente la grilla
+[x] mostrar correctamente la grilla
 [x] test de grilla por explosion de iguales
 [x] test de grilla por huerfanos
 [x] detectar colisiones
@@ -296,8 +297,8 @@ function bubbleCannon(lvl){
 		this.currentBubble.makeItRandom();
 		this.currentBubble.x = ((lvl.width / 2) - (this.lvl.bubbleRadius / 2)) + this.lvl.leftBound;
 		this.currentBubble.y = (lvl.height - lvl.bubbleRadius) + this.lvl.topBound;
-		this.currentBubble.element.style.y = this.currentBubble.y;
-		this.currentBubble.element.style.x = this.currentBubble.x;
+		this.currentBubble.element.style.top = this.currentBubble.y + 'px';
+		this.currentBubble.element.style.left = this.currentBubble.x + 'px';
 		$('#'+animNav).append(this.currentBubble.element);
 		this.readyShoot = true;
 	}
@@ -352,6 +353,8 @@ function bubbleTable(ancho, alto, lvl){
 		//alert(collided);
 		radius = this.lvl.bubbleRadius / 2;
 		halfradius = radius / 2;
+		bubble.x -= bubble.dx / 2;
+		bubble.y -= bubble.dy / 2;
 		dx = 0;
 		dy = 0;
 		deltax = collided.x - bubble.x;
@@ -621,6 +624,7 @@ function bubbleLevel(w, h, bubblesWidth, bubblesHeight){
 				//debug('removed ' + b.toString());
 			};
 		};
+		$(b.element).remove();
 	};
 	
 	this.setReadyShoot = function(){
@@ -850,10 +854,10 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 		this.drawBalls(this.frameBuffer);
 		this.ui.draw(this.frameBuffer);*/
 
-		this.clearPainter(this.painter);
+		//this.clearPainter(this.painter);
 		//performance.check('clear painter');
-		this.drawBackground(this.painter);
-		this.drawCannon(this.painter);
+		//this.drawBackground(this.painter);
+		//this.drawCannon(this.painter);
 		//this.drawBalls(this.painter);
 		this.ui.draw(this.painter);
 
@@ -865,7 +869,10 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 	this.startAnimation = function(){
 		// call this every 1/24 seconds to make all work
 		this.ui.points = this.level.points;
+		n = $('#'+animNav);
+		n[0].style.display = 'none';
 		this.level.moveBalls();
+		n[0].style.display = 'block';
 		this.draw();
 		//var animTimer = setInterval(this.draw, 42);
 	}
@@ -879,7 +886,8 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 	this.level.left = this.left;	
 	this.level.topBound = this.canvas.height - this.level.height;
 	this.level.leftBound = (this.canvas.width - this.level.width) / 2;
-	
+	$('#'+animNav).width(this.width);
+	$('#'+animNav).height(this.height);
 	this.level.makeMeRandom(5);
 	this.cannon.setReadyShoot();
 	//this.drawBackground(this.backgroundPainter);
@@ -888,6 +896,7 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 	//$('#'+canvasObj).click(shoot);
 	//$('#'+canvasObj).click(this.mouseClick);
 	$('#'+navObj).click(this.mouseClick);
+	$('#'+navObj).tap(this.mouseClick);
 }
 
 function tick(){

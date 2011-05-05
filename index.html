@@ -15,13 +15,13 @@
 	<script src="ChildBrowser.js" type="text/javascript" charset="utf-8"></script> 
 	<script src="FBconnect.js" type="text/javascript" charset="utf-8"></script> 
 	<script type="text/javascript" charset="utf-8">
-		redir_url = "http://www.facebook.com/connect/login_success.html";
+		redirect_url = "http://www.facebook.com/connect/login_success.html";
 		document.addEventListener('deviceready', function(){
 			alert('now we will make facebook conn');
 			var frame = document.createElement('iframe');
 			var authorize_url  = "https://graph.facebook.com/oauth/authorize?";
 				authorize_url += "client_id=" + APPID;
-				authorize_url += "&redirect_uri=" + redirect_uri;
+				authorize_url += "&redirect_uri=" + redirect_url;
 				authorize_url += "&display=touch"
 				authorize_url += "&type=user_agent";
 			frame.style.position = 'absolute';
@@ -29,8 +29,10 @@
 			frame.style.left = '0px';
 			frame.style.width = '100%';
 			frame.style.min.height = '100%';
-			frame.style.overflow = 'hidden';
+			frame.style.overflow = 'hidden';			
 			document.body.appendChild(frame);
+			alert(authorize_url);
+			frame.src = authorize_url;
 			/*for(o in window.plugins){
 				alert(o + ' : ' + window.plugins[o]);
 			};
@@ -157,8 +159,7 @@ function onDeviceReady()
 	  
 $(window).load(function () {	
 	
-	//FB.login(function(){ alert('login'); });
-	
+
 });
 
 				
@@ -179,6 +180,26 @@ loader.readyLoad = function(){
 				if(screen.width <= 320) gameSize = "320x480";
 				options = new Options('optionMenu');
 				game = new appEnviroment("gameCanvas", "gameMenu", "animCanvas", gameSize);
+				//FB.login(function(){ alert('login'); });
+				alert('now we will make facebook conn');
+				var frame = document.createElement('iframe');
+				//var authorize_url  = "https://graph.facebook.com/oauth/authorize?";
+				var authorize_url  = "http://m.facebook.com/dialog/oauth/?scope=publish_stream";
+					authorize_url += "&client_id=" + APPID;
+					authorize_url += "&redirect_uri=" + redirect_url;
+					authorize_url += "&display=touch"
+				//	authorize_url += "&type=user_agent";
+				frame.style.position = 'absolute';
+				frame.style.top = '0px';
+				frame.style.left = '0px';
+				frame.style.width = '100%';
+				frame.style.height = '480px';
+				//frame.style.minHeight = '100%';
+				frame.style.zIndex = 10001;
+				//frame.style.overflow = 'hidden';			
+				document.body.appendChild(frame);
+				alert(authorize_url);
+				frame.src = authorize_url;
 				//clock.connect(game.startAnimation, 'tick')
 				//clock.start();				
 				

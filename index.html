@@ -15,7 +15,12 @@
 	<script src="ChildBrowser.js" type="text/javascript" charset="utf-8"></script> 
 	<script src="FBconnect.js" type="text/javascript" charset="utf-8"></script> 
 	<script type="text/javascript" charset="utf-8">
-		document.addEventListener('deviceready', onDeviceReady, false);
+		document.addEventListener('deviceready', function(){
+			alert('now we will make facebook conn');
+			var fb = FBConnect.install();
+			fb.connect(APPID,redir_url,"touch");
+			fb.onConnect = function(){ alert('siii'); };		
+		}, false);
 	</script> 
 	
 	

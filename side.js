@@ -49,7 +49,7 @@ function Loader(progress){
 	backgroundImage.src = 'background.png';
 	logoImage.src = 'logo.jpg';
 };
-
+//function Timeline(self, fps){ //donde self es el nombre del objeto usado
 function Timeline(fps){
 	this.animations = new Array();
 	this.fps = fps;
@@ -112,28 +112,148 @@ function Timeline(fps){
 
 };
 
-function Animation(duration, fps){
+// one div, multiple imgs
+/*function Animation(duration, width, height, image){
 	this.duration = duration;
-	this.fps = fps;
-	this.ticks = new Array();
+	this.width = width;
+	this.height = height;
 	this.internalClock = duration / fps;
 	this.finished = false;
+	this.element = document.createElement('div');
+	this.frames = new Array();
+	for(var i = 0; i < duration; ++i){
+		//alert(i);
+		div = document.createElement('img');
+		div.style.width = width + 'px';
+		div.style.minHeight = height + 'px';
+		div.style.minWidth = width + 'px';
+		div.style.position = 'absolute';
+		div.style.top = '0px';
+		div.style.left = '0px';
+		div.style.backgroundPosition = i * this.width + 'px 0px';
+		div.style.display = 'none';
+		//div.style.backgroundImage = 'url(' + image + ')';
+		div.src = image[i];
+		this.frames.push(div);
+		$(this.element).append(div);
+	};
+	this.frames[0].style.display = 'block';
+
+	this.element.style.width = width + 'px';
+	this.element.style.minHeight = height + 'px';
+	this.element.style.minWidth = width + 'px';
+	this.element.style.position = 'absolute';
+	//this.element.style.backgroundImage = 'url(' + image + ')'
+	this.tick = 0;
+	
+	this.addMoment = function(img, stage){
+
+	};
+
+	this.setX = function(x){ this.element.style.left = x + 'px'; };
+	this.setY = function(y){ this.element.style.top = y + 'px'; };
+	
+	this.render = function(){
+		//alert(this.tick);
+		this.tick += 1;// % duration; 
+		this.tick = this.tick % this.duration;
+		//this.element.style.backgroundPosition = this.tick * this.width + 'px 0px';*
+		this.frames[this.tick].style.display = 'none';
+		this.tick += 1;// % duration; 
+		this.tick = this.tick % this.duration;
+		this.frames[this.tick].style.display = 'block';
+	};
+	
+};*/
+
+// one div, moving background
+function Animation(duration, width, height, image){
+	this.duration = duration;
+	this.width = width;
+	this.height = height;
+	this.internalClock = duration / fps;
+	this.finished = false;
+	this.element = document.createElement('div');
+
+	this.element.style.width = width + 'px';
+	this.element.style.minHeight = height + 'px';
+	this.element.style.minWidth = width + 'px';
+	this.element.style.position = 'absolute';
+	this.element.style.backgroundImage = 'url(' + image + ')'
+	this.tick = 0;
+	
+	this.addMoment = function(img, stage){
+
+	};
+
+	this.setX = function(x){ this.element.style.left = x + 'px'; };
+	this.setY = function(y){ this.element.style.top = y + 'px'; };
+	
+	this.render = function(){
+		//alert(this.tick);
+		this.tick += 1;// % duration; 
+		this.tick = this.tick % this.duration;
+		this.element.style.backgroundPosition = this.tick * this.width + 'px 0px';
+		//this.frames[this.tick].style.display = 'none';
+	};
+	
+};
+
+//multiple div, an div per frame
+/*function Animation(duration, width, height, image){
+	this.duration = duration;
+	this.width = width;
+	this.height = height;
+	this.internalClock = duration / fps;
+	this.finished = false;
+	this.element = document.createElement('div');
+	this.frames = new Array();
+	for(var i = 0; i < duration; ++i){
+		//alert(i);
+		div = document.createElement('div');
+		div.style.width = width + 'px';
+		div.style.minHeight = height + 'px';
+		div.style.minWidth = width + 'px';
+		div.style.position = 'absolute';
+		div.style.top = '0px';
+		div.style.left = '0px';
+		div.style.backgroundPosition = i * this.width + 'px 0px';
+		div.style.display = 'none';
+		div.style.backgroundImage = 'url(' + image + ')';
+		this.frames.push(div);
+		$(this.element).append(div);
+	};
+	this.frames[0].style.display = 'block';
+
+	this.element.style.width = width + 'px';
+	this.element.style.minHeight = height + 'px';
+	this.element.style.minWidth = width + 'px';
+	this.element.style.position = 'absolute';
+	//this.element.style.backgroundImage = 'url(' + image + ')'
+	this.tick = 0;
 	
 	this.addMoment = function(img, stage){
 		/*this.ticks.push({
 			image: img;
 			i: stage
-		});*/
+		});*
+	};
+
+	this.setX = function(x){ this.element.style.left = x + 'px'; };
+	this.setY = function(y){ this.element.style.top = y + 'px'; };
+	
+	this.render = function(){
+		//alert(this.tick);
+		/*this.tick += 1;// % duration; 
+		this.tick = this.tick % this.duration;
+		this.element.style.backgroundPosition = this.tick * this.width + 'px 0px';*
+		this.frames[this.tick].style.display = 'none';
+		this.tick += 1;// % duration; 
+		this.tick = this.tick % this.duration;
+		this.frames[this.tick].style.display = 'block';
 	};
 	
-	this.render = function(painter, x, y){
-		if(this.finished) return;
-		
-		this.internalClock--;
-		if(this.internalClocl == 0) this.finished = true;
-	};
-	
-};
+};*/
 
 function performanceStatus(updateTime, painter){
 	this.updateEvery = updateTime;

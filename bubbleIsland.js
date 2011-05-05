@@ -4,25 +4,27 @@ ToDo
 RC:
 [ ] animaciones
 [ ] sonido (html5 o por flash)
-[ ] api facebook
 
 beta:
 [x] un disparo por tiempo
 [x] optimizar draw
 [ ] dibujar cañon
 [ ] api pago
+[-] api facebook
+[ ] animaciones basicas
+[ ] animaciones deseadas
 
 alpha:
 [-] ui
 [x] interfaz de menu
-[ ] multiples resoluciones 
+[-] multiples resoluciones 
 [x] puntuacion
-[ ] diferentes niveles
-[ ] carga de niveles por ajax desde archivo
+[-] velocidad de caida variable
+[-] diferentes niveles
 [x] generar level random
 [x] lvl que aumente linea de bubbles
 [x] bubbles bajen lentamente
-[ ] linea de perdida variable
+[-] linea de perdida variable
 [x] bolas mas escurridisa (tener cierto margen de error para dejar pasar mas facil las pelotas entre otras)
 
 pre-alpha:
@@ -46,16 +48,6 @@ referencia:
 
 
 function rnd(top){ return Math.floor(Math.random()*(top + 1))};
-
-/*Object.prototype.clone = function() {
-  var newObj = (this instanceof Array) ? [] : {};
-  for (i in this) {
-    if (i == 'clone') continue;
-    if (this[i] && typeof this[i] == "object") {
-      newObj[i] = this[i].clone();
-    } else newObj[i] = this[i]
-  } return newObj;
-};*/
 
 Array.prototype.remove = function(data) {
 	//debug('called remover');
@@ -89,33 +81,6 @@ function debug(txt){
 };
 	
 
-/*image_background=new Image();
-image_background.src='colleen_back.png';
-image_cannon=new Image();
-image_cannon.src='colleen_cannon.png';
-image_balls=new Image();
-image_balls.src='colleen_balls.png';
-image_zowie=new Image();
-image_zowie.src='zowie.png';*/
-
-/*var bubbleSilverImage = new Image();
-bubbleSilverImage.src = 'silverbubble.png';
-
-var bubbleOrangeImage = new Image();
-bubbleOrangeImage.src = 'orangebubble.png';
-
-var bubbleRedImage = new Image();
-bubbleRedImage.src = 'redbubble.png';
-
-var bubblePurpleImage = new Image();
-bubblePurpleImage.src = 'purplebubble.png';
-
-var bubbleYellowImage = new Image();
-bubbleYellowImage.src = 'yellowbubble.png';
-
-var lvlFrame = new Image();
-lvlFrame.src = 'lvlboundering.png';*/
-
 var bubbleSilverImage;
 var bubbleRedImage; 
 var bubbleOrangeImage;
@@ -129,13 +94,20 @@ var game;
 var frameBuffer;
 var animNav;
 var fps = 24;
-var pointExplode = 3;
-var pointDrop = 25;
+var pointExplode = 10;
+var pointDrop = 5;
+var min_vel = .1;
+var freezeTime = 10 //en segundos
+
+
+APPID = '213255638692367';
+APPKEY = '230bd48e2d38a991fe41e284887db3d8';
+
 //var performance;
 
 function bubble(l){
 	// flavors = blue, red, purple, yellow
-	this.element = document.createElement('div');
+	this.element = document.createElement('img');
 	this.element.style.minHeight = l.bubbleRadius + 'px';
 	this.element.style.minWidth = l.bubbleRadius + 'px';
 	this.element.style.position = 'absolute';
@@ -151,31 +123,81 @@ function bubble(l){
 	this.meinBild = new Image();
 	//this.meinBild.src = 'bubble.png';
 	
+	this.secondFlavor = '';
+	this.freezeBall = false;
+	this.bombBall = false;
+	this.pointsMultiplier = 1;
+	
 	this.makeItRandom = function(){
+		var value = rnd(10);
+		switch(value){
+			case 0:
+			case 1:
+			case 2:
+			case 3:
+			case 4:
+			case 5:
+			case 6:
+				this.flavor = this.randomFlavor();				
+				break;
+			case 7:
+				var second = rnd(1);
+				if(second == 0){
+					this.pointsMultiplier = 2;
+				}else{
+					this.pointsMultiplier = 2;
+				};
+				alert('Multiplier ball: ' + this.pointsMultiplier);
+				this.flavor = this.randomFlavor();				
+				break;
+			case 8:
+				this.flavor = this.randomFlavor();
+				this.freezeBall = true;
+				alert('freezeBall!!');
+				break;
+			case 9:
+				this.flavor = this.randomFlavor();
+				do{
+					this.secondFlavor = this.randomFlavor();
+				}while(this.flavor == this.secondFlavor);
+				alert(this.flavor + ' : ' + this.secondFlavor);
+				break;
+			case 10:
+				this.flavor = this.randomFlavor();
+				this.bombBall = true;
+				alert('bombBall!!');
+				break;
+		};	
+	};
+	
+	this.randomFlavor = function(){
+		var flavor;
 		var value = rnd(4);
 		switch (value){
 			case 0:
-				this.flavor = "silver"; 
+				flavor = "silver"; 
 				this.meinBild = bubbleSilverImage;
 				break;
 			case 1:
-				this.flavor = "yellow"; 
+				flavor = "yellow"; 
 				this.meinBild = bubbleYellowImage;
 				break;
 			case 2:
-				this.flavor = "purple"; 
+				flavor = "purple"; 
 				this.meinBild = bubblePurpleImage;
 				break;
 			case 3:
-				this.flavor = "red"; 
+				flavor = "red"; 
 				this.meinBild = bubbleRedImage;
 				break;
 			case 4:
-				this.flavor = "orange";
+				flavor = "orange";
 				this.meinBild = bubbleOrangeImage;
 				break;
 		};
-		this.element.style.backgroundImage = 'url(' + this.meinBild.src+')';
+		//this.element.style.backgroundImage = 'url(' + this.meinBild.src+')';
+		this.element.src = this.meinBild.src;
+		return flavor;
 	};
 	
 	this.move = function(){
@@ -209,10 +231,10 @@ function bubble(l){
 		
 		// altura de la grilla -> mover de obj
 		//h = (this.lvl.bubbleRadius) / Math.sqrt(2);
-		h = Math.sqrt((this.lvl.bubbleRadius*this.lvl.bubbleRadius) - ((this.lvl.bubbleRadius / 2) * (this.lvl.bubbleRadius / 2)));
+		//h = Math.sqrt((this.lvl.bubbleRadius*this.lvl.bubbleRadius) - ((this.lvl.bubbleRadius / 2) * (this.lvl.bubbleRadius / 2)));
 		
 		//set proximity and attach to table
-		this.i = Math.round(((this.y - this.lvl.topBound) / h) );//+ .5);
+		this.i = Math.round(((this.y - this.lvl.topBound) / this.lvl.h) );//+ .5);
 		//calcula se corresponde corrimiento para la fila que tiene una bola menos
 		//delta = (this.i % 2) * (this.lvl.bubbleRadius / 2);
 		delta = this.lvl.grilla.isShortRow(this.i) * (this.lvl.bubbleRadius / 2);
@@ -232,7 +254,17 @@ function bubble(l){
 	};
 	
 	this.equalBubble = function(bubble){
-		return (bubble.flavor = this.flavor);
+		var equal = (bubble.flavor == this.flavor);
+		if(bubble.secondFlavor != ''){
+			equal = equal || (bubble.secondFlavor == this.flavor);		
+		};
+		if(this.secondFlavor != ''){
+			equal = equal || (this.secondFlavor == bubble.flavor);		
+		};
+		if(this.secondFlavor != ''){
+			equal = equal || (this.secondFlavor == bubble.secondFlavor);		
+		};
+		return equal;
 	};
 	
 	this.recalcXY = function(){
@@ -299,7 +331,7 @@ function bubbleCannon(lvl){
 		this.currentBubble.y = (lvl.height - lvl.bubbleRadius) + this.lvl.topBound;
 		this.currentBubble.element.style.top = this.currentBubble.y + 'px';
 		this.currentBubble.element.style.left = this.currentBubble.x + 'px';
-		$('#'+animNav).append(this.currentBubble.element);
+		animNav.append(this.currentBubble.element);
 		this.readyShoot = true;
 	}
 };
@@ -329,6 +361,8 @@ function bubbleTable(ancho, alto, lvl){
 	};
 	
 	this.touchedBubbles = new Array();
+
+	this.exploded = 0;
 	
 	
 	this.retrieveBubble = function(i, j){
@@ -376,39 +410,61 @@ function bubbleTable(ancho, alto, lvl){
 		this.Table[bubble.i][bubble.j] = bubble;
 		bubble.recalcXYfrom(collided);
 
-		c = this.checkForCompatibility(bubble, bubble.flavor);
+		c = this.checkForCompatibility(bubble, bubble);
 		//debug('    c   :' + c + '   ');
 		this.lvl.mutex = true;
 		if(c >= 3){				
-			this.lvl.pointsMultiplier = pointExplode;
-			this.explodeMarked();
-			this.lvl.pointsMultiplier = pointDrop;
+			//alert(c);
+			var mult = bubble.pointsMultiplier;
+			this.lvl.pointsMultiplier =  c * c * pointExplode * mult;
+			//alert(this.lvl.pointsMultiplier);
+			this.exploded = c;
+			this.explodeMarked();			
+			this.lvl.addPoints();
+			this.lvl.pointsMultiplier = pointDrop * mult;
 			this.checkForOrphans();
 		}else{				
 			this.clearMarks();
 		};
 		this.touchedBubbles = new Array();
 		this.lvl.setReadyShoot();
-
-		/*if(this.Table[bubble.i][bubble.j] == "vacio"){
-			this.Table[bubble.i][bubble.j] = bubble;
-			c = this.checkForCompatibility(bubble, bubble.flavor);
-			//debug('    c   :' + c + '   ');
-			this.lvl.mutex = true;
-			if(c >= 3){				
-				this.lvl.pointsMultiplier = pointExplode;
-				this.explodeMarked();
-				this.lvl.pointsMultiplier = pointDrop;
-				this.checkForOrphans();
-			}else{				
-				this.clearMarks();
-			};
-			this.touchedBubbles = new Array();
-			this.lvl.setReadyShoot();
-		};*/
+		
 	};
 	
+	
 	this.checkForCompatibility = function(toCheck, flavor){
+		//chequeo si donde cayo, puede explotar algunas
+		//if(this.retrieveBubble(i-1, j).)
+		//toCheck = bubble//this.retrieveBubble(i,j);
+		if(toCheck == "nada" || toCheck == "vacio") return 0;
+		if(toCheck.flavor == "nula") return 0;
+		if(toCheck.marked) return 0;
+		this.touchedBubbles.push(toCheck);
+		toCheck.marked = true;
+		//debug('&nbsp;  tocheck: ' + toCheck.flavor + ' &nbsp; flavor:' + flavor + ' &nbsp; i: ' + toCheck.i+ ':'+toCheck.j+ '<br>');
+		if(flavor.equalBubble(toCheck)){
+			c = 1;
+			//debug('toCheck')			
+			c += this.checkForCompatibility(this.retrieveBubble(toCheck.i, toCheck.j + 1), flavor);
+			c += this.checkForCompatibility(this.retrieveBubble(toCheck.i, toCheck.j - 1), flavor);
+			c += this.checkForCompatibility(this.retrieveBubble(toCheck.i - 1, toCheck.j), flavor);
+			c += this.checkForCompatibility(this.retrieveBubble(toCheck.i + 1, toCheck.j), flavor);
+			if(!this.isShortRow(toCheck.i)){
+				c += this.checkForCompatibility(this.retrieveBubble(toCheck.i + 1, toCheck.j - 1), flavor);
+				c += this.checkForCompatibility(this.retrieveBubble(toCheck.i - 1, toCheck.j - 1), flavor);	
+			}else{
+				c += this.checkForCompatibility(this.retrieveBubble(toCheck.i + 1, toCheck.j + 1), flavor);
+				c += this.checkForCompatibility(this.retrieveBubble(toCheck.i - 1, toCheck.j + 1), flavor);
+			};
+			return c;
+		}else{
+			toCheck.marked = false;
+			return 0;
+		};
+		
+	};
+	
+	/*this.checkForCompatibility = function(toCheck, flavor){
 		//chequeo si donde cayo, puede explotar algunas
 		//if(this.retrieveBubble(i-1, j).)
 		//toCheck = bubble//this.retrieveBubble(i,j);
@@ -438,7 +494,7 @@ function bubbleTable(ancho, alto, lvl){
 			return 0;
 		};
 		
-	};
+	};*/
 	
 	this.checkNeighbours = function(bubble){
 		//check de caidas
@@ -470,8 +526,10 @@ function bubbleTable(ancho, alto, lvl){
 		//debug(this.touchedBubbles);
 		while(this.touchedBubbles.length > 0){
 			toCheck = this.touchedBubbles.shift();
-			if(this.checkNeighbours(toCheck)){
+			if(this.checkNeighbours(toCheck)){				
 				this.explodeMarked(); // <------------- por ahora, cambiar a drop de las bolitas
+				this.lvl.pointsMultiplier = this.exploded * 10;
+				this.lvl.addPoints();
 			}else{
 				this.clearMarks();
 			};
@@ -486,6 +544,11 @@ function bubbleTable(ancho, alto, lvl){
 				b = this.Table[i][j];
 				if((b != "nada") && (b != "vacio")){					
 					if(b.marked){
+						if(b.freezeBall) this.lvl.freezeMovement();
+						if(b.bombBall){
+							this.lvl.detonateBomb(b, 3);
+							this.explodeMarked();
+						};
 						this.lvl.removeBubble(b);						
 						this.Table[i][j] = "vacio";
 						this.touchedBubbles.remove(b);
@@ -500,41 +563,85 @@ function bubbleTable(ancho, alto, lvl){
 			for(j = 0; j < this.ancho; ++j){
 				//alert('i:'+i+' j:'+j);
 				//alert(i + ':' + j);
-				if((this.Table[i][j] != "nada") ||(this.Table[i][j] != "vacio")){					
+				//if((this.Table[i][j] != "nada") || (this.Table[i][j] != "vacio")){					
+				if((this.Table[i][j] != "nada") && (this.Table[i][j] != "vacio")){					
 					b = this.Table[i][j];
 					b.marked = false;
 				}; 
 			};
 		};
 	};
+	
+	this.returnLowest = function(){
+			var i = this.alto - 1;
+			var j = 0;
+			var salir = false;
+			var result;
+			while(!salir && i > -1){
+				result = this.Table[i][j];
+				if(result != "nada" && result != "vacio"){
+					salir = true;
+				}else{
+					j++;
+					if(j == this.ancho){
+						i--;
+						j = 0;
+					};
+				};
+			};
+			
+			return result;
+		};
 }
 
-function bubbleLevel(w, h, bubblesWidth, bubblesHeight){
+function bubbleLevel(w, h, bubblesWidth, bubblesHeight, lvlnbr){
 	this.grilla = new bubbleTable(bubblesWidth, bubblesHeight, this);
 	this.cannon;
 	this.width = w;
 	this.height = h;
 	this.top;
 	this.left;
+	this.lvlnro = lvlnbr;
 	this.topBound;
 	this.leftBound;
 	this.mutex = false;
+	this.freeze = false;
+	this.freezeTimeout = 0;
 	this.bubbleRadius = this.width / bubblesWidth;
 	this.shootedBubble = null;
 	this.bubbles_array = new Array();
 	this.points = 0;
-	this.pointsToReach = 1000;
+	this.pointsToReach = 1000 * this.lvlnro * 2;
 	this.pointsMultiplier = 0;
+	this.looseLine = this.height - this.bubbleRadius;
+	this.h = Math.sqrt((this.bubbleRadius*this.bubbleRadius) - ((this.bubbleRadius / 2) * (this.bubbleRadius / 2)));
+	this.bonus = .2 * this.lvlnro;
 
-	this.fallvelocity = 0.2; //balls per seccond
-	this.bubbleVelocity = (this.bubbleRadius) * (this.fallvelocity / fps);
+	//alert(this.pointsToReach);
+	//this.fallvelocity = 0.2; //balls per seccond
+	//this.bubbleVelocity = (this.bubbleRadius) * (this.fallvelocity / fps);
+	this.bubbleVelocity = min_vel * ( this.lvlnro / 500 + 1);
+	//this.fallvelocity = Math.round(this.bubbleRadius / this.bubbleVelocity);
+	this.fallvelocity = Math.round(this.h / this.bubbleVelocity);
+	/*alert(this.bubbleRadius / this.bubbleVelocity);
+	alert(this.fallvelocity);*/
 	this.fpscount = 0;
 	
 	this.moveBalls = function(){
 		//debug('length: ' + this.bubbles_array.length);
+		this.checkColisions();
+		//check for freeze;
+		if(this.freezeTimeout == 0){
+			this.freeze = false;
+		}else{
+			this.freezeTimeout--;
+		};
+		if(this.freeze) return;
+
 		performance.check('move balls');
 		this.fpscount++;
-		this.fpscount = Math.round(this.fpscount % (fps / this.fallvelocity));
+		//this.fpscount = Math.round(this.fpscount % (fps / this.fallvelocity));
+		this.fpscount = Math.round(this.fpscount %  this.fallvelocity);
 
 		if(this.fpscount == 0) this.addRandomRow();
 
@@ -548,6 +655,9 @@ function bubbleLevel(w, h, bubblesWidth, bubblesHeight){
 			return;
 		};
 
+	};
+
+	this.checkColisions = function(){
 		//check colisions
 		performance.check('colisiones');
 		if(this.shootedBubble == null){
@@ -570,16 +680,28 @@ function bubbleLevel(w, h, bubblesWidth, bubblesHeight){
 				this.mutex=true;			
 				this.shootedBubble.stopMove();
 				this.addBubble(this.shootedBubble);
-				//alert(currentBubble + ' before shoot');
-				this.grilla.addBubble(this.shootedBubble, currentBubble);
 				this.shootedBubble.dy = this.bubbleVelocity;
+				//alert(currentBubble + ' before shoot');
+				this.grilla.addBubble(this.shootedBubble, currentBubble);				
 				this.shootedBubble = null;
 				this.mutex = false;
+				//alert(this.points);
+				if(this.points >= this.pointsToReach) this.win();
 				break;
 			};
 		};
 
 		performance.check('colisiones');
+		
+		var masBaja = this.grilla.returnLowest();
+		/*alert(this.looseLine);
+		alert(masBaja.x + this.bubbleRadius);*/
+		if(masBaja.y + this.bubbleRadius > this.looseLine){
+			alert('perdiste');
+			/*alert(this.looseLine);
+			alert(masBaja.x + this.bubbleRadius);*/
+			this.loose();
+		};
 
 		//si la pelota disparada llego al techo y freno sola
 		//debug(this.shootedBubble.isMoving());
@@ -619,8 +741,7 @@ function bubbleLevel(w, h, bubblesWidth, bubblesHeight){
 		for(var i = 0; i < this.bubbles_array.length; ++i){
 			//debug(' bubble : ' + this.bubbles_array[i].i +':'+this.bubbles_array[i].j);
 			if((this.bubbles_array[i].i == b.i) && (this.bubbles_array[i].j == b.j)){
-				this.bubbles_array.splice(i, 1);
-				this.addPoints();
+				this.bubbles_array.splice(i, 1);				
 				//debug('removed ' + b.toString());
 			};
 		};
@@ -633,8 +754,10 @@ function bubbleLevel(w, h, bubblesWidth, bubblesHeight){
 	};
 
 	this.addPoints = function(){
-		this.points += this.pointsMultiplier;
-	}
+		//alert('add points: ' + this.pointsMultiplier);
+		this.points += this.pointsMultiplier;	
+		
+	};
 
 	this.makeMeRandom = function(alto){		
 		//for(i = (this.grilla.alto - alto); i < this.grilla.alto; ++i){
@@ -643,14 +766,15 @@ function bubbleLevel(w, h, bubblesWidth, bubblesHeight){
 			for(j = 0; j < this.grilla.ancho; ++j){
 				if((j == this.grilla.ancho - 1) && isShort) continue;
 				b = new bubble(this);
-				b.makeItRandom();
+				//b.makeItRandom();
+				b.flavor = b.randomFlavor();
 				b.i = i;
 				b.j = j;
 				b.dy = this.bubbleVelocity;
 				this.grilla.Table[i][j] = b;
 				b.recalcXY();				
 				this.addBubble(b);
-				$('#'+animNav).append(b.element);
+				animNav.append(b.element);
 			};
 		};
 	};
@@ -673,16 +797,59 @@ function bubbleLevel(w, h, bubblesWidth, bubblesHeight){
 		for(i = 0; i < ancho; ++i){
 			//alert(i);
 			b = new bubble(this);
-			b.makeItRandom();
+			//b.makeItRandom();
+			b.flavor = b.randomFlavor();
 			b.i = 0;
 			b.j = i;
 			b.dy = this.bubbleVelocity;
 			b.recalcXY();
 			newrow[i] = b;
 			this.addBubble(b);
-			$('#'+animNav).append(b.element);
+			animNav.append(b.element);
 		};				
 	};
+	
+	this.clearBoard = function(){
+		for(var i = 0; i < this.bubbles_array.length; ++i){
+			var b = this.bubbles_array[i];
+			b.stopMove();
+			$(b.element).remove();
+		};
+		$(this.cannon.currentBubble.element).remove();
+	};
+	
+	this.freezeMovement = function(){
+		this.freeze = true;
+		this.freezeTimeout = fps * freezeTime;
+	};
+	
+	this.detonateBomb = function(detonated, neighbour){
+		//alert(detonated.i + ' : ' + detonated.j + '  neighbour: ' + neighbour);
+		if(neighbour == 0) return;
+		if(detonated == "nada" || detonated == "vacio") return;
+		if(detonated.flavor == "nula") return;
+		//alert(detonated.i + ' : ' + detonated.j + '  neighbour: ' + neighbour);
+		//if(detonated.marked) return;
+		
+		detonated.marked = true;
+		detonated.bombBall = false;
+		this.detonateBomb(this.grilla.retrieveBubble(detonated.i, detonated.j + 1), neighbour - 1);
+		this.detonateBomb(this.grilla.retrieveBubble(detonated.i, detonated.j - 1), neighbour - 1);
+		this.detonateBomb(this.grilla.retrieveBubble(detonated.i - 1, detonated.j), neighbour - 1);
+		this.detonateBomb(this.grilla.retrieveBubble(detonated.i + 1, detonated.j), neighbour - 1);
+		if(!this.grilla.isShortRow(detonated.i)){
+			this.detonateBomb(this.grilla.retrieveBubble(detonated.i + 1, detonated.j - 1), neighbour - 1);
+			this.detonateBomb(this.grilla.retrieveBubble(detonated.i - 1, detonated.j - 1), neighbour - 1);
+		}else{
+			this.detonateBomb(this.grilla.retrieveBubble(detonated.i + 1, detonated.j + 1), neighbour - 1);
+			this.detonateBomb(this.grilla.retrieveBubble(detonated.i - 1, detonated.j + 1), neighbour - 1);
+		};
+	};
+	
+	// event handler
+	
+	this.loose;
+	this.win;
 }
 
 function gameUI(w, h){
@@ -693,19 +860,29 @@ function gameUI(w, h){
 	
 	this.acumuledPoints = 0;
 	
+	this.element = document.createElement('div');
+	this.element.style.width = '50px';
+	this.element.style.position = 'fixed';
+	this.element.style.top = '10px';
+	this.element.style.left = (w - 50) + 'px';
+	
 	this.savePoints = function(){ this.acumuledPoints = this.points;};
 	this.restorePoints = function(){ this.points = this.acumuledPoints;}
 	
+	//$('#' + animNav).append(this.element);
+	document.body.appendChild(this.element);
+	
 	this.draw = function(painter){
 		performance.check('draw ui');
-		painter.save();
+		/*painter.save();
 		painter.fillStyle = '#fff';
 		painter.fillRect(0, 0, 100, 25);
 		painter.font = "bold 12px sans-serif";
-		painter.fillStyle = '#000';
-		if(this.pointsCounter < this.points) this.pointsCounter++;
-		painter.fillText(this.pointsCounter , 10, 10);
-		painter.restore();
+		painter.fillStyle = '#000';*/
+		if(this.pointsCounter < this.points) this.pointsCounter += 5;
+		$(this.element).html(this.pointsCounter);
+		/*painter.fillText(this.pointsCounter , 10, 10);
+		painter.restore();*/
 		performance.check('draw ui');
 	};
 	
@@ -715,6 +892,8 @@ function gameUI(w, h){
 function appEnviroment(canvasObj, menuObj, navObj, size){
 	this.level;
 	this.animTimer;
+	this.cannon;
+
 	this.canvas = document.getElementById(canvasObj);//$(canvasObj)
 	this.painter = document.getElementById(canvasObj).getContext('2d');
 	/*this.backgroundCanvas = document.getElementById(backgroundCanvasObj);
@@ -726,7 +905,32 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 	this.menu = document.getElementById(menuObj);
 	this.backgroundImage = backgroundImage;
 	this.lvlFrame = lvlFrame;
-	animNav = navObj;
+	animNav = $('#' + navObj);
+
+	this.size = size;
+
+	switch(this.size){
+		case "320x480":
+			this.canvas.width = 320;
+			this.canvas.height = 480;
+			break;
+		case "360x480":
+			this.canvas.width = 360;
+			this.canvas.height = 480;
+			break;
+		case "640x960":
+			this.canvas.width = 640;
+			this.canvas.height = 960;
+			break;
+		case "480x800":
+			this.canvas.width = 480;
+			this.canvas.height = 800;
+			break;
+		case "854x480":
+			this.canvas.height = 480; 
+			this.canvas.width = 854;
+			break;
+	};
 
 	this.clock = new Timeline(fps);
 	this.clock.connect(tick, 'tick');
@@ -735,45 +939,13 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 	performance.addChecker('move balls');
 	performance.addChecker('colisiones');
 	performance.addChecker('draw balls');
-	performance.addChecker('draw ui');
-	
-	switch(size){
-		case "320x480":
-			this.canvas.width = 320;
-			this.canvas.height = 480;
-			this.level = new bubbleLevel(240, 400, 10, 20)
-			break;
-		case "360x480":
-			this.canvas.width = 360;
-			this.canvas.height = 480;
-			this.level = new bubbleLevel(360, 480, 12, 20)
-			break;
-		case "640x960":
-			this.canvas.width = 640;
-			this.canvas.height = 960;
-			this.level = new bubbleLevel(640, 960, 15, 30)
-			break;
-		case "480x800":
-			this.canvas.width = 480;
-			this.canvas.height = 800;
-			this.level = new bubbleLevel(480, 800, 13, 25)
-			break;
-		case "854x480":
-			//$('#'+canvasObj).width(854);
-			//$('#'+canvasObj).height(480);
-			this.canvas.height = 480; 
-			this.canvas.width = 854;
-			this.level = new bubbleLevel(854, 480, 25, 20)
-			break;
-	};
+	performance.addChecker('draw ui');	
 
 	/*this.backgroundCanvas.height = this.canvas.height;
 	this.backgroundCanvas.width = this.canvas.width;*/
 	this.buffercanvas.height = this.canvas.height;
 	this.buffercanvas.width = this.canvas.width;
 	
-	this.cannon = new bubbleCannon(this.level);
-	this.level.cannon = this.cannon;
 	this.ui = new gameUI(this.canvas.width, this.canvas.height);
 	
 	//init
@@ -800,8 +972,11 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 	}
 	
 	this.startNewGame = function(){
-		//hide menu
+		
+		this.createLvl(1);
 		this.clock.start();
+
+		//hide menu
 		this.menu.style.zIndex = this.menu.style.zIndex - 1;
 		this.menu.style.display = 'none';
 		//alert('hola');
@@ -809,6 +984,69 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 	
 	this.continueGame = function(){
 	
+	};
+	
+	this.nextLevel = function(){
+		this.createLvl(this.level.lvlnro + 1);
+	};
+	
+	
+	this.redoLevel = function(){
+		this.createLvl(this.level.lvlnro);
+	};
+	
+	this.createLvl = function(levelnumber){
+		switch(this.size){
+			case "320x480":
+				this.canvas.width = 320;
+				this.canvas.height = 480;
+				this.level = new bubbleLevel(240, 400, 10, 20, levelnumber);
+				break;
+			case "360x480":
+				this.canvas.width = 360;
+				this.canvas.height = 480;
+				this.level = new bubbleLevel(360, 480, 12, 20, levelnumber);
+				break;
+			case "640x960":
+				this.canvas.width = 640;
+				this.canvas.height = 960;
+				this.level = new bubbleLevel(640, 960, 15, 30, levelnumber);
+				break;
+			case "480x800":
+				this.canvas.width = 480;
+				this.canvas.height = 800;
+				this.level = new bubbleLevel(480, 800, 13, 25, levelnumber);
+				break;
+			case "854x480":
+				this.canvas.height = 480; 
+				this.canvas.width = 854;
+				this.level = new bubbleLevel(800, 400, 25, 20, levelnumber);
+				break;
+		};
+		
+		this.cannon = new bubbleCannon(this.level);
+		this.level.cannon = this.cannon;
+		this.level.top = this.top;
+		this.level.left = this.left;	
+		this.level.topBound = this.canvas.height - this.level.height;
+		this.level.leftBound = (this.canvas.width - this.level.width) / 2;
+		this.level.points = this.ui.points;
+		this.level.loose = this.playerLoose;
+		this.level.win = this.playerWin;
+		this.level.makeMeRandom(5);
+		this.cannon.setReadyShoot();
+	};
+	
+	this.playerLoose = function(){
+		alert('loose');
+		this.clearBoard();
+		game.redoLevel();
+	};
+	
+	this.playerWin = function(){
+		alert('win');
+		game.level.clearBoard();
+		game.nextLevel();
 	};
 	
 	this.showMenu = function(){
@@ -869,10 +1107,10 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 	this.startAnimation = function(){
 		// call this every 1/24 seconds to make all work
 		this.ui.points = this.level.points;
-		n = $('#'+animNav);
-		n[0].style.display = 'none';
+		//n = $('#'+animNav);
+		animNav[0].style.display = 'none';
 		this.level.moveBalls();
-		n[0].style.display = 'block';
+		animNav[0].style.display = 'block';
 		this.draw();
 		//var animTimer = setInterval(this.draw, 42);
 	}
@@ -882,21 +1120,15 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 	this.height = $('#'+canvasObj).height();
 	this.top = $('#'+canvasObj).offset().top;
 	this.left = $('#'+canvasObj).offset().left;
-	this.level.top = this.top;
-	this.level.left = this.left;	
-	this.level.topBound = this.canvas.height - this.level.height;
-	this.level.leftBound = (this.canvas.width - this.level.width) / 2;
-	$('#'+animNav).width(this.width);
-	$('#'+animNav).height(this.height);
-	this.level.makeMeRandom(5);
-	this.cannon.setReadyShoot();
+	animNav.width(this.width);
+	animNav.height(this.height);
 	//this.drawBackground(this.backgroundPainter);
 
 
 	//$('#'+canvasObj).click(shoot);
 	//$('#'+canvasObj).click(this.mouseClick);
-	$('#'+navObj).click(this.mouseClick);
-	$('#'+navObj).tap(this.mouseClick);
+	//$('#'+navObj).click(this.mouseClick);
+	animNav.tap(this.mouseClick);
 }
 
 function tick(){

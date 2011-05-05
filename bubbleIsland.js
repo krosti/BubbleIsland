@@ -19,12 +19,12 @@ alpha:
 [x] interfaz de menu
 [-] multiples resoluciones 
 [x] puntuacion
-[-] velocidad de caida variable
-[-] diferentes niveles
+[x] velocidad de caida variable
+[x] diferentes niveles
 [x] generar level random
 [x] lvl que aumente linea de bubbles
 [x] bubbles bajen lentamente
-[-] linea de perdida variable
+[x] linea de perdida variable
 [x] bolas mas escurridisa (tener cierto margen de error para dejar pasar mas facil las pelotas entre otras)
 
 pre-alpha:

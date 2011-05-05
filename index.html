@@ -125,7 +125,7 @@ function onDeviceReady()
 			//window.location = 'http://www.facebook.com/dialog/oauth/?scope=email,publish_stream&client_id='+APPID+'redirect_uri=' + window.location + 'response_type=token&display=touch';
 			
 			//window.location = 'http://m.facebook.com/dialog/oauth/?scope=publish_stream&client_id='+APPID+'redirect_uri=' + window.location;// + 'response_type=token&display=touch';
-			window.location = 'https://graph.facebook.com/oauth/authorize?type=web_server&scope=publish_stream&display=touch&client_id=' + APPID +'&redirect_uri=' + window.location; //http://www.website.com/post.php'
+			window.location = 'https://graph.facebook.com/oauth/authorize?type=web_server&scope=publish_stream&display=touch&client_id=' + APPID +'&redirect_uri=' + redir_url; //http://www.website.com/post.php'
 		};
 	});
 }

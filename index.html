@@ -85,13 +85,13 @@
 </nav> <!-- nav background-->
 <div id="fb-root"></div>
 <script type="text/javascript" charset="utf-8">
-/*FB.init({
+FB.init({
 		appId  : APPID,
 		appKey : APPKEY,
 		status : true, // check login status
 		cookie : true//, // enable cookies to allow the server to access the session
 		//xfbml  : true  // parse XFBML
-	  });*/
+	  });
 var redir_url = "http://www.facebook.com/connect/login_success.html";
 function onBodyLoad()
 {
@@ -102,15 +102,10 @@ function onDeviceReady()
 {
 	// do your thing!
 	alert('now we will make facebook conn');
-	var fb = FBConnect.install();
+	/*var fb = FBConnect.install();
 	fb.connect(APPID,redir_url,"touch");
-	fb.onConnect = function(){ alert('siii'); };
-}
-	  
-$(window).load(function () {	
-	
-	//FB.login(function(){ alert('login'); });
-	/*FB.getLoginStatus(function(response){
+	fb.onConnect = function(){ alert('siii'); };*/
+	FB.getLoginStatus(function(response){
 		if(response.session){
 			/*for(o in response.session){
 				alert(o + ':' + response.session[o]);
@@ -123,7 +118,7 @@ $(window).load(function () {
 			  } else {
 				alert('Post ID: ' + response.id);
 			  }
-			});
+			});*/
 		}else{
 			//alert('doh!');
 			//FB.login(function(response){ alert('login'); });
@@ -132,7 +127,13 @@ $(window).load(function () {
 			//window.location = 'http://m.facebook.com/dialog/oauth/?scope=publish_stream&client_id='+APPID+'redirect_uri=' + window.location;// + 'response_type=token&display=touch';
 			window.location = 'https://graph.facebook.com/oauth/authorize?type=web_server&scope=publish_stream&display=touch&client_id=' + APPID +'&redirect_uri=' + window.location; //http://www.website.com/post.php'
 		};
-	});*/
+	});
+}
+	  
+$(window).load(function () {	
+	
+	//FB.login(function(){ alert('login'); });
+	
 });
 
 				

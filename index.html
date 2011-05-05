@@ -8,10 +8,16 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black" />
 	<script src="http://connect.facebook.net/en_US/all.js"></script>
 	<script src="jquery.js" type="text/javascript" charset="utf-8"></script> 
+	<script src="ChildBrowser.js" type="text/javascript" charset="utf-8"></script> 
 	<script src="jqueryMobile.js" type="text/javascript" charset="utf-8"></script> 
 	<script src="side.js" type="text/javascript" charset="utf-8"></script> 
 	<script src="bubbleIsland.js" type="text/javascript" charset="utf-8"></script> 	
 	<style type="text/css">
+		* {
+			margin: 0;
+			padding: 0;
+		}
+	
 		body, html { 
 			width: 320px;
 			height: 480px;
@@ -27,27 +33,38 @@
 
 	</style>
 </head>
-<body>
-<nav style="width: 320px; min-height: 480px; background-image: url('background.png'); position: absolute; top: 0px; left: 0px">
-</nav>
+<body onload="function(){ windows.scrollto(0,0);};">
+<nav style="width: 320px; min-height: 480px; background-image: url('background.png'); position: absolute; top: 0px; left: 0px" ontouchmove="touchMove(event);">
+
 <nav id="frameBackground" style="width: 320px; min-height: 480px; background-image: url('lvlboundering.png'); position: absolute; top: 0px; left: 0px;">
 </nav>
  <!--background-image: url('background.png')-->
 <!--canvas id="gameBackgroundCanvas" style="position: absolute; top: 0px; left: 0px"></canvas-->
 <canvas id="gameCanvas" style="position: absolute; top: 0px; left: 0px; display:none" ></canvas>
 <nav id="animCanvas" style="position: absolute; top: 0px; left: 0px; "></nav>
-<nav id="gameMenu" style="width: 320px; min-height: 480px; position: absolute; top: 0px; left: 0px; text-align: center; background-image: url('background.png');">
+<nav id="optionMenu" style="position: absolute; top: 0px; left: 0px; width: 100%; min-height: 100%; display: none" >
+<div style="position: absolute; display: table; top: 20%; bottom: auto; margin: auto; width: 100%">
+	<span style="font: bold 20px verdana, sans-serif; text-align: center">Bubble Paradise</span><br>
+	<div style="margin-top: 20px">
+	<nav style="font: bold 15px verdana, sans-serif; margin-top: 10px" onClick="alert('why? i dont have any sound yet!')">Sounds Enable (touch for disable it)</nav>
+	<nav style="font: bold 15px verdana, sans-serif; margin-top: 10px" onCLick="alert('when you make some real points, you will want to post it')">Post my Highscore on Facebook!</nav>
+	<nav style="font: bold 15px verdana, sans-serif; margin-top: 10px" onClick="alert('oh, rly?')">Get more coins!</nav>
+	<nav style="font: bold 15px verdana, sans-serif; margin-top: 10px" onClick="options.exitOptions()">get back to Main Menu</nav>
+	</div>
+	</div>
+</nav>
+<nav id="gameMenu" style="width: 100%; min-height: 100%; position: absolute; top: 0px; left: 0px; text-align: center; background-image: url('background.png');">
 	<div style="position: absolute; display: table; top: 20%; bottom: auto; margin: auto; width: 100%">
 	<span style="font: bold 20px verdana, sans-serif; text-align: center">Bubble Paradise</span><br>
 	<div style="margin-top: 20px">
 	<nav style="font: bold 15px verdana, sans-serif; margin-top: 10px" onClick="game.startNewGame()">New Game</nav>
-	<nav style="font: bold 15px verdana, sans-serif; margin-top: 10px">Continue Game</nav>
-	<nav style="font: bold 15px verdana, sans-serif; margin-top: 10px">Options</nav>
+	<nav style="font: bold 15px verdana, sans-serif; margin-top: 10px" onClick="alert('what game??')">Continue Game</nav>
+	<nav style="font: bold 15px verdana, sans-serif; margin-top: 10px" onCLick="options.showOptions('gameMenu')">Options</nav>
 	<nav style="font: bold 15px verdana, sans-serif; margin-top: 10px" onClick="ww = window.open(window.location, '_self'); ww.close();">Leave Paradise :(</nav>
 	</div>
 	</div>
 </nav>
-<nav id = "initScreen" style="position: absolute; top: 0px; left: 0px; border: 1px solid black; width: 100%; height: 100%; background-color: #fff	">
+<nav id = "initScreen" style="position: absolute; top: 0px; left: 0px; border: 1px solid black; width: 100%; min-height: 100%; background-color: #fff	">
 <img id="logoImg" src="logo.jpg" alt="logo" style="display: none; display: none; margin-left:auto; margin-right:auto; "/>
 <div id = "loadingScreen" style="position: absolute; top: 50%; bottom: auto; width: 100%; height: 50%; background-color: #fff">
 	<div style="font: 2em Verdana, sans-serif; text-align: center; width: 100%">Loading... </div><br>
@@ -57,6 +74,8 @@
 	</div>
 </div>
 </nav>
+
+</nav> <!-- nav background-->
 <div id="fb-root"></div>
 <script type="text/javascript" charset="utf-8">
 FB.init({
@@ -70,7 +89,7 @@ FB.init({
 $(window).load(function () {	
 	
 	//FB.login(function(){ alert('login'); });
-	FB.getLoginStatus(function(response){
+	/*FB.getLoginStatus(function(response){
 		if(response.session){
 			/*for(o in response.session){
 				alert(o + ':' + response.session[o]);
@@ -83,7 +102,7 @@ $(window).load(function () {
 			  } else {
 				alert('Post ID: ' + response.id);
 			  }
-			});*/
+			});
 		}else{
 			//alert('doh!');
 			//FB.login(function(response){ alert('login'); });
@@ -92,7 +111,7 @@ $(window).load(function () {
 			//window.location = 'http://m.facebook.com/dialog/oauth/?scope=publish_stream&client_id='+APPID+'redirect_uri=' + window.location;// + 'response_type=token&display=touch';
 			window.location = 'https://graph.facebook.com/oauth/authorize?type=web_server&scope=publish_stream&display=touch&client_id=' + APPID +'&redirect_uri=' + window.location; //http://www.website.com/post.php'
 		};
-	});
+	});*/
 });
 
 				
@@ -111,7 +130,7 @@ loader.readyLoad = function(){
 				if(screen.width <= 480) gameSize = "480x800";
 				if(screen.width <= 360) gameSize = "360x480";
 				if(screen.width <= 320) gameSize = "320x480";
-				
+				options = new Options('optionMenu');
 				game = new appEnviroment("gameCanvas", "gameMenu", "animCanvas", gameSize);
 				//clock.connect(game.startAnimation, 'tick')
 				//clock.start();				

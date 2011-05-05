@@ -49,6 +49,11 @@ referencia:
 
 function rnd(top){ return Math.floor(Math.random()*(top + 1))};
 
+touchMove = function(event) {
+	// Prevent scrolling on this element
+	event.preventDefault();
+}
+
 Array.prototype.remove = function(data) {
 	//debug('called remover');
 	i = 0; 
@@ -638,7 +643,7 @@ function bubbleLevel(w, h, bubblesWidth, bubblesHeight, lvlnbr){
 		};
 		if(this.freeze) return;
 
-		performance.check('move balls');
+		//performance.check('move balls');
 		this.fpscount++;
 		//this.fpscount = Math.round(this.fpscount % (fps / this.fallvelocity));
 		this.fpscount = Math.round(this.fpscount %  this.fallvelocity);
@@ -648,7 +653,7 @@ function bubbleLevel(w, h, bubblesWidth, bubblesHeight, lvlnbr){
 		for(i = 0; i < this.bubbles_array.length; ++i){
 			this.bubbles_array[i].move();
 		};
-		performance.check('move balls');
+		//performance.check('move balls');
 		//si esta ocupado, evitar movimiento (normalmente no se mueve, solo evita check de mas)
 		if(this.mutex == true){
 			//debug("MUTED!");
@@ -659,9 +664,9 @@ function bubbleLevel(w, h, bubblesWidth, bubblesHeight, lvlnbr){
 
 	this.checkColisions = function(){
 		//check colisions
-		performance.check('colisiones');
+		//performance.check('colisiones');
 		if(this.shootedBubble == null){
-			performance.check('colisiones');
+			//performance.check('colisiones');
 			return;	
 		} 
 		this.shootedBubble.move();
@@ -691,7 +696,7 @@ function bubbleLevel(w, h, bubblesWidth, bubblesHeight, lvlnbr){
 			};
 		};
 
-		performance.check('colisiones');
+		//performance.check('colisiones');
 		
 		var masBaja = this.grilla.returnLowest();
 		/*alert(this.looseLine);
@@ -720,14 +725,14 @@ function bubbleLevel(w, h, bubblesWidth, bubblesHeight, lvlnbr){
 	this.drawBalls = function(painter){
 		//alert(painter);
 		//if((this.bubbles_array.length) != 0) alert(this.bubbles_array.length);
-		performance.check('draw balls');
+		//performance.check('draw balls');
 		for(i = 0; i < this.bubbles_array.length; ++i){
 			//draw each ball
 			this.bubbles_array[i].draw(painter);
 			//setTimeout('game.level.bubbles_array['+i+'].draw(frameBuffer)', 1);
 		};
 
-		performance.check('draw balls');
+		//performance.check('draw balls');
 		if(this.shootedBubble != null) this.shootedBubble.draw(painter);
 	};
 	
@@ -873,7 +878,7 @@ function gameUI(w, h){
 	document.body.appendChild(this.element);
 	
 	this.draw = function(painter){
-		performance.check('draw ui');
+		//performance.check('draw ui');
 		/*painter.save();
 		painter.fillStyle = '#fff';
 		painter.fillRect(0, 0, 100, 25);
@@ -883,7 +888,7 @@ function gameUI(w, h){
 		$(this.element).html(this.pointsCounter);
 		/*painter.fillText(this.pointsCounter , 10, 10);
 		painter.restore();*/
-		performance.check('draw ui');
+		//performance.check('draw ui');
 	};
 	
 	this.addPoints = function(p){ this.points += p; };
@@ -934,12 +939,12 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 
 	this.clock = new Timeline(fps);
 	this.clock.connect(tick, 'tick');
-	performance = new performanceStatus(5, this.painter);
+	/*performance = new performanceStatus(5, this.painter);
 	performance.addChecker('clear painter');
 	performance.addChecker('move balls');
 	performance.addChecker('colisiones');
 	performance.addChecker('draw balls');
-	performance.addChecker('draw ui');	
+	performance.addChecker('draw ui');	*/
 
 	/*this.backgroundCanvas.height = this.canvas.height;
 	this.backgroundCanvas.width = this.canvas.width;*/
@@ -1133,6 +1138,6 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 
 function tick(){
 	game.startAnimation();
-	performance.update();
+	//performance.update();
 	//setTimeout("tick()", 1);
 }

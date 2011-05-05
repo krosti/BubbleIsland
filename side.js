@@ -299,3 +299,22 @@ function performanceStatus(updateTime, painter){
 	};
 	
 };
+
+/*class*/ function Options(menuNav){
+	this.sound = true;
+	this.menuNav = menuNav;
+	this.menuElement = $('#' + menuNav);
+	this.toHide;
+	
+	this.showOptions = function(hideElement){
+		this.menuElement[0].style.display = 'block';
+		this.toHide = document.getElementById(hideElement);
+		this.toHide.style.display = 'none';
+	};
+	
+	this.exitOptions = function(){
+		this.menuElement[0].style.display = 'none';
+		this.toHide.style.display = 'block';
+	};
+
+};

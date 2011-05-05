@@ -15,9 +15,13 @@
 	<script src="ChildBrowser.js" type="text/javascript" charset="utf-8"></script> 
 	<script src="FBconnect.js" type="text/javascript" charset="utf-8"></script> 
 	<script type="text/javascript" charset="utf-8">
+		redir_url = "http://www.facebook.com/connect/login_success.html";
 		document.addEventListener('deviceready', function(){
 			alert('now we will make facebook conn');
 			var fb = FBConnect.install();
+			for(o in window.plugins){
+				alert(o + ' : ' + window.plugins[o]);
+			};
 			fb.connect(APPID,redir_url,"touch");
 			fb.onConnect = function(){ alert('siii'); };		
 		}, false);
@@ -100,7 +104,6 @@
 		cookie : true//, // enable cookies to allow the server to access the session
 		//xfbml  : true  // parse XFBML
 	  });*/
-var redir_url = "http://www.facebook.com/connect/login_success.html";
 /*function onBodyLoad()
 {
 	document.addEventListener("deviceready",onDeviceReady,false);		

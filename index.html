@@ -101,16 +101,10 @@ function onBodyLoad()
 function onDeviceReady()
 {
 	// do your thing!
+	alert('now we will make facebook conn');
 	var fb = FBConnect.install();
 	fb.connect(APPID,redir_url,"touch");
-	fb.onConnect = onFBConnected;
-}
-
-function onFBConnected()
-{
-	document.getElementById("loading").innerHTML = "Connected! Getting your friends ...";
-	var req = window.plugins.fbConnect.getFriends();
-	req.onload = onGotFriends;
+	fb.onConnect = function(){ alert('siii'); };
 }
 	  
 $(window).load(function () {	

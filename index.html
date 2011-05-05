@@ -9,10 +9,12 @@
 	
 	<script src="http://connect.facebook.net/en_US/all.js"></script>
 	<script src="jquery.js" type="text/javascript" charset="utf-8"></script> 
+	<script src="jqueryMobile.js" type="text/javascript" charset="utf-8"></script> 
+	
 	<script src="phonegap.js" type="text/javascript" charset="utf-8"></script> 
 	<script src="ChildBrowser.js" type="text/javascript" charset="utf-8"></script> 
 	<script src="FBconnect.js" type="text/javascript" charset="utf-8"></script> 
-	<script src="jqueryMobile.js" type="text/javascript" charset="utf-8"></script> 
+	
 	
 	<!-- game -->
 	<script src="side.js" type="text/javascript" charset="utf-8"></script> 
@@ -38,7 +40,7 @@
 
 	</style>
 </head>
-<body onload="function(){ windows.scrollto(0,0);}; onDeviceReady()">
+<body onload="function(){ windows.scrollto(0,0);}; onBodyLoad()">
 <nav style="width: 320px; min-height: 480px; background-image: url('background.png'); position: absolute; top: 0px; left: 0px" ontouchmove="touchMove(event);">
 
 <nav id="frameBackground" style="width: 320px; min-height: 480px; background-image: url('lvlboundering.png'); position: absolute; top: 0px; left: 0px;">
@@ -91,6 +93,11 @@
 		//xfbml  : true  // parse XFBML
 	  });*/
 var redir_url = "http://www.facebook.com/connect/login_success.html";
+function onBodyLoad()
+{
+	document.addEventListener("deviceready",onDeviceReady,false);		
+}
+
 function onDeviceReady()
 {
 	// do your thing!

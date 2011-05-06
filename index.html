@@ -19,7 +19,29 @@
 		document.addEventListener('deviceready', function(){
 				alert('now we will make facebook conn');
 				
-				FB.init({
+				if(window.location.hash.length == 0)
+				{
+					url = "https://www.facebook.com/dialog/oauth?client_id=" + 
+							 appId  + "&redirect_uri=" + window.location +
+							 "&response_type=token";
+					window.open(url);
+
+				} else {
+					accessToken = window.location.hash.substring(1);
+					graphUrl = "https://graph.facebook.com/me?" + accessToken +
+								"&callback=displayUser"
+
+					//use JSON-P to call the graph
+					var script = document.createElement("script");
+					script.src = graphUrl;
+					document.body.appendChild(script);  
+				}
+
+				function displayUser(user) {
+					alert(user.name);
+				}
+				
+				/*FB.init({
 					appId  : APPID,
 					status : true, // check login status
 					cookie : true, // enable cookies to allow the server to access the session
@@ -36,7 +58,7 @@
 					  // The user has logged out, and the cookie has been cleared
 					  alert('nada');
 					}
-				  });
+				  });*/
 				//session = FB.getSession();
 				
 				return;

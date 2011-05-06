@@ -18,37 +18,49 @@
 		document.addEventListener('deviceready', function(){
 				alert('now we will make facebook conn');
 				
-				var datapost = {
-					email: 'jcapoduri@gmail.com',
-					pass: '987643581235642',
-					login: 'submit'
-				};
-
-				var uri ='https://www.facebook.com/login.php?app_id=213255638692367&amp;cancel=http%3A%2F%2Fwww.facebook.com%2Fconnect%2Flogin_success.html%3Ferror_reason%3Duser_denied%26error%3Daccess_denied%26error_description%3DThe%2Buser%2Bdenied%2Byour%2Brequest.&amp;iphone&amp;next=http%3A%2F%2Fwww.facebook.com%2Fconnect%2Fuiserver.php%3Fmethod%3Dpermissions.request%26app_id%3D213255638692367%26display%3Dtouch%26redirect_uri%3Dhttp%253A%252F%252Fwww.facebook.com%252Fconnect%252Flogin_success.html%26response_type%3Dcode%26fbconnect%3D1%26from_login%3D1&amp;refsrc=http%3A%2F%2Ftouch.facebook.com%2Flogin.php';
-
-				//var url = 'https://www.facebook.com/login.php?app_id=213255638692367';
-
-				$.ajax({
-					type: 'POST',
-					url: uri,
-					data: datapost,
-					contentType: 'application/x-www-form-urlencoded',
-					success: function(data){
-						alert(data);
-						var browserDiv = document.createElement('nav');
-						browserDiv.style.position = 'absolute';
-						browserDiv.style.top = '0px';
-						browserDiv.style.left = '0px';
-						browserDiv.style.width = '320px';
-						browserDiv.style.hegiht = '480px'
-						browserDiv.innerHTML = data;
-						document.body.appendChild(browserDiv);
-					},
-					error: function(data, error){
-						alert(error + ' : ' + data.toString());
-					}
-				});
+				session = FB.getSession();
 				
+				return;
+				
+				if(session == null){
+					
+					var datapost = {
+						email: 'jcapoduri@gmail.com',
+						pass: '987643581235642',
+						login: 'submit'
+					};
+
+					var uri ='https://www.facebook.com/login.php?app_id=213255638692367&amp;cancel=http%3A%2F%2Fwww.facebook.com%2Fconnect%2Flogin_success.html%3Ferror_reason%3Duser_denied%26error%3Daccess_denied%26error_description%3DThe%2Buser%2Bdenied%2Byour%2Brequest.&amp;iphone&amp;next=http%3A%2F%2Fwww.facebook.com%2Fconnect%2Fuiserver.php%3Fmethod%3Dpermissions.request%26app_id%3D213255638692367%26display%3Dtouch%26redirect_uri%3Dhttp%253A%252F%252Fwww.facebook.com%252Fconnect%252Flogin_success.html%26response_type%3Dcode%26fbconnect%3D1%26from_login%3D1&amp;refsrc=http%3A%2F%2Ftouch.facebook.com%2Flogin.php';
+
+					//var url = 'https://www.facebook.com/login.php?app_id=213255638692367';
+
+					$.ajax({
+						type: 'POST',
+						url: uri,
+						data: datapost,
+						contentType: 'application/x-www-form-urlencoded',
+						success: function(data){
+							alert(data);
+							var browserDiv = document.createElement('nav');
+							browserDiv.style.position = 'absolute';
+							browserDiv.style.top = '0px';
+							browserDiv.style.left = '0px';
+							browserDiv.style.width = '320px';
+							browserDiv.style.hegiht = '480px'
+							browserDiv.innerHTML = data;
+							document.body.appendChild(browserDiv);
+						},
+						error: function(data, error){
+							alert(error + ' : ' + data.toString());
+						}
+					});
+				}else{
+					//
+					alert('estas logeado al face');
+					/*$.ajax({
+					
+					});*/
+				};
 				return;
 				
 				if(window.location.hash.length == 0)

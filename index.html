@@ -26,7 +26,21 @@
 					xfbml  : true  // parse XFBML
 				});
 				
-				session  =FB.getSession()
+				
+				FB.init({appId: '(appid)', status: true, cookie: true, xfbml: true});
+				  FB.Event.subscribe('auth.sessionChange', function(response) {
+					if (response.session) {
+					  // A user has logged in, and a new cookie has been saved
+					  alert(response.session);
+					} else {
+					  // The user has logged out, and the cookie has been cleared
+					  alert('nada');
+					}
+				  });
+				//session = FB.getSession();
+				
+				return;
+				
 				if(session == null){
 					alert('no hay session');
 					var authorize_url  = "https://graph.facebook.com/oauth/authorize";

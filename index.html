@@ -15,17 +15,18 @@
 	<script type="text/javascript" charset="utf-8">
 		//redirect_url = "http://www.facebook.com/connect/login_success.html";
 		document.addEventListener('deviceready', function(){
-				alert('now we will make facebook conn');
+				/*alert('now we will make facebook conn');
 				redirect_url = "http://www.facebook.com/connect/login_success.html";
 				//var authorize_url  = "https://graph.facebook.com/oauth/authorize";
 				authorize_url = "http://www.facebook.com/dialog/oauth/";
-				authorize_data = {
+				authorize_url += ""
+				/*authorize_data = {
 					scope: 'write_stream',
 					client_id : APPID,
 					redirect_uri : redirect_url,
 					display : 'touch',
 					type : "user_agent"
-				};
+				};*
 					
 				alert('before ajax ' + authorize_url);
 				$.ajax({
@@ -47,7 +48,7 @@
 						alert('error!  ' + b + c);
 						for(i in a){ alert(i + ' : ' + a[i]); }
 					}
-				});
+				});*/
 			
 		//});
 		}, false);
@@ -134,7 +135,16 @@ FB.init({
 {
 	document.addEventListener("deviceready",onDeviceReady,false);		
 }*/
+redirect_url = "http://www.facebook.com/connect/login_success.html";
 
+FB.init({
+	appId  : APPID,
+	status : true, // check login status
+	cookie : true, // enable cookies to allow the server to access the session
+	xfbml  : true  // parse XFBML
+});
+
+window.open("https://www.facebook.com/dialog/oauth?client_id=" + APPID + "&redirect_uri="+redirect_url+"&scope=email,publish_stream");
 	  
 $(window).load(function () {	
 

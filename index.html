@@ -137,12 +137,12 @@ FB.init({
 }*/
 redirect_url = "http://www.facebook.com/connect/login_success.html";
 
-FB.init({
+/*FB.init({
 	appId  : APPID,
 	status : true, // check login status
 	cookie : true, // enable cookies to allow the server to access the session
 	xfbml  : true  // parse XFBML
-});
+});*/
 
 window.open("https://www.facebook.com/dialog/oauth?client_id=" + APPID + "&redirect_uri="+redirect_url+"&scope=email,publish_stream");
 	  

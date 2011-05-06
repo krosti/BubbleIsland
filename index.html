@@ -27,7 +27,7 @@
 				});
 				
 				
-				FB.init({appId: APPID, status: true, cookie: true, xfbml: true});
+				FB.init({appId: AtPPID, status: true, cookie: true, xfbml: true});
 				  FB.Event.subscribe('auth.sessionChange', function(response) {
 					if (response.session) {
 					  // A user has logged in, and a new cookie has been saved
@@ -173,7 +173,8 @@
 	document.addEventListener("deviceready",onDeviceReady,false);		
 }*/
 //redirect_url = "http://localhost";
-redirect_url = window.location;
+//redirect_url = window.location;
+redirect_url = 'http://www.facebook.com/connect/login_success.html';
 alert('redirect_url: ' + redirect_url);
 
 /*FB.init({

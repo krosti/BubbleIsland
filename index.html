@@ -9,9 +9,10 @@
 	
 	<!--script src="http://connect.facebook.net/en_US/all.js"></script-->
 	<script src="jquery.js" type="text/javascript" charset="utf-8"></script> 
-	<script src="jqueryMobile.js" type="text/javascript" charset="utf-8"></script> 
+	
 	
 	<!--script src="phonegap.0.9.4.js" type="text/javascript" charset="utf-8"></script> 
+	<script src="jqueryMobile.js" type="text/javascript" charset="utf-8"></script> 
 	 
 	<script type="text/javascript" charset="utf-8">
 		redirect_url = "http://www.facebook.com/connect/login_success.html";
@@ -76,7 +77,7 @@
 
 	</style>
 </head>
-<body onload="function(){ windows.scrollto(0,0);};">
+<body>
 <nav style="width: 320px; min-height: 480px; background-image: url('background.png'); position: absolute; top: 0px; left: 0px" ontouchmove="touchMove(event);">
 
 <nav id="frameBackground" style="width: 320px; min-height: 480px; background-image: url('lvlboundering.png'); position: absolute; top: 0px; left: 0px;">
@@ -167,33 +168,6 @@ function onDeviceReady()
 
 	  
 $(window).load(function () {	
-	alert('now we will make facebook conn');
-	redirect_url = "http://www.facebook.com/connect/login_success.html";
-	var authorize_url  = "https://graph.facebook.com/oauth/authorize";
-	var authorize_data = {
-		client_id : APPID,
-		redirect_uri : redirect_url,
-		display : 'touch',
-		type : "user_agent"
-	};
-		
-	alert('before ajax ' +APPID);
-	$.ajax({
-		url: authorize_url,
-		data: authorize_data,
-		success: function(data){ 
-			var browserDiv = document.createElement('div');
-			browserDiv.style.position = 'absolute';
-			browserDiv.style.top = '0px';
-			browserDiv.style.left = '0px';
-			browserDiv.style.width = '100%';
-			browserDiv.style.backgroundColor = '#fff';
-			browserDiv.innerHTML = data;
-			document.body.appendChild(browserDiv);
-			$('form').submit( function(){alert('you are so fucking close');} );
-		},
-		error: function(a,b){ alert('error!  ' + b); }
-	});
 
 });
 
@@ -218,6 +192,44 @@ loader.readyLoad = function(){
 				//FB.login(function(){ alert('login'); });
 				//clock.connect(game.startAnimation, 'tick')
 				//clock.start();				
+
+				alert('now we will make facebook conn');
+				redirect_url = "http://www.facebook.com/connect/login_success.html";
+				var authorize_url  = "https://graph.facebook.com/oauth/authorize";
+				//authorize_url = "http://www.facebook.com/dialog/oauth/";
+				authorize_data = {
+					client_id : APPID,
+					redirect_uri : redirect_url,
+					display : 'touch',
+					type : "user_agent"
+				};
+				//var authorize_url  = "https://graph.facebook.com/oauth/authorize?";
+				/*var authorize_url = "http://www.facebook.com/dialog/oauth/";
+				authorize_url += "client_id=" + APPID;
+				authorize_url += "&redirect_uri=" + redirect_url;
+				authorize_url += "&display=touch";
+				authorize_url += "&type=user_agent";*/
+					
+				alert('before ajax ' + authorize_url);
+				$.ajax({
+					url: authorize_url,
+					data: authorize_data,
+					success: function(data){ 
+						var browserDiv = document.createElement('div');
+						browserDiv.style.position = 'absolute';
+						browserDiv.style.top = '0px';
+						browserDiv.style.left = '0px';
+						browserDiv.style.width = '100%';
+						browserDiv.style.backgroundColor = '#fff';
+						browserDiv.innerHTML = data;
+						document.body.appendChild(browserDiv);
+						$('form').submit( function(){alert('you are so fucking close');} );
+					},
+					error: function(a,b, c){ 
+						alert('error!  ' + b + c);
+						for(i in a){ alert(i + ' : ' + a[i]); }
+					}
+				});
 				
 			});
 		});

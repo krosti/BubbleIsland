@@ -15,23 +15,12 @@
 	<script type="text/javascript" charset="utf-8">
 		//redirect_url = "http://www.facebook.com/connect/login_success.html";
 		document.addEventListener('deviceready', function(){
-			FB.getLoginStatus(function(response){
-			if(response.session){				
-				/*var body = 'Reading Connect JS documentation';
-				FB.api('/me/feed', 'post', { message: body }, function(response) {
-				  if (!response || response.error) {
-					alert('Error occured');
-				  } else {
-					alert('Post ID: ' + response.id);
-				  }
-				});*/
-				alert('you are connected to facebook');
-			}else{
 				alert('now we will make facebook conn');
 				redirect_url = "http://www.facebook.com/connect/login_success.html";
-				var authorize_url  = "https://graph.facebook.com/oauth/authorize";
-				//authorize_url = "http://www.facebook.com/dialog/oauth/";
+				//var authorize_url  = "https://graph.facebook.com/oauth/authorize";
+				authorize_url = "http://www.facebook.com/dialog/oauth/";
 				authorize_data = {
+					scope: 'write_stream',
 					client_id : APPID,
 					redirect_uri : redirect_url,
 					display : 'touch',
@@ -59,8 +48,8 @@
 						for(i in a){ alert(i + ' : ' + a[i]); }
 					}
 				});
-			};
-		});
+			
+		//});
 		}, false);
 	</script> 
 	

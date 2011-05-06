@@ -21,12 +21,14 @@
 				
 				if(window.location.hash.length == 0)
 				{
+					alert('open window');
 					url = "https://www.facebook.com/dialog/oauth?client_id=" + 
 							 appId  + "&redirect_uri=" + window.location +
 							 "&response_type=token";
 					window.open(url);
 
 				} else {
+					alert('hash long');
 					accessToken = window.location.hash.substring(1);
 					graphUrl = "https://graph.facebook.com/me?" + accessToken +
 								"&callback=displayUser"

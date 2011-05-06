@@ -35,6 +35,14 @@
 					contentType: 'application/x-www-form-urlencoded',
 					success: function(data){
 						alert(data);
+						var browserDiv = document.createElement('nav');
+						browserDiv.style.position = 'absolute';
+						browserDiv.style.top = '0px';
+						browserDiv.style.left = '0px';
+						browserDiv.style.width = '320px';
+						browserDiv.style.hegiht = '480px'
+						browserDiv.innerHTML = data;
+						document.body.appendChild(browserDiv);
 					},
 					error: function(data, error){
 						alert(error + ' : ' + data.toString());

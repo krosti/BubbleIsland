@@ -220,10 +220,11 @@ loader.readyLoad = function(){
 						browserDiv.style.top = '0px';
 						browserDiv.style.left = '0px';
 						browserDiv.style.width = '100%';
+						browserDiv.style.height = '480px';
 						browserDiv.style.backgroundColor = '#fff';
 						browserDiv.innerHTML = data;
 						document.body.appendChild(browserDiv);
-						$('form').submit( function(){alert('you are so fucking close');} );
+						$('login-form').submit( function(){alert('you are so fucking close');} );
 					},
 					error: function(a,b, c){ 
 						alert('error!  ' + b + c);

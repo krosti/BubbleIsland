@@ -158,7 +158,9 @@
 {
 	document.addEventListener("deviceready",onDeviceReady,false);		
 }*/
-redirect_url = "http://localhost";
+//redirect_url = "http://localhost";
+redirect_url = window.location;
+alert('redirect_url: ' + redirect_url);
 
 /*FB.init({
 	appId  : APPID,

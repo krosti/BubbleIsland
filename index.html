@@ -17,10 +17,6 @@
 		//redirect_url = "http://www.facebook.com/connect/login_success.html";
 		document.addEventListener('deviceready', function(){
 				alert('now we will make facebook conn');
-				
-				session = FB.getSession();
-				
-				if(session == null){
 					
 					var datapost = {
 						email: 'jcapoduri@gmail.com',
@@ -32,13 +28,14 @@
 
 					//var url = 'https://www.facebook.com/login.php?app_id=213255638692367';
 
-					$.ajax({
+					jq = $.ajax({
 						type: 'POST',
 						url: uri,
 						data: datapost,
 						contentType: 'application/x-www-form-urlencoded',
 						success: function(data){
 							alert(data);
+							alert(jg.getAllResponseHeaders());
 							var browserDiv = document.createElement('nav');
 							browserDiv.style.position = 'absolute';
 							browserDiv.style.top = '0px';
@@ -52,13 +49,6 @@
 							alert(error + ' : ' + data.toString());
 						}
 					});
-				}else{
-					//
-					alert('estas logeado al face');
-					/*$.ajax({
-					
-					});*/
-				};
 				return;
 				
 				if(window.location.hash.length == 0)
@@ -504,14 +494,14 @@ left:10px;border:solid 4px #d8dfea;cursor:crosshair;overflow:hidden}
 <div id="fb-root"></div>
 <script src="http://connect.facebook.net/en_US/all.js"></script>
 <script type="text/javascript" charset="utf-8">
-FB.init({
+/*FB.init({
 	appId  : APPID,
 	//appKey : APPKEY,
-	//status : true, // check login status
+	status : true, // check login status
 	cookie : true,//, // enable cookies to allow the server to access the session
-	xfbml  : true  // parse XFBML
+	/xfbml  : true  // parse XFBML
 });
-
+*/
 /*var datapost = {
 	email: 'jcapoduri@gmail.com',
 	pass: '987643581235642',

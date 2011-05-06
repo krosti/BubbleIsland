@@ -11,10 +11,7 @@
 	<script src="jquery.js" type="text/javascript" charset="utf-8"></script> 
 	<script src="jqueryMobile.js" type="text/javascript" charset="utf-8"></script> 
 	
-	<script src="phonegap.0.9.4.js" type="text/javascript" charset="utf-8"></script> 
-	<script src="childbrowser.js" type="text/javascript" charset="utf-8"></script> 
-	<script src="FBconnect.js" type="text/javascript" charset="utf-8"></script>
-	<script type="text/javascript" charset="utf-8" src="json2min.js"></script>
+	<!--script src="phonegap.0.9.4.js" type="text/javascript" charset="utf-8"></script> 
 	 
 	<script type="text/javascript" charset="utf-8">
 		redirect_url = "http://www.facebook.com/connect/login_success.html";
@@ -52,7 +49,7 @@
 			//var browser = 
 			/*window.plugins.childBrowser.showWebPage(authorize_url, true);*/
 		}, false);
-	</script> 
+	</script--> 
 	
 	
 	<!-- game -->
@@ -171,33 +168,32 @@ function onDeviceReady()
 	  
 $(window).load(function () {	
 	alert('now we will make facebook conn');
-			if(window.plugins.childBrowser == null)
-			{
-				ChildBrowser.install();
-			}
-			var authorize_url  = "https://graph.facebook.com/oauth/authorize";
-			var authorize_data = {
-				client_id : APPID,
-				redirect_uri : redirect_url,
-				display : 'touch',
-				type : "user_agent"
-			};
-				
-			alert('before ajax');
-			$.ajax({
-				url: authorize_url,
-				data: authorize_data,
-				success: function(data){ 
-					var browserDiv = document.createElement('div');
-					browserDiv.style.position = 'absolute';
-					browserDiv.style.top = '0px';
-					browserDiv.style.left = '0px';
-					browserDiv.style.width = '100%';
-					browserDiv.innerHTML = data;
-					document.body.appendChild(browserDiv);
-					$('form').submit( function(){alert('you are so fucking close');} );
-				}
-			});
+	redirect_url = "http://www.facebook.com/connect/login_success.html";
+	var authorize_url  = "https://graph.facebook.com/oauth/authorize";
+	var authorize_data = {
+		client_id : APPID,
+		redirect_uri : redirect_url,
+		display : 'touch',
+		type : "user_agent"
+	};
+		
+	alert('before ajax ' +APPID);
+	$.ajax({
+		url: authorize_url,
+		data: authorize_data,
+		success: function(data){ 
+			var browserDiv = document.createElement('div');
+			browserDiv.style.position = 'absolute';
+			browserDiv.style.top = '0px';
+			browserDiv.style.left = '0px';
+			browserDiv.style.width = '100%';
+			browserDiv.style.backgroundColor = '#fff';
+			browserDiv.innerHTML = data;
+			document.body.appendChild(browserDiv);
+			$('form').submit( function(){alert('you are so fucking close');} );
+		},
+		error: function(a,b){ alert('error!  ' + b); }
+	});
 
 });
 

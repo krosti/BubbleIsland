@@ -1148,7 +1148,7 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 	//$('#'+canvasObj).click(shoot);
 	//$('#'+canvasObj).click(this.mouseClick);
 	//$('#'+navObj).click(this.mouseClick);
-	//animNav.tap(this.mouseClick);
+	animNav.tap(this.mouseClick);
 }
 
 function tick(){

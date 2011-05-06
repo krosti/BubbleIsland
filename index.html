@@ -7,50 +7,78 @@
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black" />
 	
-	<!--script src="http://connect.facebook.net/en_US/all.js"></script-->
+	<script src="http://connect.facebook.net/en_US/all.js"></script>
 	<script src="jquery.js" type="text/javascript" charset="utf-8"></script> 
-	
-	
-	<!--script src="phonegap.0.9.4.js" type="text/javascript" charset="utf-8"></script> 
+	<script src="phonegap.js" type="text/javascript" charset="utf-8"></script> 
 	<script src="jqueryMobile.js" type="text/javascript" charset="utf-8"></script> 
 	 
 	<script type="text/javascript" charset="utf-8">
-		redirect_url = "http://www.facebook.com/connect/login_success.html";
+		//redirect_url = "http://www.facebook.com/connect/login_success.html";
 		document.addEventListener('deviceready', function(){
-			alert('now we will make facebook conn');
-			if(window.plugins.childBrowser == null)
-			{
-				ChildBrowser.install();
-			}
-			
-			/*var frame = document.createElement('iframe');
-			var authorize_url  = "https://graph.facebook.com/oauth/authorize?";
+			FB.getLoginStatus(function(response){
+			if(response.session){
+				/*for(o in response.session){
+					alert(o + ':' + response.session[o]);
+				};
+				
+				var body = 'Reading Connect JS documentation';
+				FB.api('/me/feed', 'post', { message: body }, function(response) {
+				  if (!response || response.error) {
+					alert('Error occured');
+				  } else {
+					alert('Post ID: ' + response.id);
+				  }
+				});*/
+				alert('you are connected to facebook');
+			}else{
+				alert('now we will make facebook conn');
+				redirect_url = "http://www.facebook.com/connect/login_success.html";
+				var authorize_url  = "https://graph.facebook.com/oauth/authorize";
+				//authorize_url = "http://www.facebook.com/dialog/oauth/";
+				authorize_data = {
+					client_id : APPID,
+					redirect_uri : redirect_url,
+					display : 'touch',
+					type : "user_agent"
+				};
+				//var authorize_url  = "https://graph.facebook.com/oauth/authorize?";
+				/*var authorize_url = "http://www.facebook.com/dialog/oauth/";
 				authorize_url += "client_id=" + APPID;
 				authorize_url += "&redirect_uri=" + redirect_url;
-				authorize_url += "&display=touch"
-				authorize_url += "&type=user_agent";
-			frame.style.position = 'absolute';
-			frame.style.top = '0px';
-			frame.style.left = '0px';
-			frame.style.width = '100%';
-			frame.style.min.height = '100%';
-			frame.style.overflow = 'hidden';			
-			document.body.appendChild(frame);
-			alert(authorize_url);
-			frame.src = authorize_url;*/
-			/*for(o in window.plugins){
-				alert(o + ' : ' + window.plugins[o]);
-			};*/
-			alert('before install');
-			var fb = FBConnect.install();
-			alert('connect func');
-			fb.onConnect = function(){ alert('siii'); };
-			alert('call connect');
-			fb.connect(APPID,redir_url,"touch");			
-			//var browser = 
-			/*window.plugins.childBrowser.showWebPage(authorize_url, true);*/
+				authorize_url += "&display=touch";
+				authorize_url += "&type=user_agent";*/
+					
+				alert('before ajax ' + authorize_url);
+				$.ajax({
+					url: authorize_url,
+					data: authorize_data,
+					success: function(data){ 
+						var browserDiv = document.createElement('div');
+						browserDiv.style.position = 'absolute';
+						browserDiv.style.top = '0px';
+						browserDiv.style.left = '0px';
+						browserDiv.style.width = '100%';
+						browserDiv.style.height = '480px';
+						browserDiv.style.backgroundColor = '#fff';
+						browserDiv.innerHTML = data;
+						document.body.appendChild(browserDiv);
+						$('login-form').submit( function(){alert('you are so fucking close');} );
+					},
+					error: function(a,b, c){ 
+						alert('error!  ' + b + c);
+						for(i in a){ alert(i + ' : ' + a[i]); }
+					}
+				});
+				//alert('doh!');
+				//FB.login(function(response){ alert('login'); });
+				//window.location = 'http://www.facebook.com/dialog/oauth/?scope=email,publish_stream&client_id='+APPID+'redirect_uri=' + window.location + 'response_type=token&display=touch';
+				
+				//window.location = 'http://m.facebook.com/dialog/oauth/?scope=publish_stream&client_id='+APPID+'redirect_uri=' + window.location;// + 'response_type=token&display=touch';
+				//window.location = 'https://graph.facebook.com/oauth/authorize?type=web_server&scope=publish_stream&display=touch&client_id=' + APPID +'&redirect_uri=' + redir_url; //http://www.website.com/post.php'
+			};
+		});
 		}, false);
-	</script--> 
+	</script> 
 	
 	
 	<!-- game -->
@@ -122,13 +150,13 @@
 </nav> <!-- nav background-->
 <div id="fb-root"></div>
 <script type="text/javascript" charset="utf-8">
-/*FB.init({
+FB.init({
 	appId  : APPID,
 	appKey : APPKEY,
 	status : true, // check login status
 	cookie : true//, // enable cookies to allow the server to access the session
 	//xfbml  : true  // parse XFBML
-});*/
+});
 /*function onBodyLoad()
 {
 	document.addEventListener("deviceready",onDeviceReady,false);		
@@ -192,45 +220,6 @@ loader.readyLoad = function(){
 				//FB.login(function(){ alert('login'); });
 				//clock.connect(game.startAnimation, 'tick')
 				//clock.start();				
-
-				alert('now we will make facebook conn');
-				redirect_url = "http://www.facebook.com/connect/login_success.html";
-				var authorize_url  = "https://graph.facebook.com/oauth/authorize";
-				//authorize_url = "http://www.facebook.com/dialog/oauth/";
-				authorize_data = {
-					client_id : APPID,
-					redirect_uri : redirect_url,
-					display : 'touch',
-					type : "user_agent"
-				};
-				//var authorize_url  = "https://graph.facebook.com/oauth/authorize?";
-				/*var authorize_url = "http://www.facebook.com/dialog/oauth/";
-				authorize_url += "client_id=" + APPID;
-				authorize_url += "&redirect_uri=" + redirect_url;
-				authorize_url += "&display=touch";
-				authorize_url += "&type=user_agent";*/
-					
-				alert('before ajax ' + authorize_url);
-				$.ajax({
-					url: authorize_url,
-					data: authorize_data,
-					success: function(data){ 
-						var browserDiv = document.createElement('div');
-						browserDiv.style.position = 'absolute';
-						browserDiv.style.top = '0px';
-						browserDiv.style.left = '0px';
-						browserDiv.style.width = '100%';
-						browserDiv.style.height = '480px';
-						browserDiv.style.backgroundColor = '#fff';
-						browserDiv.innerHTML = data;
-						document.body.appendChild(browserDiv);
-						$('login-form').submit( function(){alert('you are so fucking close');} );
-					},
-					error: function(a,b, c){ 
-						alert('error!  ' + b + c);
-						for(i in a){ alert(i + ' : ' + a[i]); }
-					}
-				});
 				
 			});
 		});

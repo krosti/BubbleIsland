@@ -30,10 +30,10 @@
 					var uri = 'https://www.facebook.com/dialog/oauth?client_id=213255638692367&redirect_uri=http://www.facebook.com/connect/login_success.html&display=touch&response_type=token';
 
 					jq = $.ajax({
-						type: 'POST',
+						type: 'GET',
 						url: uri,
 						//data: datapost,
-						contentType: 'application/x-www-form-urlencoded',
+						//contentType: 'application/x-www-form-urlencoded',
 						success: function(data){
 							alert(data);
 							alert(jq.getAllResponseHeaders());

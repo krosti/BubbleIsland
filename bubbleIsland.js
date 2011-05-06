@@ -13,6 +13,7 @@ beta:
 [-] api facebook
 [ ] animaciones basicas
 [ ] animaciones deseadas
+[ ] leaderboard
 
 alpha:
 [-] ui
@@ -304,6 +305,12 @@ function bubbleCannon(lvl){
 	this.currentBubble;/* = new bubble(this.lvl);
 	this.currentBubble.makeItRandom();*/
 	this.readyShoot = false;
+	this.element = document.createElement('div');
+	var style = this.element.style;
+	style.position = 'absolute';
+	style.backgroundImage = 'url('+cannonImage.src+')';
+	style.top = this.lvl.height - cannonImage.height;
+	style.left = (this.lvl.width - cannonImage.width) / 2;
 	
 	this.shoot = function(x, y){
 	//function shoot(x, y){
@@ -338,7 +345,8 @@ function bubbleCannon(lvl){
 		this.currentBubble.element.style.left = this.currentBubble.x + 'px';
 		animNav.append(this.currentBubble.element);
 		this.readyShoot = true;
-	}
+	};
+
 };
 
 function bubbleTable(ancho, alto, lvl){
@@ -372,8 +380,12 @@ function bubbleTable(ancho, alto, lvl){
 	
 	this.retrieveBubble = function(i, j){
 		//debug('  retrieve Bubble i:' + i + ' j:' + j);
-		if((i >= this.alto) || (i < 0)) return new bubble(this.lvl);
+		if((i >= this.alto)) return new bubble(this.lvl);
 		if((j >= this.ancho) || (j < 0)) return new bubble(this.lvl);
+		if(i < 0){
+			var b = new bubble(this.lvl);
+			b.flavor = "techo";
+		};
 		if(this.isShortRow(i) && j == this.ancho) return new bubble(this.lvl);
 		return this.Table[i][j];
 	};
@@ -442,7 +454,7 @@ function bubbleTable(ancho, alto, lvl){
 		//if(this.retrieveBubble(i-1, j).)
 		//toCheck = bubble//this.retrieveBubble(i,j);
 		if(toCheck == "nada" || toCheck == "vacio") return 0;
-		if(toCheck.flavor == "nula") return 0;
+		if(toCheck.flavor == "nula" ||toCheck.flavor == "techo") return 0;
 		if(toCheck.marked) return 0;
 		this.touchedBubbles.push(toCheck);
 		toCheck.marked = true;
@@ -505,7 +517,9 @@ function bubbleTable(ancho, alto, lvl){
 		//check de caidas
 		//debug(bubble);
 		if(bubble == "nada" || bubble == "vacio") return true;
-		if(bubble.flavor == "nula") return false;
+		//if(bubble.flavor == "nula") return false;
+		if(bubble.flavor == "nula") return true;
+		if(bubble.flavor == "techo") return false;
 		if(bubble.marked) return true;
 		
 		bubble.marked = true;
@@ -674,8 +688,8 @@ function bubbleLevel(w, h, bubblesWidth, bubblesHeight, lvlnbr){
 		for(i = 0; i < this.bubbles_array.length; ++i){			
 			currentBubble = this.bubbles_array[i];
 			// check radius
-			disx = Math.abs(currentBubble.x - this.shootedBubble.x);
-			disy = Math.abs(currentBubble.y - this.shootedBubble.y);
+			disx = Math.abs((currentBubble.x + this.bubbleRadius / 2) - (this.shootedBubble.x + this.bubbleRadius / 2));
+			disy = Math.abs((currentBubble.y + this.bubbleRadius / 2) - (this.shootedBubble.y + this.bubbleRadius / 2));
 			//debug(disx + ':' + disy);
 			
 			distance = Math.sqrt(disx * disx + disy * disy);
@@ -832,7 +846,7 @@ function bubbleLevel(w, h, bubblesWidth, bubblesHeight, lvlnbr){
 		//alert(detonated.i + ' : ' + detonated.j + '  neighbour: ' + neighbour);
 		if(neighbour == 0) return;
 		if(detonated == "nada" || detonated == "vacio") return;
-		if(detonated.flavor == "nula") return;
+		if(detonated.flavor == "nula" || detonated.flavor == "techo") return;
 		//alert(detonated.i + ' : ' + detonated.j + '  neighbour: ' + neighbour);
 		//if(detonated.marked) return;
 		
@@ -1031,6 +1045,7 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 		
 		this.cannon = new bubbleCannon(this.level);
 		this.level.cannon = this.cannon;
+		animNav[0].append(this.cannon.element);
 		this.level.top = this.top;
 		this.level.left = this.left;	
 		this.level.topBound = this.canvas.height - this.level.height;

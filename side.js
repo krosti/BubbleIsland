@@ -10,19 +10,30 @@ function Loader(progress){
 	lvlFrame = new Image();
 	backgroundImage = new Image();
 	logoImage = new Image();
+	cannonImage = new Image();
 	
 	this.readyLoad;// = function(){ alert('hola'); };
 	
-	this.toLoad = 8;
+	this.toLoad = 9;
 	this.isloaded = 0;
 	
 	this.loaded = function(){
+		//alert(this.isloaded);
 		this.isloaded++;
 		this.progressBar.style.width = ((this.isloaded / this.toLoad) * 100)+ '%';
 		if(this.isloaded == this.toLoad) this.readyLoad();
 	};
 	
 	this.init = function(){	
+		/*bubbleSilverImage.onLoad = this.loaded();
+		bubbleOrangeImage.onLoad = this.loaded();
+		bubbleRedImage.onLoad = this.loaded();
+		bubblePurpleImage.onLoad = this.loaded();
+		bubbleYellowImage.onLoad = this.loaded();
+		lvlFrame.onLoad = this.loaded();
+		backgroundImage.onLoad = this.loaded();
+		logoImage.onLoad = this.loaded();
+		cannonImage.onLoad = this.loaded;*/
 		bubbleSilverImage.onLoad = this.loaded();
 		bubbleOrangeImage.onLoad = this.loaded();
 		bubbleRedImage.onLoad = this.loaded();
@@ -31,23 +42,22 @@ function Loader(progress){
 		lvlFrame.onLoad = this.loaded();
 		backgroundImage.onLoad = this.loaded();
 		logoImage.onLoad = this.loaded();
+		cannonImage.onLoad = this.loaded();
+		this.startLoad();
 	};
-	
-	bubbleSilverImage.src = 'silverbubble.png';
-	bubbleOrangeImage.src = 'orangebubble.png';
-	bubbleRedImage.src = 'redbubble.png';
-	bubblePurpleImage.src = 'purplebubble.png';
-	bubbleYellowImage.src = 'yellowbubble.png';
 
-	/*bubbleSilverImage.src = 'silverbubble.jpg';
-	bubbleOrangeImage.src = 'orangebubble.jpg';
-	bubbleRedImage.src = 'redbubble.jpg';
-	bubblePurpleImage.src = 'purplebubble.jpg';
-	bubbleYellowImage.src = 'yellowbubble.jpg';*/
+	this.startLoad = function(){	
+		bubbleSilverImage.src = 'silverbubble.png';
+		bubbleOrangeImage.src = 'orangebubble.png';
+		bubbleRedImage.src = 'redbubble.png';
+		bubblePurpleImage.src = 'purplebubble.png';
+		bubbleYellowImage.src = 'yellowbubble.png';
 
-	lvlFrame.src = 'lvlboundering.png';
-	backgroundImage.src = 'background.png';
-	logoImage.src = 'logo.jpg';
+		lvlFrame.src = 'lvlboundering.png';
+		backgroundImage.src = 'background.png';
+		logoImage.src = 'logo.jpg';
+		cannonImage.src = 'cannon.png';
+	};
 };
 //function Timeline(self, fps){ //donde self es el nombre del objeto usado
 function Timeline(fps){
@@ -196,8 +206,65 @@ function Animation(duration, width, height, image){
 		this.element.style.backgroundPosition = this.tick * this.width + 'px 0px';
 		//this.frames[this.tick].style.display = 'none';
 	};
+};
+
+function standAnimation(width, hegiht, image, timeline){
+	this.width = width;
+	this.height = height;
+	this.line = timeline;
+	this.self = this;
+	this.states = {};
+	this.currentAnim = '';
+
+	//init
+	this.baseElement = document.createElement('div');
+	this.baseImage = document.createElement('img');
+	this.baseImage.src = image;
+	this.setBaseStyle(this.baseElement);
+	this.setBaseStyle(this.baseImage);
+	this.baseImage.style.position = 'relative';
+
+
 	
 };
+
+standAnimation.prototype.setBaseStyle = function(obj) {
+	var style = obj.style;
+	style.position = 'absolute';
+	style.top = '0px';
+	style.left = '0px';
+	style.width = this.width + 'px';
+	style.height = this.height + 'px';
+};
+
+standAnimation.prototype.setXY = function(obj, x, y) {
+	var style = obj.style;
+	style.top = y + 'px';
+	style.left = x + 'px';
+};
+
+standAnimation.prototype.addState = function(name, image, duration) {
+	var anim = new Animation(duration, this.width, this.height, image);
+	this.state[name] = anim;
+};
+
+standAnimation.prototype.setCurrentState = function(name) {
+	this.currentAnim = name;
+	for(animName in thisState){
+		if(animName == name){
+			this.state[animName].element.style.display = 'block';
+			this.state[animName].tick = 0;
+		}else{
+			this.state[animName].element.style.display = 'none';
+		};
+	};
+};
+
+standAnimation.prototype.render = function() {
+	if(this.currentAnim == '') return;
+	this.state[this.currentAnim].render();
+};
+
 
 //multiple div, an div per frame
 /*function Animation(duration, width, height, image){

@@ -31,8 +31,8 @@ FBConnect.prototype.onLocationChange = function(newLoc)
 {
 	if(newLoc.indexOf(this.redirect_uri) == 0)
 	{
-		var result = unescape(newLoc).split("#")[1];
-		result = unescape(result);
+		var result = decodeURI(newLoc).split("#")[1];
+		result = decodeURI(result);
 		
 		// TODO: Error Check
 		this.accessToken = result.split("&")[0].split("=")[1];		
@@ -63,13 +63,16 @@ FBConnect.prototype.getFriends = function()
 
 // Note: this plugin does NOT install itself, call this method some time after deviceready to install it
 // it will be returned, and also available globally from window.plugins.fbConnect
-FBConnect.install = function()
+/*FBConnect.install = function()
 {
+	alert('installation begin');
 	if(!window.plugins)
 	{
 		window.plugins = {};	
-	}
+	};
+	alert('after check');
 	window.plugins.fbConnect = new FBConnect();
+	alert('new object in town!');
 	return window.plugins.fbConnect;
-}
+}*/
 

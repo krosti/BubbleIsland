@@ -69,13 +69,18 @@ Array.prototype.remove = function(data) {
 	};
 };
 
-/*Object.prototype.toString = function(){
+Object.prototype.toString = function(){
 	str = "";
 	for(prop in this){
-		str += prop + ':' + this[prop];
+		if(typeof this[prop] =='object'){
+			str += prop + ':' + this[prop].toString();
+		}else{
+			str += prop + ':' + this[prop];
+		};
+		
 	};
 	return str;
-}*/
+}
 
 //debug
 var console;

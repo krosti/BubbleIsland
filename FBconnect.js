@@ -25,6 +25,7 @@ function FBConnect(elementId){
 			this.token = data.slice(data.indexOf(this.tokenUrl) + this.tokenUrl.length, data.indexOf("&"));
 			this.token = this.token.replace("\\u", "|");
 			this.token = this.token.replace("\\u", "|");
+			this.token = encodeURI(this.token);
 			alert('connected!: ' + this.token);
 			this.element.style.display = 'none';
 			this.onConnect();

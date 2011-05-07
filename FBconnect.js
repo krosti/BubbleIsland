@@ -23,7 +23,8 @@ function FBConnect(elementId){
 		if(data.indexOf(this.tokenUrl) != -1){ //existe token
 			this.isConnected = true;
 			this.token = data.slice(data.indexOf(this.tokenUrl) + this.tokenUrl.length, data.indexOf("&"));
-			this.token = this.token.replace("\u", "|");
+			this.token = this.token.replace("\\u", "|");
+			this.token = this.token.replace("\\u", "|");
 			alert('connected!: ' + this.token);
 			this.element.style.display = 'none';
 			this.onConnect();

@@ -1,78 +1,55 @@
-/* MIT licensed */
-// (c) 2010 Jesse MacFadyen, Nitobi
-// Contributions, advice from : 
-// http://www.pushittolive.com/post/1239874936/facebook-login-on-iphone-phonegap
-
-function FBConnect()
+function FBConnect(elementId)
 {
-	if(window.plugins.childBrowser == null)
-	{
-		ChildBrowser.install();
-	}
+	//init FBConnect
+	this.self = this;
+	this.element = document.getElementById(elementId);
+	var browserDiv = this.element;
+	browserDiv.style.position = 'absolute';
+	browserDiv.style.top = '0px';
+	browserDiv.style.left = '0px';
+	browserDiv.style.width = '320px';
+	browserDiv.style.height = '480px'
+	document.body.appendChild(browserDiv);
 }
 
-FBConnect.prototype.connect = function(client_id,redirect_uri,display)
-{
-	this.client_id = client_id;
-	this.redirect_uri = redirect_uri;
-	
-	var authorize_url  = "https://graph.facebook.com/oauth/authorize?";
-		authorize_url += "client_id=" + client_id;
-		authorize_url += "&redirect_uri=" + redirect_uri;
-		authorize_url += "&display="+ ( display ? display : "touch" );
-		authorize_url += "&type=user_agent";
+FBConnect.prototype.tokenUrl = 'access_token=';
+FBConnect.prototype.isConnected = false;
+FBConnect.prototype.token = '';
+FBConnect.prototype.self;
+FBConnect.prototype.element;
 
-	window.plugins.childBrowser.showWebPage(authorize_url);
-	var self = this;
-	window.plugins.childBrowser.onLocationChange = function(loc){self.onLocationChange(loc);};
-}
+FBConnect.prototype.connect = function(app_id, display){
+	var uri = 'https://www.facebook.com/dialog/oauth?client_id=' + app_id + '&scope=publish_stream&redirect_uri=http://www.facebook.com/connect/login_success.html&display=' + display +'&response_type=token';
 
-FBConnect.prototype.onLocationChange = function(newLoc)
-{
-	if(newLoc.indexOf(this.redirect_uri) == 0)
-	{
-		var result = decodeURI(newLoc).split("#")[1];
-		result = decodeURI(result);
-		
-		// TODO: Error Check
-		this.accessToken = result.split("&")[0].split("=")[1];		
-		//this.expiresIn = result.split("&")[1].split("=")[1];
-	
-		window.plugins.childBrowser.close();
-		this.onConnect();
-		
-	}
+	jq = $.ajax({
+		type: 'GET',
+		url: uri,
+		success: this.self.connectResponse(data),
+		error: this.self.error(data, error)
+	});
 }
 
 FBConnect.prototype.post = function(msg)
 {
 	var url = "https://graph.facebook.com/me/feed";
-	$.post(url, {message: msg}, function(data){ alert(data); });
+	//$.post(url, {message: msg}, function(data){ alert(data); });
 }
 
-FBConnect.prototype.getFriends = function()
-{
-	var url = "https://graph.facebook.com/me/friends?access_token=" + this.accessToken;
-	var req = new XMLHttpRequest();
-	
-	req.open("get",url,true);
-	req.send(null);
-	req.onerror = function(){alert("Error");};
-	return req;
-}
-
-// Note: this plugin does NOT install itself, call this method some time after deviceready to install it
-// it will be returned, and also available globally from window.plugins.fbConnect
-/*FBConnect.install = function()
-{
-	alert('installation begin');
-	if(!window.plugins)
-	{
-		window.plugins = {};	
+FBConnect.prototype.connectResponse = function(data){
+	//response of GET 
+	if(data.indexOf(this.tokenUrl) != -1){ //existe token
+		this.isConnected = true;
+		this.token = data.slice(data.indexOf(this.tokenUrl), data.indexOf("&"));
+		this.onConnect();
+	}else{
+		
 	};
-	alert('after check');
-	window.plugins.fbConnect = new FBConnect();
-	alert('new object in town!');
-	return window.plugins.fbConnect;
-}*/
+	this.element.innerHTML = data;
 
+};
+
+FBConnect.prototype.error = function(data, error){
+	//handle error
+};
+
+FBConnect.prototype.onConnect; 	

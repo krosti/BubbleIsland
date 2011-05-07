@@ -8,149 +8,39 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black" />
 	
 	<script src="jquery.js" type="text/javascript" charset="utf-8"></script> 
-	<script src="phonegap.js" type="text/javascript" charset="utf-8"></script> 
+	<!--script src="phonegap.js" type="text/javascript" charset="utf-8"></script> 
 	<script src="jqueryMobile.js" type="text/javascript" charset="utf-8"></script> 
 	 <!-- game -->
+	<script src="FBconnect.js" type="text/javascript" charset="utf-8"></script> 
 	<script src="side.js" type="text/javascript" charset="utf-8"></script> 
 	<script src="bubbleIsland.js" type="text/javascript" charset="utf-8"></script> 	
 	<script type="text/javascript" charset="utf-8">
 		//redirect_url = "http://www.facebook.com/connect/login_success.html";
 		document.addEventListener('deviceready', function(){
-				alert('now we will make facebook conn');
-					
-					var datapost = {
-						email: 'jcapoduri@gmail.com',
-						pass: '987643581235642',
-						login: 'submit'
-					};
+			FB.connect();
+			/*var uri = 'https://www.facebook.com/dialog/oauth?client_id=213255638692367&scope=publish_stream&redirect_uri=http://www.facebook.com/connect/login_success.html&display=touch&response_type=token';
 
-					//var uri ='https://www.facebook.com/login.php?app_id=213255638692367&amp;cancel=http%3A%2F%2Fwww.facebook.com%2Fconnect%2Flogin_success.html%3Ferror_reason%3Duser_denied%26error%3Daccess_denied%26error_description%3DThe%2Buser%2Bdenied%2Byour%2Brequest.&amp;iphone&amp;next=http%3A%2F%2Fwww.facebook.com%2Fconnect%2Fuiserver.php%3Fmethod%3Dpermissions.request%26app_id%3D213255638692367%26display%3Dtouch%26redirect_uri%3Dhttp%253A%252F%252Fwww.facebook.com%252Fconnect%252Flogin_success.html%26response_type%3Dtoken%26fbconnect%3D1%26from_login%3D1&amp;refsrc=http%3A%2F%2Ftouch.facebook.com%2Flogin.php';
-
-					
-					var uri = 'https://www.facebook.com/dialog/oauth?client_id=213255638692367&redirect_uri=http://www.facebook.com/connect/login_success.html&display=touch&response_type=token';
-
-					jq = $.ajax({
-						type: 'GET',
-						url: uri,
-						//data: datapost,
-						//contentType: 'application/x-www-form-urlencoded',
-						success: function(data){
-							alert(data);
-							alert(jq.getAllResponseHeaders());
-							alert(this.url);
-							var browserDiv = document.createElement('nav');
-							browserDiv.style.position = 'absolute';
-							browserDiv.style.top = '0px';
-							browserDiv.style.left = '0px';
-							browserDiv.style.width = '320px';
-							browserDiv.style.height = '480px'
-							browserDiv.innerHTML = data;
-							document.body.appendChild(browserDiv);
-						},
-						error: function(data, error){
-							alert(error + ' : ' + data.toString());
-						}
-					});
-				return;
-				
-				if(window.location.hash.length == 0)
-				{
-					alert('open window');
-					url = "https://www.facebook.com/dialog/oauth?client_id=" + 
-							 APPID  + "&redirect_uri=" + window.location +
-							 "&response_type=token";
-					window.open(url);
-
-				} else {
-					alert('hash long');
-					accessToken = window.location.hash.substring(1);
-					graphUrl = "https://graph.facebook.com/me?" + accessToken +
-								"&callback=displayUser"
-
-					//use JSON-P to call the graph
-					var script = document.createElement("script");
-					script.src = graphUrl;
-					document.body.appendChild(script);  
-				}
-
-				function displayUser(user) {
-					alert(user.name);
-				}
-				
-				/*FB.init({
-					appId  : APPID,
-					status : true, // check login status
-					cookie : true, // enable cookies to allow the server to access the session
-					xfbml  : true  // parse XFBML
-				});
-				
-				
-				FB.init({appId: AtPPID, status: true, cookie: true, xfbml: true});
-				  FB.Event.subscribe('auth.sessionChange', function(response) {
-					if (response.session) {
-					  // A user has logged in, and a new cookie has been saved
-					  alert(response.session);
-					} else {
-					  // The user has logged out, and the cookie has been cleared
-					  alert('nada');
-					}
-				  });*/
-				//session = FB.getSession();
-				
-				return;
-				
-				if(session == null){
-					alert('no hay session');
-					var authorize_url  = "https://graph.facebook.com/oauth/authorize";
-					var authorize_data = {
-						client_id : APPID,
-						redirect_uri : redirect_url,
-						display : 'touch',
-						type : "user_agent"
-					};
-						
-					alert('before ajax');
-					/*var authorize_url  = "https://graph.facebook.com/oauth/authorize?";
-					authorize_url += "client_id=" + APPID;
-					authorize_url += "&redirect_uri=" + redirect_url;
-					authorize_url += "&display=touch"
-					authorize_url += "&type=user_agent";
-					var browserDiv = document.createElement('iframe');
+			jq = $.ajax({
+				type: 'GET',
+				url: uri,
+				success: function(data){
+					/*alert(data);
+					alert(jq.getAllResponseHeaders());
+					alert(this.url);
+					var browserDiv = document.createElement('nav');
 					browserDiv.style.position = 'absolute';
 					browserDiv.style.top = '0px';
 					browserDiv.style.left = '0px';
 					browserDiv.style.width = '320px';
-					browserDiv.style.hegiht = '480px'
-					//browserDiv.innerHTML = data;				
+					browserDiv.style.height = '480px'
+					browserDiv.innerHTML = data;
 					document.body.appendChild(browserDiv);
-					browserDiv.src = authorize_url;
-					$('form').submit( function(){alert('you are so fucking close');} );*/
-					$.ajax({
-						url: authorize_url,
-						data: authorize_data,
-						success: function(data){ 
-							var browserDiv = document.createElement('nav');
-							browserDiv.style.position = 'absolute';
-							browserDiv.style.top = '0px';
-							browserDiv.style.left = '0px';
-							browserDiv.style.width = '320px';
-							browserDiv.style.hegiht = '480px'
-							browserDiv.innerHTML = data;
-							document.body.appendChild(browserDiv);
-							$('form').submit( function(){alert('you are so fucking close');} );
-						},
-						error: function(a,b, c){ 
-							alert('error!  ' + b + c);
-							for(i in a){ alert(i + ' : ' + a[i]); }
-						}
-					});
-				}else{
-					for(i in session){
-						alert(i + ' : ' + session[i]);
-					};
-				};
-			
-		//});
+					
+				},
+				error: function(data, error){
+					alert(error + ' : ' + data.toString());
+				}
+			});*/
 		}, false);
 	</script> 
 	<style type="text/css">
@@ -460,16 +350,17 @@ left:10px;border:solid 4px #d8dfea;cursor:crosshair;overflow:hidden}
 <canvas id="gameCanvas" style="position: absolute; top: 0px; left: 0px; display:none" ></canvas>
 <nav id="animCanvas" style="position: absolute; top: 0px; left: 0px; "></nav>
 <nav id="optionMenu" style="position: absolute; top: 0px; left: 0px; width: 100%; min-height: 100%; display: none" >
-<div style="position: absolute; display: table; top: 20%; bottom: auto; margin: auto; width: 100%">
-	<span style="font: bold 20px verdana, sans-serif; text-align: center">Bubble Paradise</span><br>
-	<div style="margin-top: 20px">
-	<nav style="font: bold 15px verdana, sans-serif; margin-top: 10px" onClick="alert('why? i dont have any sound yet!')">Sounds Enable (touch for disable it)</nav>
-	<nav style="font: bold 15px verdana, sans-serif; margin-top: 10px" onCLick="alert('when you make some real points, you will want to post it')">Post my Highscore on Facebook!</nav>
-	<nav style="font: bold 15px verdana, sans-serif; margin-top: 10px" onClick="alert('oh, rly?')">Get more coins!</nav>
-	<nav style="font: bold 15px verdana, sans-serif; margin-top: 10px" onClick="options.exitOptions()">get back to Main Menu</nav>
-	</div>
+	<div style="position: absolute; display: table; top: 20%; bottom: auto; margin: auto; width: 100%">
+		<span style="font: bold 20px verdana, sans-serif; text-align: center">Bubble Paradise</span><br>
+		<div style="margin-top: 20px">
+		<nav style="font: bold 15px verdana, sans-serif; margin-top: 10px" onClick="alert('why? i dont have any sound yet!')">Sounds Enable (touch for disable it)</nav>
+		<nav style="font: bold 15px verdana, sans-serif; margin-top: 10px" onCLick="alert('when you make some real points, you will want to post it')">Post my Highscore on Facebook!</nav>
+		<nav style="font: bold 15px verdana, sans-serif; margin-top: 10px" onClick="alert('oh, rly?')">Get more coins!</nav>
+		<nav style="font: bold 15px verdana, sans-serif; margin-top: 10px" onClick="options.exitOptions()">get back to Main Menu</nav>
+		</div>
 	</div>
 </nav>
+
 <nav id="gameMenu" style="width: 100%; min-height: 100%; position: absolute; top: 0px; left: 0px; text-align: center; background-image: url('background.png');">
 	<div style="position: absolute; display: table; top: 20%; bottom: auto; margin: auto; width: 100%">
 	<span style="font: bold 20px verdana, sans-serif; text-align: center">Bubble Paradise</span><br>
@@ -486,142 +377,30 @@ left:10px;border:solid 4px #d8dfea;cursor:crosshair;overflow:hidden}
 <div id = "loadingScreen" style="position: absolute; top: 50%; bottom: auto; width: 100%; height: 50%; background-color: #fff">
 	<div style="font: 2em Verdana, sans-serif; text-align: center; width: 100%">Loading... </div><br>
 	<div style="width: 80%; min-height: 30px; border: 1px solid black; margin: 0 auto">
-		<div id="progress" style="width: 50%; height: 30px; border: 1px solid black; background-color: #333333">
+		<div id="progress" style="width:01%; height: 30px; border: 1px solid black; background-color: #333333">
 		</div>
 	</div>
 </div>
 </nav>
-
+<nav id="fb-nav" style="width: 100%; min-height: 100%; position: absolute; top: 0px; left: 0px; background-color: #fff">
+	This Application needs you Facebook account Information to link you with your friends <br />
+	Please, log on with your account and allow this application to use your profile information and post in your wall <br />
+	Thank you! and enjoy your stay in our Paradise!!
+</nav>
 </nav> <!-- nav background-->
-<div id="fb-root"></div>
-<script src="http://connect.facebook.net/en_US/all.js"></script>
+
 <script type="text/javascript" charset="utf-8">
-/*FB.init({
-	appId  : APPID,
-	//appKey : APPKEY,
-	status : true, // check login status
-	cookie : true,//, // enable cookies to allow the server to access the session
-	/xfbml  : true  // parse XFBML
-});
-*/
-/*var datapost = {
-	email: 'jcapoduri@gmail.com',
-	pass: '987643581235642',
-	login: 'submit'
-};
-
-var uri ='https://www.facebook.com/login.php?app_id=213255638692367&amp;cancel=http%3A%2F%2Fwww.facebook.com%2Fconnect%2Flogin_success.html%3Ferror_reason%3Duser_denied%26error%3Daccess_denied%26error_description%3DThe%2Buser%2Bdenied%2Byour%2Brequest.&amp;iphone&amp;next=http%3A%2F%2Fwww.facebook.com%2Fconnect%2Fuiserver.php%3Fmethod%3Dpermissions.request%26app_id%3D213255638692367%26display%3Dtouch%26redirect_uri%3Dhttp%253A%252F%252Fwww.facebook.com%252Fconnect%252Flogin_success.html%26response_type%3Dcode%26fbconnect%3D1%26from_login%3D1&amp;refsrc=http%3A%2F%2Ftouch.facebook.com%2Flogin.php';
-
-//var url = 'https://www.facebook.com/login.php?app_id=213255638692367';
-
-$.ajax({
-	type: 'POST',
-	url: uri,
-	data: datapost,
-	contentType: 'application/x-www-form-urlencoded',
-	success: function(data){
-		alert(data);
-	},
-	error: function(data, error){
-		alert(error + ' : ' + data.toString());
-	}
-});*/
-/*function onBodyLoad()
-{
-	document.addEventListener("deviceready",onDeviceReady,false);		
-}*/
-//redirect_url = "http://localhost";
-//redirect_url = window.location;
-/*redirect_url = 'http://www.facebook.com/connect/login_success.html';
-alert('redirect_url: ' + redirect_url);*/
-
-/*FB.init({
-	appId  : APPID,
-	status : true, // check login status
-	cookie : true, // enable cookies to allow the server to access the session
-	xfbml  : true  // parse XFBML
-});*/
-
-//window.open("https://www.facebook.com/dialog/oauth?client_id=" + APPID + "&redirect_uri="+redirect_url+"&scope=email,publish_stream");
 	  
 $(window).load(function () {	
-	/*session = FB.getSession();
-	if(session == null){
-		alert('no hay session');
-		var authorize_url  = "https://graph.facebook.com/oauth/authorize";
-		var authorize_data = {
-			client_id : APPID,
-			redirect_uri : 'http://www.facebook.com/connect/login_success.html',
-			display : 'touch',
-			type : "user_agent"
-		};
-			
-		alert('before ajax');
-		/*var authorize_url  = "https://graph.facebook.com/oauth/authorize?";
-		authorize_url += "client_id=" + APPID;
-		authorize_url += "&redirect_uri=" + redirect_url;
-		authorize_url += "&display=touch"
-		authorize_url += "&type=user_agent";
-		var browserDiv = document.createElement('iframe');
-		browserDiv.style.position = 'absolute';
-		browserDiv.style.top = '0px';
-		browserDiv.style.left = '0px';
-		browserDiv.style.width = '320px';
-		browserDiv.style.hegiht = '480px'
-		//browserDiv.innerHTML = data;				
-		document.body.appendChild(browserDiv);
-		browserDiv.src = authorize_url;
-		$('form').submit( function(){alert('you are so fucking close');} );*
-		$.ajax({
-			url: "https://www.facebook.com/dialog/oauth?client_id=" + APPID + "&redirect_uri=http://www.facebook.com/connect/login_success.html&scope=email,publish_stream",
-			//url: authorize_url,
-			//data: authorize_data,
-			success: function(data){ 
-				var browserDiv = document.createElement('nav');
-				browserDiv.style.position = 'absolute';
-				browserDiv.style.top = '0px';
-				browserDiv.style.left = '0px';
-				browserDiv.style.width = '320px';
-				browserDiv.style.hegiht = '480px'
-				browserDiv.innerHTML = data;
-				document.body.appendChild(browserDiv);
-				$('form').submit( function(){alert('you are so fucking close');} );
-			},
-			error: function(a,b, c){ 
-				alert('error!  ' + b + c);
-				for(i in a){ alert(i + ' : ' + a[i]); }
-			}
-		});
-	}else{
-		for(i in session){
-			alert(i + ' : ' + session[i]);
-		};
-	};*/
-/*if(window.location.hash.length == 0)
-				{
-					alert('open window');
-					url = "https://www.facebook.com/dialog/oauth?client_id=" + 
-							 APPID  + "&redirect_uri=http://www.facebook.com/connect/login_success.html"+ 
-							 "&response_type=token";
-					window.open(url);
 
-				} else {
-					alert('hash long');
-					accessToken = window.location.hash.substring(1);
-					graphUrl = "https://graph.facebook.com/me?" + accessToken +
-								"&callback=displayUser"
-
-					//use JSON-P to call the graph
-					var script = document.createElement("script");
-					script.src = graphUrl;
-					document.body.appendChild(script);  
-				}
-
-				function displayUser(user) {
-					alert(user.name);
-				}*/
 });
 
+FB = new FBConnect('fb-nav');
+
+FB.onConnect = function(){
+	options = new Options('optionMenu');
+	game = new appEnviroment("gameCanvas", "gameMenu", "animCanvas", gameSize);
+};
 				
 loader = new Loader('progress');
 loader.readyLoad = function(){	
@@ -638,18 +417,12 @@ loader.readyLoad = function(){
 				if(screen.width <= 480) gameSize = "480x800";
 				if(screen.width <= 360) gameSize = "360x480";
 				if(screen.width <= 320) gameSize = "320x480";
-				options = new Options('optionMenu');
-				game = new appEnviroment("gameCanvas", "gameMenu", "animCanvas", gameSize);
-				//FB.login(function(){ alert('login'); });
-				//clock.connect(game.startAnimation, 'tick')
-				//clock.start();				
-				
+				/*options = new Options('optionMenu');
+				game = new appEnviroment("gameCanvas", "gameMenu", "animCanvas", gameSize);*/
 			});
 		});
-		//$('#logoImg').fadeIn();
 	});
 };
-
 
 loader.init();
 

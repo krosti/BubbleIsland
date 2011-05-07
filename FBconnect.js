@@ -73,8 +73,14 @@ function FBConnect(elementId){
 	this.post = function(msg)
 	{	
 		alert('post: ' + msg);
-		var url = "https://graph.facebook.com/me/feed";
-		$.post(url, {message: msg, access_token: FB.token}, function(data){ alert(data); });
+		var uri = "https://graph.facebook.com/me/feed";
+		//$.post(url, {message: msg, access_token: FB.token}, function(data){ alert(data); });
+		$.ajax({
+			url: uri,
+			type: 'POST',
+			success: function(data){ alert('success: ' + data); },
+			error: function(data, error){ alert('error: ' + data + error); }
+		});
 	}
 
 	this.onConnect; 

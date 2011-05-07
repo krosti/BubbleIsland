@@ -69,7 +69,7 @@ Array.prototype.remove = function(data) {
 	};
 };
 
-Object.prototype.toString = function(){
+/* 	Object.prototype.toString = function(){
 	str = "";
 	for(prop in this){
 		if(typeof this[prop] =='object'){
@@ -80,7 +80,7 @@ Object.prototype.toString = function(){
 		
 	};
 	return str;
-}
+}*/
 
 //debug
 var console;
@@ -390,6 +390,7 @@ function bubbleTable(ancho, alto, lvl){
 		if(i < 0){
 			var b = new bubble(this.lvl);
 			b.flavor = "techo";
+			return b;
 		};
 		if(this.isShortRow(i) && j == this.ancho) return new bubble(this.lvl);
 		return this.Table[i][j];
@@ -1050,7 +1051,7 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 		
 		this.cannon = new bubbleCannon(this.level);
 		this.level.cannon = this.cannon;
-		animNav[0].append(this.cannon.element);
+		animNav.append(this.cannon.element);
 		this.level.top = this.top;
 		this.level.left = this.left;	
 		this.level.topBound = this.canvas.height - this.level.height;
@@ -1153,7 +1154,8 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 	//$('#'+canvasObj).click(shoot);
 	//$('#'+canvasObj).click(this.mouseClick);
 	//$('#'+navObj).click(this.mouseClick);
-	animNav.tap(this.mouseClick);
+	//animNav.tap(this.mouseClick);
+	animNav.click(this.mouseClick);
 }
 
 function tick(){

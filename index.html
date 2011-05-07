@@ -18,30 +18,15 @@
 		//redirect_url = "http://www.facebook.com/connect/login_success.html";
 		document.addEventListener('deviceready', function(){
 			alert('in connect');
-			FB.connect(APPID, 'touch');
-			/*var uri = 'https://www.facebook.com/dialog/oauth?client_id=213255638692367&scope=publish_stream&redirect_uri=http://www.facebook.com/connect/login_success.html&display=touch&response_type=token';
+			FB.setUrl(APPID, 'touch');
+			/*var uri = 'https://www.facebook.com/dialog/oauth?client_id=213255638692367&scope=publish_stream&redirect_uri=http://www.facebook.com/connect/login_success.html&display=touch&response_type=token';*/
 
 			jq = $.ajax({
 				type: 'GET',
-				url: uri,
-				success: function(data){
-					/*alert(data);
-					alert(jq.getAllResponseHeaders());
-					alert(this.url);
-					var browserDiv = document.createElement('nav');
-					browserDiv.style.position = 'absolute';
-					browserDiv.style.top = '0px';
-					browserDiv.style.left = '0px';
-					browserDiv.style.width = '320px';
-					browserDiv.style.height = '480px'
-					browserDiv.innerHTML = data;
-					document.body.appendChild(browserDiv);
-					
-				},
-				error: function(data, error){
-					alert(error + ' : ' + data.toString());
-				}
-			});*/
+				url: FB.url,
+				success: FB.connectResponse,
+				error: FB.error
+			});
 		}, false);
 	</script> 
 	<style type="text/css">

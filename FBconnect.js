@@ -75,10 +75,15 @@ function FBConnect(elementId){
 	{	
 		alert('post: ' + msg);
 		var uri = "https://graph.facebook.com/me/feed";
+		postdata = {
+			access_token: this.token,
+			message: msg
+		};
 		//$.post(url, {message: msg, access_token: FB.token}, function(data){ alert(data); });
 		this.ajaxReply = $.ajax({
 			url: uri,
 			type: 'POST',
+			data: postdata, 
 			success: function(data){ alert('success: ' + data); },
 			error: function(data, error){ alert('error: ' + data + error); }
 		});

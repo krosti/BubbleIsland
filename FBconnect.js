@@ -73,7 +73,7 @@ function FBConnect(elementId){
 	this.post = function(msg)
 	{
 		var url = "https://graph.facebook.com/me/feed";
-		//$.post(url, {message: msg}, function(data){ alert(data); });
+		$.post(url, {message: msg}, function(data){ alert(data); });
 	}
 
 	this.onConnect; 

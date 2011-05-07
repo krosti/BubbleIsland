@@ -1,5 +1,4 @@
-function FBConnect(elementId)
-{
+function FBConnect(elementId){
 	//init FBConnect
 	alert('initializing');
 	this.self = this;
@@ -37,7 +36,7 @@ function FBConnect(elementId)
 	};
 	
 	this.setUrl = function(app_id, display){
-		this.url = 'https://www.facebook.com/dialog/oauth?client_id=' + app_id + '&scope=publish_stream&redirect_uri=http://www.facebook.com/connect/login_success.html&display=' + //display +'&response_type=token';
+		this.url = 'https://www.facebook.com/dialog/oauth?client_id=' + app_id + '&scope=publish_stream&redirect_uri=http://www.facebook.com/connect/login_success.html&display=' + display +'&response_type=token';
 		//alert('connecting: ' +uri);
 		/*jq = $.ajax({
 			type: 'GET',
@@ -80,9 +79,10 @@ function FBConnect(elementId)
 }
 
 
-
+/*
 FBConnect.prototype.post = function(msg)
 {
 	var url = "https://graph.facebook.com/me/feed";
 	//$.post(url, {message: msg}, function(data){ alert(data); });
 }
+*/

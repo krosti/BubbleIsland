@@ -83,6 +83,7 @@ function FBConnect(elementId){
 		this.ajaxReply = $.ajax({
 			url: uri,
 			type: 'POST',
+			contentType: 'multipart/form-data',
 			data: postdata, 
 			success: function(data){ alert('success: ' + data); },
 			error: function(data, error, r){ alert('error: ' + data.responseText + error + r); }

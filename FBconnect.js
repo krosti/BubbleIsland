@@ -85,9 +85,9 @@ function FBConnect(elementId){
 			type: 'POST',
 			data: postdata, 
 			success: function(data){ alert('success: ' + data); },
-			error: function(data, error){ alert('error: ' + this.url + data + error); }
+			error: function(data, error, r){ alert('error: ' + data.responseText + error + r); }
 		});
-		alert('termine el post');
+		//alert('termine el post');
 	}
 
 	this.onConnect; 

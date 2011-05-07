@@ -25,13 +25,8 @@ FBConnect.prototype.connect = function(app_id, display){
 	jq = $.ajax({
 		type: 'GET',
 		url: uri,
-		success: function(data){ 
-				alert('success: ' + data); 
-				FBConnect.connectResponse(data);
-			},
-		error: function(data, error){ 
-				alert('error'); 
-			}
+		success: FBConnect.connectResponse,
+		error: FBConnect.error
 	});
 }
 

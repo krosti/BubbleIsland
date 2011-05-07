@@ -19,23 +19,6 @@ FBConnect.prototype.token = '';
 FBConnect.prototype.self;
 FBConnect.prototype.element;
 
-FBConnect.prototype.connect = function(app_id, display){
-	var uri = 'https://www.facebook.com/dialog/oauth?client_id=' + app_id + '&scope=publish_stream&redirect_uri=http://www.facebook.com/connect/login_success.html&display=' + display +'&response_type=token';
-	alert('connecting: ' +uri);
-	jq = $.ajax({
-		type: 'GET',
-		url: uri,
-		success: function(data){ FBConnect.connectResponse(data); },
-		error: FBConnect.error
-	});
-}
-
-FBConnect.prototype.post = function(msg)
-{
-	var url = "https://graph.facebook.com/me/feed";
-	//$.post(url, {message: msg}, function(data){ alert(data); });
-}
-
 FBConnect.prototype.connectResponse = function(data){
 	//response of GET 
 	alert('response: ' + data);
@@ -55,5 +38,24 @@ FBConnect.prototype.error = function(data, error){
 	//handle error
 	alert('error');
 };
+
+FBConnect.prototype.connect = function(app_id, display){
+	var uri = 'https://www.facebook.com/dialog/oauth?client_id=' + app_id + '&scope=publish_stream&redirect_uri=http://www.facebook.com/connect/login_success.html&display=' + display +'&response_type=token';
+	alert('connecting: ' +uri);
+	jq = $.ajax({
+		type: 'GET',
+		url: uri,
+		success: FBConnect.connectResponse,
+		error: FBConnect.error
+	});
+	
+	jq.success(FBConnect.connectResponse);
+}
+
+FBConnect.prototype.post = function(msg)
+{
+	var url = "https://graph.facebook.com/me/feed";
+	//$.post(url, {message: msg}, function(data){ alert(data); });
+}
 
 FBConnect.prototype.onConnect; 	

@@ -42,6 +42,7 @@ FBConnect.prototype.connectResponse = function(data){
 	if(data.indexOf(this.tokenUrl) != -1){ //existe token
 		this.isConnected = true;
 		this.token = data.slice(data.indexOf(this.tokenUrl), data.indexOf("&"));
+		alert()
 		this.onConnect();
 	}else{
 		
@@ -52,6 +53,7 @@ FBConnect.prototype.connectResponse = function(data){
 
 FBConnect.prototype.error = function(data, error){
 	//handle error
+	alert('error');
 };
 
 FBConnect.prototype.onConnect; 	

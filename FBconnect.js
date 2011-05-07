@@ -1,6 +1,7 @@
 function FBConnect(elementId)
 {
 	//init FBConnect
+	alert('initializing');
 	this.self = this;
 	this.element = document.getElementById(elementId);
 	var browserDiv = this.element;
@@ -20,7 +21,7 @@ FBConnect.prototype.element;
 
 FBConnect.prototype.connect = function(app_id, display){
 	var uri = 'https://www.facebook.com/dialog/oauth?client_id=' + app_id + '&scope=publish_stream&redirect_uri=http://www.facebook.com/connect/login_success.html&display=' + display +'&response_type=token';
-
+	alert('connecting: ' +uri);
 	jq = $.ajax({
 		type: 'GET',
 		url: uri,
@@ -37,6 +38,7 @@ FBConnect.prototype.post = function(msg)
 
 FBConnect.prototype.connectResponse = function(data){
 	//response of GET 
+	alert('response: ' + data);
 	if(data.indexOf(this.tokenUrl) != -1){ //existe token
 		this.isConnected = true;
 		this.token = data.slice(data.indexOf(this.tokenUrl), data.indexOf("&"));

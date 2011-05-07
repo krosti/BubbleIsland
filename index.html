@@ -8,7 +8,7 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black" />
 	
 	<script src="jquery.js" type="text/javascript" charset="utf-8"></script> 
-	<!--script src="phonegap.js" type="text/javascript" charset="utf-8"></script> 
+	<script src="phonegap.js" type="text/javascript" charset="utf-8"></script> 
 	<script src="jqueryMobile.js" type="text/javascript" charset="utf-8"></script> 
 	 <!-- game -->
 	<script src="FBconnect.js" type="text/javascript" charset="utf-8"></script> 
@@ -383,7 +383,7 @@ left:10px;border:solid 4px #d8dfea;cursor:crosshair;overflow:hidden}
 	</div>
 </div>
 </nav>
-<nav id="fb-nav" style="width: 100%; min-height: 100%; position: absolute; top: 0px; left: 0px; background-color: #fff">
+<nav id = "FBnav" style="width: 100%; min-height: 100%; position: absolute; top: 0px; left: 0px; background-color: #fff">
 	This Application needs you Facebook account Information to link you with your friends <br />
 	Please, log on with your account and allow this application to use your profile information and post in your wall <br />
 	Thank you! and enjoy your stay in our Paradise!!
@@ -396,7 +396,7 @@ $(window).load(function () {
 
 });
 
-FB = new FBConnect('fb-nav');
+FB = new FBConnect('FBnav');
 
 FB.onConnect = function(){
 	options = new Options('optionMenu');

@@ -4,13 +4,13 @@ function FBConnect(elementId)
 	alert('initializing');
 	this.self = this;
 	this.element = document.getElementById(elementId);
-	var browserDiv = this.element;
-	browserDiv.style.position = 'absolute';
-	browserDiv.style.top = '0px';
-	browserDiv.style.left = '0px';
-	browserDiv.style.width = '320px';
-	browserDiv.style.height = '480px'
-	document.body.appendChild(browserDiv);
+	//var browserDiv = this.element;
+	this.element.style.position = 'absolute';
+	this.element.style.top = '0px';
+	this.element.style.left = '0px';
+	this.element.style.width = '320px';
+	this.element.style.height = '480px'
+	document.body.appendChild(this.element);
 }
 
 FBConnect.prototype.tokenUrl = 'access_token=';

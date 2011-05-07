@@ -15,6 +15,7 @@ function FBConnect(elementId){
 	this.isConnected = false;
 	this.token = '';
 	this.url;
+	this.ajaxReply;
 	
 	this.connectResponse = function(data){
 		//response of GET 
@@ -75,12 +76,13 @@ function FBConnect(elementId){
 		alert('post: ' + msg);
 		var uri = "https://graph.facebook.com/me/feed";
 		//$.post(url, {message: msg, access_token: FB.token}, function(data){ alert(data); });
-		$.ajax({
+		this.ajaxReply = $.ajax({
 			url: uri,
 			type: 'POST',
 			success: function(data){ alert('success: ' + data); },
 			error: function(data, error){ alert('error: ' + data + error); }
 		});
+		alert('termine el post');
 	}
 
 	this.onConnect; 

@@ -9,10 +9,12 @@ beta:
 [x] un disparo por tiempo
 [x] optimizar draw
 [ ] dibujar cañon
-[ ] api pago
-[-] api facebook
-[ ] animaciones basicas
-[ ] animaciones deseadas
+[X] facebook con hack
+[-] poner cartel que diga "posiblemente se cierre la aplicación para validar su cuenta de facebook"
+[ ] mejorar parte de facebook
+[ ] agregar api de pago
+[ ] pelotitas
+[ ] animaciónes, oso y cosas...
 [ ] leaderboard
 
 alpha:

@@ -191,7 +191,7 @@ function bubble(l){
 				mult.style.font = 'Verdana 15px';
 				mult.style.position = 'absolute';
 				mult.style.top = '15px'; mult.style.left = '30px';
-				alert('Multiplier ball: ' + this.pointsMultiplier);
+				//alert('Multiplier ball: ' + this.pointsMultiplier);
 				
 				break;
 			case 8:
@@ -233,7 +233,7 @@ function bubble(l){
 				zweithBild.style.left = '0px';
 				//zweithBild.style.zIndex = 30*/ //this.object.baseElement.style.zIndex + 1;
 				
-				alert(this.flavor + ' : ' + this.secondFlavor);
+				//alert(this.flavor + ' : ' + this.secondFlavor);
 				break;
 			case 10:
 				this.flavor = this.randomFlavor();
@@ -988,11 +988,26 @@ function gameUI(w, h){
 	this.element.style.top = '10px';
 	this.element.style.left = (w - 50) + 'px';
 	
+	this.element2 = document.createElement('div');
+	this.element2.style.width = '50px';
+	this.element2.style.position = 'fixed';
+	this.element2.style.top = '30px';
+	this.element2.style.left = (w - 50) + 'px';
+	
+	this.element3 = document.createElement('div');
+	this.element3.style.width = '50px';
+	this.element3.style.position = 'fixed';
+	this.element3.style.top = '50px';
+	this.element3.style.left = (w - 50) + 'px';
+	
+	
 	this.savePoints = function(){ this.acumuledPoints = this.points;};
 	this.restorePoints = function(){ this.points = this.acumuledPoints;}
 	
 	//$('#' + animNav).append(this.element);
 	document.body.appendChild(this.element);
+	document.body.appendChild(this.element2);
+	document.body.appendChild(this.element3);
 	
 	this.draw = function(painter){
 		//performance.check('draw ui');
@@ -1003,6 +1018,8 @@ function gameUI(w, h){
 		painter.fillStyle = '#000';*/
 		if(this.pointsCounter < this.points) this.pointsCounter += 5;
 		$(this.element).html(this.pointsCounter);
+		$(this.element2).html('Vidas: ' + this.lifes);
+		$(this.element3).html('Nivel: ' + game.level.lvlnro);
 		/*painter.fillText(this.pointsCounter , 10, 10);
 		painter.restore();*/
 		//performance.check('draw ui');

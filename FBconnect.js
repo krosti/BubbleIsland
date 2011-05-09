@@ -99,9 +99,14 @@ function FBConnect(elementId){
 	};
 	
 	this.retrieveUserData = function(){
+		postdata = {
+			access_token: this.token		
+		};
+		
 		this.ajaxReply = $.ajax({
 			url: 'https://graph.facebook.com/me',
 			type: 'GET',
+			data: postdata,
 			success: function(data){ alert('success: ' + data); },
 			error: function(data, er, r){ alert(data.responseText + ':' + er + ':' +r); }
 		});

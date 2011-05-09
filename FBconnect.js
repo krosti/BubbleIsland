@@ -114,9 +114,9 @@ function FBConnect(elementId){
 		});
 	};
 	
-	this.setUserData = function(data){
+	/*this.setUserData = function(data){
 		this.user = eval('(' + data + ')');
-	};
+	};*/
 
 	this.onConnect; 
 }

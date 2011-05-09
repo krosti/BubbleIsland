@@ -108,7 +108,7 @@ function FBConnect(elementId){
 			url: 'https://graph.facebook.com/me',
 			type: 'GET',
 			data: postdata,
-			success: function(data){ alert('success: ' + data); FBConnect(data); },
+			success: function(data){ alert('success: ' + data); FBConnect.setUserData(data); },
 			//success: FBConnect.setUserData,
 			error: function(data, er, r){ alert(data.responseText + ':' + er + ':' +r); }
 		});

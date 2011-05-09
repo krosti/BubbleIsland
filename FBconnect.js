@@ -96,14 +96,14 @@ function FBConnect(elementId){
 			error: function(data, error, r){ alert('error: ' + data.responseText + error + r); }
 		});
 		//alert('termine el post');
-	}
+	};
 	
 	this.retrieveUserData = function(){
 		this.ajaxReply = $.ajax({
 			url: 'https://graph.facebook.com/me',
 			type: 'GET',
 			success: function(data){ alert('success: ' + data); },
-			error: function(data, er, r){ alert(data.responseText + ':' + er + ':' +r)};
+			error: function(data, er, r){ alert(data.responseText + ':' + er + ':' +r); }
 		});
 	};
 

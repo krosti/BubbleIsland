@@ -18,6 +18,8 @@
 		//redirect_url = "http://www.facebook.com/connect/login_success.html";
 		document.addEventListener('deviceready', function(){
 			alert('in connect');
+			Playtomic.Log.View(2647, "3689729b4f17433c", document.location);
+			
 			FB.setUrl(APPID, 'touch');
 			/*var uri = 'https://www.facebook.com/dialog/oauth?client_id=213255638692367&scope=publish_stream&redirect_uri=http://www.facebook.com/connect/login_success.html&display=touch&response_type=token';*/
 			alert('before ajax: ' + FB.url);
@@ -394,7 +396,37 @@ function postHighscoreOnFacebook(){
 	var msg = FB.user.name + ' ha logrado ' +game.ui.acumuledPoints + ' en el Bubble Paradise!';
 	FB.post(msg);
 };
-				
+		
+
+		function SubmitScore()
+{
+    var simple_score = {};
+    simple_score.Name = FB.user.name;
+    simple_score.Points = game.ui.acumuledPoints;
+
+    // submit to the highest-is-best table "highscores"
+	var score_data = {
+		facebook : true,
+		highest: true,
+		allowduplicates: false
+	};
+
+    Playtomic.Leaderboards.Submit(simple_score, "highscores", SubmitComplete, score_data);
+}
+
+function SubmitComplete(score, response)
+{
+    if(response.Success)
+    {
+        alert("Score saved!");		
+    }
+    else
+    {
+        // submission failed because of response.ErrorCode
+    }
+}
+
+		
 loader = new Loader('progress');
 loader.readyLoad = function(){	
 	//toda la intro del juego

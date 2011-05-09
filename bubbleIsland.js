@@ -722,9 +722,9 @@ function bubbleLevel(w, h, bubblesWidth, bubblesHeight, lvlnbr){
 	this.h = Math.sqrt((this.bubbleRadius*this.bubbleRadius) - ((this.bubbleRadius / 2) * (this.bubbleRadius / 2)));
 	this.bonus = .2 * this.lvlnro;
 
-	this.character = new standAnimation(71, 110, pandaBearAnim.src, game.clock);
+	this.character = new standAnimation(86, 110, pandaBearAnim.src, game.clock);
 	this.character.setXY(50, 350);
-	this.character.addState('load', this.character.normalImage, 32);
+	this.character.addState('load', this.character.normalImage, 29);
 	animNav.append(this.character.element);
 	
 	//alert(this.pointsToReach);
@@ -1014,7 +1014,7 @@ function gameUI(w, h){
 };
 
 function appEnviroment(canvasObj, menuObj, navObj, size){
-	this.level;
+	this.level = '';
 	this.animTimer;
 	this.cannon;
 
@@ -1058,7 +1058,7 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 
 	this.clock = new Timeline(fps);
 	//this.clock = clock;
-	this.clock.connect(tick, 'tick');
+	//this.clock.connect(tick, 'tick');
 	/*performance = new performanceStatus(5, this.painter);
 	performance.addChecker('clear painter');
 	performance.addChecker('move balls');
@@ -1102,16 +1102,23 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 		this.clock.start();
 
 		//hide menu
-		this.menu.style.zIndex = this.menu.style.zIndex - 1;
+		//this.menu.style.zIndex = this.menu.style.zIndex - 1;
 		this.menu.style.display = 'none';
 		//alert('hola');
 	};
 	
 	this.continueGame = function(){
-		this.clock.start();
+		if(this.level == ''){
+			this.startNewGame();
+		}else{
+			//this.menu.style.zIndex = this.menu.style.zIndex + 1;
+			this.menu.style.display = 'block';
+			this.clock.start();
+		};
 	};
 	
 	this.nextLevel = function(){
+		SubmitScore();
 		this.createLvl(this.level.lvlnro + 1);
 	};
 	
@@ -1177,7 +1184,9 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 	};
 	
 	this.showMenu = function(){
-		clock.stop();
+		this.clock.stop();
+		this.menu.style.zIndex = this.menu.style.zIndex + 2;
+		this.menu.style.display = 'block';
 	};
 	
 	//animation functions

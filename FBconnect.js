@@ -20,20 +20,20 @@ function FBConnect(elementId){
 	
 	this.connectResponse = function(data){
 		//response of GET 
-		alert('response: ' + data);
+		//alert('response: ' + data);
 		if(data.indexOf(this.tokenUrl) != -1){ //existe token
 			this.isConnected = true;
 			this.token = data.slice(data.indexOf(this.tokenUrl) + this.tokenUrl.length, data.indexOf("&"));
 			this.token = '"' + this.token + '"';
-			alert(this.token);
+			//alert(this.token);
 			this.token = eval(this.token);
 			/*this.token = this.token.replace("\\u", "|");
 			this.token = this.token.replace("\\u", "|");*/
-			alert('connected!: ' + this.token);
+			//alert('connected!: ' + this.token);
 			this.element.style.display = 'none';
 			this.onConnect();
 		}else{
-			alert('no connected');
+			//alert('no connected');
 		};
 		this.element.innerHTML = data;
 	};
@@ -81,7 +81,7 @@ function FBConnect(elementId){
 
 	this.post = function(msg)
 	{	
-		alert('post: ' + msg);
+		//alert('post: ' + msg);
 		var uri = "https://graph.facebook.com/me/feed";
 		postdata = {
 			access_token: this.token,
@@ -110,7 +110,7 @@ function FBConnect(elementId){
 			data: postdata,
 			//success: function(data){ alert('success: ' + data); self.setUserData(data); },
 			success: this.setUserData,
-			error: function(data, er, r){ alert(data.responseText + ':' + er + ':' +r); }
+			error: function(data, er, r){ //alert(data.responseText + ':' + er + ':' +r); }
 		});
 	};
 	
@@ -122,7 +122,7 @@ function FBConnect(elementId){
 }
 
 FBConnect.prototype.setUserData = function(data){
-	alert(data);
+	//alert(data);
 	this.user = eval('(' + data + ')');
 };
 /*

@@ -162,7 +162,7 @@ function bubble(l){
 	};
 	
 	this.makeItRandom = function(){
-		var value = rnd(10);
+		var value = rnd(30);
 		switch(value){
 			case 0:
 			case 1:
@@ -171,11 +171,31 @@ function bubble(l){
 			case 4:
 			case 5:
 			case 6:
+			case 7:
+			case 8:
+			case 9:
+			case 10:
+			case 11:
+			case 12:
+			case 13:
+			case 14:
+			case 15:
+			case 16:
+			case 17:
+			case 18:
+			case 19:
+			case 20:
+			case 21:
+			case 22:
+			case 23:
+			case 24:
+			case 25:
+			case 26:
 				this.flavor = this.randomFlavor();
 				this.object = new standAnimation(this.lvl.bubbleRadius, this.lvl.bubbleRadius, this.meinBild.src);
 				this.element = this.object.element;
 				break;
-			case 7:
+			case 27:
 				var second = rnd(1);
 				if(second == 0){
 					this.pointsMultiplier = 2;
@@ -194,13 +214,13 @@ function bubble(l){
 				//alert('Multiplier ball: ' + this.pointsMultiplier);
 				
 				break;
-			case 8:
+			case 28:
 				this.flavor = this.randomFreezeFlavor();
 				this.object = new standAnimation(this.lvl.bubbleRadius, this.lvl.bubbleRadius, this.meinBild.src);
 				this.element = this.object.element;
 				this.freezeBall = true;
 				break;
-			case 9:
+			case 29:
 				this.flavor = this.randomFlavor();
 				this.object = new standAnimation(this.lvl.bubbleRadius, this.lvl.bubbleRadius, this.meinBild.src);
 				this.element = this.object.element;
@@ -235,7 +255,7 @@ function bubble(l){
 				
 				//alert(this.flavor + ' : ' + this.secondFlavor);
 				break;
-			case 10:
+			case 30:
 				this.flavor = this.randomFlavor();
 				this.object = new standAnimation(this.lvl.bubbleRadius, this.lvl.bubbleRadius, this.meinBild.src);
 				this.element = this.object.element;
@@ -723,8 +743,8 @@ function bubbleLevel(w, h, bubblesWidth, bubblesHeight, lvlnbr){
 	this.bonus = .2 * this.lvlnro;
 
 	this.character = new standAnimation(86, 110, pandaBearAnim.src, game.clock);
-	this.character.setXY(50, 380);
-	this.character.addState('load', this.character.normalImage, 29);
+	this.character.setXY(50, 360);
+	this.character.addState('load', this.character.normalImage, 22);
 	animNav.append(this.character.element);
 	
 	//alert(this.pointsToReach);
@@ -934,6 +954,7 @@ function bubbleLevel(w, h, bubblesWidth, bubblesHeight, lvlnbr){
 			$(b.element).remove();
 		};
 		$(this.character.element).remove();
+		$(this.cannon.element).remove();
 		if(this.cannon.currentBubble != null) $(this.cannon.currentBubble.element).remove();
 	};
 	
@@ -1190,7 +1211,12 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 	this.playerLoose = function(){
 		alert('loose');
 		this.clearBoard();
-		ui.lifes--;
+		game.ui.lifes -= 1;
+		if(game.ui.lifes == -1){
+			game.level = '';
+			game.ui.lifes = 5;
+			game.showMenu();
+		};
 		game.redoLevel();
 	};
 	

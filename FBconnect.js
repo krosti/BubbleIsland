@@ -15,6 +15,7 @@ function FBConnect(elementId){
 	this.isConnected = false;
 	this.token = '';
 	this.url;
+	this.user;
 	this.ajaxReply;
 	
 	this.connectResponse = function(data){
@@ -107,15 +108,23 @@ function FBConnect(elementId){
 			url: 'https://graph.facebook.com/me',
 			type: 'GET',
 			data: postdata,
-			success: function(data){ alert('success: ' + data); },
+			//success: function(data){ alert('success: ' + data); },
+			success: FBConnect.setUserData,
 			error: function(data, er, r){ alert(data.responseText + ':' + er + ':' +r); }
 		});
+	};
+	
+	this.setUserData = function(data){
+		this.user = eval('(' + data + ')');
 	};
 
 	this.onConnect; 
 }
 
-
+FBConnect.prototype.setUserData = function(data){
+	alert(data);
+	this.user = eval('(' + data + ')');
+};
 /*
 FBConnect.prototype.post = function(msg)
 {

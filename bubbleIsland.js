@@ -8,14 +8,14 @@ RC:
 beta:
 [x] un disparo por tiempo
 [x] optimizar draw
-[ ] dibujar cañon
+[-] dibujar cañon
 [x] facebook con hack
 [x] poner cartel que diga "posiblemente se cierre la aplicación para validar su cuenta de facebook"
 [-] mejorar parte de facebook
-[ ] leaderboard
+[-] leaderboard
 [ ] agregar api de pago
-[ ] pelotitas
-[ ] animaciónes, oso y cosas...	
+[-] pelotitas
+[-] animaciónes, oso y cosas...	
 
 alpha:
 [-] ui
@@ -71,7 +71,7 @@ Array.prototype.remove = function(data) {
 	};
 };
 
-Object.prototype.toString = function(){
+/*Object.prototype.toString = function(){
 	str = "";
 	for(prop in this){
 		if(typeof this[prop] == 'object'){
@@ -82,7 +82,7 @@ Object.prototype.toString = function(){
 		
 	};
 	return str;
-}
+}*/
 
 //debug
 var console;
@@ -99,9 +99,20 @@ var bubbleRedImage;
 var bubbleOrangeImage;
 var bubblePurpleImage;
 var bubbleYellowImage;
+var bubbleSilverFreezeImage;
+var bubbleRedFreezeImage; 
+var bubbleOrangeFreezeImage;
+var bubblePurpleFreezeImage;
+var bubbleYellowFreezeImage;
+var bubbleSilverHalfImage;
+var bubbleRedHalfImage; 
+var bubbleOrangeHalfImage;
+var bubblePurpleHalfImage;
+var bubbleYellowHalfImage;
 var lvlFrame;
 var backgroundImage;
 var logoImage;
+var pandaBearAnim;
 
 var game;
 var frameBuffer;
@@ -120,10 +131,10 @@ APPKEY = '230bd48e2d38a991fe41e284887db3d8';
 
 function bubble(l){
 	// flavors = blue, red, purple, yellow
-	this.element = document.createElement('img');
+	/*this.element = document.createElement('img');
 	this.element.style.minHeight = l.bubbleRadius + 'px';
 	this.element.style.minWidth = l.bubbleRadius + 'px';
-	this.element.style.position = 'absolute';
+	this.element.style.position = 'absolute';*/
 	this.lvl = l;
 	this.flavor = "nula";
 	this.marked = false;
@@ -134,12 +145,20 @@ function bubble(l){
 	this.dx = 0; //incremental in the x direction
 	this.dy = 0; //incremental in the x direction
 	this.meinBild = new Image();
+	this.object;
 	//this.meinBild.src = 'bubble.png';
 	
 	this.secondFlavor = '';
 	this.freezeBall = false;
 	this.bombBall = false;
 	this.pointsMultiplier = 1;
+	
+	this.makeItRandomNormal = function(){
+		this.flavor = this.randomFlavor();
+		this.object = new standAnimation(this.lvl.bubbleRadius, this.lvl.bubbleRadius, this.meinBild.src);
+		this.element = this.object.element;
+		this.object.fitNormalImage();
+	};
 	
 	this.makeItRandom = function(){
 		var value = rnd(10);
@@ -151,36 +170,79 @@ function bubble(l){
 			case 4:
 			case 5:
 			case 6:
-				this.flavor = this.randomFlavor();				
+				this.flavor = this.randomFlavor();
+				this.object = new standAnimation(this.lvl.bubbleRadius, this.lvl.bubbleRadius, this.meinBild.src);
+				this.element = this.object.element;
 				break;
 			case 7:
 				var second = rnd(1);
 				if(second == 0){
 					this.pointsMultiplier = 2;
 				}else{
-					this.pointsMultiplier = 2;
+					this.pointsMultiplier = 3;
 				};
+				var mult = document.createElement('p');
+				this.flavor = this.randomFlavor();
+				this.object = new standAnimation(this.lvl.bubbleRadius, this.lvl.bubbleRadius, this.meinBild.src);
+				this.element = this.object.element;
+				this.element.appendChild(mult);								
+				mult.innerHTML = 'X ' +  this.pointsMultiplier;
+				//mult.style.font = 'Verdana 15px';
+				//mult.style.position = 'relative';
+				//mult.style.top = '15px'; mult.style.left = '30px';
 				alert('Multiplier ball: ' + this.pointsMultiplier);
-				this.flavor = this.randomFlavor();				
+				
 				break;
 			case 8:
-				this.flavor = this.randomFlavor();
+				this.flavor = this.randomFreezeFlavor();
+				this.object = new standAnimation(this.lvl.bubbleRadius, this.lvl.bubbleRadius, this.meinBild.src);
+				this.element = this.object.element;
 				this.freezeBall = true;
-				alert('freezeBall!!');
 				break;
 			case 9:
 				this.flavor = this.randomFlavor();
+				this.object = new standAnimation(this.lvl.bubbleRadius, this.lvl.bubbleRadius, this.meinBild.src);
+				this.element = this.object.element;
 				do{
 					this.secondFlavor = this.randomFlavor();
 				}while(this.flavor == this.secondFlavor);
+				var zweithBild = document.createElement('img');				
+				switch(this.secondFlavor){
+					case 'silver':
+						zweithBild.src = bubbleSilverHalfImage.src;
+						break;
+					case 'orange':
+						zweithBild.src = bubbleOrangeHalfImage.src;
+						break;
+					case 'red':
+						zweithBild.src = bubbleRedHalfImage.src;
+						break;
+					case 'purple':
+						zweithBild.src = bubblePurpleHalfImage.src;
+						break;
+					case 'yellow':
+						zweithBild.src = bubbleYellowHalfImage.src;
+						break;
+				};
+				this.object.element.appendChild(zweithBild);
+				zweithBild.style.width = this.lvl.bubbleRadius + 'px';
+				zweithBild.style.heigth = (this.lvl.bubbleRadius / 2) + 'px';
+				/*zweithBild.style.position = 'relative';
+				zweithBild.style.top = '0px';
+				zweithBild.style.left = '0px';*
+				zweithBild.style.zIndex = 30*/ //this.object.baseElement.style.zIndex + 1;
+				
 				alert(this.flavor + ' : ' + this.secondFlavor);
 				break;
 			case 10:
 				this.flavor = this.randomFlavor();
+				this.object = new standAnimation(this.lvl.bubbleRadius, this.lvl.bubbleRadius, this.meinBild.src);
+				this.element = this.object.element;
 				this.bombBall = true;
-				alert('bombBall!!');
+				//alert('bombBall!!');
 				break;
 		};	
+		this.object.fitNormalImage();
 	};
 	
 	this.randomFlavor = function(){
@@ -208,8 +270,36 @@ function bubble(l){
 				this.meinBild = bubbleOrangeImage;
 				break;
 		};
+		return flavor;
+	};	
+	
+	this.randomFreezeFlavor = function(){
+		var flavor;
+		var value = rnd(4);
+		switch (value){
+			case 0:
+				flavor = "silver"; 
+				this.meinBild = bubbleSilverFreezeImage;
+				break;
+			case 1:
+				flavor = "yellow"; 
+				this.meinBild = bubbleYellowFreezeImage;
+				break;
+			case 2:
+				flavor = "purple"; 
+				this.meinBild = bubblePurpleFreezeImage;
+				break;
+			case 3:
+				flavor = "red"; 
+				this.meinBild = bubbleRedFreezeImage;
+				break;
+			case 4:
+				flavor = "orange";
+				this.meinBild = bubbleOrangeFreezeImage;
+				break;
+		};
 		//this.element.style.backgroundImage = 'url(' + this.meinBild.src+')';
-		this.element.src = this.meinBild.src;
+		//this.element.src = this.meinBild.src;
 		return flavor;
 	};
 	
@@ -239,31 +329,6 @@ function bubble(l){
 		this.dx = 0;
 		this.dy = 0;
 		return; 
-		if(this.x < 0) this.x = 0;
-		if(this.y < 0) this.y = 0;
-		
-		// altura de la grilla -> mover de obj
-		//h = (this.lvl.bubbleRadius) / Math.sqrt(2);
-		//h = Math.sqrt((this.lvl.bubbleRadius*this.lvl.bubbleRadius) - ((this.lvl.bubbleRadius / 2) * (this.lvl.bubbleRadius / 2)));
-		
-		//set proximity and attach to table
-		this.i = Math.round(((this.y - this.lvl.topBound) / this.lvl.h) );//+ .5);
-		//calcula se corresponde corrimiento para la fila que tiene una bola menos
-		//delta = (this.i % 2) * (this.lvl.bubbleRadius / 2);
-		delta = this.lvl.grilla.isShortRow(this.i) * (this.lvl.bubbleRadius / 2);
-		//calcular la posicion i de la bola
-		this.j = Math.round(((this.x - this.lvl.leftBound) - delta) / this.lvl.bubbleRadius)
-		
-		//alert('i:' + this.i + ' j:' + this.j + ' h:' + h + ' delta:' + delta);
-		//debug('i:' + this.i + ' j:' + this.j + ' x:' + this.x + ' y:' + this.y + ' h:' + h + ' delta:' + delta);
-		//debug('radius: ' + this.lvl.bubbleRadius);
-		this.x = this.j * (this.lvl.bubbleRadius) + delta;
-		this.y = (this.i * h);
-		
-		this.x += this.lvl.leftBound;
-		this.y += this.lvl.topBound;
-		//if(this.y > 0) this.y = this.y  - (this.lvl.bubbleRadius / 2); 
-		this.lvl.grilla.addBubble(this);
 	};
 	
 	this.equalBubble = function(bubble){
@@ -290,6 +355,8 @@ function bubble(l){
 		this.y += this.lvl.topBound;
 		this.x = Math.floor(this.x);
 		this.y = Math.floor(this.y);
+		this.element.style.top = this.y + 'px';
+		this.element.style.left = this.x + 'px';
 		//alert(this.x + ' : ' + this.y);*/
 	};
 
@@ -299,6 +366,8 @@ function bubble(l){
 		y = (thisBubble.i * h) + this.lvl.topBound;
 		this.y += thisBubble.y - y; 
 		this.y = Math.floor(this.y);
+		this.element.style.top = this.y + 'px';
+		this.element.style.left = this.x + 'px';
 	};
 	
 	this.isMoving = function(){
@@ -312,12 +381,11 @@ function bubbleCannon(lvl){
 	this.currentBubble;/* = new bubble(this.lvl);
 	this.currentBubble.makeItRandom();*/
 	this.readyShoot = false;
-	this.element = document.createElement('div');
-	var style = this.element.style;
-	style.position = 'absolute';
-	style.backgroundImage = 'url('+cannonImage.src+')';
-	style.top = this.lvl.height - cannonImage.height;
-	style.left = (this.lvl.width - cannonImage.width) / 2;
+	this.object = new standAnimation(130, 94, cannonImage.src);
+	this.element = this.object.element;
+	this.object.setXY(((this.lvl.width - cannonImage.width) / 2) + this.lvl.leftBound, (this.lvl.height - cannonImage.height) + this.lvl.topBound);
+	/*style.top = this.lvl.height - cannonImage.height;
+	style.left = (this.lvl.width - cannonImage.width) / 2;*/
 	
 	this.shoot = function(x, y){
 	//function shoot(x, y){
@@ -410,15 +478,18 @@ function bubbleTable(ancho, alto, lvl){
 	this.addBubble = function(bubble, collided){
 		//debug(' addBubble i: ' + bubble.i + 'j: ' + bubble.j);
 		//alert(collided);
-		radius = this.lvl.bubbleRadius / 2;
-		halfradius = radius / 2;
-		bubble.x -= bubble.dx / 2;
-		bubble.y -= bubble.dy / 2;
-		dx = 0;
-		dy = 0;
-		deltax = collided.x - bubble.x;
-		deltay = collided.y - bubble.y;
-		if(this.isShortRow(collided.i)){
+		var radius = this.lvl.bubbleRadius / 2;
+		var halfradius = radius / 2;
+		/*bubble.x -= bubble.dx / 2;
+		bubble.y -= bubble.dy / 2;*/
+		bubble.x -= bubble.dx;
+		bubble.y -= bubble.dy;
+		var dx = 0;
+		var dy = 0;
+		var deltax = collided.x - bubble.x;
+		var deltay = collided.y - bubble.y;
+		var isShort = this.isShortRow(collided.i);
+		if(isShort){
 			if(deltax > halfradius) dx = 0;
 			if(deltax < -halfradius) dx = 1;
 		}else{
@@ -428,6 +499,10 @@ function bubbleTable(ancho, alto, lvl){
 
 		if(deltay > -halfradius) dy = -1;
 		if(deltay < halfradius) dy = 1;
+		if((dx == 0)&&(dy == 0)){			
+			dx = (isShort ? 1 : -1);
+			alert('corrimiento nulo, nuevo dx: ' + dx)
+		};
 
 		bubble.i = collided.i + dy;
 		bubble.j = collided.j + dx;
@@ -631,6 +706,8 @@ function bubbleLevel(w, h, bubblesWidth, bubblesHeight, lvlnbr){
 	this.lvlnro = lvlnbr;
 	this.topBound;
 	this.leftBound;
+	
+	
 	this.mutex = false;
 	this.freeze = false;
 	this.freezeTimeout = 0;
@@ -644,6 +721,11 @@ function bubbleLevel(w, h, bubblesWidth, bubblesHeight, lvlnbr){
 	this.h = Math.sqrt((this.bubbleRadius*this.bubbleRadius) - ((this.bubbleRadius / 2) * (this.bubbleRadius / 2)));
 	this.bonus = .2 * this.lvlnro;
 
+	this.character = new standAnimation(71, 110, pandaBearAnim.src, game.clock);
+	this.character.setXY(50, 350);
+	this.character.addState('load', this.character.normalImage, 32);
+	animNav.append(this.character.element);
+	
 	//alert(this.pointsToReach);
 	//this.fallvelocity = 0.2; //balls per seccond
 	//this.bubbleVelocity = (this.bubbleRadius) * (this.fallvelocity / fps);
@@ -742,6 +824,7 @@ function bubbleLevel(w, h, bubblesWidth, bubblesHeight, lvlnbr){
 	
 	this.setShootedBubble = function(bubble){
 		this.shootedBubble = bubble;
+		this.character.setCurrentState('load');
 	}
 	
 	this.drawBalls = function(painter){
@@ -756,6 +839,10 @@ function bubbleLevel(w, h, bubblesWidth, bubblesHeight, lvlnbr){
 
 		//performance.check('draw balls');
 		if(this.shootedBubble != null) this.shootedBubble.draw(painter);
+	};
+	
+	this.drawLevel = function(){
+		this.character.render();	
 	};
 	
 	this.addBubble = function(b){
@@ -794,7 +881,8 @@ function bubbleLevel(w, h, bubblesWidth, bubblesHeight, lvlnbr){
 				if((j == this.grilla.ancho - 1) && isShort) continue;
 				b = new bubble(this);
 				//b.makeItRandom();
-				b.flavor = b.randomFlavor();
+				//b.flavor = b.randomFlavor();
+				b.makeItRandomNormal();
 				b.i = i;
 				b.j = j;
 				b.dy = this.bubbleVelocity;
@@ -825,7 +913,8 @@ function bubbleLevel(w, h, bubblesWidth, bubblesHeight, lvlnbr){
 			//alert(i);
 			b = new bubble(this);
 			//b.makeItRandom();
-			b.flavor = b.randomFlavor();
+			//b.flavor = b.randomFlavor();
+			b.makeItRandomNormal();
 			b.i = 0;
 			b.j = i;
 			b.dy = this.bubbleVelocity;
@@ -842,7 +931,8 @@ function bubbleLevel(w, h, bubblesWidth, bubblesHeight, lvlnbr){
 			b.stopMove();
 			$(b.element).remove();
 		};
-		$(this.cannon.currentBubble.element).remove();
+		$(this.character.element).remove();
+		if(this.cannon.currentBubble != null) $(this.cannon.currentBubble.element).remove();
 	};
 	
 	this.freezeMovement = function(){
@@ -960,6 +1050,7 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 	};
 
 	this.clock = new Timeline(fps);
+	//this.clock = clock;
 	this.clock.connect(tick, 'tick');
 	/*performance = new performanceStatus(5, this.painter);
 	performance.addChecker('clear painter');
@@ -1050,10 +1141,6 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 				this.level = new bubbleLevel(800, 400, 25, 20, levelnumber);
 				break;
 		};
-		
-		this.cannon = new bubbleCannon(this.level);
-		this.level.cannon = this.cannon;
-		animNav.append(this.cannon.element);
 		this.level.top = this.top;
 		this.level.left = this.left;	
 		this.level.topBound = this.canvas.height - this.level.height;
@@ -1062,6 +1149,10 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 		this.level.loose = this.playerLoose;
 		this.level.win = this.playerWin;
 		this.level.makeMeRandom(5);
+		this.cannon = new bubbleCannon(this.level);
+		this.level.cannon = this.cannon;
+		animNav.append(this.cannon.element);
+		
 		this.cannon.setReadyShoot();
 	};
 	
@@ -1126,6 +1217,7 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 		//this.drawCannon(this.painter);
 		//this.drawBalls(this.painter);
 		this.ui.draw(this.painter);
+		this.level.drawLevel();
 
 		//this.clearPainter(this.painter);
 		//this.painter.putImageData(this.frameBuffer.getImageData(0, 0, this.buffercanvas.width, this.buffercanvas.height), 0, 0);

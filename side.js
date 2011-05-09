@@ -7,14 +7,25 @@ function Loader(progress){
 	bubbleOrangeImage = new Image();
 	bubblePurpleImage = new Image();
 	bubbleYellowImage = new Image();
+	bubbleSilverHalfImage = new Image();
+	bubbleRedHalfImage = new Image();
+	bubbleOrangeHalfImage = new Image();
+	bubblePurpleHalfImage = new Image();
+	bubbleYellowHalfImage = new Image();
+	bubbleSilverFreezeImage = new Image();
+	bubbleRedFreezeImage = new Image();
+	bubbleOrangeFreezeImage = new Image();
+	bubblePurpleFreezeImage = new Image();
+	bubbleYellowFreezeImage = new Image();
 	lvlFrame = new Image();
 	backgroundImage = new Image();
 	logoImage = new Image();
 	cannonImage = new Image();
+	pandaBearAnim = new Image();
 	
 	this.readyLoad;// = function(){ alert('hola'); };
 	
-	this.toLoad = 9;
+	this.toLoad = 20;
 	this.isloaded = 0;
 	
 	this.loaded = function(){
@@ -39,10 +50,21 @@ function Loader(progress){
 		bubbleRedImage.onLoad = this.loaded();
 		bubblePurpleImage.onLoad = this.loaded();
 		bubbleYellowImage.onLoad = this.loaded();
+		bubbleSilverFreezeImage.onLoad = this.loaded();
+		bubbleOrangeFreezeImage.onLoad = this.loaded();
+		bubbleRedFreezeImage.onLoad = this.loaded();
+		bubblePurpleFreezeImage.onLoad = this.loaded();
+		bubbleYellowFreezeImage.onLoad = this.loaded();
+		bubbleSilverHalfImage.onLoad = this.loaded();
+		bubbleRedHalfImage.onLoad = this.loaded();
+		bubbleOrangeHalfImage.onLoad = this.loaded();
+		bubblePurpleHalfImage.onLoad = this.loaded();
+		bubbleYellowHalfImage.onLoad = this.loaded();
 		lvlFrame.onLoad = this.loaded();
 		backgroundImage.onLoad = this.loaded();
 		logoImage.onLoad = this.loaded();
 		cannonImage.onLoad = this.loaded();
+		pandaBearAnim.onLoad = this.loaded();
 		this.startLoad();
 	};
 
@@ -52,11 +74,25 @@ function Loader(progress){
 		bubbleRedImage.src = 'redbubble.png';
 		bubblePurpleImage.src = 'purplebubble.png';
 		bubbleYellowImage.src = 'yellowbubble.png';
+		
+		bubbleSilverFreezeImage.src = 'silverbubblefreeze.png';
+		bubbleOrangeFreezeImage.src = 'orangebubblefreeze.png';
+		bubbleRedFreezeImage.src = 'redbubblefreeze.png';
+		bubblePurpleFreezeImage.src = 'purplebubblefreeze.png';
+		bubbleYellowFreezeImage.src = 'yellowbubblefreeze.png';
+		
+		bubbleSilverHalfImage.src = 'halfsilverbubble.png';
+		bubbleOrangeHalfImage.src = 'halforangebubble.png';
+		bubbleRedHalfImage.src = 'halfredbubble.png';
+		bubblePurpleHalfImage.src = 'halfpurplebubble.png';
+		bubbleYellowHalfImage.src = 'halfyellowbubble.png';
 
 		lvlFrame.src = 'lvlboundering.png';
 		backgroundImage.src = 'background.png';
 		logoImage.src = 'logo.jpg';
 		cannonImage.src = 'cannon.png';
+		
+		pandaBearAnim.src = 'animacion.png';
 	};
 };
 //function Timeline(self, fps){ //donde self es el nombre del objeto usado
@@ -116,6 +152,7 @@ function Timeline(fps){
 	
 	this.trigger = function(what){
 		for(i = 0; i < what.length; ++i){
+			alert(what[i]);
 			what[i]();
 		}
 	};
@@ -186,10 +223,12 @@ function Animation(duration, width, height, image){
 	this.element = document.createElement('div');
 
 	this.element.style.width = width + 'px';
+	this.element.style.height = height + 'px';
 	this.element.style.minHeight = height + 'px';
 	this.element.style.minWidth = width + 'px';
-	this.element.style.position = 'absolute';
-	this.element.style.backgroundImage = 'url(' + image + ')'
+	this.element.style.backgroundImage = 'url(' + image + ')';
+	//this.element.style.border = 'black solid 5px';
+	this.element.style.position = 'relative';
 	this.tick = 0;
 	
 	this.addMoment = function(img, stage){
@@ -200,69 +239,124 @@ function Animation(duration, width, height, image){
 	this.setY = function(y){ this.element.style.top = y + 'px'; };
 	
 	this.render = function(){
-		//alert(this.tick);
+		//alert(this.tick);		
 		this.tick += 1;// % duration; 
-		this.tick = this.tick % this.duration;
-		this.element.style.backgroundPosition = this.tick * this.width + 'px 0px';
+		//alert('tick' + this.tick);
+		if(this.tick > this.duration){
+			//alert('hola');
+			this.animationEnd();
+			return
+		};
+		//this.tick = this.tick % this.duration;
+		this.element.style.backgroundPosition = '-' + this.tick * this.width + 'px 0px';
+		//alert(this.element.style.backgroundPosition);
 		//this.frames[this.tick].style.display = 'none';
 	};
+	
+	this.animationEnd;
 };
 
-function standAnimation(width, hegiht, image, timeline){
+function standAnimation(width, height, image, timeline){
 	this.width = width;
 	this.height = height;
 	this.line = timeline;
 	this.self = this;
 	this.states = {};
 	this.currentAnim = '';
+	this.normalImage = image;
+	this.meinSpat = timeline;
+	//var self = this;
+	//this.meinSpat.connect(self.render, 'tick');
 
 	//init
-	this.baseElement = document.createElement('div');
-	this.baseImage = document.createElement('img');
-	this.baseImage.src = image;
-	this.setBaseStyle(this.baseElement);
-	this.setBaseStyle(this.baseImage);
-	this.baseImage.style.position = 'relative';
-
-
-	
+	this.element = document.createElement('div');
+	this.baseElement = document.createElement('img');
+	this.element.appendChild(this.baseElement);
+	//this.baseImage = document.createElement('img');
+	//this.baseImage.src = image;
+	this.baseElement.src = image;
+	//this.setBaseStyle(this.element);
+	this.element.style.position = 'absolute';
+	this.element.style.top = '0px';
+	this.element.style.left = '0px';
+	this.element.style.overflow = 'hidden';
+	//this.element.style.backgroundImage = 'url(' + this.normalImage + ')';
+	this.element.style.width = this.width + 'px';
+	this.element.style.height = this.height + 'px';
+	this.element.style.minHeight = this.height + 'px';
+	//this.setBaseStyle(this.baseImage);
+	//this.baseImage.style.position = 'relative';	
+	/*this.baseElement.style.width = this.width+'px';
+	this.baseElement.style.height = this.height+'px';*/
 };
 
 standAnimation.prototype.setBaseStyle = function(obj) {
-	var style = obj.style;
-	style.position = 'absolute';
-	style.top = '0px';
-	style.left = '0px';
-	style.width = this.width + 'px';
-	style.height = this.height + 'px';
+	//var style = obj.style;
+	this.element.style.position = 'absolute';
+	this.element.style.top = '0px';
+	this.element.style.left = '0px';
+	//this.element.style.overflow = 'hidden';
+	//this.element.style.backgroundImage = 'url(' + this.normalImage + ')';
+	this.element.style.width = this.width + 'px';
+	this.element.style.height = this.height + 'px';
+	this.element.style.minHeight = this.height + 'px';
 };
 
-standAnimation.prototype.setXY = function(obj, x, y) {
+standAnimation.prototype.fitNormalImage = function(){
+	this.baseElement.style.width = this.width + 'px';
+	this.baseElement.style.height = this.height + 'px';
+	//this.baseElement.width = this.width +'';
+	//this.baseElement.height = this.height +'';
+};
+
+/*standAnimation.prototype.setXY = function(obj, x, y) {
 	var style = obj.style;
 	style.top = y + 'px';
 	style.left = x + 'px';
+};*/
+
+standAnimation.prototype.setXY = function(x, y) {
+	this.element.style.top = y + 'px';
+	this.element.style.left = x + 'px';
 };
 
 standAnimation.prototype.addState = function(name, image, duration) {
 	var anim = new Animation(duration, this.width, this.height, image);
-	this.state[name] = anim;
+	this.element.appendChild(anim.element);
+	$(this.element).append(anim.element);
+	anim.element.style.display = 'none';
+	this.states[name] = anim;
 };
 
 standAnimation.prototype.setCurrentState = function(name) {
 	this.currentAnim = name;
-	for(animName in thisState){
-		if(animName == name){
-			this.state[animName].element.style.display = 'block';
-			this.state[animName].tick = 0;
+	if(name == ''){
+		this.baseElement.style.display = 'block';
+		return;
+	};
+	this.baseElement.style.display = 'none';
+	for(animName in this.states){
+		//alert(animName + ':' + name);
+		if(animName === name){		    
+			this.states[animName].element.style.display = 'block';
+			this.states[animName].tick = 0;
+			var self = this;
+			this.states[animName].animationEnd = (function(){ self.setCurrentState(''); });
 		}else{
-			this.state[animName].element.style.display = 'none';
+			this.states[animName].element.style.display = 'none';
 		};
 	};
 };
 
+standAnimation.prototype.animationEnds = function(){
+	//alert('animation end');
+	this.setCurrentState('');
+};
+
 standAnimation.prototype.render = function() {
+	//alert('render!');
 	if(this.currentAnim == '') return;
-	this.state[this.currentAnim].render();
+	this.states[this.currentAnim].render();
 };
 
 
@@ -384,4 +478,9 @@ function performanceStatus(updateTime, painter){
 		this.toHide.style.display = 'block';
 	};
 
+	this.toggleSound = function(){
+		this.sound = !this.sound;
+	};
+	
+	this.setSound = function(v){ this.sound = v; };
 };

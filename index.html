@@ -389,6 +389,11 @@ FB.onConnect = function(){
 	//FB.post('Fer! pa\'vos!!');
 	FB.retrieveUserData();
 };
+
+function postHighscoreOnFacebook(){
+	var msg = FB.user.name + ' ha logrado ' +game.ui.acumuledPoints + ' en el Bubble Paradise!';
+	FB.post(msg);
+};
 				
 loader = new Loader('progress');
 loader.readyLoad = function(){	

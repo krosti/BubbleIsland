@@ -6,7 +6,7 @@ RC:
 [ ] sonido (html5 o por flash)
 
 beta:
-[x] un disparo por tiempo
+[b] un disparo por tiempo
 [x] optimizar draw
 [-] dibujar cañon
 [x] facebook con hack
@@ -16,6 +16,7 @@ beta:
 [ ] agregar api de pago
 [-] pelotitas
 [-] animaciónes, oso y cosas...	
+[ ] agregar ui
 
 alpha:
 [-] ui
@@ -187,9 +188,9 @@ function bubble(l){
 				this.element = this.object.element;
 				this.element.appendChild(mult);								
 				mult.innerHTML = 'X ' +  this.pointsMultiplier;
-				//mult.style.font = 'Verdana 15px';
-				//mult.style.position = 'relative';
-				//mult.style.top = '15px'; mult.style.left = '30px';
+				mult.style.font = 'Verdana 15px';
+				mult.style.position = 'absolute';
+				mult.style.top = '15px'; mult.style.left = '30px';
 				alert('Multiplier ball: ' + this.pointsMultiplier);
 				
 				break;
@@ -227,10 +228,10 @@ function bubble(l){
 				this.object.element.appendChild(zweithBild);
 				zweithBild.style.width = this.lvl.bubbleRadius + 'px';
 				zweithBild.style.heigth = (this.lvl.bubbleRadius / 2) + 'px';
-				/*zweithBild.style.position = 'relative';
+				zweithBild.style.position = 'absolute';
 				zweithBild.style.top = '0px';
-				zweithBild.style.left = '0px';*
-				zweithBild.style.zIndex = 30*/ //this.object.baseElement.style.zIndex + 1;
+				zweithBild.style.left = '0px';
+				//zweithBild.style.zIndex = 30*/ //this.object.baseElement.style.zIndex + 1;
 				
 				alert(this.flavor + ' : ' + this.secondFlavor);
 				break;
@@ -809,6 +810,7 @@ function bubbleLevel(w, h, bubblesWidth, bubblesHeight, lvlnbr){
 			alert('perdiste');
 			/*alert(this.looseLine);
 			alert(masBaja.x + this.bubbleRadius);*/
+			this.freeze = true;
 			this.loose();
 		};
 
@@ -977,6 +979,9 @@ function gameUI(w, h){
 	
 	this.acumuledPoints = 0;
 	
+	this.lifes = 5;
+	this.initialLifes = 5;
+	
 	this.element = document.createElement('div');
 	this.element.style.width = '50px';
 	this.element.style.position = 'fixed';
@@ -1004,6 +1009,8 @@ function gameUI(w, h){
 	};
 	
 	this.addPoints = function(p){ this.points += p; };
+	
+	//this.
 };
 
 function appEnviroment(canvasObj, menuObj, navObj, size){
@@ -1101,7 +1108,7 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 	};
 	
 	this.continueGame = function(){
-	
+		this.clock.start();
 	};
 	
 	this.nextLevel = function(){
@@ -1159,6 +1166,7 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 	this.playerLoose = function(){
 		alert('loose');
 		this.clearBoard();
+		ui.lifes--;
 		game.redoLevel();
 	};
 	

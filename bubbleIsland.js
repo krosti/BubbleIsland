@@ -723,7 +723,7 @@ function bubbleLevel(w, h, bubblesWidth, bubblesHeight, lvlnbr){
 	this.bonus = .2 * this.lvlnro;
 
 	this.character = new standAnimation(86, 110, pandaBearAnim.src, game.clock);
-	this.character.setXY(50, 350);
+	this.character.setXY(50, 380);
 	this.character.addState('load', this.character.normalImage, 29);
 	animNav.append(this.character.element);
 	

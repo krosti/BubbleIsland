@@ -386,7 +386,8 @@ FB = new FBConnect('FBnav');
 FB.onConnect = function(){
 	options = new Options('optionMenu');
 	game = new appEnviroment("gameCanvas", "gameMenu", "animCanvas", gameSize);
-	FB.post('Fer! pa\'vos!!');
+	//FB.post('Fer! pa\'vos!!');
+	FB.retrieveUserData();
 };
 				
 loader = new Loader('progress');

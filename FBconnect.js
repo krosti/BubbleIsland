@@ -97,6 +97,15 @@ function FBConnect(elementId){
 		});
 		//alert('termine el post');
 	}
+	
+	this.retrieveUserData = function(){
+		this.ajaxReply = $.ajax({
+			url: 'https://graph.facebook.com/me',
+			type: 'GET',
+			success: function(data){ alert('success: ' + data); },
+			error: function(data, er, r){ alert(data.responseText + ':' + er + ':' +r)};
+		});
+	};
 
 	this.onConnect; 
 }

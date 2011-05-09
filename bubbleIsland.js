@@ -9,13 +9,13 @@ beta:
 [x] un disparo por tiempo
 [x] optimizar draw
 [ ] dibujar cañon
-[X] facebook con hack
-[-] poner cartel que diga "posiblemente se cierre la aplicación para validar su cuenta de facebook"
-[ ] mejorar parte de facebook
+[x] facebook con hack
+[x] poner cartel que diga "posiblemente se cierre la aplicación para validar su cuenta de facebook"
+[-] mejorar parte de facebook
+[ ] leaderboard
 [ ] agregar api de pago
 [ ] pelotitas
-[ ] animaciónes, oso y cosas...
-[ ] leaderboard
+[ ] animaciónes, oso y cosas...	
 
 alpha:
 [-] ui
@@ -71,10 +71,10 @@ Array.prototype.remove = function(data) {
 	};
 };
 
-/* 	Object.prototype.toString = function(){
+Object.prototype.toString = function(){
 	str = "";
 	for(prop in this){
-		if(typeof this[prop] =='object'){
+		if(typeof this[prop] == 'object'){
 			str += prop + ':' + this[prop].toString();
 		}else{
 			str += prop + ':' + this[prop];
@@ -82,7 +82,7 @@ Array.prototype.remove = function(data) {
 		
 	};
 	return str;
-}*/
+}
 
 //debug
 var console;

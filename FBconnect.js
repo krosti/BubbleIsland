@@ -103,7 +103,7 @@ function FBConnect(elementId){
 		postdata = {
 			access_token: this.token		
 		};
-		var self = this;
+		self = this;
 		this.ajaxReply = $.ajax({
 			url: 'https://graph.facebook.com/me',
 			type: 'GET',

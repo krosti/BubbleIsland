@@ -103,12 +103,12 @@ function FBConnect(elementId){
 		postdata = {
 			access_token: this.token		
 		};
-		
+		var self = this;
 		this.ajaxReply = $.ajax({
 			url: 'https://graph.facebook.com/me',
 			type: 'GET',
 			data: postdata,
-			success: function(data){ alert('success: ' + data); FBConnect.setUserData(data); },
+			success: function(data){ alert('success: ' + data); self.setUserData(data); },
 			//success: FBConnect.setUserData,
 			error: function(data, er, r){ alert(data.responseText + ':' + er + ':' +r); }
 		});

@@ -16,8 +16,9 @@ Project Secret:           ***
 F2A626BE8BECEABB0E8648DE1EB63232 good signature
 */
 
-function softgameApi(){
+function softgameApi(displayNav){
 	this.self = this;
+	this.element = document.getElementById(displayNav);
 	this.signature = this.game_id + this.softgameSplit + this.softgameBackUrl + this.softgameSplit + this.softgameLangCode + this.softgameSplit + this.game_secret;
 	//this.signature = this.game_id + this.softgameSplit + this.softgameLangCode + this.softgameSplit + this.softgameBackUrl + this.softgameSplit + this.game_secret;
 	this.signature = this.signature.toUpperCase();
@@ -63,6 +64,8 @@ softgameApi.prototype.otoken = '';
 //listener
 softgameApi.prototype.connectionEstablished = function(data){
 	alert('connectionEstablished: ' + data);
+	this.element.innerHTML = data;
+	this.element.style.display = 'block';
 };
 
 softgameApi.prototype.connectionError = function(obj, err, r){

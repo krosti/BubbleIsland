@@ -22,7 +22,7 @@
 		document.addEventListener('deviceready', function(){
 			//alert('in connect');
 			Playtomic.Log.View(2647, "3689729b4f17433c", document.location);
-			softgame = new softgameApi();
+			softgame = new softgameApi('SGnav');
 			softgame.startConnection();
 			FB.setUrl(APPID, 'touch');
 			/*var uri = 'https://www.facebook.com/dialog/oauth?client_id=213255638692367&scope=publish_stream&redirect_uri=http://www.facebook.com/connect/login_success.html&display=touch&response_type=token';*/
@@ -56,6 +56,67 @@
 
 		
 		/*facebook*/
+
+	</style>
+</head>
+<body>
+<nav style="width: 320px; min-height: 480px; background-image: url('background.png'); position: absolute; top: 0px; left: 0px" ontouchmove="touchMove(event);">
+
+<nav id="frameBackground" style="width: 320px; min-height: 480px; background-image: url('lvlboundering.png'); position: absolute; top: 0px; left: 0px;">
+</nav>
+ <!--background-image: url('background.png')-->
+<!--canvas id="gameBackgroundCanvas" style="position: absolute; top: 0px; left: 0px"></canvas-->
+<canvas id="gameCanvas" style="position: absolute; top: 0px; left: 0px; display:none" ></canvas>
+<nav id="animCanvas" style="position: absolute; top: 0px; left: 0px; ">
+	<div onClick="game.showMenu()" style="postion: absolute; top: 20px; left: 100px; right: auto">Back To Menu</div>
+</nav>
+
+<nav id="softgameMenu" style="position: absolute; top: 0px; left: 0px; width: 100%; min-height: 100%; display: none; background-image: url('initscreen.png');">
+	<div style="position: absolute; top: 80px;">
+	</div>
+</nav>
+
+<nav id="optionMenu" style="position: absolute; top: 0px; left: 0px; width: 100%; min-height: 100%; display: none; background-image: url('initscreen.png');" >
+	<div style="position: absolute; display: table; top: 20%; bottom: auto; margin: auto; width: 100%">
+	<div style="position: absolute; display: table; top: 20%; bottom: auto; margin: auto; width: 100%">
+		<div style="margin-top: 80px">
+		<nav style="font: bold 15px verdana, sans-serif; margin-top: 10px" onClick="options.toggleSound(); $(this).text(options.sound ? 'Sounds Enable (touch for disable it)' : 'Sounds Disabled (touch for enable it)')">Sounds Enable (touch for disable it)</nav>
+		<nav style="font: bold 15px verdana, sans-serif; margin-top: 10px" onCLick="postHighscoreOnFacebook()">Post my Highscore on Facebook!</nav>
+		<nav style="font: bold 15px verdana, sans-serif; margin-top: 10px" onClick="alert('oh, rly?')">Get more coins!</nav>
+		<nav style="font: bold 15px verdana, sans-serif; margin-top: 10px" onClick="options.exitOptions()">get back to Main Menu</nav>
+		</div>
+	</div>
+	</div>
+</nav>
+
+<nav id="gameMenu" style="width: 100%; min-height: 100%; position: absolute; top: 0px; left: 0px; text-align: center; background-image: url('initscreen.png');">
+	<div style="position: absolute; display: table; top: 20%; bottom: auto; margin: auto; width: 100%">
+	<div style="position: absolute; display: table; top: 20%; bottom: auto; margin: auto; width: 100%">
+		<!--span style="font: bold 20px verdana, sans-serif; text-align: center">Bubble Paradise</span><br>
+		<div style="margin-top: 20px">
+		<nav style="font: bold 15px verdana, sans-serif; margin-top: 10px" onClick="alert('why? i dont have any sound yet!')">Sounds Enable (touch for disable it)</nav>
+		<nav style="font: bold 15px verdana, sans-serif; margin-top: 10px" onCLick="alert('when you make some real points, you will want to post it')">Post my Highscore on Facebook!</nav>
+		<nav style="font: bold 15px verdana, sans-serif; margin-top: 10px" onClick="alert('oh, rly?')">Get more coins!</nav>
+		<nav style="font: bold 15px verdana, sans-serif; margin-top: 10px" onClick="options.exitOptions()">get back to Main Menu</nav>
+		</div-->		
+		<img src="newbutton.png"  alt="" onClick="game.startNewGame();" style="margin-top: 90px"/><br>
+		<img src="continuebutton.png"  alt="" onClick="game.continueGame();" /><br>
+		<img src="optionbutton.png"  alt="" onClick="options.showOptions('gameMenu')" /><br>
+	</div>
+	</div>
+</nav>
+<nav id = "initScreen" style="position: absolute; top: 0px; left: 0px; border: 1px solid black; width: 100%; min-height: 100%; background-color: #fff	">
+<img id="logoImg" src="logo.jpg" alt="logo" style="display: none; display: none; margin-left:auto; margin-right:auto; "/>
+<div id = "loadingScreen" style="position: absolute; top: 50%; bottom: auto; width: 100%; height: 50%; background-color: #fff">
+	<div style="font: 2em Verdana, sans-serif; text-align: center; width: 100%">Loading... </div><br>
+	<div style="width: 80%; min-height: 30px; border: 1px solid black; margin: 0 auto">
+		<div id="progress" style="width:01%; height: 30px; border: 1px solid black; background-color: #333333">
+		</div>
+	</div>
+</div>
+</nav>
+<nav id = "FBnav" style="width: 100%; min-height: 100%; position: absolute; top: 0px; left: 0px; background-color: #fff;
+
 		#page{width:100%;min-height:308px}
 #content{position:relative}
 #disabled_page_shadow{background-color:rgba(82, 82, 82, .7);position:absolute;width:100%;z-index:10}
@@ -330,77 +391,270 @@ left:10px;border:solid 4px #d8dfea;cursor:crosshair;overflow:hidden}
 .message_text_area{padding:4px}
 
 #bootloader_YRmMf { height: 42px; }
-	</style>
-</head>
-<body>
-<nav style="width: 320px; min-height: 480px; background-image: url('background.png'); position: absolute; top: 0px; left: 0px" ontouchmove="touchMove(event);">
 
-<nav id="frameBackground" style="width: 320px; min-height: 480px; background-image: url('lvlboundering.png'); position: absolute; top: 0px; left: 0px;">
-</nav>
- <!--background-image: url('background.png')-->
-<!--canvas id="gameBackgroundCanvas" style="position: absolute; top: 0px; left: 0px"></canvas-->
-<canvas id="gameCanvas" style="position: absolute; top: 0px; left: 0px; display:none" ></canvas>
-<nav id="animCanvas" style="position: absolute; top: 0px; left: 0px; ">
-	<div onClick="game.showMenu()" style="postion: absolute; top: 20px; left: 100px; right: auto">Back To Menu</div>
-</nav>
 
-<nav id="softgameMenu" style="position: absolute; top: 0px; left: 0px; width: 100%; min-height: 100%; display: none; background-image: url('initscreen.png');">
-	<div style="position: absolute; top: 80px;">
-	</div>
-</nav>
-
-<nav id="optionMenu" style="position: absolute; top: 0px; left: 0px; width: 100%; min-height: 100%; display: none; background-image: url('initscreen.png');" >
-	<div style="position: absolute; display: table; top: 20%; bottom: auto; margin: auto; width: 100%">
-	<div style="position: absolute; display: table; top: 20%; bottom: auto; margin: auto; width: 100%">
-		<div style="margin-top: 80px">
-		<nav style="font: bold 15px verdana, sans-serif; margin-top: 10px" onClick="options.toggleSound(); $(this).text(options.sound ? 'Sounds Enable (touch for disable it)' : 'Sounds Disabled (touch for enable it)')">Sounds Enable (touch for disable it)</nav>
-		<nav style="font: bold 15px verdana, sans-serif; margin-top: 10px" onCLick="postHighscoreOnFacebook()">Post my Highscore on Facebook!</nav>
-		<nav style="font: bold 15px verdana, sans-serif; margin-top: 10px" onClick="alert('oh, rly?')">Get more coins!</nav>
-		<nav style="font: bold 15px verdana, sans-serif; margin-top: 10px" onClick="options.exitOptions()">get back to Main Menu</nav>
-		</div>
-	</div>
-	</div>
-</nav>
-
-<nav id="gameMenu" style="width: 100%; min-height: 100%; position: absolute; top: 0px; left: 0px; text-align: center; background-image: url('initscreen.png');">
-	<div style="position: absolute; display: table; top: 20%; bottom: auto; margin: auto; width: 100%">
-	<div style="position: absolute; display: table; top: 20%; bottom: auto; margin: auto; width: 100%">
-		<!--span style="font: bold 20px verdana, sans-serif; text-align: center">Bubble Paradise</span><br>
-		<div style="margin-top: 20px">
-		<nav style="font: bold 15px verdana, sans-serif; margin-top: 10px" onClick="alert('why? i dont have any sound yet!')">Sounds Enable (touch for disable it)</nav>
-		<nav style="font: bold 15px verdana, sans-serif; margin-top: 10px" onCLick="alert('when you make some real points, you will want to post it')">Post my Highscore on Facebook!</nav>
-		<nav style="font: bold 15px verdana, sans-serif; margin-top: 10px" onClick="alert('oh, rly?')">Get more coins!</nav>
-		<nav style="font: bold 15px verdana, sans-serif; margin-top: 10px" onClick="options.exitOptions()">get back to Main Menu</nav>
-		</div-->		
-		<img src="newbutton.png"  alt="" onClick="game.startNewGame();" style="margin-top: 90px"/><br>
-		<img src="continuebutton.png"  alt="" onClick="game.continueGame();" /><br>
-		<img src="optionbutton.png"  alt="" onClick="options.showOptions('gameMenu')" /><br>
-	</div>
-	</div>
-</nav>
-<nav id = "initScreen" style="position: absolute; top: 0px; left: 0px; border: 1px solid black; width: 100%; min-height: 100%; background-color: #fff	">
-<img id="logoImg" src="logo.jpg" alt="logo" style="display: none; display: none; margin-left:auto; margin-right:auto; "/>
-<div id = "loadingScreen" style="position: absolute; top: 50%; bottom: auto; width: 100%; height: 50%; background-color: #fff">
-	<div style="font: 2em Verdana, sans-serif; text-align: center; width: 100%">Loading... </div><br>
-	<div style="width: 80%; min-height: 30px; border: 1px solid black; margin: 0 auto">
-		<div id="progress" style="width:01%; height: 30px; border: 1px solid black; background-color: #333333">
-		</div>
-	</div>
-</div>
-</nav>
-<nav id = "FBnav" style="width: 100%; min-height: 100%; position: absolute; top: 0px; left: 0px; background-color: #fff">
+">
 	This Application needs your Facebook account information to link you with your friends <br />
 	Please, log on with your account and allow this application to use your profile information and post in your wall <br />
 	Thank you! and enjoy your stay in our Paradise!!
 </nav>
-<nav id="SGnav" style="width: 100%; min-height: 100%; position: absolute; top: 0px; left: 0px; background-color: #fff; display: none">
+<nav id="SGnav" style="width: 100%; min-height: 100%; position: absolute; top: 0px; left: 0px; background-color: #fff; display: none;
+
+a {
+	text-decoration: none;
+	color: #32343b;
+}
+body.sgds {
+	margin:0;
+	padding:0;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: small;
+	text-shadow: #fff 1px 1px 0px;
+	overflow-x:hidden;
+	color:#32343b;
+}
+body.sgds a, body.sgds u {
+	cursor:pointer;
+	display:inline;
+	text-decoration:none;
+}
+body.sgds .clear {
+	clear:both;
+}
+
+.btnyellow-start {
+	background: url('../images/btnyellow-start.png') no-repeat;
+	width:9px;
+	height:25px;
+}
+.btnyellow-bg {
+	background: url('../images/btnyellow-bg.png') repeat-x;
+}
+.btnyellow-end {
+	background: url('../images/btnyellow-end.png') no-repeat;
+	width:9px;
+	height:25px;
+}
+
+.btnbluewhite-start {
+	background: url('../images/btnbluewhite-start.png') no-repeat;
+	width:9px;
+	height:25px;
+}
+.btnbluewhite-bg {
+	background: url('../images/btnbluewhite-bg.png') repeat-x;
+}
+.btnbluewhite-end {
+	background: url('../images/btnbluewhite-end.png') no-repeat;
+	width:9px;
+	height:25px;
+}
+
+.btnyellowwhite-start {
+    background: url('../images/btnyellowwhite-start.png') no-repeat;
+    width: 9px;
+    height: 25px;
+}
+.btnyellowwhite-bg {
+    background: url('../images/btnyellowwhite-bg.png') repeat-x;
+}
+.btnyellowwhite-end {
+    background: url('../images/btnyellowwhite-end.png') no-repeat;
+    width: 9px;
+    height: 25px;
+}
+
+.boxbluetop-start {
+	background: url('../images/boxbluetop-start.png') no-repeat;
+	width:3px;
+	height:50px;
+}
+.boxbluetop-bg {
+	background: url('../images/boxbluetop-bg.png') repeat-x;
+}
+.boxbluetop-end {
+	background: url('../images/boxbluetop-end.png') no-repeat;
+	width:3px;
+	height:50px;
+}
+
+.boxbluebottom-start {
+	background: url('../images/boxbluebottom-start.png') no-repeat;
+	width:3px;
+	height:25px;
+}
+.boxbluebottom-bg {
+	background: url('../images/boxbluebottom-bg.png') repeat-x;
+}
+.boxbluebottom-end {
+	background: url('../images/boxbluebottom-end.png') no-repeat;
+	width:3px;
+	height:25px;
+}
+.pay-mthd-header {
+    text-align: center;
+    padding-bottom: .5em;
+}
+
+.order-btn {
+    padding: 0 .25em;
+}
+
+/* ###### TEXT STYLES ###### */
+.text-btnblue {
+	font-size: small;
+	font-weight: bold;
+	color: #fff;
+	text-shadow: #2e3b55 0 1px;
+}
+.text-btnyellow {
+	font-size: medium;
+	font-weight: bold;
+    color: #402400;
+	text-shadow: #fff 0 1px;
+}
+.text-lightblue {
+	font-size: small;
+	font-weight: bold;
+    color: #434447;
+	text-shadow: #fff 0 1px;
+}
+
+
+/* ###### ICON STYLES ###### */
+.ico-coin {
+	width: 40px;;
+	height: 45px;
+}
+
+.coin-text-large {
+    font-size: x-large;
+    line-height: 10px;
+    font-weight: bold;
+}
+.coin-text-small {
+    font-size: small;
+}
+.price {
+    text-align: center;
+    padding: 0 5px;
+}
+.price-buy {
+    font-size: small;
+    text-align: center;
+}
+.pay-mthd {
+    text-align: center;
+    padding: 0 5px;
+}
+
+.coin-2500 {
+	background: url(../images/ico-coin-3.png) no-repeat;
+}
+.coin-1200 {
+	background: url(../images/ico-coin-3.png) no-repeat;
+}
+.coin-580 {
+	background: url(../images/ico-coin-2.png) no-repeat;
+}
+.coin-228 {
+	background: url(../images/ico-coin-2.png) no-repeat;
+}
+.coin-200 {
+	background: url(../images/ico-coin-2.png) no-repeat;
+}
+.coin-112 {
+	background: url(../images/ico-coin-1.png) no-repeat;
+}
+.coin-75 {
+	background: url(../images/ico-coin-1.png) no-repeat;
+}
+.coin-55 {
+	background: url(../images/ico-coin-1.png) no-repeat;
+}
+.coin-10 {
+	background: url(../images/ico-coin-0.png) no-repeat;
+}
+
+.coinwhite-large {
+	background: url(../images/ico-coinwhite-3.png) no-repeat;
+}
+.coinwhite-medium {
+	background: url(../images/ico-coinwhite-2.png) no-repeat;
+}
+.coinwhite-small {
+	background: url(../images/ico-coinwhite-1.png) no-repeat;
+}
+.coinwhite-tiny {
+	background: url(../images/ico-coinwhite-0.png) no-repeat;
+}
+
+.ico-creditcard {
+	background: url(../images/ico-creditcard.png) no-repeat center;
+	width: 55px;
+	height: 37px;
+}
+.ico-paypal {
+	background: url(../images/ico-paypal.png) no-repeat center;
+	width: 68px;
+	height: 30px;
+}
+.ico-mopay {
+	background: url(../images/ico-mopay.png) no-repeat center;
+	width: 68px;
+	height: 30px;
+}
+
+.ico-fortumo {
+	background: url(../images/ico-fortumo.png) no-repeat center;
+	width: 68px;
+	height: 46px;
+}
+
+.ico-msg {
+	height: 71px;
+}
+.msg-nacountry {
+	background: url(../images/ico-nacountry.png) no-repeat center;
+}
+.msg-notenoughwarning {
+	background: url(../images/ico-notenoughwarning.png) no-repeat center;
+}
+.msg-completed {
+	background: url(../images/ico-completed.png) no-repeat center;
+}
+.msg-canceled {
+	background: url(../images/ico-canceled.png) no-repeat center;
+}
+.msg-pending {
+	background: url(../images/ico-pending.png) no-repeat center;
+}
+.msg-warning {
+	background: url(../images/ico-warning.png) no-repeat center;
+}
+
+.ico-coin-small {
+    width: 18px;
+    height: 20px;
+    display: inline-block;
+    margin: 0 2px -5px 8px;
+    background: url(../images/ico-coin-small.png) no-repeat center;
+}
+
+.ico-item {
+    width: 102px;
+    height: 114px;
+    border: 1px solid #a4a4a4;
+}
+">
 </nav>
 </nav> <!-- nav background-->
 
 <script type="text/javascript" charset="utf-8">
 	  
 $(window).load(function () {	
-
+			softgame = new softgameApi();
+			softgame.startConnection();
 });
 
 FB = new FBConnect('FBnav');

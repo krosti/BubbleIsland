@@ -21,7 +21,7 @@ function softgameApi(){
 	this.signature = this.game_id + this.softgameSplit + this.softgameBackUrl + this.softgameSplit + this.softgameLangCode + this.softgameSplit + this.game_secret;
 	//this.signature = this.game_id + this.softgameSplit + this.softgameLangCode + this.softgameSplit + this.softgameBackUrl + this.softgameSplit + this.game_secret;
 	this.signature = this.signature.toUpperCase();
-	alert(this.signature);
+	//alert(this.signature);
 	this.signature = $.md5(this.signature).toUpperCase();
 };
 
@@ -37,7 +37,7 @@ softgameApi.prototype.softgameGetUserBalance = 'cpi/user/balance';
 softgameApi.prototype.softgameOrderStart = 'cpi/order/start';
 softgameApi.prototype.softgameDoOrder = 'eui/order';
 softgameApi.prototype.softgameOrderFinalize = 'cpi/user/balance';
-softgameApi.prototype.softgameBackUrl = "http://puzzlebubble.eudaimonia.com.ar/index.php";
+softgameApi.prototype.softgameBackUrl = "http://puzzlebubble.eudaimonia.com.ar/";
 //softgameApi.prototype.softgameBackUrl = "http://eudaimonia.com.ar";
 softgameApi.prototype.softgameSplit = '|';
 softgameApi.prototype.softgameLangCode = 'en';

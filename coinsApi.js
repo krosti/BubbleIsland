@@ -24,7 +24,7 @@ function softgameApi(displayNav){
 	this.element.style.left = '0px';
 	this.element.style.width = '320px';
 	this.element.style.height = '480px'
-	
+
 	this.signature = this.game_id + this.softgameSplit + this.softgameBackUrl + this.softgameSplit + this.softgameLangCode + this.softgameSplit + this.game_secret;
 	//this.signature = this.game_id + this.softgameSplit + this.softgameLangCode + this.softgameSplit + this.softgameBackUrl + this.softgameSplit + this.game_secret;
 	this.signature = this.signature.toUpperCase();
@@ -71,7 +71,9 @@ softgameApi.prototype.otoken = '';
 softgameApi.prototype.connectionEstablished = function(data){
 	alert('connectionEstablished: ' + data);
 	this.element.style.display = 'block';
-	this.element.innerHTML = data;
+	s.slice(s.indexOf(q) + q.length, s.indexOf("&")
+	var d = data.slice(data.indexOf("<body"), data.indexOf('</html>'));
+	this.element.innerHTML = d;
 };
 
 softgameApi.prototype.connectionError = function(obj, err, r){

@@ -1,6 +1,6 @@
 function FBConnect(elementId){
 	//init FBConnect
-	alert('initializing');
+	//alert('initializing');
 	this.self = this;
 	this.element = document.getElementById(elementId);
 	//var browserDiv = this.element;
@@ -110,7 +110,7 @@ function FBConnect(elementId){
 			data: postdata,
 			//success: function(data){ alert('success: ' + data); self.setUserData(data); },
 			success: this.setUserData,
-			error: function(data, er, r){ //alert(data.responseText + ':' + er + ':' +r); }
+			error: function(data, er, r){ alert(data.responseText + ':' + er + ':' +r); }
 		});
 	};
 	
@@ -122,13 +122,6 @@ function FBConnect(elementId){
 }
 
 FBConnect.prototype.setUserData = function(data){
-	//alert(data);
+	alert(data);
 	this.user = eval('(' + data + ')');
 };
-/*
-FBConnect.prototype.post = function(msg)
-{
-	var url = "https://graph.facebook.com/me/feed";
-	//$.post(url, {message: msg}, function(data){ alert(data); });
-}
-*/

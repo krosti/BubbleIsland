@@ -7,6 +7,11 @@ function Loader(progress){
 	bubbleOrangeImage = new Image();
 	bubblePurpleImage = new Image();
 	bubbleYellowImage = new Image();
+	bubbleSilverBombImage = new Image();
+	bubbleRedBombImage = new Image();
+	bubbleOrangeBombImage = new Image();
+	bubblePurpleBombImage = new Image();
+	bubbleYellowBombImage = new Image();
 	bubbleSilverHalfImage = new Image();
 	bubbleRedHalfImage = new Image();
 	bubbleOrangeHalfImage = new Image();
@@ -25,7 +30,7 @@ function Loader(progress){
 	
 	this.readyLoad;// = function(){ alert('hola'); };
 	
-	this.toLoad = 20;
+	this.toLoad = 25;
 	this.isloaded = 0;
 	
 	this.loaded = function(){
@@ -50,6 +55,11 @@ function Loader(progress){
 		bubbleRedImage.onLoad = this.loaded();
 		bubblePurpleImage.onLoad = this.loaded();
 		bubbleYellowImage.onLoad = this.loaded();
+		bubbleSilverBombImage.onLoad = this.loaded();
+		bubbleOrangeBombImage.onLoad = this.loaded();
+		bubbleRedBombImage.onLoad = this.loaded();
+		bubblePurpleBombImage.onLoad = this.loaded();
+		bubbleYellowBombImage.onLoad = this.loaded();
 		bubbleSilverFreezeImage.onLoad = this.loaded();
 		bubbleOrangeFreezeImage.onLoad = this.loaded();
 		bubbleRedFreezeImage.onLoad = this.loaded();
@@ -74,6 +84,12 @@ function Loader(progress){
 		bubbleRedImage.src = 'redbubble.png';
 		bubblePurpleImage.src = 'purplebubble.png';
 		bubbleYellowImage.src = 'yellowbubble.png';
+
+		bubbleSilverBombImage.src = 'silverbubblebomb.png';
+		bubbleOrangeBombImage.src = 'orangebubblebomb.png';
+		bubbleRedBombImage.src = 'redbubblebomb.png';
+		bubblePurpleBombImage.src = 'purplebubblebomb.png';
+		bubbleYellowBombImage.src = 'yellowbubblebomb.png';
 		
 		bubbleSilverFreezeImage.src = 'silverbubblefreeze.png';
 		bubbleOrangeFreezeImage.src = 'orangebubblefreeze.png';

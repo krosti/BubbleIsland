@@ -66,7 +66,7 @@ softgameApi.prototype.connectionEstablished = function(data){
 };
 
 softgameApi.prototype.connectionError = function(obj, err, r){
-	alert(obj.getAllResponseHeaders() + err + r + this.url);
+	alert('error: ' + obj.getAllResponseHeaders() + err + r + this.url);
 };
 
 softgameApi.prototype.userRequest = function(data){

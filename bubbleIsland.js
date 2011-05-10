@@ -16,7 +16,7 @@ beta:
 [ ] agregar api de pago
 [-] pelotitas
 [-] animaciónes, oso y cosas...	
-[ ] agregar ui
+[-] agregar ui
 
 alpha:
 [-] ui
@@ -100,6 +100,11 @@ var bubbleRedImage;
 var bubbleOrangeImage;
 var bubblePurpleImage;
 var bubbleYellowImage;
+var bubbleSilverBombImage;
+var bubbleRedBombImage; 
+var bubbleOrangeBombImage;
+var bubblePurpleBombImage;
+var bubbleYellowBombImage;
 var bubbleSilverFreezeImage;
 var bubbleRedFreezeImage; 
 var bubbleOrangeFreezeImage;
@@ -210,7 +215,7 @@ function bubble(l){
 				mult.innerHTML = 'X ' +  this.pointsMultiplier;
 				mult.style.font = 'Verdana 15px';
 				mult.style.position = 'absolute';
-				mult.style.top = '15px'; mult.style.left = '30px';
+				mult.style.top = '5px'; mult.style.left = '12px';
 				//alert('Multiplier ball: ' + this.pointsMultiplier);
 				
 				break;
@@ -256,7 +261,7 @@ function bubble(l){
 				//alert(this.flavor + ' : ' + this.secondFlavor);
 				break;
 			case 30:
-				this.flavor = this.randomFlavor();
+				this.flavor = this.randomBombFlavor();
 				this.object = new standAnimation(this.lvl.bubbleRadius, this.lvl.bubbleRadius, this.meinBild.src);
 				this.element = this.object.element;
 				this.bombBall = true;
@@ -323,6 +328,36 @@ function bubble(l){
 		//this.element.src = this.meinBild.src;
 		return flavor;
 	};
+
+	this.randomBombFlavor = function(){
+		var flavor;
+		var value = rnd(4);
+		switch (value){
+			case 0:
+				flavor = "silver"; 
+				this.meinBild = bubbleSilverBombImage;
+				break;
+			case 1:
+				flavor = "yellow"; 
+				this.meinBild = bubbleYellowBombImage;
+				break;
+			case 2:
+				flavor = "purple"; 
+				this.meinBild = bubblePurplwBombImage;
+				break;
+			case 3:
+				flavor = "red"; 
+				this.meinBild = bubbleRedBombImage;
+				break;
+			case 4:
+				flavor = "orange";
+				this.meinBild = bubbleOrangeBombImage;
+				break;
+		};
+		//this.element.style.backgroundImage = 'url(' + this.meinBild.src+')';
+		//this.element.src = this.meinBild.src;
+		return flavor;
+	};
 	
 	this.move = function(){
 		if((this.dx == 0) && (this.dy == 0)) return;
@@ -330,6 +365,22 @@ function bubble(l){
 		this.y += this.dy;
 		this.element.style.top = this.y + 'px';
 		this.element.style.left = this.x + 'px';
+		/*$(this.element).animate({
+			top: this.y + 'px',
+			left: this.x + 'px'
+		}, 42);*/
+		if((this.x <= this.lvl.leftBound) || (this.x > this.lvl.width)) this.dx = -this.dx;
+		if(this.y <= this.lvl.topBound) this.stopMove();
+	};
+	
+	this.moveShooted = function(){
+		if((this.dx == 0) && (this.dy == 0)) return;
+		this.x += this.dx;
+		this.y += this.dy;
+		$(this.element).animate({
+			top: this.y + 'px',
+			left: this.x + 'px'
+		}, 32)
 		if((this.x <= this.lvl.leftBound) || (this.x > this.lvl.width)) this.dx = -this.dx;
 		if(this.y <= this.lvl.topBound) this.stopMove();
 	};
@@ -794,7 +845,7 @@ function bubbleLevel(w, h, bubblesWidth, bubblesHeight, lvlnbr){
 			//performance.check('colisiones');
 			return;	
 		} 
-		this.shootedBubble.move();
+		this.shootedBubble.moveShooted();
 
 		for(i = 0; i < this.bubbles_array.length; ++i){			
 			currentBubble = this.bubbles_array[i];
@@ -1156,7 +1207,7 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 	};
 	
 	this.nextLevel = function(){
-		SubmitScore();
+		//SubmitScore();
 		this.createLvl(this.level.lvlnro + 1);
 	};
 	

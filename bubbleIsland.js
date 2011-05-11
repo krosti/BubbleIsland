@@ -377,10 +377,27 @@ function bubble(l){
 		if((this.dx == 0) && (this.dy == 0)) return;
 		this.x += this.dx;
 		this.y += this.dy;
-		$(this.element).animate({
+		/*$(this.element).animate({
 			top: this.y + 'px',
 			left: this.x + 'px'
-		}, 32)
+		}, 10)*/
+		var ddx = this.dx;
+		var ddy = this.dy;
+		var s = this.element.style;
+		while((ddx != 0) || (ddy != 0)){
+			s.top = (this.y - ddy) + 'px';
+			s.left = (this.x - ddx) + 'px';
+
+			ddx -= 1;
+			ddy -= 1;
+			if(ddx < 0) ddx = 0;
+			if(ddy < 0) ddy = 0;
+		};
+
+				
+		while(ddx > 0){ while(ddy > 0){ this.element.style.top = (this.y - (ddy--)) + 'px'}; this.element.style.left = (this.x - (ddx--)) + 'px'};
+
+		while(ddy > 0){ while(ddx > 0){ this.element.style.left = (this.x - (ddx--)) + 'px' }; this.element.style.top = (this.y - (ddy--)) + 'px'};
 		if((this.x <= this.lvl.leftBound) || (this.x > this.lvl.width)) this.dx = -this.dx;
 		if(this.y <= this.lvl.topBound) this.stopMove();
 	};

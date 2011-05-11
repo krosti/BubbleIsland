@@ -19,11 +19,11 @@ F2A626BE8BECEABB0E8648DE1EB63232 good signature
 function softgameApi(displayNav){
 	this.self = this;
 	this.element = document.getElementById(displayNav);
-	this.element.style.position = 'absolute';
+	this.element.style.position = 'fixed';
 	this.element.style.top = '0px';
 	this.element.style.left = '0px';
 	this.element.style.width = '320px';
-	this.element.style.height = '480px'
+	this.element.style.height = '480px';
 
 	this.signature = this.game_id + this.softgameSplit + this.softgameBackUrl + this.softgameSplit + this.softgameLangCode + this.softgameSplit + this.game_secret;
 	//this.signature = this.game_id + this.softgameSplit + this.softgameLangCode + this.softgameSplit + this.softgameBackUrl + this.softgameSplit + this.game_secret;

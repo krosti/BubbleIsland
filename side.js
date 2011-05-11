@@ -477,10 +477,11 @@ function performanceStatus(updateTime, painter){
 	
 };
 
-/*class*/ function Options(menuNav){
+function Options(menuNav, leaderNav){
 	this.sound = true;
 	this.menuNav = menuNav;
 	this.menuElement = $('#' + menuNav);
+	this.leaderElement = $('#' + leaderNav);
 	this.toHide;
 	
 	this.showOptions = function(hideElement){
@@ -493,6 +494,16 @@ function performanceStatus(updateTime, painter){
 		this.menuElement[0].style.display = 'none';
 		this.toHide.style.display = 'block';
 	};
+
+	this.showLeaderboard = function(){
+		this.leaderElement[0].style.display = 'block';
+		this.menuElement[0].style.display = 'none';
+	};
+
+	this.exitLeaderboard = function(){
+		this.menuElement[0].style.display = 'block';
+		this.leaderElement[0].style.display = 'none';
+	}
 
 	this.toggleSound = function(){
 		this.sound = !this.sound;

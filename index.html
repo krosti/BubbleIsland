@@ -8,6 +8,7 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black" />
 	
 	<script src="jquery.js" type="text/javascript" charset="utf-8"></script> 
+	<script src="jquerytab.js" type="text/javascript" charset="utf-8"></script> 
 	<script src="jquerymd5.js" type="text/javascript" charset="utf-8"></script> 
 	<script src="phonegap.js" type="text/javascript" charset="utf-8"></script> 
 	<script src="jqueryMobile.js" type="text/javascript" charset="utf-8"></script> 
@@ -57,62 +58,7 @@
 
 		
 		/*facebook*/
-
-	</style>
-</head>
-<body>
-<nav style="width: 320px; min-height: 480px; background-image: url('background.png'); position: absolute; top: 0px; left: 0px" ontouchmove="touchMove(event);">
-
-<nav id="frameBackground" style="width: 320px; min-height: 480px; background-image: url('lvlboundering.png'); position: absolute; top: 0px; left: 0px;">
-</nav>
- <!--background-image: url('background.png')-->
-<!--canvas id="gameBackgroundCanvas" style="position: absolute; top: 0px; left: 0px"></canvas-->
-<canvas id="gameCanvas" style="position: absolute; top: 0px; left: 0px; display:none" ></canvas>
-<nav id="animCanvas" style="position: absolute; top: 0px; left: 0px; ">
-	<div onClick="game.showMenu()" style="postion: absolute; top: 20px; left: 100px; right: auto">Back To Menu</div>
-</nav>
-
-<nav id="softgameMenu" style="position: absolute; top: 0px; left: 0px; width: 100%; min-height: 100%; display: none; background-image: url('initscreen.png');">
-	<div style="position: absolute; top: 80px;">
-	</div>
-</nav>
-
-<nav id="optionMenu" style="position: absolute; top: 0px; left: 0px; width: 100%; min-height: 100%; display: none; background-image: url('initscreen.png');" >
-	<div style="position: absolute; display: table; top: 20%; bottom: auto; margin: auto; width: 100%">
-	<div style="position: absolute; display: table; top: 20%; bottom: auto; margin: auto; width: 100%">
-		<div style="margin-top: 80px">
-		<nav style="font: bold 15px verdana, sans-serif; margin-top: 10px" onClick="options.toggleSound(); $(this).text(options.sound ? 'Sounds Enable (touch for disable it)' : 'Sounds Disabled (touch for enable it)')">Sounds Enable (touch for disable it)</nav>
-		<nav style="font: bold 15px verdana, sans-serif; margin-top: 10px" onCLick="postHighscoreOnFacebook()">Post my Highscore on Facebook!</nav>
-		<nav style="font: bold 15px verdana, sans-serif; margin-top: 10px" onClick="alert('oh, rly?')">Get more coins!</nav>
-		<nav style="font: bold 15px verdana, sans-serif; margin-top: 10px" onClick="options.exitOptions()">get back to Main Menu</nav>
-		</div>
-	</div>
-	</div>
-</nav>
-
-<nav id="gameMenu" style="width: 100%; min-height: 100%; position: absolute; top: 0px; left: 0px; text-align: center; background-image: url('initscreen.png')" >
-	<div style="position: absolute; display: table; top: 20%; bottom: auto; margin: auto; width: 100%">
-	<div style="position: absolute; display: table; top: 20%; bottom: auto; margin: auto; width: 100%">		
-		<img src="newbutton.png"  alt="" onClick="game.startNewGame();" style="margin-top: 90px"/><br>
-		<img src="continuebutton.png"  alt="" onClick="game.continueGame();" /><br>
-		<img src="optionbutton.png"  alt="" onClick="options.showOptions('gameMenu')" /><br>
-	</div>
-	</div>
-</nav>
-
-<nav id = "initScreen" style="position: absolute; top: 0px; left: 0px; border: 1px solid black; width: 100%; min-height: 100%; background-color: #fff">
-<img id="logoImg" src="logo.jpg" alt="logo" style="display: none; display: none; margin-left:auto; margin-right:auto; "/>
-<div id = "loadingScreen" style="position: absolute; top: 50%; bottom: auto; width: 100%; height: 50%; background-color: #fff">
-	<div style="font: 2em Verdana, sans-serif; text-align: center; width: 100%">Loading... </div><br>
-	<div style="width: 80%; min-height: 30px; border: 1px solid black; margin: 0 auto">
-		<div id="progress" style="width:01%; height: 30px; border: 1px solid black; background-color: #333333">
-		</div>
-	</div>
-</div>
-</nav>
-<nav id = "FBnav" style="width: 100%; min-height: 100%; position: absolute; top: 0px; left: 0px; background-color: #fff;
-
-		#page{width:100%;min-height:308px}
+#page{width:100%;min-height:308px}
 #content{position:relative}
 #disabled_page_shadow{background-color:rgba(82, 82, 82, .7);position:absolute;width:100%;z-index:10}
 #active_tab_page, #tabpage{min-height:160px;position:relative}
@@ -387,14 +333,7 @@ left:10px;border:solid 4px #d8dfea;cursor:crosshair;overflow:hidden}
 
 #bootloader_YRmMf { height: 42px; }
 
-
-">
-	This Application needs your Facebook account information to link you with your friends <br />
-	Please, log on with your account and allow this application to use your profile information and post in your wall <br />
-	Thank you! and enjoy your stay in our Paradise!!
-</nav>
-<nav id = "SGnav" style="width: 100%; min-height: 100%; position: absolute; top: 0px; left: 0px; background-color: #fff; display: none;
-
+/* softgame */
 a {
 	text-decoration: none;
 	color: #32343b;
@@ -641,7 +580,72 @@ body.sgds .clear {
     height: 114px;
     border: 1px solid #a4a4a4;
 }
-">
+	</style>
+</head>
+<body>
+<nav style="width: 320px; min-height: 480px; background-image: url('background.png'); position: absolute; top: 0px; left: 0px" ontouchmove="touchMove(event);">
+
+<nav id="frameBackground" style="width: 320px; min-height: 480px; background-image: url('lvlboundering.png'); position: absolute; top: 0px; left: 0px;">
+</nav>
+ <!--background-image: url('background.png')-->
+<!--canvas id="gameBackgroundCanvas" style="position: absolute; top: 0px; left: 0px"></canvas-->
+<canvas id="gameCanvas" style="position: absolute; top: 0px; left: 0px; display:none" ></canvas>
+<nav id="animCanvas" style="position: absolute; top: 0px; left: 0px; ">
+	<div onClick="game.showMenu()" style="postion: absolute; top: 20px; left: 100px; right: auto">Back To Menu</div>
+</nav>
+<nav id="leaderboardMenu" style="position: absolute; top: 0px; left: 0px; width: 100%; min-height: 100%; display: none; background-image: url('initscreen.png');">
+	<ul>
+		<li><a href="#generalLeaderboard">General</a></li>
+		<li><a href="#facebookLeaderboard">Facebook</a></li>
+	</ul>
+	<div id="generalLeaderboard"></div>
+	<div id="facebookLeaderboard"></div>
+</nav>
+
+<nav id="softgameMenu" style="position: absolute; top: 0px; left: 0px; width: 100%; min-height: 100%; display: none; background-image: url('initscreen.png');">
+	<div style="position: absolute; top: 80px;">
+	</div>
+</nav>
+
+<nav id="optionMenu" style="position: absolute; top: 0px; left: 0px; width: 100%; min-height: 100%; display: none; background-image: url('initscreen.png');" >
+	<div style="position: absolute; display: table; top: 20%; bottom: auto; margin: auto; width: 100%">
+	<div style="position: absolute; display: table; top: 20%; bottom: auto; margin: auto; width: 100%">
+		<div style="margin-top: 80px">
+		<nav style="font: bold 15px verdana, sans-serif; margin-top: 10px" onClick="options.toggleSound(); $(this).text(options.sound ? 'Sounds Enable (touch for disable it)' : 'Sounds Disabled (touch for enable it)')">Sounds Enable (touch for disable it)</nav>
+		<nav style="font: bold 15px verdana, sans-serif; margin-top: 10px" onCLick="postHighscoreOnFacebook()">Post my Highscore on Facebook!</nav>
+		<nav style="font: bold 15px verdana, sans-serif; margin-top: 10px" onClick="alert('oh, rly?'); retrieveLeaderboard('generalLeaderboard','facebookLeaderboard'); options.showLeaderboard();">Get more coins!</nav>
+		<nav style="font: bold 15px verdana, sans-serif; margin-top: 10px" onClick="options.exitOptions()">get back to Main Menu</nav>
+		</div>
+	</div>
+	</div>
+</nav>
+
+<nav id="gameMenu" style="width: 100%; min-height: 100%; position: absolute; top: 0px; left: 0px; text-align: center; background-image: url('initscreen.png')" >
+	<div style="position: absolute; display: table; top: 20%; bottom: auto; margin: auto; width: 100%">
+	<div style="position: absolute; display: table; top: 20%; bottom: auto; margin: auto; width: 100%">		
+		<img src="newbutton.png"  alt="" onClick="game.startNewGame();" style="margin-top: 90px"/><br>
+		<img src="continuebutton.png"  alt="" onClick="game.continueGame();" /><br>
+		<img src="optionbutton.png"  alt="" onClick="options.showOptions('gameMenu')" /><br>
+	</div>
+	</div>
+</nav>
+
+<nav id = "initScreen" style="position: absolute; top: 0px; left: 0px; border: 1px solid black; width: 100%; min-height: 100%; background-color: #fff">
+<img id="logoImg" src="logo.jpg" alt="logo" style="display: none; display: none; margin-left:auto; margin-right:auto; "/>
+<div id = "loadingScreen" style="position: absolute; top: 50%; bottom: auto; width: 100%; height: 50%; background-color: #fff">
+	<div style="font: 2em Verdana, sans-serif; text-align: center; width: 100%">Loading... </div><br>
+	<div style="width: 80%; min-height: 30px; border: 1px solid black; margin: 0 auto">
+		<div id="progress" style="width:01%; height: 30px; border: 1px solid black; background-color: #333333">
+		</div>
+	</div>
+</div>
+</nav>
+<nav id = "FBnav" style="width: 100%; min-height: 100%; position: absolute; top: 0px; left: 0px; background-color: #fff;">
+	This Application needs your Facebook account information to link you with your friends <br />
+	Please, log on with your account and allow this application to use your profile information and post in your wall <br />
+	Thank you! and enjoy your stay in our Paradise!!
+</nav>
+<nav id = "SGnav" style="width: 100%; min-height: 100%; position: absolute; top: 0px; left: 0px; background-color: #fff; display: none;">
 softgameApi
 </nav>
 </nav> <!-- nav background-->
@@ -655,9 +659,10 @@ $(window).load(function () {
 
 FB = new FBConnect('FBnav');
 //softgame = new softgameApi('SGnav');
+$('#leaderboardMenu').tabify();
 
 FB.onConnect = function(){
-	options = new Options('optionMenu');
+	options = new Options('optionMenu', 'leaderboardMenu');
 	game = new appEnviroment("gameCanvas", "gameMenu", "animCanvas", gameSize);
 	//FB.post('Fer! pa\'vos!!');
 	FB.retrieveUserData();

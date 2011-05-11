@@ -43,7 +43,7 @@ function retrieveGeneralLeaderboard(scores, numscores, response){
     {
         alert(scores.length + " scores returned out of " + numscores);
 				
-        for(var i:int=0; i<scores.length; i++)
+        for(var i = 0; i<scores.length; i++)
         {
             var score = scores[i];
             alert(" - " + score.Name + " got " + score.Points + " on " + score.SDate);
@@ -62,7 +62,7 @@ function retrieveFacebookLeaderboard(scores, numscores, response){
     {
         alert(scores.length + " scores returned out of " + numscores);
 				
-        for(var i:int=0; i<scores.length; i++)
+        for(var i=0; i<scores.length; i++)
         {
             var score = scores[i];
             alert(" - " + score.Name + " got " + score.Points + " on " + score.SDate);

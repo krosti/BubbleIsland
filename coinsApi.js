@@ -18,17 +18,18 @@ F2A626BE8BECEABB0E8648DE1EB63232 good signature
 
 function softgameApi(displayNav){
 	this.self = this;
+	alert('get element: ' + displayNav);
 	this.element = document.getElementById(displayNav);
 	this.element.style.position = 'fixed';
 	this.element.style.top = '0px';
 	this.element.style.left = '0px';
 	this.element.style.width = '320px';
 	this.element.style.height = '480px';
-
+	alert('making signature');
 	this.signature = this.game_id + this.softgameSplit + this.softgameBackUrl + this.softgameSplit + this.softgameLangCode + this.softgameSplit + this.game_secret;
 	//this.signature = this.game_id + this.softgameSplit + this.softgameLangCode + this.softgameSplit + this.softgameBackUrl + this.softgameSplit + this.game_secret;
 	this.signature = this.signature.toUpperCase();
-	//alert(this.signature);
+	alert(this.signature);
 	this.signature = $.md5(this.signature).toUpperCase();
 };
 
@@ -72,6 +73,7 @@ softgameApi.prototype.connectionEstablished = function(data){
 	alert('connectionEstablished: ' + data);
 	this.element.style.display = 'block';
 	//s.slice(s.indexOf(q) + q.length, s.indexOf("&"))
+	alert('result: ' + d);
 	var d = data.slice(data.indexOf("<body"), data.indexOf('</html>'));
 	this.element.innerHTML = d;
 };

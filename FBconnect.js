@@ -16,6 +16,7 @@ function FBConnect(elementId){
 	this.token = '';
 	this.url;
 	this.user;
+	this.friendsArray = [];
 	this.ajaxReply;
 	
 	this.connectResponse = function(data){
@@ -113,6 +114,21 @@ function FBConnect(elementId){
 			error: function(data, er, r){ alert(data.responseText + ':' + er + ':' +r); }
 		});
 	};
+
+	this.retrieveFriendsData = function(){
+		postdata = {
+			access_token: this.token		
+		};
+		self = this;
+		this.ajaxReply = $.ajax({
+			url: 'https://graph.facebook.com/me/friends',
+			type: 'GET',
+			data: postdata,
+			//success: function(data){ alert('success: ' + data); self.setUserData(data); },
+			success: this.setFriendsArray,
+			error: function(data, er, r){ alert(data.responseText + ':' + er + ':' +r); }
+		});
+	};
 	
 	/*this.setUserData = function(data){
 		this.user = eval('(' + data + ')');
@@ -124,4 +140,12 @@ function FBConnect(elementId){
 FBConnect.prototype.setUserData = function(data){
 	alert(data);
 	this.user = eval('(' + data + ')');
+};
+
+FBConnect.prototype.setFriendsArray = function(data) {
+	alert(data);
+	var arr = eval('(' + data + ')');
+	for(i = 0; i < arr.data.length; ++i){
+		this.friendsArray.push(arr.data[i].id);
+	};
 };

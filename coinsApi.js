@@ -119,8 +119,8 @@ softgameApi.prototype.startConnection = function(){
 		crossDomain: true,
 		/*success: this.connectionEstablished,
 		error: this.connectionError,*/
-		success: function(data){ softgameApi.startConnection(data); },
-		error: function(obj, err, r){ softgameApi.connectionError(obj, err, r); },
+		success: function(data){ softgame.startConnection(data); },
+		error: function(obj, err, r){ softgame.connectionError(obj, err, r); },
 		complete: function(jq, errorStatus){
 			alert('complete: ' + errorStatus +':'+jq.status + ':' + jq.getAllResponseHeaders()); 
 		}

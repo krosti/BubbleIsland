@@ -19,7 +19,7 @@ F2A626BE8BECEABB0E8648DE1EB63232 good signature
 function softgameApi(displayNav){
 	this.self = this;
 	alert('get element: ' + displayNav);
-	this.prototype.element = document.getElementById(displayNav);
+	this.element = document.getElementById(displayNav);
 	this.element.style.position = 'fixed';
 	this.element.style.top = '0px';
 	this.element.style.left = '0px';
@@ -117,8 +117,10 @@ softgameApi.prototype.startConnection = function(){
 		url: link,
 		data: getdata,
 		crossDomain: true,
-		success: this.connectionEstablished,
-		error: this.connectionError,
+		/*success: this.connectionEstablished,
+		error: this.connectionError,*/
+		success: function(data){ softgameApi.startConnection(data); },
+		error: function(obj, err, r){ softgameApi.connectionError(obj, err, r); }
 		complete: function(jq, errorStatus){
 			alert('complete: ' + errorStatus +':'+jq.status + ':' + jq.getAllResponseHeaders()); 
 		}

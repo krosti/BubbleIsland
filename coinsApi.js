@@ -73,8 +73,11 @@ softgameApi.prototype.connectionEstablished = function(data){
 	alert('connectionEstablished: ' + data);
 	this.element.style.display = 'block';
 	//s.slice(s.indexOf(q) + q.length, s.indexOf("&"))
+	//alert(this.uri)
+	data = data + '';
+	this.element.innetHTML = data;
 	var d = data.slice(data.indexOf("<body"), data.indexOf('</html>'));
-	alert('result: ' + d);
+	//alert('result: ' + d);
 	this.element.innerHTML = d;
 };
 

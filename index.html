@@ -22,7 +22,7 @@
 		//redirect_url = "http://www.facebook.com/connect/login_success.html";
 		document.addEventListener('deviceready', function(){
 			//alert('in connect');
-			Playtomic.Log.View(2647, "3689729b4f17433c", document.location);
+			//Playtomic.Log.View(2647, "3689729b4f17433c", document.location);
 			//softgame.startConnection();
 			FB.setUrl(APPID, 'touch');
 			/*var uri = 'https://www.facebook.com/dialog/oauth?client_id=213255638692367&scope=publish_stream&redirect_uri=http://www.facebook.com/connect/login_success.html&display=touch&response_type=token';*/
@@ -668,7 +668,7 @@ function postHighscoreOnFacebook(){
 	FB.post(msg);
 };
 		
-
+/*
 function SubmitScore()
 {
     var simple_score = {};
@@ -695,7 +695,7 @@ function SubmitComplete(score, response)
     {
         // submission failed because of response.ErrorCode
     }
-}
+}*/
 
 		
 loader = new Loader('progress');

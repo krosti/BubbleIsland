@@ -847,6 +847,16 @@ function bubbleLevel(w, h, bubblesWidth, bubblesHeight, lvlnbr){
 			this.bubbles_array[i].move();
 		};
 		//performance.check('move balls');
+		var masBaja = this.grilla.returnLowest();
+		/*alert(this.looseLine);
+		alert(masBaja.x + this.bubbleRadius);*/
+		if(masBaja.y + this.bubbleRadius > this.looseLine){
+			alert('perdiste');
+			/*alert(this.looseLine);
+			alert(masBaja.x + this.bubbleRadius);*/
+			this.freeze = true;
+			this.loose();
+		};
 		//si esta ocupado, evitar movimiento (normalmente no se mueve, solo evita check de mas)
 		if(this.mutex == true){
 			//debug("MUTED!");
@@ -890,17 +900,6 @@ function bubbleLevel(w, h, bubblesWidth, bubblesHeight, lvlnbr){
 		};
 
 		//performance.check('colisiones');
-		
-		var masBaja = this.grilla.returnLowest();
-		/*alert(this.looseLine);
-		alert(masBaja.x + this.bubbleRadius);*/
-		if(masBaja.y + this.bubbleRadius > this.looseLine){
-			alert('perdiste');
-			/*alert(this.looseLine);
-			alert(masBaja.x + this.bubbleRadius);*/
-			this.freeze = true;
-			this.loose();
-		};
 
 		//si la pelota disparada llego al techo y freno sola
 		//debug(this.shootedBubble.isMoving());

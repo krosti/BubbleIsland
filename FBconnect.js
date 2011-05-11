@@ -143,7 +143,7 @@ FBConnect.prototype.setUserData = function(data){
 };
 
 FBConnect.prototype.setFriendsArray = function(data) {
-	//alert(data);
+	alert(data);
 	var arr = eval('(' + data + ')');
 	for(i = 0; i < arr.data.length; ++i){
 		this.friendsArray.push(arr.data[i].id);

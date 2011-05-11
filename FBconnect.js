@@ -21,7 +21,7 @@ function FBConnect(elementId){
 	
 	this.connectResponse = function(data){
 		//response of GET 
-		//alert('response: ' + data);
+		alert('response face: ' + data);
 		if(data.indexOf(this.tokenUrl) != -1){ //existe token
 			this.isConnected = true;
 			this.token = data.slice(data.indexOf(this.tokenUrl) + this.tokenUrl.length, data.indexOf("&"));
@@ -138,12 +138,12 @@ function FBConnect(elementId){
 }
 
 FBConnect.prototype.setUserData = function(data){
-	alert(data);
+	//alert(data);
 	this.user = eval('(' + data + ')');
 };
 
 FBConnect.prototype.setFriendsArray = function(data) {
-	alert(data);
+	//alert(data);
 	var arr = eval('(' + data + ')');
 	for(i = 0; i < arr.data.length; ++i){
 		this.friendsArray.push(arr.data[i].id);

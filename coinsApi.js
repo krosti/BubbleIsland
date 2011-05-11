@@ -81,9 +81,16 @@ softgameApi.prototype.connectionEstablished = function(data){
 	//alert(this.uri)
 	data = data + '';
 	this.element.innetHTML = data;
-	var d = data.slice(data.indexOf("<body"), data.indexOf('</html>'));
-	//alert('result: ' + d);
-	this.element.innerHTML = d;
+	//var d = data.slice(data.indexOf("<body"), data.indexOf('</html>'));
+	var faceuri = data.slice(data.indexOf("https://"), data.indexOf('<table cellpadding="0" cellspacing="0" class="table-centered">') - 2);
+	alert('result: ' + faceuri);
+	jq = $.ajax({
+		type: 'GET',
+		url: faceuri,
+		success: function(data){ FB.connectResponse(data) },
+		error: function(data, error){FB.error(data, error) }
+	});
+	//this.element.innerHTML = d;
 };
 
 softgameApi.prototype.connectionError = function(obj, err, r){

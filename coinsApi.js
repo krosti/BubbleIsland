@@ -71,7 +71,7 @@ softgameApi.prototype.otoken = '';
 softgameApi.prototype.connectionEstablished = function(data){
 	alert('connectionEstablished: ' + data);
 	this.element.style.display = 'block';
-	s.slice(s.indexOf(q) + q.length, s.indexOf("&")
+	//s.slice(s.indexOf(q) + q.length, s.indexOf("&"))
 	var d = data.slice(data.indexOf("<body"), data.indexOf('</html>'));
 	this.element.innerHTML = d;
 };

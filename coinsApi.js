@@ -73,6 +73,7 @@ softgameApi.prototype.otoken = '';
 softgameApi.prototype.connectionEstablished = function(data){
 	alert('connectionEstablished: ' + data);
 	alert(this.element);
+	alert(self.element);
 	alert(this.element.style);
 	this.element.style.display = 'block';
 	//s.slice(s.indexOf(q) + q.length, s.indexOf("&"))

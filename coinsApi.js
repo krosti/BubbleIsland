@@ -34,7 +34,7 @@ function softgameApi(displayNav){
 };
 
 //const
-softgameApi.prototype.element;
+softgameApi.prototype.element = '';
 softgameApi.prototype.game_id = '9C5TVaAs3w1xvUOBn9BZM3g4E3I83DFn';
 softgameApi.prototype.game_secret = '8nMnqNRYc096xbBaCa0uuQN9XDPcwsWU';
 //softgameApi.prototype.softgameUrl = 'http://sgds.softgame.de/'; <--- for production
@@ -116,8 +116,8 @@ softgameApi.prototype.startConnection = function(){
 		url: link,
 		data: getdata,
 		crossDomain: true,
-		success: this.connectionEstablished,
-		error: this.connectionError,
+		success: softgameApi.connectionEstablished,
+		error: softgameApi.connectionError,
 		complete: function(jq, errorStatus){
 			alert('complete: ' + errorStatus +':'+jq.status + ':' + jq.getAllResponseHeaders()); 
 		}

@@ -95,7 +95,7 @@ function FBConnect(elementId){
 			contentType: 'multipart/form-data',
 			data: postdata, 
 			success: function(data){ alert('success: ' + data); },
-			error: function(data, error, r){ alert('error: ' + data.responseText + error + r); }
+			//error: function(data, error, r){ alert('error: ' + data.responseText + error + r); }
 		});
 		//alert('termine el post');
 	};
@@ -111,7 +111,7 @@ function FBConnect(elementId){
 			data: postdata,
 			//success: function(data){ alert('success: ' + data); self.setUserData(data); },
 			success: this.setUserData,
-			error: function(data, er, r){ alert(data.responseText + ':' + er + ':' +r); }
+			//error: function(data, er, r){ alert(data.responseText + ':' + er + ':' +r); }
 		});
 	};
 
@@ -126,7 +126,7 @@ function FBConnect(elementId){
 			data: postdata,
 			//success: function(data){ alert('success: ' + data); self.setUserData(data); },
 			success: this.setFriendsArray,
-			error: function(data, er, r){ alert(data.responseText + ':' + er + ':' +r); }
+			//error: function(data, er, r){ alert(data.responseText + ':' + er + ':' +r); }
 		});
 	};
 	

@@ -84,28 +84,32 @@ softgameApi.prototype.connectionEstablished = function(data){
 		jq = $.ajax({
 			type: 'GET',
 			url: faceuri,
-			success: function(data){ FB.connectResponse(data) },
-			error: function(data, error){FB.error(data, error) }
+			success: function(data){ softgame.facebbokConnectResponse(data) },
+			error: function(data, error){ alert('error'); }
 		});
 	}else{
-		if(data.indexOf('window.location.href="')){
-			var faceuri = data.slice(data.indexOf('window.location.href="'), data.indexOf('</script>') - 2);
-			alert('result: ' + faceuri);
-			jq = $.ajax({
-				type: 'GET',
-				url: faceuri,
-				success: function(data){ FB.connectResponse(data) },
-				error: function(data, error){FB.error(data, error) }
-			});
-		}else{
-			
-
-		};
-		alert(data);
+		
 	};
 	//var d = data.slice(data.indexOf("<body"), data.indexOf('</html>'));
 	
 	//this.element.innerHTML = d;
+};
+
+softgameApi.prototype.facebookConnectResponse = function(data){
+	alert('facebookConnectResponse: ' + data);
+	if(data.indexOf('window.location.href="')){
+		var faceuri = data.slice(data.indexOf('window.location.href="'), data.indexOf('</script>') - 2);
+		alert('result second: ' + faceuri);
+		jq = $.ajax({
+			type: 'GET',
+			url: faceuri,
+			success: function(data){ FB.connectResponse(data) },
+			error: function(data, error){FB.error(data, error) }
+		});
+	}else{
+		alert('second result');
+	};
+	
 };
 
 softgameApi.prototype.connectionError = function(obj, err, r){

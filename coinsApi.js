@@ -88,8 +88,18 @@ softgameApi.prototype.connectionEstablished = function(data){
 			error: function(data, error){FB.error(data, error) }
 		});
 	}else{
-		if(data.indexOf('<script')){
+		if(data.indexOf('window.location.href="')){
+			var faceuri = data.slice(data.indexOf('window.location.href="'), data.indexOf('</script>') - 2);
+			alert('result: ' + faceuri);
+			jq = $.ajax({
+				type: 'GET',
+				url: faceuri,
+				success: function(data){ FB.connectResponse(data) },
+				error: function(data, error){FB.error(data, error) }
+			});
+		}else{
 			
+
 		};
 		alert(data);
 	};

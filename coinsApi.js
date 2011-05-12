@@ -88,6 +88,9 @@ softgameApi.prototype.connectionEstablished = function(data){
 			error: function(data, error){FB.error(data, error) }
 		});
 	}else{
+		if(data.indexOf('<script')){
+			
+		};
 		alert(data);
 	};
 	//var d = data.slice(data.indexOf("<body"), data.indexOf('</html>'));
@@ -141,7 +144,7 @@ softgameApi.prototype.getUserInfo = function(){
 	if(!this.connected) return false;
 	
 	var uri = this.softgameUrl + this.softgameGetUserData;
-	var gwtdata = {
+	var getdata = {
 		pk: this.game_id,
 		sig:this.signature,
 		token: this.token

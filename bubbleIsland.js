@@ -269,6 +269,9 @@ function bubble(l){
 				break;
 		};	
 		this.object.fitNormalImage();
+		this.object.addState('estela', 'estela.png', 5);
+		this.element.style.overflow = 'show';
+
 	};
 	
 	this.randomFlavor = function(){
@@ -397,17 +400,6 @@ function bubble(l){
 		while(ddx > 0){ while(ddy > 0){ this.element.style.top = (this.y - (ddy--)) + 'px'}; this.element.style.left = (this.x - (ddx--)) + 'px'};
 
 		while(ddy > 0){ while(ddx > 0){ this.element.style.left = (this.x - (ddx--)) + 'px' }; this.element.style.top = (this.y - (ddy--)) + 'px'};
-		
-		img = document.createElement('img');
-		//alert('idImg' + idImg);
-		img.src = this.meinBild.src;
-		animNav.append(img);
-		//alert(img.id);
-		img.style.position = 'absolute';
-		img.style.top = this.y + 'px';
-		img.style.left = this.x + 'px';
-		
-		//$(img).fadeOut('slow');
 		
 		if((this.x <= this.lvl.leftBound) || (this.x > this.lvl.width)) this.dx = -this.dx;
 		if(this.y <= this.lvl.topBound) this.stopMove();
@@ -579,6 +571,8 @@ function bubbleTable(ancho, alto, lvl){
 	this.addBubble = function(bubble, collided){
 		//debug(' addBubble i: ' + bubble.i + 'j: ' + bubble.j);
 		//alert(collided);
+		bubble.object.setCurrentState('');
+
 		var radius = this.lvl.bubbleRadius / 2;
 		var halfradius = radius / 2;
 		/*bubble.x -= bubble.dx / 2;
@@ -822,7 +816,7 @@ function bubbleLevel(w, h, bubblesWidth, bubblesHeight, lvlnbr){
 	this.h = Math.sqrt((this.bubbleRadius*this.bubbleRadius) - ((this.bubbleRadius / 2) * (this.bubbleRadius / 2)));
 	this.bonus = .2 * this.lvlnro;
 
-	this.character = new standAnimation(86, 110, pandaBearAnim.src, game.clock);
+	this.character = new standAnimation(86, 110, 'panda.png', game.clock);
 	this.character.setXY(80, 370);
 	this.character.addState('load', this.character.normalImage, 22);
 	animNav.append(this.character.element);
@@ -926,6 +920,9 @@ function bubbleLevel(w, h, bubblesWidth, bubblesHeight, lvlnbr){
 	this.setShootedBubble = function(bubble){
 		this.shootedBubble = bubble;
 		this.character.setCurrentState('load');
+		this.shootedBubble.object.setCurrentState('estela', true);
+		this.shootedBubble.object.baseElement.style.display = 'block';
+		//this.shootedBubble.object.animationEnds = function(){ this.setCurrentState('estela'); }
 	}
 	
 	this.drawBalls = function(painter){
@@ -944,6 +941,7 @@ function bubbleLevel(w, h, bubblesWidth, bubblesHeight, lvlnbr){
 	
 	this.drawLevel = function(){
 		this.character.render();	
+		if(this.shootedBubble != undefined) this.shootedBubble.object.render();
 	};
 	
 	this.addBubble = function(b){

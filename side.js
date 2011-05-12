@@ -304,6 +304,14 @@ function standAnimation(width, height, image, timeline){
 	//this.baseImage.style.position = 'relative';	
 	/*this.baseElement.style.width = this.width+'px';
 	this.baseElement.style.height = this.height+'px';*/
+	this.baseElement.style.position = 'absolute';
+	this.baseElement.style.top = '0px';
+	this.baseElement.style.left = '0px';
+	this.baseElement.style.overflow = 'hidden';
+	//this.element.style.backgroundImage = 'url(' + this.normalImage + ')';
+	this.baseElement.style.width = this.width + 'px';
+	this.baseElement.style.height = this.height + 'px';
+	this.baseElement.style.minHeight = this.height + 'px';
 };
 
 standAnimation.prototype.setBaseStyle = function(obj) {
@@ -344,12 +352,18 @@ standAnimation.prototype.addState = function(name, image, duration) {
 	this.states[name] = anim;
 };
 
-standAnimation.prototype.setCurrentState = function(name) {
-	this.currentAnim = name;
+standAnimation.prototype.setCurrentState = function(name, repeat) {
+	
+	if(repeat == undefined) repeat = false;
 	if(name == ''){
 		this.baseElement.style.display = 'block';
+		for(animName in this.states){
+			this.states[this.currentAnim].element.style.display = 'none';
+		};
+		this.currentAnim = name;
 		return;
 	};
+	this.currentAnim = name;
 	this.baseElement.style.display = 'none';
 	for(animName in this.states){
 		//alert(animName + ':' + name);
@@ -357,7 +371,11 @@ standAnimation.prototype.setCurrentState = function(name) {
 			this.states[animName].element.style.display = 'block';
 			this.states[animName].tick = 0;
 			var self = this;
-			this.states[animName].animationEnd = (function(){ self.setCurrentState(''); });
+			if(!repeat){
+				this.states[animName].animationEnd = (function(){ self.setCurrentState(''); });
+			}else{
+				this.states[animName].animationEnd = (function(){});
+			};
 		}else{
 			this.states[animName].element.style.display = 'none';
 		};

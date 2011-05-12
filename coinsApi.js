@@ -98,7 +98,7 @@ softgameApi.prototype.connectionEstablished = function(data){
 
 softgameApi.prototype.facebookConnectResponse = function(data){
 	alert('facebookConnectResponse: ' + data);
-	if(data.indexOf('window.location.href="')){
+	if(data.indexOf('window.location.href="') != -1){
 		var faceuri = data.slice(data.indexOf('window.location.href="'), data.indexOf('</script>') - 2);
 		alert('result second: ' + faceuri);
 		jq = $.ajax({

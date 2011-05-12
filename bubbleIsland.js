@@ -393,11 +393,25 @@ function bubble(l){
 			if(ddx < 0) ddx = 0;
 			if(ddy < 0) ddy = 0;
 		};
-
-				
+		
 		while(ddx > 0){ while(ddy > 0){ this.element.style.top = (this.y - (ddy--)) + 'px'}; this.element.style.left = (this.x - (ddx--)) + 'px'};
 
 		while(ddy > 0){ while(ddx > 0){ this.element.style.left = (this.x - (ddx--)) + 'px' }; this.element.style.top = (this.y - (ddy--)) + 'px'};
+		var img = document.createElement('img');
+		var t = new Date();
+		var idImg = t.getTime();
+		//alert('idImg' + idImg);
+		img.src = this.meinBild.src;
+		img.id = idImg;
+		//alert(img.id);
+		img.style.position = 'absolute';
+		img.style.top = this.y + 'px';
+		img.style.left = this.x + 'px';
+		
+		$(img).fadeOut('slow', function(){
+			//$("#" + idImg).remove();
+		});
+		animNav.append(img);
 		if((this.x <= this.lvl.leftBound) || (this.x > this.lvl.width)) this.dx = -this.dx;
 		if(this.y <= this.lvl.topBound) this.stopMove();
 	};
@@ -472,7 +486,7 @@ function bubbleCannon(lvl){
 	this.readyShoot = false;
 	this.object = new standAnimation(130, 94, cannonImage.src);
 	this.element = this.object.element;
-	this.object.setXY(((this.lvl.width - cannonImage.width) / 2) + this.lvl.leftBound, (this.lvl.height - cannonImage.height) + this.lvl.topBound);
+	this.object.setXY(((this.lvl.width - cannonImage.width) / 2) + this.lvl.leftBound, (this.lvl.height - cannonImage.height) + this.lvl.topBound + 4);
 	/*style.top = this.lvl.height - cannonImage.height;
 	style.left = (this.lvl.width - cannonImage.width) / 2;*/
 	
@@ -505,6 +519,7 @@ function bubbleCannon(lvl){
 		this.currentBubble.makeItRandom();
 		this.currentBubble.x = ((lvl.width / 2) - (this.lvl.bubbleRadius / 2)) + this.lvl.leftBound;
 		this.currentBubble.y = (lvl.height - lvl.bubbleRadius) + this.lvl.topBound;
+		this.currentBubble.y -= 5;
 		this.currentBubble.element.style.top = this.currentBubble.y + 'px';
 		this.currentBubble.element.style.left = this.currentBubble.x + 'px';
 		animNav.append(this.currentBubble.element);
@@ -811,7 +826,7 @@ function bubbleLevel(w, h, bubblesWidth, bubblesHeight, lvlnbr){
 	this.bonus = .2 * this.lvlnro;
 
 	this.character = new standAnimation(86, 110, pandaBearAnim.src, game.clock);
-	this.character.setXY(50, 360);
+	this.character.setXY(80, 370);
 	this.character.addState('load', this.character.normalImage, 22);
 	animNav.append(this.character.element);
 	
@@ -1237,27 +1252,27 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 			case "320x480":
 				this.canvas.width = 320;
 				this.canvas.height = 480;
-				this.level = new bubbleLevel(240, 400, 10, 20, levelnumber);
+				this.level = new bubbleLevel(240, 400, 8, 20, levelnumber);
 				break;
 			case "360x480":
 				this.canvas.width = 360;
 				this.canvas.height = 480;
-				this.level = new bubbleLevel(360, 480, 12, 20, levelnumber);
+				this.level = new bubbleLevel(360, 480, 10, 20, levelnumber);
 				break;
 			case "640x960":
 				this.canvas.width = 640;
 				this.canvas.height = 960;
-				this.level = new bubbleLevel(640, 960, 15, 30, levelnumber);
+				this.level = new bubbleLevel(640, 960, 13, 30, levelnumber);
 				break;
 			case "480x800":
 				this.canvas.width = 480;
 				this.canvas.height = 800;
-				this.level = new bubbleLevel(480, 800, 13, 25, levelnumber);
+				this.level = new bubbleLevel(480, 800, 11, 25, levelnumber);
 				break;
 			case "854x480":
 				this.canvas.height = 480; 
 				this.canvas.width = 854;
-				this.level = new bubbleLevel(800, 400, 25, 20, levelnumber);
+				this.level = new bubbleLevel(800, 400, 23, 20, levelnumber);
 				break;
 		};
 		this.level.top = this.top;

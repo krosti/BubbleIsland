@@ -39,18 +39,21 @@ function retrieveLeaderboard(divGen, divFB){
 };
 
 function retrieveGeneralLeaderboard(scores, numscores, response){
-	alert(response);
+	//alert(response);
 	if(response.Success)
     {
-        alert(scores.length + " scores returned out of " + numscores);
+        //alert(scores.length + " scores returned out of " + numscores);
+        if(numscores == 0){ LeaderBoard.divGen.innerHTML('There is no scores to show'); };
 				
+        var text = '';
         for(var i = 0; i<scores.length; i++)
         {
             var score = scores[i];
             alert(" - " + score.Name + " got " + score.Points + " on " + score.SDate);
-            
+            text += '<div>'+(i + 1 ) + ") " + score.Name + 'with' +score.Points+ 'points!</div>';
             // including custom data?  score.CustomPlaytomic.Data.Property
-        }
+        };
+        LeaderBoard.devGen.innerHTML(text);
     }
     else
     {
@@ -62,15 +65,18 @@ function retrieveFacebookLeaderboard(scores, numscores, response){
 	alert(response);
 	if(response.Success)
     {
-        alert(scores.length + " scores returned out of " + numscores);
+        //alert(scores.length + " scores returned out of " + numscores);
+        if(numscores == 0){ LeaderBoard.divFB.innerHTML('There is no scores to show'); };
 				
+        var text = '';
         for(var i=0; i<scores.length; i++)
         {
             var score = scores[i];
             alert(" - " + score.Name + " got " + score.Points + " on " + score.SDate);
-            
+            text += '<div>'+(i + 1 ) + ") " + score.Name + 'with' +score.Points+ 'points!</div>'
             // including custom data?  score.CustomPlaytomic.Data.Property
-        }
+        };
+        LeaderBoard.divFB.iinerHTML(text);
     }
     else
     {

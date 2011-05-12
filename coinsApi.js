@@ -77,16 +77,21 @@ softgameApi.prototype.connectionEstablished = function(data){
 	//s.slice(s.indexOf(q) + q.length, s.indexOf("&"))
 	//alert(this.uri)
 	data = data + '';
-	this.element.innetHTML = data;
+	//this.element.innetHTML = data;
+	if(data.indexOf("https://")){
+		var faceuri = data.slice(data.indexOf("https://"), data.indexOf('<table cellpadding="0" cellspacing="0" class="table-centered">') - 2);
+		alert('result: ' + faceuri);
+		jq = $.ajax({
+			type: 'GET',
+			url: faceuri,
+			success: function(data){ FB.connectResponse(data) },
+			error: function(data, error){FB.error(data, error) }
+		});
+	}else{
+		alert(data);
+	};
 	//var d = data.slice(data.indexOf("<body"), data.indexOf('</html>'));
-	var faceuri = data.slice(data.indexOf("https://"), data.indexOf('<table cellpadding="0" cellspacing="0" class="table-centered">') - 2);
-	alert('result: ' + faceuri);
-	jq = $.ajax({
-		type: 'GET',
-		url: faceuri,
-		success: function(data){ FB.connectResponse(data) },
-		error: function(data, error){FB.error(data, error) }
-	});
+	
 	//this.element.innerHTML = d;
 };
 

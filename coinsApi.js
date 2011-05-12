@@ -29,8 +29,8 @@ function softgameApi(displayNav){
 	this.signature = this.game_id + this.softgameSplit + this.softgameBackUrl + this.softgameSplit + this.softgameLangCode + this.softgameSplit + this.game_secret;
 	//this.signature = this.game_id + this.softgameSplit + this.softgameLangCode + this.softgameSplit + this.softgameBackUrl + this.softgameSplit + this.game_secret;
 	this.signature = this.signature.toUpperCase();
-	alert(this.signature);
 	this.signature = $.md5(this.signature).toUpperCase();
+	alert(this.signature);
 };
 
 //const

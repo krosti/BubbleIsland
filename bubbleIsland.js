@@ -466,6 +466,12 @@ function bubble(l){
 		//debug(((this.dx == 0) && (this.dy == 0)));
 		return ((this.dx != 0) || (this.dy) != 0);
 	};
+
+	this.explode = function(){
+		//do explode animation and remove element
+		this.object.setCurrentState('explode');
+		this.object.animationEnds = function(){ $(this.element).remove(); } 
+	};
 };
 
 function bubbleCannon(lvl){

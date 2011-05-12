@@ -397,21 +397,18 @@ function bubble(l){
 		while(ddx > 0){ while(ddy > 0){ this.element.style.top = (this.y - (ddy--)) + 'px'}; this.element.style.left = (this.x - (ddx--)) + 'px'};
 
 		while(ddy > 0){ while(ddx > 0){ this.element.style.left = (this.x - (ddx--)) + 'px' }; this.element.style.top = (this.y - (ddy--)) + 'px'};
-		var img = document.createElement('img');
-		var t = new Date();
-		var idImg = t.getTime();
+		
+		img = document.createElement('img');
 		//alert('idImg' + idImg);
 		img.src = this.meinBild.src;
-		img.id = idImg;
+		animNav.append(img);
 		//alert(img.id);
 		img.style.position = 'absolute';
 		img.style.top = this.y + 'px';
 		img.style.left = this.x + 'px';
 		
-		$(img).fadeOut('slow', function(){
-			//$("#" + idImg).remove();
-		});
-		animNav.append(img);
+		//$(img).fadeOut('slow');
+		
 		if((this.x <= this.lvl.leftBound) || (this.x > this.lvl.width)) this.dx = -this.dx;
 		if(this.y <= this.lvl.topBound) this.stopMove();
 	};

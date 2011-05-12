@@ -108,11 +108,13 @@ softgameApi.prototype.connectionEstablished = function(data){
 };
 
 softgameApi.prototype.facebookConnectResponse = function(data){
+	alert('facebookConnectResponse: ' + data);
+	this.element.style.display = 'block';
 	this.element.innerHTML = data;
 };
 
 softgameApi.prototype.secondFacebookConnectResponse = function(data){
-	alert('facebookConnectResponse: ' + data);
+	alert('secondFacebookConnectResponse: ' + data);
 	if(data.indexOf('window.location.href="')){
 		var faceuri = data.slice(data.indexOf('window.location.href="'), data.indexOf('</script>') - 2);
 		alert('result second: ' + faceuri);

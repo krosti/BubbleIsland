@@ -84,7 +84,7 @@ softgameApi.prototype.connectionEstablished = function(data){
 		jq = $.ajax({
 			type: 'GET',
 			url: faceuri,
-			success: function(data){ softgame.facebbokConnectResponse(data) },
+			success: function(data){ softgame.facebookConnectResponse(data) },
 			error: function(data, error){ alert('error'); }
 		});
 	}else{

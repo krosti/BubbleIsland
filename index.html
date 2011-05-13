@@ -663,11 +663,14 @@ softgame = new softgameApi('SGnav');
 $('#leaderboardMenu').tabify();
 
 FB.onConnect = function(){
+	alert('init options');
 	options = new Options('optionMenu', 'leaderboardMenu');
+	alert('init appEnviroment');
 	game = new appEnviroment("gameCanvas", "gameMenu", "animCanvas", gameSize);
 	//FB.post('Fer! pa\'vos!!');
 	//FB.retrieveUserData();
 	//FB.retrieveFriendsData();
+	alert('softgameconnection');
 	softgame.startConnection();
 };
 

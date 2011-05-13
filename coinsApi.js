@@ -191,7 +191,7 @@ softgameApi.prototype.startConnection = function(){
 		sig: this.signature,
 		back: this.softgameBackUrl
 	};
-	//alert(link);
+	alert(link);
 	this.jqajax = $.ajax({
 		type: 'GET',
 		url: link,

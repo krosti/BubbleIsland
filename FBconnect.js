@@ -662,7 +662,7 @@ function FBConnect(elementId){
 	
 	this.error = function(data, error){
 		//handle error
-		alert('error');
+		alert('FB.error');
 	};
 	
 	this.setUrl = function(app_id, display){

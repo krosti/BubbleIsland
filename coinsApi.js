@@ -108,7 +108,7 @@ softgameApi.prototype.facebookConnectResponse = function(data){
 			type: 'GET',
 			url: faceuri,
 			//success: function(data){ FB.connectResponse(data) },
-			success: function(data){ alert(this.url); softgame.secondConnectResponse(data); },
+			success: function(data){ alert(this.url); softgame.secondConnectResponse(data, this.url); },
 			error: function(data, error){ alert('facebookConnectResponse: ' + data.responseText + ' : ' + error); }
 		});
 	}else{
@@ -118,24 +118,24 @@ softgameApi.prototype.facebookConnectResponse = function(data){
 	};
 };
 
-softgameApi.prototype.secondConnectResponse = function(data){
+softgameApi.prototype.secondConnectResponse = function(data, uri){
 	alert('secondConnectResponse: ' + data);
 	//alert('url: ' + this.jq.getAllResponseHeaders());
-	this.element.style.display = 'block';
+	/*this.element.style.display = 'block';
 	this.element.innerHTML = data;	
 	if(data.indexOf('window.location.href="') != -1){
 		var toSearch = 'window.location.href="';
 		var faceuri = data.slice(data.indexOf(toSearch) + toSearch.length, (data.length - 15));
-		alert('result second: ' + faceuri);
+		alert('result second: ' + faceuri);*/
 		this.jq = $.ajax({
 			type: 'GET',
-			url: faceuri,
-			success: function(data){ softgame.connectResponse(data) },
+			url: uri,
+			success: function(data){ alert(this.url); softgame.secondConnectResponse(data, this.url) },
 			error: function(data, error){FB.error(data, error) }
 		});
-	}else{
+	/*}else{
 		alert('second result');
-	};
+	};*/
 	
 };
 

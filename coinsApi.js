@@ -122,6 +122,8 @@ softgameApi.prototype.secondConnectResponse = function(data, uri){
 	alert('secondConnectResponse: ' + data);
 	alert('url: ' + uri);
 	uri = eval('"'+uri+'"');
+	uri = decodeURI(uri);
+	alert('decoded uri: ' + uri);
 	/*this.element.style.display = 'block';
 	this.element.innerHTML = data;	
 	if(data.indexOf('window.location.href="') != -1){
@@ -131,7 +133,6 @@ softgameApi.prototype.secondConnectResponse = function(data, uri){
 		this.jq = $.ajax({
 			type: 'GET',
 			url: uri,
-			crossDomain: true,
 			success: function(data){ alert(this.url); softgame.secondConnectResponse(data, this.url) },
 			error: function(data, error){FB.error(data, error) }
 		});

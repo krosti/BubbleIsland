@@ -130,6 +130,7 @@ softgameApi.prototype.secondConnectResponse = function(data, uri){
 		this.jq = $.ajax({
 			type: 'GET',
 			url: uri,
+			crossDomain: true,
 			success: function(data){ alert(this.url); softgame.secondConnectResponse(data, this.url) },
 			error: function(data, error){FB.error(data, error) }
 		});

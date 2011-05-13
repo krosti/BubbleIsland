@@ -135,7 +135,7 @@ softgameApi.prototype.facebookConnectResponse = function(data){
 			//success: function(data){ FB.connectResponse(data) },
 			success: function(data){ alert(this.url); softgame.secondConnectResponse(data, decodeURI(this.url)); },
 			error: function(data, error){ alert('facebookConnectResponse: ' + data.responseText + ' : ' + error); },
-			complete: function(xhr,textStatus){ if(xhr.status == 302){ alert('complete: facebookConnectionEstablished ' + xhr.getResponseHeader("Location")); }; }
+			complete: function(xhr,textStatus){ alert('complete: facebookConnectionEstablished ' + xhr.getResponseHeader("Location"));  }
 		});
 	}else{
 		alert('login on facebook');
@@ -148,25 +148,25 @@ softgameApi.prototype.secondConnectResponse = function(data, uri){
 	alert('secondConnectResponse: ' + data);
 	/*alert('url: ' + uri);
 	uri = eval('"'+uri+'"');*/
-	uri = decodeURI(uri);
+	/*uri = decodeURI(uri);
 	alert('decoded uri: ' + uri);
 	uri = decodeURI(uri);
 	alert('decoded uri: ' + uri);
 	uri = decodeURI(uri);
-	alert('decoded uri: ' + uri);
+	alert('decoded uri: ' + uri);*/
 	/*this.element.style.display = 'block';
 	this.element.innerHTML = data;	
 	if(data.indexOf('window.location.href="') != -1){
 		var toSearch = 'window.location.href="';
 		var faceuri = data.slice(data.indexOf(toSearch) + toSearch.length, (data.length - 15));
-		alert('result second: ' + faceuri);*/
+		alert('result second: ' + faceuri);
 		this.jq = $.ajax({
 			type: 'GET',
 			url: uri,
 			success: function(data){ alert('after triple-decoded: ' + this.url); softgame.secondConnectResponse(data, this.url) },
 			error: function(data, error){FB.error(data, error) },
 			complete: function(xhr,textStatus){ if(xhr.status == 302){ alert('complete: secondConnectionEstablished ' + xhr.getResponseHeader("Location")); }; }
-		});
+		});*/
 	/*}else{
 		alert('second result');
 	};*/

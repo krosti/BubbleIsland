@@ -34,6 +34,8 @@ function softgameApi(displayNav){
 	this.signature = this.signature.toUpperCase();
 	this.signature = $.md5(this.signature).toUpperCase();
 	alert(this.signature);
+
+	this.onLoginStablish;
 };
 
 //const
@@ -146,34 +148,11 @@ softgameApi.prototype.facebookConnectResponse = function(data){
 
 softgameApi.prototype.secondConnectResponse = function(data, uri){
 	alert('secondConnectResponse: ' + data);
-	alert('this.url: ' + this.url);
-	alert('uri: ' + uri);
-
-	/*alert('url: ' + uri);
-	uri = eval('"'+uri+'"');*/
-	/*uri = decodeURI(uri);
-	alert('decoded uri: ' + uri);
-	uri = decodeURI(uri);
-	alert('decoded uri: ' + uri);
-	uri = decodeURI(uri);
-	alert('decoded uri: ' + uri);*/
-	/*this.element.style.display = 'block';
-	this.element.innerHTML = data;	
-	if(data.indexOf('window.location.href="') != -1){
-		var toSearch = 'window.location.href="';
-		var faceuri = data.slice(data.indexOf(toSearch) + toSearch.length, (data.length - 15));
-		alert('result second: ' + faceuri);
-		this.jq = $.ajax({
-			type: 'GET',
-			url: uri,
-			success: function(data){ alert('after triple-decoded: ' + this.url); softgame.secondConnectResponse(data, this.url) },
-			error: function(data, error){FB.error(data, error) },
-			complete: function(xhr,textStatus){ if(xhr.status == 302){ alert('complete: secondConnectionEstablished ' + xhr.getResponseHeader("Location")); }; }
-		});*/
-	/*}else{
-		alert('second result');
-	};*/
-	
+	/*alert('this.url: ' + this.url);
+	alert('uri: ' + uri);*/
+	var response = eval(data);
+	this.token = response.token;	
+	softgame.getUserInfo();
 };
 
 softgameApi.prototype.connectionError = function(obj, err, r){
@@ -234,7 +213,7 @@ softgameApi.prototype.getUserInfo = function(){
 		sync: true,
 		/*success: this.connectionEstablished,
 		error: this.connectionError*/
-		success: function(){ alert('success' + this.url); },
+		success: function(data){ alert('success' + this.url + 'data: ' + data); },
 		error: function(){ alert('error ' + this.url); }
 	});
 };

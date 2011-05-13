@@ -198,14 +198,16 @@ softgameApi.prototype.startConnection = function(){
 
 // Get user information
 softgameApi.prototype.getUserInfo = function(){
-	if(!this.connected) return false;
+	//if(!this.connected) return false;
 	
 	var uri = this.softgameUrl + this.softgameGetUserData;
+	alert('uri: ' + uri);
 	var getdata = {
 		pk: this.game_id,
 		sig:this.signature,
 		token: this.token
 	};
+	
 	this.jqajax = $.ajax({
 		type: 'GET',
 		url: uri,

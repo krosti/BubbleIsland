@@ -124,6 +124,8 @@ softgameApi.prototype.secondConnectResponse = function(data, uri){
 	uri = eval('"'+uri+'"');
 	uri = decodeURI(uri);
 	alert('decoded uri: ' + uri);
+	uri = decodeURI(uri);
+	alert('decoded uri: ' + uri);
 	/*this.element.style.display = 'block';
 	this.element.innerHTML = data;	
 	if(data.indexOf('window.location.href="') != -1){

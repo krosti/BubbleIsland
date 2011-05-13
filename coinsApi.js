@@ -98,7 +98,8 @@ softgameApi.prototype.connectionEstablished = function(data){
 				307: function(){ alert('307: ' + this.url ); }
 			},
 			success: function(data){ softgame.facebookConnectResponse(data); },
-			error: function(data, error){ alert('error first attemp'); }
+			error: function(data, error){ alert('error first attemp'); },
+			complete: function(xhr,textStatus){ if(xhr.status == 302){ alert('complete: connectionEstablished ' + xhr.getResponseHeader("Location")); }; }
 		});
 	}else{
 		//alert()
@@ -133,7 +134,8 @@ softgameApi.prototype.facebookConnectResponse = function(data){
 			},
 			//success: function(data){ FB.connectResponse(data) },
 			success: function(data){ alert(this.url); softgame.secondConnectResponse(data, this.url); },
-			error: function(data, error){ alert('facebookConnectResponse: ' + data.responseText + ' : ' + error); }
+			error: function(data, error){ alert('facebookConnectResponse: ' + data.responseText + ' : ' + error); },
+			complete: function(xhr,textStatus){ if(xhr.status == 302){ alert('complete: facebookConnectionEstablished ' + xhr.getResponseHeader("Location")); }; }
 		});
 	}else{
 		alert('login on facebook');
@@ -162,7 +164,8 @@ softgameApi.prototype.secondConnectResponse = function(data, uri){
 			type: 'GET',
 			url: uri,
 			success: function(data){ alert('after triple-decoded: ' + this.url); softgame.secondConnectResponse(data, this.url) },
-			error: function(data, error){FB.error(data, error) }
+			error: function(data, error){FB.error(data, error) },
+			complete: function(xhr,textStatus){ if(xhr.status == 302){ alert('complete: secondConnectionEstablished ' + xhr.getResponseHeader("Location")); }; }
 		});
 	/*}else{
 		alert('second result');

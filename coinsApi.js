@@ -151,6 +151,7 @@ softgameApi.prototype.secondConnectResponse = function(data, uri){
 	/*alert('this.url: ' + this.url);
 	alert('uri: ' + uri);*/
 	var response = eval(data);
+	alert('response: ' + response);
 	this.token = response.token;	
 	softgame.getUserInfo();
 };
@@ -207,7 +208,7 @@ softgameApi.prototype.getUserInfo = function(){
 		sig:this.signature,
 		token: this.token
 	};
-	
+
 	this.jqajax = $.ajax({
 		type: 'GET',
 		url: uri,

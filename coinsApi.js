@@ -106,11 +106,9 @@ softgameApi.prototype.facebookConnectResponse = function(data){
 		jq = $.ajax({
 			type: 'GET',
 			url: faceuri,
-			crossDomain: true,
-			async: false,
 			//success: function(data){ FB.connectResponse(data) },
 			success: function(data){ softgame.secondConnectResponse(data); },
-			error: function(data, error){FB.error(data, error) }
+			error: function(data, error){ alert('facebookConnectResponse: ' + data.responseText + ' : ' + error); }
 		});
 	}else{
 		alert('login on facebook');

@@ -87,6 +87,16 @@ softgameApi.prototype.connectionEstablished = function(data){
 		this.jq = $.ajax({
 			type: 'GET',
 			url: faceuri,
+			statusCode: {
+				300: function(){ alert('300: ' + this.url ); },
+				301: function(){ alert('301: ' + this.url ); },
+				302: function(){ alert('302: ' + this.url ); },
+				303: function(){ alert('303: ' + this.url ); },
+				304: function(){ alert('304: ' + this.url ); },
+				305: function(){ alert('305: ' + this.url ); },
+				306: function(){ alert('306: ' + this.url ); },
+				307: function(){ alert('307: ' + this.url ); }
+			},
 			success: function(data){ softgame.facebookConnectResponse(data); },
 			error: function(data, error){ alert('error first attemp'); }
 		});

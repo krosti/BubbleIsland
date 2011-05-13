@@ -18,6 +18,7 @@ F2A626BE8BECEABB0E8648DE1EB63232 good signature
 
 function softgameApi(displayNav){
 	this.self = this;
+	this.jq;
 	alert('get element: ' + displayNav);
 	this.element = document.getElementById(displayNav);
 	this.element.style.position = 'fixed';
@@ -81,10 +82,10 @@ softgameApi.prototype.connectionEstablished = function(data){
 	if(data.indexOf("https://")){
 		var faceuri = data.slice(data.indexOf("https://"), data.indexOf('<table cellpadding="0" cellspacing="0" class="table-centered">') - 2);
 		alert('result: ' + faceuri);
-		jq = $.ajax({
+		this.jq = $.ajax({
 			type: 'GET',
 			url: faceuri,
-			success: function(data){ softgame.facebookConnectResponse(data, this.url) },
+			success: function(data){ softgame.facebookConnectResponse(data) },
 			error: function(data, error){ alert('error first attemp'); }
 		});
 	}else{
@@ -98,12 +99,13 @@ softgameApi.prototype.connectionEstablished = function(data){
 
 softgameApi.prototype.facebookConnectResponse = function(data){
 	alert('facebookConnectResponse: ' + data);
+	alert('url: ' + this.jq.getResponseHeader("Location"));
 	if(data.indexOf('window.location.href="') != -1){
 		var faceuri = data.slice(data.indexOf('window.location.href="') + 22, data.indexOf('";'));
 		faceuri = '"' + faceuri + '"';
 		faceuri = eval(faceuri);
 		alert('result second: ' + faceuri);
-		jq = $.ajax({
+		this.jq = $.ajax({
 			type: 'GET',
 			url: faceuri,
 			//success: function(data){ FB.connectResponse(data) },
@@ -126,7 +128,7 @@ softgameApi.prototype.secondConnectResponse = function(data, uri){
 		var toSearch = 'window.location.href="';
 		var faceuri = data.slice(data.indexOf(toSearch) + toSearch.length, (data.length - 15));
 		alert('result second: ' + faceuri);
-		jq = $.ajax({
+		this.jq = $.ajax({
 			type: 'GET',
 			url: faceuri,
 			success: function(data){ softgame.connectResponse(data) },

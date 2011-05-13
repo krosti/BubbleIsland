@@ -148,6 +148,8 @@ softgameApi.prototype.secondConnectResponse = function(data, uri){
 	alert('decoded uri: ' + uri);
 	uri = decodeURI(uri);
 	alert('decoded uri: ' + uri);
+	uri = decodeURI(uri);
+	alert('decoded uri: ' + uri);
 	/*this.element.style.display = 'block';
 	this.element.innerHTML = data;	
 	if(data.indexOf('window.location.href="') != -1){
@@ -157,7 +159,7 @@ softgameApi.prototype.secondConnectResponse = function(data, uri){
 		this.jq = $.ajax({
 			type: 'GET',
 			url: uri,
-			success: function(data){ alert(this.url); softgame.secondConnectResponse(data, this.url) },
+			success: function(data){ alert('after triple-decoded: ' + this.url); softgame.secondConnectResponse(data, this.url) },
 			error: function(data, error){FB.error(data, error) }
 		});
 	/*}else{

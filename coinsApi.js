@@ -119,7 +119,8 @@ softgameApi.prototype.secondConnectResponse = function(data){
 	alert('secondConnectResponse: ' + data);
 	if(data.indexOf('window.location.href="')){
 		var toSearch = 'window.location.href="';
-		var faceuri = data.slice(data.indexOf(toSearch) + toSearch.length, (data.indexOf('";') - 9));
+		</script>
+		var faceuri = data.slice(data.indexOf(toSearch) + toSearch.length, (data.length - 13));
 		alert('result second: ' + faceuri);
 		jq = $.ajax({
 			type: 'GET',

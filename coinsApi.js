@@ -118,7 +118,7 @@ softgameApi.prototype.facebookConnectResponse = function(data){
 		faceuri = eval(faceuri);
 		alert('result second: ' + faceuri);
 		faceuri = decodeURI(faceuri);
-		window.location = faceuri;
+		//window.location = faceuri;
 		this.jq = $.ajax({
 			type: 'GET',
 			url: faceuri,

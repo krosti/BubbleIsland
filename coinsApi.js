@@ -14,6 +14,8 @@ Project Id:                   9C5TVaAs3w1xvUOBn9BZM3g4E3I83DFn
 Project Secret:           ***
 
 F2A626BE8BECEABB0E8648DE1EB63232 good signature
+
+http://drone.softgames.de/eui/auth?pk=9C5TVaAs3w1xvUOBn9BZM3g4E3I83DFn&lang=en&sig=BA97816F2802DBA7FF69D8BCC22CF3E3&back=http%3A%2F%2Fpuzzlebubble.eudaimonia.com.ar%2F
 */
 
 function softgameApi(displayNav){
@@ -107,6 +109,16 @@ softgameApi.prototype.facebookConnectResponse = function(data){
 		this.jq = $.ajax({
 			type: 'GET',
 			url: faceuri,
+			statusCode: {
+				300: function(){ alert('300: ' + this.url ); },
+				301: function(){ alert('301: ' + this.url ); },
+				302: function(){ alert('302: ' + this.url ); },
+				303: function(){ alert('303: ' + this.url ); },
+				304: function(){ alert('304: ' + this.url ); },
+				305: function(){ alert('305: ' + this.url ); },
+				306: function(){ alert('306: ' + this.url ); },
+				307: function(){ alert('307: ' + this.url ); }
+			},
 			//success: function(data){ FB.connectResponse(data) },
 			success: function(data){ alert(this.url); softgame.secondConnectResponse(data, this.url); },
 			error: function(data, error){ alert('facebookConnectResponse: ' + data.responseText + ' : ' + error); }
@@ -169,7 +181,7 @@ softgameApi.prototype.startConnection = function(){
 		sig: this.signature,
 		back: this.softgameBackUrl
 	};
-	
+	//alert(link);
 	this.jqajax = $.ajax({
 		type: 'GET',
 		url: link,
@@ -177,8 +189,8 @@ softgameApi.prototype.startConnection = function(){
 		crossDomain: true,
 		/*success: this.connectionEstablished,
 		error: this.connectionError,*/
-		success: function(data){ softgame.connectionEstablished(data); },
-		error: function(obj, err, r){ softgame.connectionError(obj, err, r); },
+		success: function(data){ alert(this.url); softgame.connectionEstablished(data); },
+		error: function(obj, err, r){  alert(this.url); softgame.connectionError(obj, err, r); },
 		complete: function(jq, errorStatus){
 			alert('complete: ' + errorStatus +':'+jq.status + ':' + jq.getAllResponseHeaders()); 
 		}

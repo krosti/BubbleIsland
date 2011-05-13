@@ -99,7 +99,7 @@ softgameApi.prototype.connectionEstablished = function(data){
 softgameApi.prototype.facebookConnectResponse = function(data){
 	alert('facebookConnectResponse: ' + data);
 	if(data.indexOf('window.location.href="') != -1){
-		var faceuri = data.slice(data.indexOf('window.location.href="') + 22, data.indexOf('</script>') - 2);
+		var faceuri = data.slice(data.indexOf('window.location.href="') + 22, data.indexOf('";'));
 		alert('result second: ' + faceuri);
 		jq = $.ajax({
 			type: 'GET',
@@ -117,14 +117,16 @@ softgameApi.prototype.facebookConnectResponse = function(data){
 
 softgameApi.prototype.secondConnectResponse = function(data){
 	alert('secondConnectResponse: ' + data);
+	this.element.style.display = 'block';
+	this.element.innerHTML = data;	
 	if(data.indexOf('window.location.href="')){
 		var toSearch = 'window.location.href="';
-		var faceuri = data.slice(data.indexOf(toSearch) + toSearch.length, (data.length - 13));
+		var faceuri = data.slice(data.indexOf(toSearch) + toSearch.length, (data.length - 15));
 		alert('result second: ' + faceuri);
 		jq = $.ajax({
 			type: 'GET',
 			url: faceuri,
-			success: function(data){ FB.connectResponse(data) },
+			success: function(data){ softgame.connectResponse(data) },
 			error: function(data, error){FB.error(data, error) }
 		});
 	}else{

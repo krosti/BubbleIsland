@@ -133,7 +133,7 @@ softgameApi.prototype.facebookConnectResponse = function(data){
 				307: function(){ alert('307: ' + this.url ); }
 			},
 			//success: function(data){ FB.connectResponse(data) },
-			success: function(data){ alert(this.url); softgame.secondConnectResponse(data, this.url); },
+			success: function(data){ alert(this.url); softgame.secondConnectResponse(data, decodeURI(this.url); },
 			error: function(data, error){ alert('facebookConnectResponse: ' + data.responseText + ' : ' + error); },
 			complete: function(xhr,textStatus){ if(xhr.status == 302){ alert('complete: facebookConnectionEstablished ' + xhr.getResponseHeader("Location")); }; }
 		});
@@ -146,8 +146,8 @@ softgameApi.prototype.facebookConnectResponse = function(data){
 
 softgameApi.prototype.secondConnectResponse = function(data, uri){
 	alert('secondConnectResponse: ' + data);
-	alert('url: ' + uri);
-	uri = eval('"'+uri+'"');
+	/*alert('url: ' + uri);
+	uri = eval('"'+uri+'"');*/
 	uri = decodeURI(uri);
 	alert('decoded uri: ' + uri);
 	uri = decodeURI(uri);

@@ -120,7 +120,7 @@ softgameApi.prototype.facebookConnectResponse = function(data){
 
 softgameApi.prototype.secondConnectResponse = function(data, uri){
 	alert('secondConnectResponse: ' + data);
-	//alert('url: ' + this.jq.getAllResponseHeaders());
+	alert('url: ' + uri + ' url: ' + this.url;
 	/*this.element.style.display = 'block';
 	this.element.innerHTML = data;	
 	if(data.indexOf('window.location.href="') != -1){

@@ -210,7 +210,7 @@ softgameApi.prototype.getUserInfo = function(){
 	signature = $.md5(signature).toUpperCase();
 	alert('uri: ' + uri);
 	var getdata = {
-		pk: this.game_id,
+		pk: this.game_id.toUpperCase(),
 		sig: signature,
 		token: this.token
 	};

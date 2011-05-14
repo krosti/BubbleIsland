@@ -1,36 +1,64 @@
 
-function Loader(progress){
+function Loader(progress, size){
 	this.progressBar = document.getElementById(progress);	
+	this.size = size;
 
-	bubbleSilverImage = new Image();
+	bubbleBlueImage = new Image();
 	bubbleRedImage = new Image();
-	bubbleOrangeImage = new Image();
+	bubbleGreenImage = new Image();
 	bubblePurpleImage = new Image();
 	bubbleYellowImage = new Image();
-	bubbleSilverBombImage = new Image();
+
+	bubbleBlueBombImage = new Image();
 	bubbleRedBombImage = new Image();
-	bubbleOrangeBombImage = new Image();
+	bubbleGreenBombImage = new Image();
 	bubblePurpleBombImage = new Image();
 	bubbleYellowBombImage = new Image();
-	bubbleSilverHalfImage = new Image();
+
+	bubbleBlueHalfImage = new Image();
 	bubbleRedHalfImage = new Image();
-	bubbleOrangeHalfImage = new Image();
+	bubbleGreenHalfImage = new Image();
 	bubblePurpleHalfImage = new Image();
 	bubbleYellowHalfImage = new Image();
-	bubbleSilverFreezeImage = new Image();
+
+	bubbleBlueFreezeImage = new Image();
 	bubbleRedFreezeImage = new Image();
-	bubbleOrangeFreezeImage = new Image();
+	bubbleGreenFreezeImage = new Image();
 	bubblePurpleFreezeImage = new Image();
 	bubbleYellowFreezeImage = new Image();
+
+	bubbleBlueImageX2 = new Image();
+	bubbleRedImageX2 = new Image();
+	bubbleGreenImageX2 = new Image();
+	bubblePurpleImageX2 = new Image();
+	bubbleYellowImageX2 = new Image();
+
+	bubbleBlueImageX3 = new Image();
+	bubbleRedImageX3 = new Image();
+	bubbleGreenImageX3 = new Image();
+	bubblePurpleImageX3 = new Image();
+	bubbleYellowImageX3 = new Image();
+
 	lvlFrame = new Image();
 	backgroundImage = new Image();
+	initImage = new Image();
 	logoImage = new Image();
-	cannonImage = new Image();
 	pandaBearAnim = new Image();
+	uiPanda = new Image();
+	uiLevelFrame = new Image();
+	uiLifeFrame = new Image();
+	uiPointsFrame = new Image();
+	uiLooseFrame = new Image();
+	uiWinFrame = new Image();
+	uiCannon = new Image();
+	uiOptionButton = new Image();
+	uiNewButton = new Image();
+	uiContinueButton = new Image();
+	uiBackButton = new Image();
 	
 	this.readyLoad;// = function(){ alert('hola'); };
 	
-	this.toLoad = 25;
+	this.toLoad = 46;
 	this.isloaded = 0;
 	
 	this.loaded = function(){
@@ -41,8 +69,8 @@ function Loader(progress){
 	};
 	
 	this.init = function(){	
-		/*bubbleSilverImage.onLoad = this.loaded();
-		bubbleOrangeImage.onLoad = this.loaded();
+		/*bubbleBlueImage.onLoad = this.loaded();
+		bubbleGreenImage.onLoad = this.loaded();
 		bubbleRedImage.onLoad = this.loaded();
 		bubblePurpleImage.onLoad = this.loaded();
 		bubbleYellowImage.onLoad = this.loaded();
@@ -50,65 +78,116 @@ function Loader(progress){
 		backgroundImage.onLoad = this.loaded();
 		logoImage.onLoad = this.loaded();
 		cannonImage.onLoad = this.loaded;*/
-		bubbleSilverImage.onLoad = this.loaded();
-		bubbleOrangeImage.onLoad = this.loaded();
+		bubbleBlueImage.onLoad = this.loaded();
+		bubbleGreenImage.onLoad = this.loaded();
 		bubbleRedImage.onLoad = this.loaded();
 		bubblePurpleImage.onLoad = this.loaded();
 		bubbleYellowImage.onLoad = this.loaded();
-		bubbleSilverBombImage.onLoad = this.loaded();
-		bubbleOrangeBombImage.onLoad = this.loaded();
+
+		bubbleBlueBombImage.onLoad = this.loaded();
+		bubbleGreenBombImage.onLoad = this.loaded();
 		bubbleRedBombImage.onLoad = this.loaded();
 		bubblePurpleBombImage.onLoad = this.loaded();
 		bubbleYellowBombImage.onLoad = this.loaded();
-		bubbleSilverFreezeImage.onLoad = this.loaded();
-		bubbleOrangeFreezeImage.onLoad = this.loaded();
+
+		bubbleBlueFreezeImage.onLoad = this.loaded();
+		bubbleGreenFreezeImage.onLoad = this.loaded();
 		bubbleRedFreezeImage.onLoad = this.loaded();
 		bubblePurpleFreezeImage.onLoad = this.loaded();
 		bubbleYellowFreezeImage.onLoad = this.loaded();
-		bubbleSilverHalfImage.onLoad = this.loaded();
+
+		bubbleBlueHalfImage.onLoad = this.loaded();
 		bubbleRedHalfImage.onLoad = this.loaded();
-		bubbleOrangeHalfImage.onLoad = this.loaded();
+		bubbleGreenHalfImage.onLoad = this.loaded();
 		bubblePurpleHalfImage.onLoad = this.loaded();
 		bubbleYellowHalfImage.onLoad = this.loaded();
+
+		bubbleBlueImageX2.onLoad = this.loaded();
+		bubbleGreenImageX2.onLoad = this.loaded();
+		bubbleRedImageX2.onLoad = this.loaded();
+		bubblePurpleImageX2.onLoad = this.loaded();
+		bubbleYellowImageX2.onLoad = this.loaded();
+
+		bubbleBlueImageX3.onLoad = this.loaded();
+		bubbleGreenImageX3.onLoad = this.loaded();
+		bubbleRedImageX3.onLoad = this.loaded();
+		bubblePurpleImageX3.onLoad = this.loaded();
+		bubbleYellowImageX3.onLoad = this.loaded();
+
 		lvlFrame.onLoad = this.loaded();
+		initImage.onLoad = this.loaded();
 		backgroundImage.onLoad = this.loaded();
 		logoImage.onLoad = this.loaded();
-		cannonImage.onLoad = this.loaded();
 		pandaBearAnim.onLoad = this.loaded();
+		uiPanda.onLoad = this.loaded();
+		uiLevelFrame.onLoad = this.loaded();
+		uiLifeFrame.onLoad = this.loaded();
+		uiPointsFrame.onLoad = this.loaded();
+		uiLooseFrame.onLoad = this.loaded();
+		uiWinFrame.onLoad = this.loaded();
+		uiCannon.onLoad = this.loaded();
+		uiOptionButton.onLoad = this.loaded();
+		uiNewButton.onLoad = this.loaded();
+		uiContinueButton.onLoad = this.loaded();
+		uiBackButton.onLoad = this.loaded();
+
 		this.startLoad();
 	};
 
 	this.startLoad = function(){	
-		bubbleSilverImage.src = 'silverbubble.png';
-		bubbleOrangeImage.src = 'orangebubble.png';
-		bubbleRedImage.src = 'redbubble.png';
-		bubblePurpleImage.src = 'purplebubble.png';
-		bubbleYellowImage.src = 'yellowbubble.png';
+		bubbleBlueImage.src = 'bubbles/bluebubble.png';
+		bubbleGreenImage.src = 'bubbles/greenbubble.png';
+		bubbleRedImage.src = 'bubbles/redbubble.png';
+		bubblePurpleImage.src = 'bubbles/purplebubble.png';
+		bubbleYellowImage.src = 'bubbles/yellowbubble.png';
 
-		bubbleSilverBombImage.src = 'silverbubblebomb.png';
-		bubbleOrangeBombImage.src = 'orangebubblebomb.png';
-		bubbleRedBombImage.src = 'redbubblebomb.png';
-		bubblePurpleBombImage.src = 'purplebubblebomb.png';
-		bubbleYellowBombImage.src = 'yellowbubblebomb.png';
+		bubbleBlueBombImage.src = 'bubbles/bluebubblebomb.png';
+		bubbleGreenBombImage.src = 'bubbles/greenbubblebomb.png';
+		bubbleRedBombImage.src = 'bubbles/redbubblebomb.png';
+		bubblePurpleBombImage.src = 'bubbles/purplebubblebomb.png';
+		bubbleYellowBombImage.src = 'bubbles/yellowbubblebomb.png';
 		
-		bubbleSilverFreezeImage.src = 'silverbubblefreeze.png';
-		bubbleOrangeFreezeImage.src = 'orangebubblefreeze.png';
-		bubbleRedFreezeImage.src = 'redbubblefreeze.png';
-		bubblePurpleFreezeImage.src = 'purplebubblefreeze.png';
-		bubbleYellowFreezeImage.src = 'yellowbubblefreeze.png';
+		bubbleBlueFreezeImage.src = 'bubbles/bluebubblefreeze.png';
+		bubbleGreenFreezeImage.src = 'bubbles/greenbubblefreeze.png';
+		bubbleRedFreezeImage.src = 'bubbles/redbubblefreeze.png';
+		bubblePurpleFreezeImage.src = 'bubbles/purplebubblefreeze.png';
+		bubbleYellowFreezeImage.src = 'bubbles/yellowbubblefreeze.png';
 		
-		bubbleSilverHalfImage.src = 'halfsilverbubble.png';
-		bubbleOrangeHalfImage.src = 'halforangebubble.png';
-		bubbleRedHalfImage.src = 'halfredbubble.png';
-		bubblePurpleHalfImage.src = 'halfpurplebubble.png';
-		bubbleYellowHalfImage.src = 'halfyellowbubble.png';
+		bubbleBlueHalfImage.src = 'bubbles/bluebubblehalf.png';
+		bubbleGreenHalfImage.src = 'bubbles/greenbubblehalf.png';
+		bubbleRedHalfImage.src = 'bubbles/redbubblehalf.png';
+		bubblePurpleHalfImage.src = 'bubbles/purplebubblehalf.png';
+		bubbleYellowHalfImage.src = 'bubbles/yellowbubblehalf.png';
 
-		lvlFrame.src = 'lvlboundering.png';
-		backgroundImage.src = 'background.png';
-		logoImage.src = 'logo.jpg';
-		cannonImage.src = 'cannon.png';
-		
-		pandaBearAnim.src = 'animacion.png';
+		bubbleBlueImageX2.src = 'bubbles/bluebubbleX2.png';
+		bubbleGreenImageX2.src = 'bubbles/greenbubbleX2.png';
+		bubbleRedImageX2.src = 'bubbles/redbubbleX2.png';
+		bubblePurpleImageX2.src = 'bubbles/purplebubbleX2.png';
+		bubbleYellowImageX2.src = 'bubbles/yellowbubbleX2.png';
+
+		bubbleBlueImageX3.src = 'bubbles/bluebubbleX3.png';
+		bubbleGreenImageX3.src = 'bubbles/greenbubbleX3.png';
+		bubbleRedImageX3.src = 'bubbles/redbubbleX3.png';
+		bubblePurpleImageX3.src = 'bubbles/purplebubbleX3.png';
+		bubbleYellowImageX3.src = 'bubbles/yellowbubbleX3.png';
+
+		lvlFrame.src = this.size + '/lvlframe.png';
+		//alert(this.size + '/lvlframe.png');
+		backgroundImage.src = this.size + '/background.png';
+		logoImage.src = this.size + '/logo.jpg';		
+		initImage.src = this.size + '/initscreen.png';
+		pandaBearAnim.src = this.size + '/animacion.png';
+		uiPanda.src = this.size + '/panda.png';
+		uiLevelFrame.src = this.size + '/lvlframe';
+		uiLifeFrame.src = this.size + '/life.png';
+		uiPointsFrame.src = this.size + '/points.png';
+		uiLooseFrame.src = this.size + '/gui_loose.png';
+		uiWinFrame.src = this.size + '/gui_win.png';
+		uiCannon.src = this.size + '/cannon.png';
+		uiOptionButton.src = this.size + '/optionbutton.png';
+		uiNewButton.src = this.size + '/newbutton.png';
+		uiContinueButton.src = this.size + '/continuebutton.png';
+		uiBackButton.src = this.size + '/backbutton.png';
 	};
 };
 //function Timeline(self, fps){ //donde self es el nombre del objeto usado

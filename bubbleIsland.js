@@ -5,6 +5,23 @@ RC:
 [ ] animaciones
 [ ] sonido (html5 o por flash)
 
+To make a Mileston Monday
+Rebuild:
+[X] mover todo el proyecto
+[X] agregar bubbles a el side
+[X] agregar bubbles al bubbleIsland.js
+[X] agregar las imagenes dinamicamente dependiendo del tamaño
+[ ] agregar ui al juego
+[ ] probar css3 o cufon para las fuentes
+[ ] agregar explosion
+[ ] empaquetar para celular
+api:
+[ ] finish softgameApi
+[ ] integrate softgameApi with facebook, all functional
+[ ] check api softgame
+[ ] recheck facebook
+[ ] check leaderboard
+
 beta:
 [b] un disparo por tiempo
 [x] optimizar draw
@@ -95,30 +112,59 @@ function debug(txt){
 };
 	
 
-var bubbleSilverImage;
+var bubbleBlueImage;
 var bubbleRedImage; 
-var bubbleOrangeImage;
+var bubbleGreenImage;
 var bubblePurpleImage;
 var bubbleYellowImage;
-var bubbleSilverBombImage;
+
+var bubbleBlueBombImage;
 var bubbleRedBombImage; 
-var bubbleOrangeBombImage;
+var bubbleGreenBombImage;
 var bubblePurpleBombImage;
 var bubbleYellowBombImage;
-var bubbleSilverFreezeImage;
+
+var bubbleBlueFreezeImage;
 var bubbleRedFreezeImage; 
-var bubbleOrangeFreezeImage;
+var bubbleGreenFreezeImage;
 var bubblePurpleFreezeImage;
 var bubbleYellowFreezeImage;
-var bubbleSilverHalfImage;
+
+var bubbleBlueHalfImage;
 var bubbleRedHalfImage; 
-var bubbleOrangeHalfImage;
+var bubbleGreenHalfImage;
 var bubblePurpleHalfImage;
 var bubbleYellowHalfImage;
+
+var bubbleBlueImageX2;
+var bubbleRedImageX2; 
+var bubbleGreenImageX2;
+var bubblePurpleImageX2;
+var bubbleYellowImageX2;
+
+var bubbleBlueImageX3;
+var bubbleRedImageX3; 
+var bubbleGreenImageX3;
+var bubblePurpleImageX3;
+var bubbleYellowImageX3;
+
 var lvlFrame;
+var initImage;
 var backgroundImage;
 var logoImage;
 var pandaBearAnim;
+var uiPanda;
+var uiLevelFrame
+var uiLifeFrame
+var uiPointsFrame;
+var uiLooseFrame;
+var uiWinFrame;
+var uiCannon;
+var uiOptionButton
+var uiNewButton
+var uiContinueButton;
+var uiBackButton;
+
 
 var game;
 var frameBuffer;
@@ -204,20 +250,13 @@ function bubble(l){
 				var second = rnd(1);
 				if(second == 0){
 					this.pointsMultiplier = 2;
+					this.flavor = this.randomX2Flavor();
 				}else{
 					this.pointsMultiplier = 3;
-				};
-				var mult = document.createElement('p');
-				this.flavor = this.randomFlavor();
+					this.flavor = this.randomX3Flavor();
+				};				
 				this.object = new standAnimation(this.lvl.bubbleRadius, this.lvl.bubbleRadius, this.meinBild.src);
-				this.element = this.object.element;
-				this.element.appendChild(mult);								
-				mult.innerHTML = 'X ' +  this.pointsMultiplier;
-				mult.style.font = 'Verdana 15px';
-				mult.style.position = 'absolute';
-				mult.style.top = '5px'; mult.style.left = '12px';
-				//alert('Multiplier ball: ' + this.pointsMultiplier);
-				
+				this.element = this.object.element;				
 				break;
 			case 28:
 				this.flavor = this.randomFreezeFlavor();
@@ -234,11 +273,11 @@ function bubble(l){
 				}while(this.flavor == this.secondFlavor);
 				var zweithBild = document.createElement('img');				
 				switch(this.secondFlavor){
-					case 'silver':
-						zweithBild.src = bubbleSilverHalfImage.src;
+					case 'blue':
+						zweithBild.src = bubbleBlueHalfImage.src;
 						break;
-					case 'orange':
-						zweithBild.src = bubbleOrangeHalfImage.src;
+					case 'green':
+						zweithBild.src = bubbleGreenHalfImage.src;
 						break;
 					case 'red':
 						zweithBild.src = bubbleRedHalfImage.src;
@@ -256,9 +295,6 @@ function bubble(l){
 				zweithBild.style.position = 'absolute';
 				zweithBild.style.top = '0px';
 				zweithBild.style.left = '0px';
-				//zweithBild.style.zIndex = 30*/ //this.object.baseElement.style.zIndex + 1;
-				
-				//alert(this.flavor + ' : ' + this.secondFlavor);
 				break;
 			case 30:
 				this.flavor = this.randomBombFlavor();
@@ -279,8 +315,8 @@ function bubble(l){
 		var value = rnd(4);
 		switch (value){
 			case 0:
-				flavor = "silver"; 
-				this.meinBild = bubbleSilverImage;
+				flavor = "blue"; 
+				this.meinBild = bubbleBlueImage;
 				break;
 			case 1:
 				flavor = "yellow"; 
@@ -295,8 +331,8 @@ function bubble(l){
 				this.meinBild = bubbleRedImage;
 				break;
 			case 4:
-				flavor = "orange";
-				this.meinBild = bubbleOrangeImage;
+				flavor = "green";
+				this.meinBild = bubbleGreenImage;
 				break;
 		};
 		return flavor;
@@ -307,8 +343,8 @@ function bubble(l){
 		var value = rnd(4);
 		switch (value){
 			case 0:
-				flavor = "silver"; 
-				this.meinBild = bubbleSilverFreezeImage;
+				flavor = "blue"; 
+				this.meinBild = bubbleBlueFreezeImage;
 				break;
 			case 1:
 				flavor = "yellow"; 
@@ -323,12 +359,10 @@ function bubble(l){
 				this.meinBild = bubbleRedFreezeImage;
 				break;
 			case 4:
-				flavor = "orange";
-				this.meinBild = bubbleOrangeFreezeImage;
+				flavor = "green";
+				this.meinBild = bubbleGreenFreezeImage;
 				break;
 		};
-		//this.element.style.backgroundImage = 'url(' + this.meinBild.src+')';
-		//this.element.src = this.meinBild.src;
 		return flavor;
 	};
 
@@ -337,8 +371,8 @@ function bubble(l){
 		var value = rnd(4);
 		switch (value){
 			case 0:
-				flavor = "silver"; 
-				this.meinBild = bubbleSilverBombImage;
+				flavor = "blue"; 
+				this.meinBild = bubbleBlueBombImage;
 				break;
 			case 1:
 				flavor = "yellow"; 
@@ -353,12 +387,66 @@ function bubble(l){
 				this.meinBild = bubbleRedBombImage;
 				break;
 			case 4:
-				flavor = "orange";
-				this.meinBild = bubbleOrangeBombImage;
+				flavor = "green";
+				this.meinBild = bubbleGreenBombImage;
 				break;
 		};
-		//this.element.style.backgroundImage = 'url(' + this.meinBild.src+')';
-		//this.element.src = this.meinBild.src;
+		return flavor;
+	};
+
+	this.randomX2Flavor = function(){
+		var flavor;
+		var value = rnd(4);
+		switch (value){
+			case 0:
+				flavor = "blue"; 
+				this.meinBild = bubbleBlueBombImageX2;
+				break;
+			case 1:
+				flavor = "yellow"; 
+				this.meinBild = bubbleYellowBombImageX2;
+				break;
+			case 2:
+				flavor = "purple"; 
+				this.meinBild = bubblePurplwBombImageX2;
+				break;
+			case 3:
+				flavor = "red"; 
+				this.meinBild = bubbleRedBombImageX2;
+				break;
+			case 4:
+				flavor = "green";
+				this.meinBild = bubbleGreenBombImageX2;
+				break;
+		};
+		return flavor;
+	};
+
+	this.randomX3Flavor= function(){
+		var flavor;
+		var value = rnd(4);
+		switch (value){
+			case 0:
+				flavor = "blue"; 
+				this.meinBild = bubbleBlueBombImageX3;
+				break;
+			case 1:
+				flavor = "yellow"; 
+				this.meinBild = bubbleYellowBombImageX3;
+				break;
+			case 2:
+				flavor = "purple"; 
+				this.meinBild = bubblePurplwBombImageX3;
+				break;
+			case 3:
+				flavor = "red"; 
+				this.meinBild = bubbleRedBombImageX3;
+				break;
+			case 4:
+				flavor = "green";
+				this.meinBild = bubbleGreenBombImageX3;
+				break;
+		};
 		return flavor;
 	};
 	

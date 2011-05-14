@@ -15,6 +15,8 @@ Project Secret:           ***
 
 F2A626BE8BECEABB0E8648DE1EB63232 good signature
 
+9C5TVAAS3W1XVUOBN9BZM3G4E3I83DFN|40F8E485C6464B2D0CAC0C004DAE04D1|8NMNQNRYC096XBBACA0UUQN9XDPCWSWU
+
 http://drone.softgames.de/eui/auth?pk=9C5TVaAs3w1xvUOBn9BZM3g4E3I83DFn&lang=en&sig=BA97816F2802DBA7FF69D8BCC22CF3E3&back=http://puzzlebubble.eudaimonia.com.ar/
 */
 
@@ -205,7 +207,7 @@ softgameApi.prototype.getUserInfo = function(){
 	var uri = this.softgameUrl + this.softgameGetUserData;
 	var signature = this.game_id + this.softgameSplit + this.token + this.softgameSplit + this.game_secreat;
 	signature = signature.toUpperCase();
-	signature = $.md5(signature);
+	signature = $.md5(signature).toUpperCase();
 	alert('uri: ' + uri);
 	var getdata = {
 		pk: this.game_id,

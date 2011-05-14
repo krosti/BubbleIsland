@@ -665,10 +665,11 @@ softgameApi
 
 <script type="text/javascript" charset="utf-8">
 	  
-$(window).load(function () {	
-			/*softgame = new softgameApi();
-			softgame.startConnection();*/
-});
+if(screen.width >= 854) gameSize = "854x480";
+if(screen.width <= 640) gameSize = "640x960";
+if(screen.width <= 480) gameSize = "480x800";
+if(screen.width <= 360) gameSize = "360x480";
+if(screen.width <= 320) gameSize = "320x480";
 
 FB = new FBConnect('FBnav');
 softgame = new softgameApi('SGnav');
@@ -709,7 +710,7 @@ function SubmitComplete(score, response)
 }*/
 
 		
-loader = new Loader('progress');
+loader = new Loader('progress', gameSize);
 loader.readyLoad = function(){	
 	//toda la intro del juego
 	
@@ -719,11 +720,6 @@ loader.readyLoad = function(){
 				$("#initScreen").remove();		
 				//game = new appEnviroment("gameCanvas", "gameMenu", "gameBackgroundCanvas", "320x480");
 				//alert(screen.width);
-				if(screen.width >= 854) gameSize = "854x480";
-				if(screen.width <= 640) gameSize = "640x960";
-				if(screen.width <= 480) gameSize = "480x800";
-				if(screen.width <= 360) gameSize = "360x480";
-				if(screen.width <= 320) gameSize = "320x480";
 				/*options = new Options('optionMenu');
 				game = new appEnviroment("gameCanvas", "gameMenu", "animCanvas", gameSize);*/
 			});

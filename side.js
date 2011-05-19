@@ -3,7 +3,7 @@ function Loader(progress, size){
 	this.progressBar = document.getElementById(progress);	
 	this.size = size;
 
-	bubbleBlueImage = new Image();
+	/*bubbleBlueImage = new Image();
 	bubbleRedImage = new Image();
 	bubbleGreenImage = new Image();
 	bubblePurpleImage = new Image();
@@ -27,17 +27,17 @@ function Loader(progress, size){
 	bubblePurpleFreezeImage = new Image();
 	bubbleYellowFreezeImage = new Image();
 
-	bubbleBlueImageX2 = new Image();
-	bubbleRedImageX2 = new Image();
-	bubbleGreenImageX2 = new Image();
-	bubblePurpleImageX2 = new Image();
-	bubbleYellowImageX2 = new Image();
+	bubbleBlueImagex2 = new Image();
+	bubbleRedImagex2 = new Image();
+	bubbleGreenImagex2 = new Image();
+	bubblePurpleImagex2 = new Image();
+	bubbleYellowImagex2 = new Image();
 
-	bubbleBlueImageX3 = new Image();
-	bubbleRedImageX3 = new Image();
-	bubbleGreenImageX3 = new Image();
-	bubblePurpleImageX3 = new Image();
-	bubbleYellowImageX3 = new Image();
+	bubbleBlueImagex3 = new Image();
+	bubbleRedImagex3 = new Image();
+	bubbleGreenImagex3 = new Image();
+	bubblePurpleImagex3 = new Image();
+	bubbleYellowImagex3 = new Image();
 
 	lvlFrame = new Image();
 	backgroundImage = new Image();
@@ -54,87 +54,92 @@ function Loader(progress, size){
 	uiOptionButton = new Image();
 	uiNewButton = new Image();
 	uiContinueButton = new Image();
-	uiBackButton = new Image();
+	uiBackButton = new Image();*/
 	
-	this.readyLoad;// = function(){ alert('hola'); };
+	this.readyLoad; // = function(){ alert('hola'); };
 	
-	this.toLoad = 46;
+	this.toLoad = 48;
 	this.isloaded = 0;
+	this.separator = '/';
 	
 	this.loaded = function(){
 		//alert(this.isloaded);
-		this.isloaded++;
-		this.progressBar.style.width = ((this.isloaded / this.toLoad) * 100)+ '%';
-		if(this.isloaded == this.toLoad) this.readyLoad();
+		loader.isloaded++;
+		//alert(loader.isloaded + ':' + this.src);
+		loader.progressBar.style.width = ((loader.isloaded / loader.toLoad) * 100)+ '%';
+		if(loader.isloaded == loader.toLoad) loader.readyLoad();
 	};
 	
+	//this.init = function(){	
+		/*bubbleBlueImage.onload = this.loaded();
+		bubbleGreenImage.onload = this.loaded();
+		bubbleRedImage.onload = this.loaded();
+		bubblePurpleImage.onload = this.loaded();
+		bubbleYellowImage.onload = this.loaded();
+		lvlFrame.onload = this.loaded();
+		backgroundImage.onload = this.loaded();
+		logoImage.onload = this.loaded();
+		cannonImage.onload = this.loaded;*/
+		bubbleBlueImage.onload = this.loaded;
+		bubbleGreenImage.onload = this.loaded;
+		bubbleRedImage.onload = this.loaded;
+		bubblePurpleImage.onload = this.loaded;
+		bubbleYellowImage.onload = this.loaded;
+
+		bubbleBlueBombImage.onload = this.loaded;
+		bubbleGreenBombImage.onload = this.loaded;
+		bubbleRedBombImage.onload = this.loaded;
+		bubblePurpleBombImage.onload = this.loaded;
+		bubbleYellowBombImage.onload = this.loaded;
+
+		bubbleBlueFreezeImage.onload = this.loaded;
+		bubbleGreenFreezeImage.onload = this.loaded;
+		bubbleRedFreezeImage.onload = this.loaded;
+		bubblePurpleFreezeImage.onload = this.loaded;
+		bubbleYellowFreezeImage.onload = this.loaded;
+
+		bubbleBlueHalfImage.onload = this.loaded;
+		bubbleRedHalfImage.onload = this.loaded;
+		bubbleGreenHalfImage.onload = this.loaded;
+		bubblePurpleHalfImage.onload = this.loaded;
+		bubbleYellowHalfImage.onload = this.loaded;
+
+		bubbleBlueImageX2.onload = this.loaded;
+		bubbleGreenImageX2.onload = this.loaded;
+		bubbleRedImageX2.onload = this.loaded;
+		bubblePurpleImageX2.onload = this.loaded;
+		bubbleYellowImageX2.onload = this.loaded;
+
+		bubbleBlueImageX3.onload = this.loaded
+		bubbleGreenImageX3.onload = this.loaded;
+		bubbleRedImageX3.onload = this.loaded;
+		bubblePurpleImageX3.onload = this.loaded;
+		bubbleYellowImageX3.onload = this.loaded;
+
+		bubbleExplode.onload = this.loaded;
+		bubbleEstela.onload = this.loaded;
+
+		lvlFrame.onload = this.loaded;
+		initImage.onload = this.loaded;
+		backgroundImage.onload = this.loaded
+		logoImage.onload = this.loaded;
+		pandaBearAnim.onload = this.loaded;
+		uiPanda.onload = this.loaded;
+		uiLevelFrame.onload = this.loaded;
+		uiLifeFrame.onload = this.loaded;
+		uiPointsFrame.onload = this.loaded;
+		uiLooseFrame.onload = this.loaded;
+		uiWinFrame.onload = this.loaded;
+		uiCannon.onload = this.loaded;
+		uiOptionButton.onload = this.loaded;
+		uiNewButton.onload = this.loaded;
+		uiContinueButton.onload = this.loaded;
+		uiBackButton.onload = this.loaded;
+
+		/*this.startLoad();
+	};*/
 	this.init = function(){	
-		/*bubbleBlueImage.onLoad = this.loaded();
-		bubbleGreenImage.onLoad = this.loaded();
-		bubbleRedImage.onLoad = this.loaded();
-		bubblePurpleImage.onLoad = this.loaded();
-		bubbleYellowImage.onLoad = this.loaded();
-		lvlFrame.onLoad = this.loaded();
-		backgroundImage.onLoad = this.loaded();
-		logoImage.onLoad = this.loaded();
-		cannonImage.onLoad = this.loaded;*/
-		bubbleBlueImage.onLoad = this.loaded();
-		bubbleGreenImage.onLoad = this.loaded();
-		bubbleRedImage.onLoad = this.loaded();
-		bubblePurpleImage.onLoad = this.loaded();
-		bubbleYellowImage.onLoad = this.loaded();
-
-		bubbleBlueBombImage.onLoad = this.loaded();
-		bubbleGreenBombImage.onLoad = this.loaded();
-		bubbleRedBombImage.onLoad = this.loaded();
-		bubblePurpleBombImage.onLoad = this.loaded();
-		bubbleYellowBombImage.onLoad = this.loaded();
-
-		bubbleBlueFreezeImage.onLoad = this.loaded();
-		bubbleGreenFreezeImage.onLoad = this.loaded();
-		bubbleRedFreezeImage.onLoad = this.loaded();
-		bubblePurpleFreezeImage.onLoad = this.loaded();
-		bubbleYellowFreezeImage.onLoad = this.loaded();
-
-		bubbleBlueHalfImage.onLoad = this.loaded();
-		bubbleRedHalfImage.onLoad = this.loaded();
-		bubbleGreenHalfImage.onLoad = this.loaded();
-		bubblePurpleHalfImage.onLoad = this.loaded();
-		bubbleYellowHalfImage.onLoad = this.loaded();
-
-		bubbleBlueImageX2.onLoad = this.loaded();
-		bubbleGreenImageX2.onLoad = this.loaded();
-		bubbleRedImageX2.onLoad = this.loaded();
-		bubblePurpleImageX2.onLoad = this.loaded();
-		bubbleYellowImageX2.onLoad = this.loaded();
-
-		bubbleBlueImageX3.onLoad = this.loaded();
-		bubbleGreenImageX3.onLoad = this.loaded();
-		bubbleRedImageX3.onLoad = this.loaded();
-		bubblePurpleImageX3.onLoad = this.loaded();
-		bubbleYellowImageX3.onLoad = this.loaded();
-
-		lvlFrame.onLoad = this.loaded();
-		initImage.onLoad = this.loaded();
-		backgroundImage.onLoad = this.loaded();
-		logoImage.onLoad = this.loaded();
-		pandaBearAnim.onLoad = this.loaded();
-		uiPanda.onLoad = this.loaded();
-		uiLevelFrame.onLoad = this.loaded();
-		uiLifeFrame.onLoad = this.loaded();
-		uiPointsFrame.onLoad = this.loaded();
-		uiLooseFrame.onLoad = this.loaded();
-		uiWinFrame.onLoad = this.loaded();
-		uiCannon.onLoad = this.loaded();
-		uiOptionButton.onLoad = this.loaded();
-		uiNewButton.onLoad = this.loaded();
-		uiContinueButton.onLoad = this.loaded();
-		uiBackButton.onLoad = this.loaded();
-
-		this.startLoad();
-	};
-
-	this.startLoad = function(){	
+	//this.startLoad = function(){	
 		bubbleBlueImage.src = 'bubbles/bluebubble.png';
 		bubbleGreenImage.src = 'bubbles/greenbubble.png';
 		bubbleRedImage.src = 'bubbles/redbubble.png';
@@ -159,35 +164,39 @@ function Loader(progress, size){
 		bubblePurpleHalfImage.src = 'bubbles/purplebubblehalf.png';
 		bubbleYellowHalfImage.src = 'bubbles/yellowbubblehalf.png';
 
-		bubbleBlueImageX2.src = 'bubbles/bluebubbleX2.png';
-		bubbleGreenImageX2.src = 'bubbles/greenbubbleX2.png';
-		bubbleRedImageX2.src = 'bubbles/redbubbleX2.png';
-		bubblePurpleImageX2.src = 'bubbles/purplebubbleX2.png';
-		bubbleYellowImageX2.src = 'bubbles/yellowbubbleX2.png';
+		bubbleBlueImageX2.src = 'bubbles/bluebubblex2.png';
+		bubbleGreenImageX2.src = 'bubbles/greenbubblex2.png';
+		bubbleRedImageX2.src = 'bubbles/redbubblex2.png';
+		bubblePurpleImageX2.src = 'bubbles/purplebubblex2.png';
+		bubbleYellowImageX2.src = 'bubbles/yellowbubblex2.png';
 
-		bubbleBlueImageX3.src = 'bubbles/bluebubbleX3.png';
-		bubbleGreenImageX3.src = 'bubbles/greenbubbleX3.png';
-		bubbleRedImageX3.src = 'bubbles/redbubbleX3.png';
-		bubblePurpleImageX3.src = 'bubbles/purplebubbleX3.png';
-		bubbleYellowImageX3.src = 'bubbles/yellowbubbleX3.png';
+		bubbleBlueImageX3.src = 'bubbles/bluebubblex3.png';
+		bubbleGreenImageX3.src = 'bubbles/greenbubblex3.png';
+		bubbleRedImageX3.src = 'bubbles/redbubblex3.png';
+		bubblePurpleImageX3.src = 'bubbles/purplebubblex3.png';
+		bubbleYellowImageX3.src = 'bubbles/yellowbubblex3.png';
 
-		lvlFrame.src = this.size + '/lvlframe.png';
-		//alert(this.size + '/lvlframe.png');
-		backgroundImage.src = this.size + '/background.png';
-		logoImage.src = this.size + '/logo.jpg';		
-		initImage.src = this.size + '/initscreen.png';
-		pandaBearAnim.src = this.size + '/animacion.png';
-		uiPanda.src = this.size + '/panda.png';
-		uiLevelFrame.src = this.size + '/lvlframe';
-		uiLifeFrame.src = this.size + '/life.png';
-		uiPointsFrame.src = this.size + '/points.png';
-		uiLooseFrame.src = this.size + '/gui_loose.png';
-		uiWinFrame.src = this.size + '/gui_win.png';
-		uiCannon.src = this.size + '/cannon.png';
-		uiOptionButton.src = this.size + '/optionbutton.png';
-		uiNewButton.src = this.size + '/newbutton.png';
-		uiContinueButton.src = this.size + '/continuebutton.png';
-		uiBackButton.src = this.size + '/backbutton.png';
+		bubbleExplode.src = this.size + this.separator + 'explosion.png';
+		bubbleEstela.src = this.size + this.separator + 'estela.png';
+
+		lvlFrame.src = this.size + this.separator + 'lvlframe.png';
+		//alert(this.size + this.separator + 'lvlframe.png');
+		backgroundImage.src = this.size + this.separator + 'background.png';
+		//alert(backgroundImage.src);
+		logoImage.src = 'logo.jpg';		
+		initImage.src = this.size + this.separator + 'initscreen.png';
+		pandaBearAnim.src = this.size + this.separator + 'animacion.png';
+		uiPanda.src = this.size + this.separator + 'panda.png';
+		uiLevelFrame.src = this.size + this.separator + 'lvl.png';
+		uiLifeFrame.src = this.size + this.separator + 'life.png';
+		uiPointsFrame.src = this.size + this.separator + 'points.png';
+		uiLooseFrame.src = this.size + this.separator + 'guiloose.png';
+		uiWinFrame.src = this.size + this.separator + 'guiwin.png';
+		uiCannon.src = this.size + this.separator + 'cannon.png';
+		uiOptionButton.src = this.size + this.separator + 'optionbutton.png';
+		uiNewButton.src = this.size + this.separator + 'newbutton.png';
+		uiContinueButton.src = this.size + this.separator + 'continuebutton.png';
+		uiBackButton.src = this.size + this.separator + 'backbutton.png';
 	};
 };
 //function Timeline(self, fps){ //donde self es el nombre del objeto usado
@@ -324,6 +333,7 @@ function Animation(duration, width, height, image){
 	this.element.style.backgroundImage = 'url(' + image + ')';
 	//this.element.style.border = 'black solid 5px';
 	this.element.style.position = 'relative';
+	this.element.style.overflow = 'hidden';
 	this.tick = 0;
 	
 	this.addMoment = function(img, stage){

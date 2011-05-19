@@ -11,10 +11,13 @@ Rebuild:
 [X] agregar bubbles a el side
 [X] agregar bubbles al bubbleIsland.js
 [X] agregar las imagenes dinamicamente dependiendo del tamaño
-[ ] agregar ui al juego
-[ ] probar css3 o cufon para las fuentes
-[ ] agregar explosion
+[x] agregar ui al juego
+[x] probar css3 o cufon para las fuentes
+[x] agregar explosion
 [ ] empaquetar para celular
+[ ] check explosion masiva
+[x] arreglar animacion en freeze
+[ ] check de posicionamiento
 api:
 [ ] finish softgameApi
 [ ] integrate softgameApi with facebook, all functional
@@ -25,14 +28,14 @@ api:
 beta:
 [b] un disparo por tiempo
 [x] optimizar draw
-[-] dibujar cañon
+[x] dibujar cañon
 [x] facebook con hack
 [x] poner cartel que diga "posiblemente se cierre la aplicación para validar su cuenta de facebook"
 [-] mejorar parte de facebook
 [-] leaderboard
 [ ] agregar api de pago
-[-] pelotitas
-[-] animaciónes, oso y cosas...	
+[x] pelotitas
+[x] animaciónes, oso y cosas...	
 [-] agregar ui
 
 alpha:
@@ -112,7 +115,63 @@ function debug(txt){
 };
 	
 
-var bubbleBlueImage;
+bubbleBlueImage = new Image();
+bubbleRedImage = new Image();
+bubbleGreenImage = new Image();
+bubblePurpleImage = new Image();
+bubbleYellowImage = new Image();
+
+bubbleBlueBombImage = new Image();
+bubbleRedBombImage = new Image();
+bubbleGreenBombImage = new Image();
+bubblePurpleBombImage = new Image();
+bubbleYellowBombImage = new Image();
+
+bubbleBlueHalfImage = new Image();
+bubbleRedHalfImage = new Image();
+bubbleGreenHalfImage = new Image();
+bubblePurpleHalfImage = new Image();
+bubbleYellowHalfImage = new Image();
+
+bubbleBlueFreezeImage = new Image();
+bubbleRedFreezeImage = new Image();
+bubbleGreenFreezeImage = new Image();
+bubblePurpleFreezeImage = new Image();
+bubbleYellowFreezeImage = new Image();
+
+bubbleBlueImageX2 = new Image();
+bubbleRedImageX2 = new Image();
+bubbleGreenImageX2 = new Image();
+bubblePurpleImageX2 = new Image();
+bubbleYellowImageX2 = new Image();
+
+bubbleBlueImageX3 = new Image();
+bubbleRedImageX3 = new Image();
+bubbleGreenImageX3 = new Image();
+bubblePurpleImageX3 = new Image();
+bubbleYellowImageX3 = new Image();
+
+bubbleExplode = new Image();
+bubbleEstela = new Image();
+
+lvlFrame = new Image();
+backgroundImage = new Image();
+initImage = new Image();
+logoImage = new Image();
+pandaBearAnim = new Image();
+uiPanda = new Image();
+uiLevelFrame = new Image();
+uiLifeFrame = new Image();
+uiPointsFrame = new Image();
+uiLooseFrame = new Image();
+uiWinFrame = new Image();
+uiCannon = new Image();
+uiOptionButton = new Image();
+uiNewButton = new Image();
+uiContinueButton = new Image();
+uiBackButton = new Image();
+
+	/*var bubbleBlueImage;
 var bubbleRedImage; 
 var bubbleGreenImage;
 var bubblePurpleImage;
@@ -163,7 +222,7 @@ var uiCannon;
 var uiOptionButton
 var uiNewButton
 var uiContinueButton;
-var uiBackButton;
+var uiBackButton;*/
 
 
 var game;
@@ -305,7 +364,8 @@ function bubble(l){
 				break;
 		};	
 		this.object.fitNormalImage();
-		this.object.addState('estela', 'estela.png', 5);
+		this.object.addState('estela', bubbleEstela.src, 5);
+		this.object.addState('explode', bubbleExplode.src, 7);
 		this.element.style.overflow = 'show';
 
 	};
@@ -380,7 +440,7 @@ function bubble(l){
 				break;
 			case 2:
 				flavor = "purple"; 
-				this.meinBild = bubblePurplwBombImage;
+				this.meinBild = bubblePurpleBombImage;
 				break;
 			case 3:
 				flavor = "red"; 
@@ -400,23 +460,23 @@ function bubble(l){
 		switch (value){
 			case 0:
 				flavor = "blue"; 
-				this.meinBild = bubbleBlueBombImageX2;
+				this.meinBild = bubbleBlueImageX2;
 				break;
 			case 1:
 				flavor = "yellow"; 
-				this.meinBild = bubbleYellowBombImageX2;
+				this.meinBild = bubbleYellowImageX2;
 				break;
 			case 2:
 				flavor = "purple"; 
-				this.meinBild = bubblePurplwBombImageX2;
+				this.meinBild = bubblePurpleImageX2;
 				break;
 			case 3:
 				flavor = "red"; 
-				this.meinBild = bubbleRedBombImageX2;
+				this.meinBild = bubbleRedImageX2;
 				break;
 			case 4:
 				flavor = "green";
-				this.meinBild = bubbleGreenBombImageX2;
+				this.meinBild = bubbleGreenImageX2;
 				break;
 		};
 		return flavor;
@@ -428,23 +488,23 @@ function bubble(l){
 		switch (value){
 			case 0:
 				flavor = "blue"; 
-				this.meinBild = bubbleBlueBombImageX3;
+				this.meinBild = bubbleBlueImageX3;
 				break;
 			case 1:
 				flavor = "yellow"; 
-				this.meinBild = bubbleYellowBombImageX3;
+				this.meinBild = bubbleYellowImageX3;
 				break;
 			case 2:
 				flavor = "purple"; 
-				this.meinBild = bubblePurplwBombImageX3;
+				this.meinBild = bubblePurpleImageX3;
 				break;
 			case 3:
 				flavor = "red"; 
-				this.meinBild = bubbleRedBombImageX3;
+				this.meinBild = bubbleRedImageX3;
 				break;
 			case 4:
 				flavor = "green";
-				this.meinBild = bubbleGreenBombImageX3;
+				this.meinBild = bubbleGreenImageX3;
 				break;
 		};
 		return flavor;
@@ -454,13 +514,15 @@ function bubble(l){
 		if((this.dx == 0) && (this.dy == 0)) return;
 		this.x += this.dx;
 		this.y += this.dy;
+		if(this.x <= this.lvl.leftBound) this.x = this.lvl.leftBound;
+		//if(this.x > this.lvl.width) this.x = this.lvl.width;
 		this.element.style.top = this.y + 'px';
 		this.element.style.left = this.x + 'px';
 		/*$(this.element).animate({
 			top: this.y + 'px',
 			left: this.x + 'px'
 		}, 42);*/
-		if((this.x <= this.lvl.leftBound) || (this.x > this.lvl.width)) this.dx = -this.dx;
+		if((this.x == this.lvl.leftBound) || (this.x >= this.lvl.width)) this.dx = -this.dx;
 		if(this.y <= this.lvl.topBound) this.stopMove();
 	};
 	
@@ -468,6 +530,8 @@ function bubble(l){
 		if((this.dx == 0) && (this.dy == 0)) return;
 		this.x += this.dx;
 		this.y += this.dy;
+		if(this.x <= this.lvl.leftBound) this.x = this.lvl.leftBound;
+		if(this.x > this.lvl.width) this.x = this.lvl.width;
 		/*$(this.element).animate({
 			top: this.y + 'px',
 			left: this.x + 'px'
@@ -475,6 +539,7 @@ function bubble(l){
 		var ddx = this.dx;
 		var ddy = this.dy;
 		var s = this.element.style;
+		/*
 		while((ddx != 0) || (ddy != 0)){
 			s.top = (this.y - ddy) + 'px';
 			s.left = (this.x - ddx) + 'px';
@@ -488,8 +553,8 @@ function bubble(l){
 		while(ddx > 0){ while(ddy > 0){ this.element.style.top = (this.y - (ddy--)) + 'px'}; this.element.style.left = (this.x - (ddx--)) + 'px'};
 
 		while(ddy > 0){ while(ddx > 0){ this.element.style.left = (this.x - (ddx--)) + 'px' }; this.element.style.top = (this.y - (ddy--)) + 'px'};
-		
-		if((this.x <= this.lvl.leftBound) || (this.x > this.lvl.width)) this.dx = -this.dx;
+		*/
+		if((this.x == this.lvl.leftBound) || (this.x == this.lvl.width)) this.dx = -this.dx;
 		if(this.y <= this.lvl.topBound) this.stopMove();
 	};
 	
@@ -557,8 +622,16 @@ function bubble(l){
 
 	this.explode = function(){
 		//do explode animation and remove element
-		this.object.setCurrentState('explode');
-		this.object.animationEnds = function(){ $(this.element).remove(); } 
+		//this.object.animationEnds = this.removeBubble;
+		
+		var anim = new Animation(7, bubbleExplode.width / 7, bubbleExplode.height, bubbleExplode.src);
+		anim.element.style.position = 'absolute';
+		anim.element.style.top = this.y + 'px';
+		anim.element.style.left = this.x + 'px';
+		anim.animationEnd = function(){};
+		animNav.append(anim.element);
+		$(this.element).remove();
+		this.lvl.animations.push(anim);
 	};
 };
 
@@ -567,9 +640,9 @@ function bubbleCannon(lvl){
 	this.currentBubble;/* = new bubble(this.lvl);
 	this.currentBubble.makeItRandom();*/
 	this.readyShoot = false;
-	this.object = new standAnimation(130, 94, cannonImage.src);
+	this.object = new standAnimation(uiCannon.width, uiCannon.height, uiCannon.src);
 	this.element = this.object.element;
-	this.object.setXY(((this.lvl.width - cannonImage.width) / 2) + this.lvl.leftBound, (this.lvl.height - cannonImage.height) + this.lvl.topBound + 4);
+	this.object.setXY(((this.lvl.width - uiCannon.width) / 2) + this.lvl.leftBound, (this.lvl.height - uiCannon.height) + this.lvl.topBound + 4);
 	/*style.top = this.lvl.height - cannonImage.height;
 	style.left = (this.lvl.width - cannonImage.width) / 2;*/
 	
@@ -589,7 +662,7 @@ function bubbleCannon(lvl){
 		//alert(this.lvl.left + ' : ' + this.lvl.top);
 		//ang = Math.atan(Math.abs(vecy/vecx));
 		//alert(ang);
-		velocity = 17; //--------------------------------------------------------------------------------------------------------------------velocidad bola, const
+		velocity = 27; //--------------------------------------------------------------------------------------------------------------------velocidad bola, const
 		this.currentBubble.dx = velocity * (vecx/hip);//Math.cos(ang);
 		this.currentBubble.dy = velocity * (vecy/hip);//;/Math.sin(ang);
 		//this.lvl.addBubble(this.currentBubble);
@@ -667,11 +740,11 @@ function bubbleTable(ancho, alto, lvl){
 		//alert(collided);
 		bubble.object.setCurrentState('');
 
-		var radius = this.lvl.bubbleRadius / 2;
+		/*var radius = this.lvl.bubbleRadius / 2;
 		var halfradius = radius / 2;
-		/*bubble.x -= bubble.dx / 2;
-		bubble.y -= bubble.dy / 2;*/
-		bubble.x -= bubble.dx;
+		bubble.x -= bubble.dx / 2;
+		bubble.y -= bubble.dy / 2;
+		/*bubble.x -= bubble.dx;
 		bubble.y -= bubble.dy;
 		var dx = 0;
 		var dy = 0;
@@ -691,7 +764,47 @@ function bubbleTable(ancho, alto, lvl){
 		if((dx == 0)&&(dy == 0)){			
 			dx = (isShort ? 1 : -1);
 			alert('corrimiento nulo, nuevo dx: ' + dx)
+		};*/
+
+
+		var radius = this.lvl.bubbleRadius / 2;
+		var halfradius = this.lvl.bubbleRadius / 3;
+
+
+		disx = Math.abs((bubble.x + radius) - ( collided.x + radius));
+		disy = Math.abs((bubble.y + radius) - ( collided.y + radius));
+			
+		distance = Math.sqrt(disx * disx + disy * disy);
+		if(distance < radius){
+			bubble.x -= bubble.dx;
+			bubble.y -= bubble.dy;
 		};
+
+		var deltax = (collided.x + radius) - (bubble.x + radius);
+		var deltay = (collided.y + radius) - (bubble.y + radius);
+
+		var isShort = this.isShortRow(collided.i); 
+		var dx = 0;
+		var dy = 0;
+		/*bubble.x -= (bubble.dx / bubble.dx) * (this.lvl.bubbleRadius / 2);
+		bubble.y -= (bubble.dy/bubble.dy) * (this.lvl.bubbleRadius / 2);*/
+
+		if(deltay > -(halfradius / 2)) dy = -1;
+		if(deltay < (halfradius / 2)) dy = 1;
+		if(dy == 0){
+			if(deltax >= 0) dx = -1;
+			if(deltax < 0) dx = 1;
+		}else{
+			if(isShort){
+				if(deltax > 0) dx = 0;
+				if(deltax < 0) dx = 1;
+			}else{
+				if(deltax > 0) dx = -1;
+				if(deltax < 0) dx = 0;
+			};
+		};
+
+		//debug(dx +':'+ dy + '; &nbsp;');
 
 		bubble.i = collided.i + dy;
 		bubble.j = collided.j + dx;
@@ -895,10 +1008,13 @@ function bubbleLevel(w, h, bubblesWidth, bubblesHeight, lvlnbr){
 	this.lvlnro = lvlnbr;
 	this.topBound;
 	this.leftBound;
+
+	this.animations = new Array();
 	
 	
 	this.mutex = false;
 	this.freeze = false;
+	this.finished = false;
 	this.freezeTimeout = 0;
 	this.bubbleRadius = this.width / bubblesWidth;
 	this.shootedBubble = null;
@@ -910,9 +1026,9 @@ function bubbleLevel(w, h, bubblesWidth, bubblesHeight, lvlnbr){
 	this.h = Math.sqrt((this.bubbleRadius*this.bubbleRadius) - ((this.bubbleRadius / 2) * (this.bubbleRadius / 2)));
 	this.bonus = .2 * this.lvlnro;
 
-	this.character = new standAnimation(86, 110, 'panda.png', game.clock);
-	this.character.setXY(80, 370);
-	this.character.addState('load', this.character.normalImage, 22);
+	this.character = new standAnimation(uiPanda.height, uiPanda.width, uiPanda.src, game.clock);
+	this.character.setXY((w / 2), (game.canvas.height - uiPanda.height) - 7 );
+	this.character.addState('load', pandaBearAnim.src, 22);
 	animNav.append(this.character.element);
 	
 	//alert(this.pointsToReach);
@@ -927,6 +1043,14 @@ function bubbleLevel(w, h, bubblesWidth, bubblesHeight, lvlnbr){
 	
 	this.moveBalls = function(){
 		//debug('length: ' + this.bubbles_array.length);
+		if(this.finished) return;
+		for(i = 0; i < this.animations.length; ++i){
+			this.animations[i].render();
+			if(this.animations[i].tick > this.animations[i].duration){
+				$(this.animations[i].element).remove();
+				this.animations.remove(this.animations[i]);
+			};
+		};
 		this.checkColisions();
 		//check for freeze;
 		if(this.freezeTimeout == 0){
@@ -946,15 +1070,17 @@ function bubbleLevel(w, h, bubblesWidth, bubblesHeight, lvlnbr){
 		for(i = 0; i < this.bubbles_array.length; ++i){
 			this.bubbles_array[i].move();
 		};
+
 		//performance.check('move balls');
 		var masBaja = this.grilla.returnLowest();
-		/*alert(this.looseLine);
-		alert(masBaja.x + this.bubbleRadius);*/
+		/*alert(this.looseLine);*/
+		//alert(masBaja.y + this.bubbleRadius);
 		if(masBaja.y + this.bubbleRadius > this.looseLine){
-			alert('perdiste');
+			//alert('perdiste');
 			/*alert(this.looseLine);
 			alert(masBaja.x + this.bubbleRadius);*/
 			this.freeze = true;
+			this.finished = true;
 			this.loose();
 		};
 		//si esta ocupado, evitar movimiento (normalmente no se mueve, solo evita check de mas)
@@ -972,7 +1098,8 @@ function bubbleLevel(w, h, bubblesWidth, bubblesHeight, lvlnbr){
 			//performance.check('colisiones');
 			return;	
 		} 
-		this.shootedBubble.moveShooted();
+		this.shootedBubble.move();
+		var collisions = new Array();
 
 		for(i = 0; i < this.bubbles_array.length; ++i){			
 			currentBubble = this.bubbles_array[i];
@@ -985,20 +1112,33 @@ function bubbleLevel(w, h, bubblesWidth, bubblesHeight, lvlnbr){
 			if(distance < (this.bubbleRadius *.9)){
 				//debug('COLLITION');				
 				//this.bubbles_array.push(this.shootedBubble);	
-				this.mutex=true;			
-				this.shootedBubble.stopMove();
-				this.addBubble(this.shootedBubble);
-				this.shootedBubble.dy = this.bubbleVelocity;
-				//alert(currentBubble + ' before shoot');
-				this.grilla.addBubble(this.shootedBubble, currentBubble);				
-				this.shootedBubble = null;
-				this.mutex = false;
+				collisions.push({ bubble: currentBubble, dis: distance});
+				
 				//alert(this.points);
-				if(this.points >= this.pointsToReach) this.win();
-				break;
+				//break;
 			};
 		};
-
+		if(collisions.length > 0){
+			//debug(' &nbsp; length: ' + collisions.length);
+			this.mutex=true;			
+			this.shootedBubble.stopMove();
+			this.addBubble(this.shootedBubble);
+			this.shootedBubble.dy = this.bubbleVelocity;
+			//alert(currentBubble + ' before shoot');
+			currentBubble = collisions[0];
+			for(var i = 1; i < collisions.length; ++i){
+				if(currentBubble.dis > collisions[i].dis) currentBubble = collisions[i];
+			};
+			//(bubble, collided)
+			this.grilla.addBubble(this.shootedBubble, currentBubble.bubble);				
+			this.shootedBubble = null;
+			this.mutex = false;
+		};
+		if(this.points >= this.pointsToReach){
+			this.freeze = true;
+			this.finished = true;
+			this.win();
+		};
 		//performance.check('colisiones');
 
 		//si la pelota disparada llego al techo y freno sola
@@ -1052,7 +1192,8 @@ function bubbleLevel(w, h, bubblesWidth, bubblesHeight, lvlnbr){
 				//debug('removed ' + b.toString());
 			};
 		};
-		$(b.element).remove();
+		//$(b.element).remove();
+		if(b != 'nada' && b != 'vacio' && b != 'techo') b.explode();
 	};
 	
 	this.setReadyShoot = function(){
@@ -1124,9 +1265,14 @@ function bubbleLevel(w, h, bubblesWidth, bubblesHeight, lvlnbr){
 			b.stopMove();
 			$(b.element).remove();
 		};
+		for(var i = 0; i < this.animations.length; ++i){
+			var b = this.animations[i];
+			$(b.element).remove();
+		};
 		$(this.character.element).remove();
 		$(this.cannon.element).remove();
 		if(this.cannon.currentBubble != null) $(this.cannon.currentBubble.element).remove();
+		if(this.shootedBubble != null) $(this.shootedBubble.element).remove();
 	};
 	
 	this.freezeMovement = function(){
@@ -1138,7 +1284,7 @@ function bubbleLevel(w, h, bubblesWidth, bubblesHeight, lvlnbr){
 		//alert(detonated.i + ' : ' + detonated.j + '  neighbour: ' + neighbour);
 		if(neighbour == 0) return;
 		if(detonated == "nada" || detonated == "vacio") return;
-		if(detonated.flavor == "nula" || detonated.flavor == "techo") return;
+		if(detonated.flavor == "nula" || detonated == "techo") return;
 		//alert(detonated.i + ' : ' + detonated.j + '  neighbour: ' + neighbour);
 		//if(detonated.marked) return;
 		
@@ -1174,32 +1320,65 @@ function gameUI(w, h){
 	this.lifes = 5;
 	this.initialLifes = 5;
 	
+	//this.element = document.createElement('<div style=" @font-face: { font-family: \'The New Font\'; src: Bubblegum.ttf;}"></div>');
 	this.element = document.createElement('div');
-	this.element.style.width = '50px';
-	this.element.style.position = 'fixed';
-	this.element.style.top = '10px';
-	this.element.style.left = (w - 50) + 'px';
-	
 	this.element2 = document.createElement('div');
-	this.element2.style.width = '50px';
-	this.element2.style.position = 'fixed';
-	this.element2.style.top = '30px';
-	this.element2.style.left = (w - 50) + 'px';
-	
 	this.element3 = document.createElement('div');
-	this.element3.style.width = '50px';
-	this.element3.style.position = 'fixed';
-	this.element3.style.top = '50px';
-	this.element3.style.left = (w - 50) + 'px';
+	this.backElement = document.createElement('div');
+
+	$(this.element).addClass('pointsFrame');
+	$(this.element2).addClass('lifesFrame');
+	$(this.element3).addClass('levelsFrame');
+
+	animNav.append(this.element);
+	animNav.append(this.element2);
+	animNav.append(this.element3);
+	animNav.append(this.backElement);
+
+	/*this.element.style.backgroundImage = 'url('+uiPointsFrame.src+')';
+	//alert(uiPointsFrame.width + ':' + uiPointsFrame.height)
+	this.element.style.width = uiPointsFrame.width + 'px';
+	this.element.style.maxWidth = uiPointsFrame.width + 'px';
+	this.element.style.height = uiPointsFrame.height + 'px';
+	this.element.style.position = 'absolute';
+	this.element.style.top = (h * .7) + 'px';
+	this.element.style.left = (w - uiPointsFrame.width + 5) + 'px';
+	
+	
+	this.element2.style.backgroundImage = 'url('+uiLifeFrame.src+')';
+	this.element2.style.width = uiLifeFrame.width + 'px';
+	this.element2.style.height = uiLifeFrame.height + 'px';
+	this.element2.style.position = 'absolute';
+	this.element2.style.top = '0px';
+	this.element2.style.left = (w * (2/3)) + 'px';
+	
+	
+	this.element3.style.backgroundImage = 'url('+uiLevelFrame.src+')';
+	this.element3.style.width = uiLevelFrame.width + 'px';
+	this.element3.style.height = uiLevelFrame.height + 'px';
+	this.element3.style.position = 'absolute';
+	this.element3.style.top = (h * .7) + uiLevelFrame.height + 'px';
+	this.element3.style.left = (w - uiLevelFrame.width + 5) + 'px';*/
+	$(this.element).addClass('pointsFrame'+ gameSize);
+	$(this.element2).addClass('lifesFrame'+ gameSize);
+	$(this.element3).addClass('levelsFrame'+ gameSize);
+	$(this.backElement).addClass('gobackFrame' + gameSize);
+
+	/*this.backElement.style.backgroundImage = 'url('+uiBackButton.src+')';
+	//alert(uiBackButton.src + ':' + uiBackButton.width + ':' + uiBackButton.height);
+	this.backElement.style.width = uiBackButton.width + 'px';
+	this.backElement.style.height = uiBackButton.height + 'px';
+	this.backElement.style.position = 'absolute';
+	this.backElement.style.top = uiLifeFrame.height + 'px';
+	this.backElement.style.left = (w * (2/3)) + 'px';*/
+	//alert((uiLifeFrame.height + 5) + 'px' + (w * (2/3)) + 'px');
+	$(this.backElement).click(function(){ game.showMenu(); });
 	
 	
 	this.savePoints = function(){ this.acumuledPoints = this.points;};
 	this.restorePoints = function(){ this.points = this.acumuledPoints;}
 	
 	//$('#' + animNav).append(this.element);
-	document.body.appendChild(this.element);
-	document.body.appendChild(this.element2);
-	document.body.appendChild(this.element3);
 	
 	this.draw = function(painter){
 		//performance.check('draw ui');
@@ -1208,10 +1387,10 @@ function gameUI(w, h){
 		painter.fillRect(0, 0, 100, 25);
 		painter.font = "bold 12px sans-serif";
 		painter.fillStyle = '#000';*/
-		if(this.pointsCounter < this.points) this.pointsCounter += 5;
+		if(this.pointsCounter < this.points) this.pointsCounter += 10;
 		$(this.element).html(this.pointsCounter);
-		$(this.element2).html('Vidas: ' + this.lifes);
-		$(this.element3).html('Nivel: ' + game.level.lvlnro);
+		$(this.element2).html(this.lifes);
+		$(this.element3).html(game.level.lvlnro);
 		/*painter.fillText(this.pointsCounter , 10, 10);
 		painter.restore();*/
 		//performance.check('draw ui');
@@ -1302,11 +1481,12 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 		//alert(event.screenX + ' ' + event.screenY);
 		//this = game;
 		//debug(event);
+		if(event.clientY < (game.ui.backElement.height + game.level.height)) return;
 		game.cannon.shoot(event.clientX, event.clientY);
 	}
 	
 	this.startNewGame = function(){
-		
+		if(this.level != '') this.level.clearBoard();
 		this.createLvl(1);
 		this.clock.start();
 
@@ -1321,7 +1501,7 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 			this.startNewGame();
 		}else{
 			//this.menu.style.zIndex = this.menu.style.zIndex + 1;
-			this.menu.style.display = 'block';
+			this.menu.style.display = 'none';
 			this.clock.start();
 		};
 	};
@@ -1341,7 +1521,7 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 			case "320x480":
 				this.canvas.width = 320;
 				this.canvas.height = 480;
-				this.level = new bubbleLevel(240, 400, 8, 20, levelnumber);
+				this.level = new bubbleLevel(240, 380, 8, 20, levelnumber);
 				break;
 			case "360x480":
 				this.canvas.width = 360;
@@ -1380,26 +1560,83 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 	};
 	
 	this.playerLoose = function(){
-		alert('loose');
-		this.clearBoard();
-		game.ui.lifes -= 1;
-		if(game.ui.lifes == -1){
-			game.level = '';
-			game.ui.lifes = 5;
-			game.showMenu();
-		};
-		game.redoLevel();
+		//alert('loose');
+		game.level.clearBoard();
+		cartel = document.createElement('div');
+		var image = document.createElement('img');
+		image.src = uiLooseFrame.src;
+		image.style.top = '30%';
+		image.style.left = ((game.canvas.width - uiLooseFrame.width) / 2) + 'px';
+		image.style.position = 'absolute';
+		cartel.appendChild(image);
+		cartel.style.width = game.canvas.width + 'px';
+		cartel.style.height = game.canvas.height + 'px';
+		cartel.style.maxHeight = game.canvas.height + 'px';
+		cartel.style.display = 'none';
+		cartel.style.position = 'fixed';
+		cartel.style.top = '0px';
+		cartel.style.left = '0px';
+		//cartel.style.zIndex = -99;
+		cartel.style.backgroundImage = 'url(backgrounddiv.png)';
+		cartel.style.backgroundRepeat = 'repeat';
+		//cartel.style.backgroundImage = 'url('+uiLooseFrame.src+')';
+		$(document.body).append(cartel);
+		$(cartel).fadeIn(150);
+		$(cartel).click(function(){
+			$(cartel).fadeOut(300, function(){
+				game.ui.lifes -= 1;
+				if(game.ui.lifes == -1){
+					game.level = '';
+					game.ui.lifes = 5;
+					game.ui.points = 0;
+					game.ui.acumuledPoints = 0;
+					game.ui.pointsCounter = 0;
+					game.showMenu();
+				}else{
+					game.ui.points = game.ui.acumuledPoints;					 
+					game.ui.pointsCounter = game.ui.acumuledPoints;
+				};
+				game.redoLevel();
+				$(cartel).remove();
+			});
+		});
 	};
 	
 	this.playerWin = function(){
-		alert('win');
 		game.level.clearBoard();
-		game.nextLevel();
+		cartel = document.createElement('div');
+		var image = document.createElement('img');
+		image.src = uiWinFrame.src;
+		image.style.top = '30%';
+		image.style.left = ((game.canvas.width - uiWinFrame.width) / 2) + 'px';
+		image.style.position = 'absolute';
+		cartel.appendChild(image);
+		cartel.style.width = game.canvas.width + 'px';
+		cartel.style.height = game.canvas.height + 'px';
+		cartel.style.maxHeight = game.canvas.height + 'px';
+		cartel.style.display = 'none';
+		cartel.style.position = 'fixed';
+		cartel.style.top = '0px';
+		cartel.style.left = '0px';
+		//cartel.style.zIndex = -99;
+		cartel.style.backgroundImage = 'url(backgrounddiv.png)';
+		cartel.style.backgroundRepeat = 'repeat';
+		//cartel.style.backgroundImage = 'url('+uiLooseFrame.src+')';
+		$(document.body).append(cartel);
+		$(cartel).fadeIn(150);
+		$(cartel).click(function(){
+			$(cartel).fadeOut(300, function(){
+				game.level.clearBoard();
+				game.ui.acumuledPoints = game.ui.points;
+				game.nextLevel();
+				$(cartel).remove();
+			});
+		});
 	};
 	
 	this.showMenu = function(){
 		this.clock.stop();
-		this.menu.style.zIndex = this.menu.style.zIndex + 2;
+		this.menu.style.zIndex = 90//this.menu.style.zIndex + 2;
 		this.menu.style.display = 'block';
 	};
 	
@@ -1461,9 +1698,9 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 		//n = $('#'+animNav);
 		animNav[0].style.display = 'none';
 		this.level.moveBalls();
-		animNav[0].style.display = 'block';
 		this.draw();
 		//var animTimer = setInterval(this.draw, 42);
+		animNav[0].style.display = 'block';
 	}
 	
 	//init

@@ -1113,7 +1113,7 @@ function bubbleLevel(w, h, bubblesWidth, bubblesHeight, lvlnbr){
 	this.character = new flashAnimation(uiPanda.src, uiPanda.width / 28, uiPanda.height, 28);
 	//this.character.setXY((w / 2), (game.canvas.height - uiPanda.height) - 7);
 	this.character.addState('blink', 1, 5);
-	this.character.addState('load', 6, 28);
+	this.character.addState('load', 6, 27);
 	//this.character.addState('standby', uiPandaLoading.src, 5);
 	animNav.append(this.character.element);
 	$(this.character.element).addClass('panda' + gameSize);
@@ -1214,8 +1214,7 @@ function bubbleLevel(w, h, bubblesWidth, bubblesHeight, lvlnbr){
 			//debug(' &nbsp; length: ' + collisions.length);
 			this.mutex=true;						
 			this.addBubble(this.shootedBubble);
-			this.shootedBubble.stopMove();
-			this.shootedBubble.dy = this.bubbleVelocity;
+			
 			//alert(currentBubble + ' before shoot');
 			var currentBubble = collisions[0];
 			for(var i = 1; i < collisions.length; ++i){
@@ -1223,6 +1222,8 @@ function bubbleLevel(w, h, bubblesWidth, bubblesHeight, lvlnbr){
 			};
 			//(bubble, collided)
 			this.grilla.addBubble(this.shootedBubble, currentBubble.bubble);				
+			this.shootedBubble.stopMove();
+			this.shootedBubble.dy = this.bubbleVelocity;
 			this.shootedBubble = null;
 			this.mutex = false;
 		};

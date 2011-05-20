@@ -11,7 +11,7 @@
 	position: fixed;
 	background-image: url(../320x480/points.png);
 	top: 340px;
-	left: 245px;
+	left: 240px;
 	width: 87px;
 	height: 62px;
 	min-height: 62px;
@@ -73,30 +73,30 @@
 .facebookFrame320x480{
 	position: fixed;
 	background-image: url(../320x480/facebook.png);
-	width: 81px;
-	height: 54px;
-	min-height: 54px;
-	left: 240px;
-	top: 261px;
+	width: 87px;
+	height: 47px;
+	min-height: 47px;
+	left: 235px;
+	top: 295px;
 }
 
 .coinsFrame320x480{
 	position: fixed;
 	background-image: url(../320x480/coins.png);
-	width: 67px;
-	height: 51px;
-	min-height: 51px;
-	left: 255px;
-	top: 315px;
+	width: 74px;
+	height: 46px;
+	min-height: 46px;
+	left: 250px;
+	top: 360px;
 }
 
 .leaderboardFrame320x480{
 	position: fixed;
 	background-image: url(../320x480/leaderboards.png);
-	width: 81px;
+	width: 86px;
 	height: 56px;
 	min-height: 56px;
-	left: 240px;
+	left: 235px;
 	top: 215px;
 }
 
@@ -106,9 +106,9 @@
 	width: 160px;
 	height: 65px;
 	min-height: 65px;
-	left: 72px;
+	left: 85px;
 	right: auto;
-	top: 150px;
+	top: 170px;
 }
 
 .continueImage320x480{
@@ -117,7 +117,7 @@
 	width: 160px;
 	height: 65px;
 	min-height: 65px;
-	left: 71px;
+	left: 85px;
 	top: 250px;
 }
 
@@ -127,7 +127,7 @@
 	width: 160px;
 	height: 65px;
 	min-height: 65px;
-	left: 77px;
+	left: 100px;
 	right: auto;
 	top: 335px;
 }
@@ -169,7 +169,7 @@
 	width: 67px;
 	height: 40px;
 	top: 287px;
-	padding-top: 20px;
+	padding-top: 15px;
 	left: 125px;
 	text-align: center;
 }

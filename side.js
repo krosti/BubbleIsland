@@ -185,7 +185,7 @@ function Loader(progress, size){
 		bubbleBombExplode.src = this.size + this.separator + 'bombexplosion.png';
 		bubbleFreezeExplode.src = this.size + this.separator + 'freezeexplosion.png';
 		bubbleMultiColorExplode.src = this.size + this.separator + 'multicolorexplosion.png';
-		bubbleX2Explode.src = this.size + this.separator + 'x3explosion.png';
+		bubbleX2Explode.src = this.size + this.separator + 'x2explosion.png';
 		bubbleX3Explode.src = this.size + this.separator + 'x3explosion.png';
 
 		lvlFrame.src = this.size + this.separator + 'lvlframe.png';
@@ -465,14 +465,13 @@ standAnimation.prototype.setCurrentState = function(name, repeat) {
 	if(repeat == undefined) repeat = false;
 	if(name == ''){
 		this.baseElement.style.display = 'block';
-		for(animName in this.states){
+		//for(animName in this.states){
 			this.states[this.currentAnim].element.style.display = 'none';
-		};
+		//};
 		this.currentAnim = name;
 		return;
 	};
 	this.currentAnim = name;
-	this.baseElement.style.display = 'none';
 	for(animName in this.states){
 		//alert(animName + ':' + name);
 		if(animName === name){		    
@@ -488,6 +487,7 @@ standAnimation.prototype.setCurrentState = function(name, repeat) {
 			this.states[animName].element.style.display = 'none';
 		};
 	};
+	this.baseElement.style.display = 'none';
 };
 
 standAnimation.prototype.animationEnds = function(){
@@ -621,12 +621,15 @@ function Options(menuNav, leaderNav){
 		this.toHide.style.display = 'block';
 	};
 
-	this.showLeaderboard = function(){
+	this.showLeaderboard = function(hideElement){
 		this.leaderElement[0].style.display = 'block';
+		this.toHide = document.getElementById(hideElement);
+		this.toHide.style.display = 'none';
 		this.menuElement[0].style.display = 'none';
 	};
 
 	this.exitLeaderboard = function(){
+		this.toHide.style.display = 'block';
 		this.menuElement[0].style.display = 'block';
 		this.leaderElement[0].style.display = 'none';
 	}

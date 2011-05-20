@@ -8,7 +8,7 @@ RC:
 To make a Mileston Monday
 Rebuild:
 [x] alinear panda
-[ ] explosiones extras
+[x] explosiones extras
 [x] animacion cañon
 [ ] animacion blink
 [x] add nuevas imagenes a loader
@@ -269,6 +269,7 @@ function bubble(l){
 	this.secondFlavor = '';
 	this.freezeBall = false;
 	this.bombBall = false;
+	this.wasDetonated = false;
 	this.pointsMultiplier = 1;
 	
 	this.makeItRandomNormal = function(){
@@ -634,24 +635,43 @@ function bubble(l){
 	this.explode = function(){
 		//do explode animation and remove element
 		//this.object.animationEnds = this.removeBubble;
+		var anim = '';
 		if(this.freezeBall){
-			var anim = new Animation(7, bubbleFreezeExplode.width / 7, bubbleFreezeExplode.height, bubbleFreezeExplode.src);		
+			anim = new Animation(7, bubbleFreezeExplode.width / 7, bubbleFreezeExplode.height, bubbleFreezeExplode.src);		
 			anim.element.style.position = 'absolute';
 			anim.element.style.top = ((this.y + (this.lvl.bubbleRadius / 2) ) - (bubbleFreezeExplode.height / 2)) + 'px';
 			anim.element.style.left = ((this.x + (this.lvl.bubbleRadius / 2) ) - ((bubbleFreezeExplode.width / 7) / 2)) + 'px';
-		}else{
-			if(this.bombBall){
-				var anim = new Animation(7, bubbleBombExplode.width / 7, bubbleBombExplode.height, bubbleBombExplode.src);		
-				anim.element.style.position = 'absolute';
-				anim.element.style.top = ((this.y + (this.lvl.bubbleRadius / 2) ) - (bubbleBombExplode.height / 2)) + 'px';
-				anim.element.style.left = ((this.x + (this.lvl.bubbleRadius / 2) ) - ((bubbleBombExplode.width / 7) / 2)) + 'px';
-			}else{
-				var anim = new Animation(7, bubbleExplode.width / 7, bubbleExplode.height, bubbleExplode.src);		
-				anim.element.style.position = 'absolute';
-				anim.element.style.top = ((this.y + (this.lvl.bubbleRadius / 2) ) - (bubbleExplode.height / 2)) + 'px';
-				anim.element.style.left = ((this.x + (this.lvl.bubbleRadius / 2) ) - ((bubbleExplode.width / 7) / 2)) + 'px';
-			}
-		}
+		};
+		if(this.wasDetonated){
+			anim = new Animation(7, bubbleBombExplode.width / 7, bubbleBombExplode.height, bubbleBombExplode.src);		
+			anim.element.style.position = 'absolute';
+			anim.element.style.top = ((this.y + (this.lvl.bubbleRadius / 2) ) - (bubbleBombExplode.height / 2)) + 'px';
+			anim.element.style.left = ((this.x + (this.lvl.bubbleRadius / 2) ) - ((bubbleBombExplode.width / 7) / 2)) + 'px';
+		};
+		if(this.secondFlavor != ''){
+			anim = new Animation(7, bubbleMultiColorExplode.width / 7, bubbleMultiColorExplode.height, bubbleMultiColorExplode.src);		
+			anim.element.style.position = 'absolute';
+			anim.element.style.top = ((this.y + (this.lvl.bubbleRadius / 2) ) - (bubbleMultiColorExplode.height / 2)) + 'px';
+			anim.element.style.left = ((this.x + (this.lvl.bubbleRadius / 2) ) - ((bubbleMultiColorExplode.width / 7) / 2)) + 'px';
+		};
+		if(this.pointsMultiplier == 2){			
+			anim = new Animation(7, bubbleX2Explode.width / 7, bubbleX2Explode.height, bubbleX2Explode.src);		
+			anim.element.style.position = 'absolute';
+			anim.element.style.top = ((this.y + (this.lvl.bubbleRadius / 2) ) - (bubbleX2Explode.height / 2)) + 'px';
+			anim.element.style.left = ((this.x + (this.lvl.bubbleRadius / 2) ) - ((bubbleX2Explode.width / 7) / 2)) + 'px';
+		};
+		if(this.pointsMultiplier == 3){			
+			anim = new Animation(7, bubbleX3Explode.width / 9, bubbleX3Explode.height, bubbleX3Explode.src);		
+			anim.element.style.position = 'absolute';
+			anim.element.style.top = ((this.y + (this.lvl.bubbleRadius / 2) ) - (bubbleX3Explode.height / 2)) + 'px';
+			anim.element.style.left = ((this.x + (this.lvl.bubbleRadius / 2) ) - ((bubbleX3Explode.width / 9) / 2)) + 'px';
+		};	
+		if(anim == ''){
+			anim = new Animation(7, bubbleExplode.width / 7, bubbleExplode.height, bubbleExplode.src);		
+			anim.element.style.position = 'absolute';
+			anim.element.style.top = ((this.y + (this.lvl.bubbleRadius / 2) ) - (bubbleExplode.height / 2)) + 'px';
+			anim.element.style.left = ((this.x + (this.lvl.bubbleRadius / 2) ) - ((bubbleExplode.width / 7) / 2)) + 'px';
+		};
 		anim.animationEnd = function(){};
 		animNav.append(anim.element);
 		$(this.element).remove();
@@ -1042,7 +1062,7 @@ function bubbleLevel(w, h, bubblesWidth, bubblesHeight, lvlnbr){
 
 	this.animations = new Array();
 	
-	
+	this.blinkTimer;
 	this.mutex = false;
 	this.freeze = false;
 	this.finished = false;
@@ -1059,11 +1079,13 @@ function bubbleLevel(w, h, bubblesWidth, bubblesHeight, lvlnbr){
 
 	this.character = new standAnimation(uiPanda.width, uiPanda.height, uiPanda.src, game.clock);
 	//this.character.setXY((w / 2), (game.canvas.height - uiPanda.height) - 7);
-	this.character.addState('load', uiPandaLoading.src, 22);
-	this.character.addState('blink', uiPandaBlinking.src, 5);
+	this.character.addState('load', uiPandaLoading.src, 21);
+	this.character.addState('blink', uiPandaBlinking.src, 4);
 	this.character.addState('standby', uiPandaLoading.src, 5);
 	animNav.append(this.character.element);
 	$(this.character.element).addClass('panda' + gameSize);
+
+	this.blinkTimer = setInterval('game.level.characterBlink()', 1500);
 		
 	//alert(this.pointsToReach);
 	//this.fallvelocity = 0.2; //balls per seccond
@@ -1078,7 +1100,10 @@ function bubbleLevel(w, h, bubblesWidth, bubblesHeight, lvlnbr){
 	this.moveBalls = function(){
 		//debug('length: ' + this.bubbles_array.length);
 		if(this.finished) return;
-		this.shootedBubble.move();
+		if(this.shootedBubble != null){
+			this.shootedBubble.move();
+			this.checkColisions();
+		};
 		for(i = 0; i < this.animations.length; ++i){
 			this.animations[i].render();
 			if(this.animations[i].tick > this.animations[i].duration){
@@ -1111,7 +1136,6 @@ function bubbleLevel(w, h, bubblesWidth, bubblesHeight, lvlnbr){
 		for(i = 0; i < this.bubbles_array.length; ++i){
 			this.bubbles_array[i].move();
 		};
-		this.checkColisions();
 		//performance.check('move balls');
 		var masBaja = this.grilla.returnLowest();
 		/*alert(this.looseLine);*/
@@ -1295,6 +1319,7 @@ function bubbleLevel(w, h, bubblesWidth, bubblesHeight, lvlnbr){
 	};
 	
 	this.clearBoard = function(){
+		clearInterval(this.blinkTimer);
 		for(var i = 0; i < this.bubbles_array.length; ++i){
 			var b = this.bubbles_array[i];
 			b.stopMove();
@@ -1324,7 +1349,10 @@ function bubbleLevel(w, h, bubblesWidth, bubblesHeight, lvlnbr){
 		//if(detonated.marked) return;
 		
 		detonated.marked = true;
-		detonated.bombBall = false;
+		if(detonated.bombBall){
+			detonated.bombBall = false;
+			detonated.wasDetonated	= true;
+		};
 		this.detonateBomb(this.grilla.retrieveBubble(detonated.i, detonated.j + 1), neighbour - 1);
 		this.detonateBomb(this.grilla.retrieveBubble(detonated.i, detonated.j - 1), neighbour - 1);
 		this.detonateBomb(this.grilla.retrieveBubble(detonated.i - 1, detonated.j), neighbour - 1);
@@ -1335,6 +1363,12 @@ function bubbleLevel(w, h, bubblesWidth, bubblesHeight, lvlnbr){
 		}else{
 			this.detonateBomb(this.grilla.retrieveBubble(detonated.i + 1, detonated.j + 1), neighbour - 1);
 			this.detonateBomb(this.grilla.retrieveBubble(detonated.i - 1, detonated.j + 1), neighbour - 1);
+		};
+	};
+
+	this.characterBlink = function(){
+		if(this.character.currentAnim == ''){
+			this.character.setCurrentState('blink');
 		};
 	};
 	

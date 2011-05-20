@@ -34,8 +34,8 @@ function SubmitComplete(score, response)
 function retrieveLeaderboard(divGen, divFB){
 	LeaderBoard.divGen = document.getElementById(divGen);
 	LeaderBoard.divFB = document.getElementById(divFB);
-	Playtomic.Leaderboards.ListFB("highscores", retrieveFacebookLeaderboard, { friendslist: FB.friendsArray });
-	Playtomic.Leaderboards.List("highscores", retrieveGeneralLeaderboard);
+	/*Playtomic.Leaderboards.ListFB("highscores", retrieveFacebookLeaderboard, { friendslist: FB.friendsArray });
+	Playtomic.Leaderboards.List("highscores", retrieveGeneralLeaderboard);*/
 };
 
 function retrieveGeneralLeaderboard(scores, numscores, response){
@@ -53,7 +53,7 @@ function retrieveGeneralLeaderboard(scores, numscores, response){
             text += '<div>'+(i + 1 ) + ") " + score.Name + 'with' +score.Points+ 'points!</div>';
             // including custom data?  score.CustomPlaytomic.Data.Property
         };
-        LeaderBoard.devGen.innerHTML(text);
+        LeaderBoard.divGen.innerHTML(text);
     }
     else
     {
@@ -76,7 +76,7 @@ function retrieveFacebookLeaderboard(scores, numscores, response){
             text += '<div>'+(i + 1 ) + ") " + score.Name + 'with' +score.Points+ 'points!</div>'
             // including custom data?  score.CustomPlaytomic.Data.Property
         };
-        LeaderBoard.divFB.iinerHTML(text);
+        LeaderBoard.divFB.innerHTML(text);
     }
     else
     {

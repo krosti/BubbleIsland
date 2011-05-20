@@ -7,23 +7,15 @@ RC:
 
 To make a Mileston Monday
 Rebuild:
-[X] mover todo el proyecto
-[X] agregar bubbles a el side
-[X] agregar bubbles al bubbleIsland.js
-[X] agregar las imagenes dinamicamente dependiendo del tamaño
-[x] agregar ui al juego
-[x] probar css3 o cufon para las fuentes
-[x] agregar explosion
-[ ] empaquetar para celular
-[ ] check explosion masiva
-[x] arreglar animacion en freeze
-[ ] check de posicionamiento
-api:
-[ ] finish softgameApi
-[ ] integrate softgameApi with facebook, all functional
-[ ] check api softgame
-[ ] recheck facebook
-[ ] check leaderboard
+[x] alinear panda
+[ ] explosiones extras
+[x] animacion cañon
+[ ] animacion blink
+[x] add nuevas imagenes a loader
+[x] nuevo cartel de perder
+[x] añadir boton en perder y funcionalidad
+[x] puntajes en los carteles
+[ ] 
 
 beta:
 [b] un disparo por tiempo
@@ -153,23 +145,38 @@ bubbleYellowImageX3 = new Image();
 
 bubbleExplode = new Image();
 bubbleEstela = new Image();
+bubbleBombExplode = new Image();
+bubbleFreezeExplode = new Image();
+bubbleMultiColorExplode = new Image();
+bubbleX2Explode = new Image();
+bubbleX3Explode = new Image();
 
 lvlFrame = new Image();
 backgroundImage = new Image();
 initImage = new Image();
 logoImage = new Image();
-pandaBearAnim = new Image();
+//pandaBearAnim = new Image();
+uiPandaStandBy = new Image();
+uiPandaLoading = new Image();
+uiPandaBlinking = new Image();
 uiPanda = new Image();
 uiLevelFrame = new Image();
 uiLifeFrame = new Image();
 uiPointsFrame = new Image();
 uiLooseFrame = new Image();
 uiWinFrame = new Image();
+uiFinishContinue = new Image();
+uiFinishMenu = new Image();
 uiCannon = new Image();
+uiCannonShoot = new Image();
 uiOptionButton = new Image();
 uiNewButton = new Image();
 uiContinueButton = new Image();
 uiBackButton = new Image();
+uiLoadingScreen = new Image();
+
+facebookScreen = new Image();
+facebookButton = new Image();
 
 	/*var bubbleBlueImage;
 var bubbleRedImage; 
@@ -303,6 +310,7 @@ function bubble(l){
 			case 26:
 				this.flavor = this.randomFlavor();
 				this.object = new standAnimation(this.lvl.bubbleRadius, this.lvl.bubbleRadius, this.meinBild.src);
+				//this.object.addState('explode', bubbleExplode.src, 7);
 				this.element = this.object.element;
 				break;
 			case 27:
@@ -315,17 +323,20 @@ function bubble(l){
 					this.flavor = this.randomX3Flavor();
 				};				
 				this.object = new standAnimation(this.lvl.bubbleRadius, this.lvl.bubbleRadius, this.meinBild.src);
+				//this.object.addState('explode', bubbleExplode.src, 7);
 				this.element = this.object.element;				
 				break;
 			case 28:
 				this.flavor = this.randomFreezeFlavor();
 				this.object = new standAnimation(this.lvl.bubbleRadius, this.lvl.bubbleRadius, this.meinBild.src);
+				//this.object.addState('explode', bubbleExplode.src, 7);
 				this.element = this.object.element;
 				this.freezeBall = true;
 				break;
 			case 29:
 				this.flavor = this.randomFlavor();
 				this.object = new standAnimation(this.lvl.bubbleRadius, this.lvl.bubbleRadius, this.meinBild.src);
+				//this.object.addState('explode', bubbleExplode.src, 7);
 				this.element = this.object.element;
 				do{
 					this.secondFlavor = this.randomFlavor();
@@ -358,14 +369,14 @@ function bubble(l){
 			case 30:
 				this.flavor = this.randomBombFlavor();
 				this.object = new standAnimation(this.lvl.bubbleRadius, this.lvl.bubbleRadius, this.meinBild.src);
+				//this.object.addState('explode', bubbleExplode.src, 7);
 				this.element = this.object.element;
 				this.bombBall = true;
 				//alert('bombBall!!');
 				break;
 		};	
 		this.object.fitNormalImage();
-		this.object.addState('estela', bubbleEstela.src, 5);
-		this.object.addState('explode', bubbleExplode.src, 7);
+		this.object.addState('estela', bubbleEstela.src, 5);		
 		this.element.style.overflow = 'show';
 
 	};
@@ -623,11 +634,24 @@ function bubble(l){
 	this.explode = function(){
 		//do explode animation and remove element
 		//this.object.animationEnds = this.removeBubble;
-		
-		var anim = new Animation(7, bubbleExplode.width / 7, bubbleExplode.height, bubbleExplode.src);
-		anim.element.style.position = 'absolute';
-		anim.element.style.top = this.y + 'px';
-		anim.element.style.left = this.x + 'px';
+		if(this.freezeBall){
+			var anim = new Animation(7, bubbleFreezeExplode.width / 7, bubbleFreezeExplode.height, bubbleFreezeExplode.src);		
+			anim.element.style.position = 'absolute';
+			anim.element.style.top = ((this.y + (this.lvl.bubbleRadius / 2) ) - (bubbleFreezeExplode.height / 2)) + 'px';
+			anim.element.style.left = ((this.x + (this.lvl.bubbleRadius / 2) ) - ((bubbleFreezeExplode.width / 7) / 2)) + 'px';
+		}else{
+			if(this.bombBall){
+				var anim = new Animation(7, bubbleBombExplode.width / 7, bubbleBombExplode.height, bubbleBombExplode.src);		
+				anim.element.style.position = 'absolute';
+				anim.element.style.top = ((this.y + (this.lvl.bubbleRadius / 2) ) - (bubbleBombExplode.height / 2)) + 'px';
+				anim.element.style.left = ((this.x + (this.lvl.bubbleRadius / 2) ) - ((bubbleBombExplode.width / 7) / 2)) + 'px';
+			}else{
+				var anim = new Animation(7, bubbleExplode.width / 7, bubbleExplode.height, bubbleExplode.src);		
+				anim.element.style.position = 'absolute';
+				anim.element.style.top = ((this.y + (this.lvl.bubbleRadius / 2) ) - (bubbleExplode.height / 2)) + 'px';
+				anim.element.style.left = ((this.x + (this.lvl.bubbleRadius / 2) ) - ((bubbleExplode.width / 7) / 2)) + 'px';
+			}
+		}
 		anim.animationEnd = function(){};
 		animNav.append(anim.element);
 		$(this.element).remove();
@@ -641,6 +665,7 @@ function bubbleCannon(lvl){
 	this.currentBubble.makeItRandom();*/
 	this.readyShoot = false;
 	this.object = new standAnimation(uiCannon.width, uiCannon.height, uiCannon.src);
+	this.object.addState('shoot', uiCannonShoot.src, 9);
 	this.element = this.object.element;
 	this.object.setXY(((this.lvl.width - uiCannon.width) / 2) + this.lvl.leftBound, (this.lvl.height - uiCannon.height) + this.lvl.topBound + 4);
 	/*style.top = this.lvl.height - cannonImage.height;
@@ -651,6 +676,7 @@ function bubbleCannon(lvl){
 		/*vecx = -((lvl.width / 2) - (x - this.lvl.left));
 		vecy = lvl.height - (y - this.lvl.top);*/
 		if(!this.readyShoot) return;
+		this.readyShoot = false;
 		vecx = (x - this.lvl.left) - (this.currentBubble.x  + (this.lvl.bubbleRadius / 2));
 		vecy = (y - this.lvl.top) - (this.currentBubble.y + (this.lvl.bubbleRadius / 2));
 		
@@ -667,6 +693,7 @@ function bubbleCannon(lvl){
 		this.currentBubble.dy = velocity * (vecy/hip);//;/Math.sin(ang);
 		//this.lvl.addBubble(this.currentBubble);
 		this.lvl.setShootedBubble(this.currentBubble);	
+		this.object.setCurrentState('shoot');
 		this.currentBubble = null;
 	};
 	
@@ -680,6 +707,10 @@ function bubbleCannon(lvl){
 		this.currentBubble.element.style.left = this.currentBubble.x + 'px';
 		animNav.append(this.currentBubble.element);
 		this.readyShoot = true;
+	};
+
+	this.draw = function(){
+		this.object.render();
 	};
 
 };
@@ -765,7 +796,7 @@ function bubbleTable(ancho, alto, lvl){
 			dx = (isShort ? 1 : -1);
 			alert('corrimiento nulo, nuevo dx: ' + dx)
 		};*/
-
+		debug(collided.x +':'+collided.y+' i:'+collided.i+' j:'+collided.j+'&nbsp;');
 
 		var radius = this.lvl.bubbleRadius / 2;
 		var halfradius = this.lvl.bubbleRadius / 3;
@@ -776,7 +807,7 @@ function bubbleTable(ancho, alto, lvl){
 			
 		distance = Math.sqrt(disx * disx + disy * disy);
 		if(distance < radius){
-			bubble.x -= bubble.dx;
+			//bubble.x -= bubble.dx;
 			bubble.y -= bubble.dy;
 		};
 
@@ -1026,11 +1057,14 @@ function bubbleLevel(w, h, bubblesWidth, bubblesHeight, lvlnbr){
 	this.h = Math.sqrt((this.bubbleRadius*this.bubbleRadius) - ((this.bubbleRadius / 2) * (this.bubbleRadius / 2)));
 	this.bonus = .2 * this.lvlnro;
 
-	this.character = new standAnimation(uiPanda.height, uiPanda.width, uiPanda.src, game.clock);
-	this.character.setXY((w / 2), (game.canvas.height - uiPanda.height) - 7 );
-	this.character.addState('load', pandaBearAnim.src, 22);
+	this.character = new standAnimation(uiPanda.width, uiPanda.height, uiPanda.src, game.clock);
+	//this.character.setXY((w / 2), (game.canvas.height - uiPanda.height) - 7);
+	this.character.addState('load', uiPandaLoading.src, 22);
+	this.character.addState('blink', uiPandaBlinking.src, 5);
+	this.character.addState('standby', uiPandaLoading.src, 5);
 	animNav.append(this.character.element);
-	
+	$(this.character.element).addClass('panda' + gameSize);
+		
 	//alert(this.pointsToReach);
 	//this.fallvelocity = 0.2; //balls per seccond
 	//this.bubbleVelocity = (this.bubbleRadius) * (this.fallvelocity / fps);
@@ -1044,6 +1078,7 @@ function bubbleLevel(w, h, bubblesWidth, bubblesHeight, lvlnbr){
 	this.moveBalls = function(){
 		//debug('length: ' + this.bubbles_array.length);
 		if(this.finished) return;
+		this.shootedBubble.move();
 		for(i = 0; i < this.animations.length; ++i){
 			this.animations[i].render();
 			if(this.animations[i].tick > this.animations[i].duration){
@@ -1051,7 +1086,13 @@ function bubbleLevel(w, h, bubblesWidth, bubblesHeight, lvlnbr){
 				this.animations.remove(this.animations[i]);
 			};
 		};
-		this.checkColisions();
+
+		//si esta ocupado, evitar movimiento (normalmente no se mueve, solo evita check de mas)
+		if(this.mutex == true){
+			//debug("MUTED!");
+			return;
+		};
+
 		//check for freeze;
 		if(this.freezeTimeout == 0){
 			this.freeze = false;
@@ -1070,7 +1111,7 @@ function bubbleLevel(w, h, bubblesWidth, bubblesHeight, lvlnbr){
 		for(i = 0; i < this.bubbles_array.length; ++i){
 			this.bubbles_array[i].move();
 		};
-
+		this.checkColisions();
 		//performance.check('move balls');
 		var masBaja = this.grilla.returnLowest();
 		/*alert(this.looseLine);*/
@@ -1083,11 +1124,6 @@ function bubbleLevel(w, h, bubblesWidth, bubblesHeight, lvlnbr){
 			this.finished = true;
 			this.loose();
 		};
-		//si esta ocupado, evitar movimiento (normalmente no se mueve, solo evita check de mas)
-		if(this.mutex == true){
-			//debug("MUTED!");
-			return;
-		};
 
 	};
 
@@ -1098,11 +1134,10 @@ function bubbleLevel(w, h, bubblesWidth, bubblesHeight, lvlnbr){
 			//performance.check('colisiones');
 			return;	
 		} 
-		this.shootedBubble.move();
 		var collisions = new Array();
 
 		for(i = 0; i < this.bubbles_array.length; ++i){			
-			currentBubble = this.bubbles_array[i];
+			var currentBubble = this.bubbles_array[i];
 			// check radius
 			disx = Math.abs((currentBubble.x + this.bubbleRadius / 2) - (this.shootedBubble.x + this.bubbleRadius / 2));
 			disy = Math.abs((currentBubble.y + this.bubbleRadius / 2) - (this.shootedBubble.y + this.bubbleRadius / 2));
@@ -1125,7 +1160,7 @@ function bubbleLevel(w, h, bubblesWidth, bubblesHeight, lvlnbr){
 			this.addBubble(this.shootedBubble);
 			this.shootedBubble.dy = this.bubbleVelocity;
 			//alert(currentBubble + ' before shoot');
-			currentBubble = collisions[0];
+			var currentBubble = collisions[0];
 			for(var i = 1; i < collisions.length; ++i){
 				if(currentBubble.dis > collisions[i].dis) currentBubble = collisions[i];
 			};
@@ -1565,7 +1600,7 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 		cartel = document.createElement('div');
 		var image = document.createElement('img');
 		image.src = uiLooseFrame.src;
-		image.style.top = '30%';
+		image.style.top = '0px';
 		image.style.left = ((game.canvas.width - uiLooseFrame.width) / 2) + 'px';
 		image.style.position = 'absolute';
 		cartel.appendChild(image);
@@ -1579,10 +1614,24 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 		//cartel.style.zIndex = -99;
 		cartel.style.backgroundImage = 'url(backgrounddiv.png)';
 		cartel.style.backgroundRepeat = 'repeat';
+
+		points = document.createElement('div');
+		cartel.appendChild(points);
+		$(points).addClass('guiFinishPoints' + game.size);
+		points.innerHTML = '<p>'+game.ui.points+'</p>';
+
+		continuebutton = document.createElement('div');
+		$(continuebutton).addClass('guiLooseContinue' + game.size);
+		cartel.appendChild(continuebutton);
+
+		tomenubutton = document.createElement('div');
+		$(tomenubutton).addClass('guiLooseMenu' + game.size);
+		cartel.appendChild(tomenubutton);
+
 		//cartel.style.backgroundImage = 'url('+uiLooseFrame.src+')';
 		$(document.body).append(cartel);
 		$(cartel).fadeIn(150);
-		$(cartel).click(function(){
+		$(continuebutton).click(function(){
 			$(cartel).fadeOut(300, function(){
 				game.ui.lifes -= 1;
 				if(game.ui.lifes == -1){
@@ -1600,6 +1649,10 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 				$(cartel).remove();
 			});
 		});
+
+		$(tomenubutton).click(function(){
+			game.showMenu();	
+		});
 	};
 	
 	this.playerWin = function(){
@@ -1607,7 +1660,7 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 		cartel = document.createElement('div');
 		var image = document.createElement('img');
 		image.src = uiWinFrame.src;
-		image.style.top = '30%';
+		image.style.top = '0px';
 		image.style.left = ((game.canvas.width - uiWinFrame.width) / 2) + 'px';
 		image.style.position = 'absolute';
 		cartel.appendChild(image);
@@ -1618,6 +1671,10 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 		cartel.style.position = 'fixed';
 		cartel.style.top = '0px';
 		cartel.style.left = '0px';
+		points = document.createElement('div');
+		cartel.appendChild(points);
+		$(points).addClass('guiFinishPoints' + game.size);
+		points.innerHTML = '<p>'+game.ui.points+'</p>';
 		//cartel.style.zIndex = -99;
 		cartel.style.backgroundImage = 'url(backgrounddiv.png)';
 		cartel.style.backgroundRepeat = 'repeat';
@@ -1686,7 +1743,7 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 		//this.drawBalls(this.painter);
 		this.ui.draw(this.painter);
 		this.level.drawLevel();
-
+		this.cannon.draw();
 		//this.clearPainter(this.painter);
 		//this.painter.putImageData(this.frameBuffer.getImageData(0, 0, this.buffercanvas.width, this.buffercanvas.height), 0, 0);
 		//this.canvas.style.display = 'block';

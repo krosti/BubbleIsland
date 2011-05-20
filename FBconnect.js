@@ -4,11 +4,11 @@ function FBConnect(elementId){
 	this.self = this;
 	this.element = document.getElementById(elementId);
 	//var browserDiv = this.element;
-	this.element.style.position = 'absolute';
+	/*this.element.style.position = 'absolute';
 	this.element.style.top = '0px';
 	this.element.style.left = '0px';
 	this.element.style.width = '320px';
-	this.element.style.height = '480px'
+	this.element.style.height = '480px'*/
 	//document.body.appendChild(this.element);
 	
 	this.tokenUrl = 'access_token=';
@@ -706,7 +706,7 @@ function FBConnect(elementId){
 
 	this.post = function(msg)
 	{	
-		//alert('post: ' + msg);
+		alert('post: ' + msg);
 		var uri = "https://graph.facebook.com/me/feed";
 		postdata = {
 			access_token: this.token,
@@ -719,7 +719,7 @@ function FBConnect(elementId){
 			contentType: 'multipart/form-data',
 			data: postdata, 
 			success: function(data){ alert('success: ' + data); },
-			//error: function(data, error, r){ alert('error: ' + data.responseText + error + r); }
+			error: function(data, error, r){ alert('error: ' + data.responseText + error + r); }
 		});
 		//alert('termine el post');
 	};
@@ -762,7 +762,7 @@ function FBConnect(elementId){
 }
 
 FBConnect.prototype.setUserData = function(data){
-	//alert(data);
+	alert(data);
 	this.user = eval('(' + data + ')');
 };
 

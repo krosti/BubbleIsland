@@ -198,7 +198,8 @@ function Loader(progress, size){
 		uiPandaStandBy.src = this.size + this.separator + 'standbyanimacion.png';
 		uiPandaLoading.src = this.size + this.separator + 'loadinganimacion.png';
 		uiPandaBlinking.src = this.size + this.separator + 'blinkinganimacion.png';
-		uiPanda.src = this.size + this.separator + 'panda.png';
+		//uiPanda.src = this.size + this.separator + 'panda.png';
+		uiPanda.src = this.size + this.separator + 'flashanimacion.png';
 		uiLevelFrame.src = this.size + this.separator + 'lvl.png';
 		uiLifeFrame.src = this.size + this.separator + 'life.png';
 		uiPointsFrame.src = this.size + this.separator + 'points.png';
@@ -501,7 +502,93 @@ standAnimation.prototype.render = function() {
 	this.states[this.currentAnim].render();
 };
 
+flashAnimation = function(image, width, height, totalFrames){
+	this.width = width;
+	this.height = height;
+	this.states = {};
+	this.currentAnim = '';
+	this.image = image;
+	this.totalFrames = totalFrames;
+	this.tick = 0;
+	var self = this;
+	//this.meinSpat.connect(self.render, 'tick');
+	//init
+	this.element = document.createElement('div');
+	//this.element.appendChild(this.baseElement);
+	//this.baseImage = document.createElement('img');
+	//this.baseImage.src = image;
+	//this.baseElement.src = image;
+	//this.setBaseStyle(this.element);
+	this.element.style.position = 'absolute';
+	/*this.element.style.top = '0px';
+	this.element.style.left = '0px';*/
+	this.element.style.overflow = 'hidden';
+	this.element.style.backgroundImage = 'url(' + this.image + ')';
+	this.element.style.width = this.width + 'px';
+	this.element.style.height = this.height + 'px';
+	this.element.style.minHeight = this.height + 'px';
+	//this.addState('normal', 0, 0);
+	this.duration = 0;
+};
 
+
+flashAnimation.prototype.setXY = function(x, y) {
+	this.element.style.top = y + 'px';
+	this.element.style.left = x + 'px';
+};
+
+flashAnimation.prototype.addState = function(name, start, end) {
+	var anim = {
+		start: start,
+		end: end
+	};
+	this.states[name] = anim;
+};
+
+flashAnimation.prototype.setCurrentState = function(name, repeat) {
+	
+	if(repeat == undefined) repeat = false;
+	if(name == ''){
+		this.tick = 0;
+		this.duration = 0;
+		this.element.style.backgroundPosition = '0px 0px';
+	};
+	this.currentAnim = name;
+	for(animName in this.states){
+		//alert(animName + ':' + name);
+		if(animName === name){		    
+			//this.states[animName].element.style.display = 'block';
+			this.tick = this.states[animName].start;
+			this.duration = this.states[animName].end;
+			var self = this;
+			if(!repeat){
+				this.animationEnd = (function(){ self.setCurrentState(''); });
+			}else{
+				this.animationEnd = (function(){});
+			};
+			break;
+		};
+	};
+	//this.baseElement.style.display = 'none';
+};
+
+flashAnimation.prototype.animationEnds = function(){
+	//alert('animation end');
+	this.setCurrentState('');
+};
+
+flashAnimation.prototype.render = function() {
+	if(this.currentAnim == '') return;
+	if(this.tick > this.duration){
+		//alert('hola');
+		this.animationEnd();
+		return
+	};
+	this.element.style.backgroundPosition = '-' + this.tick * this.width + 'px 0px';
+	this.tick += 1;// % duration; 
+	//alert('tick' + this.tick);
+	//this.tick = this.tick % this.duration;
+};
 //multiple div, an div per frame
 /*function Animation(duration, width, height, image){
 	this.duration = duration;

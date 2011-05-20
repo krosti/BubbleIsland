@@ -1,0 +1,203 @@
+@font-face {
+	font-family: Bubblegum;
+	src: url(../grobold.ttf);
+}
+
+/*
+*		320x480
+*/
+
+.pointsFrame320x480{
+	position: fixed;
+	background-image: url(../320x480/points.png);
+	top: 340px;
+	left: 245px;
+	width: 87px;
+	height: 62px;
+	min-height: 62px;
+	font-family: Bubblegum;
+	font-size: 0.8em;
+	padding-top: 25px;			
+	/*padding-left: 20px;*/
+	text-align: center;
+	color: #eeeeee;
+	text-shadow: -2px 0 black, 0 2px black,	  2px 0 black, 0 -2px black;
+}
+
+.levelsFrame320x480{
+	position: fixed;
+	background-image: url(../320x480/lvl.png);
+	top: 400px;
+	left: 245px;
+	width: 87px;
+	height: 62px;
+	min-height: 62px;
+	font-family: Bubblegum;
+	font-size: 0.8em;
+	padding-top: 37px;
+	padding-left: 35px;
+	color: #eeeeee;
+	text-shadow: -2px 0 black, 0 2px black,	  2px 0 black, 0 -2px black;
+}
+
+.lifesFrame320x480{
+	position: fixed;
+	background-image: url(../320x480/life.png);
+	top: 0px;
+	left: 215px;
+	width: 87px;
+	height: 62px;
+	min-height: 62px;
+	font-family: Bubblegum;
+	font-size: 0.8em;
+	padding-top: 31px;
+	padding-left: 46px;
+	color: #eeeeee;
+	text-shadow: -2px 0 black, 0 2px black,	  2px 0 black, 0 -2px black;
+}
+
+.gobackFrame320x480{
+	position: fixed;
+	background-image: url(../320x480/backbutton.png);
+	top: 62px;
+	left: 210px;
+	width: 89px;
+	height: 27px;
+	min-height: 27px;
+	font-family: Bubblegum;
+	font-size: 0.8em;
+	color: #eeeeee;
+	text-shadow: -2px 0 black, 0 2px black,	  2px 0 black, 0 -2px black;
+}
+
+.facebookFrame320x480{
+	position: fixed;
+	background-image: url(../320x480/facebook.png);
+	width: 81px;
+	height: 54px;
+	min-height: 54px;
+	left: 240px;
+	top: 261px;
+}
+
+.coinsFrame320x480{
+	position: fixed;
+	background-image: url(../320x480/coins.png);
+	width: 67px;
+	height: 51px;
+	min-height: 51px;
+	left: 255px;
+	top: 315px;
+}
+
+.leaderboardFrame320x480{
+	position: fixed;
+	background-image: url(../320x480/leaderboards.png);
+	width: 81px;
+	height: 56px;
+	min-height: 56px;
+	left: 240px;
+	top: 215px;
+}
+
+.playImage320x480{
+	position: fixed;
+	background-image: url(../320x480/newbutton.png);
+	width: 160px;
+	height: 65px;
+	min-height: 65px;
+	left: 72px;
+	right: auto;
+	top: 150px;
+}
+
+.continueImage320x480{
+	position: fixed;
+	background-image: url(../320x480/continuebutton.png);
+	width: 160px;
+	height: 65px;
+	min-height: 65px;
+	left: 71px;
+	top: 250px;
+}
+
+.optionsImage320x480{
+	position: fixed;
+	background-image: url(../320x480/optionbutton.png);
+	width: 160px;
+	height: 65px;
+	min-height: 65px;
+	left: 77px;
+	right: auto;
+	top: 335px;
+}
+
+.facebookButton320x480{
+	position: fixed;
+	background-image: url(../320x480/facebookbutton.png);
+	width: 155px;
+	height: 25px;
+	min-height: 25px;
+	left: 130px;
+	top: 300px;
+}
+
+.loadingProgressBar320x480{
+	position: fixed;
+	width: 130px;
+	height: 9px;
+	min-height: 9px;
+	left: 102px;
+	top: 260px;
+}
+
+.panda320x480{
+	position: fixed;
+	/*width: 90px;
+	height: 111px;
+	min-height: 111px;*/
+	left: 80px;
+	top: 370px;
+}
+
+.guiFinishPoints320x480{
+	font-family: Bubblegum;
+	font-size: 0.9em;
+	color: #eeeeee;
+	text-shadow: -2px 0 black, 0 2px black,	  2px 0 black, 0 -2px black;
+	position: fixed;
+	width: 67px;
+	height: 40px;
+	top: 287px;
+	padding-top: 20px;
+	left: 125px;
+	text-align: center;
+}
+
+.guiFinishPoints320x480 > p { 
+	vertical-align: middle;
+}
+
+.guiLooseContinue320x480{
+	position: fixed;
+	background-image: url(../320x480/guicontinue.png);
+	width: 137px;
+	height: 60px;
+	min-height: 60px;
+	left: 107px;
+	top: 335px;
+}
+
+.guiLooseMenu320x480{
+	position: fixed;
+	background-image: url(../320x480/guimenu.png);
+	width: 149px;
+	height: 55px;
+	min-height: 60px;
+	left: 80px;
+	top: 395px;
+}
+
+#initScreen{
+	background-image: url(../320x480/loadingscreen.png);
+}

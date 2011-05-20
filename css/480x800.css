@@ -1,0 +1,129 @@
+/*
+*		480x800
+*/
+
+.pointsFrame480x800{
+	position: fixed;
+	background-image: url(480x800/points.png);
+	top: 340px;
+	left: 245px;
+	width: 87px;
+	height: 62px;
+	min-height: 62px;
+	font-family: Bubblegum;
+	font-size: 0.8em;
+	padding-top: 25px;			
+	/*padding-left: 20px;*/
+	text-align: center;
+	color: #eeeeee;
+	text-shadow: -2px 0 black, 0 2px black,	  2px 0 black, 0 -2px black;
+}
+
+.levelsFrame480x800{
+	position: fixed;
+	background-image: url(480x800/lvl.png);
+	top: 400px;
+	left: 245px;
+	width: 87px;
+	height: 62px;
+	min-height: 62px;
+	font-family: Bubblegum;
+	font-size: 0.8em;
+	padding-top: 37px;
+	padding-left: 35px;
+	color: #eeeeee;
+	text-shadow: -2px 0 black, 0 2px black,	  2px 0 black, 0 -2px black;
+}
+
+.lifesFrame480x800{
+	position: fixed;
+	background-image: url(480x800/life.png);
+	top: 0px;
+	left: 215px;
+	width: 87px;
+	height: 62px;
+	min-height: 62px;
+	font-family: Bubblegum;
+	font-size: 0.8em;
+	padding-top: 31px;
+	padding-left: 46px;
+	color: #eeeeee;
+	text-shadow: -2px 0 black, 0 2px black,	  2px 0 black, 0 -2px black;
+}
+
+.gobackFrame480x800{
+	position: fixed;
+	background-image: url(480x800/backbutton.png);
+	top: 62px;
+	left: 210px;
+	width: 89px;
+	height: 27px;
+	min-height: 27px;
+	font-family: Bubblegum;
+	font-size: 0.8em;
+	color: #eeeeee;
+	text-shadow: -2px 0 black, 0 2px black,	  2px 0 black, 0 -2px black;
+}
+
+.facebookFrame480x800{
+	position: fixed;
+	background-image: url(480x800/facebook.png);
+	width: 81px;
+	height: 54px;
+	min-height: 54px;
+	left: 240px;
+	top: 261px;
+}
+
+.coinsFrame480x800{
+	position: fixed;
+	background-image: url(480x800/coins.png);
+	width: 67px;
+	height: 51px;
+	min-height: 51px;
+	left: 255px;
+	top: 315px;
+}
+
+.leaderboardFrame480x800{
+	position: fixed;
+	background-image: url(480x800/leaderboards.png);
+	width: 81px;
+	height: 56px;
+	min-height: 56px;
+	left: 240px;
+	top: 215px;
+}
+
+.playImage480x800{
+	position: fixed;
+	background-image: url(480x800/newbutton.png);
+	width: 160px;
+	height: 65px;
+	min-height: 65px;
+	left: 75px;
+	right: auto;
+	top: 150px;
+}
+
+.continueImage480x800{
+	position: fixed;
+	background-image: url(480x800/continuebutton.png);
+	width: 160px;
+	height: 65px;
+	min-height: 65px;
+	left: 67px;
+	right: auto;
+	top: 250px;
+}
+
+.optionsImage480x800{
+	position: fixed;
+	background-image: url(480x800/optionbutton.png);
+	width: 160px;
+	height: 65px;
+	min-height: 65px;
+	left: 75px;
+	right: auto;
+	top: 335px;
+}

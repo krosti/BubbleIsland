@@ -639,8 +639,8 @@ function bubble(l){
 		if(this.freezeBall){
 			anim = new Animation(7, bubbleFreezeExplode.width / 7, bubbleFreezeExplode.height, bubbleFreezeExplode.src);		
 			anim.element.style.position = 'absolute';
-			anim.element.style.top = ((this.y + (this.lvl.h / 2) ) - (bubbleFreezeExplode.height / 2)) + 'px';
-			anim.element.style.left = ((this.x + (this.lvl.w / 2) ) - ((bubbleFreezeExplode.width / 7) / 2)) + 'px';
+			anim.element.style.top = ( (this.lvl.h / 2) - (bubbleFreezeExplode.height / 2)) + 'px';
+			anim.element.style.left = ( (this.lvl.w / 2)  - ((bubbleFreezeExplode.width / 7) / 2)) + 'px';
 		};
 		if(this.wasDetonated){
 			anim = new Animation(7, bubbleBombExplode.width / 9, bubbleBombExplode.height, bubbleBombExplode.src);		
@@ -713,7 +713,7 @@ function bubbleCannon(lvl){
 		this.currentBubble.dy = velocity * (vecy/hip);//;/Math.sin(ang);
 		//this.lvl.addBubble(this.currentBubble);
 		this.lvl.setShootedBubble(this.currentBubble);	
-		this.object.setCurrentState('shoot');
+		//this.object.setCurrentState('shoot');
 		this.currentBubble = null;
 	};
 	
@@ -789,7 +789,7 @@ function bubbleTable(ancho, alto, lvl){
 	this.addBubble = function(bubble, collided){
 		//debug(' addBubble i: ' + bubble.i + 'j: ' + bubble.j);
 		//alert(collided);
-		bubble.object.setCurrentState('');
+		//bubble.object.setCurrentState('');
 
 		/*var radius = this.lvl.bubbleRadius / 2;
 		var halfradius = radius / 2;
@@ -816,7 +816,7 @@ function bubbleTable(ancho, alto, lvl){
 			dx = (isShort ? 1 : -1);
 			alert('corrimiento nulo, nuevo dx: ' + dx)
 		};*/
-		debug(collided.x +':'+collided.y+' i:'+collided.i+' j:'+collided.j+'&nbsp;');
+		//debug(collided.x +':'+collided.y+' i:'+collided.i+' j:'+collided.j+'&nbsp;');
 
 		var radius = this.lvl.bubbleRadius / 2;
 		var halfradius = this.lvl.bubbleRadius / 3;
@@ -886,6 +886,7 @@ function bubbleTable(ancho, alto, lvl){
 			};
 			bubble.i = collided.i + dy;
 			bubble.j = collided.j + dx;
+			if((bubble.x == bubble.lvl.leftBound) || (bubble.x == bubble.lvl.width)) bubble.dx = -bubble.dx;
 		}while(this.Table[bubble.i][bubble.j] != 'vacio');
 
 		this.Table[bubble.i][bubble.j] = bubble;
@@ -1105,15 +1106,15 @@ function bubbleLevel(w, h, bubblesWidth, bubblesHeight, lvlnbr){
 	this.h = Math.sqrt((this.bubbleRadius*this.bubbleRadius) - ((this.bubbleRadius / 2) * (this.bubbleRadius / 2)));
 	this.bonus = .2 * this.lvlnro;
 
-	/*this.character = new standAnimation(uiPanda.width, uiPanda.height, uiPanda.src, game.clock);
+	this.character = new standAnimation(uiPanda.width, uiPanda.height, uiPanda.src, game.clock);
 	//this.character.setXY((w / 2), (game.canvas.height - uiPanda.height) - 7);
 	this.character.addState('load', uiPandaLoading.src, 21);
 	this.character.addState('blink', uiPandaBlinking.src, 4);
-	this.character.addState('standby', uiPandaLoading.src, 5);*/
-	this.character = new flashAnimation(uiPanda.src, uiPanda.width / 28, uiPanda.height, 28);
+	this.character.addState('standby', uiPandaLoading.src, 5);
+	/*this.character = new flashAnimation(uiPanda.src, uiPanda.width / 28, uiPanda.height, 28);
 	//this.character.setXY((w / 2), (game.canvas.height - uiPanda.height) - 7);
 	this.character.addState('blink', 1, 5);
-	this.character.addState('load', 6, 27);
+	this.character.addState('load', 6, 27);*/
 	//this.character.addState('standby', uiPandaLoading.src, 5);
 	animNav.append(this.character.element);
 	$(this.character.element).addClass('panda' + gameSize);
@@ -1248,7 +1249,7 @@ function bubbleLevel(w, h, bubblesWidth, bubblesHeight, lvlnbr){
 	this.setShootedBubble = function(bubble){
 		this.shootedBubble = bubble;
 		this.character.setCurrentState('load');
-		this.shootedBubble.object.setCurrentState('estela', true);
+		//this.shootedBubble.object.setCurrentState('estela', true);
 		this.shootedBubble.object.baseElement.style.display = 'block';
 		//this.shootedBubble.object.animationEnds = function(){ this.setCurrentState('estela'); }
 	}

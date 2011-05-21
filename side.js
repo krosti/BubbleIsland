@@ -198,8 +198,8 @@ function Loader(progress, size){
 		uiPandaStandBy.src = this.size + this.separator + 'standbyanimacion.png';
 		uiPandaLoading.src = this.size + this.separator + 'loadinganimacion.png';
 		uiPandaBlinking.src = this.size + this.separator + 'blinkinganimacion.png';
-		//uiPanda.src = this.size + this.separator + 'panda.png';
-		uiPanda.src = this.size + this.separator + 'flashanimacion.png';
+		uiPanda.src = this.size + this.separator + 'panda.png';
+		//uiPanda.src = this.size + this.separator + 'flashanimacion.png';
 		uiLevelFrame.src = this.size + this.separator + 'lvl.png';
 		uiLifeFrame.src = this.size + this.separator + 'life.png';
 		uiPointsFrame.src = this.size + this.separator + 'points.png';

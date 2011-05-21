@@ -162,15 +162,15 @@
 
 .guiFinishPoints320x480{
 	font-family: Bubblegum;
-	font-size: 0.9em;
+	font-size: 1.1em;
 	color: #eeeeee;
 	text-shadow: -2px 0 black, 0 2px black,	  2px 0 black, 0 -2px black;
 	position: fixed;
 	width: 67px;
 	height: 40px;
 	top: 287px;
-	padding-top: 15px;
-	left: 125px;
+	padding-top: 12px;
+	left: 130px;
 	text-align: center;
 }
 

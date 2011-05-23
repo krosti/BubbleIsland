@@ -105,8 +105,15 @@ softgameApi.prototype.connectionEstablished = function(data){
 			complete: function(xhr,textStatus){ if(xhr.status == 302){ alert('complete: connectionEstablished ' + xhr.getResponseHeader("Location")); }; }
 		});
 	}else{
-		//alert()
-
+		if(data.indexOf('token')){
+			var response = eval('(' + data + ')');
+			//alert('response: ' + response);
+			this.token = response.token;	
+			this.signature = response.sig;
+			softgame.getUserInfo();
+		}else{
+			alert('Error gral de apps');
+		};
 	};
 	//var d = data.slice(data.indexOf("<body"), data.indexOf('</html>'));
 

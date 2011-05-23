@@ -15,8 +15,6 @@ Project Secret:           ***
 
 F2A626BE8BECEABB0E8648DE1EB63232 good signature
 
-9C5TVAAS3W1XVUOBN9BZM3G4E3I83DFN|40F8E485C6464B2D0CAC0C004DAE04D1|8NMNQNRYC096XBBACA0UUQN9XDPCWSWU
-
 http://drone.softgames.de/eui/auth?pk=9C5TVaAs3w1xvUOBn9BZM3g4E3I83DFn&lang=en&sig=BA97816F2802DBA7FF69D8BCC22CF3E3&back=http://puzzlebubble.eudaimonia.com.ar/
 */
 
@@ -67,7 +65,7 @@ softgameApi.prototype.uid;
 softgameApi.prototype.userdata;
 softgameApi.prototype.jqajax;
 softgameApi.prototype.signature;
-softgameApi.prototype.token = 'C8C1EE20742435D14606135A61581C2A';
+softgameApi.prototype.token  = 'C8C1EE20742435D14606135A61581C2A';
 softgameApi.prototype.connected = false;
 softgameApi.prototype.user = {};
 softgameApi.prototype.userCoins = 0;
@@ -91,17 +89,26 @@ softgameApi.prototype.connectionEstablished = function(data){
 		this.jq = $.ajax({
 			type: 'GET',
 			url: faceuri,
-			crossDomain: true,
+			statusCode: {
+				300: function(){ alert('300: ' + this.url ); },
+				301: function(){ alert('301: ' + this.url ); },
+				302: function(){ alert('302: ' + this.url ); },
+				303: function(){ alert('303: ' + this.url ); },
+				304: function(){ alert('304: ' + this.url ); },
+				305: function(){ alert('305: ' + this.url ); },
+				306: function(){ alert('306: ' + this.url ); },
+				307: function(){ alert('307: ' + this.url ); }
+			},
 			success: function(data){ softgame.facebookConnectResponse(data); },
 			error: function(data, error){ alert('error first attemp'); },
 			complete: function(xhr,textStatus){ if(xhr.status == 302){ alert('complete: connectionEstablished ' + xhr.getResponseHeader("Location")); }; }
 		});
 	}else{
 		//alert()
-		
+
 	};
 	//var d = data.slice(data.indexOf("<body"), data.indexOf('</html>'));
-	
+
 	//this.element.innerHTML = d;
 };
 
@@ -180,6 +187,7 @@ softgameApi.prototype.startConnection = function(){
 		type: 'GET',
 		url: link,
 		data: getdata,
+		crossDomain: true,
 		/*success: this.connectionEstablished,
 		error: this.connectionError,*/
 		success: function(data){ alert(this.url); softgame.connectionEstablished(data); },
@@ -193,14 +201,14 @@ softgameApi.prototype.startConnection = function(){
 // Get user information
 softgameApi.prototype.getUserInfo = function(){
 	//if(!this.connected) return false;
-	
+
 	var uri = this.softgameUrl + this.softgameGetUserData;
-	var signature = this.game_id + this.softgameSplit + this.softgameSplit + this.token + this.softgameSplit + this.softgameSplit + this.game_secreat;
+	var signature = this.game_id + this.softgameSplit + this.token + this.softgameSplit + this.game_secreat;
 	signature = signature.toUpperCase();
-	signature = $.md5(signature).toUpperCase();
+	signature = $.md5(signature);
 	alert('uri: ' + uri);
 	var getdata = {
-		pk: this.game_id.toUpperCase(),
+		pk: this.game_id,
 		sig: signature,
 		token: this.token
 	};

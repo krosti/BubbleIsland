@@ -148,9 +148,11 @@ softgameApi.prototype.facebookConnectResponse = function(data){
 			var todata = {};
 			var inputs = $('input');
 			for(var i = 0; i < inputs.length; ++i){
-				todata[inputs[0].name] = inputs[0].value;
+				todata[inputs[i].name] = inputs[i].value;
 			};
-			
+			alert($('form').action + ':' + $('form')[0].action);
+			alert(inputs[0].name + ':' + inputs[0].value);
+
 			$.ajax({
 				url: $('form')[0].action,
 				data: todata,

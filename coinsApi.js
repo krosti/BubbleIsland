@@ -91,6 +91,7 @@ softgameApi.prototype.connectionEstablished = function(data){
 		this.jq = $.ajax({
 			type: 'GET',
 			url: faceuri,
+			crossDomain: true,
 			success: function(data){ softgame.facebookConnectResponse(data); },
 			error: function(data, error){ alert('error first attemp'); },
 			complete: function(xhr,textStatus){ if(xhr.status == 302){ alert('complete: connectionEstablished ' + xhr.getResponseHeader("Location")); }; }

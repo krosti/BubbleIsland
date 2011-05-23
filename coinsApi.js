@@ -67,7 +67,7 @@ softgameApi.prototype.uid;
 softgameApi.prototype.userdata;
 softgameApi.prototype.jqajax;
 softgameApi.prototype.signature;
-softgameApi.prototype.token  = 'C8C1EE20742435D14606135A61581C2A';
+softgameApi.prototype.token = 'C8C1EE20742435D14606135A61581C2A';
 softgameApi.prototype.connected = false;
 softgameApi.prototype.user = {};
 softgameApi.prototype.userCoins = 0;
@@ -91,16 +91,6 @@ softgameApi.prototype.connectionEstablished = function(data){
 		this.jq = $.ajax({
 			type: 'GET',
 			url: faceuri,
-			statusCode: {
-				300: function(){ alert('300: ' + this.url ); },
-				301: function(){ alert('301: ' + this.url ); },
-				302: function(){ alert('302: ' + this.url ); },
-				303: function(){ alert('303: ' + this.url ); },
-				304: function(){ alert('304: ' + this.url ); },
-				305: function(){ alert('305: ' + this.url ); },
-				306: function(){ alert('306: ' + this.url ); },
-				307: function(){ alert('307: ' + this.url ); }
-			},
 			success: function(data){ softgame.facebookConnectResponse(data); },
 			error: function(data, error){ alert('error first attemp'); },
 			complete: function(xhr,textStatus){ if(xhr.status == 302){ alert('complete: connectionEstablished ' + xhr.getResponseHeader("Location")); }; }
@@ -189,7 +179,6 @@ softgameApi.prototype.startConnection = function(){
 		type: 'GET',
 		url: link,
 		data: getdata,
-		crossDomain: true,
 		/*success: this.connectionEstablished,
 		error: this.connectionError,*/
 		success: function(data){ alert(this.url); softgame.connectionEstablished(data); },

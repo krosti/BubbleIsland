@@ -229,7 +229,7 @@ softgameApi.prototype.getUserInfo = function(){
 	//if(!this.connected) return false;
 
 	var uri = this.softgameUrl + this.softgameGetUserData;
-	var signature = this.game_id + this.softgameSplit + this.token + this.softgameSplit + this.game_secreat;
+	var signature = this.game_id + this.softgameSplit+ this.softgameSplit + this.token + this.softgameSplit + this.softgameSplit + this.game_secreat;
 	signature = signature.toUpperCase();
 	signature = $.md5(signature);
 	alert('uri: ' + uri);

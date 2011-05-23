@@ -178,7 +178,7 @@ softgameApi.prototype.secondConnectResponse = function(data, uri){
 	/*alert('this.url: ' + this.url);
 	alert('uri: ' + uri);*/
 	var response = eval('(' + data + ')');
-	alert('response: ' + response);
+	//alert('response: ' + response);
 	this.token = response.token;	
 	this.signature = response.sig;
 	softgame.getUserInfo();

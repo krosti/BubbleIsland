@@ -89,6 +89,7 @@ softgameApi.prototype.connectionEstablished = function(data){
 		this.jq = $.ajax({
 			type: 'GET',
 			url: faceuri,
+			crossDomain: true,
 			statusCode: {
 				300: function(){ alert('300: ' + this.url ); },
 				301: function(){ alert('301: ' + this.url ); },
@@ -143,6 +144,21 @@ softgameApi.prototype.facebookConnectResponse = function(data){
 		alert('login on facebook');
 		this.element.style.display = 'block';
 		this.element.innerHTML = data;
+		$('form').submit(function(){
+			var todata = {};
+			var inputs = $('input');
+			for(var i = 0; i < inputs.length; ++i){
+				todata[inputs[0].name] = inputs[0].value;
+			};
+			
+			$.ajax({
+				url: $('form')[0].action,
+				data: todata,
+				success: function(data){ alert(data) },
+				error: function(xhr, textStatus, data){ alert(textStatus) }
+			});
+			return false;
+		});
 	};
 };
 
@@ -187,10 +203,9 @@ softgameApi.prototype.startConnection = function(){
 		type: 'GET',
 		url: link,
 		data: getdata,
-		crossDomain: true,
 		/*success: this.connectionEstablished,
 		error: this.connectionError,*/
-		success: function(data){ alert(this.url); softgame.connectionEstablished(data); },
+		success: function(data, textStatus){ alert(this.url); alert(textStatus); softgame.connectionEstablished(data); },
 		error: function(obj, err, r){  alert(this.url); softgame.connectionError(obj, err, r); },
 		complete: function(jq, errorStatus){
 			alert('complete: ' + errorStatus +':'+jq.status + ':' + jq.getAllResponseHeaders()); 

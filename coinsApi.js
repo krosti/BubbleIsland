@@ -155,6 +155,7 @@ softgameApi.prototype.facebookConnectResponse = function(data){
 			alert(inputs[0].name + ':' + inputs[0].value);
 
 			$.ajax({
+				type: 'POST',
 				url: $('form')[0].action,
 				data: todata,
 				success: function(data){ alert(data) },

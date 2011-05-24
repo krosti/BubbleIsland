@@ -232,7 +232,7 @@ softgameApi.prototype.getUserInfo = function(){
 	//if(!this.connected) return false;
 
 	var uri = this.softgameUrl + this.softgameGetUserData;
-	var signature = this.game_id + this.softgameSplit +  this.token + this.softgameSplit + this.game_secreat;
+	var signature = this.game_id + this.softgameSplit2 +  this.token + this.softgameSplit2 + this.game_secret;
 	signature = signature.toUpperCase();
 	signature = $.md5(signature).toUpperCase();
 	alert('uri: ' + uri);

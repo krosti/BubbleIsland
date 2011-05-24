@@ -97,6 +97,9 @@ Array.prototype.remove = function(data) {
 	return str;
 }*/
 
+
+var VERSION = '0.9.006';
+
 //debug
 var console;
 function setDebugEnv(elem){
@@ -535,7 +538,17 @@ function bubble(l){
 			left: this.x + 'px'
 		}, 42);*/
 		if((this.x == this.lvl.leftBound) || (this.x >= this.lvl.width)) this.dx = -this.dx;
-		if(this.y <= this.lvl.topBound) this.stopMove();
+		if(this.y <= (this.lvl.topBound + this.lvl.currentTop)){
+			this.stopMove();
+			this.j = Math.round(this.x / this.lvl.bubbleRadius);
+			this.i = 0;
+			this.recalcXY();
+			this.y += this.lvl.currentTop
+			this.dy = this.lvl.bubbleVelocity;			
+			this.lvl.addBubble(this);
+			this.lvl.shootedBubble = null;
+			this.lvl.setReadyShoot();
+		}; 
 	};
 	
 	this.moveShooted = function(){
@@ -859,8 +872,6 @@ function bubbleTable(ancho, alto, lvl){
 
 
 		do{
-			bubble.x -= bubble.dx;
-			bubble.y -= bubble.dy;
 			var deltax = (collided.x + radius) - (bubble.x + radius);
 			var deltay = (collided.y + radius) - (bubble.y + radius);
 
@@ -870,8 +881,10 @@ function bubbleTable(ancho, alto, lvl){
 			/*bubble.x -= (bubble.dx / bubble.dx) * (this.lvl.bubbleRadius / 2);
 			bubble.y -= (bubble.dy/bubble.dy) * (this.lvl.bubbleRadius / 2);*/
 
-			if(deltay > -(halfradius / 2)) dy = -1;
-			if(deltay < (halfradius / 2)) dy = 1;
+			/*if(deltay > -(halfradius / 2)) dy = -1;
+			if(deltay < (halfradius / 2)) dy = 1;*/
+			if(deltay < -(halfradius / 2)) dy = 1;
+			if(deltay >= (halfradius / 2)) dy = -1;
 			if(dy == 0){
 				if(deltax >= 0) dx = -1;
 				if(deltax < 0) dx = 1;
@@ -884,8 +897,11 @@ function bubbleTable(ancho, alto, lvl){
 					if(deltax < 0) dx = 0;
 				};
 			};
+			alert(dx + ':' + dy);
 			bubble.i = collided.i + dy;
 			bubble.j = collided.j + dx;
+			bubble.x -= bubble.dx;
+			bubble.y -= bubble.dy;
 			if((bubble.x <= bubble.lvl.leftBound) || (bubble.x >= bubble.lvl.width)) bubble.dx = -bubble.dx;
 		}while(this.Table[bubble.i][bubble.j] != 'vacio');
 
@@ -1100,9 +1116,10 @@ function bubbleLevel(w, h, bubblesWidth, bubblesHeight, lvlnbr){
 	this.shootedBubble = null;
 	this.bubbles_array = new Array();
 	this.points = 0;
-	this.pointsToReach = 1000 * this.lvlnro * 2;
+	this.pointsToReach = game.ui.points + (1000 * this.lvlnro * 2);
 	this.pointsMultiplier = 0;
 	this.looseLine = this.height - this.bubbleRadius;
+	this.currentTop = 0;
 	this.h = Math.sqrt((this.bubbleRadius*this.bubbleRadius) - ((this.bubbleRadius / 2) * (this.bubbleRadius / 2)));
 	this.bonus = .2 * this.lvlnro;
 
@@ -1170,6 +1187,7 @@ function bubbleLevel(w, h, bubblesWidth, bubblesHeight, lvlnbr){
 		for(i = 0; i < this.bubbles_array.length; ++i){
 			this.bubbles_array[i].move();
 		};
+		this.currentTop += this.bubbleVelocity;
 		//performance.check('move balls');
 		var masBaja = this.grilla.returnLowest();
 		/*alert(this.looseLine);*/
@@ -1202,7 +1220,7 @@ function bubbleLevel(w, h, bubblesWidth, bubblesHeight, lvlnbr){
 			//debug(disx + ':' + disy);
 			
 			distance = Math.sqrt(disx * disx + disy * disy);
-			if(distance < (this.bubbleRadius *.9)){
+			if(distance < (this.bubbleRadius *.8)){
 				//debug('COLLITION');				
 				//this.bubbles_array.push(this.shootedBubble);	
 				collisions.push({ bubble: currentBubble, dis: distance});
@@ -1351,7 +1369,8 @@ function bubbleLevel(w, h, bubblesWidth, bubblesHeight, lvlnbr){
 			newrow[i] = b;
 			this.addBubble(b);
 			animNav.append(b.element);
-		};				
+		};			
+		this.currentTop = 0;	
 	};
 	
 	this.clearBoard = function(){
@@ -1843,6 +1862,12 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 	animNav.height(this.height);
 	//this.drawBackground(this.backgroundPainter);
 
+	var version = document.createElement('div');
+	version.innerHTML = VERSION;
+	version.style.position = 'fixed';
+	version.style.top = '0px';
+	version.style.left = '0px';
+	animNav.append(version);
 
 	//$('#'+canvasObj).click(shoot);
 	//$('#'+canvasObj).click(this.mouseClick);

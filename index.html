@@ -35,7 +35,6 @@
 			alert('softgamr');
 			softgame = new softgameApi('SGnav');
 			alert('playtomic initialized')
-			softgame.startConnection();
 			FB.onConnect = function(){
 				/*alert('init options');
 				options = new Options('optionMenu', 'leaderboardMenu');
@@ -47,6 +46,7 @@
 			};
 
 			FB.setUrl(APPID, 'touch');
+			loader.init();
 			/*var uri = 'https://www.facebook.com/dialog/oauth?client_id=213255638692367&scope=publish_stream&redirect_uri=http://www.facebook.com/connect/login_success.html&display=touch&response_type=token';*/
 			/*alert('before ajax: ' + FB.url);
 			jq = $.ajax({
@@ -706,7 +706,19 @@ function $_GET(q) {
 } 
 
 function connectToFacebook(){
-		window.location = 'https://www.facebook.com/dialog/oauth?client_id=' + APPID + '&scope=publish_stream&redirect_uri='+window.location+'&response_type=token';
+		//window.location = 'https://www.facebook.com/dialog/oauth?client_id=' + APPID + '&scope=publish_stream&redirect_uri='+window.location+'&response_type=token';
+		softgame.onLoad = connectToFacebook2;
+		softgame.startConnection();
+};
+
+function connectToFacebook2(){
+	alert('before ajax: ' + FB.url);
+	jq = $.ajax({
+		type: 'GET',
+		url: FB.url,
+		success: function(data){ FB.connectResponse(data) },
+		error: function(data, error){FB.error(data, error) }
+	})
 };
 
 $(window).load(function () {	

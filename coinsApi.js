@@ -267,7 +267,7 @@ softgameApi.prototype.getUserBalance = function(){
 	var signature = this.game_id + this.softgameSplit2 +  this.token + this.softgameSplit2 + this.game_secret;
 	signature = signature.toUpperCase();
 	signature = $.md5(signature).toUpperCase();
-	var getdata{
+	var getdata = {
 		pk: this.game_id,
 		token: this.token,
 		sig: signature
@@ -275,11 +275,11 @@ softgameApi.prototype.getUserBalance = function(){
 	this.jqajax = $.ajax({
 		type: 'GET',
 		url: uri,
-		data, getdata,
-		success: function(data){ alert('success: ' + data);},
-		success: function(xhr, data){ alert('error: ' + data);}
+		data: getdata,
+		success: function(data){ alert('success: ' + data); },
+		error: function(xhr, data){ alert('error: ' + data); }
 	});
-}
+};
 
 /*softgameApi.prototype.name = function(){
 	if(!this.connected) return false;

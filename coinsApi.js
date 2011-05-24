@@ -54,6 +54,7 @@ softgameApi.prototype.softgameOrderFinalize = 'cpi/user/balance';
 softgameApi.prototype.softgameBackUrl = "http://puzzlebubble.eudaimonia.com.ar/";
 //softgameApi.prototype.softgameBackUrl = "http://eudaimonia.com.ar";
 softgameApi.prototype.softgameSplit = '|';
+softgameApi.prototype.softgameSplit2 = '||';
 softgameApi.prototype.softgameLangCode = 'en';
 //softgameApi.prototype.softgame
 
@@ -231,7 +232,7 @@ softgameApi.prototype.getUserInfo = function(){
 	//if(!this.connected) return false;
 
 	var uri = this.softgameUrl + this.softgameGetUserData;
-	var signature = this.game_id + this.softgameSplit+ this.softgameSplit + this.token + this.softgameSplit + this.softgameSplit + this.game_secreat;
+	var signature = this.game_id + this.softgameSplit2 +  this.token + this.softgameSplit2 + this.game_secreat;
 	signature = signature.toUpperCase();
 	signature = $.md5(signature).toUpperCase();
 	alert('uri: ' + uri);
@@ -245,7 +246,6 @@ softgameApi.prototype.getUserInfo = function(){
 		type: 'GET',
 		url: uri,
 		data: getdata,
-		sync: true,
 		/*success: this.connectionEstablished,
 		error: this.connectionError*/
 		success: function(data){ alert('success' + this.url + 'data: ' + data); },

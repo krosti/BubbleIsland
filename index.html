@@ -30,6 +30,8 @@
 		document.addEventListener('deviceready', function(){
 			alert('in connect');
 			Playtomic.Log.View(2647, "3689729b4f17433c", document.location);
+			FB = new FBConnect('FBnav');
+			softgame = new softgameApi('SGnav');
 			alert('playtomic initialized')
 			softgame.startConnection();
 			FB.onConnect = function(){
@@ -704,9 +706,6 @@ function $_GET(q) {
 function connectToFacebook(){
 		window.location = 'https://www.facebook.com/dialog/oauth?client_id=' + APPID + '&scope=publish_stream&redirect_uri='+window.location+'&response_type=token';
 };
-
-FB = new FBConnect('FBnav');
-softgame = new softgameApi('SGnav');
 
 $(window).load(function () {	
 //SWFID: 2647

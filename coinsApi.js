@@ -113,6 +113,8 @@ softgameApi.prototype.connectionEstablished = function(data){
 			softgame.getUserInfo();
 		}else{
 			alert('Error gral de apps');
+			this.element.style.display = 'block';
+			this.element.innerHTML = data;
 		};
 	};
 	//var d = data.slice(data.indexOf("<body"), data.indexOf('</html>'));
@@ -231,7 +233,7 @@ softgameApi.prototype.getUserInfo = function(){
 	var uri = this.softgameUrl + this.softgameGetUserData;
 	var signature = this.game_id + this.softgameSplit+ this.softgameSplit + this.token + this.softgameSplit + this.softgameSplit + this.game_secreat;
 	signature = signature.toUpperCase();
-	signature = $.md5(signature);
+	signature = $.md5(signature).toUpperCase();
 	alert('uri: ' + uri);
 	var getdata = {
 		pk: this.game_id,

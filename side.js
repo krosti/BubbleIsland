@@ -695,6 +695,7 @@ function Options(menuNav, leaderNav){
 	this.menuNav = menuNav;
 	this.menuElement = $('#' + menuNav);
 	this.leaderElement = $('#' + leaderNav);
+	this.element;
 	this.toHide;
 	
 	this.showOptions = function(hideElement){
@@ -719,7 +720,19 @@ function Options(menuNav, leaderNav){
 		this.toHide.style.display = 'block';
 		this.menuElement[0].style.display = 'block';
 		this.leaderElement[0].style.display = 'none';
-	}
+	};
+
+	this.showNav = function(navToShow, navToHide){
+		this.element = $('#'+navToShow);
+		this.toHide = $('#' + navToHide);
+		this.element[0].style.display = 'block';
+		this.toHide[0].style.display = 'none';
+	};
+
+	this.backToMenu = function(){
+		this.element[0].style.display = 'none';
+		this.toHide[0].style.display = 'block';
+	};
 
 	this.toggleSound = function(){
 		this.sound = !this.sound;

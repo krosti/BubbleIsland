@@ -6,6 +6,12 @@
     <meta name="viewport" content="user-scalable=0, width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+
+    <link href="css/320x480.css" rel="stylesheet" type="text/css" />
+	<link href="css/360x480.css" rel="stylesheet" type="text/css" />
+	<link href="css/480x800.css" rel="stylesheet" type="text/css" />
+	<link href="css/640x960.css" rel="stylesheet" type="text/css" />
+	<link href="css/854x480.css" rel="stylesheet" type="text/css" />
 	
 	<script src="jquery.js" type="text/javascript" charset="utf-8"></script> 
 	<script src="jquerytab.js" type="text/javascript" charset="utf-8"></script> 
@@ -34,8 +40,6 @@
 				//FB.post('Fer! pa\'vos!!');
 				//FB.retrieveUserData();
 				//FB.retrieveFriendsData();
-				alert('softgameconnection');
-				softgame.startConnection();
 			};
 
 			FB.setUrl(APPID, 'touch');
@@ -68,7 +72,11 @@
 			-webkit-interpolation-mode: nearest-neighbor;
 		}
 
-		
+		#leaderboardTabs { padding: 0; margin-top: 50px; }
+		#leaderboardTabs li { display: inline; }
+		#leaderboardTabs li a { background: #ccf; padding: 10px; float:left; border-right: 1px solid #ccf; border-bottom: none; text-decoration: none; color: #000; font-weight: bold;}
+		#leaderboardTabs li.active a { background: #eef; }
+		.content { float: left; clear: both; border: 1px solid #ccf; border-top: none; border-left: none; background: #eef; padding: 10px 20px 20px; width: 400px; }
 		/*facebook*/
 #page{width:100%;min-height:308px}
 #content{position:relative}
@@ -595,139 +603,191 @@ body.sgds .clear {
 	</style>
 </head>
 <body>
-<nav style="width: 320px; min-height: 480px; background-image: url('background.png'); position: absolute; top: 0px; left: 0px" ontouchmove="touchMove(event);">
+<nav id="backgroundNav" style="position: absolute; top: 0px; left: 0px;" ontouchmove="touchMove(event);">
 
-<nav id="frameBackground" style="width: 320px; min-height: 480px; background-image: url('lvlboundering.png'); position: absolute; top: 0px; left: 0px;">
+<nav id="frameBackground" style="width: 100%; height: 300px; background-position: bottom center; position: absolute; top: 0px; left: 0px;">
 </nav>
  <!--background-image: url('background.png')-->
 <!--canvas id="gameBackgroundCanvas" style="position: absolute; top: 0px; left: 0px"></canvas-->
 <canvas id="gameCanvas" style="position: absolute; top: 0px; left: 0px; display:none" ></canvas>
 <nav id="animCanvas" style="position: absolute; top: 0px; left: 0px; ">
-	<div onClick="game.showMenu()" style="postion: absolute; top: 20px; left: 100px; right: auto">Back To Menu</div>
+	<!--div onClick="game.showMenu()" style="postion: absolute; top: 10px; left: 100px; right: auto">Back To Menu</div-->
 </nav>
-<nav id="leaderboardMenu" style="position: absolute; top: 0px; left: 0px; width: 100%; min-height: 100%; display: none; background-image: url('initscreen.png');">
-	<ul>
+<nav id="resolutionNav" style="background-position: center center; display: none; width: 100%; max-height: %100"></nav>
+<nav id="softgameNav" style="background-position: center center; display: none; width: 100%; max-height: %100">
+	Api de pagos <br />
+	Cargando estado de cuenta <br />
+	<div onClick="options.backToMenu()">back</div>
+</nav>
+<nav id="leaderboardMenu" style="position: absolute; top: 0px; left: 0px; width: 100%; min-height: 100%; display: none; ">
+	<ul id="leaderboardTabs">
 		<li><a href="#generalLeaderboard">General</a></li>
 		<li><a href="#facebookLeaderboard">Facebook</a></li>
 	</ul>
 	<div id="generalLeaderboard"></div>
 	<div id="facebookLeaderboard"></div>
 </nav>
-
-<nav id="softgameMenu" style="position: absolute; top: 0px; left: 0px; width: 100%; min-height: 100%; display: none; background-image: url('initscreen.png');">
-	<div style="position: absolute; top: 80px;">
-	</div>
-</nav>
-
-<nav id="optionMenu" style="position: absolute; top: 0px; left: 0px; width: 100%; min-height: 100%; display: none; background-image: url('initscreen.png');" >
+<nav id="optionMenu" style="position: absolute; top: 0px; left: 0px; width: 100%; min-height: 100%; display: none;" >
 	<div style="position: absolute; display: table; top: 20%; bottom: auto; margin: auto; width: 100%">
 	<div style="position: absolute; display: table; top: 20%; bottom: auto; margin: auto; width: 100%">
 		<div style="margin-top: 80px">
 		<nav style="font: bold 15px verdana, sans-serif; margin-top: 10px" onClick="options.toggleSound(); $(this).text(options.sound ? 'Sounds Enable (touch for disable it)' : 'Sounds Disabled (touch for enable it)')">Sounds Enable (touch for disable it)</nav>
+		<nav style="font: bold 15px verdana, sans-serif; margin-top: 10px" onClick="options.showLeaderboard(); retrieveLeaderboard('facebookLeaderboard', 'generalLeaderboard');">Show Leaderboard</nav>
 		<nav style="font: bold 15px verdana, sans-serif; margin-top: 10px" onCLick="postHighscoreOnFacebook()">Post my Highscore on Facebook!</nav>
-		<nav style="font: bold 15px verdana, sans-serif; margin-top: 10px" onClick="alert('oh, rly?');">Get more coins!</nav>
-		<nav style="font: bold 15px verdana, sans-serif; margin-top: 10px" onClick="retrieveLeaderboard('generalLeaderboard','facebookLeaderboard'); options.showLeaderboard();">Show Leaderboards</nav>
+		<nav style="font: bold 15px verdana, sans-serif; margin-top: 10px" onClick="alert('oh, rly?')">Get more coins!</nav>
 		<nav style="font: bold 15px verdana, sans-serif; margin-top: 10px" onClick="options.exitOptions()">get back to Main Menu</nav>
 		</div>
 	</div>
 	</div>
 </nav>
 
-<nav id="gameMenu" style="width: 100%; min-height: 100%; position: absolute; top: 0px; left: 0px; text-align: center; background-image: url('initscreen.png')" >
+<nav id="gameMenu" style="width: 100%; min-height: 100%; position: absolute; top: 0px; left: 0px; text-align: center; ">
 	<div style="position: absolute; display: table; top: 20%; bottom: auto; margin: auto; width: 100%">
-	<div style="position: absolute; display: table; top: 20%; bottom: auto; margin: auto; width: 100%">		
-		<img src="newbutton.png"  alt="" onClick="game.startNewGame();" style="margin-top: 90px"/><br>
-		<img src="continuebutton.png"  alt="" onClick="game.continueGame();" /><br>
-		<img src="optionbutton.png"  alt="" onClick="options.showOptions('gameMenu')" /><br>
-	</div>
+		<!--span style="font: bold 20px verdana, sans-serif; text-align: center">Bubble Paradise</span><br>
+		<div style="margin-top: 20px">
+		<nav style="font: bold 15px verdana, sans-serif; margin-top: 10px" onClick="alert('why? i dont have any sound yet!')">Sounds Enable (touch for disable it)</nav>
+		<nav style="font: bold 15px verdana, sans-serif; margin-top: 10px" onCLick="alert('when you make some real points, you will want to post it')">Post my Highscore on Facebook!</nav>
+		<nav style="font: bold 15px verdana, sans-serif; margin-top: 10px" onClick="alert('oh, rly?')">Get more coins!</nav>
+		<nav style="font: bold 15px verdana, sans-serif; margin-top: 10px" onClick="options.exitOptions()">get back to Main Menu</nav>
+		<img id="newbutton" alt="" onClick="game.startNewGame();" style="margin-top: 60px"/><br>
+		<img id="continuebutton" alt="" onClick="game.continueGame();" /><br>
+		<img id="optionbutton" alt="" onClick="options.showOptions('gameMenu')" style="margin-top: 40px"/><br>
+		</div-->		
+		<div id="newbutton" onClick="game.startNewGame();"></div>
+		<div id="continuebutton" onClick="game.continueGame();" ></div>
+		<div id="optionbutton" onClick="/*options.showOptions('gameMenu')*/" ></div>
+
+		<div id="facebookFrame" onClick="postHighscoreOnFacebook()"></div>
+		<div id="coinsFrame" onClick="options.showNav('softgameNav', 'gameMenu'); softgame.getUserBalance()"></div>
+		<div id="leaderboardFrame" onClick="options.showLeaderboard('gameMenu'); retrieveLeaderboard('facebookLeaderboard', 'generalLeaderboard');"></div>
 	</div>
 </nav>
-
-<nav id = "initScreen" style="position: absolute; top: 0px; left: 0px; border: 1px solid black; width: 100%; min-height: 100%; background-color: #fff">
-<img id="logoImg" src="logo.jpg" alt="logo" style="display: none; display: none; margin-left:auto; margin-right:auto; "/>
-<div id = "loadingScreen" style="position: absolute; top: 50%; bottom: auto; width: 100%; height: 50%; background-color: #fff">
-	<div style="font: 2em Verdana, sans-serif; text-align: center; width: 100%">Loading... </div><br>
-	<div style="width: 80%; min-height: 30px; border: 1px solid black; margin: 0 auto">
-		<div id="progress" style="width:01%; height: 30px; border: 1px solid black; background-color: #333333">
-		</div>
+<nav id = "FBnav" style="width: 100%; min-height: 100%; position: absolute; top: 0px; left: 0px; background-color: #fff">
+	<div id="FBbutton" onClick="connectToFacebook()"></div>
+</nav>
+<nav id = "initScreen" style="position: absolute; top: 0px; left: 0px; border: 1px solid black; width: 100%; min-height: 100%; background-color: #fff	">
+<div id="progressBar">
+	<div id="progress" style="width: 0%; height: 100%; background-color: #ffffff">
 	</div>
 </div>
+<img id="logoImg" src="logo.jpg" alt="logo" style="position: absolute; display: none; margin-left:auto; margin-right:auto; "/>	
+
+<!--div id = "loadingScreen" style="position: absolute; top: 0px; left: 0px; width: 100%; min-height: 100%; background-color: #fff">
+</div-->
 </nav>
-<nav id = "FBnav" style="width: 100%; min-height: 100%; position: absolute; top: 0px; left: 0px; background-color: #fff;">
+</nav> <!-- nav background
+
+<nav id = "FBnav" style="width: 100%; min-height: 100%; position: absolute; top: 0px; left: 0px; background-color: #fff">
 	This Application needs your Facebook account information to link you with your friends <br />
 	Please, log on with your account and allow this application to use your profile information and post in your wall <br />
 	Thank you! and enjoy your stay in our Paradise!!
 </nav>
-<nav id = "SGnav" style="width: 100%; min-height: 100%; position: absolute; top: 0px; left: 0px; background-color: #fff; display: none;">
-softgameApi
-</nav>
-</nav> <!-- nav background-->
+<div id="debug" style="margin-top: 490px"></div>
+-->
 
 <script type="text/javascript" charset="utf-8">
-	  
-if(screen.width >= 854) gameSize = "854x480";
-if(screen.width <= 640) gameSize = "640x960";
-if(screen.width <= 480) gameSize = "480x800";
-if(screen.width <= 360) gameSize = "360x480";
-if(screen.width <= 320) gameSize = "320x480";
+//setDebugEnv('debug');
+//setDebugEnv('initScreen');	  
+/*softgame = new softgameApi();
+	softgame.startConnection();*/
+function $_GET(q) { 
+    var s = window.location + ''; 
+    var q = q + '=';
+    if(s.indexOf(q) != -1){ //existe token			
+		return decodeURI(s.slice(s.indexOf(q) + q.length, s.indexOf("&")));
+	}else{
+		return '';
+	};
+} 
+
+function connectToFacebook(){
+		window.location = 'https://www.facebook.com/dialog/oauth?client_id=' + APPID + '&scope=publish_stream&redirect_uri='+window.location+'&response_type=token';
+};
 
 FB = new FBConnect('FBnav');
 softgame = new softgameApi('SGnav');
-$('#leaderboardMenu').tabify();
+
+$(window).load(function () {	
+//SWFID: 2647
+//GUID: 3689729b4f17433c
+	setTimeout(function(){ window.scrollTo(0,1); }, 0);
+	
+});
+
+gameSize = "320x480";
+//gameSize = "480x800";
+/*if(screen.width >= 854) gameSize = "854x480";
+if(screen.width <= 640) gameSize = "640x960";
+if(screen.width <= 480) gameSize = "480x800";
+if(screen.width <= 360) gameSize = "360x480";
+if(screen.width <= 320) gameSize = "320x480";*/
+
+loader = new Loader('progress', gameSize);
+options = new Options('optionMenu', 'leaderboardMenu');
+$('#leaderboardTabs ul').idTabs();
+$('#backgroundNav')[0].style.width = gameSize.slice(0,3) + 'px';
+$('#backgroundNav')[0].style.height = gameSize.slice(4) + 'px';
+//$('#frameBackground')[0].style.backgroundImage = 'url('++')';
+$('#frameBackground')[0].style.width = gameSize.slice(0,3) + 'px';
+$('#frameBackground')[0].style.height = gameSize.slice(4) + 'px';
+$('#FBnav')[0].style.width = gameSize.slice(0,3) + 'px';
+$('#FBnav')[0].style.height = gameSize.slice(4) + 'px';
+
+$('#progressBar').addClass('loadingProgressBar' + gameSize);
 
 function postHighscoreOnFacebook(){
 	var msg = FB.user.name + ' ha logrado ' +game.ui.acumuledPoints + ' en el Bubble Paradise!';
 	FB.post(msg);
 };
-		
-/*
-function SubmitScore()
-{
-    var simple_score = {};
-    simple_score.Name = FB.user.name;
-    simple_score.Points = game.ui.acumuledPoints;
 
-    // submit to the highest-is-best table "highscores"
-	var score_data = {
-		facebook : true,
-		highest: true,
-		allowduplicates: false
-	};
-
-    Playtomic.Leaderboards.Submit(simple_score, "highscores", SubmitComplete, score_data);
-}
-
-function SubmitComplete(score, response)
-{
-    if(response.Success)
-    {
-        alert("Score saved!");		
-    }
-    else
-    {
-        // submission failed because of response.ErrorCode
-    }
-}*/
-
-		
-loader = new Loader('progress', gameSize);
 loader.readyLoad = function(){	
 	//toda la intro del juego
+	document.getElementById('backgroundNav').style.backgroundImage = 'url('+backgroundImage.src+')';
+	//alert('url('+backgroundImage.src+')');
+	//alert(gameSize.slice(0,3) + 'x' + gameSize.slice(4));
+	$('#leaderboardMenu')[0].style.backgroundImage = 'url('+initImage.src+')';
+	$('#optionMenu')[0].style.backgroundImage = 'url('+initImage.src+')';
+	$('#gameMenu')[0].style.backgroundImage = 'url('+initImage.src+')';
+	$('#frameBackground')[0].style.backgroundImage = 'url('+lvlFrame.src+')';
+
+	$('#newbutton')[0].src = uiNewButton.src;
+	$('#continuebutton')[0].src = uiContinueButton.src;
+	$('#optionbutton')[0].src = uiOptionButton.src;
+
+	$('#facebookFrame').addClass('facebookFrame' + gameSize);
+	$('#coinsFrame').addClass('coinsFrame' + gameSize);
+	$('#leaderboardFrame').addClass('leaderboardFrame' + gameSize);
+
+	$('#newbutton').addClass('playImage' + gameSize);
+	$('#continuebutton').addClass('continueImage' + gameSize);
+	$('#optionbutton').addClass('optionsImage' + gameSize);
 	
-	$('#loadingScreen').fadeOut('fast', function(){
-		$('#logoImg').fadeIn(1900, function(){
-			$(this).fadeOut(1900, function(){
-				$("#initScreen").remove();		
-				//game = new appEnviroment("gameCanvas", "gameMenu", "gameBackgroundCanvas", "320x480");
-				//alert(screen.width);
-				/*options = new Options('optionMenu');
-				game = new appEnviroment("gameCanvas", "gameMenu", "animCanvas", gameSize);*/
-			});
+	$('#FBnav')[0].style.backgroundImage = 'url('+facebookScreen.src+')';
+	$('#FBbutton').addClass('facebookButton'+gameSize)
+
+	//$('#initScreen').fadeOut(600, function(){ $(this).remove(); });
+	//$('#loadingScreen').fadeOut('fast', function(){
+	FB.token = $_GET('access_token');
+	//if(FB.token != ''){	
+		game = new appEnviroment("gameCanvas", "gameMenu", "animCanvas", gameSize);	
+		FB.element.style.display = 'none';
+		FB.retrieveUserData();
+		FB.retrieveFriendsData();
+	//};
+
+	$('#logoImg').fadeIn(500, function(){
+		$("#initScreen").remove();
+		$(this).fadeOut(1900, function(){
+					
+			//game = new appEnviroment("gameCanvas", "gameMenu", "gameBackgroundCanvas", "320x480");
+			//alert(screen.width);
+			
+			//options = new Options('optionMenu', 'leaderboardMenu');
+			//game = new appEnviroment("gameCanvas", "gameMenu", "animCanvas", gameSize);
 		});
 	});
+	//});
 };
-
-loader.init();
 
 // fps
 /*var s = document.createElement('script');

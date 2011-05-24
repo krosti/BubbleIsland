@@ -35,7 +35,7 @@ function softgameApi(displayNav){
 	this.signature = $.md5(this.signature).toUpperCase();
 	alert(this.signature);
 
-	this.onLoginStablish;
+	this.onLogin = function(){};
 };
 
 //const
@@ -111,6 +111,8 @@ softgameApi.prototype.connectionEstablished = function(data){
 			//alert('response: ' + response);
 			this.token = response.token;	
 			this.signature = response.sig;
+			this.element.style.display = 'none';
+			this.onLogin();
 			softgame.getUserInfo();
 		}else{
 			alert('Error gral de apps');
@@ -184,6 +186,8 @@ softgameApi.prototype.secondConnectResponse = function(data, uri){
 	//alert('response: ' + response);
 	this.token = response.token;	
 	this.signature = response.sig;
+	this.element.style.display = 'none';
+	this.onLogin();
 	softgame.getUserInfo();
 };
 
@@ -202,6 +206,7 @@ softgameApi.prototype.coinsRequest = function(data){
 		this.userCoins = this.response.balance;
 	};
 };
+
 
 //functions
 softgameApi.prototype.startConnection = function(){
@@ -253,7 +258,28 @@ softgameApi.prototype.getUserInfo = function(){
 	});
 };
 
-
+softgameApi.prototype.getUserBalance = function(){
+	if(this.userdata == undefined){
+		alert('Error! we dont have your info yet, please wait while we chat with our server to ask about you :)');
+		return;
+	};
+	var uri = this.softgameUrl + this.softgameGetUserBalance;
+	var signature = this.game_id + this.softgameSplit2 +  this.token + this.softgameSplit2 + this.game_secret;
+	signature = signature.toUpperCase();
+	signature = $.md5(signature).toUpperCase();
+	var getdata{
+		pk: this.game_id,
+		token: this.token,
+		sig: signature
+	};
+	this.jqajax = $.ajax({
+		type: 'GET',
+		url: uri,
+		data, getdata,
+		success: function(data){ alert('success: ' + data);},
+		success: function(xhr, data){ alert('error: ' + data);}
+	});
+}
 
 /*softgameApi.prototype.name = function(){
 	if(!this.connected) return false;

@@ -102,8 +102,8 @@ softgameApi.prototype.connectionEstablished = function(data){
 				307: function(){ alert('307: ' + this.url ); }
 			},
 			success: function(data){ softgame.facebookConnectResponse(data); },
-			error: function(data, error){ alert('error first attemp'); },
-			complete: function(xhr,textStatus){ if(xhr.status == 302){ alert('complete: connectionEstablished ' + xhr.getResponseHeader("Location")); }; }
+			error: function(data, error){ alert('error first attemp'); }
+			//complete: function(xhr,textStatus){ if(xhr.status == 302){ alert('complete: connectionEstablished ' + xhr.getResponseHeader("Location")); }; }
 		});
 	}else{
 		if(data.indexOf('token')){
@@ -126,7 +126,7 @@ softgameApi.prototype.connectionEstablished = function(data){
 };
 
 softgameApi.prototype.facebookConnectResponse = function(data){
-	alert('facebookConnectResponse: ' + data);
+	//alert('facebookConnectResponse: ' + data);
 	if(data.indexOf('window.location.href="') != -1){
 		var faceuri = data.slice(data.indexOf('window.location.href="') + 22, data.indexOf('";'));
 		faceuri = '"' + faceuri + '"';
@@ -149,8 +149,8 @@ softgameApi.prototype.facebookConnectResponse = function(data){
 			},
 			//success: function(data){ FB.connectResponse(data) },
 			success: function(data){softgame.secondConnectResponse(data, decodeURI(this.url)); },
-			error: function(data, error){ alert('facebookConnectResponse: ' + data.responseText + ' : ' + error); },
-			complete: function(xhr,textStatus){ alert('complete: facebookConnectionEstablished ' + xhr.getAllResponseHeaders());  }
+			error: function(data, error){ alert('facebookConnectResponse: ' + data.responseText + ' : ' + error); }
+			//complete: function(xhr,textStatus){ alert('complete: facebookConnectionEstablished ' + xhr.getAllResponseHeaders());  }
 		});
 	}else{
 		//alert('login on facebook');
@@ -161,9 +161,9 @@ softgameApi.prototype.facebookConnectResponse = function(data){
 			var inputs = $('input');
 			for(var i = 0; i < inputs.length; ++i){
 				todata[inputs[i].name] = inputs[i].value;
-				alert(inputs[i].name + ':' + inputs[i].value);
+				//alert(inputs[i].name + ':' + inputs[i].value);
 			};
-			alert('form.action: ' + $('form')[0].action);
+			//alert('form.action: ' + $('form')[0].action);
 			//alert(inputs[0].name + ':' + inputs[0].value);
 
 			$.ajax({
@@ -217,7 +217,7 @@ softgameApi.prototype.startConnection = function(){
 		sig: this.signature,
 		back: this.softgameBackUrl
 	};
-	alert(link);
+	//alert(link);
 	this.jqajax = $.ajax({
 		type: 'GET',
 		url: link,
@@ -225,10 +225,10 @@ softgameApi.prototype.startConnection = function(){
 		/*success: this.connectionEstablished,
 		error: this.connectionError,*/
 		success: function(data, textStatus){ alert(this.url); alert(textStatus); softgame.connectionEstablished(data); },
-		error: function(obj, err, r){  alert(this.url); softgame.connectionError(obj, err, r); },
-		complete: function(jq, errorStatus){
+		error: function(obj, err, r){  alert(this.url); softgame.connectionError(obj, err, r); }
+		/*complete: function(jq, errorStatus){
 			alert('complete: ' + errorStatus +':'+jq.status + ':' + jq.getAllResponseHeaders()); 
-		}
+		}*/
 	});
 };
 

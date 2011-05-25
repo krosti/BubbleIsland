@@ -134,7 +134,7 @@ api.softgame.addSignatureParm = function(p){
 
 api.softgame.getSignature = function(){
 	alert('getSignature');
-	api.softgame.addSignatureParm(api.signature.game_secret);
+	api.softgame.addSignatureParm(api.softgame.game_secret);
 	api.softgame.signature = api.softgame.signature.toUpperCase();
 	alert('before md5');
 	api.softgame.signature = $.md5(api.softgame.signature).toUpperCase();

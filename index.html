@@ -751,7 +751,7 @@ $('#FBnav')[0].style.height = gameSize.slice(4) + 'px';
 $('#progressBar').addClass('loadingProgressBar' + gameSize);
 
 function postHighscoreOnFacebook(){
-	var msg = FB.user.name + ' ha logrado ' +game.ui.acumuledPoints + ' en el Bubble Paradise!';
+	var msg = FB.user.name + ' ha logrado ' + game.ui.acumuledPoints + ' en el Bubble Paradise!';
 	FB.post(msg);
 };
 

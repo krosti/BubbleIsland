@@ -35,7 +35,7 @@ api.facebook.errorResponse = function(data, error){
 api.facebook.connectResponse = function(data){
 	alert('connectResponse: ' + data);
 	if(data.indexOf('access_token=') != -1){
-		api.softgame.loginResponse(data);
+		api.facebook.loginResponse(data);
 		return;
 	};
 	api.facebook.framework.style.display = 'block';
@@ -232,7 +232,7 @@ api.softgame.connectionEstablished = function(data){
 	api.softgame.framework.style.display = 'none';
 	//s.slice(s.indexOf(q) + q.length, s.indexOf("&"))
 	//alert(this.uri)
-	/*data = data + '';
+	//data = data + '';
 	//this.element.innetHTML = data;
 	if(data.indexOf("https://") != -1){
 		var faceuri = data.slice(data.indexOf("https://"), data.indexOf('<table cellpadding="0" cellspacing="0" class="table-centered">') - 2);
@@ -241,11 +241,11 @@ api.softgame.connectionEstablished = function(data){
 			type: 'GET',
 			url: faceuri,
 			crossDomain: true,
-			success: function(data){ softgame.facebookConnectResponse(data); },
+			success: function(data){ api.softgame.connectionEstablished(data); },
 			error: function(data, error){ alert('error first attemp'); }
 			//complete: function(xhr,textStatus){ if(xhr.status == 302){ alert('complete: connectionEstablished ' + xhr.getResponseHeader("Location")); }; }
 		});
-	}else{*/
+	}else{
 		if(data.indexOf('token') != -1){
 			var response = eval('(' + data + ')');
 			//alert('response: ' + response);
@@ -259,7 +259,7 @@ api.softgame.connectionEstablished = function(data){
 			api.softgame.framework.style.display = 'block';
 			api.softgame.framework.innerHTML = data;
 		};
-	//};
+	};
 	//var d = data.slice(data.indexOf("<body"), data.indexOf('</html>'));
 
 	//this.element.innerHTML = d;

@@ -4,18 +4,19 @@ ToDo
 RC:
 [ ] animaciones
 [ ] sonido (html5 o por flash)
+[ ] leaderboard maquetado
+[ ] 
 
 To make a Mileston Monday
 Rebuild:
 [x] alinear panda
 [x] explosiones extras
 [x] animacion cañon
-[ ] animacion blink
+[x] animacion blink
 [x] add nuevas imagenes a loader
 [x] nuevo cartel de perder
 [x] añadir boton en perder y funcionalidad
-[x] puntajes en los carteles
-[ ] 
+[x] puntajes en los carteles 
 
 beta:
 [b] un disparo por tiempo
@@ -98,7 +99,7 @@ Array.prototype.remove = function(data) {
 }*/
 
 
-var VERSION = '0.9.006';
+var VERSION = '0.9.018';
 
 //debug
 var console;
@@ -177,6 +178,12 @@ uiNewButton = new Image();
 uiContinueButton = new Image();
 uiBackButton = new Image();
 uiLoadingScreen = new Image();
+
+uiLeaderboardScreen = new Image();
+uiLeaderboardMenu = new Image();
+uiLeaderboardHighscore = new Image();
+uiLeaderboardFriends = new Image();
+uiLeaderboardStar = new Image();
 
 facebookScreen = new Image();
 facebookButton = new Image();
@@ -539,15 +546,18 @@ function bubble(l){
 		}, 42);*/
 		if((this.x == this.lvl.leftBound) || (this.x >= this.lvl.width)) this.dx = -this.dx;
 		if(this.y <= (this.lvl.topBound + this.lvl.currentTop)){
+			this.lvl.mutex = true;
 			this.stopMove();
-			this.j = Math.round(this.x / this.lvl.bubbleRadius);
+			this.j = Math.floor((this.x - this.lvl.leftBound) / this.lvl.bubbleRadius);
 			this.i = 0;
 			this.recalcXY();
-			this.y += this.lvl.currentTop
+			this.y += this.lvl.currentTop;
 			this.dy = this.lvl.bubbleVelocity;			
 			this.lvl.addBubble(this);
+			this.lvl.grilla.Table[this.i][this.j] = this;
 			this.lvl.shootedBubble = null;
 			this.lvl.setReadyShoot();
+			this.lvl.mutex = false;
 		}; 
 	};
 	
@@ -650,22 +660,22 @@ function bubble(l){
 		//this.object.animationEnds = this.removeBubble;
 		var anim = '';
 		if(this.freezeBall){
-			anim = new Animation(7, bubbleFreezeExplode.width / 7, bubbleFreezeExplode.height, bubbleFreezeExplode.src);		
+			anim = new Animation(14, bubbleFreezeExplode.width / 14, bubbleFreezeExplode.height, bubbleFreezeExplode.src);		
 			anim.element.style.position = 'absolute';
 			anim.element.style.top = ( (game.height / 2) - (bubbleFreezeExplode.height / 2)) + 'px';
-			anim.element.style.left = ( (game.width / 2)  - ((bubbleFreezeExplode.width / 7) / 2)) + 'px';
+			anim.element.style.left = ( (game.width / 2)  - ((bubbleFreezeExplode.width / 14) / 2)) + 'px';
 		};
 		if(this.wasDetonated){
-			anim = new Animation(7, bubbleBombExplode.width / 9, bubbleBombExplode.height, bubbleBombExplode.src);		
+			anim = new Animation(14, bubbleBombExplode.width / 14, bubbleBombExplode.height, bubbleBombExplode.src);		
 			anim.element.style.position = 'absolute';
 			anim.element.style.top = ((this.y + (this.lvl.bubbleRadius / 2) ) - (bubbleBombExplode.height / 2)) + 'px';
-			anim.element.style.left = ((this.x + (this.lvl.bubbleRadius / 2) ) - ((bubbleBombExplode.width / 9) / 2)) + 'px';
+			anim.element.style.left = ((this.x + (this.lvl.bubbleRadius / 2) ) - ((bubbleBombExplode.width / 14) / 2)) + 'px';
 		};
 		if(this.secondFlavor != ''){
 			anim = new Animation(7, bubbleMultiColorExplode.width / 7, bubbleMultiColorExplode.height, bubbleMultiColorExplode.src);		
 			anim.element.style.position = 'absolute';
 			anim.element.style.top = ((this.y + (this.lvl.bubbleRadius / 2) ) - (bubbleMultiColorExplode.height / 2)) + 'px';
-			anim.element.style.left = ((this.x + (this.lvl.bubbleRadius / 2) ) - ((bubbleMultiColorExplode.width / 7) / 2)) + 'px';
+			anim.element.style.left = ((this.x + (this.lvl.bubbleRadius / 2) ) - ((bubbleMultiColorExplode.width / 14) / 2)) + 'px';
 		};
 		if(this.pointsMultiplier == 2){			
 			anim = new Animation(7, bubbleX2Explode.width / 7, bubbleX2Explode.height, bubbleX2Explode.src);		
@@ -698,9 +708,9 @@ function bubbleCannon(lvl){
 	this.currentBubble.makeItRandom();*/
 	this.readyShoot = false;
 	this.object = new standAnimation(uiCannon.width, uiCannon.height, uiCannon.src);
-	this.object.addState('shoot', uiCannonShoot.src, 9);
+	this.object.addState('shoot', uiCannonShoot.src, 8);
 	this.element = this.object.element;
-	this.object.setXY(((this.lvl.width - uiCannon.width) / 2) + this.lvl.leftBound, (this.lvl.height - uiCannon.height) + this.lvl.topBound + 4);
+	this.object.setXY(((this.lvl.width - uiCannon.width) / 2) + this.lvl.leftBound - 5, (this.lvl.height - uiCannon.height) + this.lvl.topBound + 4);
 	/*style.top = this.lvl.height - cannonImage.height;
 	style.left = (this.lvl.width - cannonImage.width) / 2;*/
 	
@@ -897,7 +907,7 @@ function bubbleTable(ancho, alto, lvl){
 					if(deltax < 0) dx = 0;
 				};
 			};
-			alert(dx + ':' + dy);
+			//alert(dx + ':' + dy);
 			bubble.i = collided.i + dy;
 			bubble.j = collided.j + dx;
 			bubble.x -= bubble.dx;
@@ -1344,6 +1354,10 @@ function bubbleLevel(w, h, bubblesWidth, bubblesHeight, lvlnbr){
 	this.addRandomRow = function(){
 		//re do
 		//alert("newrow");
+		if(this.mutex){
+			setTimeout('game.level.addRandomRow()', 10);
+			return;
+		};
 		ancho = this.grilla.ancho;
 		newrow = new Array(ancho);
 		if(!this.grilla.isShortRow(0)){ 
@@ -1771,13 +1785,19 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 		//cartel.style.zIndex = -99;
 		cartel.style.backgroundImage = 'url(backgrounddiv.png)';
 		cartel.style.backgroundRepeat = 'repeat';
+
+		continuebutton = document.createElement('div');
+		$(continuebutton).addClass('guiLooseContinue' + game.size);
+		cartel.appendChild(continuebutton);
+
 		//cartel.style.backgroundImage = 'url('+uiLooseFrame.src+')';
 		$(document.body).append(cartel);
 		$(cartel).fadeIn(150);
-		$(cartel).click(function(){
+		$(continuebutton).click(function(){
 			$(cartel).fadeOut(300, function(){
 				game.level.clearBoard();
 				game.ui.acumuledPoints = game.ui.points;
+				game.ui.pointsCounter = game.ui.points;
 				game.nextLevel();
 				$(cartel).remove();
 			});

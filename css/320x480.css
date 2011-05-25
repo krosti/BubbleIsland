@@ -33,9 +33,9 @@
 	height: 62px;
 	min-height: 62px;
 	font-family: Bubblegum;
-	font-size: 0.8em;
+	font-size: 0.7em;
 	padding-top: 37px;
-	padding-left: 35px;
+	padding-left: 37px;
 	color: #eeeeee;
 	text-shadow: -2px 0 black, 0 2px black,	  2px 0 black, 0 -2px black;
 }
@@ -50,8 +50,8 @@
 	min-height: 62px;
 	font-family: Bubblegum;
 	font-size: 0.8em;
-	padding-top: 31px;
-	padding-left: 46px;
+	padding-top: 33px;
+	padding-left: 47px;
 	color: #eeeeee;
 	text-shadow: -2px 0 black, 0 2px black,	  2px 0 black, 0 -2px black;
 }
@@ -169,7 +169,8 @@
 	width: 67px;
 	height: 40px;
 	top: 287px;
-	padding-top: 12px;
+	padding-top: 11px;
+	padding-left: 5px;
 	left: 130px;
 	text-align: center;
 }
@@ -200,4 +201,59 @@
 
 #initScreen{
 	background-image: url(../320x480/loadingscreen.png);
+}
+
+.leaderboard320x480{
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	background-image: url(../320x480/leaderboardscreen.png);
+};
+
+.leaderboardTabs320x480{
+	position: absolute;
+	top: 180px;
+	left: 135px;
+	width: 158px;
+	height: 20px;
+	min-height: 20px;
+}
+
+.leaderboardTab320x480{ 
+	position: absolute;
+	top: 245px;
+	left: 67px;
+	width: 200px;
+	height: 97px;
+	min-height: 97px;
+}
+
+.leaderboardTabHighscore320x480 { 
+	position: absolute;
+	top: 180px;
+	left: 135px;
+	width: 79px;
+	height: 20px;
+	min-height: 20px;
+	background-image: url(../320x480/leaderboardhighscore.png);
+}
+
+.leaderboardTabFriends320x480 { 
+	position: absolute;
+	top: 180px;
+	left: 215px;
+	width: 97px;
+	height: 20px;
+	min-height: 20px;
+	background-image: url(../320x480/leaderboardfriends.png);
+}
+
+.leaderboardBackMenu320x480 { 
+	position: absolute;
+	top: 380px;
+	left: 35px;
+	width: 116px;
+	height: 265px;
+	min-height: 65px;
+	background-image: url(../320x480/leaderboardmenu.png);
 }

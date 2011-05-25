@@ -58,7 +58,7 @@ function Loader(progress, size){
 	
 	this.readyLoad; // = function(){ alert('hola'); };
 	
-	this.toLoad = 60;
+	this.toLoad = 65;
 	this.isloaded = 0;
 	this.separator = '/';
 	
@@ -137,6 +137,12 @@ function Loader(progress, size){
 	uiBackButton.onload = this.loaded;
 	//uiLoadingScreen.onload = this.loaded;
 
+	uiLeaderboardScreen.onload = this.loaded;
+	uiLeaderboardMenu.onload = this.loaded;
+	uiLeaderboardHighscore.onload = this.loaded;
+	uiLeaderboardFriends.onload = this.loaded;
+	uiLeaderboardStar.onload = this.loaded;
+
 	facebookScreen.onload = this.loaded;
 	facebookButton.onload = this.loaded;
 
@@ -214,6 +220,12 @@ function Loader(progress, size){
 		uiContinueButton.src = this.size + this.separator + 'continuebutton.png';
 		uiBackButton.src = this.size + this.separator + 'backbutton.png';
 		//uiLoadingScreen.src = this.size + this.separator + 'loadingscreen.png';
+
+		uiLeaderboardScreen.src = this.size + this.separator + 'leaderboardscreen.png';
+		uiLeaderboardMenu.src = this.size + this.separator + 'leaderboardmenu.png';
+		uiLeaderboardHighscore.src = this.size + this.separator + 'leaderboardhighscore.png';
+		uiLeaderboardFriends.src = this.size + this.separator + 'leaderboardfriends.png';
+		uiLeaderboardStar.src = this.size + this.separator + 'leaderboardstar.png';
 
 		facebookScreen.src = this.size + this.separator + 'facebookscreen.png';
 		facebookButton.src = this.size + this.separator + 'facebookbutton.png';

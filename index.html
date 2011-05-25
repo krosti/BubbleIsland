@@ -32,7 +32,7 @@
 			Playtomic.Log.View(2647, "3689729b4f17433c", document.location);
 			alert('face');
 			FB = new FBConnect('FBnav');
-			alert('softgamr');
+			alert('softgame');
 			softgame = new softgameApi('SGnav');
 			alert('playtomic initialized')
 			FB.onConnect = function(){
@@ -61,6 +61,7 @@
 		* {
 			margin: 0;
 			padding: 0;
+			background-repeat: no-repeat;
 		}
 	
 		body, html { 
@@ -784,7 +785,7 @@ loader.readyLoad = function(){
 	FB.token = $_GET('access_token');
 	//if(FB.token != ''){	
 		game = new appEnviroment("gameCanvas", "gameMenu", "animCanvas", gameSize);	
-		FB.element.style.display = 'none';
+		//FB.element.style.display = 'none';
 		FB.retrieveUserData();
 		FB.retrieveFriendsData();
 	//};

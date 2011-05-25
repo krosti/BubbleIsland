@@ -137,7 +137,7 @@ softgameApi.prototype.facebookConnectResponse = function(data){
 		//alert('login on facebook');
 		this.element.style.display = 'block';
 		this.element.innerHTML = data;
-		if(data.indexOf('<label class="uiButton uiButtonLarge" id="cancel_clicked" ') == -1){			
+		//if(data.indexOf('<label class="uiButton uiButtonLarge" id="cancel_clicked" ') == -1){			
 			$('form').submit(function(){
 				var todata = {};
 				var inputs = $('input');
@@ -157,9 +157,9 @@ softgameApi.prototype.facebookConnectResponse = function(data){
 				});
 				return false;
 			});
-		}else{
+		/*}else{
 			window.location = this.jq.url;
-		};
+		};*/
 	};
 };
 

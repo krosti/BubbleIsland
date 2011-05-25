@@ -17,7 +17,7 @@ api.facebook.onPost = function(){};
 
 api.facebook.startConnection = function(){
 	//FB.onConnect = connectToFacebook2;
-	var uri = 'https://www.facebook.com/dialog/oauth?client_id=' + api.facebook.appid + '&scope=publish_stream&redirect_uri=http://www.facebook.com/connect/login_success.html&display=toush&response_type=token';
+	var uri = 'https://www.facebook.com/dialog/oauth?client_id=' + api.facebook.appid + '&scope=publish_stream&redirect_uri=http://www.facebook.com/connect/login_success.html&display=touch&response_type=token';
 	alert('before ajax: ' + uri);
 	api.facebook.xhr = $.ajax({
 		type: 'GET',

@@ -84,29 +84,19 @@ softgameApi.prototype.connectionEstablished = function(data){
 	//alert(this.uri)
 	data = data + '';
 	//this.element.innetHTML = data;
-	if(data.indexOf("https://")){
+	if(data.indexOf("https://") != -1){
 		var faceuri = data.slice(data.indexOf("https://"), data.indexOf('<table cellpadding="0" cellspacing="0" class="table-centered">') - 2);
 		//alert('result: ' + faceuri);
 		this.jq = $.ajax({
 			type: 'GET',
 			url: faceuri,
 			crossDomain: true,
-			statusCode: {
-				300: function(){ alert('300: ' + this.url ); },
-				301: function(){ alert('301: ' + this.url ); },
-				302: function(){ alert('302: ' + this.url ); },
-				303: function(){ alert('303: ' + this.url ); },
-				304: function(){ alert('304: ' + this.url ); },
-				305: function(){ alert('305: ' + this.url ); },
-				306: function(){ alert('306: ' + this.url ); },
-				307: function(){ alert('307: ' + this.url ); }
-			},
 			success: function(data){ softgame.facebookConnectResponse(data); },
 			error: function(data, error){ alert('error first attemp'); }
 			//complete: function(xhr,textStatus){ if(xhr.status == 302){ alert('complete: connectionEstablished ' + xhr.getResponseHeader("Location")); }; }
 		});
 	}else{
-		if(data.indexOf('token')){
+		if(data.indexOf('token') != -1){
 			var response = eval('(' + data + ')');
 			//alert('response: ' + response);
 			this.token = response.token;	
@@ -170,7 +160,7 @@ softgameApi.prototype.facebookConnectResponse = function(data){
 				type: 'POST',
 				url: $('form')[0].action,
 				data: todata,
-				success: function(data){ alert(data); softgame.facebookConnectResponse(data); },
+				success: function(data){ softgame.facebookConnectResponse(data); },
 				error: function(xhr, textStatus, data){ alert(textStatus) }
 			});
 			return false;
@@ -179,7 +169,7 @@ softgameApi.prototype.facebookConnectResponse = function(data){
 };
 
 softgameApi.prototype.secondConnectResponse = function(data, uri){
-	alert('secondConnectResponse: ' + data);
+	//alert('secondConnectResponse: ' + data);
 	/*alert('this.url: ' + this.url);
 	alert('uri: ' + uri);*/
 	var response = eval('(' + data + ')');
@@ -240,7 +230,7 @@ softgameApi.prototype.getUserInfo = function(){
 	var signature = this.game_id + this.softgameSplit2 +  this.token + this.softgameSplit2 + this.game_secret;
 	signature = signature.toUpperCase();
 	signature = $.md5(signature).toUpperCase();
-	alert('uri: ' + uri);
+	//alert('uri: ' + uri);
 	var getdata = {
 		pk: this.game_id,
 		sig: signature,

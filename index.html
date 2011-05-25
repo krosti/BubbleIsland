@@ -710,11 +710,12 @@ function connectToFacebook(){
 		//window.location = 'https://www.facebook.com/dialog/oauth?client_id=' + APPID + '&scope=publish_stream&redirect_uri='+window.location+'&response_type=token';
 		//softgame.onLoad = connectToFacebook2;
 		$('#FBbutton').click(function(){});
+		softgame.onLoginUser = connectToFacebook2;
 		softgame.startConnection();
 };
 
 function connectToFacebook2(){
-	//alert('before ajax: ' + FB.url);
+	alert('before ajax: ' + FB.url);
 	jq = $.ajax({
 		type: 'GET',
 		url: FB.url,

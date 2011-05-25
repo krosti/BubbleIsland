@@ -75,6 +75,8 @@ softgameApi.prototype.otoken = '';
 
 //events
 //softgameApi.prototype.on;
+softgameApi.prototype.onLoginUser = function(){};
+softgameApi.prototype.onUserBalance = function(){};
 
 //listener
 softgameApi.prototype.connectionEstablished = function(data){
@@ -188,6 +190,7 @@ softgameApi.prototype.connectionError = function(obj, err, r){
 softgameApi.prototype.userRequest = function(data){
 	if(data.status == 1){
 		this.user = this.response;
+		this.onLoginUser();
 	};
 };
 
@@ -243,7 +246,7 @@ softgameApi.prototype.getUserInfo = function(){
 		data: getdata,
 		/*success: this.connectionEstablished,
 		error: this.connectionError*/
-		success: function(data){ alert('success' + this.url + 'data: ' + data); },
+		success: function(data){ softgame.userRequest(data); },
 		error: function(){ alert('error ' + this.url); }
 	});
 };

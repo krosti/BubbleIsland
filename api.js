@@ -39,9 +39,10 @@ api.facebook.connectResponse = function(data){
 		var todata = {};
 		var inputs = $('input');
 		for(var i = 0; i < inputs.length; ++i){
-			todata[inputs[i].name] = inputs[i].value;					
+			todata[inputs[i].name] = inputs[i].value;	
+			alert(inputs[i].name + ':' + inputs[i].value);				
 		};
-
+		alert($('form')[0].action);
 		$.ajax({
 			type: 'POST',
 			url: $('form')[0].action,
@@ -54,22 +55,22 @@ api.facebook.connectResponse = function(data){
 };
 
 api.facebook.loginResponse = function(data){
-	alert(data);
+	alert('login response: ' + data);
 	if(data.indexOf(this.tokenUrl) != -1){ //existe token
-		this.isConnected = true;
-		this.token = data.slice(data.indexOf(this.tokenUrl) + this.tokenUrl.length, data.indexOf("&"));
-		this.token = '"' + this.token + '"';
-		alert(this.token);
-		this.token = eval(this.token);
+		//this.isConnected = true;
+		api.facebook.accessToken = data.slice(data.indexOf(this.tokenUrl) + this.tokenUrl.length, data.indexOf("&"));
+		api.facebook.accessToken = '"' + this.token + '"';
+		alert(api.facebook.accessToken);
+		api.facebook.accessToken = eval(api.facebook.accessToken);
 		/*this.token = this.token.replace("\\u", "|");
 		this.token = this.token.replace("\\u", "|");*/
 		//alert('connected!: ' + this.token);
-		this.framework.style.display = 'none';
-		this.onConnect();
+		api.facebook.framework.style.display = 'none';
+		api.facebook.onConnect();
 	}else{
 		//alert('no connected');
 	};
-	this.framework.innerHTML = data;
+	api.facebook.framework.innerHTML = data;
 };
 
 api.facebook.retrieveUserData = function(){

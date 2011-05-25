@@ -34,6 +34,10 @@ api.facebook.errorResponse = function(data, error){
 
 api.facebook.connectResponse = function(data){
 	alert('connectResponse: ' + data);
+	if(data.indexOf(access_token=)){
+		api.softgame.loginResponse(data);
+		return;
+	};
 	api.facebook.framework.style.display = 'block';
 	api.facebook.framework.innerHTML = data;
 	$('form').submit(function(){
@@ -158,16 +162,16 @@ api.softgame.startConnection = function(){
 	var link = api.softgame.softgameUrl + api.softgame.softgameAuth;
 	var getdata = {
 		pk: api.softgame.game_id,
-		lang: api.softgame.softgameLangCode,
-		back: api.softgame.softgameBackUrl
+		back: api.softgame.softgameBackUrl,
+		lang: api.softgame.softgameLangCode
 	};
 	alert('to sign');
 	var sign = api.softgame.JSON2Signature(getdata, 'RESTApi');
 	alert('signed');
 	getdata.sig = sign;
-	for(param in getdata){
+	/*for(param in getdata){
 		alert()
-	};
+	};*/
 	alert(link);
 	api.softgame.xhr = $.ajax({
 		type: 'GET',

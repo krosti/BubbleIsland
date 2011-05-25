@@ -642,7 +642,7 @@ function FBConnect(elementId){
 	
 	this.connectResponse = function(data){
 		//response of GET 
-		alert('response face: ' + data);
+		//alert('response face: ' + data);
 		if(data.indexOf(this.tokenUrl) != -1){ //existe token
 			this.isConnected = true;
 			this.token = data.slice(data.indexOf(this.tokenUrl) + this.tokenUrl.length, data.indexOf("&"));

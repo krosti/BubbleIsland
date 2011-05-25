@@ -135,7 +135,7 @@ softgameApi.prototype.facebookConnectResponse = function(data){
 		});
 	}else{
 		//alert('login on facebook');
-		if(data.indexOf('Log in to Facebook to connect it to') != -1){			
+		if(data.indexOf('<label class="uiButton uiButtonLarge" id="cancel_clicked" ') == -1){			
 			$('form').submit(function(){
 				var todata = {};
 				var inputs = $('input');

@@ -121,8 +121,11 @@ api.softgame.userCoins = 0;
 api.softgame.otoken = '';
 
 api.softgame.startSignature = function(type){	 
+	alert(type);
 	(type == 'RESTApi')? api.softgame.split = '|' : api.softgame.split = '||';
+	alert(api.softgame.split);
 	api.softgame.signature = api.softgame.game_id;
+	alert(api.softgame.signature);
 };
 
 api.softgame.addSignatureParm = function(p){
@@ -130,9 +133,12 @@ api.softgame.addSignatureParm = function(p){
 };
 
 api.softgame.getSignature = function(){
+	alert('getSignature');
 	api.softgame.addSignatureParm(api.signature.game_secret);
 	api.softgame.signature = api.softgame.signature.toUpperCase();
+	alert('before md5');
 	api.softgame.signature = $.md5(api.softgame.signature).toUpperCase();
+	alert('after md5');
 	return api.softgame.signature;
 };
 
@@ -141,8 +147,10 @@ api.softgame.JSON2Signature = function(obj, type){
 	var data = [];
 	for(param in obj){
 		data.push(obj[param]);
+		alert(param + ':' + obj[param]);
 	};
 	api.softgame.signature = data.join(api.softgame.split);
+	alert(api.softgame.signature);
 	return api.softgame.getSignature();
 };
 

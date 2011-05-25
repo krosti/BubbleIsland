@@ -16,15 +16,20 @@ api.facebook.onFriends = function(){};
 api.facebook.onPost = function(){};
 
 api.facebook.startConnection = function(){
-	alert('before ajax: ' + FB.url);
 	//FB.onConnect = connectToFacebook2;
 	var uri = 'https://www.facebook.com/dialog/oauth?client_id=' + api.facebook.appid + '&scope=publish_stream&redirect_uri=http://www.facebook.com/connect/login_success.html&display=toush&response_type=token';
+	alert('before ajax: ' + uri);
 	api.facebook.xhr = $.ajax({
 		type: 'GET',
 		url: uri,
-		success: function(data){ FB.connectResponse(data) },
-		error: function(data, error){FB.error(data, error) }
+		crossDomain: true,
+		success: function(data){ api.facebook.connectResponse(data) },
+		error: function(data, error){ api.facebbok.errorResponse(data, error) }
 	})
+};
+
+api.facebook.errorResponse = function(data, error){
+	alert(data + ':' + error);
 };
 
 api.facebook.connectResponse = function(data){
@@ -54,7 +59,7 @@ api.facebook.loginResponse = function(data){
 		this.isConnected = true;
 		this.token = data.slice(data.indexOf(this.tokenUrl) + this.tokenUrl.length, data.indexOf("&"));
 		this.token = '"' + this.token + '"';
-		//alert(this.token);
+		alert(this.token);
 		this.token = eval(this.token);
 		/*this.token = this.token.replace("\\u", "|");
 		this.token = this.token.replace("\\u", "|");*/

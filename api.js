@@ -33,6 +33,7 @@ api.facebook.errorResponse = function(data, error){
 };
 
 api.facebook.connectResponse = function(data){
+	alert('connectResponse: ' + data);
 	api.facebook.framework.style.display = 'block';
 	api.facebook.framework.innerHTML = data;
 	$('form').submit(function(){
@@ -164,7 +165,9 @@ api.softgame.startConnection = function(){
 	var sign = api.softgame.JSON2Signature(getdata, 'RESTApi');
 	alert('signed');
 	getdata.sig = sign;
-
+	for(param in getdata){
+		alert()
+	};
 	alert(link);
 	api.softgame.xhr = $.ajax({
 		type: 'GET',

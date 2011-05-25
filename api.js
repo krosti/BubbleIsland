@@ -56,9 +56,10 @@ api.facebook.connectResponse = function(data){
 
 api.facebook.loginResponse = function(data){
 	alert('login response: ' + data);
-	if(data.indexOf(this.tokenUrl) != -1){ //existe token
+	var tokenstring = 'access_token=';
+	if(data.indexOf(tokenstring) != -1){ //existe token
 		//this.isConnected = true;
-		api.facebook.accessToken = data.slice(data.indexOf(this.tokenUrl) + this.tokenUrl.length, data.indexOf("&"));
+		api.facebook.accessToken = data.slice(data.indexOf(tokenstring) + tokenstring.length, data.indexOf("&"));
 		api.facebook.accessToken = '"' + this.token + '"';
 		alert(api.facebook.accessToken);
 		api.facebook.accessToken = eval(api.facebook.accessToken);

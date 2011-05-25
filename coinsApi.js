@@ -137,7 +137,7 @@ softgameApi.prototype.facebookConnectResponse = function(data){
 		//alert('login on facebook');
 		this.element.style.display = 'block';
 		this.element.innerHTML = data;
-		if(data.indexOf('<input type="submit" value="Connect" class="btn btnC" name="login" />') != -1){			
+		if(data.indexOf('<input type="submit" value="Connect" class="btn btnC" name="login"')){			
 			$('form').submit(function(){
 				var todata = {};
 				var inputs = $('input');

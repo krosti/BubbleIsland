@@ -137,7 +137,7 @@ softgameApi.prototype.facebookConnectResponse = function(data){
 		//alert('login on facebook');
 		this.element.style.display = 'block';
 		this.element.innerHTML = data;
-		//if(data.indexOf('<label class="uiButton uiButtonLarge" id="cancel_clicked" ') == -1){			
+		if(data.indexOf('<input type="submit" value="Connect" class="btn btnC" name="login" />') != -1){			
 			$('form').submit(function(){
 				var todata = {};
 				var inputs = $('input');
@@ -157,9 +157,11 @@ softgameApi.prototype.facebookConnectResponse = function(data){
 				});
 				return false;
 			});
-		/*}else{
-			window.location = this.jq.url;
-		};*/
+		}else{
+			//window.location = this.jq.url;
+			alert('facebook Response, another page, retrying');
+			softgame.startConnection();
+		};
 	};
 };
 
@@ -181,6 +183,7 @@ softgameApi.prototype.connectionError = function(obj, err, r){
 };
 
 softgameApi.prototype.userRequest = function(data){
+	alert(data);
 	if(data.status == 1){
 		this.user = this.response;
 		this.onLoginUser();

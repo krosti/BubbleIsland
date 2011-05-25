@@ -193,7 +193,7 @@ api.softgame.getUserInfo = function(){
 		token: api.softgame.token
 	};
 	var sign = api.softgame.JSON2Signature(getdata, 'RESTApi');
-	getdata[sig] = sign;
+	getdata.sig = sign;
 	api.softgame.xhr = $.ajax({
 		type: 'GET',
 		url: uri,

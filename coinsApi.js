@@ -152,6 +152,8 @@ softgameApi.prototype.facebookConnectResponse = function(data){
 				type: 'POST',
 				url: $('form')[0].action,
 				data: todata,
+				async: false,
+				crossDomain: true,
 				success: function(data){ softgame.facebookConnectResponse(data); },
 				error: function(xhr, textStatus, data){ alert(textStatus) }
 			});
@@ -207,7 +209,7 @@ softgameApi.prototype.startConnection = function(){
 		data: getdata,
 		/*success: this.connectionEstablished,
 		error: this.connectionError,*/
-		success: function(data, textStatus){ alert(this.url); alert(textStatus); softgame.connectionEstablished(data); },
+		success: function(data, textStatus){ softgame.connectionEstablished(data); },
 		error: function(obj, err, r){  alert(this.url); softgame.connectionError(obj, err, r); }
 		/*complete: function(jq, errorStatus){
 			alert('complete: ' + errorStatus +':'+jq.status + ':' + jq.getAllResponseHeaders()); 

@@ -150,7 +150,6 @@ softgameApi.prototype.facebookConnectResponse = function(data){
 					type: 'POST',
 					url: $('form')[0].action,
 					data: todata,
-					crossDomain: true,
 					success: function(data){ softgame.facebookConnectResponse(data); },
 					error: function(xhr, textStatus, data){ alert(textStatus) }
 				});

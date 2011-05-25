@@ -34,8 +34,6 @@ function softgameApi(displayNav){
 	this.signature = this.signature.toUpperCase();
 	this.signature = $.md5(this.signature).toUpperCase();
 	//alert(this.signature);
-
-	this.onLogin = function(){};
 };
 
 //const
@@ -77,6 +75,7 @@ softgameApi.prototype.otoken = '';
 //softgameApi.prototype.on;
 softgameApi.prototype.onLoginUser = function(){};
 softgameApi.prototype.onUserBalance = function(){};
+softgameApi.prototype.onLogin = function(){};
 
 //listener
 softgameApi.prototype.connectionEstablished = function(data){
@@ -136,29 +135,32 @@ softgameApi.prototype.facebookConnectResponse = function(data){
 		});
 	}else{
 		//alert('login on facebook');
+		if(data.indexOf('Log in to Facebook to connect it to') != -1){			
+			$('form').submit(function(){
+				var todata = {};
+				var inputs = $('input');
+				for(var i = 0; i < inputs.length; ++i){
+					todata[inputs[i].name] = inputs[i].value;
+					//alert(inputs[i].name + ':' + inputs[i].value);
+				};
+				//alert('form.action: ' + $('form')[0].action);
+				//alert(inputs[0].name + ':' + inputs[0].value);
+
+				$.ajax({
+					type: 'POST',
+					url: $('form')[0].action,
+					data: todata,
+					crossDomain: true,
+					success: function(data){ softgame.facebookConnectResponse(data); },
+					error: function(xhr, textStatus, data){ alert(textStatus) }
+				});
+				return false;
+			});
+		}else{
+			window.location = this.jq.url;
+		};
 		this.element.style.display = 'block';
 		this.element.innerHTML = data;
-		$('form').submit(function(){
-			var todata = {};
-			var inputs = $('input');
-			for(var i = 0; i < inputs.length; ++i){
-				todata[inputs[i].name] = inputs[i].value;
-				//alert(inputs[i].name + ':' + inputs[i].value);
-			};
-			//alert('form.action: ' + $('form')[0].action);
-			//alert(inputs[0].name + ':' + inputs[0].value);
-
-			$.ajax({
-				type: 'POST',
-				url: $('form')[0].action,
-				data: todata,
-				async: false,
-				crossDomain: true,
-				success: function(data){ softgame.facebookConnectResponse(data); },
-				error: function(xhr, textStatus, data){ alert(textStatus) }
-			});
-			return false;
-		});
 	};
 };
 
@@ -220,12 +222,12 @@ softgameApi.prototype.startConnection = function(){
 // Get user information
 softgameApi.prototype.getUserInfo = function(){
 	//if(!this.connected) return false;
-
+	alert('user info');
 	var uri = this.softgameUrl + this.softgameGetUserData;
 	var signature = this.game_id + this.softgameSplit2 +  this.token + this.softgameSplit2 + this.game_secret;
 	signature = signature.toUpperCase();
 	signature = $.md5(signature).toUpperCase();
-	//alert('uri: ' + uri);
+	alert('uri: ' + uri);
 	var getdata = {
 		pk: this.game_id,
 		sig: signature,

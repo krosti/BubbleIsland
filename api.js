@@ -153,14 +153,18 @@ api.softgame.onLogin = function(){};
 
 //functions
 api.softgame.startConnection = function(){
+	alert('starConnection');
 	var link = api.softgame.softgameUrl + api.softgame.softgameAuth;
 	var getdata = {
 		pk: api.softgame.game_id,
 		lang: api.softgame.softgameLangCode,
 		back: api.softgame.softgameBackUrl
 	};
+	alert('to sign');
 	var sign = api.softgame.JSON2Signature(getdata, 'RESTApi');
+	alert('signed');
 	getdata[sig] = sign;
+
 	//alert(link);
 	api.softgame.xhr = $.ajax({
 		type: 'GET',

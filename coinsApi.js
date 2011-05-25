@@ -21,19 +21,19 @@ http://drone.softgames.de/eui/auth?pk=9C5TVaAs3w1xvUOBn9BZM3g4E3I83DFn&lang=en&s
 function softgameApi(displayNav){
 	this.self = this;
 	this.jq;
-	alert('get element: ' + displayNav);
+	//alert('get element: ' + displayNav);
 	this.element = document.getElementById(displayNav);
 	this.element.style.position = 'fixed';
 	this.element.style.top = '0px';
 	this.element.style.left = '0px';
 	this.element.style.width = '320px';
 	this.element.style.height = '480px';
-	alert('making signature');
+	//alert('making signature');
 	this.signature = this.game_id + this.softgameSplit + this.softgameBackUrl + this.softgameSplit + this.softgameLangCode + this.softgameSplit + this.game_secret;
 	//this.signature = this.game_id + this.softgameSplit + this.softgameLangCode + this.softgameSplit + this.softgameBackUrl + this.softgameSplit + this.game_secret;
 	this.signature = this.signature.toUpperCase();
 	this.signature = $.md5(this.signature).toUpperCase();
-	alert(this.signature);
+	//alert(this.signature);
 
 	this.onLogin = function(){};
 };
@@ -86,7 +86,7 @@ softgameApi.prototype.connectionEstablished = function(data){
 	//this.element.innetHTML = data;
 	if(data.indexOf("https://")){
 		var faceuri = data.slice(data.indexOf("https://"), data.indexOf('<table cellpadding="0" cellspacing="0" class="table-centered">') - 2);
-		alert('result: ' + faceuri);
+		//alert('result: ' + faceuri);
 		this.jq = $.ajax({
 			type: 'GET',
 			url: faceuri,
@@ -131,7 +131,7 @@ softgameApi.prototype.facebookConnectResponse = function(data){
 		var faceuri = data.slice(data.indexOf('window.location.href="') + 22, data.indexOf('";'));
 		faceuri = '"' + faceuri + '"';
 		faceuri = eval(faceuri);
-		alert('result second: ' + faceuri);
+		//alert('result second: ' + faceuri);
 		faceuri = decodeURI(faceuri);
 		//window.location = faceuri;
 		this.jq = $.ajax({
@@ -148,12 +148,12 @@ softgameApi.prototype.facebookConnectResponse = function(data){
 				307: function(){ alert('307: ' + this.url ); }
 			},
 			//success: function(data){ FB.connectResponse(data) },
-			success: function(data){ alert(this.url); softgame.secondConnectResponse(data, decodeURI(this.url)); },
+			success: function(data){softgame.secondConnectResponse(data, decodeURI(this.url)); },
 			error: function(data, error){ alert('facebookConnectResponse: ' + data.responseText + ' : ' + error); },
 			complete: function(xhr,textStatus){ alert('complete: facebookConnectionEstablished ' + xhr.getAllResponseHeaders());  }
 		});
 	}else{
-		alert('login on facebook');
+		//alert('login on facebook');
 		this.element.style.display = 'block';
 		this.element.innerHTML = data;
 		$('form').submit(function(){
@@ -161,10 +161,10 @@ softgameApi.prototype.facebookConnectResponse = function(data){
 			var inputs = $('input');
 			for(var i = 0; i < inputs.length; ++i){
 				todata[inputs[i].name] = inputs[i].value;
-				alert(inputs[i].name + ':' + inputs[i].value);
+				//alert(inputs[i].name + ':' + inputs[i].value);
 			};
-			alert($('form').action + ':' + $('form')[0].action);
-			alert(inputs[0].name + ':' + inputs[0].value);
+			//alert($('form').action + ':' + $('form')[0].action);
+			//alert(inputs[0].name + ':' + inputs[0].value);
 
 			$.ajax({
 				type: 'POST',

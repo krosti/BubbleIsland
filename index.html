@@ -712,12 +712,14 @@ function connectToFacebook2(){
 		//softgame.onLoad = connectToFacebook2;
 		
 		//softgame.onLoginUser = connectToFacebook2;
-		softgame.startConnection();
+		//softgame.startConnection();
+		api.softgame.startConnection();
 };
 
 function connectToFacebook(){
 	$('#FBbutton').click(function(){});
 	api.facebook.framework = document.getElementById('SGnav');
+	api.softgame.framework = document.getElementById('SGnav');
 	api.facebook.onConnect = connectToFacebook2;
 	api.facebook.startConnection();
 	/*alert('before ajax: ' + FB.url);

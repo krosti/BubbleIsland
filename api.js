@@ -34,7 +34,7 @@ api.facebook.errorResponse = function(data, error){
 
 api.facebook.connectResponse = function(data){
 	alert('connectResponse: ' + data);
-	if(data.indexOf(access_token=)){
+	if(data.indexOf('access_token=')){
 		api.softgame.loginResponse(data);
 		return;
 	};

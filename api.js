@@ -80,8 +80,23 @@ api.facebook.loginResponse = function(data){
 };
 
 api.facebook.retrieveUserData = function(){
-	
+	postdata = {
+		access_token: api.facebook.accessToken		
+	};
+	self = this;
+	$.ajax({
+		url: 'https://graph.facebook.com/me',
+		type: 'GET',
+		data: postdata,
+		//success: function(data){ alert('success: ' + data); self.setUserData(data); },
+		success: this.setUserData,
+		//error: function(data, er, r){ alert(data.responseText + ':' + er + ':' +r); }
+	});
+};
 
+api.facebook.setUserData = function(data){
+	alert(data);
+	api.facebook.user = eval('(' + data + ')');	
 };
 
 api.facebook.retrieveUserFriends = function(){
@@ -89,6 +104,22 @@ api.facebook.retrieveUserFriends = function(){
 };
 
 api.facebook.postMessage = function(msg){
+		alert('post: ' + msg);
+		var uri = "https://graph.facebook.com/me/feed";
+		postdata = {
+			access_token: this.token,
+			message: msg
+		};
+		//$.post(url, {message: msg, access_token: FB.token}, function(data){ alert(data); });
+		this.ajaxReply = $.ajax({
+			url: uri,
+			type: 'POST',
+			contentType: 'multipart/form-data',
+			data: postdata, 
+			success: function(data){ alert('success: ' + data); },
+			error: function(data, error, r){ alert('error: ' + data.responseText + error + r); }
+		});
+		//alert('termine el post');
 	
 };
 
@@ -225,7 +256,8 @@ api.softgame.getBilling = function(){
 	var uri = api.softgame.softgameUrl + api.softgame.softgameBilling;
 	var getdata = {
 		pk: api.softgame.game_id,
-		token: api.softgame.token
+		back: api.softgame.softgameBackUrl,
+		lang: api.softgame.softgameLangCode
 	};
 	var sign = api.softgame.JSON2Signature(getdata, 'web');
 	getdata.sig = sign;
@@ -366,5 +398,89 @@ api.softgame.balanceRequest = function(data){
 
 api.softgame.billingRequest = function(data){
 	alert(data);
-	var billingdata = eval('(' + data + ')');
+	api.softgame.framework.style.display = 'block';
+	api.softgame.framework.innerHTML = data;
+	//var billingdata = eval('(' + data + ')');
+
+};
+
+
+//api db personal
+api.levels = {};
+api.levels.xhr;
+api.levels.url = 'apilevels.borealdev.com.ar/';
+api.levels.jsonlevel = {};
+
+api.levels.onGetLevel = function(){};
+
+api.levels.getLevel = function(playerid){
+	var $getdata = {
+		to: 'get',
+		player_id: playerid,
+	};
+	api.levels.xhr = $.ajax({
+		type: 'POST',
+		data: getdata,
+		url: api.levels.url, 
+		success: api.levels.getResponse,
+		error: api.responseError
+	});
+};
+
+api.levels.getResponse = function(data){
+	var jsonlevel = api.string2JSON(data);
+	if(jsonlevel.status == 1){
+		api.levels.jsonlevel = api.string2JSON(jsonlevel.level);
+	};
+};
+
+api.levels.putLevel = function(playerid){
+	var $getdata = {
+		to: 'put',
+		player_id: playerid,
+	};
+	api.levels.xhr = $.ajax({
+		type: 'POST',
+		data: getdata,
+		url: api.levels.url, 
+		success: api.levels.getResponse,
+		error: api.responseError
+	});
+};
+
+api.levels.putResponse = function(data){
+	
+};
+
+api.levels.responseError = function(xhr, error, text){
+	alert(xhr + ':' + error + ':' + text);
+};
+
+api.levels.serializeLevel;
+api.levels.unserializeLevel;
+//additional api usefull function
+
+api.string2JSON = function(data){
+	return eval('(' + data + ')')
+};
+
+api.JSON2String = function(obj){
+	var t = typeof (obj);
+    if(t != "object" || obj === null){
+        if (t == "string") obj = '"'+obj+'"';
+        return String(obj);
+    }else{
+        var n, v, json = [], arr = (obj && obj.constructor == Array);
+        for (n in obj) {
+            v = obj[n]; t = typeof(v);
+            if (t == "string") v = '"'+v+'"';
+            else if (t == "object" && v !== null) v = api.JSON2String(v);
+            json.push((arr ? "" : '"' + n + '":') + String(v));
+        }
+        return (arr ? "[" : "{") + String(json) + (arr ? "]" : "}");
+    }
+};
+
+api.md5 = function(data){
+	//to implement
 };

@@ -2,9 +2,8 @@
 ToDo
 
 RC:
-[ ] animaciones
-[ ] sonido (html5 o por flash)
-[ ] leaderboard maquetado
+[x] animaciones
+[-] leaderboard maquetado
 [ ] 
 
 To make a Mileston Monday
@@ -26,7 +25,7 @@ beta:
 [x] poner cartel que diga "posiblemente se cierre la aplicación para validar su cuenta de facebook"
 [-] mejorar parte de facebook
 [-] leaderboard
-[ ] agregar api de pago
+[-] agregar api de pago
 [x] pelotitas
 [x] animaciónes, oso y cosas...	
 [-] agregar ui
@@ -99,7 +98,7 @@ Array.prototype.remove = function(data) {
 }*/
 
 
-var VERSION = '0.9.018';
+var VERSION = '0.9.020';
 
 //debug
 var console;
@@ -250,6 +249,14 @@ var pointExplode = 10;
 var pointDrop = 5;
 var min_vel = .1;
 var freezeTime = 10 //en segundos
+
+var currentState = {
+	level: 1,
+	points: 0,
+	state: 'waiting'
+};
+
+var datafile;
 
 
 APPID = '213255638692367';
@@ -1556,6 +1563,7 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 	this.backgroundImage = backgroundImage;
 	this.lvlFrame = lvlFrame;
 	animNav = $('#' + navObj);
+	this.filestate = 'loading'; // posible state loading, ok, writing
 
 	this.size = size;
 
@@ -1599,15 +1607,30 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 	
 	this.ui = new gameUI(this.canvas.width, this.canvas.height);
 	
-	//init
-	/*this.width = this.canvas.width;
-	this.height = this.canvas.height;
-	this.top = this.canvas.top;
-	this.left = this.canvas.left;
-	this.level.top = this.top;
-	this.level.left = this.left;
-	this.level.topBound = this.canvas.height - lvlFrame.height;
-	this.level.leftBound = (this.canvas.width - lvlFrame.width) / 2;*/
+	this.startLocalStorage = function(){
+		
+	};
+
+	this.loadState = function(){
+		this.filestate = 'loading';
+		var reader = new FileReader();
+		reader.onloadend = function(evt){
+			game.filestate = 'ok';
+			currentState = api.string2JSON(this.result);	
+			game.level = currentState.level;
+			game.ui.acumuledPoints = currentState.points;
+		};
+		reader.readAsText(datafile);
+	};
+
+	this.saveState = function(){
+		this.filestate = 'writing';
+		datafile.createWriter(function(writer){
+			writer.seek(0);
+			writer.onwrite = function(){ game.filestate = 'ok'};
+			writer.write(api.JSON2String(currentState));
+		});
+	};
 	
 	//event listeners
 	this.mouseMove = function(event){
@@ -1901,3 +1924,14 @@ function tick(){
 	//performance.update();
 	//setTimeout("tick()", 1);
 }
+
+api.levels.serializeLevel = function(game){
+	//api.levels.jsonlevel = {};
+	var lvl;
+	lvl.lvlnumber;
+
+};
+
+api.levels.unserializeLevel = function(game){
+	//api.
+};

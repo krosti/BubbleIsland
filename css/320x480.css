@@ -20,8 +20,8 @@
 	padding-top: 25px;			
 	/*padding-left: 20px;*/
 	text-align: center;
-	color: #eeeeee;
-	text-shadow: -2px 0 black, 0 2px black,	  2px 0 black, 0 -2px black;
+	color: #4e3e2d;
+	/*text-shadow: -2px 0 black, 0 2px black,	  2px 0 black, 0 -2px black;*/
 }
 
 .levelsFrame320x480{
@@ -36,8 +36,8 @@
 	font-size: 0.7em;
 	padding-top: 37px;
 	padding-left: 37px;
-	color: #eeeeee;
-	text-shadow: -2px 0 black, 0 2px black,	  2px 0 black, 0 -2px black;
+	color: #4e3e2d;
+	/*text-shadow: -2px 0 black, 0 2px black,	  2px 0 black, 0 -2px black;*/
 }
 
 .lifesFrame320x480{
@@ -50,10 +50,10 @@
 	min-height: 62px;
 	font-family: Bubblegum;
 	font-size: 0.8em;
-	padding-top: 33px;
+	padding-top: 31px;
 	padding-left: 47px;
-	color: #eeeeee;
-	text-shadow: -2px 0 black, 0 2px black,	  2px 0 black, 0 -2px black;
+	color: #ffffff;
+	/*text-shadow: -2px 0 black, 0 2px black,	  2px 0 black, 0 -2px black;*/
 }
 
 .gobackFrame320x480{
@@ -66,8 +66,8 @@
 	min-height: 27px;
 	font-family: Bubblegum;
 	font-size: 0.8em;
-	color: #eeeeee;
-	text-shadow: -2px 0 black, 0 2px black,	  2px 0 black, 0 -2px black;
+	color: #4e3e2d;
+	/*text-shadow: -2px 0 black, 0 2px black,	  2px 0 black, 0 -2px black;*/
 }
 
 .facebookFrame320x480{
@@ -208,7 +208,7 @@
 	top: 0px;
 	left: 0px;
 	background-image: url(../320x480/leaderboardscreen.png);
-};
+}
 
 .leaderboardTabs320x480{
 	position: absolute;

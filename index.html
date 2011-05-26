@@ -45,11 +45,11 @@
 				//FB.retrieveUserData();
 				//FB.retrieveFriendsData();
 			};*/
-			window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(fileSystem){
+			/*window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(fileSystem){
 				fileSystem.root.getFile("localdata", null, function(handler){
 					datafile = handler;
 				});
-			});
+			});*/
 			FB.setUrl(APPID, 'touch');
 			loader.init();
 			/*var uri = 'https://www.facebook.com/dialog/oauth?client_id=213255638692367&scope=publish_stream&redirect_uri=http://www.facebook.com/connect/login_success.html&display=touch&response_type=token';*/

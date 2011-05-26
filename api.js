@@ -331,6 +331,8 @@ api.softgame.connectionError = function(obj, err, r){
 api.softgame.userRequest = function(data){
 	alert(data);
 	var userdata = eval('(' + data + ')');
+	alert(userdata);
+	alert(userdata.status);
 	if(userdata.status == 1){
 		api.softgame.user = userdata.response;
 		api.softgame.onLoginUser();

@@ -105,6 +105,7 @@ api.softgame.softgameGetUserBalance = 'cpi/user/balance';
 api.softgame.softgameOrderStart = 'cpi/order/start';
 api.softgame.softgameDoOrder = 'eui/order';
 api.softgame.softgameOrderFinalize = 'cpi/user/balance';
+api.softgame.softgameBilling = 'eui/billing';
 api.softgame.softgameBackUrl = "http://puzzlebubble.eudaimonia.com.ar/";
 //api.softgame.softgameBackUrl = "http://eudaimonia.com.ar";
 api.softgame.split = '|';
@@ -216,6 +217,23 @@ api.softgame.getUserBalance = function(){
 		url: uri,
 		data: getdata,
 		success: function(data){ api.softgame.balanceRequest(data); },
+		error: function(xhr, data){ alert('error: ' + data); }
+	});
+};
+
+api.softgame.getBilling = function(){
+	var uri = api.softgame.softgameUrl + api.softgame.softgameBilling;
+	var getdata = {
+		pk: api.softgame.game_id,
+		token: api.softgame.token
+	};
+	var sign = api.softgame.JSON2Signature(getdata, 'web');
+	getdata.sig = sign;
+	this.jqajax = $.ajax({
+		type: 'GET',
+		url: uri,
+		data: getdata,
+		success: function(data){ api.softgame.billingRequest(data); },
 		error: function(xhr, data){ alert('error: ' + data); }
 	});
 };
@@ -344,4 +362,9 @@ api.softgame.coinsRequest = function(data){
 api.softgame.balanceRequest = function(data){
 	alert(data);
 	var balancedata = eval('(' + data + ')');
+};
+
+api.softgame.billingRequest = function(data){
+	alert(data);
+	var billingdata = eval('(' + data + ')');
 };

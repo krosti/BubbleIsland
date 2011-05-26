@@ -33,7 +33,7 @@ api.facebook.errorResponse = function(data, error){
 };
 
 api.facebook.connectResponse = function(data){
-	alert('connectResponse: ' + data);
+	//alert('connectResponse: ' + data);
 	if(data.indexOf('access_token=') != -1){
 		api.facebook.loginResponse(data);
 		return;
@@ -60,7 +60,7 @@ api.facebook.connectResponse = function(data){
 };
 
 api.facebook.loginResponse = function(data){
-	alert('login response: ' + data);
+	//alert('login response: ' + data);
 	var tokenstring = 'access_token=';
 	if(data.indexOf(tokenstring) != -1){ //existe token
 		//this.isConnected = true;
@@ -158,21 +158,21 @@ api.softgame.onLogin = function(){};
 
 //functions
 api.softgame.startConnection = function(){
-	alert('starConnection');
+	//alert('starConnection');
 	var link = api.softgame.softgameUrl + api.softgame.softgameAuth;
 	var getdata = {
 		pk: api.softgame.game_id,
 		back: api.softgame.softgameBackUrl,
 		lang: api.softgame.softgameLangCode
 	};
-	alert('to sign');
+	//alert('to sign');
 	var sign = api.softgame.JSON2Signature(getdata, 'RESTApi');
-	alert('signed');
+	//alert('signed');
 	getdata.sig = sign;
 	/*for(param in getdata){
 		alert()
 	};*/
-	alert(link);
+	//alert(link);
 	api.softgame.xhr = $.ajax({
 		type: 'GET',
 		url: link,
@@ -185,7 +185,7 @@ api.softgame.startConnection = function(){
 // Get user information
 api.softgame.getUserInfo = function(){
 	//if(!this.connected) return false;
-	alert('user info');
+	//alert('user info');
 	var uri = api.softgame.softgameUrl + api.softgame.softgameGetUserData;
 	alert('uri: ' + uri);
 	var getdata = {
@@ -228,7 +228,7 @@ api.softgame.getUserBalance = function(){
 
 //response handlers
 api.softgame.connectionEstablished = function(data){
-	alert('connectionEstablished: ' + data);
+	//alert('connectionEstablished: ' + data);
 	api.softgame.framework.style.display = 'none';
 	//s.slice(s.indexOf(q) + q.length, s.indexOf("&"))
 	//alert(this.uri)
@@ -331,9 +331,9 @@ api.softgame.connectionError = function(obj, err, r){
 api.softgame.userRequest = function(data){
 	alert(data);
 	var userdata = eval('(' + data + ')');
-	alert(userdata);
-	alert(userdata.status);
-	if(userdata.status == 1){
+	//alert(userdata);
+	//alert(userdata.status);
+	if(userdata.status == 1){		
 		api.softgame.user = userdata.response;
 		api.softgame.onLoginUser();
 	};

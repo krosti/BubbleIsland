@@ -17,10 +17,12 @@
 	<script src="jquerytab.js" type="text/javascript" charset="utf-8"></script> 
 	<script src="jquerymd5.js" type="text/javascript" charset="utf-8"></script> 
 	<script src="api.js" type="text/javascript" charset="utf-8"></script> 
-	<script src="phonegap.js" type="text/javascript" charset="utf-8"></script> 
+	
 	<script src="jqueryMobile.js" type="text/javascript" charset="utf-8"></script> 
 	<script src="playtomic.js" type="text/javascript" charset="utf-8"></script>
-	 <!-- game 	 -->
+	 <!-- game
+	 <script src="phonegap.js" type="text/javascript" charset="utf-8"></script> 
+	  	 -->
 	<script src="FBconnect.js" type="text/javascript" charset="utf-8"></script> 
 	<script src="leaderboard.js" type="text/javascript" charset="utf-8"></script> 
 	<script src="side.js" type="text/javascript" charset="utf-8"></script> 
@@ -31,6 +33,7 @@
 		document.addEventListener('deviceready', function(){
 			//alert('in connect');
 			Playtomic.Log.View(2647, "3689729b4f17433c", document.location);
+			loader.init();
 			//alert('face');
 			/*FB = new FBConnect('FBnav');
 			//alert('softgame');
@@ -50,8 +53,8 @@
 					datafile = handler;
 				});
 			});*/
-			FB.setUrl(APPID, 'touch');
-			loader.init();
+			//FB.setUrl(APPID, 'touch');
+			
 			/*var uri = 'https://www.facebook.com/dialog/oauth?client_id=213255638692367&scope=publish_stream&redirect_uri=http://www.facebook.com/connect/login_success.html&display=touch&response_type=token';*/
 			/*alert('before ajax: ' + FB.url);
 			jq = $.ajax({
@@ -747,6 +750,7 @@ $(window).load(function () {
 //SWFID: 2647
 //GUID: 3689729b4f17433c
 	setTimeout(function(){ window.scrollTo(0,1); }, 0);
+	loader.init();
 	
 });
 
@@ -812,12 +816,12 @@ loader.readyLoad = function(){
 
 	//$('#initScreen').fadeOut(600, function(){ $(this).remove(); });
 	//$('#loadingScreen').fadeOut('fast', function(){
-	FB.token = $_GET('access_token');
+	//FB.token = $_GET('access_token');
 	//if(FB.token != ''){	
 		game = new appEnviroment("gameCanvas", "gameMenu", "animCanvas", gameSize);	
 		//FB.element.style.display = 'none';
-		FB.retrieveUserData();
-		FB.retrieveFriendsData();
+		//FB.retrieveUserData();
+		//FB.retrieveFriendsData();
 	//};
 
 	$('#logoImg').fadeIn(1200, function(){

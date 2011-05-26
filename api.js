@@ -24,7 +24,7 @@ api.facebook.startConnection = function(){
 		url: uri,
 		crossDomain: true,
 		success: function(data){ api.facebook.connectResponse(data) },
-		error: function(data, error){ api.facebbok.errorResponse(data, error) }
+		error: function(data, error){ api.facebook.errorResponse(data, error) }
 	})
 };
 

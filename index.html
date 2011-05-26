@@ -626,12 +626,16 @@ body.sgds .clear {
 	<div onClick="options.backToMenu()">back</div>
 </nav>
 <nav id="leaderboardMenu" style="position: absolute; top: 0px; left: 0px; width: 100%; min-height: 100%; display: none; ">
-	<ul id="leaderboardTabs">
-		<li><a href="#generalLeaderboard">General</a></li>
-		<li><a href="#facebookLeaderboard">Facebook</a></li>
-	</ul>
+	<!--ul id="leaderboardTabs">
+		<li><a href="#generalLeaderboard"><div id="generalLeaderboardTab"></div></a></li>
+		<li><a href="#facebookLeaderboard"><div id="facebookLeaderboardTab"></div></a></li>
+	</ul-->
+	<div id="generalLeaderboardTab" onClick="$('#generalLeaderboard')[0].style.display = 'block'; $('#facebookLeaderboard')[0].style.display = 'none';"></div>
+	<div id="facebookLeaderboardTab" onClick="$('#generalLeaderboard')[0].style.display = 'none'; $('#facebookLeaderboard')[0].style.display = 'block';"></div>
 	<div id="generalLeaderboard"></div>
 	<div id="facebookLeaderboard"></div>
+
+	<div id="leaderboardBackMenu" onClick=""></div>
 </nav>
 <nav id="optionMenu" style="position: absolute; top: 0px; left: 0px; width: 100%; min-height: 100%; display: none;" >
 	<div style="position: absolute; display: table; top: 20%; bottom: auto; margin: auto; width: 100%">
@@ -664,7 +668,7 @@ body.sgds .clear {
 		<div id="optionbutton" onClick="/*options.showOptions('gameMenu')*/" ></div>
 
 		<div id="facebookFrame" onClick="postHighscoreOnFacebook()"></div>
-		<div id="coinsFrame" onClick="options.showNav('softgameNav', 'gameMenu'); softgame.getUserBalance()"></div>
+		<div id="coinsFrame" onClick="options.showNav('softgameNav', 'gameMenu'); api.softgame.getUserBalance()"></div>
 		<div id="leaderboardFrame" onClick="options.showLeaderboard('gameMenu'); retrieveLeaderboard('facebookLeaderboard', 'generalLeaderboard');"></div>
 	</div>
 </nav>
@@ -752,7 +756,7 @@ if(screen.width <= 320) gameSize = "320x480";*/
 
 loader = new Loader('progress', gameSize);
 options = new Options('optionMenu', 'leaderboardMenu');
-$('#leaderboardTabs ul').idTabs();
+//$('#leaderboardTabs ul').idTabs();
 $('#backgroundNav')[0].style.width = gameSize.slice(0,3) + 'px';
 $('#backgroundNav')[0].style.height = gameSize.slice(4) + 'px';
 //$('#frameBackground')[0].style.backgroundImage = 'url('++')';
@@ -762,6 +766,15 @@ $('#FBnav')[0].style.width = gameSize.slice(0,3) + 'px';
 $('#FBnav')[0].style.height = gameSize.slice(4) + 'px';
 
 $('#progressBar').addClass('loadingProgressBar' + gameSize);
+
+$('#leaderboardMenu')[0].style.backgroundImage = 'url('+uiLeaderboardScreen.src+')';
+
+$("#generalLeaderboard").addClass('leaderboardTab' + gameSize);
+$("#facebookLeaderboard").addClass('leaderboardTab' + gameSize);
+$("#generalLeaderboardTab").addClass('leaderboardTabHighscore' + gameSize);
+$("#facebookLeaderboardTab").addClass('leaderboardTabFriends' + gameSize);
+$("#leaderboardBackMenu").addClass('leaderboardBackMenu' + gameSize);
+$("#leaderboardTabs").addClass('leaderboardTabs' + gameSize);
 
 function postHighscoreOnFacebook(){
 	var msg = FB.user.name + ' ha logrado ' + game.ui.acumuledPoints + ' en el Bubble Paradise!';

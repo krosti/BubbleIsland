@@ -204,24 +204,18 @@ api.softgame.getUserInfo = function(){
 };
 
 api.softgame.getUserBalance = function(){
-	if(this.userdata == undefined){
-		alert('Error! we dont have your info yet, please wait while we chat with our server to ask about you :)');
-		return;
-	};
-	var uri = this.softgameUrl + this.softgameGetUserBalance;
-	var signature = this.game_id + this.split2 +  this.token + this.split2 + this.game_secret;
-	signature = signature.toUpperCase();
-	signature = $.md5(signature).toUpperCase();
+	var uri = api.softgame.softgameUrl + api.softgame.softgameGetUserBalance;
 	var getdata = {
-		pk: this.game_id,
-		token: this.token,
-		sig: signature
+		pk: api.softgame.game_id,
+		token: api.softgame.token
 	};
+	var sign = api.softgame.JSON2Signature(getdata, 'web');
+	getdata.sig = sign;
 	this.jqajax = $.ajax({
 		type: 'GET',
 		url: uri,
 		data: getdata,
-		success: function(data){ alert('success: ' + data); },
+		success: function(data){ api.softgame.balanceRequest(data); },
 		error: function(xhr, data){ alert('error: ' + data); }
 	});
 };
@@ -345,4 +339,9 @@ api.softgame.coinsRequest = function(data){
 	if(data.status == 1){
 		api.softgame.userCoins = coinsdata.response.balance;
 	};
+};
+
+api.softgame.balanceRequest = function(data){
+	alert(data);
+	var balancedata = eval('(' + data + ')');
 };

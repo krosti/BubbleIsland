@@ -18,7 +18,7 @@ api.facebook.onPost = function(){};
 api.facebook.startConnection = function(){
 	//FB.onConnect = connectToFacebook2;
 	var uri = 'https://www.facebook.com/dialog/oauth?client_id=' + api.facebook.appid + '&scope=publish_stream&redirect_uri=http://www.facebook.com/connect/login_success.html&display=touch&response_type=token';
-	alert('before ajax: ' + uri);
+	//alert('before ajax: ' + uri);
 	api.facebook.xhr = $.ajax({
 		type: 'GET',
 		url: uri,
@@ -45,9 +45,9 @@ api.facebook.connectResponse = function(data){
 		var inputs = $('input');
 		for(var i = 0; i < inputs.length; ++i){
 			todata[inputs[i].name] = inputs[i].value;	
-			alert(inputs[i].name + ':' + inputs[i].value);				
+			//alert(inputs[i].name + ':' + inputs[i].value);				
 		};
-		alert($('form')[0].action);
+		//alert($('form')[0].action);
 		$.ajax({
 			type: 'POST',
 			url: $('form')[0].action,
@@ -330,14 +330,17 @@ api.softgame.connectionError = function(obj, err, r){
 
 api.softgame.userRequest = function(data){
 	alert(data);
-	if(data.status == 1){
-		api.softgame.user = data.response;
+	var userdata = eval('(' + data + ')');
+	if(userdata.status == 1){
+		api.softgame.user = userdata.response;
 		api.softgame.onLoginUser();
 	};
 };
 
 api.softgame.coinsRequest = function(data){
+	alert(data);
+	var coinsdata = eval('(' + data + ')');
 	if(data.status == 1){
-		api.softgame.userCoins = data.response.balance;
+		api.softgame.userCoins = coinsdata.response.balance;
 	};
 };

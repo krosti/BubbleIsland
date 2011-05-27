@@ -299,6 +299,7 @@ api.softgame.startCoinsBuying = function(id, title, desc, price, img_url, obj){
 
 api.softgame.doCoinsBuying = function(){
 	var uri = api.softgame.softgameUrl + api.softgame.softgameDoOrder;
+	alert('doCoinsBuying: ' + uri);
 	var getdata = {
 		pk: api.softgame.game_id,
 		back: api.softgame.softgameBackUrl,
@@ -307,6 +308,7 @@ api.softgame.doCoinsBuying = function(){
 	};
 	var sign = api.softgame.JSON2Signature(getdata, 'web');
 	getdata.sig = sign;
+	alert(api.JSON2String(getdata));
 	api.softgame.xhr = $.ajax({
 		url: uri,
 		data: getdata,

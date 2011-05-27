@@ -452,6 +452,7 @@ api.softgame.billingRequest = function(data){
 api.softgame.startOrderRequest = function(data){
 	//alert('startOrderResponse: ' + data);
 	var orderdata = api.string2JSON(data);
+	alert('json: ' + api.JSON2String(orderdata));
 	if(orderdata.status == 1){
 		api.softgame.otoken = oderdata.response.otoken;
 		api.softgame.doCoinsBuying();

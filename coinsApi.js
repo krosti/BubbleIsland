@@ -16,8 +16,18 @@ Project Secret:           ***
 F2A626BE8BECEABB0E8648DE1EB63232 good signature
 
 http://drone.softgames.de/eui/auth?pk=9C5TVaAs3w1xvUOBn9BZM3g4E3I83DFn&lang=en&sig=BA97816F2802DBA7FF69D8BCC22CF3E3&back=http://puzzlebubble.eudaimonia.com.ar/
-*/
 
+http://sgds.softgames.de/cpi/order/start?pk=9C5TVaAs3w1xvUOBn9BZM3g4E3I83DFn&token=302C795A3902A56CFA83D30542706195&id=lifes&title=3 vidas de onda&price=1
+http://drone.softgames.de/cpi/order/start?pk=9C5TVaAs3w1xvUOBn9BZM3g4E3I83DFn&token=369BAAA95B71765D5F2703EACED3E8F7&id=lifes&title=3vidas&price=1&sig=DEC6C2E1295098F8367610D8CF2DF390
+
+http://drone.softgames.de/eui/order?pk=9C5TVaAs3w1xvUOBn9BZM3g4E3I83DFn&lang=en&back=http://puzzlebubble.eudaimonia.com.ar/&otoken=AF2A3D391D26146B7FBCCB9C8D0A57E6&sig=7B09F299AE873DC3F3A6D0A653889979
+
+http://drone.softgames.de/cpi/order/start?pk=9C5TVaAs3w1xvUOBn9BZM3g4E3I83DFn&token=302C795A3902A56CFA83D30542706195&id=lifes&title=3vidas&price=1&sig=50D7A0A5B89ABBCED8B508F06620C113
+http://drone.softgames.de/cpi/order/start?pk=9C5TVaAs3w1xvUOBn9BZM3g4E3I83DFn&token=302C795A3902A56CFA83D30542706195&id=lifes&title=3vidas&price=1&sig=13EDEB8FA717FAEB1D542902B2D5B576
+http://drone.softgames.de/cpi/order/start?pk=9C5TVaAs3w1xvUOBn9BZM3g4E3I83DFn&token=302C795A3902A56CFA83D30542706195&id=lifes&title=3vidas&price=1&sig=7A539EB11932032912193F7C4A195605
+http://drone.softgames.de/cpi/order/start?pk=9C5TVaAs3w1xvUOBn9BZM3g4E3I83DFn&token=302C795A3902A56CFA83D30542706195&id=lifes&title=3vidas&price=1&sig=131E7AC8B0EC7816DC6258BDEC043DA8
+
+*/
 function softgameApi(displayNav){
 	this.self = this;
 	this.jq;

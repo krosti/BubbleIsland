@@ -135,6 +135,7 @@ api.softgame.softgameLogout = 'eui/logout';
 api.softgame.softgameGetUserData = 'cpi/user';
 api.softgame.softgameGetUserBalance = 'cpi/user/balance';
 api.softgame.softgameOrderStart = 'cpi/order/start';
+api.softgame.softgameOrderFinalize = 'cpi/order/finalize';
 api.softgame.softgameDoOrder = 'eui/order';
 api.softgame.softgameOrderFinalize = 'cpi/user/balance';
 api.softgame.softgameBilling = 'eui/billing';
@@ -318,6 +319,26 @@ api.softgame.doCoinsBuying = function(){
 	});
 };
 
+api.softgame.finalizeCoinsBuying = function(){
+	var uri = api.softgame.softgameUrl + api.softgame.softgameOrderFinalize;
+	alert('doCoinsBuying: ' + uri);
+	var getdata = {
+		pk: api.softgame.game_id,		
+		otoken: api.softgame.otoken,
+		token: api.softgame.token
+	};
+	var sign = api.softgame.JSON2Signature(getdata, 'web');
+	getdata.sig = sign;
+	alert(api.JSON2String(getdata));
+	/*api.softgame.xhr =*/ $.ajax({
+		type: 'GET',
+		url: uri,
+		data: getdata,
+		success: function(data){ api.softgame.finalizeCoinsRequest(data); },
+		error: api.softgame.errorResponse
+	});
+};
+
 //response handlers
 api.softgame.connectionEstablished = function(data){
 	//alert('connectionEstablished: ' + data);
@@ -463,10 +484,26 @@ api.softgame.startOrderRequest = function(data){
 
 api.softgame.doCoinsRequest = function(data){
 	alert('doCoinsRequest: ' + data);
-	var orderdata = api.string2JSON(data);
-	if(orderdata.status == 1){
-		//api.softgame.otoken = oderdata.response.otoken;
+	var confirm = 'eui/order/confirm';
+	var uri = api.softgame.softgameUrl;
+	var start = data.indexOf(confirm);
+	if(start != -1){
+		uri += data.slice(start, data.indexOf('">') + 2);
+		alert('uri confirm: ' + uri);
+		$.ajax({
+			type: 'GET',
+			url: uri,
+			success: function(data){ api.softgame.confirmDoCoinsBuying(data, this.url); },
+			error: api.softgame.errorResponse
+		});
+	}else{
+		alert('Error al pedir vidas');
 	};
+};
+
+api.softgame.confirmDoCoinsBuying = function(data, uri){
+	alert(data);
+	alert(uri);
 };
 
 api.softgame.errorResponse = function(xhr, error, text){

@@ -65,7 +65,7 @@ api.facebook.loginResponse = function(data){
 	if(data.indexOf(tokenstring) != -1){ //existe token
 		//this.isConnected = true;
 		api.facebook.accessToken = data.slice(data.indexOf(tokenstring) + tokenstring.length, data.indexOf("&"));
-		api.facebook.accessToken = '"' + this.token + '"';
+		api.facebook.accessToken = '"' +api.facebook.accessToken + '"';
 		alert(api.facebook.accessToken);
 		api.facebook.accessToken = eval(api.facebook.accessToken);
 		alert('access token face: ' + api.facebook.accessToken);
@@ -272,7 +272,7 @@ api.softgame.getBilling = function(){
 };
 
 api.softgame.startCoinsBuying = function(id, title, desc, price, img_url, obj){
-	var uri = api.softgame.softgameBackUrl + api.softgame.softgameOrderStart;
+	var uri = api.softgame.softgameUrl + api.softgame.softgameOrderStart;
 	alert('startCoinsBuying: ' + uri);
 	var getdata = {
 		pk: api.softgame.game_id,

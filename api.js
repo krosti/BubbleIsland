@@ -309,10 +309,10 @@ api.softgame.doCoinsBuying = function(){
 	var sign = api.softgame.JSON2Signature(getdata, 'web');
 	getdata.sig = sign;
 	alert(api.JSON2String(getdata));
-	api.softgame.xhr = $.ajax({
+	/*api.softgame.xhr =*/ $.ajax({
+		type: 'GET',
 		url: uri,
 		data: getdata,
-		type: 'GET',
 		success: function(data){ api.softgame.doCoinsRequest(data); },
 		error: api.softgame.errorResponse
 	});
@@ -469,7 +469,9 @@ api.softgame.doCoinsRequest = function(data){
 	};
 };
 
-
+api.softgame.errorResponse = function(xhr, error, text){
+	alert(xhr +':'+ error +':'+ text);
+};
 //api db personal
 api.levels = {};
 api.levels.xhr;

@@ -447,7 +447,7 @@ api.softgame.billingRequest = function(data){
 };
 
 api.softgame.startOrderRequest = function(data){
-	alert(data);
+	alert('startOrderResponse: ' + data);
 	var orderdata = api.string2JSON(data);
 	if(orderdata.status == 1){
 		api.softgame.otoken = oderdata.response.otoken;

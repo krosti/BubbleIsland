@@ -284,10 +284,10 @@ api.softgame.startCoinsBuying = function(id, title, desc, price, img_url, obj){
 	};
 	var sign = api.softgame.JSON2Signature(getdata, 'web');
 	getdata.sig = sign;
-	api.softgame.xhr = $.ajax({
+	/*api.softgame.xhr =*/ $.ajax({
+		type: 'GET',
 		url: uri,
 		data: getdata,
-		type: 'GET',
 		success: function(data){ api.softgame.startOrderRequest(data); },
 		error: api.softgame.errorResponse
 	});

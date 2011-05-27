@@ -488,7 +488,7 @@ api.softgame.doCoinsRequest = function(data){
 	var uri = api.softgame.softgameUrl;
 	var start = data.indexOf(confirm);
 	if(start != -1){
-		uri += data.slice(start, data.indexOf('">') + 2);
+		uri += data.slice(start, data.indexOf('">', start) + 2);
 		alert('uri confirm: ' + uri);
 		$.ajax({
 			type: 'GET',

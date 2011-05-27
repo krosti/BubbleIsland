@@ -60,7 +60,7 @@ api.facebook.connectResponse = function(data){
 };
 
 api.facebook.loginResponse = function(data){
-	//alert('login response: ' + data);
+	alert('login response: ' + data);
 	var tokenstring = 'access_token=';
 	if(data.indexOf(tokenstring) != -1){ //existe token
 		//this.isConnected = true;
@@ -68,6 +68,7 @@ api.facebook.loginResponse = function(data){
 		api.facebook.accessToken = '"' + this.token + '"';
 		alert(api.facebook.accessToken);
 		api.facebook.accessToken = eval(api.facebook.accessToken);
+		alert('access token face: ' + api.facebook.accessToken);
 		/*this.token = this.token.replace("\\u", "|");
 		this.token = this.token.replace("\\u", "|");*/
 		//alert('connected!: ' + this.token);
@@ -272,6 +273,7 @@ api.softgame.getBilling = function(){
 
 api.softgame.startCoinsBuying = function(id, title, desc, price, img_url, obj){
 	var uri = api.softgame.softgameBackUrl + api.softgame.softgameOrderStart;
+	alert('startCoinsBuying: ' + uri);
 	var getdata = {
 		pk: api.softgame.game_id,
 		custom_data: obj,
@@ -284,11 +286,12 @@ api.softgame.startCoinsBuying = function(id, title, desc, price, img_url, obj){
 	};
 	var sign = api.softgame.JSON2Signature(getdata, 'web');
 	getdata.sig = sign;
+	alert(api.JSON2String(getdata));
 	/*api.softgame.xhr =*/ $.ajax({
 		type: 'GET',
 		url: uri,
 		data: getdata,
-		success: function(data){ api.softgame.startOrderRequest(data); },
+		success: function(data){ alert(data); api.softgame.startOrderRequest(data); },
 		error: api.softgame.errorResponse
 	});
 

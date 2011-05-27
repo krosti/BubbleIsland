@@ -306,7 +306,7 @@ api.softgame.doCoinsBuying = function(){
 		lang: api.softgame.softgameLangCode,
 		otoken: api.softgame.otoken
 	};
-	var sign = api.softgame.JSON2Signature(getdata, 'web');
+	var sign = api.softgame.JSON2Signature(getdata, 'RESTApi');
 	getdata.sig = sign;
 	alert(api.JSON2String(getdata));
 	/*api.softgame.xhr =*/ $.ajax({

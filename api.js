@@ -452,9 +452,9 @@ api.softgame.billingRequest = function(data){
 api.softgame.startOrderRequest = function(data){
 	//alert('startOrderResponse: ' + data);
 	var orderdata = api.string2JSON(data);
-	alert('json: ' + api.JSON2String(orderdata));
+	//alert('json: ' + api.JSON2String(orderdata));
 	if(orderdata.status == 1){
-		api.softgame.otoken = oderdata.response.otoken;
+		api.softgame.otoken = orderdata.response.otoken;
 		api.softgame.doCoinsBuying();
 	};
 };
@@ -471,7 +471,7 @@ api.softgame.doCoinsRequest = function(data){
 //api db personal
 api.levels = {};
 api.levels.xhr;
-api.levels.url = 'apilevels.borealdev.com.ar/';
+api.levels.url = 'betatester.borealdev.com.ar/apilevels';
 api.levels.jsonlevel = {};
 
 api.levels.onGetLevel = function(){};

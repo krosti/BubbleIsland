@@ -1928,8 +1928,9 @@ function tick(){
 
 api.levels.serializeLevel = function(game){
 	//api.levels.jsonlevel = {};
-	var lvl;
-	lvl.lvlnumber;
+	var lvl = {};
+	lvl.resolut = gameSize;
+	lvl.lvlnumber = game.level.lvlnro;
 
 };
 

@@ -107,7 +107,7 @@ api.facebook.postMessage = function(msg){
 		alert('post: ' + msg);
 		var uri = "https://graph.facebook.com/me/feed";
 		postdata = {
-			access_token: this.token,
+			access_token: api.facebook.accessToken,
 			message: msg
 		};
 		//$.post(url, {message: msg, access_token: FB.token}, function(data){ alert(data); });
@@ -261,12 +261,55 @@ api.softgame.getBilling = function(){
 	};
 	var sign = api.softgame.JSON2Signature(getdata, 'web');
 	getdata.sig = sign;
-	this.jqajax = $.ajax({
+	api.softgame.xhr = $.ajax({
 		type: 'GET',
 		url: uri,
 		data: getdata,
 		success: function(data){ api.softgame.billingRequest(data); },
 		error: function(xhr, data){ alert('error: ' + data); }
+	});
+};
+
+api.softgame.startCoinsBuying = function(id, title, desc, price, img_url, obj){
+	var uri = api.softgame.softgameBackUrl + api.softgame.softgameOrderStart;
+	var getdata = {
+		pk: api.softgame.game_id,
+		custom_data: obj,
+		descr: desc,
+		id: id,
+		img_url: img_url,
+		price: price,
+		title: title,
+		token: api.softgame.token
+	};
+	var sign = api.softgame.JSON2Signature(getdata, 'web');
+	getdata.sig = sign;
+	api.softgame.xhr = $.ajax({
+		url: uri,
+		data: getdata,
+		type: 'GET',
+		success: ,
+		error: api.softgame.errorResponse
+	});
+
+};
+
+api.softgame.doCoinsBuying = function(){
+	var uri = api.softgame.softgameBackUrl + api.softgame.softgameDoOrder;
+	var getdata = {
+		pk: api.softgame.game_id,
+		back: api.softgame.softgameBackUrl,
+		lang: api.softgame.softgameLangCode
+		otoken: api.softgame.otoken
+	};
+	var sign = api.softgame.JSON2Signature(getdata, 'web');
+	getdata.sig = sign;
+	api.softgame.xhr = $.ajax({
+		url: uri,
+		data: getdata,
+		type: 'GET',
+		success: api.softgame.doCoinsBuying,
+		error: api.softgame.errorResponse
 	});
 };
 
@@ -401,7 +444,22 @@ api.softgame.billingRequest = function(data){
 	api.softgame.framework.style.display = 'block';
 	api.softgame.framework.innerHTML = data;
 	//var billingdata = eval('(' + data + ')');
+};
 
+api.softgame.startOrderRequest = function(data){
+	alert(data);
+	var orderdata = api.string2JSON(data);
+	if(orderdata.status == 1){
+		api.softgame.otoken = oderdata.response.otoken;
+	};
+};
+
+api.softgame.doOrderRequest = function(data){
+	alert(data);
+	var orderdata = api.string2JSON(data);
+	if(orderdata.status == 1){
+		//api.softgame.otoken = oderdata.response.otoken;
+	};
 };
 
 

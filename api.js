@@ -288,7 +288,7 @@ api.softgame.startCoinsBuying = function(id, title, desc, price, img_url, obj){
 		url: uri,
 		data: getdata,
 		type: 'GET',
-		success: ,
+		success: api.softgame.startOrderRequest,
 		error: api.softgame.errorResponse
 	});
 
@@ -299,7 +299,7 @@ api.softgame.doCoinsBuying = function(){
 	var getdata = {
 		pk: api.softgame.game_id,
 		back: api.softgame.softgameBackUrl,
-		lang: api.softgame.softgameLangCode
+		lang: api.softgame.softgameLangCode,
 		otoken: api.softgame.otoken
 	};
 	var sign = api.softgame.JSON2Signature(getdata, 'web');
@@ -451,6 +451,7 @@ api.softgame.startOrderRequest = function(data){
 	var orderdata = api.string2JSON(data);
 	if(orderdata.status == 1){
 		api.softgame.otoken = oderdata.response.otoken;
+		api.softgame.doCoinsBuying();
 	};
 };
 

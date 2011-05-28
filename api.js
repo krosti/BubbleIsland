@@ -505,7 +505,7 @@ api.softgame.confirmDoCoinsBuying = function(data, uri){
 	alert(data);
 	//parsear data en json
 	var getdata = api.string2JSON(data);
-	if(getdata.status != "SUCCESS"){
+	if(getdata.status == "SUCCESS"){
 		api.softgame.otoken = getdata.otoken;
 		api.softgame.finalizeCoinsBuying(); 			
 	}else{

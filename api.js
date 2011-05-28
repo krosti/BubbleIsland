@@ -488,7 +488,7 @@ api.softgame.doCoinsRequest = function(data){
 	var uri = api.softgame.softgameUrl;
 	var start = data.indexOf(confirm);
 	if(start != -1){
-		uri += data.slice(start, data.indexOf('">', start) + 2);
+		uri += data.slice(start, data.indexOf('">', start));
 		alert('uri confirm: ' + uri);
 		$.ajax({
 			type: 'GET',
@@ -503,7 +503,25 @@ api.softgame.doCoinsRequest = function(data){
 
 api.softgame.confirmDoCoinsBuying = function(data, uri){
 	alert(data);
-	alert(uri);
+	//parsear data en json
+	var getdata = api.string2JSON(data);
+	if(getdata.status != "SUCCESS"){
+		api.softgame.otoken = getdata.otoken;
+		api.softgame.finalizeCoinsBuying(); 			
+	}else{
+		alert('Mmm.. we have a little inconvenient trying to reach you some lifes. Please can you try again and see if Hades wanna give you another chance?');
+	};
+	//alert(uri);
+};
+
+api.softgame.finalizeCoinsRequest = function(data){
+	alert(data);
+	var getdata = api.string2JSON(data);
+	if(getdata.status == 1){
+		alert('You have 3 more lifes!! or you are a cat or someone loves you up there :)');
+	}else{
+		alert('Mmm.. we have a little inconvenient trying to reach you some lifes. Please can you try again and see if Hades wanna give you another chance?');
+	};
 };
 
 api.softgame.errorResponse = function(xhr, error, text){

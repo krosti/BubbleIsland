@@ -280,7 +280,7 @@ function bubble(l){
 	this.dx = 0; //incremental in the x direction
 	this.dy = 0; //incremental in the x direction
 	this.meinBild = new Image();
-	this.object;
+	this.object = null;
 	//this.meinBild.src = 'bubble.png';
 	
 	this.secondFlavor = '';
@@ -539,6 +539,171 @@ function bubble(l){
 		return flavor;
 	};
 	
+	this.serialize = function(){
+		var ich;
+		ich.flavor = this.flavor;
+		ich.marked = this.marked;
+		ich.i = this.i;
+		ich.j = this.j;
+		ich.x = this.x;
+		ich.y = this.y;
+		ich.dx = this.dx
+		ich.dy = this.dy;		
+		ich.secondFlavor = this.secondFlavor;
+		ich.freezeBall = this.freezeBall;
+		ich.bombBall = this.bombBall;
+		ich.wasDetonated = this.wasDetonated
+		ich.pointsMultiplier = this.pointsMultiplier;
+		return ich;
+	};
+
+	this.unserialize = function(ich){
+		if(ich == null) return null;
+		this.flavor = ich.flavor;
+		this.marked = ich.marked;
+		this.i = ich.i;
+		this.j = ich.j;
+		this.x = ich.x;
+		this.y = ich.y;
+		this.dx = ich.dx
+		this.dy = ich.dy;		
+		this.secondFlavor = ich.secondFlavor;
+		this.freezeBall = ich.freezeBall;
+		this.bombBall = ich.bombBall;
+		this.wasDetonated = ich.wasDetonated
+		this.pointsMultiplier = ich.pointsMultiplier;
+		//armo el html
+		if(this.freezeBall){
+			switch (this.flavor){
+				case "blue":
+					this.meinBild = bubbleBlueFreezeImage;
+					break;
+				case "yellow":
+					this.meinBild = bubbleYellowFreezeImage;
+					break;
+				case "purple":
+					this.meinBild = bubblePurpleFreezeImage;
+					break;
+				case "red":
+					this.meinBild = bubbleRedFreezeImage;
+					break;
+				case "green":
+					this.meinBild = bubbleGreenFreezeImage;
+					break;
+			};			
+		};
+		if(this.bombBall){
+			switch (this.flavor){
+				case "blue":
+					this.meinBild = bubbleBlueBombImage;
+					break;
+				case "yellow":
+					this.meinBild = bubbleYellowBombImage;
+					break;
+				case "purple":
+					this.meinBild = bubblePurpleBombImage;
+					break;
+				case "red":
+					this.meinBild = bubbleRedBombImage;
+					break;
+				case "green":
+					this.meinBild = bubbleGreenBombImage;
+					break;
+			};			
+		};
+		if(this.pointsMultiplier == 2){
+			switch (this.flavor){
+				case "blue":
+					this.meinBild = bubbleBlueX2Image;
+					break;
+				case "yellow":
+					this.meinBild = bubbleYellowX2Image;
+					break;
+				case "purple":
+					this.meinBild = bubblePurpleX2Image;
+					break;
+				case "red":
+					this.meinBild = bubbleRedX2Image;
+					break;
+				case "green":
+					this.meinBild = bubbleGreenX2Image;
+					break;
+			};			
+		};
+		if(this.pointsMultiplier == 3){
+			switch (this.flavor){
+				case "blue":
+					this.meinBild = bubbleBlueX3Image;
+					break;
+				case "yellow":
+					this.meinBild = bubbleYellowX3Image;
+					break;
+				case "purple":
+					this.meinBild = bubblePurpleX3Image;
+					break;
+				case "red":
+					this.meinBild = bubbleRedX3Image;
+					break;
+				case "green":
+					this.meinBild = bubbleGreenX3Image;
+					break;
+			};			
+		};
+
+		if(this.secondFlavor != ''){
+			switch(this.secondFlavor){
+				case 'blue':
+					zweithBild.src = bubbleBlueHalfImage.src;
+					break;
+				case 'green':
+					zweithBild.src = bubbleGreenHalfImage.src;
+					break;
+				case 'red':
+					zweithBild.src = bubbleRedHalfImage.src;
+					break;
+				case 'purple':
+					zweithBild.src = bubblePurpleHalfImage.src;
+					break;
+				case 'yellow':
+					zweithBild.src = bubbleYellowHalfImage.src;
+					break;
+			};			
+		};
+
+		if(this.meinBild.src == ''){ // normal
+			switch (value){
+				case "blue":
+					this.meinBild = bubbleBlueImage;
+					break;
+				case "yellow":
+					this.meinBild = bubbleYellowImage;
+					break;
+				case "purple":
+					this.meinBild = bubblePurpleImage;
+					break;
+				case "red":
+					this.meinBild = bubbleRedImage;
+					break;
+				case "green":
+					this.meinBild = bubbleGreenImage;
+					break;
+			};
+		};
+
+		this.object = new standAnimation(this.lvl.bubbleRadius, this.lvl.bubbleRadius, this.meinBild.src);
+		this.element = this.object.element;
+
+		if(this.secondFlavor != ''){
+			var zweithBild = document.createElement('img');				
+			this.object.element.appendChild(zweithBild);
+			zweithBild.style.width = this.lvl.bubbleRadius + 'px';
+			zweithBild.style.heigth = (this.lvl.bubbleRadius / 2) + 'px';
+			zweithBild.style.position = 'absolute';
+			zweithBild.style.top = '0px';
+			zweithBild.style.left = '0px';
+		};
+	};
+
 	this.move = function(){
 		if((this.dx == 0) && (this.dy == 0)) return;
 		this.x += this.dx;
@@ -1929,11 +2094,106 @@ function tick(){
 api.levels.serializeLevel = function(game){
 	//api.levels.jsonlevel = {};
 	var lvl = {};
-	lvl.resolut = gameSize;
+	lvl.resolution = gameSize;
 	lvl.lvlnumber = game.level.lvlnro;
 
+	//this.grilla = new bubbleTable(bubblesWidth, bubblesHeight, this);
+	//this.cannon;
+	lvl.width = game.level.width;
+	lvl.height = game.level.height;
+	lvl.top = game.level.top;
+	lvl.left = game.level.left;
+	lvl.topBound = game.level.topBound;
+	lvl.leftBound = game.level.leftBound;
+	
+	lvl.mutex = game.level.mutex;
+	lvl.freeze = game.level.freeze
+	lvl.finished = game.level.finished;
+	lvl.freezeTimeout = game.level.frezeeTimeout;
+	lvl.bubbleRadius = game.level.bubbleRadius
+	lvl.shootedBubble = game.level.shootedBubble;
+	//lvl.bubbles_array = new Array();
+	lvl.points = game.level.points;
+	lvl.pointsToReach = game.level.pointsToReach;
+	lvl.pointsMultiplier = game.level.pointsMultiplier;
+	lvl.looseLine = game.level.looseLine;
+	lvl.currentTop = game.level.currentTop;
+	lvl.h = game.level.h
+	lvl.bonus = game.level.bonus;
+	lvl.bubble_array = [];
+	//salvo las bubbles del array, son las mismas que la grilla
+	for(var i = 0; i < game.level.bubbles_array.length; ++i){
+		var current = game.level.bubbles_array[i];
+		var bubble = current.serialize();
+		lvl.bubble_array.push(bubble);
+		current = null;
+	};
+
+	lvl.cannon = {};
+	lvl.cannon.currentBubble = (game.level.cannon.currentBubble == null)? null : game.level.cannon.currentBubble.serialize();
+	lvl.cannon.readyShoot = game.level.cannon.readyShoot;
 };
 
 api.levels.unserializeLevel = function(game){
-	//api.
+	var lvl = api.levels.jsonlevel;
+	if(lvl.resolution != gamSize){
+		alert('You have another session started with another phone resolution, we cannot arrange the bubbles in the same position, this will a mess!! please relogin with the original phone and try again, if you dont care losee your progress and fell you can do better in one sit, hit play and enjoy the paradise!!');
+		return;
+	};
+	var level = {};
+	switch(lvl.resolution){
+		case "320x480":
+			level = new bubbleLevel(240, 380, 8, 20, lvl.lvlnumber);
+			break;
+		case "360x480":
+			this.level = new bubbleLevel(360, 480, 10, 20, lvl.lvlnumber);
+			break;
+		case "640x960":
+			this.level = new bubbleLevel(640, 960, 13, 30, lvl.lvlnumber);
+			break;
+		case "480x800":
+			this.level = new bubbleLevel(480, 800, 11, 25, lvl.lvlnumber);
+			break;
+		case "854x480":
+			this.level = new bubbleLevel(800, 400, 23, 20, lvl.lvlnumber);
+			break;
+	};
+
+	level.top = lvl.top;
+	level.left = lvl.left;
+	level.topBound = lvl.topBound;
+	level.leftBound = lvl.leftBound;
+	
+	level.mutex = lvl.mutex;
+	level.freeze = lvl.freeze
+	level.finished = lvl.finished;
+	level.freezeTimeout = lvl.frezeeTimeout;
+	level.bubbleRadius = lvl.bubbleRadius
+	level.shootedBubble = lvl.shootedBubble;
+	//level.bubbles_array = new Array();
+	level.points = lvl.points;
+	level.pointsToReach = lvl.pointsToReach;
+	level.pointsMultiplier = lvl.pointsMultiplier;
+	level.looseLine = lvl.looseLine;
+	level.currentTop = lvl.currentTop;
+	level.h = lvl.h
+	level.bonus = lvl.bonus;
+
+	for(var i = 0; i < lvl.bubbles_array.length; ++i){
+		var current = lvl.bubbles_array[i];
+		var bubble = new bubble(level);
+		bubble.unserialize(current);
+		level.bubble_array.push(bubble);
+		level.grilla.Table[bubble.i][bubble.j] = bubble;
+		current = null;
+	};
+
+	level.cannon = new bubbleCannon(level);
+	level.cannon.currentBubble = null;
+	if(lvl.cannon.currentBubble != null){
+		level.cannon.currentBubble = new bubble(level);
+		level.cannon.currentBubble.unserialize(lvl.cannon.currentBubble);
+	};
+
+	game.level = level;
 };

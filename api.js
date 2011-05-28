@@ -516,11 +516,12 @@ api.softgame.confirmDoCoinsBuying = function(data, uri){
 
 api.softgame.finalizeCoinsRequest = function(data){
 	alert(data);
-	var getdata = api.string2JSON(data);
+	var getdata = api.string2JSON(data.replace('\\\\', ''));
 	if(getdata.status == 1){
 		alert('You have 3 more lifes!! or you are a cat or someone loves you up there :)');
 	}else{
 		alert('Mmm.. we have a little inconvenient trying to reach you some lifes. Please can you try again and see if Hades wanna give you another chance?');
+		alert(api.JSON2String(getdata));
 	};
 };
 

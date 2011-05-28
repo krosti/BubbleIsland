@@ -327,10 +327,10 @@ api.softgame.finalizeCoinsBuying = function(){
 		otoken: api.softgame.otoken,
 		token: api.softgame.token
 	};
-	var sign = api.softgame.JSON2Signature(getdata, 'RESTApi');
+	var sign = api.softgame.JSON2Signature(getdata, 'web');
 	getdata.sig = sign;
 	alert(api.JSON2String(getdata));
-	/*api.softgame.xhr =*/ $.ajax({
+	$.ajax({
 		type: 'GET',
 		url: uri,
 		data: getdata,
@@ -506,7 +506,7 @@ api.softgame.confirmDoCoinsBuying = function(data, uri){
 	//parsear data en json
 	var getdata = api.string2JSON(data);
 	if(getdata.status == "SUCCESS"){
-		api.softgame.otoken = getdata.otoken;
+		//api.softgame.otoken = getdata.otoken;
 		api.softgame.finalizeCoinsBuying(); 			
 	}else{
 		alert('Mmm.. we have a little inconvenient trying to reach you some lifes. Please can you try again and see if Hades wanna give you another chance?');

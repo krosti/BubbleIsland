@@ -321,15 +321,15 @@ api.softgame.doCoinsBuying = function(){
 
 api.softgame.finalizeCoinsBuying = function(){
 	var uri = api.softgame.softgameUrl + api.softgame.softgameOrderFinalize;
-	alert('doCoinsBuying: ' + uri);
+	//alert('doCoinsBuying: ' + uri);
 	var getdata = {
 		pk: api.softgame.game_id,		
 		otoken: api.softgame.otoken,
 		token: api.softgame.token
 	};
-	var sign = api.softgame.JSON2Signature(getdata, 'RESTApi');
+	var sign = api.softgame.JSON2Signature(getdata, 'web');
 	getdata.sig = sign;
-	alert(api.JSON2String(getdata));
+	//alert(api.JSON2String(getdata));
 	$.ajax({
 		type: 'GET',
 		url: uri,

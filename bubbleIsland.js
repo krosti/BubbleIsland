@@ -4,6 +4,10 @@ ToDo
 RC:
 [x] animaciones
 [-] leaderboard maquetado
+[ ] api de pagos andando
+[ ] api de face
+[ ] invitar amigos
+[ ] chequear allow a applicaciones
 [ ] 
 
 To make a Mileston Monday
@@ -98,7 +102,7 @@ Array.prototype.remove = function(data) {
 }*/
 
 
-var VERSION = '0.9.020';
+var VERSION = '0.9.023';
 
 //debug
 var console;

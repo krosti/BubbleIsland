@@ -327,7 +327,7 @@ api.softgame.finalizeCoinsBuying = function(){
 		otoken: api.softgame.otoken,
 		token: api.softgame.token
 	};
-	var sign = api.softgame.JSON2Signature(getdata, 'web');
+	var sign = api.softgame.JSON2Signature(getdata, 'RESPApi');
 	getdata.sig = sign;
 	alert(api.JSON2String(getdata));
 	$.ajax({

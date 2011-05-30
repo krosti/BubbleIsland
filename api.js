@@ -565,7 +565,7 @@ api.levels.getLevel = function(playerid){
 	api.levels.xhr = $.ajax({
 		type: 'POST',
 		data: getdata,
-		contentType: 'multipart/form-data',
+		contentType: 'application/x-www-form-urlencoded',
 		url: api.levels.url, 
 		success: function(data){ alert(data); api.levels.getResponse(data); },
 		error: api.levels.responseError

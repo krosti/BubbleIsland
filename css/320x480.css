@@ -199,6 +199,45 @@
 	top: 395px;
 }
 
+.uiAlert320x480{
+	position: fixed;
+	background-image: url(../backgrounddiv.png);
+	width: 100%;
+	height: 100%;
+	min-height: 100%;
+	left: 0px;
+	top: 0px;
+}
+
+.uiAlertImage320x480{
+	position: fixed;
+	background-image: url(../320x480/alertscreen.png);
+	width: 320px;
+	height: 263px;
+	min-height: 263px;
+	left: 0px;
+	top: 0px;
+}
+
+.uiAlertButton320x480{
+	position: fixed;
+	background-image: url(../320x480/alertbutton.png);
+	width: px;
+	height: px;
+	min-height: px;
+	top: 265px;
+	left: 90px;
+}
+
+.uiAlertText320x480{
+	position: absolute;
+	width: 244px;
+	height: 104px;
+	min-height: 263px;
+	left: 42px;
+	top: 115px;
+}
+
 #initScreen{
 	background-image: url(../320x480/loadingscreen.png);
 }
@@ -280,7 +319,7 @@
 
 .optionsLeaderboards320x480 {
 	position: fixed;
-	top: 380px;
+	top: 285px;
 	left: 35px;
 	width: 110px;
 	height: 92px;

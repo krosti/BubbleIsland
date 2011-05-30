@@ -196,6 +196,9 @@ uiOptionsFacebook = new Image();
 uiOptionsLeaderboard = new Image();
 uiOptionsCoins = new Image();
 
+uiAlertScreen = new Image();
+uiAlertButton = new Image();
+
 facebookScreen = new Image();
 facebookButton = new Image();
 
@@ -2212,4 +2215,38 @@ api.levels.unserializeLevel = function(game){
 	};
 
 	game.level = level;
+};
+
+api.ui.alert = function(msg, button, fn){
+	var alertui = document.createElement('div');
+	var alertuitext = document.createElement('div');
+	var alertuibackground = document.createElement('div');
+	var alertuibutton = document.createElement('div');
+	alertuibackground.style.backgroundImage = 'url(' + uiAlertScreen.src + ')';
+	$(alertui).addClass('uiAlert' + gameSize);
+	$(alertuitext).addClass('uiAlertText' + gameSize);
+	$(alertuibackground).addClass('uiAlertImage' + gameSize);
+	$(alertuibutton).addClass('uiAlertButton' + gameSize);
+	alertui.appendChild(alertuibackground);
+	alertui.appendChild(alertuibutton);
+	alertuibackground.appendChild(alertuitext);
+	
+	cartel = alertui;
+
+	$(alertuitext)[0].innerText = msg;
+	$(alertuibutton)[0].innerText = button;
+	$(alertuibutton)[0].onclick = fn;
+
+
+	$(document.body).append(cartel);
+	$(cartel).fadeIn(150);
+	$(alertuibutton).click(function(){
+		$(cartel).fadeOut(300, function(){
+			$(cartel).remove();
+		});
+	});
+
+	$(tomenubutton).click(function(){
+		game.showMenu();	
+	});
 };

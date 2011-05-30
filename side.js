@@ -151,6 +151,9 @@ function Loader(progress, size){
 	uiOptionsLeaderboard.onload = this.loaded;
 	uiOptionsCoins.onload = this.loaded;
 
+	uiAlertScreen.onload = this.loaded;
+	uiAlertButton.onload = this.loaded;
+
 	facebookScreen.onload = this.loaded;
 	facebookButton.onload = this.loaded;
 
@@ -242,6 +245,9 @@ function Loader(progress, size){
 		uiOptionsFacebook.src = this.size + this.separator + 'optionsfacebook.png';
 		uiOptionsLeaderboard.src = this.size + this.separator + 'optionsleaderboard.png';
 		uiOptionsCoins.src = this.size + this.separator + 'optionscoins.png';
+
+		uiAlertScreen.src = this.size + this.separator + 'alertscreen.png';
+		uiAlertButton.src = this.size + this.separator + 'alertbutton.png';
 
 		facebookScreen.src = this.size + this.separator + 'facebookscreen.png';
 		facebookButton.src = this.size + this.separator + 'facebookbutton.png';

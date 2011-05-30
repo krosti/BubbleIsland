@@ -609,7 +609,7 @@ api.levels.responseError = function(xhr, error, text){
 api.levels.serializeLevel;
 api.levels.unserializeLevel;
 //additional api usefull function
-
+api.ui = {};
 api.ui.alert = function(msg, button, fn){}; //(msg, button, fn)
 
 api.string2JSON = function(data){

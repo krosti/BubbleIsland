@@ -188,6 +188,14 @@ uiLeaderboardHighscore = new Image();
 uiLeaderboardFriends = new Image();
 uiLeaderboardStar = new Image();
 
+uiOptionsBackground = new Image();
+uiOptionsMenu = new Image();
+uiOptionsVolumenOn = new Image();
+uiOptionsVolumenOff = new Image();
+uiOptionsFacebook = new Image();
+uiOptionsLeaderboard = new Image();
+uiOptionsCoins = new Image();
+
 facebookScreen = new Image();
 facebookButton = new Image();
 

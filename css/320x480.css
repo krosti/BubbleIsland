@@ -257,3 +257,63 @@
 	min-height: 65px;
 	background-image: url(../320x480/leaderboardmenu.png);
 }
+
+.optionsFacebook320x480 {
+	position: fixed;
+	top: 270px;
+	left: 120px;
+	width: 92px;
+	height: 61px;
+	min-height: 61px;
+	background-image: url(../320x480/optionsfacebook.png);
+}
+
+.optionsCoins320x480 {
+	position: fixed;
+	top: 265px;
+	left: 185px;
+	width: 110px;
+	height: 115px;
+	min-height: 115px;
+	background-image: url(../320x480/optionscoins.png);
+}
+
+.optionsLeaderboards320x480 {
+	position: fixed;
+	top: 380px;
+	left: 35px;
+	width: 110px;
+	height: 92px;
+	min-height: 92px;
+	background-image: url(../320x480/optionsleaderboard.png);
+}
+
+.optionsVolumeOn320x480 {
+	position: fixed;
+	top: 380px;
+	left: 35px;
+	width: 92px;
+	height: 61px;
+	min-height: 61px;
+	background-image: url(../320x480/optionsvolumneon.png);
+}
+
+.optionsVolumeOff320x480 {
+	position: fixed;
+	top: 380px;
+	left: 35px;
+	width: 92px;
+	height: 61px;
+	min-height: 61px;
+	background-image: url(../320x480/optionsvolumneoff.png);
+}
+
+.optionsMenu320x480 {
+	position: fixed;
+	top: 320px;
+	left: 150px;
+	width: 109px;
+	height: 124px;
+	min-height: 124px;
+	background-image: url(../320x480/optionsmenu.png);
+}

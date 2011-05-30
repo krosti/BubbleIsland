@@ -58,7 +58,7 @@ function Loader(progress, size){
 	
 	this.readyLoad; // = function(){ alert('hola'); };
 	
-	this.toLoad = 65;
+	this.toLoad = 72;
 	this.isloaded = 0;
 	this.separator = '/';
 	
@@ -143,6 +143,14 @@ function Loader(progress, size){
 	uiLeaderboardFriends.onload = this.loaded;
 	uiLeaderboardStar.onload = this.loaded;
 
+	uiOptionsBackground.onload = this.loaded;
+	uiOptionsMenu.onload = this.loaded;
+	uiOptionsVolumenOn.onload = this.loaded;
+	uiOptionsVolumenOff.onload = this.loaded;
+	uiOptionsFacebook.onload = this.loaded;
+	uiOptionsLeaderboard.onload = this.loaded;
+	uiOptionsCoins.onload = this.loaded;
+
 	facebookScreen.onload = this.loaded;
 	facebookButton.onload = this.loaded;
 
@@ -226,6 +234,14 @@ function Loader(progress, size){
 		uiLeaderboardHighscore.src = this.size + this.separator + 'leaderboardhighscore.png';
 		uiLeaderboardFriends.src = this.size + this.separator + 'leaderboardfriends.png';
 		uiLeaderboardStar.src = this.size + this.separator + 'leaderboardstar.png';
+
+		uiOptionsBackground.src = this.size + this.separator + 'optionsbackground.png';
+		uiOptionsMenu.src = this.size + this.separator + 'optionsmenu.png';
+		uiOptionsVolumenOn.src = this.size + this.separator + 'optionsvolumenon.png';
+		uiOptionsVolumenOff.src = this.size + this.separator + 'optionsvolumenoff.png';
+		uiOptionsFacebook.src = this.size + this.separator + 'optionsfacebook.png';
+		uiOptionsLeaderboard.src = this.size + this.separator + 'optionsleaderboard.png';
+		uiOptionsCoins.src = this.size + this.separator + 'optionscoins.png';
 
 		facebookScreen.src = this.size + this.separator + 'facebookscreen.png';
 		facebookButton.src = this.size + this.separator + 'facebookbutton.png';

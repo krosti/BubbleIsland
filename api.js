@@ -593,9 +593,9 @@ api.levels.putLevel = function(playerid){
 	$.ajax({
 		type: 'POST',
 		url: api.levels.url, 
-		contentType: 'multipart/form-data',
+		contentType: 'application/x-www-form-urlencoded',
 		data: getdata,
-		success: function(data){ alert(data); api.levels.getResponse(data) },
+		success: function(data){ alert(this.url); api.levels.getResponse(data) },
 		error: function(xhr, error, text){ alert(this.url); api.levels.responseError(xhr, error, text) }
 	});
 };

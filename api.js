@@ -137,7 +137,6 @@ api.softgame.softgameGetUserBalance = 'cpi/user/balance';
 api.softgame.softgameOrderStart = 'cpi/order/start';
 api.softgame.softgameOrderFinalize = 'cpi/order/finalize';
 api.softgame.softgameDoOrder = 'eui/order';
-api.softgame.softgameOrderFinalize = 'cpi/user/balance';
 api.softgame.softgameBilling = 'eui/billing';
 api.softgame.softgameBackUrl = "http://puzzlebubble.eudaimonia.com.ar/";
 //api.softgame.softgameBackUrl = "http://eudaimonia.com.ar";

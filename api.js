@@ -320,6 +320,11 @@ api.softgame.doCoinsBuying = function(){
 };
 
 api.softgame.finalizeCoinsBuying = function(){
+//rpuebas
+// [x] web
+// [ ] RESTApi
+// [ ] 
+
 	var uri = api.softgame.softgameUrl + api.softgame.softgameOrderFinalize;
 	//alert('doCoinsBuying: ' + uri);
 	var getdata = {
@@ -329,12 +334,12 @@ api.softgame.finalizeCoinsBuying = function(){
 	};
 	var sign = api.softgame.JSON2Signature(getdata, 'web');
 	getdata.sig = sign;
-	//alert(api.JSON2String(getdata));
+	alert(api.JSON2String(getdata));
 	$.ajax({
 		type: 'GET',
 		url: uri,
 		data: getdata,
-		success: function(data){ api.softgame.finalizeCoinsRequest(data); },
+		success: function(data){ alert(this.url); api.softgame.finalizeCoinsRequest(data); },
 		error: api.softgame.errorResponse
 	});
 };

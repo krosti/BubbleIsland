@@ -5,7 +5,8 @@
 
     <meta name="viewport" content="user-scalable=0, width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
     <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="apple-mobile-web-app-status-bar-style"content="black-translucent" /> 
+	<meta name="apple-touch-fullscreen" content="yes" /> 
 
     <link href="css/320x480.css" rel="stylesheet" type="text/css" />
 	<link href="css/360x480.css" rel="stylesheet" type="text/css" />
@@ -725,6 +726,7 @@ function connectToFacebook2(){
 		
 		//softgame.onLoginUser = connectToFacebook2;
 		//softgame.startConnection();
+		api.facebook.retrieveUserData();
 		api.softgame.onLoginUser = function(){
 			$('#FBnav')[0].style.display = 'none';
 		};

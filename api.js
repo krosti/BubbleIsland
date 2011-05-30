@@ -578,8 +578,9 @@ api.levels.putLevel = function(playerid){
 };
 
 api.levels.putResponse = function(data){
-	
+	alert(data);
 };
+
 
 api.levels.responseError = function(xhr, error, text){
 	alert(xhr + ':' + error + ':' + text);

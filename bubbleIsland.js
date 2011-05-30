@@ -4,8 +4,8 @@ ToDo
 RC:
 [x] animaciones
 [-] leaderboard maquetado
-[ ] api de pagos andando
-[ ] api de face
+[-] api de pagos andando
+[-] api de face
 [ ] invitar amigos
 [ ] chequear allow a applicaciones
 [ ] 
@@ -1998,6 +1998,8 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 	};
 	
 	this.showMenu = function(){
+		api.levels.serializeLevel(game);
+		api.levels.putLevel(api.facebook.user.id);
 		this.clock.stop();
 		this.menu.style.zIndex = 90//this.menu.style.zIndex + 2;
 		this.menu.style.display = 'block';

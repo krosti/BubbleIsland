@@ -544,7 +544,7 @@ function bubble(l){
 	};
 	
 	this.serialize = function(){
-		var ich;
+		var ich = {};
 		ich.flavor = this.flavor;
 		ich.marked = this.marked;
 		ich.i = this.i;
@@ -1999,7 +1999,7 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 	
 	this.showMenu = function(){
 		api.levels.serializeLevel(game);
-		api.levels.putLevel(api.facebook.user.id);
+		api.levels.putLevel(1234/*api.facebook.user.id*/);
 		this.clock.stop();
 		this.menu.style.zIndex = 90//this.menu.style.zIndex + 2;
 		this.menu.style.display = 'block';
@@ -2132,12 +2132,14 @@ api.levels.serializeLevel = function(game){
 		var current = game.level.bubbles_array[i];
 		var bubble = current.serialize();
 		lvl.bubble_array.push(bubble);
-		current = null;
+		//current = null;
 	};
 
 	lvl.cannon = {};
 	lvl.cannon.currentBubble = (game.level.cannon.currentBubble == null)? null : game.level.cannon.currentBubble.serialize();
 	lvl.cannon.readyShoot = game.level.cannon.readyShoot;
+
+	api.levels.jsonlevel = lvl;
 };
 
 api.levels.unserializeLevel = function(game){

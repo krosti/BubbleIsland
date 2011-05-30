@@ -101,7 +101,22 @@ api.facebook.setUserData = function(data){
 };
 
 api.facebook.retrieveUserFriends = function(){
-	
+	postdata = {
+		access_token: api.facebook.accessToken		
+	};
+	self = this;
+	$.ajax({
+		url: 'https://graph.facebook.com/me/friends',
+		type: 'GET',
+		data: postdata,
+		//success: function(data){ alert('success: ' + data); self.setUserData(data); },
+		success: this.setUserData,
+		//error: function(data, er, r){ alert(data.responseText + ':' + er + ':' +r); }
+	});
+};
+
+api.facebook.retrieveUserFriendsResponse = function(data){
+	api.facebook.friends = api.string2JSON(data);
 };
 
 api.facebook.postMessage = function(msg){
@@ -537,13 +552,13 @@ api.softgame.errorResponse = function(xhr, error, text){
 //api db personal
 api.levels = {};
 api.levels.xhr;
-api.levels.url = 'betatester.borealdev.com.ar/apilevels';
+api.levels.url = 'http://betatester.borealdev.com.ar/apilevels';
 api.levels.jsonlevel = {};
 
 api.levels.onGetLevel = function(){};
 
 api.levels.getLevel = function(playerid){
-	var $getdata = {
+	var getdata = {
 		to: 'get',
 		player_id: playerid,
 	};
@@ -551,12 +566,13 @@ api.levels.getLevel = function(playerid){
 		type: 'POST',
 		data: getdata,
 		url: api.levels.url, 
-		success: api.levels.getResponse,
-		error: api.responseError
+		success: function(data){ alert(data); api.levels.getResponse(data); },
+		error: api.levels.responseError
 	});
 };
 
 api.levels.getResponse = function(data){
+	alert(data);
 	var jsonlevel = api.string2JSON(data);
 	if(jsonlevel.status == 1){
 		api.levels.jsonlevel = api.string2JSON(jsonlevel.level);
@@ -564,16 +580,20 @@ api.levels.getResponse = function(data){
 };
 
 api.levels.putLevel = function(playerid){
-	var $getdata = {
+	alert(playerid);
+	var getdata = {
 		to: 'put',
 		player_id: playerid,
+		json: api.JSON2String(api.levels.jsonlevel)
 	};
+	alert(api.JSON2String(getdata));
 	api.levels.xhr = $.ajax({
 		type: 'POST',
-		data: getdata,
 		url: api.levels.url, 
-		success: api.levels.getResponse,
-		error: api.responseError
+		crossDomain: true,
+		data: getdata,
+		success: function(data){ alert(data); api.levels.getResponse },
+		error: api.levels.responseError
 	});
 };
 

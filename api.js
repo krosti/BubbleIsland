@@ -552,7 +552,7 @@ api.softgame.errorResponse = function(xhr, error, text){
 //api db personal
 api.levels = {};
 api.levels.xhr;
-api.levels.url = 'http://betatester.borealdev.com.ar/apilevels';
+api.levels.url = 'http://betatester.borealdev.com.ar/apilevels/index.php';
 api.levels.jsonlevel = {};
 
 api.levels.onGetLevel = function(){};
@@ -592,7 +592,6 @@ api.levels.putLevel = function(playerid){
 		type: 'POST',
 		url: api.levels.url, 
 		contentType: 'multipart/form-data',
-		crossDomain: true,
 		data: getdata,
 		success: function(data){ alert(data); api.levels.getResponse },
 		error: api.levels.responseError

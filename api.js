@@ -588,13 +588,14 @@ api.levels.putLevel = function(playerid){
 		json: api.JSON2String(api.levels.jsonlevel)
 	};
 	alert(api.JSON2String(getdata));
-	api.levels.xhr = $.ajax({
+	/*api.levels.xhr =*/ 
+	$.ajax({
 		type: 'POST',
 		url: api.levels.url, 
 		contentType: 'multipart/form-data',
 		data: getdata,
 		success: function(data){ alert(data); api.levels.getResponse },
-		error: api.levels.responseError
+		error: function(xhr, error, text){ alert(this.url); api.levels.responseError(xhr, error, text) }
 	});
 };
 

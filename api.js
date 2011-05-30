@@ -582,10 +582,11 @@ api.levels.getResponse = function(data){
 
 api.levels.putLevel = function(playerid){
 	alert(playerid);
+	var level = api.JSON2String(api.levels.jsonlevel);
 	var getdata = {
 		to: 'put',
 		player_id: playerid,
-		json: api.JSON2String(api.levels.jsonlevel)
+		json: level
 	};
 	alert(api.JSON2String(getdata));
 	/*api.levels.xhr =*/ 
@@ -594,7 +595,7 @@ api.levels.putLevel = function(playerid){
 		url: api.levels.url, 
 		contentType: 'multipart/form-data',
 		data: getdata,
-		success: function(data){ alert(data); api.levels.getResponse },
+		success: function(data){ alert(data); api.levels.getResponse(data) },
 		error: function(xhr, error, text){ alert(this.url); api.levels.responseError(xhr, error, text) }
 	});
 };

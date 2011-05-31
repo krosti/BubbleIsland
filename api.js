@@ -208,7 +208,7 @@ api.softgame.onLogin = function(){};
 
 //functions
 api.softgame.startConnection = function(){
-	//alert('starConnection');
+	alert('starConnection');
 	var link = api.softgame.softgameUrl + api.softgame.softgameAuth;
 	var getdata = {
 		pk: api.softgame.game_id,

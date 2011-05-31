@@ -2300,7 +2300,7 @@ api.ui.alert2 = function(msg, button, fns){
 	for(var i = 0; i < fns.length; ++i){
 		var button = document.createElement('div');
 		$(button).addClass('uiAlertButton' + gameSize);
-		button.innerText = fns[i]button;
+		button.innerText = fns[i].button;
 		button.onclick = fns[i].action;
 		$(button).click(function(){
 			$(cartel).fadeOut(300, function(){

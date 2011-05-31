@@ -2422,7 +2422,7 @@ api.ui.alert2 = function(msg, fns){
 			});
 		});
 		button.style.top = button.style.top + (i * button.style.height);
-		$(alertui).appendChild(button);
+		alertui.appendChild(button);
 	};
 
 

@@ -790,7 +790,9 @@ $("#leaderboardBackMenu").addClass('leaderboardBackMenu' + gameSize);
 $("#leaderboardTabs").addClass('leaderboardTabs' + gameSize);
 
 function showCoins(){
+	api.ui.showWaiting();
 	api.softgame.onLoginUser = function(){
+		api.ui.hideWaiting();
 		api.ui.alert('You have ' + api.softgame.user.balance + ' coin/s to spend, you can buy more lifes when you run out of them', 'Ok, thanks for the advice', function(){ options.backToMenu(); });
 	};
 	//options.showNav('softgameNav', 'gameMenu');

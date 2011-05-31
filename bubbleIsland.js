@@ -2251,6 +2251,7 @@ api.levels.unserializeLevel = function(){
 	};
 	//alert('hola3');
 	game.level.cannon = new bubbleCannon(game.level);
+	game.cannon = game.level.cannon;
 	game.level.cannon.currentBubble = null;
 	if(lvl.cannon.currentBubble != null){
 		game.level.cannon.currentBubble = new bubble(game.level);
@@ -2258,6 +2259,7 @@ api.levels.unserializeLevel = function(){
 	};
 	game.level.loose = game.playerLoose;
 	game.level.win = game.playerWin;	
+	animNav.append(game.cannon.element);
 	return true;
 };
 

@@ -717,6 +717,7 @@ function bubble(l){
 			zweithBild.style.top = '0px';
 			zweithBild.style.left = '0px';
 		};
+		animNav.append(this.element);
 	};
 
 	this.move = function(){

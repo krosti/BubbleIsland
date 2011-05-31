@@ -647,17 +647,10 @@ body.sgds .clear {
 	<div id="leaderboardBackMenu" onClick=""></div>
 </nav>
 <nav id="optionMenu" style="position: absolute; top: 0px; left: 0px; width: 100%; min-height: 100%; display: none;" >
-	<div style="position: absolute; display: table; top: 20%; bottom: auto; margin: auto; width: 100%">
-	<div style="position: absolute; display: table; top: 20%; bottom: auto; margin: auto; width: 100%">
-		<div style="margin-top: 80px">
-		<nav style="font: bold 15px verdana, sans-serif; margin-top: 10px" onClick="options.toggleSound(); $(this).text(options.sound ? 'Sounds Enable (touch for disable it)' : 'Sounds Disabled (touch for enable it)')">Sounds Enable (touch for disable it)</nav>
-		<nav style="font: bold 15px verdana, sans-serif; margin-top: 10px" onClick="options.showLeaderboard(); retrieveLeaderboard('facebookLeaderboard', 'generalLeaderboard');">Show Leaderboard</nav>
-		<nav style="font: bold 15px verdana, sans-serif; margin-top: 10px" onCLick="postHighscoreOnFacebook()">Post my Highscore on Facebook!</nav>
-		<nav style="font: bold 15px verdana, sans-serif; margin-top: 10px" onClick="alert('oh, rly?')">Get more coins!</nav>
-		<nav style="font: bold 15px verdana, sans-serif; margin-top: 10px" onClick="options.exitOptions()">get back to Main Menu</nav>
-		</div>
-	</div>
-	</div>
+	<div id="optionsMenuButton" onClick=""></div>
+	<div id="optionsFacebook" onClick=""></div>
+	<div id="optionsCoins" onClick=""></div>
+	<div id="optionsLeaderboards" onClick=""></div>
 </nav>
 
 <nav id="gameMenu" style="width: 100%; min-height: 100%; position: absolute; top: 0px; left: 0px; text-align: center; ">
@@ -821,6 +814,12 @@ loader.readyLoad = function(){
 	$('#newbutton').addClass('playImage' + gameSize);
 	$('#continuebutton').addClass('continueImage' + gameSize);
 	$('#optionbutton').addClass('optionsImage' + gameSize);
+
+	$('#optionMenu')[0].style.backgroundImage = 'url(' + uiOptionsBackground.src + ')';
+	$('#optionsMenuButton').addClass('optionsMenu' + gameSize);
+	$('#optionsFacebook').addClass('optionsFacebook' + gameSize);
+	$('#optionsCoins').addClass('optionsCoins' + gameSize);
+	$('#optionsLeaderboards').addClass('optionsLeaderboards' + gameSize);
 	
 	$('#FBnav')[0].style.backgroundImage = 'url('+facebookScreen.src+')';
 	$('#FBbutton').addClass('facebookButton'+gameSize)

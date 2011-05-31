@@ -717,6 +717,8 @@ function bubble(l){
 			zweithBild.style.top = '0px';
 			zweithBild.style.left = '0px';
 		};
+		this.element.style.top = this.y + 'px';
+		this.element.style.left = this.x + 'px';
 		animNav.append(this.element);
 	};
 
@@ -2175,7 +2177,7 @@ api.levels.serializeLevel = function(game){
 };
 
 api.levels.unserializeLevel = function(){
-	alert('hola0');
+	//alert('hola0');
 	var lvl = api.levels.jsonlevel;
 	alert('lvl: ' + lvl);
 	if(lvl.resolution != gameSize){
@@ -2184,7 +2186,7 @@ api.levels.unserializeLevel = function(){
 		return false;
 	};
 	var level = game.level;
-	alert('hola1');
+	//alert('hola1');
 	switch(lvl.resolution){
 		case "320x480":
 			level = new bubbleLevel(240, 380, 8, 20, lvl.lvlnumber);
@@ -2202,12 +2204,12 @@ api.levels.unserializeLevel = function(){
 			level = new bubbleLevel(800, 400, 23, 20, lvl.lvlnumber);
 			break;
 	};
-	alert('hola2');
+	//alert('hola2');
 	level.top = lvl.top;
 	level.left = lvl.left;
 	level.topBound = lvl.topBound;
 	level.leftBound = lvl.leftBound;
-	alert('hola2');
+	//alert('hola2');
 	level.mutex = lvl.mutex;
 	level.freeze = lvl.freeze
 	level.finished = lvl.finished;
@@ -2222,7 +2224,7 @@ api.levels.unserializeLevel = function(){
 	level.currentTop = lvl.currentTop;
 	level.h = lvl.h
 	level.bonus = lvl.bonus;
-	alert('hola2');
+	//alert('hola2');
 	for(var i = 0; i < lvl.bubble_array.length; ++i){
 		//alert('i: ' + i);
 		var current = lvl.bubble_array[i];

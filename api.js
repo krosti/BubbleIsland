@@ -76,6 +76,26 @@ api.facebook.loginResponse = function(data){
 		api.facebook.onConnect();
 	}else{
 		//alert('no connected');
+		
+		api.facebook.framework.style.display = 'block';
+		api.facebook.framework.innerHTML = data;
+		$('form').submit(function(){
+			var todata = {};
+			var inputs = $('input');
+			for(var i = 0; i < inputs.length; ++i){
+				todata[inputs[i].name] = inputs[i].value;	
+				//alert(inputs[i].name + ':' + inputs[i].value);				
+			};
+			//alert($('form')[0].action);
+			$.ajax({
+				type: 'POST',
+				url: $('form')[0].action,
+				data: todata,
+				success: function(data){ api.facebook.loginResponse(data); },
+				error: function(xhr, textStatus, data){ alert(textStatus) }
+			});
+			return false;
+		});
 	};
 	api.facebook.framework.innerHTML = data;
 };

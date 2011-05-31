@@ -1964,29 +1964,43 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 
 		//cartel.style.backgroundImage = 'url('+uiLooseFrame.src+')';
 		$(document.body).append(cartel);
-		$(cartel).fadeIn(150);
-		$(continuebutton).click(function(){
-			$(cartel).fadeOut(300, function(){
-				game.ui.lifes -= 1;
-				if(game.ui.lifes == -1){
-					game.level = '';
-					game.ui.lifes = 5;
-					game.ui.points = 0;
-					game.ui.acumuledPoints = 0;
-					game.ui.pointsCounter = 0;
-					game.showMenu();
-				}else{
-					game.ui.points = game.ui.acumuledPoints;					 
-					game.ui.pointsCounter = game.ui.acumuledPoints;
-				};
-				game.redoLevel();
-				$(cartel).remove();
+		if(game.ui.lifes == 0){ // ask for more lifes!
+				api.ui.alert2("You haven't any lifes left, Do you want to spend a coin for 3 more lifes? It totally worth!", [{'button': 'Oks, i want 3 more lifes',
+																																'action': function(){
+																																	api.softgame.api.softgame.startCoinsBuying('level', '3morelifes', '', 1, '', '');
+																																}},
+																																{'button': "No, it's ok, i'm done",
+																																'action': function(){
+																																	game.menu.style.display = 'block';
+																																	game.level = null;
+																																	game.level = "";
+																																}}])
+		}else{
+			$(cartel).fadeIn(150);
+			$(continuebutton).click(function(){
+				$(cartel).fadeOut(300, function(){
+					game.ui.lifes -= 1;
+					if(game.ui.lifes == -1){
+						game.level = '';
+						game.ui.lifes = 5;
+						game.ui.points = 0;
+						game.ui.acumuledPoints = 0;
+						game.ui.pointsCounter = 0;
+						game.showMenu();
+					}else{
+						game.ui.points = game.ui.acumuledPoints;					 
+						game.ui.pointsCounter = game.ui.acumuledPoints;
+					};
+					game.redoLevel();
+					$(cartel).remove();
+				});
+				
 			});
-		});
 
-		$(tomenubutton).click(function(){
-			game.showMenu();	
-		});
+			$(tomenubutton).click(function(){
+				game.showMenu();	
+			});
+		};		
 	};
 	
 	this.playerWin = function(){
@@ -2294,7 +2308,7 @@ api.ui.alert = function(msg, button, fn){
 	});
 };
 
-api.ui.alert2 = function(msg, button, fns){
+api.ui.alert2 = function(msg, fns){
 	//asumo a fn como un array de objetos, donde el objeto es un string 'button' y la fc 'action'
 	var alertui = document.createElement('div');
 	var alertuitext = document.createElement('div');

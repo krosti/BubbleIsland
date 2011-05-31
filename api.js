@@ -118,7 +118,8 @@ api.facebook.retrieveUserFriends = function(){
 
 api.facebook.retrieveUserFriendsResponse = function(data){
 	alert(data);
-	api.facebook.friends = api.string2JSON(data);
+	var friends = api.string2JSON(data)
+	api.facebook.friends = friends.data;
 };
 
 api.facebook.postMessage = function(msg){

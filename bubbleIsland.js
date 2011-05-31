@@ -2274,8 +2274,49 @@ api.ui.alert = function(msg, button, fn){
 			$(cartel).remove();
 		});
 	});
+};
 
-	$(tomenubutton).click(function(){
-		game.showMenu();	
+api.ui.alert2 = function(msg, button, fns){
+	//asumo a fn como un array de objetos, donde el objeto es un string 'button' y la fc 'action'
+	var alertui = document.createElement('div');
+	var alertuitext = document.createElement('div');
+	var alertuibackground = document.createElement('div');
+	//var alertuibutton = document.createElement('div');
+	alertuibackground.style.backgroundImage = 'url(' + uiAlertScreen.src + ')';
+	$(alertui).addClass('uiAlert' + gameSize);
+	$(alertuitext).addClass('uiAlertText' + gameSize);
+	$(alertuibackground).addClass('uiAlertImage' + gameSize);
+	//$(alertuibutton).addClass('uiAlertButton' + gameSize);
+	alertui.appendChild(alertuibackground);
+	//alertui.appendChild(alertuibutton);
+	alertuibackground.appendChild(alertuitext);
+	
+	cartel = alertui;
+
+	$(alertuitext)[0].innerText = msg;
+	/*$(alertuibutton)[0].innerText = button;
+	$(alertuibutton)[0].onclick = fn;*/
+
+	for(var i = 0; i < fns.length; ++i){
+		var button = document.createElement('div');
+		$(button).addClass('uiAlertButton' + gameSize);
+		button.innerText = fns[i]button;
+		button.onclick = fns[i].action;
+		$(button).click(function(){
+			$(cartel).fadeOut(300, function(){
+				$(cartel).remove();
+			});
+		});
+		button.style.top = button.style.top + (i * button.style.height);
+		$(alertui).appendChild(button);
+	};
+
+
+	$(document.body).append(cartel);
+	$(cartel).fadeIn(150);
+	$(alertuibutton).click(function(){
+		$(cartel).fadeOut(300, function(){
+			$(cartel).remove();
+		});
 	});
 };

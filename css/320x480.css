@@ -200,6 +200,7 @@
 }
 
 .uiAlert320x480{
+	font: Bubblegum;
 	position: fixed;
 	background-image: url(../backgrounddiv.png);
 	width: 100%;
@@ -222,9 +223,9 @@
 .uiAlertButton320x480{
 	position: fixed;
 	background-image: url(../320x480/alertbutton.png);
-	width: px;
-	height: px;
-	min-height: px;
+	width: 201px;
+	height: 117px;
+	min-height: 117px;
 	top: 265px;
 	left: 90px;
 }

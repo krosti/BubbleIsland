@@ -771,8 +771,6 @@ $('#FBnav')[0].style.height = gameSize.slice(4) + 'px';
 
 $('#progressBar').addClass('loadingProgressBar' + gameSize);
 
-$('#leaderboardMenu')[0].style.backgroundImage = 'url('+uiLeaderboardScreen.src+')';
-
 $("#generalLeaderboard").addClass('leaderboardTab' + gameSize);
 $("#facebookLeaderboard").addClass('leaderboardTab' + gameSize);
 $("#generalLeaderboardTab").addClass('leaderboardTabHighscore' + gameSize);
@@ -814,6 +812,8 @@ loader.readyLoad = function(){
 	$('#newbutton').addClass('playImage' + gameSize);
 	$('#continuebutton').addClass('continueImage' + gameSize);
 	$('#optionbutton').addClass('optionsImage' + gameSize);
+
+	$('#leaderboardMenu')[0].style.backgroundImage = 'url('+uiLeaderboardScreen.src+')';
 
 	$('#optionMenu')[0].style.backgroundImage = 'url(' + uiOptionsBackground.src + ')';
 	$('#optionsMenuButton').addClass('optionsMenu' + gameSize);

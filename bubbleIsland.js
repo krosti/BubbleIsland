@@ -2250,13 +2250,14 @@ api.levels.unserializeLevel = function(){
 		current = null;
 	};
 	//alert('hola3');
-	game.level.cannon = new bubbleCannon(game.level);
-	game.cannon = game.level.cannon;
+	game.cannon = new bubbleCannon(game.level);
+	game.level.cannon = game.cannon;
 	game.level.cannon.currentBubble = null;
 	if(lvl.cannon.currentBubble != null){
 		game.level.cannon.currentBubble = new bubble(game.level);
 		game.level.cannon.currentBubble.unserialize(lvl.cannon.currentBubble);
 	};
+	game.cannon.readyShoot = lvl.cannon.readyShoot;
 	game.level.loose = game.playerLoose;
 	game.level.win = game.playerWin;	
 	animNav.append(game.cannon.element);

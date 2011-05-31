@@ -2223,13 +2223,13 @@ api.levels.unserializeLevel = function(game){
 	level.bonus = lvl.bonus;
 	alert('hola2');
 	for(var i = 0; i < lvl.bubble_array.length; ++i){
-		alert('i: ' + i);
+		//alert('i: ' + i);
 		var current = lvl.bubble_array[i];
-		alert(current);
+		//alert(current);
 		var b = new bubble(level);
-		alert('unserialize bubble');
+		//alert('unserialize bubble');
 		b.unserialize(current);
-		alert('fin unserialize bubble');
+		//alert('fin unserialize bubble');
 		level.bubbles_array.push(b);
 		level.grilla.Table[b.i][b.j] = b;
 		current = null;

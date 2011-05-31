@@ -2174,36 +2174,39 @@ api.levels.serializeLevel = function(game){
 };
 
 api.levels.unserializeLevel = function(game){
+	alert('hola0');
 	var lvl = api.levels.jsonlevel;
+	alert('lvl: ' + lvl);
 	if(lvl.resolution != gamSize){
 		alert('resolution wrong');
 		api.ui.alert('You have another session started with another phone resolution, we cannot arrange the bubbles in the same position, this will a mess!! please relogin with the original phone and try again, if you dont care losee your progress and fell you can do better in one sit, hit play and enjoy the paradise!!', 'Ok, see you later');
 		return;
 	};
 	var level = {};
+	alert('hola1');
 	switch(lvl.resolution){
 		case "320x480":
 			level = new bubbleLevel(240, 380, 8, 20, lvl.lvlnumber);
 			break;
 		case "360x480":
-			this.level = new bubbleLevel(360, 480, 10, 20, lvl.lvlnumber);
+			level = new bubbleLevel(360, 480, 10, 20, lvl.lvlnumber);
 			break;
 		case "640x960":
-			this.level = new bubbleLevel(640, 960, 13, 30, lvl.lvlnumber);
+			level = new bubbleLevel(640, 960, 13, 30, lvl.lvlnumber);
 			break;
 		case "480x800":
-			this.level = new bubbleLevel(480, 800, 11, 25, lvl.lvlnumber);
+			level = new bubbleLevel(480, 800, 11, 25, lvl.lvlnumber);
 			break;
 		case "854x480":
-			this.level = new bubbleLevel(800, 400, 23, 20, lvl.lvlnumber);
+			level = new bubbleLevel(800, 400, 23, 20, lvl.lvlnumber);
 			break;
 	};
-
+	alert('hola2');
 	level.top = lvl.top;
 	level.left = lvl.left;
 	level.topBound = lvl.topBound;
 	level.leftBound = lvl.leftBound;
-	
+	alert('hola2');
 	level.mutex = lvl.mutex;
 	level.freeze = lvl.freeze
 	level.finished = lvl.finished;
@@ -2218,7 +2221,7 @@ api.levels.unserializeLevel = function(game){
 	level.currentTop = lvl.currentTop;
 	level.h = lvl.h
 	level.bonus = lvl.bonus;
-
+	alert('hola2');
 	for(var i = 0; i < lvl.bubbles_array.length; ++i){
 		var current = lvl.bubbles_array[i];
 		var bubble = new bubble(level);
@@ -2227,14 +2230,14 @@ api.levels.unserializeLevel = function(game){
 		level.grilla.Table[bubble.i][bubble.j] = bubble;
 		current = null;
 	};
-
+	alert('hola3');
 	level.cannon = new bubbleCannon(level);
 	level.cannon.currentBubble = null;
 	if(lvl.cannon.currentBubble != null){
 		level.cannon.currentBubble = new bubble(level);
 		level.cannon.currentBubble.unserialize(lvl.cannon.currentBubble);
 	};
-
+	alert('hola4');
 	game.level = level;
 };
 

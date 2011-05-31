@@ -1779,6 +1779,7 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 	performance.addChecker('colisiones');
 	performance.addChecker('draw balls');
 	performance.addChecker('draw ui');	*/
+	this.loadedLevel = false;
 
 	/*this.backgroundCanvas.height = this.canvas.height;
 	this.backgroundCanvas.width = this.canvas.width;*/
@@ -1843,7 +1844,12 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 	
 	this.continueGame = function(){
 		if(this.level == ''){
-			this.startNewGame();
+			if(!this.loadedLevel){
+				api.levels.onGetLevel = this.loadPreviousGame();
+				api.levels.getLevel(api.facebook.user.id);
+			}else{
+				this.startNewGame();
+			};
 		}else{
 			//this.menu.style.zIndex = this.menu.style.zIndex + 1;
 			this.menu.style.display = 'none';
@@ -1851,6 +1857,14 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 		};
 	};
 	
+	this.loadPreviosGame = function(){
+		if(api.levels.jsonlevel === ""){
+			api.ui.alert("I can't find any previous game, you need to start from the begginig!");
+		};
+		api.levels.unserializeLevel(this);
+		this.continueGame();
+	};
+
 	this.nextLevel = function(){
 		//SubmitScore();
 		this.createLvl(this.level.lvlnro + 1);
@@ -2156,7 +2170,7 @@ api.levels.serializeLevel = function(game){
 api.levels.unserializeLevel = function(game){
 	var lvl = api.levels.jsonlevel;
 	if(lvl.resolution != gamSize){
-		alert('You have another session started with another phone resolution, we cannot arrange the bubbles in the same position, this will a mess!! please relogin with the original phone and try again, if you dont care losee your progress and fell you can do better in one sit, hit play and enjoy the paradise!!');
+		api.ui.alert('You have another session started with another phone resolution, we cannot arrange the bubbles in the same position, this will a mess!! please relogin with the original phone and try again, if you dont care losee your progress and fell you can do better in one sit, hit play and enjoy the paradise!!', 'Ok, see you later');
 		return;
 	};
 	var level = {};

@@ -577,7 +577,10 @@ api.levels.getResponse = function(data){
 	var jsonlevel = api.string2JSON(data);
 	if(jsonlevel.status == 1){
 		api.levels.jsonlevel = api.string2JSON(jsonlevel.level);
+	}else{
+		api.levels.jsonlevel = "";
 	};
+	api.levels.onGetLevel();
 };
 
 api.levels.putLevel = function(playerid){

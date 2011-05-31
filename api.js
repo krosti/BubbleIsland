@@ -29,7 +29,7 @@ api.facebook.startConnection = function(){
 };
 
 api.facebook.errorResponse = function(data, error){
-	alert(data + ':' + error);
+	//alert(data + ':' + error);
 };
 
 api.facebook.connectResponse = function(data){
@@ -53,7 +53,8 @@ api.facebook.connectResponse = function(data){
 			url: $('form')[0].action,
 			data: todata,
 			success: function(data){ api.facebook.loginResponse(data); },
-			error: function(xhr, textStatus, data){ alert(textStatus) }
+			error: function(xhr, textStatus, data){ //alert(textStatus) 
+			}
 		});
 		return false;
 	});
@@ -92,7 +93,8 @@ api.facebook.loginResponse = function(data){
 				url: $('form')[0].action,
 				data: todata,
 				success: function(data){ api.facebook.loginResponse(data); },
-				error: function(xhr, textStatus, data){ alert(textStatus) }
+				error: function(xhr, textStatus, data){ //alert(textStatus) 
+				}
 			});
 			return false;
 		});
@@ -116,7 +118,7 @@ api.facebook.retrieveUserData = function(){
 };
 
 api.facebook.setUserData = function(data){
-	alert(data);
+	//alert(data);
 	api.facebook.user = eval('(' + data + ')');	
 	api.facebook.retrieveUserFriends();
 };
@@ -137,13 +139,13 @@ api.facebook.retrieveUserFriends = function(){
 };
 
 api.facebook.retrieveUserFriendsResponse = function(data){
-	alert(data);
+	//alert(data);
 	var friends = api.string2JSON(data)
 	api.facebook.friends = friends.data;
 };
 
 api.facebook.postMessage = function(msg){
-		alert('post: ' + msg);
+		//alert('post: ' + msg);
 		var uri = "https://graph.facebook.com/me/feed";
 		postdata = {
 			access_token: api.facebook.accessToken,
@@ -155,8 +157,10 @@ api.facebook.postMessage = function(msg){
 			type: 'POST',
 			contentType: 'multipart/form-data',
 			data: postdata, 
-			success: function(data){ alert('success: ' + data); },
-			error: function(data, error, r){ alert('error: ' + data.responseText + error + r); }
+			success: function(data){ //alert('success: ' + data); 
+			},
+			error: function(data, error, r){ //alert('error: ' + data.responseText + error + r); 
+			}
 		});
 		//alert('termine el post');
 	
@@ -229,7 +233,7 @@ api.softgame.onLogin = function(){};
 
 //functions
 api.softgame.startConnection = function(){
-	alert('starConnection');
+	//alert('starConnection');
 	var link = api.softgame.softgameUrl + api.softgame.softgameAuth;
 	var getdata = {
 		pk: api.softgame.game_id,
@@ -258,7 +262,7 @@ api.softgame.getUserInfo = function(){
 	//if(!this.connected) return false;
 	//alert('user info');
 	var uri = api.softgame.softgameUrl + api.softgame.softgameGetUserData;
-	alert('uri: ' + uri);
+	//alert('uri: ' + uri);
 	var getdata = {
 		pk: api.softgame.game_id,
 		token: api.softgame.token
@@ -269,8 +273,10 @@ api.softgame.getUserInfo = function(){
 		type: 'GET',
 		url: uri,
 		data: getdata,
-		success: function(data){ alert(this.url); api.softgame.userRequest(data); },
-		error: function(){ alert('error ' + this.url); }
+		success: function(data){ //alert(this.url); api.softgame.userRequest(data); 
+		},
+		error: function(){ //alert('error ' + this.url); 
+		}
 	});
 };
 
@@ -287,7 +293,8 @@ api.softgame.getUserBalance = function(){
 		url: uri,
 		data: getdata,
 		success: function(data){ api.softgame.balanceRequest(data); },
-		error: function(xhr, data){ alert('error: ' + data); }
+		error: function(xhr, data){ //alert('error: ' + data); 
+		}
 	});
 };
 
@@ -305,13 +312,14 @@ api.softgame.getBilling = function(){
 		url: uri,
 		data: getdata,
 		success: function(data){ api.softgame.billingRequest(data); },
-		error: function(xhr, data){ alert('error: ' + data); }
+		error: function(xhr, data){ //alert('error: ' + data); 
+		}
 	});
 };
 
 api.softgame.startCoinsBuying = function(id, title, desc, price, img_url, obj){
 	var uri = api.softgame.softgameUrl + api.softgame.softgameOrderStart;
-	alert('startCoinsBuying: ' + uri);
+	//alert('startCoinsBuying: ' + uri);
 	var getdata = {
 		pk: api.softgame.game_id,
 		custom_data: obj,
@@ -324,12 +332,13 @@ api.softgame.startCoinsBuying = function(id, title, desc, price, img_url, obj){
 	};
 	var sign = api.softgame.JSON2Signature(getdata, 'web');
 	getdata.sig = sign;
-	alert(api.JSON2String(getdata));
+	//alert(api.JSON2String(getdata));
 	/*api.softgame.xhr =*/ $.ajax({
 		type: 'GET',
 		url: uri,
 		data: getdata,
-		success: function(data){ alert(data); api.softgame.startOrderRequest(data); },
+		success: function(data){ //alert(data); api.softgame.startOrderRequest(data); 
+		},
 		error: api.softgame.errorResponse
 	});
 
@@ -337,7 +346,7 @@ api.softgame.startCoinsBuying = function(id, title, desc, price, img_url, obj){
 
 api.softgame.doCoinsBuying = function(){
 	var uri = api.softgame.softgameUrl + api.softgame.softgameDoOrder;
-	alert('doCoinsBuying: ' + uri);
+	//alert('doCoinsBuying: ' + uri);
 	var getdata = {
 		pk: api.softgame.game_id,
 		back: api.softgame.softgameBackUrl,
@@ -371,12 +380,13 @@ api.softgame.finalizeCoinsBuying = function(){
 	};
 	var sign = api.softgame.JSON2Signature(getdata, 'web');
 	getdata.sig = sign;
-	alert(api.JSON2String(getdata));
+	//alert(api.JSON2String(getdata));
 	$.ajax({
 		type: 'GET',
 		url: uri,
 		data: getdata,
-		success: function(data){ alert(this.url); api.softgame.finalizeCoinsRequest(data); },
+		success: function(data){ //alert(this.url); api.softgame.finalizeCoinsRequest(data); 
+		},
 		error: api.softgame.errorResponse
 	});
 };
@@ -410,7 +420,7 @@ api.softgame.connectionEstablished = function(data){
 			api.softgame.onLogin();
 			api.softgame.getUserInfo();
 		}else{
-			alert('Error gral de apps');
+			//alert('Error gral de apps');
 			api.softgame.framework.style.display = 'block';
 			api.softgame.framework.innerHTML = data;
 		};
@@ -434,7 +444,8 @@ api.softgame.facebookConnectResponse = function(data){
 			url: faceuri,
 			//success: function(data){ FB.connectResponse(data) },
 			success: function(data){ api.softgame.secondConnectResponse(data, decodeURI(this.url)); },
-			error: function(data, error){ alert('facebookConnectResponse: ' + data.responseText + ' : ' + error); }
+			error: function(data, error){ //alert('facebookConnectResponse: ' + data.responseText + ' : ' + error); 
+			}
 			//complete: function(xhr,textStatus){ alert('complete: facebookConnectionEstablished ' + xhr.getAllResponseHeaders());  }
 		});
 	}else{
@@ -454,13 +465,14 @@ api.softgame.facebookConnectResponse = function(data){
 					url: $('form')[0].action,
 					data: todata,
 					success: function(data){ api.softgame.facebookConnectResponse(data); },
-					error: function(xhr, textStatus, data){ alert(textStatus) }
+					error: function(xhr, textStatus, data){ //alert(textStatus) 
+					}
 				});
 				return false;
 			});
 		}else{
 			//window.location = this.jq.url;
-			alert('facebook Response, another page, retrying');
+			//alert('facebook Response, another page, retrying');
 			api.softgame.startConnection();
 		};
 	};
@@ -480,11 +492,11 @@ api.softgame.secondConnectResponse = function(data, uri){
 };
 
 api.softgame.connectionError = function(obj, err, r){
-	alert('error: ' + obj.getAllResponseHeaders() + err + r + this.url);
+	//alert('error: ' + obj.getAllResponseHeaders() + err + r + this.url);
 };
 
 api.softgame.userRequest = function(data){
-	alert(data);
+	//alert(data);
 	var userdata = eval('(' + data + ')');
 	//alert(userdata);
 	//alert(userdata.status);
@@ -495,7 +507,7 @@ api.softgame.userRequest = function(data){
 };
 
 api.softgame.coinsRequest = function(data){
-	alert(data);
+	//alert(data);
 	var coinsdata = eval('(' + data + ')');
 	if(data.status == 1){
 		api.softgame.userCoins = coinsdata.response.balance;
@@ -503,12 +515,12 @@ api.softgame.coinsRequest = function(data){
 };
 
 api.softgame.balanceRequest = function(data){
-	alert(data);
+	//alert(data);
 	var balancedata = eval('(' + data + ')');
 };
 
 api.softgame.billingRequest = function(data){
-	alert(data);
+	//alert(data);
 	api.softgame.framework.style.display = 'block';
 	api.softgame.framework.innerHTML = data;
 	//var billingdata = eval('(' + data + ')');
@@ -525,13 +537,13 @@ api.softgame.startOrderRequest = function(data){
 };
 
 api.softgame.doCoinsRequest = function(data){
-	alert('doCoinsRequest: ' + data);
+	//alert('doCoinsRequest: ' + data);
 	var confirm = 'eui/order/confirm';
 	var uri = api.softgame.softgameUrl;
 	var start = data.indexOf(confirm);
 	if(start != -1){
 		uri += data.slice(start, data.indexOf('">', start));
-		alert('uri confirm: ' + uri);
+		//alert('uri confirm: ' + uri);
 		$.ajax({
 			type: 'GET',
 			url: uri,
@@ -539,13 +551,13 @@ api.softgame.doCoinsRequest = function(data){
 			error: api.softgame.errorResponse
 		});
 	}else{
-		alert('Error al pedir vidas');
+		//alert('Error al pedir vidas');
 	};
 };
 
 api.softgame.confirmDoCoinsBuying = function(data, uri){
-	alert(data);
-	alert(uri);
+	//alert(data);
+	//alert(uri);
 	//parsear data en json
 	var getdata = api.string2JSON(data);
 	if(getdata.status == "SUCCESS"){
@@ -553,24 +565,24 @@ api.softgame.confirmDoCoinsBuying = function(data, uri){
 		alert('otoken: ' + api.softgame.otoken);*/
 		api.softgame.finalizeCoinsBuying(); 			
 	}else{
-		alert('Mmm.. we have a little inconvenient trying to reach you some lifes. Please can you try again and see if Hades wanna give you another chance?');
+		//alert('Mmm.. we have a little inconvenient trying to reach you some lifes. Please can you try again and see if Hades wanna give you another chance?');
 	};
 	//alert(uri);
 };
 
 api.softgame.finalizeCoinsRequest = function(data){
-	alert(data);
+	//alert(data);
 	var getdata = api.string2JSON(data.replace('\\\\', ''));
 	if(getdata.status == 1){
 		api.ui.alert('You have 3 more lifes!! or you are a cat or someone loves you up there :)', 'Thanks! Go on!', function(){});
 	}else{
-		alert('Mmm.. we have a little inconvenient trying to reach you some lifes. Please can you try again and see if Hades wanna give you another chance?');
-		alert(api.JSON2String(getdata));
+		//alert('Mmm.. we have a little inconvenient trying to reach you some lifes. Please can you try again and see if Hades wanna give you another chance?');
+		//alert(api.JSON2String(getdata));
 	};
 };
 
 api.softgame.errorResponse = function(xhr, error, text){
-	alert(xhr +':'+ error +':'+ text);
+	//alert(xhr +':'+ error +':'+ text);
 };
 //api db personal
 api.levels = {};
@@ -581,7 +593,7 @@ api.levels.jsonlevel = {};
 api.levels.onGetLevel = function(){};
 
 api.levels.getLevel = function(playerid){
-	alert(playerid);
+	//alert(playerid);
 	var getdata = {
 		to: 'get',
 		player_id: playerid,
@@ -591,17 +603,18 @@ api.levels.getLevel = function(playerid){
 		data: getdata,
 		contentType: 'application/x-www-form-urlencoded',
 		url: api.levels.url, 
-		success: function(data){ alert(data); api.levels.getResponse(data); },
+		success: function(data){ //alert(data); api.levels.getResponse(data); 
+		},
 		error: api.levels.responseError
 	});
 };
 
 api.levels.getResponse = function(data){
-	alert(data);
+	//alert(data);
 	var jsonlevel = api.string2JSON(data);
 	if(jsonlevel.status == 1){
 		api.levels.jsonlevel = api.string2JSON(jsonlevel.level);
-		alert(api.levels.jsonlevel);
+		//alert(api.levels.jsonlevel);
 	}else{
 		api.levels.jsonlevel = "";
 	};
@@ -609,32 +622,34 @@ api.levels.getResponse = function(data){
 };
 
 api.levels.putLevel = function(playerid){
-	alert(playerid);
+	//alert(playerid);
 	var level = api.JSON2String(api.levels.jsonlevel);
 	var getdata = {
 		to: 'put',
 		player_id: playerid,
 		json: level
 	};
-	alert(api.JSON2String(getdata));
+	//alert(api.JSON2String(getdata));
 	/*api.levels.xhr =*/ 
 	$.ajax({
 		type: 'POST',
 		url: api.levels.url, 
 		contentType: 'application/x-www-form-urlencoded',
 		data: getdata,
-		success: function(data){ alert(this.url); api.levels.getResponse(data) },
-		error: function(xhr, error, text){ alert(this.url); api.levels.responseError(xhr, error, text) }
+		success: function(data){ //alert(this.url); api.levels.getResponse(data) 
+		},
+		error: function(xhr, error, text){ //alert(this.url); api.levels.responseError(xhr, error, text) 
+		}
 	});
 };
 
 api.levels.putResponse = function(data){
-	alert(data);
+	//alert(data);
 };
 
 
 api.levels.responseError = function(xhr, error, text){
-	alert(xhr + ':' + error + ':' + text);
+	//alert(xhr + ':' + error + ':' + text);
 };
 
 api.levels.serializeLevel;

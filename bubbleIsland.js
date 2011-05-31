@@ -1431,8 +1431,8 @@ function bubbleLevel(w, h, bubblesWidth, bubblesHeight, lvlnbr){
 		};
 		if(collisions.length > 0){
 			//debug(' &nbsp; length: ' + collisions.length);
-			//this.mutex=true;					
-			game.clock.stop();
+			this.mutex = true;					
+			//game.clock.stop();
 			this.addBubble(this.shootedBubble);			
 			//alert(currentBubble + ' before shoot');
 			var currentBubble = collisions[0];
@@ -1446,8 +1446,8 @@ function bubbleLevel(w, h, bubblesWidth, bubblesHeight, lvlnbr){
 			this.shootedBubble.stopMove();
 			this.shootedBubble.dy = this.bubbleVelocity;
 			this.shootedBubble = null;
-			//this.mutex = false;
-			game.clock.start();	
+			this.mutex = false;
+			//game.clock.start();	
 		};
 		if(this.points >= this.pointsToReach){
 			this.freeze = true;

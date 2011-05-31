@@ -66,7 +66,7 @@ function retrieveGeneralLeaderboard(scores, numscores, response){
 };
 
 function retrieveFacebookLeaderboard(scores, numscores, response){
-	//alert(response);
+	alert(api.JSON2String(response));
 	if(response.Success)
     {
         //alert(scores.length + " scores returned out of " + numscores);

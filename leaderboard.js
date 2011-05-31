@@ -61,6 +61,7 @@ function retrieveGeneralLeaderboard(scores, numscores, response){
     else
     {
         // score listing failed because of response.ErrorCode
+        api.ui.alert('Sorry, now we have a little problem with the leaderboards, please check it later', 'Ok');
     }
 };
 
@@ -86,5 +87,6 @@ function retrieveFacebookLeaderboard(scores, numscores, response){
     else
     {
         // score listing failed because of response.ErrorCode
+        api.ui.alert('Sorry, now we have a little problem with the leaderboards, please check it later', 'Ok');
     }
 };

@@ -790,7 +790,7 @@ function showCoins(){
 	api.softgame.onLoginUser = function(){
 		api.ui.alert('You have ' + api.softgame.user.balance + ' coin/s to spend, you can buy more lifes when you run out of them', 'Ok, thanks for the advice', function(){ options.backToMenu(); });
 	};
-	options.showNav('softgameNav', 'gameMenu');
+	//options.showNav('softgameNav', 'gameMenu');
 	api.softgame.getUserInfo();
 };
 

@@ -1431,7 +1431,8 @@ function bubbleLevel(w, h, bubblesWidth, bubblesHeight, lvlnbr){
 		};
 		if(collisions.length > 0){
 			//debug(' &nbsp; length: ' + collisions.length);
-			this.mutex=true;					
+			//this.mutex=true;					
+			game.clock.stop();
 			this.addBubble(this.shootedBubble);			
 			//alert(currentBubble + ' before shoot');
 			var currentBubble = collisions[0];
@@ -1439,13 +1440,14 @@ function bubbleLevel(w, h, bubblesWidth, bubblesHeight, lvlnbr){
 				if(currentBubble.dis > collisions[i].dis) currentBubble = collisions[i];
 			};
 			//(bubble, collided)
-			game.clock.stop();	
+				
 			this.grilla.addBubble(this.shootedBubble, currentBubble.bubble);	
-			game.clock.start();			
+					
 			this.shootedBubble.stopMove();
 			this.shootedBubble.dy = this.bubbleVelocity;
 			this.shootedBubble = null;
-			this.mutex = false;
+			//this.mutex = false;
+			game.clock.start();	
 		};
 		if(this.points >= this.pointsToReach){
 			this.freeze = true;
@@ -2374,8 +2376,9 @@ api.ui.showWaiting = function(){
 		$(api.ui.waitdiv).addClass('uiAlert' + gameSize);
 		var cartel = document.createElement('div');
 		$(cartel).addClass('uiAlert' + gameSize);
-		cartel.style.backgroundImage = 'url(' + gameSize + 'waitscreen.png)';
+		cartel.style.backgroundImage = 'url(' + gameSize + '/waitscreen.png)';
 		api.ui.waitdiv.appendChild(cartel);
+		$(document.body).appendChild(api.ui.waitdiv);
 	};
 	api.ui.waitTimer = setTimeout('api.ui.waitdiv.style.display = "block"', 500);
 };

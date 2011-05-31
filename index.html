@@ -96,7 +96,7 @@
 		#leaderboardTabs li a { background: #ccf; padding: 10px; float:left; border-right: 1px solid #ccf; border-bottom: none; text-decoration: none; color: #000; font-weight: bold;}
 		#leaderboardTabs li.active a { background: #eef; }
 		.content { float: left; clear: both; border: 1px solid #ccf; border-top: none; border-left: none; background: #eef; padding: 10px 20px 20px; width: 400px; }
-		/*facebook*/
+		/*facebook*/ -->
 #page{width:100%;min-height:308px}
 #content{position:relative}
 #disabled_page_shadow{background-color:rgba(82, 82, 82, .7);position:absolute;width:100%;z-index:10}
@@ -619,7 +619,7 @@ body.sgds .clear {
     height: 114px;
     border: 1px solid #a4a4a4;
 }
-	</style>-->
+	</style>
 </head>
 <body>
 <nav id="backgroundNav" style="position: absolute; top: 0px; left: 0px;" ontouchmove="touchMove(event);">
@@ -723,7 +723,7 @@ function connectToFacebook2(){
 		
 		//softgame.onLoginUser = connectToFacebook2;
 		//softgame.startConnection();
-		
+		alert('connectToFacebook2');
 		api.softgame.onLoginUser = function(){
 			api.facebook.retrieveUserData();
 			$('#FBnav')[0].style.display = 'none';

@@ -1846,7 +1846,7 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 	};
 	
 	this.continueGame = function(){
-		if(this.level == ''){
+		if(game.level == ''){
 			alert('level = nada');
 			if(!this.loadedLevel){
 				api.levels.onGetLevel = this.loadPreviousGame;
@@ -2179,72 +2179,72 @@ api.levels.serializeLevel = function(game){
 api.levels.unserializeLevel = function(){
 	//alert('hola0');
 	var lvl = api.levels.jsonlevel;
-	alert('lvl: ' + lvl);
+	//alert('lvl: ' + lvl);
 	if(lvl.resolution != gameSize){
 		//alert('resolution wrong');
 		api.ui.alert('You have another session started with another phone resolution, we cannot arrange the bubbles in the same position, this will a mess!! please relogin with the original phone and try again', 'Ok, see you later');
 		return false;
 	};
-	var level = game.level;
+	//var level = game.level;
 	//alert('hola1');
 	switch(lvl.resolution){
 		case "320x480":
-			level = new bubbleLevel(240, 380, 8, 20, lvl.lvlnumber);
+			game.level = new bubbleLevel(240, 380, 8, 20, lvl.lvlnumber);
 			break;
 		case "360x480":
-			level = new bubbleLevel(360, 480, 10, 20, lvl.lvlnumber);
+			game.level = new bubbleLevel(360, 480, 10, 20, lvl.lvlnumber);
 			break;
 		case "640x960":
-			level = new bubbleLevel(640, 960, 13, 30, lvl.lvlnumber);
+			game.level = new bubbleLevel(640, 960, 13, 30, lvl.lvlnumber);
 			break;
 		case "480x800":
-			level = new bubbleLevel(480, 800, 11, 25, lvl.lvlnumber);
+			game.level = new bubbleLevel(480, 800, 11, 25, lvl.lvlnumber);
 			break;
 		case "854x480":
-			level = new bubbleLevel(800, 400, 23, 20, lvl.lvlnumber);
+			game.level = new bubbleLevel(800, 400, 23, 20, lvl.lvlnumber);
 			break;
 	};
 	//alert('hola2');
-	level.top = lvl.top;
-	level.left = lvl.left;
-	level.topBound = lvl.topBound;
-	level.leftBound = lvl.leftBound;
+	game.level.top = lvl.top;
+	game.level.left = lvl.left;
+	game.level.topBound = lvl.topBound;
+	game.level.leftBound = lvl.leftBound;
 	//alert('hola2');
-	level.mutex = lvl.mutex;
-	level.freeze = lvl.freeze
-	level.finished = lvl.finished;
-	level.freezeTimeout = lvl.frezeeTimeout;
-	level.bubbleRadius = lvl.bubbleRadius
-	level.shootedBubble = lvl.shootedBubble;
-	//level.bubbles_array = new Array();
-	level.points = lvl.points;
-	level.pointsToReach = lvl.pointsToReach;
-	level.pointsMultiplier = lvl.pointsMultiplier;
-	level.looseLine = lvl.looseLine;
-	level.currentTop = lvl.currentTop;
-	level.h = lvl.h
-	level.bonus = lvl.bonus;
+	game.level.mutex = lvl.mutex;
+	game.level.freeze = lvl.freeze
+	game.level.finished = lvl.finished;
+	game.level.freezeTimeout = lvl.frezeeTimeout;
+	game.level.bubbleRadius = lvl.bubbleRadius
+	game.level.shootedBubble = lvl.shootedBubble;
+	//game.level.bubbles_array = new Array();
+	game.level.points = lvl.points;
+	game.level.pointsToReach = lvl.pointsToReach;
+	game.level.pointsMultiplier = lvl.pointsMultiplier;
+	game.level.looseLine = lvl.looseLine;
+	game.level.currentTop = lvl.currentTop;
+	game.level.h = lvl.h
+	game.level.bonus = lvl.bonus;
 	//alert('hola2');
 	for(var i = 0; i < lvl.bubble_array.length; ++i){
 		//alert('i: ' + i);
 		var current = lvl.bubble_array[i];
 		//alert(current);
-		var b = new bubble(level);
+		var b = new bubble(game.level);
 		//alert('unserialize bubble');
 		b.unserialize(current);
 		//alert('fin unserialize bubble');
-		level.bubbles_array.push(b);
-		level.grilla.Table[b.i][b.j] = b;
+		game.level.bubbles_array.push(b);
+		game.level.grilla.Table[b.i][b.j] = b;
 		current = null;
 	};
-	alert('hola3');
-	level.cannon = new bubbleCannon(level);
-	level.cannon.currentBubble = null;
+	//alert('hola3');
+	game.level.cannon = new bubbleCannon(game.level);
+	game.level.cannon.currentBubble = null;
 	if(lvl.cannon.currentBubble != null){
-		level.cannon.currentBubble = new bubble(level);
-		level.cannon.currentBubble.unserialize(lvl.cannon.currentBubble);
+		game.level.cannon.currentBubble = new bubble(game.level);
+		game.level.cannon.currentBubble.unserialize(lvl.cannon.currentBubble);
 	};
-	alert('hola4');
+	//alert('hola4');
 	//game.level = level;
 	return true;
 };

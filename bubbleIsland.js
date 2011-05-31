@@ -2151,7 +2151,7 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 	var version = document.createElement('div');
 	version.innerHTML = VERSION;
 	version.style.position = 'fixed';
-	version.style.top = '0px';
+	version.style.bottom = '15px';
 	version.style.left = '0px';
 	animNav.append(version);
 
@@ -2372,13 +2372,12 @@ api.ui.waitdiv = '';
 api.ui.showWaiting = function(){
 	if(api.ui.waitdiv == ''){
 		api.ui.waitdiv = document.createElement('div');
-		api.ui.waitdiv.style.display = "none";
 		$(api.ui.waitdiv).addClass('uiAlert' + gameSize);
 		var cartel = document.createElement('div');
 		$(cartel).addClass('uiAlert' + gameSize);
 		cartel.style.backgroundImage = 'url(' + gameSize + '/waitscreen.png)';
 		api.ui.waitdiv.appendChild(cartel);
-		$(document.body).appendChild(api.ui.waitdiv);
+		$(document.body).append(api.ui.waitdiv);
 	};
 	//api.ui.waitTimer = setTimeout('api.ui.waitdiv.style.display = "block"', 500);
 	api.ui.waitdiv.style.display = "block";

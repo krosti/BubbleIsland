@@ -2179,8 +2179,8 @@ api.levels.unserializeLevel = function(){
 	var lvl = api.levels.jsonlevel;
 	alert('lvl: ' + lvl);
 	if(lvl.resolution != gameSize){
-		alert('resolution wrong');
-		api.ui.alert('You have another session started with another phone resolution, we cannot arrange the bubbles in the same position, this will a mess!! please relogin with the original phone and try again, if you dont care losee your progress and fell you can do better in one sit, hit play and enjoy the paradise!!', 'Ok, see you later');
+		//alert('resolution wrong');
+		api.ui.alert('You have another session started with another phone resolution, we cannot arrange the bubbles in the same position, this will a mess!! please relogin with the original phone and try again', 'Ok, see you later');
 		return false;
 	};
 	var level = {};

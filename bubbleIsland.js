@@ -2380,10 +2380,11 @@ api.ui.showWaiting = function(){
 		api.ui.waitdiv.appendChild(cartel);
 		$(document.body).appendChild(api.ui.waitdiv);
 	};
-	api.ui.waitTimer = setTimeout('api.ui.waitdiv.style.display = "block"', 500);
+	//api.ui.waitTimer = setTimeout('api.ui.waitdiv.style.display = "block"', 500);
+	api.ui.waitdiv.style.display = "block";
 };
 
 api.ui.hideWaiting = function(){
 	api.ui.waitdiv.style.display = 'none';
-	clearTimeout(api.ui.waitTimer);
+	//clearTimeout(api.ui.waitTimer);
 };

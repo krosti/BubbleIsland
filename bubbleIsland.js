@@ -102,7 +102,7 @@ Array.prototype.remove = function(data) {
 }*/
 
 
-var VERSION = '0.9.023';
+var VERSION = '0.9.024';
 
 //debug
 var console;

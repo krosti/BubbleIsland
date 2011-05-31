@@ -2223,7 +2223,9 @@ api.levels.unserializeLevel = function(game){
 	level.bonus = lvl.bonus;
 	alert('hola2');
 	for(var i = 0; i < lvl.bubbles_array.length; ++i){
+		alert('i: ' + i);
 		var current = lvl.bubbles_array[i];
+		alert(current);
 		var bubble = new bubble(level);
 		alert('unserialize bubble');
 		bubble.unserialize(current);

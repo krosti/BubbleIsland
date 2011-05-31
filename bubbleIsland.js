@@ -1848,7 +1848,7 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 			alert('level = nada');
 			if(!this.loadedLevel){
 				api.levels.onGetLevel = this.loadPreviousGame;
-				this.loadedLevel = true;
+				this.loadedLevel = true;				
 				api.levels.getLevel(api.facebook.user.id);
 			}else{
 				alert('start new game');
@@ -1856,8 +1856,8 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 			};
 		}else{
 			//this.menu.style.zIndex = this.menu.style.zIndex + 1;
-			this.menu.style.display = 'none';
-			this.clock.start();
+			game.menu.style.display = 'none';
+			game.clock.start();
 		};
 	};
 	

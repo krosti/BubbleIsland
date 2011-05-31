@@ -629,38 +629,38 @@ function bubble(l){
 		if(this.pointsMultiplier == 2){
 			switch (this.flavor){
 				case "blue":
-					this.meinBild = bubbleBlueX2Image;
+					this.meinBild = bubbleBlueImageX2;
 					break;
 				case "yellow":
-					this.meinBild = bubbleYellowX2Image;
+					this.meinBild = bubbleYellowImageX2;
 					break;
 				case "purple":
-					this.meinBild = bubblePurpleX2Image;
+					this.meinBild = bubblePurpleImageX2;
 					break;
 				case "red":
-					this.meinBild = bubbleRedX2Image;
+					this.meinBild = bubbleRedImageX2;
 					break;
 				case "green":
-					this.meinBild = bubbleGreenX2Image;
+					this.meinBild = bubbleGreenImageX2;
 					break;
 			};			
 		};
 		if(this.pointsMultiplier == 3){
 			switch (this.flavor){
 				case "blue":
-					this.meinBild = bubbleBlueX3Image;
+					this.meinBild = bubbleBlueImageX3;
 					break;
 				case "yellow":
-					this.meinBild = bubbleYellowX3Image;
+					this.meinBild = bubbleYellowImageX3;
 					break;
 				case "purple":
-					this.meinBild = bubblePurpleX3Image;
+					this.meinBild = bubblePurpleImageX3;
 					break;
 				case "red":
-					this.meinBild = bubbleRedX3Image;
+					this.meinBild = bubbleRedImageX3;
 					break;
 				case "green":
-					this.meinBild = bubbleGreenX3Image;
+					this.meinBild = bubbleGreenImageX3;
 					break;
 			};			
 		};
@@ -686,7 +686,7 @@ function bubble(l){
 		};
 
 		if(this.meinBild.src == ''){ // normal
-			switch (value){
+			switch (this.flavor){
 				case "blue":
 					this.meinBild = bubbleBlueImage;
 					break;
@@ -2225,7 +2225,9 @@ api.levels.unserializeLevel = function(game){
 	for(var i = 0; i < lvl.bubbles_array.length; ++i){
 		var current = lvl.bubbles_array[i];
 		var bubble = new bubble(level);
+		alert('unserialize bubble');
 		bubble.unserialize(current);
+		alert('fin unserialize bubble');
 		level.bubble_array.push(bubble);
 		level.grilla.Table[bubble.i][bubble.j] = bubble;
 		current = null;

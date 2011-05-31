@@ -2355,11 +2355,12 @@ api.ui.showWaiting = function(){
 		var cartel = document.createElement('div');
 		$(cartel).addClass('uiAlert' + gameSize);
 		cartel.style.backgroundImage = 'url(' + gameSize + 'waitscreen.png)';
+		api.ui.waitdiv.appendChild(cartel);
 	};
-	api.ui.waitTimer = setTimeout('api.ui.style.display = "block"', 1000);
+	api.ui.waitTimer = setTimeout('api.ui.waitdiv.style.display = "block"', 500);
 };
 
 api.ui.hideWaiting = function(){
 	api.ui.waitdiv.style.display = 'none';
-	clearTimeout(api.waitTimer);
+	clearTimeout(api.ui.waitTimer);
 };

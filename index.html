@@ -647,7 +647,7 @@ body.sgds .clear {
 	<div id="leaderboardBackMenu" onClick=""></div>
 </nav>
 <nav id="optionMenu" style="position: absolute; top: 0px; left: 0px; width: 100%; min-height: 100%; display: none;" >
-	<div id="optionsMenuButton" onClick=""></div>
+	<div id="optionsMenuButton" onClick="options.exitOptions();"></div>
 	<div id="optionsFacebook" onClick=""></div>
 	<div id="optionsCoins" onClick=""></div>
 	<div id="optionsLeaderboards" onClick=""></div>
@@ -667,7 +667,7 @@ body.sgds .clear {
 		</div-->		
 		<div id="newbutton" onClick="game.startNewGame();"></div>
 		<div id="continuebutton" onClick="game.continueGame();" ></div>
-		<div id="optionbutton" onClick="/*options.showOptions('gameMenu')*/" ></div>
+		<div id="optionbutton" onClick="options.showOptions('gameMenu')" ></div>
 
 		<div id="facebookFrame" onClick="postHighscoreOnFacebook()"></div>
 		<div id="coinsFrame" onClick="/*options.showNav('softgameNav', 'gameMenu'); api.softgame.startCoinsBuying('level', '3morelifes', '', 1, '', '')*/ showCoins();"></div>

@@ -98,6 +98,7 @@ api.facebook.retrieveUserData = function(){
 api.facebook.setUserData = function(data){
 	alert(data);
 	api.facebook.user = eval('(' + data + ')');	
+	api.facebook.retrieveUserFriends();
 };
 
 api.facebook.retrieveUserFriends = function(){

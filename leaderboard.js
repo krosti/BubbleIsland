@@ -6,7 +6,7 @@ LeaderBoard = {
 function SubmitScore()
 {
     var simple_score = {};
-    simple_score.Name = FB.user.name;
+    simple_score.Name = api.facebook.user.name;
     simple_score.Points = game.ui.acumuledPoints;
 
     // submit to the highest-is-best table "highscores"
@@ -23,7 +23,7 @@ function SubmitComplete(score, response)
 {
     if(response.Success)
     {
-        alert("Score saved!");		
+        //alert("Score saved!");		
     }
     else
     {
@@ -34,8 +34,8 @@ function SubmitComplete(score, response)
 function retrieveLeaderboard(divGen, divFB){
 	LeaderBoard.divGen = document.getElementById(divGen);
 	LeaderBoard.divFB = document.getElementById(divFB);
-	/*Playtomic.Leaderboards.ListFB("highscores", retrieveFacebookLeaderboard, { friendslist: FB.friendsArray });
-	Playtomic.Leaderboards.List("highscores", retrieveGeneralLeaderboard);*/
+	Playtomic.Leaderboards.ListFB("highscores", retrieveFacebookLeaderboard, { friendslist: api.facebook.friends });
+	Playtomic.Leaderboards.List("highscores", retrieveGeneralLeaderboard);
 };
 
 function retrieveGeneralLeaderboard(scores, numscores, response){

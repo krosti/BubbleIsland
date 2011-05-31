@@ -726,12 +726,14 @@ function connectToFacebook2(){
 		//softgame.startConnection();
 		//alert('connectToFacebook2');
 		//api.softgame.onLoginUser = function(){			
-			$('#FBnav')[0].style.display = 'none';
+		$('#FBnav')[0].style.display = 'none';
 		//};
 		api.ui.showWaiting();
 		api.softgame.startConnection();
 		api.facebook.retrieveUserData();
-		api.ui.hideWaiting();
+		api.facebook.loaded = function(){
+			api.ui.hideWaiting();
+		};
 };
 
 function connectToFacebook(){

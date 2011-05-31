@@ -1844,11 +1844,13 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 	
 	this.continueGame = function(){
 		if(this.level == ''){
+			alert('level = nada');
 			if(!this.loadedLevel){
 				api.levels.onGetLevel = this.loadPreviousGame;
 				this.loadedLevel = true;
 				api.levels.getLevel(api.facebook.user.id);
 			}else{
+				alert('start new game');
 				this.startNewGame();
 			};
 		}else{
@@ -1861,11 +1863,12 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 	this.loadPreviousGame = function(){
 		alert("loadPreviousGame");
 		if(api.levels.jsonlevel === ""){
+			alert("wepa!");
 			api.ui.alert("I can't find any previous game, you need to start from the begginig!");
 			return;
 		};
 		api.levels.unserializeLevel(this);
-		this.continueGame();
+		game.continueGame();
 	};
 
 	this.nextLevel = function(){
@@ -2173,6 +2176,7 @@ api.levels.serializeLevel = function(game){
 api.levels.unserializeLevel = function(game){
 	var lvl = api.levels.jsonlevel;
 	if(lvl.resolution != gamSize){
+		alert('resolution wrong');
 		api.ui.alert('You have another session started with another phone resolution, we cannot arrange the bubbles in the same position, this will a mess!! please relogin with the original phone and try again, if you dont care losee your progress and fell you can do better in one sit, hit play and enjoy the paradise!!', 'Ok, see you later');
 		return;
 	};

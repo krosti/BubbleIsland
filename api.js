@@ -578,6 +578,7 @@ api.levels.getResponse = function(data){
 	var jsonlevel = api.string2JSON(data);
 	if(jsonlevel.status == 1){
 		api.levels.jsonlevel = api.string2JSON(jsonlevel.level);
+		alert(api.levels.jsonlevel);
 	}else{
 		api.levels.jsonlevel = "";
 	};

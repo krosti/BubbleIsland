@@ -1431,16 +1431,17 @@ function bubbleLevel(w, h, bubblesWidth, bubblesHeight, lvlnbr){
 		};
 		if(collisions.length > 0){
 			//debug(' &nbsp; length: ' + collisions.length);
-			this.mutex=true;						
-			this.addBubble(this.shootedBubble);
-			
+			this.mutex=true;					
+			this.addBubble(this.shootedBubble);			
 			//alert(currentBubble + ' before shoot');
 			var currentBubble = collisions[0];
 			for(var i = 1; i < collisions.length; ++i){
 				if(currentBubble.dis > collisions[i].dis) currentBubble = collisions[i];
 			};
 			//(bubble, collided)
-			this.grilla.addBubble(this.shootedBubble, currentBubble.bubble);				
+			game.clock.stop();	
+			this.grilla.addBubble(this.shootedBubble, currentBubble.bubble);	
+			game.clock.start();			
 			this.shootedBubble.stopMove();
 			this.shootedBubble.dy = this.bubbleVelocity;
 			this.shootedBubble = null;

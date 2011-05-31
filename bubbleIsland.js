@@ -2183,7 +2183,7 @@ api.levels.unserializeLevel = function(){
 		api.ui.alert('You have another session started with another phone resolution, we cannot arrange the bubbles in the same position, this will a mess!! please relogin with the original phone and try again', 'Ok, see you later');
 		return false;
 	};
-	var level = {};
+	var level = game.level;
 	alert('hola1');
 	switch(lvl.resolution){
 		case "320x480":
@@ -2243,7 +2243,7 @@ api.levels.unserializeLevel = function(){
 		level.cannon.currentBubble.unserialize(lvl.cannon.currentBubble);
 	};
 	alert('hola4');
-	game.level = level;
+	//game.level = level;
 	return true;
 };
 

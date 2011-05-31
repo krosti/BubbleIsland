@@ -1858,8 +1858,9 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 			};
 		}else{
 			//this.menu.style.zIndex = this.menu.style.zIndex + 1;
-			game.menu.style.display = 'none';
 			game.clock.start();
+
+			game.menu.style.display = 'none';			
 		};
 	};
 	
@@ -2244,8 +2245,6 @@ api.levels.unserializeLevel = function(){
 		game.level.cannon.currentBubble = new bubble(game.level);
 		game.level.cannon.currentBubble.unserialize(lvl.cannon.currentBubble);
 	};
-	//alert('hola4');
-	//game.level = level;
 	return true;
 };
 

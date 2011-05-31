@@ -725,11 +725,11 @@ function connectToFacebook2(){
 		//softgame.onLoginUser = connectToFacebook2;
 		//softgame.startConnection();
 		//alert('connectToFacebook2');
-		api.softgame.onLoginUser = function(){
-			api.facebook.retrieveUserData();
+		api.softgame.onLoginUser = function(){			
 			$('#FBnav')[0].style.display = 'none';
 		};
 		api.softgame.startConnection();
+		api.facebook.retrieveUserData();
 };
 
 function connectToFacebook(){

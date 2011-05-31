@@ -1865,10 +1865,10 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 		alert("loadPreviousGame");
 		if(api.levels.jsonlevel === ""){
 			alert("wepa!");
-			api.ui.alert("I can't find any previous game, you need to start from the begginig!");
+			api.ui.alert("I can't find any previous game, you need to start from the begginig!", 'Ok, lets go for it!');
 			return;
 		};
-		api.levels.unserializeLevel();
+		if(!api.levels.unserializeLevel()) return;
 		game.continueGame();
 	};
 
@@ -2181,7 +2181,7 @@ api.levels.unserializeLevel = function(){
 	if(lvl.resolution != gameSize){
 		alert('resolution wrong');
 		api.ui.alert('You have another session started with another phone resolution, we cannot arrange the bubbles in the same position, this will a mess!! please relogin with the original phone and try again, if you dont care losee your progress and fell you can do better in one sit, hit play and enjoy the paradise!!', 'Ok, see you later');
-		return;
+		return false;
 	};
 	var level = {};
 	alert('hola1');
@@ -2244,6 +2244,7 @@ api.levels.unserializeLevel = function(){
 	};
 	alert('hola4');
 	game.level = level;
+	return true;
 };
 
 api.ui.alert = function(msg, button, fn){

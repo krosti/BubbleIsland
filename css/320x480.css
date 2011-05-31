@@ -226,8 +226,10 @@
 	width: 201px;
 	height: 117px;
 	min-height: 117px;
-	top: 265px;
+	top: 235px;
 	left: 90px;
+	padding-top`: 35px;
+	padding-left: 27px;
 }
 
 .uiAlertText320x480{

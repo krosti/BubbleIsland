@@ -34,7 +34,7 @@
 	min-height: 62px;
 	font-family: Bubblegum;
 	font-size: 0.7em;
-	padding-top: 37px;
+	padding-top: 40px;
 	padding-left: 37px;
 	color: #4e3e2d;
 	/*text-shadow: -2px 0 black, 0 2px black,	  2px 0 black, 0 -2px black;*/
@@ -50,7 +50,7 @@
 	min-height: 62px;
 	font-family: Bubblegum;
 	font-size: 0.8em;
-	padding-top: 31px;
+	padding-top: 34px;
 	padding-left: 47px;
 	color: #ffffff;
 	/*text-shadow: -2px 0 black, 0 2px black,	  2px 0 black, 0 -2px black;*/
@@ -164,7 +164,6 @@
 	font-family: Bubblegum;
 	font-size: 1.1em;
 	color: #eeeeee;
-	text-shadow: -2px 0 black, 0 2px black,	  2px 0 black, 0 -2px black;
 	position: fixed;
 	width: 67px;
 	height: 40px;

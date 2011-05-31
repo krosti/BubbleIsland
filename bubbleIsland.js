@@ -312,8 +312,70 @@ function bubble(l){
 	};
 	
 	this.makeItRandom = function(){
-		var value = rnd(30);
-		switch(value){
+		var value = rnd(100) / 100;
+		if(value < this.lvl.bonus){
+			this.flavor = this.randomFlavor();
+			this.object = new standAnimation(this.lvl.bubbleRadius, this.lvl.bubbleRadius, this.meinBild.src);
+			this.element = this.object.element;
+		}else{
+			var second = rnd(18);
+			if((second >= 0) && ( second <4)){
+				this.pointsMultiplier = 2;
+				this.object = new standAnimation(this.lvl.bubbleRadius, this.lvl.bubbleRadius, this.meinBild.src);
+				this.element = this.object.element;				
+			};
+			if((second >= 4) && ( second < 7)){
+				this.pointsMultiplier = 3;
+				this.object = new standAnimation(this.lvl.bubbleRadius, this.lvl.bubbleRadius, this.meinBild.src);
+				this.element = this.object.element;				
+			};
+			if((second >= 7) && ( second < 10)){
+				this.flavor = this.randomBombFlavor();
+				this.object = new standAnimation(this.lvl.bubbleRadius, this.lvl.bubbleRadius, this.meinBild.src);
+				this.element = this.object.element;
+				this.bombBall = true;
+			};
+			if((second >= 10) && ( second < 14)){
+				this.flavor = this.randomFreezeFlavor();
+				this.object = new standAnimation(this.lvl.bubbleRadius, this.lvl.bubbleRadius, this.meinBild.src);
+				this.element = this.object.element;
+				this.freezeBall = true;
+			};
+			if((second >= 14) && ( second <= 18)){
+				this.flavor = this.randomFlavor();
+				this.object = new standAnimation(this.lvl.bubbleRadius, this.lvl.bubbleRadius, this.meinBild.src);
+				this.element = this.object.element;
+				do{
+					this.secondFlavor = this.randomFlavor();
+				}while(this.flavor == this.secondFlavor);
+				var zweithBild = document.createElement('img');				
+				switch(this.secondFlavor){
+					case 'blue':
+						zweithBild.src = bubbleBlueHalfImage.src;
+						break;
+					case 'green':
+						zweithBild.src = bubbleGreenHalfImage.src;
+						break;
+					case 'red':
+						zweithBild.src = bubbleRedHalfImage.src;
+						break;
+					case 'purple':
+						zweithBild.src = bubblePurpleHalfImage.src;
+						break;
+					case 'yellow':
+						zweithBild.src = bubbleYellowHalfImage.src;
+						break;
+				};
+				this.object.element.appendChild(zweithBild);
+				zweithBild.style.width = this.lvl.bubbleRadius + 'px';
+				zweithBild.style.heigth = (this.lvl.bubbleRadius / 2) + 'px';
+				zweithBild.style.position = 'absolute';
+				zweithBild.style.top = '0px';
+				zweithBild.style.left = '0px';
+			};
+		};
+
+		/*switch(value){
 			case 0:
 			case 1:
 			case 2:
@@ -410,7 +472,7 @@ function bubble(l){
 		};	
 		this.object.fitNormalImage();
 		this.object.addState('estela', bubbleEstela.src, 5);		
-		this.element.style.overflow = 'show';
+		this.element.style.overflow = 'show';*/
 
 	};
 	

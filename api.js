@@ -111,12 +111,13 @@ api.facebook.retrieveUserFriends = function(){
 		type: 'GET',
 		data: postdata,
 		//success: function(data){ alert('success: ' + data); self.setUserData(data); },
-		success: this.setUserData,
+		success: api.facebook.retrieveUserFriendsResponse,
 		//error: function(data, er, r){ alert(data.responseText + ':' + er + ':' +r); }
 	});
 };
 
 api.facebook.retrieveUserFriendsResponse = function(data){
+	alert(data);
 	api.facebook.friends = api.string2JSON(data);
 };
 

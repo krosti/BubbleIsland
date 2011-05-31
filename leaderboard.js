@@ -46,13 +46,16 @@ function retrieveGeneralLeaderboard(scores, numscores, response){
         if(numscores == 0){ LeaderBoard.divGen.innerHTML('There is no scores to show'); };
 				
         var text = '';
+        text = '<table style="width: 100%">';
         for(var i = 0; i<scores.length; i++)
         {
             var score = scores[i];
-            alert(" - " + score.Name + " got " + score.Points + " on " + score.SDate);
-            text += '<div>'+(i + 1 ) + ") " + score.Name + 'with' +score.Points+ 'points!</div>';
+            //alert(" - " + score.Name + " got " + score.Points + " on " + score.SDate);
+            text += '<tr><td><img src="'+uiLeaderboardStar.src+'" alt="star">' + score.Name + '</td><td style="text-align: right">' +score.Points+ '</td></tr>';
             // including custom data?  score.CustomPlaytomic.Data.Property
+            if(i == 6) break;
         };
+        text += '</table>';
         LeaderBoard.divGen.innerHTML(text);
     }
     else
@@ -68,14 +71,16 @@ function retrieveFacebookLeaderboard(scores, numscores, response){
         //alert(scores.length + " scores returned out of " + numscores);
         if(numscores == 0){ LeaderBoard.divFB.innerHTML('There is no scores to show'); };
 				
-        var text = '';
-        for(var i=0; i<scores.length; i++)
+        text = '<table style="width: 100%">';
+        for(var i = 0; i<scores.length; i++)
         {
             var score = scores[i];
-            alert(" - " + score.Name + " got " + score.Points + " on " + score.SDate);
-            text += '<div>'+(i + 1 ) + ") " + score.Name + 'with' +score.Points+ 'points!</div>'
+            //alert(" - " + score.Name + " got " + score.Points + " on " + score.SDate);
+            text += '<tr><td><img src="'+uiLeaderboardStar.src+'" alt="star">' + score.Name + '</td><td style="text-align: right">' +score.Points+ '</td></tr>';
             // including custom data?  score.CustomPlaytomic.Data.Property
+            if(i == 6) break;
         };
+        text += '</table>';
         LeaderBoard.divFB.innerHTML(text);
     }
     else

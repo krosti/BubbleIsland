@@ -1847,13 +1847,13 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 	
 	this.continueGame = function(){
 		if(game.level == ''){
-			alert('level = nada');
+			//alert('level = nada');
 			if(!this.loadedLevel){
 				api.levels.onGetLevel = this.loadPreviousGame;
 				this.loadedLevel = true;				
 				api.levels.getLevel(api.facebook.user.id);
 			}else{
-				alert('start new game');
+				//alert('start new game');
 				this.startNewGame();
 			};
 		}else{
@@ -1865,9 +1865,9 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 	};
 	
 	this.loadPreviousGame = function(){
-		alert("loadPreviousGame");
+		//alert("loadPreviousGame");
 		if(api.levels.jsonlevel === ""){
-			alert("wepa!");
+			//alert("wepa!");
 			api.ui.alert("I can't find any previous game, you need to start from the begginig!", 'Ok, lets go for it!');
 			return;
 		};
@@ -2344,7 +2344,7 @@ api.ui.alert2 = function(msg, fns){
 
 	$(document.body).append(alertui);
 };
-/*
+
 api.ui.waitTimer = 0;
 api.ui.waitdiv = '';
 api.ui.showWaiting = function(){
@@ -2354,11 +2354,12 @@ api.ui.showWaiting = function(){
 		$(api.ui.waitdiv).addClass('uiAlert' + gameSize);
 		var cartel = document.createElement('div');
 		$(cartel).addClass('uiAlert' + gameSize);
-		cartel.style.backgroundImage = 'url(' + + ')';
+		cartel.style.backgroundImage = 'url(' + gameSize + 'waitscreen.png)';
 	};
 	api.ui.waitTimer = setTimeout('api.ui.style.display = "block"', 1000);
 };
 
 api.ui.hideWaiting = function(){
-	
-};*/
+	api.ui.waitdiv.style.display = 'none';
+	clearTimeout(api.waitTimer);
+};

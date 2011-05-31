@@ -729,6 +729,7 @@ function connectToFacebook2(){
 			$('#FBnav')[0].style.display = 'none';
 		//};
 		api.softgame.startConnection();
+		api.ui.hideWaiting();
 		api.facebook.retrieveUserData();
 };
 
@@ -738,6 +739,7 @@ function connectToFacebook(){
 	api.softgame.framework = document.getElementById('SGnav');
 	api.facebook.onConnect = connectToFacebook2;
 	api.facebook.startConnection();
+	api.ui.showWaiting();
 	/*alert('before ajax: ' + FB.url);
 	FB.onConnect = connectToFacebook2;
 	jq = $.ajax({

@@ -2337,3 +2337,21 @@ api.ui.alert2 = function(msg, button, fns){
 		});
 	});
 };
+/*
+api.ui.waitTimer = 0;
+api.ui.waitdiv = '';
+api.ui.showWaiting = function(){
+	if(api.ui.waitdiv == ''){
+		api.ui.waitdiv = document.createElement('div');
+		api.ui.waitdiv.style.display = "none";
+		$(api.ui.waitdiv).addClass('uiAlert' + gameSize);
+		var cartel = document.createElement('div');
+		$(cartel).addClass('uiAlert' + gameSize);
+		cartel.style.backgroundImage = 'url(' + + ')';
+	};
+	api.ui.waitTimer = setTimeout('api.ui.style.display = "block"', 1000);
+};
+
+api.ui.hideWaiting = function(){
+	
+};*/

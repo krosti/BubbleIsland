@@ -628,6 +628,7 @@ api.JSON2String = function(obj){
         var n, v, json = [], arr = (obj && obj.constructor == Array);
         for (n in obj) {
             v = obj[n]; t = typeof(v);
+            if (t == "function") continue;
             if (t == "string") v = '"'+v+'"';
             else if (t == "object" && v !== null) v = api.JSON2String(v);
             json.push((arr ? "" : '"' + n + '":') + String(v));

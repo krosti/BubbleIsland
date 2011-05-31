@@ -2323,8 +2323,6 @@ api.ui.alert2 = function(msg, fns){
 	//alertui.appendChild(alertuibutton);
 	alertuibackground.appendChild(alertuitext);
 	
-	cartel = alertui;
-
 	$(alertuitext)[0].innerText = msg;
 	/*$(alertuibutton)[0].innerText = button;
 	$(alertuibutton)[0].onclick = fn;*/
@@ -2344,13 +2342,7 @@ api.ui.alert2 = function(msg, fns){
 	};
 
 
-	$(document.body).append(cartel);
-	$(cartel).fadeIn(150);
-	$(alertuibutton).click(function(){
-		$(cartel).fadeOut(300, function(){
-			$(cartel).remove();
-		});
-	});
+	$(document.body).append(alertui);
 };
 /*
 api.ui.waitTimer = 0;

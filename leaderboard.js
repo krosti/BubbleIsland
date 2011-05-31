@@ -71,7 +71,7 @@ function retrieveFacebookLeaderboard(scores, numscores, response){
         //alert(scores.length + " scores returned out of " + numscores);
         if(numscores == 0){ LeaderBoard.divFB.innerHTML('There is no scores to show'); };
 				
-        text = '<table style="width: 100%">';
+        var text = '<table style="width: 100%">';
         for(var i = 0; i<scores.length; i++)
         {
             var score = scores[i];

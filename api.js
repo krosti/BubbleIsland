@@ -226,7 +226,7 @@ api.softgame.startConnection = function(){
 		url: link,
 		data: getdata,
 		success: function(data, textStatus){ api.softgame.connectionEstablished(data); },
-		error: function(obj, err, r){  alert(this.url); api.softgame.connectionError(obj, err, r); }
+		error: function(obj, err, r){ api.softgame.connectionError(obj, err, r); }
 	});
 };
 
@@ -374,7 +374,7 @@ api.softgame.connectionEstablished = function(data){
 			url: faceuri,
 			crossDomain: true,
 			success: function(data){ api.softgame.facebookConnectResponse(data); },
-			error: function(data, error){ alert('error first attemp'); }
+			error: function(data, error){ api.ui.alert('Error trying to access to Facebook, have you got internet?', 'Ok'); }
 			//complete: function(xhr,textStatus){ if(xhr.status == 302){ alert('complete: connectionEstablished ' + xhr.getResponseHeader("Location")); }; }
 		});
 	}else{
@@ -453,7 +453,7 @@ api.softgame.secondConnectResponse = function(data, uri){
 	api.softgame.signature = response.sig;
 	api.softgame.framework.style.display = 'none';
 	api.softgame.onLogin();
-	api.softgame.getUserInfo();
+	//api.softgame.getUserInfo();
 };
 
 api.softgame.connectionError = function(obj, err, r){

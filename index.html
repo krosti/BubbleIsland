@@ -677,7 +677,7 @@ body.sgds .clear {
 		<div id="optionbutton" onClick="/*options.showOptions('gameMenu')*/" ></div>
 
 		<div id="facebookFrame" onClick="postHighscoreOnFacebook()"></div>
-		<div id="coinsFrame" onClick="options.showNav('softgameNav', 'gameMenu'); api.softgame.startCoinsBuying('level', '3morelifes', '', 1, '', '')"></div>
+		<div id="coinsFrame" onClick="/*options.showNav('softgameNav', 'gameMenu'); api.softgame.startCoinsBuying('level', '3morelifes', '', 1, '', '')*/ showCoins();"></div>
 		<div id="leaderboardFrame" onClick="options.showLeaderboard('gameMenu'); retrieveLeaderboard('facebookLeaderboard', 'generalLeaderboard');"></div>
 	</div>
 </nav>
@@ -786,6 +786,14 @@ $("#generalLeaderboardTab").addClass('leaderboardTabHighscore' + gameSize);
 $("#facebookLeaderboardTab").addClass('leaderboardTabFriends' + gameSize);
 $("#leaderboardBackMenu").addClass('leaderboardBackMenu' + gameSize);
 $("#leaderboardTabs").addClass('leaderboardTabs' + gameSize);
+
+function showCoins(){
+	api.softgame.onLoginUser = function(){
+		api.ui.alert('You have ' + api.softgame.user.balance + ' coin/s to spend, you can buy more lifes when you run out of them', 'Ok, thanks for the advice', function(){ options.backToMenu(); });
+	};
+	options.showNav('softgameNav', 'gameMenu');
+	api.softgame.getUserInfo();
+};
 
 function postHighscoreOnFacebook(){
 	var msg = FB.user.name + ' ha logrado ' + game.ui.acumuledPoints + ' en el Bubble Paradise!';

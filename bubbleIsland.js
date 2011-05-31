@@ -1867,7 +1867,7 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 			api.ui.alert("I can't find any previous game, you need to start from the begginig!");
 			return;
 		};
-		api.levels.unserializeLevel(this);
+		api.levels.unserializeLevel();
 		game.continueGame();
 	};
 
@@ -2173,7 +2173,7 @@ api.levels.serializeLevel = function(game){
 	api.levels.jsonlevel = lvl;
 };
 
-api.levels.unserializeLevel = function(game){
+api.levels.unserializeLevel = function(){
 	alert('hola0');
 	var lvl = api.levels.jsonlevel;
 	alert('lvl: ' + lvl);

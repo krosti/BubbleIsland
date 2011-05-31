@@ -1420,7 +1420,7 @@ function bubbleLevel(w, h, bubblesWidth, bubblesHeight, lvlnbr){
 			//debug(disx + ':' + disy);
 			
 			distance = Math.sqrt(disx * disx + disy * disy);
-			if(distance < (this.bubbleRadius *.8)){
+			if(distance < (this.bubbleRadius *.88)){
 				//debug('COLLITION');				
 				//this.bubbles_array.push(this.shootedBubble);	
 				collisions.push({ bubble: currentBubble, dis: distance});

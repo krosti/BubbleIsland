@@ -2141,6 +2141,7 @@ api.levels.serializeLevel = function(game){
 	//salvo las bubbles del array, son las mismas que la grilla
 	for(var i = 0; i < game.level.bubbles_array.length; ++i){
 		var current = game.level.bubbles_array[i];
+		if(typeof(current) == 'function') continue;
 		var bubble = current.serialize();
 		lvl.bubble_array.push(bubble);
 		//current = null;

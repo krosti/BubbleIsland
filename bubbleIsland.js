@@ -1548,8 +1548,10 @@ function bubbleLevel(w, h, bubblesWidth, bubblesHeight, lvlnbr){
 			setTimeout('game.level.addRandomRow()', 10);
 			return;
 		};
-		ancho = this.grilla.ancho;
-		newrow = new Array(ancho);
+		var pFlavor1 = '';
+		var pFlavor2 = '';
+		var ancho = this.grilla.ancho;
+		var newrow = new Array(ancho);
 		if(!this.grilla.isShortRow(0)){ 
 			ancho--;
 			newrow[ancho] = "nada"; 
@@ -1559,8 +1561,25 @@ function bubbleLevel(w, h, bubblesWidth, bubblesHeight, lvlnbr){
 		for(var i = 0; i < this.bubbles_array.length; ++i){			
 			this.bubbles_array[i].i += 1;
 		};
+		var i = 0;
+		while(i < ancho){
+			b = new bubble(this);
+			b.makeItRandomNormal();
+			if((pFlavor1 == b.flavor) || (pFlavor2 == b.flavor)){				
+				b.i = 0;
+				b.j = i;
+				b.dy = this.bubbleVelocity;
+				b.recalcXY();
+				newrow[i] = b;
+				this.addBubble(b);
+				animNav.append(b.element);
+				pFlavor1 = pFlavor2;
+				pFlavor2 = b.flavor;
+				i++;
+			};			
+		};
 
-		for(i = 0; i < ancho; ++i){
+		/*for(i = 0; i < ancho; ++i){
 			//alert(i);
 			b = new bubble(this);
 			//b.makeItRandom();
@@ -1573,7 +1592,7 @@ function bubbleLevel(w, h, bubblesWidth, bubblesHeight, lvlnbr){
 			newrow[i] = b;
 			this.addBubble(b);
 			animNav.append(b.element);
-		};			
+		};	*/		
 		this.currentTop = 0;	
 	};
 	

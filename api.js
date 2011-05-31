@@ -15,6 +15,8 @@ api.facebook.onConnect = function(){};
 api.facebook.onFriends = function(){};
 api.facebook.onPost = function(){};
 
+//https://www.facebook.com/login.php?api_key=171902539527776&cancel_url=&display=touch&fbconnect=1&next=http%3A%2F%2Fdrone.softgames.de%2Feui%2Fauth%2Ffacebook%3Fctx%3Dbcb5cebc2dda7d9b38cfbcffe1272932%26SGDS_D%3Da91hotld1pfs5gg78tel3sv3j5&return_session=1&session_version=3&v=1.0&req_perms=publish_stream
+
 api.facebook.startConnection = function(){
 	//FB.onConnect = connectToFacebook2;
 	var uri = 'https://www.facebook.com/dialog/oauth?client_id=' + api.facebook.appid + '&scope=publish_stream&redirect_uri=http://www.facebook.com/connect/login_success.html&display=touch&response_type=token';

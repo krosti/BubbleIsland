@@ -2226,12 +2226,12 @@ api.levels.unserializeLevel = function(game){
 		alert('i: ' + i);
 		var current = lvl.bubble_array[i];
 		alert(current);
-		var bubble = new bubble(level);
+		var b = new bubble(level);
 		alert('unserialize bubble');
-		bubble.unserialize(current);
+		b.unserialize(current);
 		alert('fin unserialize bubble');
-		level.bubble_array.push(bubble);
-		level.grilla.Table[bubble.i][bubble.j] = bubble;
+		level.bubble_array.push(b);
+		level.grilla.Table[b.i][b.j] = b;
 		current = null;
 	};
 	alert('hola3');

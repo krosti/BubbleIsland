@@ -1845,7 +1845,8 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 	this.continueGame = function(){
 		if(this.level == ''){
 			if(!this.loadedLevel){
-				api.levels.onGetLevel = this.loadPreviousGame();
+				api.levels.onGetLevel = this.loadPreviousGame;
+				this.loadedLevel = true;
 				api.levels.getLevel(api.facebook.user.id);
 			}else{
 				this.startNewGame();
@@ -1857,9 +1858,11 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 		};
 	};
 	
-	this.loadPreviosGame = function(){
+	this.loadPreviousGame = function(){
+		alert("loadPreviousGame");
 		if(api.levels.jsonlevel === ""){
 			api.ui.alert("I can't find any previous game, you need to start from the begginig!");
+			return;
 		};
 		api.levels.unserializeLevel(this);
 		this.continueGame();
@@ -2024,7 +2027,7 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 	
 	this.showMenu = function(){
 		api.levels.serializeLevel(game);
-		api.levels.putLevel(1234/*api.facebook.user.id*/);
+		api.levels.putLevel(api.facebook.user.id);
 		this.clock.stop();
 		this.menu.style.zIndex = 90//this.menu.style.zIndex + 2;
 		this.menu.style.display = 'block';

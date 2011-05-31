@@ -558,6 +558,7 @@ api.levels.jsonlevel = {};
 api.levels.onGetLevel = function(){};
 
 api.levels.getLevel = function(playerid){
+	alert(playerid);
 	var getdata = {
 		to: 'get',
 		player_id: playerid,

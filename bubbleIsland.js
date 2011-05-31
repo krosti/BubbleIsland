@@ -2230,7 +2230,7 @@ api.levels.unserializeLevel = function(game){
 		alert('unserialize bubble');
 		b.unserialize(current);
 		alert('fin unserialize bubble');
-		level.bubble_array.push(b);
+		level.bubbles_array.push(b);
 		level.grilla.Table[b.i][b.j] = b;
 		current = null;
 	};

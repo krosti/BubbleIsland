@@ -1858,9 +1858,9 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 			};
 		}else{
 			//this.menu.style.zIndex = this.menu.style.zIndex + 1;
-			game.clock.start();
+			this.clock.start();
 
-			game.menu.style.display = 'none';			
+			this.menu.style.display = 'none';			
 		};
 	};
 	
@@ -2188,20 +2188,31 @@ api.levels.unserializeLevel = function(){
 	};
 	//var level = game.level;
 	//alert('hola1');
+
 	switch(lvl.resolution){
 		case "320x480":
+			game.canvas.width = 320;
+			game.canvas.height = 480;	
 			game.level = new bubbleLevel(240, 380, 8, 20, lvl.lvlnumber);
 			break;
 		case "360x480":
+			game.canvas.width = 360;
+			game.canvas.height = 480;
 			game.level = new bubbleLevel(360, 480, 10, 20, lvl.lvlnumber);
 			break;
 		case "640x960":
+			game.canvas.width = 640;
+			game.canvas.height = 960;
 			game.level = new bubbleLevel(640, 960, 13, 30, lvl.lvlnumber);
 			break;
 		case "480x800":
+			game.canvas.width = 480;
+			game.canvas.height = 800;
 			game.level = new bubbleLevel(480, 800, 11, 25, lvl.lvlnumber);
 			break;
 		case "854x480":
+			game.canvas.height = 480; 
+			game.canvas.width = 854;
 			game.level = new bubbleLevel(800, 400, 23, 20, lvl.lvlnumber);
 			break;
 	};
@@ -2245,6 +2256,8 @@ api.levels.unserializeLevel = function(){
 		game.level.cannon.currentBubble = new bubble(game.level);
 		game.level.cannon.currentBubble.unserialize(lvl.cannon.currentBubble);
 	};
+	game.level.loose = game.playerLoose;
+	game.level.win = game.playerWin;	
 	return true;
 };
 

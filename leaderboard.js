@@ -54,7 +54,7 @@ function retrieveGeneralLeaderboard(scores, numscores, response){
             //alert(" - " + score.Name + " got " + score.Points + " on " + score.SDate);
             text += '<tr><td><img src="'+uiLeaderboardStar.src+'" alt="star">' + score.Name + '</td><td style="text-align: right">' +score.Points+ '</td></tr>';
             // including custom data?  score.CustomPlaytomic.Data.Property
-            if(i == 6) break;
+            if(i == 5) break;
         };
         text += '</table>';
         LeaderBoard.divGen.innerHTML = text;

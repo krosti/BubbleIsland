@@ -738,6 +738,7 @@ function connectToFacebook2(){
 
 function connectToFacebook(){
 	$('#FBbutton').click(function(){});
+	api.ui.showWaiting();
 	api.facebook.framework = document.getElementById('SGnav');
 	api.softgame.framework = document.getElementById('SGnav');
 	api.facebook.onConnect = connectToFacebook2;

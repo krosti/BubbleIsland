@@ -793,10 +793,22 @@ function showCoins(){
 	api.ui.showWaiting();
 	api.softgame.onLoginUser = function(){
 		api.ui.hideWaiting();
-		api.ui.alert('You have ' + api.softgame.user.balance + ' coin/s to spend, you can buy more lifes when you run out of them', 'Ok, thanks for the advice', function(){ options.backToMenu(); });
+		//api.ui.alert('You have ' + api.softgame.user.balance + ' coin/s to spend, you can buy more lifes when you run out of them', 'Ok, thanks for the advice', function(){ options.backToMenu(); });
+		api.ui.alert2('You have ' + api.softgame.user.balance + ' coin/s to spend, you can buy more lifes when you run out of them',
+							[{
+								'button': 'Ok, thanks for the advice',
+								'action' : function(){
+									
+								}
+							},{
+								'button': 'Ups! i need more coins!',
+								'action' : function(){
+									window.location = api.softgame.getBuyingCoinsUrl();
+								}
+							}]);
 	};
 	//options.showNav('softgameNav', 'gameMenu');
-	api.softgame.getUserInfo();
+	api.softgame.getUserInfo()
 };
 
 function postHighscoreOnFacebook(){

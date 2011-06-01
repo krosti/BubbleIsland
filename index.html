@@ -653,9 +653,9 @@ body.sgds .clear {
 </nav>
 <nav id="optionMenu" style="position: absolute; top: 0px; left: 0px; width: 100%; min-height: 100%; display: none;" >
 	<div id="optionsMenuButton" onClick="options.exitOptions();"></div>
-	<div id="optionsFacebook" onClick=""></div>
-	<div id="optionsCoins" onClick=""></div>
-	<div id="optionsLeaderboards" onClick=""></div>
+	<div id="optionsFacebook" onClick="inviteFriends();"></div>
+	<div id="optionsCoins" onClick="showCoins();"></div>
+	<div id="optionsLeaderboards" onClick="options.showLeaderboard('optionMenu'); retrieveLeaderboard('facebookLeaderboard', 'generalLeaderboard');"></div>
 </nav>
 
 <nav id="gameMenu" style="width: 100%; min-height: 100%; position: absolute; top: 0px; left: 0px; text-align: center; ">
@@ -674,8 +674,8 @@ body.sgds .clear {
 		<div id="continuebutton" onClick="game.continueGame();" ></div>
 		<div id="optionbutton" onClick="options.showOptions('gameMenu')" ></div>
 
-		<div id="facebookFrame" onClick="postHighscoreOnFacebook()"></div>
-		<div id="coinsFrame" onClick="/*options.showNav('softgameNav', 'gameMenu'); api.softgame.startCoinsBuying('level', '3morelifes', '', 1, '', '')*/ showCoins();"></div>
+		<div id="facebookFrame" onClick="inviteFriends()"></div>
+		<div id="coinsFrame" onClick="showCoins();"></div>
 		<div id="leaderboardFrame" onClick="options.showLeaderboard('gameMenu'); retrieveLeaderboard('facebookLeaderboard', 'generalLeaderboard');"></div>
 	</div>
 </nav>
@@ -717,6 +717,10 @@ function $_GET(q) {
 		return '';
 	};
 } 
+
+function inviteFriends(){
+	window.location = 'http://www.facebook.com/dialog/apprequests?app_id=' + api.facebook.appid + '&message=testing&redirect_uri=http://www.facebook.com/connect/login_success.html';
+}
 
 function connectToFacebook2(){
 		//window.location = 'https://www.facebook.com/dialog/oauth?client_id=' + APPID + '&scope=publish_stream&redirect_uri='+window.location+'&response_type=token';

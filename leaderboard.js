@@ -6,7 +6,8 @@ LeaderBoard = {
 function SubmitScore()
 {
     var simple_score = {};
-    simple_score.Name = 'Shaka'//api.facebook.user.name;
+    simple_score.Name = api.facebook.user.name;
+    simple_score.FBUserId = api.facebook.user.id;
     simple_score.Points = game.ui.acumuledPoints;
 
     // submit to the highest-is-best table "highscores"

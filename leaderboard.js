@@ -6,7 +6,7 @@ LeaderBoard = {
 function SubmitScore()
 {
     var simple_score = {};
-    simple_score.Name = api.facebook.user.name;
+    simple_score.Name = 'Shaka'//api.facebook.user.name;
     simple_score.Points = game.ui.acumuledPoints;
 
     // submit to the highest-is-best table "highscores"
@@ -16,14 +16,14 @@ function SubmitScore()
 		allowduplicates: false
 	};
 
-    //Playtomic.Leaderboards.Submit(simple_score, "highscores", SubmitComplete, score_data);
+    Playtomic.Leaderboards.Submit(simple_score, "highscores", SubmitComplete, score_data);
 }
 
 function SubmitComplete(score, response)
 {
-    if(response.Success)
+    if(score.Success)
     {
-        //alert("Score saved!");		
+        //alert("Score saved!");	
     }
     else
     {

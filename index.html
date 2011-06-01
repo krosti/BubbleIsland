@@ -799,6 +799,7 @@ function showCoins(){
 	api.softgame.onLoginUser = function(){
 		api.ui.hideWaiting();
 		//api.ui.alert('You have ' + api.softgame.user.balance + ' coin/s to spend, you can buy more lifes when you run out of them', 'Ok, thanks for the advice', function(){ options.backToMenu(); });
+		alert(api.JSON2String(api.softgame.user););
 		api.ui.alert2('You have ' + api.softgame.user.balance + ' coin/s to spend, you can buy more lifes when you run out of them',
 							[{
 								'button': 'Ok, thanks for the advice',

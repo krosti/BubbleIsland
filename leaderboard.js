@@ -31,11 +31,11 @@ function SubmitComplete(score, response)
     }
 }
 
-function retrieveLeaderboard(divGen, divFB){
+function retrieveLeaderboard(divFB, divGen){
 	LeaderBoard.divGen = document.getElementById(divGen);
 	LeaderBoard.divFB = document.getElementById(divFB);
-	Playtomic.Leaderboards.ListFB("highscores", retrieveFacebookLeaderboard, { friendslist: api.facebook.friends });
 	Playtomic.Leaderboards.List("highscores", retrieveGeneralLeaderboard);
+	Playtomic.Leaderboards.ListFB("highscores", retrieveFacebookLeaderboard, { friendslist: api.facebook.friends });
 };
 
 function retrieveGeneralLeaderboard(scores, numscores, response){
@@ -56,7 +56,7 @@ function retrieveGeneralLeaderboard(scores, numscores, response){
             if(i == 6) break;
         };
         text += '</table>';
-        LeaderBoard.divGen.innerHTML(text);
+        LeaderBoard.divGen.innerHTML = text;
     }
     else
     {
@@ -82,7 +82,7 @@ function retrieveFacebookLeaderboard(scores, numscores, response){
             if(i == 6) break;
         };
         text += '</table>';
-        LeaderBoard.divFB.innerHTML(text);
+        LeaderBoard.divFB.innerHTML = text;
     }
     else
     {

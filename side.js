@@ -118,7 +118,7 @@ function Loader(progress, size){
 
 	
 
-	this.toLoad = 72;
+	this.toLoad = 74;
 
 	this.isloaded = 0;
 
@@ -308,7 +308,8 @@ function Loader(progress, size){
 
 	uiAlertButton.onload = this.loaded;
 
-
+	uiPauseButton.onload = this.loaded;
+	uiPauseCartel.onload = this.loaded;
 
 	facebookScreen.onload = this.loaded;
 
@@ -498,6 +499,8 @@ function Loader(progress, size){
 
 		uiAlertButton.src = this.size + this.separator + 'alertbutton.png';
 
+		uiPauseButton.src = this.size + this.separator + 'pausebutton.png';
+		uiPauseCartel.src = this.size + this.separator + 'pausecartel.png';
 
 
 		facebookScreen.src = this.size + this.separator + 'facebookscreen.png';

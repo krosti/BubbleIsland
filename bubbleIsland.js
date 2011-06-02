@@ -117,6 +117,9 @@ uiOptionsCoins = new Image();
 uiAlertScreen = new Image();
 uiAlertButton = new Image();
 
+uiPauseButton = new Image();
+uiPauseCartel = new Image();
+
 facebookScreen = new Image();
 facebookButton = new Image();
 
@@ -1886,10 +1889,12 @@ function gameUI(w, h){
 	this.element2 = document.createElement('div');
 	this.element3 = document.createElement('div');
 	this.backElement = document.createElement('div');
+	this.pauseElement = document.createElement('div');
 
 	$(this.element).addClass('pointsFrame');
 	$(this.element2).addClass('lifesFrame');
 	$(this.element3).addClass('levelsFrame');
+	$(this.pauseElement).addClass('gobackFrame' + gameSize);
 
 	animNav.append(this.element);
 	animNav.append(this.element2);
@@ -1928,6 +1933,19 @@ function gameUI(w, h){
 	this.backElement.style.left = (w * (2/3)) + 'px';*/
 	//alert((uiLifeFrame.height + 5) + 'px' + (w * (2/3)) + 'px');
 	$(this.backElement).click(function(){ game.showMenu(); });
+
+	$(this.pauseElement).click(function(){
+		cartel = document.createElement('div');
+		var waitscreen = document.createElement('div');
+		$(cartel).addClass('uiAlert' + gameSize);
+		$(waitscreen).addClass('uiPauseScreen' + gameSize);
+		$(waitscreen).click(function(){
+			$(cartel).remove();
+			game.clock.start();
+		});
+		$(document.body).append(cartel);
+		game.clock.stop();
+	});
 
 	this.savePoints = function(){ this.acumuledPoints = this.points;};
 

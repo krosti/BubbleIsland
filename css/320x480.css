@@ -247,6 +247,26 @@
 	background-image: url(../320x480/loadingscreen.png);
 }
 
+.uiPauseButton320x480{
+	position: fixed;
+	background-image: url(../320x480/pausebutton.png);
+	width: 53px;
+	height: 39px;
+	min-height: 39px;
+	top: 52px;
+	left: 140px;
+};
+
+.uiPauseScreen320x480{
+	position: fixed;
+	background-image: url(../320x480/pausecartel.png);
+	width: 320px;
+	height: 263px;
+	min-height: 263px;
+	left: 0px;
+	top: 0px;
+}
+
 .leaderboard320x480{
 	position: absolute;
 	top: 0px;

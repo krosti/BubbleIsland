@@ -1774,6 +1774,11 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 		this.createLvl(this.level.lvlnro);
 	};
 
+	this.moreLifes = function(){
+		game.ui.lifes += 3;
+		game.ui.refresh();
+	};
+
 	this.createLvl = function(levelnumber){
 		switch(this.size){
 			case "320x480":
@@ -2033,6 +2038,8 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 	this.left = $('#'+canvasObj).offset().left;
 	animNav.width(this.width);
 	animNav.height(this.height);
+
+	api.softgame.buyFinalized = game.moreLifes
 
 	//this.drawBackground(this.backgroundPainter);
 	var version = document.createElement('div');

@@ -1,4 +1,4 @@
-var VERSION = '0.9.042';
+var VERSION = '0.9.052';
 
 function rnd(top){ return Math.floor(Math.random()*(top + 1))};
 
@@ -507,83 +507,44 @@ function bubble(l){
 
 
 		if(this.secondFlavor != ''){
-
 			switch(this.secondFlavor){
-
 				case 'blue':
-
 					zweithBild.src = bubbleBlueHalfImage.src;
-
 					break;
-
 				case 'green':
-
 					zweithBild.src = bubbleGreenHalfImage.src;
-
 					break;
-
 				case 'red':
-
 					zweithBild.src = bubbleRedHalfImage.src;
-
 					break;
-
 				case 'purple':
-
 					zweithBild.src = bubblePurpleHalfImage.src;
-
 					break;
-
 				case 'yellow':
-
 					zweithBild.src = bubbleYellowHalfImage.src;
-
 					break;
-
 			};			
-
 		};
-
-
 
 		if(this.meinBild.src == ''){ // normal
-
 			switch (this.flavor){
-
 				case "blue":
-
 					this.meinBild = bubbleBlueImage;
-
 					break;
-
 				case "yellow":
-
 					this.meinBild = bubbleYellowImage;
-
 					break;
-
 				case "purple":
-
 					this.meinBild = bubblePurpleImage;
-
 					break;
-
 				case "red":
-
 					this.meinBild = bubbleRedImage;
-
 					break;
-
 				case "green":
-
 					this.meinBild = bubbleGreenImage;
-
 					break;
-
 			};
-
 		};
-
 		this.object = new standAnimation(this.lvl.bubbleRadius, this.lvl.bubbleRadius, this.meinBild.src);
 		this.element = this.object.element;
 		$(this.element).addClass('bubble');
@@ -601,8 +562,6 @@ function bubble(l){
 		animNav.append(this.element);
 	};
 
-
-
 	this.move = function(){
 		if((this.dx == 0) && (this.dy == 0)) return;
 		this.x += this.dx;
@@ -617,22 +576,52 @@ function bubble(l){
 
 		if(this.y <= (this.lvl.topBound + this.lvl.currentTop)){
 			this.lvl.mutex = true;
+			game.clock.stop();
+			var inPlace = false;
+			var currentBubble;
+			/*var delta = this.lvl.grilla.isShortRow(0) * (this.lvl.bubbleRadius / 2);
+			delta = delta / 2;*/
+			do{					
+				this.j = Math.floor((this.x - this.lvl.leftBound) / this.lvl.bubbleRadius);
+				this.i = 0;
+				inPlace = ( this.lvl.grilla.Table[this.i][this.j] == 'vacio');
+				
+				this.x -= (this.dx / 4);
+				this.y -= (this.dy / 4);
+				if((this.x <= this.lvl.leftBound) || (this.x >= this.lvl.width)) this.dx = -this.dx;
+			}while(!inPlace);
 			this.stopMove();
-			this.j = Math.floor((this.x - this.lvl.leftBound) / this.lvl.bubbleRadius);
-			this.i = 0;
 			this.recalcXY();
 			this.y += this.lvl.currentTop;
 			this.dy = this.lvl.bubbleVelocity;			
 			this.lvl.addBubble(this);
 			this.lvl.grilla.Table[this.i][this.j] = this;
+			var c = this.lvl.grilla.checkForCompatibility(this, this);
+			//debug('    c   :' + c + '   ');
+			this.lvl.mutex = true;
+			if(c >= 3){				
+				//alert(c);
+				var mult = bubble.pointsMultiplier;
+				this.lvl.pointsMultiplier =  c * c * pointExplode * mult;
+				//alert(this.lvl.pointsMultiplier);
+				this.lvl.grilla.exploded = c;
+				this.lvl.grilla.explodeMarked();			
+				this.lvl.addPoints();
+				this.lvl.pointsMultiplier = pointDrop * mult;
+				this.lvl.grilla.checkForOrphans();
+			}else{				
+				this.lvl.grilla.clearMarks();
+			};
+			this.lvl.grilla.touchedBubbles = null;
+			this.lvl.grilla.touchedBubbles = new Array();
+
 			this.lvl.shootedBubble = null;
 			this.lvl.setReadyShoot();
+			game.clock.start();
 			this.lvl.mutex = false;
 		}; 
 	};
-
 	
-
 	this.moveShooted = function(){
 		if((this.dx == 0) && (this.dy == 0)) return;
 		this.x += this.dx;
@@ -640,11 +629,8 @@ function bubble(l){
 		if(this.x <= this.lvl.leftBound) this.x = this.lvl.leftBound;
 		if(this.x > this.lvl.width) this.x = this.lvl.width;
 		/*$(this.element).animate({
-
 			top: this.y + 'px',
-
 			left: this.x + 'px'
-
 		}, 10)*/
 		var ddx = this.dx;
 		var ddy = this.dy;
@@ -722,9 +708,7 @@ function bubble(l){
 	this.explode = function(){
 		//do explode animation and remove element
 		//this.object.animationEnds = this.removeBubble;
-
 		var anim = '';
-
 		if(this.freezeBall){
 			anim = new Animation(14, bubbleFreezeExplode.width / 14, bubbleFreezeExplode.height, bubbleFreezeExplode.src);		
 			anim.element.style.position = 'absolute';
@@ -794,19 +778,12 @@ function bubbleCannon(lvl){
 		vecy = lvl.height - (y - this.lvl.top);*/
 		if(!this.readyShoot) return;
 		this.readyShoot = false;
-		var vecx = (x - this.lvl.left) - (this.currentBubble.x  + (this.lvl.bubbleRadius / 2));
-		var vecy = (y - this.lvl.top) - (this.currentBubble.y + (this.lvl.bubbleRadius / 2));
+		var vecx = (x/* - this.lvl.left*/) - (this.currentBubble.x  + (this.lvl.bubbleRadius / 2));
+		var vecy = (y /*- this.lvl.top*/) - (this.currentBubble.y + (this.lvl.bubbleRadius / 2));
 
 		var hip = Math.sqrt(vecx*vecx+vecy*vecy);
-		//alert(vecx + ' : '+ vecy);
-		//debug('versor: ' + vecx + ' : '+ vecy + ' h: ' + hip);
-		//debug('offset: ' + this.lvl.top + ' : ' + this.lvl.left);
-		//debug('offset: ' + x + ' : ' + y);
-		//alert(this.lvl.left + ' : ' + this.lvl.top);
-		//ang = Math.atan(Math.abs(vecy/vecx));
-		//alert(ang);
 
-		var velocity = 27; //--------------------------------------------------------------------------------------------------------------------velocidad bola, const
+		var velocity = 25; //--------------------------------------------------------------------------------------------------------------------velocidad bola, const
 		this.currentBubble.dx = velocity * (vecx/hip);//Math.cos(ang);
 		this.currentBubble.dy = velocity * (vecy/hip);//;/Math.sin(ang);
 		//this.lvl.addBubble(this.currentBubble);
@@ -835,100 +812,53 @@ function bubbleCannon(lvl){
 
 
 function bubbleTable(ancho, alto, lvl){
-
 	// 15 x 10 pelotitas
-
-	
-
 	// Init
-
 	this.lvl = lvl
-
 	this.alto = alto;
-
 	this.ancho = ancho;
-
 	this.Table = new Array(this.alto);
-
 	for(var i = 0; i < this.alto; ++i){
-
 		this.Table[i] = new Array(this.ancho);
-
 	};
-
 	for(var i = 0; i < this.alto; ++i){
-
 		for(var j = 0; j < this.ancho; ++j){
-
 			//alert('i:'+i+' j:'+j);
-
 			this.Table[i][j] = "vacio";
-
 		};
-
 	};
-
 	
-
 	for(var i = 0; i < this.alto; ++i){		
-
 		if((i % 2) == 0){
-
 			this.Table[i][this.ancho - 1] = "nada";
-
 		};
-
 	};
-
-	
 
 	this.touchedBubbles = new Array();
 	this.exploded = 0;
 
 	this.retrieveBubble = function(i, j){
-
 		//debug('  retrieve Bubble i:' + i + ' j:' + j);
-
 		if((i >= this.alto)) return new bubble(this.lvl);
-
 		if((j >= this.ancho) || (j < 0)) return new bubble(this.lvl);
-
 		if(i < 0){
-
 			var b = new bubble(this.lvl);
-
 			b.flavor = "techo";
-
 			return b;
-
 		};
-
 		if(this.isShortRow(i) && j == this.ancho) return new bubble(this.lvl);
-
 		return this.Table[i][j];
-
 	};
-
-	
 
 	this.isShortRow = function(i){
-
 		//debug(this.Table[i][this.ancho - 1]);
-
 		if(this.Table[i][this.ancho - 1] == "nada"){
-
 			return 1;
-
 		}else{
-
 			return 0;
-
 		};
-
 	};
-
 	
-
 	this.addBubble = function(bubble, collided){
 		//debug(dx +':'+ dy + '; &nbsp;');
 		var radius = this.lvl.bubbleRadius / 2;
@@ -997,8 +927,8 @@ function bubbleTable(ancho, alto, lvl){
 				inPlace = ( this.Table[bubble.i][bubble.j] == 'vacio');
 				i++;
 			}while(!inPlace && (i != collided.length));
-			bubble.x -= bubble.dx;
-			bubble.y -= bubble.dy;
+			bubble.x -= (bubble.dx / 4);
+			bubble.y -= (bubble.dy / 4);
 			if((bubble.x <= bubble.lvl.leftBound) || (bubble.x >= bubble.lvl.width)) bubble.dx = -bubble.dx;
 		}while(!inPlace);
 		//$('#debug')[0].innerHTML = $('#debug')[0].innerHTML + ' &nbsp; tabla: ' + this.Table[bubble.i][bubble.j];
@@ -1031,332 +961,164 @@ function bubbleTable(ancho, alto, lvl){
 	};
 
 	this.checkForCompatibility = function(toCheck, flavor){
-
 		//chequeo si donde cayo, puede explotar algunas
-
 		//if(this.retrieveBubble(i-1, j).)
-
 		//toCheck = bubble//this.retrieveBubble(i,j);
-
 		if(toCheck == "nada" || toCheck == "vacio") return 0;
-
 		if(toCheck.flavor == "nula" ||toCheck.flavor == "techo") return 0;
-
 		if(toCheck.marked) return 0;
-
 		this.touchedBubbles.push(toCheck);
-
 		toCheck.marked = true;
-
 		//debug('&nbsp;  tocheck: ' + toCheck.flavor + ' &nbsp; flavor:' + flavor + ' &nbsp; i: ' + toCheck.i+ ':'+toCheck.j+ '<br>');
-
 		if(flavor.equalBubble(toCheck)){
-
 			var c = 1;
-
 			//debug('toCheck')			
-
 			c += this.checkForCompatibility(this.retrieveBubble(toCheck.i, toCheck.j + 1), flavor);
-
 			c += this.checkForCompatibility(this.retrieveBubble(toCheck.i, toCheck.j - 1), flavor);
-
 			c += this.checkForCompatibility(this.retrieveBubble(toCheck.i - 1, toCheck.j), flavor);
-
 			c += this.checkForCompatibility(this.retrieveBubble(toCheck.i + 1, toCheck.j), flavor);
-
 			if(!this.isShortRow(toCheck.i)){
-
 				c += this.checkForCompatibility(this.retrieveBubble(toCheck.i + 1, toCheck.j - 1), flavor);
-
 				c += this.checkForCompatibility(this.retrieveBubble(toCheck.i - 1, toCheck.j - 1), flavor);	
-
 			}else{
-
 				c += this.checkForCompatibility(this.retrieveBubble(toCheck.i + 1, toCheck.j + 1), flavor);
-
 				c += this.checkForCompatibility(this.retrieveBubble(toCheck.i - 1, toCheck.j + 1), flavor);
-
 			};
-
 			return c;
-
 		}else{
-
 			toCheck.marked = false;
-
 			return 0;
-
 		};
-
-		
-
 	};
-
-	
 
 	/*this.checkForCompatibility = function(toCheck, flavor){
-
 		//chequeo si donde cayo, puede explotar algunas
-
 		//if(this.retrieveBubble(i-1, j).)
-
 		//toCheck = bubble//this.retrieveBubble(i,j);
-
 		if(toCheck == "nada" || toCheck == "vacio") return 0;
-
 		if(toCheck.flavor == "nula") return 0;
-
 		if(toCheck.marked) return 0;
-
 		this.touchedBubbles.push(toCheck);
-
 		toCheck.marked = true;
-
 		//debug('&nbsp;  tocheck: ' + toCheck.flavor + ' &nbsp; flavor:' + flavor + ' &nbsp; i: ' + toCheck.i+ ':'+toCheck.j+ '<br>');
-
 		if(toCheck.flavor == flavor){
-
 			c = 1;
-
 			//debug('toCheck')			
-
 			c += this.checkForCompatibility(this.retrieveBubble(toCheck.i, toCheck.j + 1), flavor);
-
 			c += this.checkForCompatibility(this.retrieveBubble(toCheck.i, toCheck.j - 1), flavor);
-
 			c += this.checkForCompatibility(this.retrieveBubble(toCheck.i - 1, toCheck.j), flavor);
-
 			c += this.checkForCompatibility(this.retrieveBubble(toCheck.i + 1, toCheck.j), flavor);
-
 			if(!this.isShortRow(toCheck.i)){
-
 				c += this.checkForCompatibility(this.retrieveBubble(toCheck.i + 1, toCheck.j - 1), flavor);
-
 				c += this.checkForCompatibility(this.retrieveBubble(toCheck.i - 1, toCheck.j - 1), flavor);	
-
 			}else{
-
 				c += this.checkForCompatibility(this.retrieveBubble(toCheck.i + 1, toCheck.j + 1), flavor);
-
 				c += this.checkForCompatibility(this.retrieveBubble(toCheck.i - 1, toCheck.j + 1), flavor);
-
 			};
-
 			return c;
-
 		}else{
-
 			toCheck.marked = false;
-
 			return 0;
-
-		};
-
-		
-
+		};	
 	};*/
-
-	
-
 	this.checkNeighbours = function(bubble){
-
 		//check de caidas
-
 		//debug(bubble);
-
 		if(bubble == "nada" || bubble == "vacio") return true;
-
 		//if(bubble.flavor == "nula") return false;
-
 		if(bubble.flavor == "nula") return true;
-
 		if(bubble.flavor == "techo") return false;
-
 		if(bubble.marked) return true;
-
 		
-
 		bubble.marked = true;
-
 		var c = true;
-
 		c = c && this.checkNeighbours(this.retrieveBubble(bubble.i, bubble.j + 1));
-
 		c = c && this.checkNeighbours(this.retrieveBubble(bubble.i, bubble.j - 1));
-
 		c = c && this.checkNeighbours(this.retrieveBubble(bubble.i - 1, bubble.j));
-
 		c = c && this.checkNeighbours(this.retrieveBubble(bubble.i + 1, bubble.j));
-
 		if(!this.isShortRow(bubble.i)){
-
 			c = c && this.checkNeighbours(this.retrieveBubble(bubble.i + 1, bubble.j - 1));
-
 			c = c && this.checkNeighbours(this.retrieveBubble(bubble.i - 1, bubble.j - 1));
-
 		}else{
-
 			c = c && this.checkNeighbours(this.retrieveBubble(bubble.i + 1, bubble.j + 1));
-
 			c = c && this.checkNeighbours(this.retrieveBubble(bubble.i - 1, bubble.j + 1));
-
 		};
-
 		bubble.marked = c;
-
 		return c;
-
 	};
-
 	
-
 	this.checkForOrphans = function(){
-
 		//cheque si hay alguno que se cae
-
 		//mientras tenga bubbles por chequear
-
 		//debug(this.touchedBubbles);
-
 		while(this.touchedBubbles.length > 0){
-
-			toCheck = this.touchedBubbles.shift();
-
+			var toCheck = this.touchedBubbles.shift();
 			if(this.checkNeighbours(toCheck)){				
-
 				this.explodeMarked(); // <------------- por ahora, cambiar a drop de las bolitas
-
 				this.lvl.pointsMultiplier = this.exploded * 10;
-
 				this.lvl.addPoints();
-
 			}else{
-
 				this.clearMarks();
-
 			};
-
 		};
-
 	}
-
 	
-
 	this.explodeMarked = function(){
-
 		//bubbles marked as exploded, explode
-
 		//debug( ' explode!!!  ' + this.alto + ':' + this.ancho );
-
 		for(var i = 0; i < this.alto; ++i){
-
 			for(var j = 0; j < this.ancho; ++j){
-
-				b = this.Table[i][j];
-
+				var b = this.Table[i][j];
 				if((b != "nada") && (b != "vacio")){					
-
 					if(b.marked){
-
 						if(b.freezeBall) this.lvl.freezeMovement();
-
 						if(b.bombBall){
-
 							this.lvl.detonateBomb(b, 3);
-
 							this.explodeMarked();
-
 						};
-
 						this.lvl.removeBubble(b);						
-
 						this.Table[i][j] = "vacio";
-
 						this.touchedBubbles.remove(b);
-
 					};
-
 				}; 
-
 			};
-
 		};
-
 	};
-
-	
 
 	this.clearMarks  = function(){
-
 		for(var i = 0; i < this.alto; ++i){
-
 			for(var j = 0; j < this.ancho; ++j){
-
 				//alert('i:'+i+' j:'+j);
-
 				//alert(i + ':' + j);
-
 				//if((this.Table[i][j] != "nada") || (this.Table[i][j] != "vacio")){					
-
 				if((this.Table[i][j] != "nada") && (this.Table[i][j] != "vacio")){					
-
-					b = this.Table[i][j];
-
+					var b = this.Table[i][j];
 					b.marked = false;
-
 				}; 
-
 			};
-
 		};
-
 	};
-
 	
-
 	this.returnLowest = function(){
-
 			var i = this.alto - 1;
-
 			var j = 0;
-
 			var salir = false;
-
 			var result;
-
 			while(!salir && i > -1){
-
 				result = this.Table[i][j];
-
 				if(result != "nada" && result != "vacio"){
-
 					salir = true;
-
 				}else{
-
 					j++;
-
 					if(j == this.ancho){
-
 						i--;
-
 						j = 0;
-
 					};
-
 				};
-
 			};
-
-			
-
 			return result;
-
 		};
-
 }
-
-
 
 function bubbleLevel(w, h, bubblesWidth, bubblesHeight, lvlnbr){
 	this.grilla = new bubbleTable(bubblesWidth, bubblesHeight, this);
@@ -1466,10 +1228,7 @@ function bubbleLevel(w, h, bubblesWidth, bubblesHeight, lvlnbr){
 	this.checkColisions = function(){
 		//check colisions
 		//performance.check('colisiones');
-		if(this.shootedBubble == null){
-			//performance.check('colisiones');
-			return;	
-		} 
+		if(this.shootedBubble == null) return;	
 		var collisions = new Array();
 		for(var i = 0; i < this.bubbles_array.length; ++i){			
 			var currentBubble = this.bubbles_array[i];
@@ -1479,7 +1238,7 @@ function bubbleLevel(w, h, bubblesWidth, bubblesHeight, lvlnbr){
 			//debug(disx + ':' + disy);
 			
 			var distance = Math.sqrt(disx * disx + disy * disy);
-			if(distance < (this.bubbleRadius *.88)){
+			if(distance < (this.bubbleRadius *.9)){
 				//debug('COLLITION');				
 				//this.bubbles_array.push(this.shootedBubble);	
 				collisions.push({ bubble: currentBubble, dis: distance});
@@ -1499,7 +1258,20 @@ function bubbleLevel(w, h, bubblesWidth, bubblesHeight, lvlnbr){
 			};*/
 			//(bubble, collided)
 			//this.grilla.addBubble(this.shootedBubble, currentBubble.bubble);	
-			this.grilla.addBubble(this.shootedBubble, collisions);
+			this.grilla.addBubble(this.shootedBubble, collisions);			
+			/*for(var i = 0; i < this.bubbles_array.length; ++i){
+				var b1 = this.bubbles_array[i];
+				for(var j = 0; j < this.bubbles_array.length; ++j){
+					if(i == j) continue;
+					var b2 = this.bubbles_array[j];
+					if((b2.i == b1.i) && (b2.j == b1.j)){
+						alert('superposicion! con b1 ' + i + ' y b2 ' + j+ ' en la posicion i: ' + b1.i + ' j: '+ b1.j);
+					};
+					if((Math.abs(b2.x - b1.x) < 5) && (Math.abs(b2.y - b1.y) < 5) ){
+						alert('superposicion! con b1 ' + i + ' y b2 ' + j+ ' en la ubicacion x: ' + b1.x + ' y: '+ b1.y);
+					};
+				};
+			};*/
 			this.shootedBubble.stopMove();
 			this.shootedBubble.dy = this.bubbleVelocity;
 			this.shootedBubble = null;
@@ -1550,226 +1322,118 @@ function bubbleLevel(w, h, bubblesWidth, bubblesHeight, lvlnbr){
 	
 
 	this.drawLevel = function(){
-
 		this.character.render();	
-
 		if(this.shootedBubble != undefined) this.shootedBubble.object.render();
-
 	};
-
 	
-
 	this.addBubble = function(b){
-
 		this.bubbles_array.push(b);	
-
 	};
-
 	
-
 	this.removeBubble = function(b){
-
 		//debug('called remover');
-
 		//debug(b.i + ':' + b.j);
-
 		for(var i = 0; i < this.bubbles_array.length; ++i){
-
 			//debug(' bubble : ' + this.bubbles_array[i].i +':'+this.bubbles_array[i].j);
-
 			if((this.bubbles_array[i].i == b.i) && (this.bubbles_array[i].j == b.j)){
-
 				this.bubbles_array.splice(i, 1);				
-
 				//debug('removed ' + b.toString());
-
 			};
-
 		};
-
 		//$(b.element).remove();
-
 		if(b != 'nada' && b != 'vacio' && b != 'techo') b.explode();
-
 	};
-
 	
-
 	this.setReadyShoot = function(){
-
 		game.level.mutex = false;
-
 		this.cannon.setReadyShoot();
-
 	};
-
-
 
 	this.addPoints = function(){
-
 		//alert('add points: ' + this.pointsMultiplier);
-
 		this.points += this.pointsMultiplier;	
 
-		
-
 	};
-
-
 
 	this.makeMeRandom = function(alto){		
-
 		//for(i = (this.grilla.alto - alto); i < this.grilla.alto; ++i){
-
 		for(var i = 0; i < alto; ++i){
-
 			isShort = this.grilla.isShortRow(i);
-
 			for(var j = 0; j < this.grilla.ancho; ++j){
-
 				if((j == this.grilla.ancho - 1) && isShort) continue;
-
-				b = new bubble(this);
-
+				var b = new bubble(this);
 				//b.makeItRandom();
-
 				//b.flavor = b.randomFlavor();
-
 				b.makeItRandomNormal();
-
 				b.i = i;
-
 				b.j = j;
-
 				b.dy = this.bubbleVelocity;
-
 				this.grilla.Table[i][j] = b;
-
 				b.recalcXY();				
-
 				this.addBubble(b);
-
 				animNav.append(b.element);
-
 			};
-
 		};
-
 	};
-
 	
-
 	this.addRandomRow = function(){
-
 		//re do
-
 		//alert("newrow");
-
+		//console.log('add row');
 		if(this.mutex){
-
+			//console.log('muted');
 			setTimeout('game.level.addRandomRow()', 10);
-
 			return;
-
 		};
-
 		var pFlavor1 = '';
-
 		var pFlavor2 = '';
-
 		var ancho = this.grilla.ancho;
-
 		var newrow = new Array(ancho);
-
 		if(!this.grilla.isShortRow(0)){ 
-
 			ancho--;
-
 			newrow[ancho] = "nada"; 
-
 		};	
-
 		this.grilla.alto = this.grilla.Table.unshift(newrow);
 
-
-
 		for(var i = 0; i < this.bubbles_array.length; ++i){			
-
 			this.bubbles_array[i].i += 1;
-
 		};
-
 		var i = 0;
-
 		while(i < ancho){
-
 			var b = new bubble(this);
-
 			b.makeItRandomNormal();
-
 			if((pFlavor1 != b.flavor) || (pFlavor2 != b.flavor)){				
-
 				b.i = 0;
-
 				b.j = i;
-
 				b.dy = this.bubbleVelocity;
-
 				b.recalcXY();
-
 				//newrow[i] = b;
 				this.grilla.Table[b.i][b.j] = b;
-
 				this.addBubble(b);
-
 				animNav.append(b.element);
-
 				pFlavor1 = pFlavor2;
-
 				pFlavor2 = b.flavor;
-
 				i++;
-
 			};			
-
 		};
 
-
-
 		/*for(i = 0; i < ancho; ++i){
-
 			//alert(i);
-
 			b = new bubble(this);
-
 			//b.makeItRandom();
-
-			//b.flavor = b.randomFlavor();
-
+		//b.flavor = b.randomFlavor();
 			b.makeItRandomNormal();
-
 			b.i = 0;
-
 			b.j = i;
-
 			b.dy = this.bubbleVelocity;
-
 			b.recalcXY();
-
 			newrow[i] = b;
-
 			this.addBubble(b);
-
 			animNav.append(b.element);
-
 		};	*/		
-
 		this.currentTop = 0;	
-
 	};
-
 	
-
 	this.clearBoard = function(){
 		clearInterval(this.blinkTimer);
 		for(var i = 0; i < this.bubbles_array.length; ++i){
@@ -1791,73 +1455,41 @@ function bubbleLevel(w, h, bubblesWidth, bubblesHeight, lvlnbr){
 	
 
 	this.freezeMovement = function(){
-
 		this.freeze = true;
-
 		this.freezeTimeout = fps * freezeTime;
-
 	};
 
 	
 
 	this.detonateBomb = function(detonated, neighbour){
-
 		//alert(detonated.i + ' : ' + detonated.j + '  neighbour: ' + neighbour);
-
 		if(neighbour == 0) return;
-
 		if(detonated == "nada" || detonated == "vacio") return;
-
 		if(detonated.flavor == "nula" || detonated == "techo") return;
-
 		//alert(detonated.i + ' : ' + detonated.j + '  neighbour: ' + neighbour);
-
 		//if(detonated.marked) return;
-
 		
-
 		detonated.marked = true;
-
 		if(detonated.bombBall){
-
 			detonated.bombBall = false;
-
 			detonated.wasDetonated	= true;
-
 		};
-
 		this.detonateBomb(this.grilla.retrieveBubble(detonated.i, detonated.j + 1), neighbour - 1);
-
 		this.detonateBomb(this.grilla.retrieveBubble(detonated.i, detonated.j - 1), neighbour - 1);
-
 		this.detonateBomb(this.grilla.retrieveBubble(detonated.i - 1, detonated.j), neighbour - 1);
-
 		this.detonateBomb(this.grilla.retrieveBubble(detonated.i + 1, detonated.j), neighbour - 1);
-
 		if(!this.grilla.isShortRow(detonated.i)){
-
 			this.detonateBomb(this.grilla.retrieveBubble(detonated.i + 1, detonated.j - 1), neighbour - 1);
-
 			this.detonateBomb(this.grilla.retrieveBubble(detonated.i - 1, detonated.j - 1), neighbour - 1);
-
 		}else{
-
 			this.detonateBomb(this.grilla.retrieveBubble(detonated.i + 1, detonated.j + 1), neighbour - 1);
-
 			this.detonateBomb(this.grilla.retrieveBubble(detonated.i - 1, detonated.j + 1), neighbour - 1);
-
 		};
-
 	};
 
-
-
 	this.characterBlink = function(){
-
 		if(this.character.currentAnim == ''){
-
 			this.character.setCurrentState('blink');
-
 		};
 
 	};
@@ -2416,451 +2048,228 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 	animNav.click(this.mouseClick);
 }
 
-
-
 function tick(){
-
 	game.startAnimation();
-
 	//performance.update();
-
 	//setTimeout("tick()", 1);
-
 }
 
-
-
 api.levels.serializeLevel = function(game){
-
 	//api.levels.jsonlevel = {};
-
 	var lvl = {};
-
 	lvl.resolution = gameSize;
-
 	lvl.lvlnumber = game.level.lvlnro;
 
-
-
 	//this.grilla = new bubbleTable(bubblesWidth, bubblesHeight, this);
-
 	//this.cannon;
-
 	lvl.width = game.level.width;
-
 	lvl.height = game.level.height;
-
 	lvl.top = game.level.top;
-
 	lvl.left = game.level.left;
-
 	lvl.topBound = game.level.topBound;
-
 	lvl.leftBound = game.level.leftBound;
-
 	
-
 	lvl.mutex = game.level.mutex;
-
 	lvl.freeze = game.level.freeze
-
 	lvl.finished = game.level.finished;
-
 	lvl.freezeTimeout = game.level.frezeeTimeout;
-
 	lvl.bubbleRadius = game.level.bubbleRadius
-
 	lvl.shootedBubble = game.level.shootedBubble;
-
 	//lvl.bubbles_array = new Array();
-
 	lvl.points = game.level.points;
-
 	lvl.pointsToReach = game.level.pointsToReach;
-
 	lvl.pointsMultiplier = game.level.pointsMultiplier;
-
 	lvl.looseLine = game.level.looseLine;
-
 	lvl.currentTop = game.level.currentTop;
-
 	lvl.h = game.level.h
-
 	lvl.bonus = game.level.bonus;
-
 	lvl.bubble_array = [];
-
 	//salvo las bubbles del array, son las mismas que la grilla
-
 	for(var i = 0; i < game.level.bubbles_array.length; ++i){
-
 		var current = game.level.bubbles_array[i];
-
 		var bubble = current.serialize();
-
 		lvl.bubble_array.push(bubble);
-
 		//current = null;
-
 	};
-
-
 
 	lvl.cannon = {};
-
 	lvl.cannon.currentBubble = (game.level.cannon.currentBubble == null)? null : game.level.cannon.currentBubble.serialize();
-
 	lvl.cannon.readyShoot = game.level.cannon.readyShoot;
 
-
-
 	api.levels.jsonlevel = lvl;
-
 };
-
-
 
 api.levels.unserializeLevel = function(){
-
-	//alert('hola0');
-
 	var lvl = api.levels.jsonlevel;
-
 	//alert('lvl: ' + lvl);
-
 	if(lvl.resolution != gameSize){
-
 		//alert('resolution wrong');
-
 		api.ui.alert('You have another session started with another phone resolution, we cannot arrange the bubbles in the same position, this will a mess!! please relogin with the original phone and try again', 'Ok, see you later');
-
 		return false;
-
 	};
-
 	//var level = game.level;
-
 	//alert('hola1');
 
-
-
 	switch(lvl.resolution){
-
 		case "320x480":
-
 			game.canvas.width = 320;
-
 			game.canvas.height = 480;	
-
 			game.level = new bubbleLevel(240, 380, 8, 20, lvl.lvlnumber);
-
 			break;
-
 		case "360x480":
-
 			game.canvas.width = 360;
-
 			game.canvas.height = 480;
-
 			game.level = new bubbleLevel(360, 480, 10, 20, lvl.lvlnumber);
-
 			break;
-
 		case "640x960":
-
 			game.canvas.width = 640;
-
 			game.canvas.height = 960;
-
 			game.level = new bubbleLevel(640, 960, 13, 30, lvl.lvlnumber);
-
 			break;
-
 		case "480x800":
-
 			game.canvas.width = 480;
-
 			game.canvas.height = 800;
-
 			game.level = new bubbleLevel(480, 800, 11, 25, lvl.lvlnumber);
-
 			break;
-
 		case "854x480":
-
 			game.canvas.height = 480; 
-
 			game.canvas.width = 854;
-
 			game.level = new bubbleLevel(800, 400, 23, 20, lvl.lvlnumber);
-
 			break;
-
 	};
-
 	//alert('hola2');
-
 	game.level.top = lvl.top;
-
 	game.level.left = lvl.left;
-
 	game.level.topBound = lvl.topBound;
-
 	game.level.leftBound = lvl.leftBound;
-
 	//alert('hola2');
-
 	game.level.mutex = lvl.mutex;
-
 	game.level.freeze = lvl.freeze
-
 	game.level.finished = lvl.finished;
-
 	game.level.freezeTimeout = lvl.frezeeTimeout;
-
 	game.level.bubbleRadius = lvl.bubbleRadius
-
 	game.level.shootedBubble = lvl.shootedBubble;
-
 	//game.level.bubbles_array = new Array();
-
 	game.level.points = lvl.points;
-
 	game.level.pointsToReach = lvl.pointsToReach;
-
 	game.level.pointsMultiplier = lvl.pointsMultiplier;
-
 	game.level.looseLine = lvl.looseLine;
-
 	game.level.currentTop = lvl.currentTop;
-
 	game.level.h = lvl.h
-
 	game.level.bonus = lvl.bonus;
-
 	//alert('hola2');
-
 	for(var i = 0; i < lvl.bubble_array.length; ++i){
-
 		//alert('i: ' + i);
-
 		var current = lvl.bubble_array[i];
-
 		//alert(current);
-
 		var b = new bubble(game.level);
-
 		//alert('unserialize bubble');
-
 		b.unserialize(current);
-
 		//alert('fin unserialize bubble');
-
 		game.level.bubbles_array.push(b);
-
 		game.level.grilla.Table[b.i][b.j] = b;
-
 		current = null;
-
 	};
-
 	//alert('hola3');
-
 	game.cannon = new bubbleCannon(game.level);
-
 	game.level.cannon = game.cannon;
-
 	game.level.cannon.currentBubble = null;
-
 	if(lvl.cannon.currentBubble != null){
-
 		game.level.cannon.currentBubble = new bubble(game.level);
-
 		game.level.cannon.currentBubble.unserialize(lvl.cannon.currentBubble);
-
 	};
-
 	game.cannon.readyShoot = lvl.cannon.readyShoot;
-
 	game.level.loose = game.playerLoose;
-
 	game.level.win = game.playerWin;	
-
 	animNav.append(game.cannon.element);
-
 	return true;
-
 };
 
-
-
 api.ui.alert = function(msg, button, fn){
-
 	var alertui = document.createElement('div');
-
 	var alertuitext = document.createElement('div');
-
 	var alertuibackground = document.createElement('div');
-
 	var alertuibutton = document.createElement('div');
-
 	//alertuibackground.style.backgroundImage = 'url(' + uiAlertScreen.src + ')';
-
 	$(alertui).addClass('uiAlert' + gameSize);
-
 	$(alertuitext).addClass('uiAlertText' + gameSize);
-
 	$(alertuibackground).addClass('uiAlertImage' + gameSize);
-
 	$(alertuibutton).addClass('uiAlertButton' + gameSize);
-
 	alertui.appendChild(alertuibackground);
-
 	alertui.appendChild(alertuibutton);
-
 	alertuibackground.appendChild(alertuitext);
-
 	
-
 	cartel = alertui;
 
-
-
 	alertuitext.innerHTML = msg;
-
-	alertuibutton.innerHTML = button;
-
+	alertuibutton.innerHTML = '<div>' + button + '</div>';
 	alertuibutton.onclick = fn;
 
-
-
-
-
 	$(document.body).append(cartel);
-
 	$(cartel).fadeIn(150);
-
 	$(alertuibutton).click(function(){
-
 		$(cartel).fadeOut(300, function(){
-
 			$(cartel).remove();
-
 		});
-
 	});
-
 };
 
 
 
 api.ui.alert2 = function(msg, fns){
-
 	//asumo a fn como un array de objetos, donde el objeto es un string 'button' y la fc 'action'
-
 	var alertui = document.createElement('div');
-
 	var alertuitext = document.createElement('div');
-
 	var alertuibackground = document.createElement('div');
-
 	//var alertuibutton = document.createElement('div');
-
 	alertuibackground.style.backgroundImage = 'url(' + uiAlertScreen.src + ')';
-
 	$(alertui).addClass('uiAlert' + gameSize);
-
 	$(alertuitext).addClass('uiAlertText' + gameSize);
-
 	$(alertuibackground).addClass('uiAlertImage' + gameSize);
-
 	//$(alertuibutton).addClass('uiAlertButton' + gameSize);
-
 	alertui.appendChild(alertuibackground);
-
 	//alertui.appendChild(alertuibutton);
-
 	alertuibackground.appendChild(alertuitext);
-
 	
-
 	alertuitext.innerHTML = msg;
-
 	/*$(alertuibutton)[0].innerText = button;
-
 	$(alertuibutton)[0].onclick = fn;*/
-
 
 	cartel = alertui;
 	for(var i = 0; i < fns.length; ++i){
-
 		var button = document.createElement('div');
-
 		$(button).addClass('uiAlertButton' + gameSize);
-
-		button.innerHTML = fns[i].button;
-
+		button.innerHTML = '<div>' + fns[i].button + '</div>';
 		button.onclick = fns[i].action;
-
 		$(button).click(function(){
-
 			$(cartel).fadeOut(300, function(){
-
 				$(cartel).remove();
-
 			});
-
 		});
-
 		button.style.top = (parseInt($(button).css('top')) + (i * parseInt($(button).css('height')))) + 'px';
-		//alert(button.style.top);
-
 		alertui.appendChild(button);
-
 	};
-
 	$(document.body).append(alertui);
-
 };
 
-
-
 api.ui.waitTimer = 0;
-
 api.ui.waitdiv = '';
 
 api.ui.showWaiting = function(){
-
 	if(api.ui.waitdiv == ''){
-
 		api.ui.waitdiv = document.createElement('div');
-
 		$(api.ui.waitdiv).addClass('uiAlert' + gameSize);
-
 		var cartel = document.createElement('div');
-
 		$(cartel).addClass('uiAlert' + gameSize);
-
 		cartel.style.backgroundImage = 'url(' + gameSize + '/waitscreen.png)';
-
 		api.ui.waitdiv.appendChild(cartel);
-
 		$(document.body).append(api.ui.waitdiv);
-
 	};
-
 	//api.ui.waitTimer = setTimeout('api.ui.waitdiv.style.display = "block"', 500);
-
 	api.ui.waitdiv.style.display = "block";
-
 };
 
-
-
 api.ui.hideWaiting = function(){
-
 	api.ui.waitdiv.style.display = 'none';
-
 	//clearTimeout(api.ui.waitTimer);
-
 };

@@ -169,7 +169,7 @@
 	height: 40px;
 	top: 287px;
 	padding-top: 11px;
-	padding-left: 5px;
+	/*padding-left: 5px;*/
 	left: 130px;
 	text-align: center;
 }
@@ -201,7 +201,7 @@
 .uiAlert320x480{
 	font-family: Bubblegum;
 	font-size: 1.1em;
-	color: #111111;
+	color: #644000;
 	position: fixed;
 	background-image: url(../backgrounddiv.png);
 	background-repeat: repeat;
@@ -225,13 +225,25 @@
 .uiAlertButton320x480{
 	position: fixed;
 	background-image: url(../320x480/alertbutton.png);
-	width: 201px;
+	width: 200px;
+	max-width: 201px;
 	height: 117px;
 	min-height: 117px;
 	top: 235px;
 	left: 90px;
-	padding-top: 45px;
-	padding-left: 27px;
+	/*padding-top: 50px;
+	padding-left: 27px;*/
+	text-align: center;
+	display: table-cell;
+	vertical-align: middle
+}
+
+.uiAlertButton320x480 > div {
+	position: absolute;
+	height: 50px;
+	width: 140px;
+	top: 40px;
+	left: 30px;
 }
 
 .uiAlertText320x480{
@@ -239,6 +251,7 @@
 	width: 244px;
 	height: 104px;
 	min-height: 263px;
+	text-align: center;
 	left: 42px;
 	top: 115px;
 }

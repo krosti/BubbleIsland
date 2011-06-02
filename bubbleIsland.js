@@ -1,4 +1,4 @@
-var VERSION = '0.9.035';
+var VERSION = '0.9.042';
 
 function rnd(top){ return Math.floor(Math.random()*(top + 1))};
 

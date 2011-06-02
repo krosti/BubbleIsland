@@ -35,8 +35,8 @@ function SubmitComplete(score, response)
 function retrieveLeaderboard(divFB, divGen){
 	LeaderBoard.divGen = document.getElementById(divGen);
 	LeaderBoard.divFB = document.getElementById(divFB);
-	Playtomic.Leaderboards.List("highscores", retrieveGeneralLeaderboard);
-	Playtomic.Leaderboards.ListFB("highscores", retrieveFacebookLeaderboard, { friendslist: api.facebook.friends });
+	Playtomic.Leaderboards.List("highscores", retrieveGeneralLeaderboard, { perpage: 5});
+	Playtomic.Leaderboards.ListFB("highscores", retrieveFacebookLeaderboard, { friendslist: api.facebook.friends, perpage: 5 });
 };
 
 function retrieveGeneralLeaderboard(scores, numscores, response){
@@ -80,7 +80,7 @@ function retrieveFacebookLeaderboard(scores, numscores, response){
             //alert(" - " + score.Name + " got " + score.Points + " on " + score.SDate);
             text += '<tr><td><img src="'+uiLeaderboardStar.src+'" alt="star">' + score.Name + '</td><td style="text-align: right">' +score.Points+ '</td></tr>';
             // including custom data?  score.CustomPlaytomic.Data.Property
-            if(i == 6) break;
+            if(i == 5) break;
         };
         text += '</table>';
         LeaderBoard.divFB.innerHTML = text;

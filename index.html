@@ -654,7 +654,7 @@ body.sgds .clear {
 	<div id="leaderboardBackMenu" onClick="options.exitLeaderboard()"></div>
 </nav>
 <nav id="optionMenu" style="position: absolute; top: 0px; left: 0px; width: 100%; min-height: 100%; display: none;" >
-	<div id="optionsMenuButton" onClick="options.exitOptions();"></div>
+	<div id="optionsMenuButton" onClick="$('#gameMenu')[0].style.display = 'block'; $('#optionMenu')[0].style.display = 'none';options.exitOptions();"></div>
 	<div id="optionsFacebook" onClick="inviteFriends();"></div>
 	<div id="optionsCoins" onClick="showCoins();"></div>
 	<div id="optionsLeaderboards" onClick="options.showLeaderboard('optionMenu'); retrieveLeaderboard('facebookLeaderboard', 'generalLeaderboard');"></div>

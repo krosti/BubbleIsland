@@ -1894,12 +1894,13 @@ function gameUI(w, h){
 	$(this.element).addClass('pointsFrame');
 	$(this.element2).addClass('lifesFrame');
 	$(this.element3).addClass('levelsFrame');
-	$(this.pauseElement).addClass('gobackFrame' + gameSize);
+	$(this.pauseElement).addClass('uiPauseButton' + gameSize);
 
 	animNav.append(this.element);
 	animNav.append(this.element2);
 	animNav.append(this.element3);
 	animNav.append(this.backElement);
+	animNav.append(this.pauseElement);
 	/*this.element.style.backgroundImage = 'url('+uiPointsFrame.src+')';
 	//alert(uiPointsFrame.width + ':' + uiPointsFrame.height)
 	this.element.style.width = uiPointsFrame.width + 'px';
@@ -1937,12 +1938,13 @@ function gameUI(w, h){
 	$(this.pauseElement).click(function(){
 		cartel = document.createElement('div');
 		var waitscreen = document.createElement('div');
-		$(cartel).addClass('uiAlert' + gameSize);
+		$(cartel).addClass('uiAlert' + gameSize);		
 		$(waitscreen).addClass('uiPauseScreen' + gameSize);
 		$(waitscreen).click(function(){
 			$(cartel).remove();
 			game.clock.start();
 		});
+		cartel.appendChild(waitscreen);
 		$(document.body).append(cartel);
 		game.clock.stop();
 	});
@@ -2003,6 +2005,8 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 	this.filestate = 'loading'; // posible state loading, ok, writing
 
 	this.size = size;
+
+	this.doSerialize = true;
 
 	switch(this.size){
 		case "320x480":
@@ -2217,7 +2221,8 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 		cartel.appendChild(tomenubutton);
 
 		//cartel.style.backgroundImage = 'url('+uiLooseFrame.src+')';
-		$(document.body).append(cartel);
+		//$(document.body).append(cartel);
+		animNav.append(cartel);
 		if(game.ui.lifes == 0){ // ask for more lifes!
 				api.ui.alert2("You haven't any lifes left, Do you want to spend a coin for 3 more lifes? It totally worth it!", [{'button': 'Oks, i want 3 more lifes',
 																																'action': function(){
@@ -2233,7 +2238,7 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 			$(cartel).fadeIn(150);
 			$(continuebutton).click(function(){
 				$(cartel).fadeOut(300, function(){
-					game.ui.lifes -= 1;
+					game.ui.lifes -= 1;					
 					if(game.ui.lifes == -1){
 						game.level = {};
 						game.level = '';
@@ -2246,6 +2251,7 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 						game.ui.points = game.ui.acumuledPoints;					 
 						game.ui.pointsCounter = game.ui.acumuledPoints;
 					};
+					game.doSerialize = true;
 					game.redoLevel();
 					$(cartel).remove();
 				});
@@ -2289,12 +2295,14 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 		$(tomenubutton).addClass('guiLooseMenu' + game.size);
 		cartel.appendChild(tomenubutton);
 		//cartel.style.backgroundImage = 'url('+uiLooseFrame.src+')';
-		$(document.body).append(cartel);
+		//$(document.body).append(cartel);
+		animNav.append(cartel);
 		SubmitScore();
 		$(cartel).fadeIn(150);
 		$(continuebutton).click(function(){
 			$(cartel).fadeOut(300, function(){
 				game.level.clearBoard();
+				game.doSerialize = true;
 				api.facebook.postMessage(api.facebook.user.name + " has got " + game.ui.points + " points in Bubble Paradise! Come with him and enjoy togheter in the paradise!");
 				game.ui.acumuledPoints = game.ui.points;
 				game.ui.pointsCounter = game.ui.points;
@@ -2309,10 +2317,13 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 	};
 
 	this.showMenu = function(){
-		api.levels.serializeLevel(game);
-		api.levels.putLevel(api.facebook.user.id);
+		if(this.doSerialize){
+			api.levels.serializeLevel(game);
+			api.levels.putLevel(api.facebook.user.id);
+			this.doSerialize = false;
+		};		
 		game.clock.stop();
-		this.menu.style.zIndex = 90//this.menu.style.zIndex + 2;
+		//this.menu.style.zIndex = 90//this.menu.style.zIndex + 2;
 		this.menu.style.display = 'block';
 	};
 
@@ -2807,10 +2818,6 @@ api.ui.alert2 = function(msg, fns){
 		alertui.appendChild(button);
 
 	};
-
-
-
-
 
 	$(document.body).append(alertui);
 

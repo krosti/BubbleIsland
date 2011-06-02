@@ -255,14 +255,14 @@
 	min-height: 39px;
 	top: 52px;
 	left: 140px;
-};
+}
 
 .uiPauseScreen320x480{
 	position: fixed;
 	background-image: url(../320x480/pausecartel.png);
 	width: 320px;
-	height: 263px;
-	min-height: 263px;
+	height: 480px;
+	min-height: 480px;
 	left: 0px;
 	top: 0px;
 }
@@ -285,7 +285,7 @@
 
 .leaderboardTab320x480{ 
 	position: absolute;
-	top: 245px;
+	top: 225px;
 	left: 67px;
 	width: 200px;
 	height: 97px;

@@ -1463,101 +1463,52 @@ function performanceStatus(updateTime, painter){
 
 
 function Options(menuNav, leaderNav){
-
 	this.sound = true;
-
 	this.menuNav = menuNav;
-
 	this.menuElement = $('#' + menuNav);
-
 	this.leaderElement = $('#' + leaderNav);
-
 	this.element;
-
 	this.toHide;
 
-	
-
 	this.showOptions = function(hideElement){
-
 		this.menuElement[0].style.display = 'block';
-
 		this.toHide = document.getElementById(hideElement);
-
 		this.toHide.style.display = 'none';
-
 	};
-
-	
 
 	this.exitOptions = function(){
-
 		this.menuElement[0].style.display = 'none';
-
 		this.toHide.style.display = 'block';
-
 	};
-
-
 
 	this.showLeaderboard = function(hideElement){
-
 		this.leaderElement[0].style.display = 'block';
-
 		this.toHide = document.getElementById(hideElement);
-
 		this.toHide.style.display = 'none';
-
 		this.menuElement[0].style.display = 'none';
-
 	};
-
-
 
 	this.exitLeaderboard = function(){
-
 		this.toHide.style.display = 'block';
-
 		//this.menuElement[0].style.display = 'block';
-
 		this.leaderElement[0].style.display = 'none';
-
 	};
-
-
 
 	this.showNav = function(navToShow, navToHide){
-
 		this.element = $('#'+navToShow);
-
 		this.toHide = $('#' + navToHide);
-
 		this.element[0].style.display = 'block';
-
 		this.toHide[0].style.display = 'none';
-
 	};
-
-
 
 	this.backToMenu = function(){
-
 		this.element[0].style.display = 'none';
-
 		this.toHide[0].style.display = 'block';
-
 	};
-
-
 
 	this.toggleSound = function(){
-
 		this.sound = !this.sound;
-
 	};
-
 	
-
 	this.setSound = function(v){ this.sound = v; };
-
 };

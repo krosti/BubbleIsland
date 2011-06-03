@@ -1,4 +1,4 @@
-var VERSION = '0.9.052';
+var VERSION = '0.9.057';
 
 function rnd(top){ return Math.floor(Math.random()*(top + 1))};
 
@@ -574,48 +574,56 @@ function bubble(l){
 
 		if((this.x == this.lvl.leftBound) || (this.x >= this.lvl.width)) this.dx = -this.dx;
 
-		if(this.y <= (this.lvl.topBound + this.lvl.currentTop)){
+		if(this.y < (this.lvl.topBound + this.lvl.currentTop)){
 			this.lvl.mutex = true;
 			game.clock.stop();
 			var inPlace = false;
-			var currentBubble;
+			//var currentBubble;
 			/*var delta = this.lvl.grilla.isShortRow(0) * (this.lvl.bubbleRadius / 2);
 			delta = delta / 2;*/
-			do{					
-				this.j = Math.floor((this.x - this.lvl.leftBound) / this.lvl.bubbleRadius);
-				this.i = 0;
-				inPlace = ( this.lvl.grilla.Table[this.i][this.j] == 'vacio');
+			//do{					
+			this.j = Math.floor((this.x - this.lvl.leftBound) / this.lvl.bubbleRadius);
+			this.i = 0;
+			inPlace = ( this.lvl.grilla.Table[this.i][this.j] == 'vacio');
 				
-				this.x -= (this.dx / 4);
+				/*this.x -= (this.dx / 4);
 				this.y -= (this.dy / 4);
 				if((this.x <= this.lvl.leftBound) || (this.x >= this.lvl.width)) this.dx = -this.dx;
-			}while(!inPlace);
-			this.stopMove();
-			this.recalcXY();
-			this.y += this.lvl.currentTop;
-			this.dy = this.lvl.bubbleVelocity;			
-			this.lvl.addBubble(this);
-			this.lvl.grilla.Table[this.i][this.j] = this;
-			var c = this.lvl.grilla.checkForCompatibility(this, this);
-			//debug('    c   :' + c + '   ');
-			this.lvl.mutex = true;
-			if(c >= 3){				
-				//alert(c);
-				var mult = bubble.pointsMultiplier;
-				this.lvl.pointsMultiplier =  c * c * pointExplode * mult;
-				//alert(this.lvl.pointsMultiplier);
-				this.lvl.grilla.exploded = c;
-				this.lvl.grilla.explodeMarked();			
-				this.lvl.addPoints();
-				this.lvl.pointsMultiplier = pointDrop * mult;
-				this.lvl.grilla.checkForOrphans();
-			}else{				
-				this.lvl.grilla.clearMarks();
-			};
-			this.lvl.grilla.touchedBubbles = null;
-			this.lvl.grilla.touchedBubbles = new Array();
+				}while(!inPlace);*/			
+			if(!inPlace){
+				var me = this;
+				this.lvl.shootedBubble = null;
+				//this.lvl.setReadyShoot();
+				this.lvl.grilla.addBubble(me, [{bubble: this.lvl.grilla.Table[this.i][this.j], dis: 0}]);
+			}else{
+				this.stopMove();
+				this.recalcXY();
+				this.y += this.lvl.currentTop;
+				this.dy = this.lvl.bubbleVelocity;			
+				this.lvl.addBubble(this);
+				this.lvl.grilla.Table[this.i][this.j] = this;
+				var c = this.lvl.grilla.checkForCompatibility(this, this);
+				//debug('    c   :' + c + '   ');
+				this.lvl.mutex = true;
+				if(c >= 3){				
+					//alert(c);
+					var mult = this.pointsMultiplier;
+					this.lvl.pointsMultiplier =  c * c * pointExplode * mult;
+					//alert(this.lvl.pointsMultiplier);
+					this.lvl.grilla.exploded = c;
+					this.lvl.grilla.explodeMarked();			
+					this.lvl.addPoints();
+					this.lvl.pointsMultiplier = pointDrop * mult;
+					this.lvl.grilla.checkForOrphans();
+				}else{				
+					this.lvl.grilla.clearMarks();
+				};
+				this.lvl.grilla.touchedBubbles = null;
+				this.lvl.grilla.touchedBubbles = new Array();
 
-			this.lvl.shootedBubble = null;
+				this.lvl.shootedBubble = null;
+				
+			};
 			this.lvl.setReadyShoot();
 			game.clock.start();
 			this.lvl.mutex = false;
@@ -861,6 +869,7 @@ function bubbleTable(ancho, alto, lvl){
 	
 	this.addBubble = function(bubble, collided){
 		//debug(dx +':'+ dy + '; &nbsp;');
+		console.log('addBubble');
 		var radius = this.lvl.bubbleRadius / 2;
 		var halfradius = this.lvl.bubbleRadius / 3;
 		/*var tableBubble = 'vacio';
@@ -924,8 +933,8 @@ function bubbleTable(ancho, alto, lvl){
 				//alert(dx + ':' + dy);
 				bubble.i = currentBubble.i + dy;
 				bubble.j = currentBubble.j + dx;
-				inPlace = ( this.Table[bubble.i][bubble.j] == 'vacio');
-				i++;
+				inPlace = (this.retrieveBubble(bubble.i, bubble.j) == 'vacio');
+				i += 1;
 			}while(!inPlace && (i != collided.length));
 			bubble.x -= (bubble.dx / 4);
 			bubble.y -= (bubble.dy / 4);
@@ -1789,12 +1798,12 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 			case "360x480":
 				this.canvas.width = 360;
 				this.canvas.height = 480;
-				this.level = new bubbleLevel(360, 480, 10, 20, levelnumber);
+				this.level = new bubbleLevel(250, 380, 10, 20, levelnumber);
 				break;
 			case "640x960":
 				this.canvas.width = 640;
 				this.canvas.height = 960;
-				this.level = new bubbleLevel(640, 960, 13, 30, levelnumber);
+				this.level = new bubbleLevel(475, 740, 13, 30, levelnumber);
 				break;
 			case "480x800":
 				this.canvas.width = 480;

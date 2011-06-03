@@ -1,4 +1,4 @@
-LeaderBoard = {
+var LeaderBoard = {
 	divGen: '',
 	divFB: ''
 };

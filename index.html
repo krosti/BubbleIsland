@@ -712,7 +712,7 @@ body.sgds .clear {
 	softgame.startConnection();*/
 function $_GET(q) { 
     var s = window.location + ''; 
-    var q = q + '=';
+    q = q + '=';
     if(s.indexOf(q) != -1){ //existe token			
 		return decodeURI(s.slice(s.indexOf(q) + q.length, s.indexOf("&")));
 	}else{
@@ -768,7 +768,7 @@ $(window).load(function () {
 	
 });
 
-gameSize = "320x480";
+var gameSize = "320x480";
 //gameSize = "480x800";
 /*if(screen.width >= 854) gameSize = "854x480";
 if(screen.width <= 640) gameSize = "640x960";
@@ -776,8 +776,8 @@ if(screen.width <= 480) gameSize = "480x800";
 if(screen.width <= 360) gameSize = "360x480";
 if(screen.width <= 320) gameSize = "320x480";*/
 
-loader = new Loader('progress', gameSize);
-options = new Options('optionMenu', 'leaderboardMenu');
+var loader = new Loader('progress', gameSize);
+var options = new Options('optionMenu', 'leaderboardMenu');
 //$('#leaderboardTabs ul').idTabs();
 $('#backgroundNav')[0].style.width = gameSize.slice(0,3) + 'px';
 $('#backgroundNav')[0].style.height = gameSize.slice(4) + 'px';

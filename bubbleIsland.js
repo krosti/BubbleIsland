@@ -1,8 +1,12 @@
-var VERSION = '0.9.065';
+var VERSION = '0.9.072';
 
 function rnd(top){ return Math.floor(Math.random()*(top + 1))};
 
-touchMove = function(event) {
+/*touchMove = function(event) {
+	// Prevent scrolling on this element
+	event.preventDefault();
+}*/
+function touchMove(event) {
 	// Prevent scrolling on this element
 	event.preventDefault();
 }
@@ -31,97 +35,97 @@ function debug(txt){
 	$(console).html("" + $(console).text() + txt + "<br>");
 };
 
-bubbleBlueImage = new Image();
-bubbleRedImage = new Image();
-bubbleGreenImage = new Image();
-bubblePurpleImage = new Image();
-bubbleYellowImage = new Image();
+var bubbleBlueImage = new Image();
+var bubbleRedImage = new Image();
+var bubbleGreenImage = new Image();
+var bubblePurpleImage = new Image();
+var bubbleYellowImage = new Image();
 
-bubbleBlueBombImage = new Image();
-bubbleRedBombImage = new Image();
-bubbleGreenBombImage = new Image();
-bubblePurpleBombImage = new Image();
-bubbleYellowBombImage = new Image();
+var bubbleBlueBombImage = new Image();
+var bubbleRedBombImage = new Image();
+var bubbleGreenBombImage = new Image();
+var bubblePurpleBombImage = new Image();
+var bubbleYellowBombImage = new Image();
 
-bubbleBlueHalfImage = new Image();
-bubbleRedHalfImage = new Image();
-bubbleGreenHalfImage = new Image();
-bubblePurpleHalfImage = new Image();
-bubbleYellowHalfImage = new Image();
+var bubbleBlueHalfImage = new Image();
+var bubbleRedHalfImage = new Image();
+var bubbleGreenHalfImage = new Image();
+var bubblePurpleHalfImage = new Image();
+var bubbleYellowHalfImage = new Image();
 
-bubbleBlueFreezeImage = new Image();
-bubbleRedFreezeImage = new Image();
-bubbleGreenFreezeImage = new Image();
-bubblePurpleFreezeImage = new Image();
-bubbleYellowFreezeImage = new Image();
+var bubbleBlueFreezeImage = new Image();
+var bubbleRedFreezeImage = new Image();
+var bubbleGreenFreezeImage = new Image();
+var bubblePurpleFreezeImage = new Image();
+var bubbleYellowFreezeImage = new Image();
 
-bubbleBlueImageX2 = new Image();
-bubbleRedImageX2 = new Image();
-bubbleGreenImageX2 = new Image();
-bubblePurpleImageX2 = new Image();
-bubbleYellowImageX2 = new Image();
+var bubbleBlueImageX2 = new Image();
+var bubbleRedImageX2 = new Image();
+var bubbleGreenImageX2 = new Image();
+var bubblePurpleImageX2 = new Image();
+var bubbleYellowImageX2 = new Image();
 
-bubbleBlueImageX3 = new Image();
-bubbleRedImageX3 = new Image();
-bubbleGreenImageX3 = new Image();
-bubblePurpleImageX3 = new Image();
-bubbleYellowImageX3 = new Image();
+var bubbleBlueImageX3 = new Image();
+var bubbleRedImageX3 = new Image();
+var bubbleGreenImageX3 = new Image();
+var bubblePurpleImageX3 = new Image();
+var bubbleYellowImageX3 = new Image();
 
-bubbleExplode = new Image();
-bubbleEstela = new Image();
-bubbleBombExplode = new Image();
-bubbleFreezeExplode = new Image();
-bubbleMultiColorExplode = new Image();
-bubbleX2Explode = new Image();
-bubbleX3Explode = new Image();
+var bubbleExplode = new Image();
+var bubbleEstela = new Image();
+var bubbleBombExplode = new Image();
+var bubbleFreezeExplode = new Image();
+var bubbleMultiColorExplode = new Image();
+var bubbleX2Explode = new Image();
+var bubbleX3Explode = new Image();
 
-lvlFrame = new Image();
-backgroundImage = new Image();
-initImage = new Image();
-logoImage = new Image();
+var lvlFrame = new Image();
+var backgroundImage = new Image();
+var initImage = new Image();
+var logoImage = new Image();
 //pandaBearAnim = new Image();
 
-uiPandaStandBy = new Image();
-uiPandaLoading = new Image();
-uiPandaBlinking = new Image();
-uiPanda = new Image();
-uiLevelFrame = new Image();
-uiLifeFrame = new Image();
-uiPointsFrame = new Image();
-uiLooseFrame = new Image();
-uiWinFrame = new Image();
-uiFinishContinue = new Image();
-uiFinishMenu = new Image();
-uiCannon = new Image();
-uiCannonShoot = new Image();
-uiOptionButton = new Image();
-uiNewButton = new Image();
-uiContinueButton = new Image();
-uiBackButton = new Image();
-uiLoadingScreen = new Image();
+var uiPandaStandBy = new Image();
+var uiPandaLoading = new Image();
+var uiPandaBlinking = new Image();
+var uiPanda = new Image();
+var uiLevelFrame = new Image();
+var uiLifeFrame = new Image();
+var uiPointsFrame = new Image();
+var uiLooseFrame = new Image();
+var uiWinFrame = new Image();
+var uiFinishContinue = new Image();
+var uiFinishMenu = new Image();
+var uiCannon = new Image();
+var uiCannonShoot = new Image();
+var uiOptionButton = new Image();
+var uiNewButton = new Image();
+var uiContinueButton = new Image();
+var uiBackButton = new Image();
+var uiLoadingScreen = new Image();
 
-uiLeaderboardScreen = new Image();
-uiLeaderboardMenu = new Image();
-uiLeaderboardHighscore = new Image();
-uiLeaderboardFriends = new Image();
-uiLeaderboardStar = new Image();
+var uiLeaderboardScreen = new Image();
+var uiLeaderboardMenu = new Image();
+var uiLeaderboardHighscore = new Image();
+var uiLeaderboardFriends = new Image();
+var uiLeaderboardStar = new Image();
 
-uiOptionsBackground = new Image();
-uiOptionsMenu = new Image();
-uiOptionsVolumenOn = new Image();
-uiOptionsVolumenOff = new Image();
-uiOptionsFacebook = new Image();
-uiOptionsLeaderboard = new Image();
-uiOptionsCoins = new Image();
+var uiOptionsBackground = new Image();
+var uiOptionsMenu = new Image();
+var uiOptionsVolumenOn = new Image();
+var uiOptionsVolumenOff = new Image();
+var uiOptionsFacebook = new Image();
+var uiOptionsLeaderboard = new Image();
+var uiOptionsCoins = new Image();
 
-uiAlertScreen = new Image();
-uiAlertButton = new Image();
+var uiAlertScreen = new Image();
+var uiAlertButton = new Image();
 
-uiPauseButton = new Image();
-uiPauseCartel = new Image();
+var uiPauseButton = new Image();
+var uiPauseCartel = new Image();
 
-facebookScreen = new Image();
-facebookButton = new Image();
+var facebookScreen = new Image();
+var facebookButton = new Image();
 
 var game;
 var cartel;
@@ -141,8 +145,8 @@ var currentState = {
 
 //var datafile;
 
-APPID = '213255638692367';
-APPKEY = '230bd48e2d38a991fe41e284887db3d8';
+/*APPID = '213255638692367';
+APPKEY = '230bd48e2d38a991fe41e284887db3d8';*/
 
 
 function bubble(l){
@@ -573,25 +577,30 @@ function bubble(l){
 		this.element.style.left = this.x + 'px';
 
 		if((this.x == this.lvl.leftBound) || (this.x >= this.lvl.width)) this.dx = -this.dx;
-
+		//if((currentBubble.dx == 0) || (currentBubble.dy == this.lvl.bubbleVelocity)) alert('es un hijo de puta a fuera: ' + culo);
 		if(this.y < (this.lvl.topBound + this.lvl.currentTop)){
+			var currentBubble = this;
+			/*if((currentBubble.dx == 0) || (currentBubble.dy == this.lvl.bubbleVelocity)) alert('es un hijo de puta antes de arrancar1: ' + culo);
 			this.lvl.mutex = true;
 			game.clock.stop();
 			var inPlace = false;
-			var currentBubble = this;
+			
 			this.lvl.shootedBubble = null;
 			this.lvl.cannon.currentBubble = null
-			/*var delta = this.lvl.grilla.isShortRow(0) * (this.lvl.bubbleRadius / 2);
-			delta = delta / 2;*/
+			if((currentBubble.dx == 0) || (currentBubble.dy == this.lvl.bubbleVelocity)) alert('es un hijo de puta antes de arrancar2: ' + culo);
+			var delta = this.lvl.grilla.isShortRow(0) * (this.lvl.bubbleRadius / 2);
+			delta = delta / 2;
 			var culo = 0;
 			do{					
-				currentBubble.j = Math.floor(((currentBubble.x + ( currentBubble.lvl.bubbleRadius / 2)) - currentBubble.lvl.leftBound) / currentBubble.lvl.bubbleRadius);
+				//currentBubble.j = Math.floor(((currentBubble.x + ( currentBubble.lvl.bubbleRadius / 2)) - currentBubble.lvl.leftBound) / currentBubble.lvl.bubbleRadius);
+
+				currentBubble.j = Math.floor((((currentBubble.x + delta) - currentBubble.lvl.leftBound) + ( currentBubble.lvl.bubbleRadius / 2)) / currentBubble.lvl.bubbleRadius);
 				currentBubble.i = 0;
 				inPlace = (currentBubble.lvl.grilla.Table[currentBubble.i][currentBubble.j] == 'vacio');
 				currentBubble.x -= (currentBubble.dx / 4);
 				currentBubble.y -= (currentBubble.dy / 4);
 				if((currentBubble.x <= currentBubble.lvl.leftBound) || (currentBubble.x >= currentBubble.lvl.width)) currentBubble.dx = -currentBubble.dx;
-				if((currentBubble.x == 0) || (currentBubble.y == this.lvl.bubbleVelocity)) alert('es un hijo de puta: ' + culo);
+				if((currentBubble.dx == 0) || (currentBubble.dy == this.lvl.bubbleVelocity)) alert('es un hijo de puta: ' + culo);
 				culo++;
 			}while(!inPlace);		
 			//alert('stop');
@@ -618,48 +627,62 @@ function bubble(l){
 				this.lvl.grilla.clearMarks();
 			};
 			this.lvl.grilla.touchedBubbles = null;
-			this.lvl.grilla.touchedBubbles = new Array();
+			this.lvl.grilla.touchedBubbles = new Array();*/
 
+			/*this.lvl.mutex = true;
+			game.clock.stop();
+			var inPlace = false;
 			
+			this.lvl.shootedBubble = null;
+			this.lvl.cannon.currentBubble = null
+			var delta = this.lvl.grilla.isShortRow(0) * (this.lvl.bubbleRadius / 2);
+			delta = delta / 2;
+			currentBubble.j = Math.floor((((currentBubble.x + delta) - currentBubble.lvl.leftBound) + ( currentBubble.lvl.bubbleRadius / 2)) / currentBubble.lvl.bubbleRadius);
+			currentBubble.i = 0;
+			inPlace = (currentBubble.lvl.grilla.Table[currentBubble.i][currentBubble.j] == 'vacio');
 
-			/*if(!inPlace){
-				var me = this;
-				this.lvl.shootedBubble = null;
+			if(!inPlace){
+				//var me = this;
+				//this.lvl.shootedBubble = null;
 				//this.lvl.setReadyShoot();
-				this.lvl.grilla.addBubble(me, [{bubble: this.lvl.grilla.Table[this.i][this.j], dis: 0}]);
-				me.dy = me.lvl.bubbleVelocity;
+				this.lvl.grilla.addBubble(currentBubble, [{bubble: this.lvl.grilla.Table[this.i][this.j], dis: 0}]);
+				currentBubble.stopMove();
+				currentBubble.dy = currentBubble.lvl.bubbleVelocity;
+				this.lvl.addBubble(currentBubble);
 			}else{
 				this.stopMove();
 				this.recalcXY();
 				this.y += this.lvl.currentTop;
 				this.dy = this.lvl.bubbleVelocity;			
 				this.lvl.addBubble(this);
-				this.lvl.grilla.Table[this.i][this.j] = this;
-				var c = this.lvl.grilla.checkForCompatibility(this, this);
-				//debug('    c   :' + c + '   ');
-				this.lvl.mutex = true;
-				if(c >= 3){				
-					//alert(c);
-					var mult = this.pointsMultiplier;
-					this.lvl.pointsMultiplier =  c * c * pointExplode * mult;
-					//alert(this.lvl.pointsMultiplier);
-					this.lvl.grilla.exploded = c;
-					this.lvl.grilla.explodeMarked();			
-					this.lvl.addPoints();
-					this.lvl.pointsMultiplier = pointDrop * mult;
-					this.lvl.grilla.checkForOrphans();
-				}else{				
-					this.lvl.grilla.clearMarks();
-				};
-				this.lvl.grilla.touchedBubbles = null;
-				this.lvl.grilla.touchedBubbles = new Array();
+				this.lvl.grilla.Table[this.i][this.j] = this;				
+			};
 
-				this.lvl.shootedBubble = null;
-				
-			};*/
+			var c = this.lvl.grilla.checkForCompatibility(this, this);
+			//debug('    c   :' + c + '   ');
+			this.lvl.mutex = true;
+			if(c >= 3){				
+				//alert(c);
+				var mult = this.pointsMultiplier;
+				this.lvl.pointsMultiplier =  c * c * pointExplode * mult;
+				//alert(this.lvl.pointsMultiplier);
+				this.lvl.grilla.exploded = c;
+				this.lvl.grilla.explodeMarked();			
+				this.lvl.addPoints();
+				this.lvl.pointsMultiplier = pointDrop * mult;
+				this.lvl.grilla.checkForOrphans();
+			}else{				
+				this.lvl.grilla.clearMarks();
+			};
+			this.lvl.grilla.touchedBubbles = null;
+			this.lvl.grilla.touchedBubbles = new Array();
+
+			this.lvl.shootedBubble = null;
+
 			this.lvl.setReadyShoot();
+
 			game.clock.start();
-			this.lvl.mutex = false;
+			this.lvl.mutex = false;*/
 		}; 
 	};
 	
@@ -667,18 +690,120 @@ function bubble(l){
 		if((this.dx == 0) && (this.dy == 0)) return;
 		this.x += this.dx;
 		this.y += this.dy;
-		if(this.x <= this.lvl.leftBound) this.x = this.lvl.leftBound;
-		if(this.x > this.lvl.width) this.x = this.lvl.width;
-		/*$(this.element).animate({
-			top: this.y + 'px',
-			left: this.x + 'px'
-		}, 10)*/
-		var ddx = this.dx;
-		var ddy = this.dy;
-		var s = this.element.style;
 
-		if((this.x == this.lvl.leftBound) || (this.x == this.lvl.width)) this.dx = -this.dx;
-		if(this.y <= this.lvl.topBound) this.stopMove();
+		if(this.x <= this.lvl.leftBound) this.x = this.lvl.leftBound;
+		//if(this.x > this.lvl.width) this.x = this.lvl.width;
+		this.element.style.top = this.y + 'px';
+		this.element.style.left = this.x + 'px';
+
+		if((this.x == this.lvl.leftBound) || (this.x >= this.lvl.width)) this.dx = -this.dx;
+		//if((currentBubble.dx == 0) || (currentBubble.dy == this.lvl.bubbleVelocity)) alert('es un hijo de puta a fuera: ' + culo);
+		if(this.y < (this.lvl.topBound + this.lvl.currentTop)){
+			var currentBubble = this;
+			/*if((currentBubble.dx == 0) || (currentBubble.dy == this.lvl.bubbleVelocity)) alert('es un hijo de puta antes de arrancar1: ' + culo);
+			this.lvl.mutex = true;
+			game.clock.stop();
+			var inPlace = false;
+			
+			this.lvl.shootedBubble = null;
+			this.lvl.cannon.currentBubble = null
+			if((currentBubble.dx == 0) || (currentBubble.dy == this.lvl.bubbleVelocity)) alert('es un hijo de puta antes de arrancar2: ' + culo);
+			var delta = this.lvl.grilla.isShortRow(0) * (this.lvl.bubbleRadius / 2);
+			delta = delta / 2;
+			var culo = 0;
+			do{					
+				//currentBubble.j = Math.floor(((currentBubble.x + ( currentBubble.lvl.bubbleRadius / 2)) - currentBubble.lvl.leftBound) / currentBubble.lvl.bubbleRadius);
+
+				currentBubble.j = Math.floor((((currentBubble.x + delta) - currentBubble.lvl.leftBound) + ( currentBubble.lvl.bubbleRadius / 2)) / currentBubble.lvl.bubbleRadius);
+				currentBubble.i = 0;
+				inPlace = (currentBubble.lvl.grilla.Table[currentBubble.i][currentBubble.j] == 'vacio');
+				currentBubble.x -= (currentBubble.dx / 4);
+				currentBubble.y -= (currentBubble.dy / 4);
+				if((currentBubble.x <= currentBubble.lvl.leftBound) || (currentBubble.x >= currentBubble.lvl.width)) currentBubble.dx = -currentBubble.dx;
+				if((currentBubble.dx == 0) || (currentBubble.dy == this.lvl.bubbleVelocity)) alert('es un hijo de puta: ' + culo);
+				culo++;
+			}while(!inPlace);		
+			//alert('stop');
+			this.stopMove();
+			this.recalcXY();
+			this.y += this.lvl.currentTop;
+			this.dy = this.lvl.bubbleVelocity;			
+			this.lvl.addBubble(this);
+			this.lvl.grilla.Table[this.i][this.j] = this;
+			var c = this.lvl.grilla.checkForCompatibility(this, this);
+			//debug('    c   :' + c + '   ');
+			//this.lvl.mutex = true;
+			if(c >= 3){				
+				//alert(c);
+				var mult = this.pointsMultiplier;
+				this.lvl.pointsMultiplier =  c * c * pointExplode * mult;
+				//alert(this.lvl.pointsMultiplier);
+				this.lvl.grilla.exploded = c;
+				this.lvl.grilla.explodeMarked();			
+				this.lvl.addPoints();
+				this.lvl.pointsMultiplier = pointDrop * mult;
+				this.lvl.grilla.checkForOrphans();
+			}else{				
+				this.lvl.grilla.clearMarks();
+			};
+			this.lvl.grilla.touchedBubbles = null;
+			this.lvl.grilla.touchedBubbles = new Array();*/
+
+			/*this.lvl.mutex = true;
+			game.clock.stop();
+			var inPlace = false;
+			
+			this.lvl.shootedBubble = null;
+			this.lvl.cannon.currentBubble = null
+			var delta = this.lvl.grilla.isShortRow(0) * (this.lvl.bubbleRadius / 2);
+			delta = delta / 2;
+			currentBubble.j = Math.floor((((currentBubble.x + delta) - currentBubble.lvl.leftBound) + ( currentBubble.lvl.bubbleRadius / 2)) / currentBubble.lvl.bubbleRadius);
+			currentBubble.i = 0;
+			inPlace = (currentBubble.lvl.grilla.Table[currentBubble.i][currentBubble.j] == 'vacio');
+
+			if(!inPlace){
+				//var me = this;
+				//this.lvl.shootedBubble = null;
+				//this.lvl.setReadyShoot();
+				this.lvl.grilla.addBubble(currentBubble, [{bubble: this.lvl.grilla.Table[this.i][this.j], dis: 0}]);
+				currentBubble.stopMove();
+				currentBubble.dy = currentBubble.lvl.bubbleVelocity;
+				this.lvl.addBubble(currentBubble);
+			}else{
+				this.stopMove();
+				this.recalcXY();
+				this.y += this.lvl.currentTop;
+				this.dy = this.lvl.bubbleVelocity;			
+				this.lvl.addBubble(this);
+				this.lvl.grilla.Table[this.i][this.j] = this;				
+			};
+
+			var c = this.lvl.grilla.checkForCompatibility(this, this);
+			//debug('    c   :' + c + '   ');
+			this.lvl.mutex = true;
+			if(c >= 3){				
+				//alert(c);
+				var mult = this.pointsMultiplier;
+				this.lvl.pointsMultiplier =  c * c * pointExplode * mult;
+				//alert(this.lvl.pointsMultiplier);
+				this.lvl.grilla.exploded = c;
+				this.lvl.grilla.explodeMarked();			
+				this.lvl.addPoints();
+				this.lvl.pointsMultiplier = pointDrop * mult;
+				this.lvl.grilla.checkForOrphans();
+			}else{				
+				this.lvl.grilla.clearMarks();
+			};
+			this.lvl.grilla.touchedBubbles = null;
+			this.lvl.grilla.touchedBubbles = new Array();
+
+			this.lvl.shootedBubble = null;
+
+			this.lvl.setReadyShoot();
+
+			game.clock.start();
+			this.lvl.mutex = false;*/
+		}; 
 	};
 
 	this.draw = function(painter){
@@ -1224,7 +1349,8 @@ function bubbleLevel(w, h, bubblesWidth, bubblesHeight, lvlnbr){
 		//si esta ocupado, evitar movimiento (normalmente no se mueve, solo evita check de mas)
 		if(game.level.mutex) return;
 		if(this.shootedBubble != null){
-			this.shootedBubble.move();
+			//this.shootedBubble.moveShooted();
+			this.shootedBubble.move();//Shooted();
 			this.checkColisions();
 		};
 		for(var i = 0; i < this.animations.length; ++i){
@@ -1321,6 +1447,68 @@ function bubbleLevel(w, h, bubblesWidth, bubblesHeight, lvlnbr){
 			this.shootedBubble = null;
 			game.level.mutex = false;
 			game.clock.start();	
+		};
+		//chequea si no se paso
+		if(this.shootedBubble != null){
+			if(this.shootedBubble.y < (this.topBound + this.currentTop)){
+				game.level.mutex = true;					
+				game.clock.stop();
+				this.addBubble(this.shootedBubble);	
+
+				var currentBubble = this.shootedBubble;
+				if((currentBubble.dx == 0) || (currentBubble.dy == this.bubbleVelocity)) alert('es un hijo de puta antes de arrancar2: ' + culo);
+				var delta = this.grilla.isShortRow(0) * (this.bubbleRadius / 2);
+				delta = delta / 2;
+				//var culo = 0;
+				do{					
+					//currentBubble.j = Math.floor(((currentBubble.x + ( currentBubble.lvl.bubbleRadius / 2)) - currentBubble.lvl.leftBound) / currentBubble.lvl.bubbleRadius);
+					currentBubble.j = Math.floor((((currentBubble.x + delta) - currentBubble.lvl.leftBound) + ( currentBubble.lvl.bubbleRadius / 2)) / currentBubble.lvl.bubbleRadius);
+					currentBubble.i = 0;
+					//if(this.grilla.isShortRow(0) && (currentBubble.j == 8)) currentBubble;
+					if(currentBubble.lvl.grilla.Table[currentBubble.i][currentBubble.j] == 'nada') currentBubble.j = currentBubble.j - 1;
+					inPlace = (currentBubble.lvl.grilla.Table[currentBubble.i][currentBubble.j] == 'vacio');
+					currentBubble.x -= (currentBubble.dx / 4);
+					currentBubble.y -= (currentBubble.dy / 4);
+					if((currentBubble.x <= currentBubble.lvl.leftBound) || (currentBubble.x >= currentBubble.lvl.width)) currentBubble.dx = -currentBubble.dx;
+					if((currentBubble.dx == 0) || (currentBubble.dy == this.bubbleVelocity)) alert('es un hijo de puta: ' + culo);
+					//culo++;
+				}while(!inPlace);	
+
+				this.shootedBubble.stopMove();
+				this.shootedBubble.recalcXY();
+				this.shootedBubble.y += this.currentTop;
+				this.shootedBubble.dy = this.bubbleVelocity;
+				this.shootedBubble = null;
+
+
+				this.grilla.Table[currentBubble.i][currentBubble.j] = currentBubble;
+				//currentBubble.recalcXYfrom(currentBubble);
+				/*bubble.recalcXY();
+				bubble.y = bubble.y + bubble.lvl.currentTop;
+				bubble.element.top = bubble.y + 'px';*/
+
+				var c = this.grilla.checkForCompatibility(currentBubble, currentBubble);
+				//debug('    c   :' + c + '   ');
+				if(c >= 3){				
+					//alert(c);
+					var mult = currentBubble.pointsMultiplier;
+					this.pointsMultiplier =  c * c * pointExplode * mult;
+					//alert(this.lvl.pointsMultiplier);
+					this.grilla.exploded = c;
+					this.grilla.explodeMarked();			
+					this.addPoints();
+					this.pointsMultiplier = pointDrop * mult;
+					this.grilla.checkForOrphans();
+				}else{				
+					this.grilla.clearMarks();
+				};
+				this.grilla.touchedBubbles = null;
+				this.grilla.touchedBubbles = new Array();
+				this.setReadyShoot();
+
+				game.clock.start();	
+				game.level.mutex = false;
+			};
 		};
 
 		if(this.points >= this.pointsToReach){
@@ -2287,9 +2475,9 @@ api.ui.alert2 = function(msg, fns){
 	$(alertuibutton)[0].onclick = fn;*/
 
 	cartel = alertui;
-	var button;
+	//var button;
 	for(var i = 0; i < fns.length; ++i){
-		button = document.createElement('div');
+		var button = document.createElement('div');
 		$(button).addClass('uiAlertButton' + gameSize);
 		button.innerHTML = '<div>' + fns[i].button + '</div>';
 		button.onclick = fns[i].action;
@@ -2301,7 +2489,7 @@ api.ui.alert2 = function(msg, fns){
 		button.style.top = (parseInt($(button).css('top')) + (i * parseInt($(button).css('height')))) + 'px';
 		alertui.appendChild(button);
 	};
-	$(document.body).append(alertui);
+	$(document.body).append(cartel);
 };
 
 api.ui.waitTimer = 0;

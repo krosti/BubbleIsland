@@ -119,6 +119,7 @@ function Loader(progress, size){
 	
 
 	this.toLoad = 74;
+	//this.toLoad = 80;
 
 	this.isloaded = 0;
 
@@ -1021,7 +1022,8 @@ standAnimation.prototype.render = function() {
 
 
 
-flashAnimation = function(image, width, height, totalFrames){
+//flashAnimation = function(image, width, height, totalFrames){
+function flashAnimation(image, width, height, totalFrames){
 
 	this.width = width;
 

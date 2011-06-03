@@ -2508,6 +2508,7 @@ api.ui.showWaiting = function(){
 	if(api.ui.waitdiv == ''){
 		api.ui.waitdiv = document.createElement('div');
 		$(api.ui.waitdiv).addClass('uiAlert' + gameSize);
+		api.ui.waitdiv.style.backgroundRepeat = 'no-repeat';
 		var cartel = document.createElement('div');
 		$(cartel).addClass('uiAlert' + gameSize);
 		cartel.style.backgroundImage = 'url(' + gameSize + '/waitscreen.png)';

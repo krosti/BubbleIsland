@@ -250,6 +250,31 @@
 	width: 470px;
 }
 
+.uiHighscoreImage640x960{
+	background-image: url("../640x960/highscorescreen.png");
+	height: 530px;
+	left: 0;
+	min-height: 263px;
+	position: fixed;
+	top: 0;
+	width: 640px;
+}
+
+.uiHighscoreButton640x960{
+	background-image: url("../640x960/highscorebutton.png");
+	display: table-cell;
+	height: 233px;
+	left: 90px;
+	max-width: 383px;
+	min-height: 117px;
+	padding-top: 105px;
+	position: fixed;
+	text-align: center;
+	top: 530px;
+	vertical-align: middle;
+	width: 383px;
+}
+
 .initScreen640x960{
 	background-image: url(../640x960/loadingscreen.png);
 }

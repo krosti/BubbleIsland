@@ -121,6 +121,9 @@ var uiOptionsCoins = new Image();
 var uiAlertScreen = new Image();
 var uiAlertButton = new Image();
 
+var uiHighscoreScreen = new Image();
+var uiHighscoreButton = new Image();
+
 var uiPauseButton = new Image();
 var uiPauseCartel = new Image();
 
@@ -2183,6 +2186,8 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 		$(tomenubutton).click(function(){
 			game.showMenu();	
 		});
+
+		if(LeaderBoard.highscore < game.ui.points) api.ui.showHighScore();
 	};
 
 	this.showMenu = function(){
@@ -2285,6 +2290,8 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 	//$('#'+navObj).click(this.mouseClick);
 	//animNav.tap(this.mouseClick);
 	animNav.click(this.mouseClick);
+
+	retrieveHighScore();
 }
 
 function tick(){
@@ -2495,6 +2502,7 @@ api.ui.alert2 = function(msg, fns){
 
 api.ui.waitTimer = 0;
 api.ui.waitdiv = '';
+api.ui.highscore = null;
 
 api.ui.showWaiting = function(){
 	if(api.ui.waitdiv == ''){
@@ -2513,4 +2521,27 @@ api.ui.showWaiting = function(){
 api.ui.hideWaiting = function(){
 	api.ui.waitdiv.style.display = 'none';
 	//clearTimeout(api.ui.waitTimer);
+};
+
+api.ui.showHighScore = function(){
+	if(api.ui.highscore == null){
+		api.ui.highscore = document.createElement('div');
+		$(api.ui.highscore).addClass('uiAlert' + gameSize);
+		api.ui.waitdiv.style.backgroundRepeat = 'no-repeat';
+		var alertuibackground = document.createElement('div');
+		var alertuibutton = document.createElement('div');
+		//alertuibackground.style.backgroundImage = 'url(' + uiAlertScreen.src + ')';
+		$(api.ui.highscore).addClass('uiAlert' + gameSize);
+		$(alertuibackground).addClass('uiHighscoreImage' + gameSize);
+		$(alertuibutton).addClass('uiHighscoreButton' + gameSize);
+		api.ui.highscore.appendChild(alertuibackground);
+		api.ui.highscore.appendChild(alertuibutton);
+		
+		$(document.body).append(api.ui.highscore);
+		//$(api.ui.highscore).show();
+		$(alertuibutton).click(function(){
+			$(api.ui.highscore).remove();
+		});
+	};
+	$(api.ui.highscore).show();
 };

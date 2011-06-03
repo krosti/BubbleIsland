@@ -1,6 +1,7 @@
 var LeaderBoard = {
 	divGen: '',
-	divFB: ''
+	divFB: '',
+    highscore: 10000000
 };
 
 function SubmitScore()
@@ -90,4 +91,13 @@ function retrieveFacebookLeaderboard(scores, numscores, response){
         // score listing failed because of response.ErrorCode
         api.ui.alert('Sorry, now we have a little problem with the leaderboards, please check it later', 'Ok');
     }
+};
+
+function retrieveHighScore(){
+    Playtomic.Leaderboards.List("highscores", function(scores, numscores, response){
+        if(response.Success){
+            if(numscores == 0) return;
+            LeaderBoard.highscore = scores[0].Points;
+        }; 
+    }, { perpage: 1});
 };

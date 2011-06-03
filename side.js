@@ -1,513 +1,212 @@
 
-
 function Loader(progress, size){
-
 	this.progressBar = document.getElementById(progress);	
-
-	this.size = size;
-
-
-
-	/*bubbleBlueImage = new Image();
-
-	bubbleRedImage = new Image();
-
-	bubbleGreenImage = new Image();
-
-	bubblePurpleImage = new Image();
-
-	bubbleYellowImage = new Image();
-
-
-
-	bubbleBlueBombImage = new Image();
-
-	bubbleRedBombImage = new Image();
-
-	bubbleGreenBombImage = new Image();
-
-	bubblePurpleBombImage = new Image();
-
-	bubbleYellowBombImage = new Image();
-
-
-
-	bubbleBlueHalfImage = new Image();
-
-	bubbleRedHalfImage = new Image();
-
-	bubbleGreenHalfImage = new Image();
-
-	bubblePurpleHalfImage = new Image();
-
-	bubbleYellowHalfImage = new Image();
-
-
-
-	bubbleBlueFreezeImage = new Image();
-
-	bubbleRedFreezeImage = new Image();
-
-	bubbleGreenFreezeImage = new Image();
-
-	bubblePurpleFreezeImage = new Image();
-
-	bubbleYellowFreezeImage = new Image();
-
-
-
-	bubbleBlueImagex2 = new Image();
-
-	bubbleRedImagex2 = new Image();
-
-	bubbleGreenImagex2 = new Image();
-
-	bubblePurpleImagex2 = new Image();
-
-	bubbleYellowImagex2 = new Image();
-
-
-
-	bubbleBlueImagex3 = new Image();
-
-	bubbleRedImagex3 = new Image();
-
-	bubbleGreenImagex3 = new Image();
-
-	bubblePurpleImagex3 = new Image();
-
-	bubbleYellowImagex3 = new Image();
-
-
-
-	lvlFrame = new Image();
-
-	backgroundImage = new Image();
-
-	initImage = new Image();
-
-	logoImage = new Image();
-
-	pandaBearAnim = new Image();
-
-	uiPanda = new Image();
-
-	uiLevelFrame = new Image();
-
-	uiLifeFrame = new Image();
-
-	uiPointsFrame = new Image();
-
-	uiLooseFrame = new Image();
-
-	uiWinFrame = new Image();
-
-	uiCannon = new Image();
-
-	uiOptionButton = new Image();
-
-	uiNewButton = new Image();
-
-	uiContinueButton = new Image();
-
-	uiBackButton = new Image();*/
-
-	
+	this.size = size;	
 
 	this.readyLoad; // = function(){ alert('hola'); };
-
 	
-
-	this.toLoad = 74;
+	this.toLoad = 76;
 	//this.toLoad = 80;
-
 	this.isloaded = 0;
-
 	this.separator = '/';
-
 	
-
 	this.loaded = function(){
-
 		//alert(this.isloaded);
-
 		loader.isloaded++;
-
 		//alert(loader.isloaded + ':' + this.src);
-
 		loader.progressBar.style.width = ((loader.isloaded / loader.toLoad) * 100)+ '%';
-
 		if(loader.isloaded == loader.toLoad) loader.readyLoad();
-
 	};
-
 	
-
 	bubbleBlueImage.onload = this.loaded;
-
 	bubbleGreenImage.onload = this.loaded;
-
 	bubbleRedImage.onload = this.loaded;
-
 	bubblePurpleImage.onload = this.loaded;
-
 	bubbleYellowImage.onload = this.loaded;
 
-
-
 	bubbleBlueBombImage.onload = this.loaded;
-
 	bubbleGreenBombImage.onload = this.loaded;
-
 	bubbleRedBombImage.onload = this.loaded;
-
 	bubblePurpleBombImage.onload = this.loaded;
-
 	bubbleYellowBombImage.onload = this.loaded;
 
-
-
 	bubbleBlueFreezeImage.onload = this.loaded;
-
 	bubbleGreenFreezeImage.onload = this.loaded;
-
 	bubbleRedFreezeImage.onload = this.loaded;
-
 	bubblePurpleFreezeImage.onload = this.loaded;
-
 	bubbleYellowFreezeImage.onload = this.loaded;
 
-
-
 	bubbleBlueHalfImage.onload = this.loaded;
-
 	bubbleRedHalfImage.onload = this.loaded;
-
 	bubbleGreenHalfImage.onload = this.loaded;
-
 	bubblePurpleHalfImage.onload = this.loaded;
-
 	bubbleYellowHalfImage.onload = this.loaded;
 
-
-
 	bubbleBlueImageX2.onload = this.loaded;
-
 	bubbleGreenImageX2.onload = this.loaded;
-
 	bubbleRedImageX2.onload = this.loaded;
-
 	bubblePurpleImageX2.onload = this.loaded;
-
 	bubbleYellowImageX2.onload = this.loaded;
 
-
-
 	bubbleBlueImageX3.onload = this.loaded
-
 	bubbleGreenImageX3.onload = this.loaded;
-
 	bubbleRedImageX3.onload = this.loaded;
-
 	bubblePurpleImageX3.onload = this.loaded;
-
 	bubbleYellowImageX3.onload = this.loaded;
 
-
-
 	bubbleExplode.onload = this.loaded;
-
 	bubbleEstela.onload = this.loaded;
-
 	bubbleBombExplode.onload = this.loaded;
-
 	bubbleFreezeExplode.onload = this.loaded;
-
 	bubbleMultiColorExplode.onload = this.loaded;
-
 	bubbleX2Explode.onload = this.loaded;
-
 	bubbleX3Explode.onload = this.loaded;
 
-
-
 	lvlFrame.onload = this.loaded;
-
 	initImage.onload = this.loaded;
-
 	backgroundImage.onload = this.loaded
-
 	logoImage.onload = this.loaded;
-
 	uiPandaStandBy.onload = this.loaded;
-
 	uiPandaLoading.onload = this.loaded;
-
 	uiPandaBlinking.onload = this.loaded;
-
 	uiPanda.onload = this.loaded;
-
 	uiLevelFrame.onload = this.loaded;
-
 	uiLifeFrame.onload = this.loaded;
-
 	uiPointsFrame.onload = this.loaded;
-
 	uiLooseFrame.onload = this.loaded;
-
 	uiWinFrame.onload = this.loaded;
-
 	uiFinishContinue.onload = this.loaded;
-
 	uiFinishMenu.onload = this.loaded;
-
 	uiCannon.onload = this.loaded;
-
 	uiCannonShoot.onload = this.loaded
-
 	uiOptionButton.onload = this.loaded;
-
 	uiNewButton.onload = this.loaded;
-
 	uiContinueButton.onload = this.loaded;
-
 	uiBackButton.onload = this.loaded;
-
 	//uiLoadingScreen.onload = this.loaded;
 
-
-
 	uiLeaderboardScreen.onload = this.loaded;
-
 	uiLeaderboardMenu.onload = this.loaded;
-
 	uiLeaderboardHighscore.onload = this.loaded;
-
 	uiLeaderboardFriends.onload = this.loaded;
-
 	uiLeaderboardStar.onload = this.loaded;
 
-
-
 	uiOptionsBackground.onload = this.loaded;
-
 	uiOptionsMenu.onload = this.loaded;
-
 	uiOptionsVolumenOn.onload = this.loaded;
-
 	uiOptionsVolumenOff.onload = this.loaded;
-
 	uiOptionsFacebook.onload = this.loaded;
-
 	uiOptionsLeaderboard.onload = this.loaded;
-
 	uiOptionsCoins.onload = this.loaded;
 
-
-
 	uiAlertScreen.onload = this.loaded;
-
 	uiAlertButton.onload = this.loaded;
-
+	uiHighscoreScreen.onload = this.loaded;
+	uiHighscoreButton.onload = this.loaded;
 	uiPauseButton.onload = this.loaded;
 	uiPauseCartel.onload = this.loaded;
-
 	facebookScreen.onload = this.loaded;
-
 	facebookButton.onload = this.loaded;
-
-
-
 		/*this.startLoad();
-
 	};*/
 
 	this.init = function(){	
-
 	//this.startLoad = function(){	
-
 		bubbleBlueImage.src = 'bubbles/bluebubble.png';
-
 		bubbleGreenImage.src = 'bubbles/greenbubble.png';
-
 		bubbleRedImage.src = 'bubbles/redbubble.png';
-
 		bubblePurpleImage.src = 'bubbles/purplebubble.png';
-
 		bubbleYellowImage.src = 'bubbles/yellowbubble.png';
 
-
-
 		bubbleBlueBombImage.src = 'bubbles/bluebubblebomb.png';
-
 		bubbleGreenBombImage.src = 'bubbles/greenbubblebomb.png';
-
 		bubbleRedBombImage.src = 'bubbles/redbubblebomb.png';
-
 		bubblePurpleBombImage.src = 'bubbles/purplebubblebomb.png';
-
 		bubbleYellowBombImage.src = 'bubbles/yellowbubblebomb.png';
-
 		
-
 		bubbleBlueFreezeImage.src = 'bubbles/bluebubblefreeze.png';
-
 		bubbleGreenFreezeImage.src = 'bubbles/greenbubblefreeze.png';
-
 		bubbleRedFreezeImage.src = 'bubbles/redbubblefreeze.png';
-
 		bubblePurpleFreezeImage.src = 'bubbles/purplebubblefreeze.png';
-
 		bubbleYellowFreezeImage.src = 'bubbles/yellowbubblefreeze.png';
-
 		
-
 		bubbleBlueHalfImage.src = 'bubbles/bluebubblehalf.png';
-
 		bubbleGreenHalfImage.src = 'bubbles/greenbubblehalf.png';
-
 		bubbleRedHalfImage.src = 'bubbles/redbubblehalf.png';
-
 		bubblePurpleHalfImage.src = 'bubbles/purplebubblehalf.png';
-
 		bubbleYellowHalfImage.src = 'bubbles/yellowbubblehalf.png';
 
-
-
 		bubbleBlueImageX2.src = 'bubbles/bluebubblex2.png';
-
 		bubbleGreenImageX2.src = 'bubbles/greenbubblex2.png';
-
 		bubbleRedImageX2.src = 'bubbles/redbubblex2.png';
-
 		bubblePurpleImageX2.src = 'bubbles/purplebubblex2.png';
-
 		bubbleYellowImageX2.src = 'bubbles/yellowbubblex2.png';
 
-
-
 		bubbleBlueImageX3.src = 'bubbles/bluebubblex3.png';
-
 		bubbleGreenImageX3.src = 'bubbles/greenbubblex3.png';
-
 		bubbleRedImageX3.src = 'bubbles/redbubblex3.png';
-
 		bubblePurpleImageX3.src = 'bubbles/purplebubblex3.png';
-
 		bubbleYellowImageX3.src = 'bubbles/yellowbubblex3.png';
 
-
-
 		bubbleExplode.src = this.size + this.separator + 'explosion.png';
-
 		bubbleEstela.src = this.size + this.separator + 'estela.png';
-
 		bubbleBombExplode.src = this.size + this.separator + 'bombexplosion.png';
-
 		bubbleFreezeExplode.src = this.size + this.separator + 'freezeexplosion.png';
-
 		bubbleMultiColorExplode.src = this.size + this.separator + 'multicolorexplosion.png';
-
 		bubbleX2Explode.src = this.size + this.separator + 'x2explosion.png';
-
 		bubbleX3Explode.src = this.size + this.separator + 'x3explosion.png';
 
-
-
 		lvlFrame.src = this.size + this.separator + 'lvlframe.png';
-
 		//alert(this.size + this.separator + 'lvlframe.png');
-
 		backgroundImage.src = this.size + this.separator + 'background.png';
-
 		//alert(backgroundImage.src);
-
 		logoImage.src = this.size + this.separator + 'logo.jpg';		
-
 		initImage.src = this.size + this.separator + 'initscreen.png';
-
 		//pandaBearAnim.src = this.size + this.separator + 'animacion.png';
-
 		uiPandaStandBy.src = this.size + this.separator + 'standbyanimacion.png';
-
 		uiPandaLoading.src = this.size + this.separator + 'loadinganimacion.png';
-
 		uiPandaBlinking.src = this.size + this.separator + 'blinkinganimacion.png';
-
 		//uiPanda.src = this.size + this.separator + 'panda.png';
-
 		uiPanda.src = this.size + this.separator + 'flashanimacion.png';
-
 		uiLevelFrame.src = this.size + this.separator + 'lvl.png';
-
 		uiLifeFrame.src = this.size + this.separator + 'life.png';
-
 		uiPointsFrame.src = this.size + this.separator + 'points.png';
-
 		uiLooseFrame.src = this.size + this.separator + 'guiloose.png';
-
 		uiWinFrame.src = this.size + this.separator + 'guiwin.png';
-
 		uiFinishContinue.src = this.size + this.separator + 'guicontinue.png';
-
 		uiFinishMenu.src = this.size + this.separator + 'guimenu.png';
-
 		uiCannon.src = this.size + this.separator + 'cannon.png';
-
 		uiCannonShoot.src = this.size + this.separator + 'cannonanimacion.png';
-
 		uiOptionButton.src = this.size + this.separator + 'optionbutton.png';
-
 		uiNewButton.src = this.size + this.separator + 'newbutton.png';
-
 		uiContinueButton.src = this.size + this.separator + 'continuebutton.png';
-
 		uiBackButton.src = this.size + this.separator + 'backbutton.png';
-
 		//uiLoadingScreen.src = this.size + this.separator + 'loadingscreen.png';
 
-
-
 		uiLeaderboardScreen.src = this.size + this.separator + 'leaderboardscreen.png';
-
 		uiLeaderboardMenu.src = this.size + this.separator + 'leaderboardmenu.png';
-
 		uiLeaderboardHighscore.src = this.size + this.separator + 'leaderboardhighscore.png';
-
 		uiLeaderboardFriends.src = this.size + this.separator + 'leaderboardfriends.png';
-
 		uiLeaderboardStar.src = this.size + this.separator + 'leaderboardstar.png';
-
-
-
 		uiOptionsBackground.src = this.size + this.separator + 'optionsbackground.png';
-
 		uiOptionsMenu.src = this.size + this.separator + 'optionsmenu.png';
-
 		uiOptionsVolumenOn.src = this.size + this.separator + 'optionsvolumenon.png';
-
 		uiOptionsVolumenOff.src = this.size + this.separator + 'optionsvolumenoff.png';
-
 		uiOptionsFacebook.src = this.size + this.separator + 'optionsfacebook.png';
-
 		uiOptionsLeaderboard.src = this.size + this.separator + 'optionsleaderboard.png';
-
 		uiOptionsCoins.src = this.size + this.separator + 'optionscoins.png';
 
-
-
 		uiAlertScreen.src = this.size + this.separator + 'alertscreen.png';
-
 		uiAlertButton.src = this.size + this.separator + 'alertbutton.png';
+
+		uiHighscoreScreen.src = this.size + this.separator + 'highscorescreen.png';
+		uiHighscoreButton.src = this.size + this.separator + 'highscorebutton.png';
 
 		uiPauseButton.src = this.size + this.separator + 'pausebutton.png';
 		uiPauseCartel.src = this.size + this.separator + 'pausecartel.png';
 
-
 		facebookScreen.src = this.size + this.separator + 'facebookscreen.png';
-
 		facebookButton.src = this.size + this.separator + 'facebookbutton.png';
-
 	};
 
 };

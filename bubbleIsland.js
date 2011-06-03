@@ -1814,7 +1814,7 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 		this.level.points = this.ui.points;
 		this.level.loose = this.playerLoose;
 		this.level.win = this.playerWin;
-		this.level.makeMeRandom(5);
+		this.level.makeMeRandom(2);
 		this.cannon = new bubbleCannon(this.level);
 		this.level.cannon = this.cannon;
 		animNav.append(this.cannon.element);
@@ -2039,7 +2039,7 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 	animNav.width(this.width);
 	animNav.height(this.height);
 
-	api.softgame.buyFinalized = game.moreLifes
+	api.softgame.buyFinalized = this.moreLifes;
 
 	//this.drawBackground(this.backgroundPainter);
 	var version = document.createElement('div');

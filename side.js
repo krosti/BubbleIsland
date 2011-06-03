@@ -514,139 +514,74 @@ function Loader(progress, size){
 //function Timeline(self, fps){ //donde self es el nombre del objeto usado
 
 function Timeline(fps){
-
 	this.animations = new Array();
-
 	this.fps = fps;
-
 	this.timerId;
-
 	this.state = 'stop';
-
 	
-
 	this.onStop = new Array();
-
 	this.onStart = new Array();
-
 	this.onTick = new Array();
-
 	
-
 	this.tick = function(){
-
 		this.trigger(this.onTick);
-
 	};
-
 	
-
 	this.start = function(){
-
 		//empieza la animacion
-
 		if(this.state == 'stop'){
 			this.state = 'started';
 		}else{
 			return;
 		};
-
 		this.trigger(this.onStart);
-
 		this.timerId = setInterval("this.tick()", 1000/this.fps);
-
 		//this.timerId = setTimeout("this.tick()", 1);
-
 	};
-
 	
-
 	this.stop = function(){
-
 		//detiene la animacion
 		this.state = 'stop';
-
 		clearInterval(this.timerId)
-
 		this.trigger(this.onStop);
-
 	};
-
 	
-
 	this.connect = function(f, to){
-
 		switch(to){
-
 			case 'start':
-
 				this.onStart.push(f);
-
 				break;
-
 			case 'stop':
-
 				this.onStop.push(f);
-
 				break;
-
 			case 'tick':
-
 				this.onTick.push(f);
-
 				break;
-
 		};	
-
 	};
-
 	
-
 	this.disconnect = function(f, to){
-
 		switch(to){
-
 			case 'start':
-
 				this.onStart.remove(f);
-
 				break;
-
 			case 'stop':
-
 				this.onStop.remove(f);
-
 				break;
-
 			case 'tick':
-
 				this.onTick.remove(f);
-
 				break;
-
 		};	
-
 	};
-
 	
-
 	this.trigger = function(what){
-
 		for(i = 0; i < what.length; ++i){
-
 			alert(what[i]);
-
 			what[i]();
-
 		}
-
 	};
-
-
 
 };
-
-
 
 // one div, multiple imgs
 

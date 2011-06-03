@@ -2479,15 +2479,16 @@ api.ui.alert2 = function(msg, fns){
 	for(var i = 0; i < fns.length; ++i){
 		var button = document.createElement('div');
 		$(button).addClass('uiAlertButton' + gameSize);
+		alertui.appendChild(button);
 		button.innerHTML = '<div>' + fns[i].button + '</div>';
 		button.onclick = fns[i].action;
+		button.style.top = (parseInt($(button).css('top')) + (i * parseInt($(button).css('height')))) + 'px';		
 		$(button).click(function(){
 			$(cartel).fadeOut(300, function(){
 				$(cartel).remove();
 			});
 		});
-		button.style.top = (parseInt($(button).css('top')) + (i * parseInt($(button).css('height')))) + 'px';
-		alertui.appendChild(button);
+		
 	};
 	$(document.body).append(cartel);
 };

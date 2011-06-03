@@ -1,4 +1,4 @@
-var VERSION = '0.9.058';
+var VERSION = '0.9.065';
 
 function rnd(top){ return Math.floor(Math.random()*(top + 1))};
 
@@ -580,8 +580,10 @@ function bubble(l){
 			var inPlace = false;
 			var currentBubble = this;
 			this.lvl.shootedBubble = null;
+			this.lvl.cannon.currentBubble = null
 			/*var delta = this.lvl.grilla.isShortRow(0) * (this.lvl.bubbleRadius / 2);
 			delta = delta / 2;*/
+			var culo = 0;
 			do{					
 				currentBubble.j = Math.floor(((currentBubble.x + ( currentBubble.lvl.bubbleRadius / 2)) - currentBubble.lvl.leftBound) / currentBubble.lvl.bubbleRadius);
 				currentBubble.i = 0;
@@ -589,8 +591,10 @@ function bubble(l){
 				currentBubble.x -= (currentBubble.dx / 4);
 				currentBubble.y -= (currentBubble.dy / 4);
 				if((currentBubble.x <= currentBubble.lvl.leftBound) || (currentBubble.x >= currentBubble.lvl.width)) currentBubble.dx = -currentBubble.dx;
+				if((currentBubble.x == 0) || (currentBubble.y == this.lvl.bubbleVelocity)) alert('es un hijo de puta: ' + culo);
+				culo++;
 			}while(!inPlace);		
-			alert('stop');
+			//alert('stop');
 			this.stopMove();
 			this.recalcXY();
 			this.y += this.lvl.currentTop;
@@ -889,7 +893,9 @@ function bubbleTable(ancho, alto, lvl){
 
 	this.isShortRow = function(i){
 		//debug(this.Table[i][this.ancho - 1]);
+		//var bubble = this.retrieveBubble(i, this.ancho - 1);
 		if(this.Table[i][this.ancho - 1] == "nada"){
+		//if(bubble == "nada"){
 			return 1;
 		}else{
 			return 0;
@@ -1832,7 +1838,7 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 			case "640x960":
 				this.canvas.width = 640;
 				this.canvas.height = 960;
-				this.level = new bubbleLevel(475, 740, 13, 30, levelnumber);
+				this.level = new bubbleLevel(475, 740, 8, 25, levelnumber);
 				break;
 			case "480x800":
 				this.canvas.width = 480;
@@ -1852,7 +1858,7 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 		this.level.points = this.ui.points;
 		this.level.loose = this.playerLoose;
 		this.level.win = this.playerWin;
-		this.level.makeMeRandom(2);
+		this.level.makeMeRandom(1);
 		this.cannon = new bubbleCannon(this.level);
 		this.level.cannon = this.cannon;
 		animNav.append(this.cannon.element);

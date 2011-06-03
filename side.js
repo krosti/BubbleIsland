@@ -421,7 +421,7 @@ function Loader(progress, size){
 
 		//alert(backgroundImage.src);
 
-		logoImage.src = 'logo.jpg';		
+		logoImage.src = this.size + this.separator + 'logo.jpg';		
 
 		initImage.src = this.size + this.separator + 'initscreen.png';
 

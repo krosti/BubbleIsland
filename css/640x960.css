@@ -250,7 +250,7 @@
 	width: 470px;
 }
 
-#initScreen{
+.initScreen640x960{
 	background-image: url(../640x960/loadingscreen.png);
 }
 

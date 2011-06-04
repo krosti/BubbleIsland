@@ -2490,6 +2490,7 @@ api.ui.alert2 = function(msg, fns){
 		button.innerHTML = '<div>' + fns[i].button + '</div>';
 		button.onclick = fns[i].action;
 		//button.style.top = (parseInt($(button).css('top')) + (i * parseInt($(button).css('height')))) + 'px';		
+		alert(button.style.top + ' : ' + parseInt(button.style.top) + ' : ' + (i * parseInt(button.style.top)));
 		button.style.top = (parseInt(button.style.top) + (i * parseInt(button.style.height))) + 'px';
 		$(button).click(function(){
 			$(cartel).fadeOut(300, function(){

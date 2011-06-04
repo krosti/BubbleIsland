@@ -2508,11 +2508,11 @@ api.ui.showWaiting = function(){
 	if(api.ui.waitdiv == ''){
 		api.ui.waitdiv = document.createElement('div');
 		$(api.ui.waitdiv).addClass('uiAlert' + gameSize);
-		var cartel = document.createElement('div');
-		$(cartel).addClass('uiAlert' + gameSize);
-		cartel.style.backgroundRepeat = 'no-repeat';
-		cartel.style.backgroundImage = 'url(' + gameSize + '/waitscreen.png)';
-		api.ui.waitdiv.appendChild(cartel);
+		var waiting = document.createElement('div');
+		$(waiting).addClass('uiAlert' + gameSize);
+		waiting.style.backgroundRepeat = 'no-repeat';
+		waiting.style.backgroundImage = 'url(' + gameSize + '/waitscreen.png)';
+		api.ui.waitdiv.appendChild(waiting);
 		$(document.body).append(api.ui.waitdiv);
 	};
 	//api.ui.waitTimer = setTimeout('api.ui.waitdiv.style.display = "block"', 500);

@@ -140,6 +140,7 @@ var pointDrop = 5;
 var min_vel = .1;
 var freezeTime = 10 //en segundos
 var lifesPerCoins = 5;
+var linesPerLevel = 5;
 
 var currentState = {
 	level: 1,
@@ -2073,7 +2074,7 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 		this.level.points = this.ui.points;
 		this.level.loose = this.playerLoose;
 		this.level.win = this.playerWin;
-		this.level.makeMeRandom(1);
+		this.level.makeMeRandom(linesPerLevel);
 		this.cannon = new bubbleCannon(this.level);
 		this.level.cannon = this.cannon;
 		animNav.append(this.cannon.element);

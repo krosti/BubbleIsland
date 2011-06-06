@@ -1999,21 +1999,21 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 		if(!api.levels.unserializeLevel()) return;
 		//chequeo si esta en ganar o perder
 		//gano
-		alert('check win');
+		//alert('check win');
 		if(game.level.points >= game.level.pointsToReach){
-			alert('win');
+			//alert('win');
 			game.level.freeze = true;
 			game.level.finished = true;
 			game.ui.points = this.points;
 			game.level.win();
 		};
 		//perdio
-		alert('check lose');
+		//alert('check lose');
 		var masBaja = game.level.grilla.returnLowest();
 		/*alert(this.looseLine);*/
 		//alert(masBaja.y + this.bubbleRadius);
 		if(masBaja.y + game.level.bubbleRadius > game.level.looseLine){
-			alert('perdiste');
+			//alert('perdiste');
 			/*alert(this.looseLine);
 			alert(masBaja.x + this.bubbleRadius);*/
 			game.level.freeze = true;
@@ -2084,46 +2084,74 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 	this.playerLoose = function(){
 		//alert('loose');
 		game.level.clearBoard();
-		cartel = document.createElement('div');
-		var image = document.createElement('img');
-		image.src = uiLooseFrame.src;
-		image.style.top = '0px';
-		image.style.left = ((game.canvas.width - uiLooseFrame.width) / 2) + 'px';
-		image.style.position = 'absolute';
-		cartel.appendChild(image);
-		cartel.style.width = game.canvas.width + 'px';
-		cartel.style.height = game.canvas.height + 'px';
-		cartel.style.maxHeight = game.canvas.height + 'px';
-		cartel.style.display = 'none';
-		cartel.style.position = 'fixed';
-		cartel.style.top = '0px';
-		cartel.style.left = '0px';
-		//cartel.style.zIndex = -99;
-		cartel.style.backgroundImage = 'url(backgrounddiv.png)';
-		cartel.style.backgroundRepeat = 'repeat';
 
-		var points = document.createElement('div');
-		cartel.appendChild(points);
-		$(points).addClass('guiFinishPoints' + game.size);
-		points.innerHTML = '<p>'+game.ui.points+'</p>';
-
-		var continuebutton = document.createElement('div');
-		$(continuebutton).addClass('guiLooseContinue' + game.size);
-		cartel.appendChild(continuebutton);
-
-		var tomenubutton = document.createElement('div');
-		$(tomenubutton).addClass('guiLooseMenu' + game.size);
-		cartel.appendChild(tomenubutton);
-
-		//cartel.style.backgroundImage = 'url('+uiLooseFrame.src+')';
-		//$(document.body).append(cartel);
-		animNav.append(cartel);
 		if(game.ui.lifes == 0){ // ask for more lifes!
 				api.ui.alert2("You haven't any lifes left, Do you want to spend a coin for 3 more lifes? It totally worth it!", [{'button': 'Oks, i want 3 more lifes',
 																																'action': function(){
-																																	api.softgame.buyFinalized = $(this).remove;
-																																	api.softgame.startCoinsBuying('level', '3morelifes', '', 1, '', '');
 																																	$(this).onclick = function(){};
+																																	api.softgame.buyFinalized = function(){
+																																		$(cartel).remove();
+																																		cartel = document.createElement('div');
+																																		var image = document.createElement('img');
+																																		image.src = uiLooseFrame.src;
+																																		image.style.top = '0px';
+																																		image.style.left = ((game.canvas.width - uiLooseFrame.width) / 2) + 'px';
+																																		image.style.position = 'absolute';
+																																		cartel.appendChild(image);
+																																		cartel.style.width = game.canvas.width + 'px';
+																																		cartel.style.height = game.canvas.height + 'px';
+																																		cartel.style.maxHeight = game.canvas.height + 'px';
+																																		cartel.style.display = 'none';
+																																		cartel.style.position = 'fixed';
+																																		cartel.style.top = '0px';
+																																		cartel.style.left = '0px';
+																																		//cartel.style.zIndex = -99;
+																																		cartel.style.backgroundImage = 'url(backgrounddiv.png)';
+																																		cartel.style.backgroundRepeat = 'repeat';
+
+																																		var points = document.createElement('div');
+																																		cartel.appendChild(points);
+																																		$(points).addClass('guiFinishPoints' + game.size);
+																																		points.innerHTML = '<p>'+game.ui.points+'</p>';
+
+																																		var continuebutton = document.createElement('div');
+																																		$(continuebutton).addClass('guiLooseContinue' + game.size);
+																																		cartel.appendChild(continuebutton);
+
+																																		var tomenubutton = document.createElement('div');
+																																		$(tomenubutton).addClass('guiLooseMenu' + game.size);
+																																		cartel.appendChild(tomenubutton);
+
+																																		//cartel.style.backgroundImage = 'url('+uiLooseFrame.src+')';
+																																		//$(document.body).append(cartel);
+																																		animNav.append(cartel);
+																																		$(continuebutton).click(function(){
+																																			$(cartel).fadeOut(300, function(){
+																																				game.ui.lifes -= 1;					
+																																				if(game.ui.lifes == -1){
+																																					game.level = {};
+																																					game.level = '';
+																																					game.ui.lifes = 5;
+																																					game.ui.points = 0;
+																																					game.ui.acumuledPoints = 0;
+																																					game.ui.pointsCounter = 0;
+																																					game.showMenu();
+																																				}else{
+																																					game.ui.points = game.ui.acumuledPoints;					 
+																																					game.ui.pointsCounter = game.ui.acumuledPoints;
+																																				};
+																																				game.doSerialize = true;
+																																				game.redoLevel();
+																																				$(cartel).remove();
+																																			});
+																																		});
+																																		$(tomenubutton).click(function(){
+																																			//alert('test tomenu');
+																																			game.showMenu();	
+																																		});
+																																		$(cartel).fadeIn(150);
+																																	};
+																																	api.softgame.startCoinsBuying('level', '3morelifes', '', 1, '', '');																																	
 																																}},
 																																{'button': "No, it's ok, i'm done",
 																																'action': function(){
@@ -2132,7 +2160,40 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 																																	game.level = "";
 																																}}])
 		}else{
-			$(cartel).fadeIn(150);
+			cartel = document.createElement('div');
+			var image = document.createElement('img');
+			image.src = uiLooseFrame.src;
+			image.style.top = '0px';
+			image.style.left = ((game.canvas.width - uiLooseFrame.width) / 2) + 'px';
+			image.style.position = 'absolute';
+			cartel.appendChild(image);
+			cartel.style.width = game.canvas.width + 'px';
+			cartel.style.height = game.canvas.height + 'px';
+			cartel.style.maxHeight = game.canvas.height + 'px';
+			cartel.style.display = 'none';
+			cartel.style.position = 'fixed';
+			cartel.style.top = '0px';
+			cartel.style.left = '0px';
+			//cartel.style.zIndex = -99;
+			cartel.style.backgroundImage = 'url(backgrounddiv.png)';
+			cartel.style.backgroundRepeat = 'repeat';
+
+			var points = document.createElement('div');
+			cartel.appendChild(points);
+			$(points).addClass('guiFinishPoints' + game.size);
+			points.innerHTML = '<p>'+game.ui.points+'</p>';
+
+			var continuebutton = document.createElement('div');
+			$(continuebutton).addClass('guiLooseContinue' + game.size);
+			cartel.appendChild(continuebutton);
+
+			var tomenubutton = document.createElement('div');
+			$(tomenubutton).addClass('guiLooseMenu' + game.size);
+			cartel.appendChild(tomenubutton);
+
+			//cartel.style.backgroundImage = 'url('+uiLooseFrame.src+')';
+			//$(document.body).append(cartel);
+			animNav.append(cartel);
 			$(continuebutton).click(function(){
 				$(cartel).fadeOut(300, function(){
 					game.ui.lifes -= 1;					
@@ -2157,6 +2218,8 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 				//alert('test tomenu');
 				game.showMenu();	
 			});
+			$(cartel).fadeIn(150);
+			
 		};		
 	};
 

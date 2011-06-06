@@ -2088,8 +2088,10 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 		if(game.ui.lifes == 0){ // ask for more lifes!
 				api.ui.alert2("You haven't any lifes left, Do you want to spend a coin for 3 more lifes? It totally worth it!", [{'button': 'Oks, i want 3 more lifes',
 																																'action': function(){
-																																	$(this).onclick = function(){};
+																																	//$(this).onclick = function(){};
 																																	api.softgame.buyFinalized = function(){
+																																		api.ui.hideWaiting();
+																																		game.ui.lifes = 3;
 																																		$(cartel).remove();
 																																		cartel = document.createElement('div');
 																																		var image = document.createElement('img');
@@ -2127,19 +2129,8 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 																																		animNav.append(cartel);
 																																		$(continuebutton).click(function(){
 																																			$(cartel).fadeOut(300, function(){
-																																				game.ui.lifes -= 1;					
-																																				if(game.ui.lifes == -1){
-																																					game.level = {};
-																																					game.level = '';
-																																					game.ui.lifes = 5;
-																																					game.ui.points = 0;
-																																					game.ui.acumuledPoints = 0;
-																																					game.ui.pointsCounter = 0;
-																																					game.showMenu();
-																																				}else{
-																																					game.ui.points = game.ui.acumuledPoints;					 
-																																					game.ui.pointsCounter = game.ui.acumuledPoints;
-																																				};
+																																				game.ui.points = game.ui.acumuledPoints;					 
+																																				game.ui.pointsCounter = game.ui.acumuledPoints;
 																																				game.doSerialize = true;
 																																				game.redoLevel();
 																																				$(cartel).remove();
@@ -2151,8 +2142,9 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 																																		});
 																																		$(cartel).fadeIn(150);
 																																	};
+																																	api.ui.showWaiting();
 																																	api.softgame.startCoinsBuying('level', '3morelifes', '', 1, '', '');																																	
-																																}},
+																																}, 'noclose': true},
 																																{'button': "No, it's ok, i'm done",
 																																'action': function(){
 																																	game.menu.style.display = 'block';
@@ -2587,6 +2579,7 @@ api.ui.alert2 = function(msg, fns){
 		//alert(button.style.top + ' : ' + parseInt(button.style.top) + ' : ' + (i * parseInt(button.style.top)));
 		//alert($(button).css('top') + ':' + parseInt($(button).css('top')));
 		button.style.top = (parseInt(button.style.top) + (i * parseInt(button.style.height))) + 'px';
+		if(fns[i].noclose === true) continue;
 		$(button).click(function(){
 			$(cartel).fadeOut(300, function(){
 				$(cartel).remove();

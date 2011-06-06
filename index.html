@@ -866,10 +866,10 @@ loader.readyLoad = function(){
 		//FB.retrieveFriendsData();
 	//};
 
-	$('#logoImg').show(200, function(){
-		$("#initScreen").remove();
-		$(this).delay(1000).fadeOut(1900, function(){
-					
+	$('#logoImg').show(1000, function(){
+		
+		$(this).delay(1000).fadeOut(100, function(){
+					$("#initScreen").remove();
 			//game = new appEnviroment("gameCanvas", "gameMenu", "gameBackgroundCanvas", "320x480");
 			//alert(screen.width);
 			

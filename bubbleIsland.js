@@ -140,7 +140,7 @@ var pointDrop = 5;
 var min_vel = .1;
 var freezeTime = 10 //en segundos
 var lifesPerCoins = 5;
-var linesPerLevel = 5;
+var linesPerLevel = 4;
 
 var currentState = {
 	level: 1,

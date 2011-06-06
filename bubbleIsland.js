@@ -1997,27 +1997,30 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 			return;
 		};
 		if(!api.levels.unserializeLevel()) return;
-		game.continueGame();
 		//chequeo si esta en ganar o perder
 		//gano
-		if(game.lvl.points >= game.lvl.pointsToReach){
-			game.lvl.freeze = true;
-			game.lvl.finished = true;
+		alert('check win');
+		if(game.level.points >= game.level.pointsToReach){
+			alert('win');
+			game.level.freeze = true;
+			game.level.finished = true;
 			game.ui.points = this.points;
-			game.lvl.win();
+			game.level.win();
 		};
 		//perdio
+		alert('check lose');
 		var masBaja = game.level.grilla.returnLowest();
 		/*alert(this.looseLine);*/
 		//alert(masBaja.y + this.bubbleRadius);
 		if(masBaja.y + game.level.bubbleRadius > game.level.looseLine){
-			//alert('perdiste');
+			alert('perdiste');
 			/*alert(this.looseLine);
 			alert(masBaja.x + this.bubbleRadius);*/
 			game.level.freeze = true;
 			game.level.finished = true;
 			game.level.loose();
 		};
+		game.continueGame();
 	};
 
 	this.nextLevel = function(){

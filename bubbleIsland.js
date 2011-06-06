@@ -2142,6 +2142,7 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 																																				game.showMenu();	
 																																			});
 																																			$(cartel).fadeIn(150);
+																																			$(api.ui.alert2nav).remove();
 																																		});
 																																	};
 																																	api.ui.showWaiting();
@@ -2518,6 +2519,8 @@ api.levels.unserializeLevel = function(){
 	return true;
 };
 
+api.ui.alertnav = null;
+
 api.ui.alert = function(msg, button, fn){
 	var alertui = document.createElement('div');
 	var alertuitext = document.createElement('div');
@@ -2532,22 +2535,22 @@ api.ui.alert = function(msg, button, fn){
 	alertui.appendChild(alertuibutton);
 	alertuibackground.appendChild(alertuitext);
 	
-	cartel = alertui;
+	api.ui.alertnav = alertui;
 
 	alertuitext.innerHTML = msg;
 	alertuibutton.innerHTML = '<div>' + button + '</div>';
 	alertuibutton.onclick = fn;
 
-	$(document.body).append(cartel);
-	$(cartel).fadeIn(150);
+	$(document.body).append(api.ui.alertnav);
+	$(api.ui.alertnav).fadeIn(150);
 	$(alertuibutton).click(function(){
-		$(cartel).fadeOut(300, function(){
-			$(cartel).remove();
+		$(api.ui.alertnav).fadeOut(300, function(){
+			$(api.ui.alertnav).remove();
 		});
 	});
 };
 
-
+api.ui.alert2nav = null;
 
 api.ui.alert2 = function(msg, fns){
 	//asumo a fn como un array de objetos, donde el objeto es un string 'button' y la fc 'action'
@@ -2568,8 +2571,8 @@ api.ui.alert2 = function(msg, fns){
 	/*$(alertuibutton)[0].innerText = button;
 	$(alertuibutton)[0].onclick = fn;*/
 
-	cartel = alertui;
-	$(document.body).append(cartel);
+	api.ui.alert2nav = alertui;
+	$(document.body).append(api.ui.alert2nav);
 	//var button;
 	for(var i = 0; i < fns.length; ++i){
 		var button = document.createElement('div');
@@ -2583,8 +2586,8 @@ api.ui.alert2 = function(msg, fns){
 		button.style.top = (parseInt(button.style.top) + (i * parseInt(button.style.height))) + 'px';
 		if(fns[i].noclose === true) continue;
 		$(button).click(function(){
-			$(cartel).fadeOut(300, function(){
-				$(cartel).remove();
+			$(api.ui.alert2nav).fadeOut(300, function(){
+				$(api.ui.alert2nav).remove();
 			});
 		});
 		

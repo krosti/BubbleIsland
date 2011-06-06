@@ -1998,6 +1998,26 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 		};
 		if(!api.levels.unserializeLevel()) return;
 		game.continueGame();
+		//chequeo si esta en ganar o perder
+		//gano
+		if(game.lvl.points >= game.lvl.pointsToReach){
+			game.lvl.freeze = true;
+			game.lvl.finished = true;
+			game.ui.points = this.points;
+			game.lvl.win();
+		};
+		//perdio
+		var masBaja = game.level.grilla.returnLowest();
+		/*alert(this.looseLine);*/
+		//alert(masBaja.y + this.bubbleRadius);
+		if(masBaja.y + game.level.bubbleRadius > game.level.looseLine){
+			//alert('perdiste');
+			/*alert(this.looseLine);
+			alert(masBaja.x + this.bubbleRadius);*/
+			game.level.freeze = true;
+			game.level.finished = true;
+			game.level.loose();
+		};
 	};
 
 	this.nextLevel = function(){
@@ -2098,7 +2118,9 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 		if(game.ui.lifes == 0){ // ask for more lifes!
 				api.ui.alert2("You haven't any lifes left, Do you want to spend a coin for 3 more lifes? It totally worth it!", [{'button': 'Oks, i want 3 more lifes',
 																																'action': function(){
+																																	api.softgame.buyFinalized = $(this).remove;
 																																	api.softgame.startCoinsBuying('level', '3morelifes', '', 1, '', '');
+																																	$(this).onclick = function(){};
 																																}},
 																																{'button': "No, it's ok, i'm done",
 																																'action': function(){
@@ -2342,6 +2364,8 @@ api.levels.serializeLevel = function(game){
 	lvl.cannon.currentBubble = (game.level.cannon.currentBubble == null)? null : game.level.cannon.currentBubble.serialize();
 	lvl.cannon.readyShoot = game.level.cannon.readyShoot;
 
+	lvl.ui.lifes = game.ui.lifes;
+
 	api.levels.jsonlevel = lvl;
 };
 
@@ -2427,6 +2451,9 @@ api.levels.unserializeLevel = function(){
 	game.cannon.readyShoot = lvl.cannon.readyShoot;
 	game.level.loose = game.playerLoose;
 	game.level.win = game.playerWin;	
+
+	game.ui.lifes = lvl.ui.lifes;
+
 	animNav.append(game.cannon.element);
 	return true;
 };

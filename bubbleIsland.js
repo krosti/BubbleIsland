@@ -139,6 +139,7 @@ var pointExplode = 10;
 var pointDrop = 5;
 var min_vel = .1;
 var freezeTime = 10 //en segundos
+var lifesPerCoins = 5;
 
 var currentState = {
 	level: 1,
@@ -1750,7 +1751,7 @@ function gameUI(w, h){
 	this.pointsCounter = 0;
 	this.acumuledPoints = 0;
 	this.lifes = 5;
-	this.initialLifes = 5;
+	this.initialLifes = lifesPerCoins;
 	//this.element = document.createElement('<div style=" @font-face: { font-family: \'The New Font\'; src: Bubblegum.ttf;}"></div>');
 	this.element = document.createElement('div');
 	this.element2 = document.createElement('div');
@@ -2086,13 +2087,13 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 		game.level.clearBoard();
 
 		if(game.ui.lifes == 0){ // ask for more lifes!
-				api.ui.alert2("You haven't any lifes left, Do you want to spend a coin for 3 more lifes? It totally worth it!", [{'button': 'Oks, i want 3 more lifes',
+				api.ui.alert2("You haven't any lifes left, Do you want to spend a coin for " + lifesPerCoins + " more lifes? It totally worth it!", [{'button': 'Oks, i want 3 more lifes',
 																																'action': function(){
 																																	//$(this).onclick = function(){};
 																																	api.softgame.buyFinalized = function(){
 																																		api.ui.hideWaiting();
-																																		api.ui.alert('You have 3 more lifes!! or you are a cat or someone loves you up there :)', 'Thanks! Go on!', function(){
-																																			game.ui.lifes = 3;
+																																		api.ui.alert('You have ' + lifesPerCoins + ' more lifes!! or you are a cat or someone loves you up there :)', 'Thanks! Go on!', function(){
+																																			game.ui.lifes = lifesPerCoins;
 																																			$(cartel).remove();
 																																			cartel = document.createElement('div');
 																																			var image = document.createElement('img');
@@ -2274,14 +2275,14 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 	};
 
 	this.showMenu = function(){
+		game.clock.stop();
+		//this.menu.style.zIndex = 90//this.menu.style.zIndex + 2;
+		this.menu.style.display = 'block';
 		if(this.doSerialize){
 			api.levels.serializeLevel(game);
 			api.levels.putLevel(api.facebook.user.id);
 			this.doSerialize = false;
 		};		
-		game.clock.stop();
-		//this.menu.style.zIndex = 90//this.menu.style.zIndex + 2;
-		this.menu.style.display = 'block';
 	};
 
 	
@@ -2424,7 +2425,7 @@ api.levels.serializeLevel = function(game){
 	lvl.cannon = {};
 	lvl.cannon.currentBubble = (game.level.cannon.currentBubble == null)? null : game.level.cannon.currentBubble.serialize();
 	lvl.cannon.readyShoot = game.level.cannon.readyShoot;
-
+	lvl.ui = {};
 	lvl.ui.lifes = game.ui.lifes;
 
 	api.levels.jsonlevel = lvl;

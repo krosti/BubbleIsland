@@ -53,7 +53,7 @@ function retrieveGeneralLeaderboard(scores, numscores, response){
         {
             var score = scores[i];
             //alert(" - " + score.Name + " got " + score.Points + " on " + score.SDate);
-            text += '<tr><td><img src="'+uiLeaderboardStar.src+'" alt="star">' + score.Name + '</td><td style="text-align: right">' +score.Points+ '</td></tr>';
+            text += '<tr><td><img src="'+uiLeaderboardStar.src+'" alt="star"></td><td>' + score.Name + '</td><td style="text-align: right">' +score.Points+ '</td></tr>';
             // including custom data?  score.CustomPlaytomic.Data.Property
             if(i == 5) break;
         };

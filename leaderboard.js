@@ -6,10 +6,28 @@ var LeaderBoard = {
 
 function SubmitScore()
 {
-    var simple_score = {};
-    simple_score.Name = api.facebook.user.name;
-    simple_score.FBUserId = api.facebook.user.id;
-    simple_score.Points = game.ui.acumuledPoints;
+    var score = {};
+    score.Name = 'Shaka';
+    score.FBUserId = 1454082351;
+    score.Points = 1234;
+
+    var saveoptions = {
+        facebook : true,
+        highest: true,
+        allowduplicates: false
+    };
+
+    var listoptions = {
+        perpage: 5,
+        friendslist: []
+    };
+
+    //Playtomic.Leaderboards.SaveAndList(score, "highscores", SubmitComplete, saveoptions, listoptions);
+    Playtomic.Leaderboards.SaveAndList(score, "highscores", SubmitComplete, saveoptions, listoptions);
+    /*var simple_score = {};
+    simple_score.Name = 'Shaka';//api.facebook.user.name;
+    simple_score.FBUserId = 123456789//api.facebook.user.id;
+    simple_score.Points = 1234//game.ui.acumuledPoints;
 
     // submit to the highest-is-best table "highscores"
 	var score_data = {
@@ -18,26 +36,27 @@ function SubmitScore()
 		allowduplicates: false
 	};
 
-    Playtomic.Leaderboards.Submit(simple_score, "highscores", SubmitComplete, score_data);
+    Playtomic.Leaderboards.SaveAndList(simple_score, "highscores", SubmitComplete, score_data);*/
 }
 
-function SubmitComplete(score, response)
+function SubmitComplete(score, num, response)
 {
-    if(score.Success)
-    {
-        //alert("Score saved!");	
-    }
-    else
-    {
-        // submission failed because of response.ErrorCode
-    }
+    alert(api.JSON2String(score));
+    alert(api.JSON2String(num));
+    alert(api.JSON2String(response));
+    if(response.Success){
+        
+    }else{
+        
+    };
+
 }
 
 function retrieveLeaderboard(divFB, divGen){
 	LeaderBoard.divGen = document.getElementById(divGen);
 	LeaderBoard.divFB = document.getElementById(divFB);
 	Playtomic.Leaderboards.List("highscores", retrieveGeneralLeaderboard, { perpage: 5});
-	Playtomic.Leaderboards.ListFB("highscores", retrieveFacebookLeaderboard, { friendslist: api.facebook.friends, perpage: 5 });
+	//Playtomic.Leaderboards.List("highscores", retrieveFacebookLeaderboard, { facebook: true, friendslist: api.facebook.friends, perpage: 5 });
 };
 
 function retrieveGeneralLeaderboard(scores, numscores, response){

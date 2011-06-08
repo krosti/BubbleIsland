@@ -1,3 +1,35 @@
+//  This file is part of the official Playtomic API for HTML5 games.  
+//  Playtomic is a real time analytics platform for casual games 
+//  and services that go in casual games.  If you haven't used it 
+//  before check it out:
+//  http://playtomic.com/
+//
+//  Created by ben at the above domain on 2/25/11.
+//  Copyright 2011 Playtomic LLC. All rights reserved.
+//
+//  Documentation is available at:
+//  http://playtomic.com/api/html5
+//
+// PLEASE NOTE:
+// You may modify this SDK if you wish but be kind to our servers.  Be
+// careful about modifying the analytics stuff as it may give you 
+// borked reports.
+//
+// If you make any awesome improvements feel free to let us know!
+//
+// -------------------------------------------------------------------------
+// THIS SOFTWARE IS PROVIDED BY PLAYTOMIC, LLC "AS IS" AND ANY
+// EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+// IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+// PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR
+// CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+// EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+// PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
+// PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+// LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+// NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+// SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
 // -------------------------------------------------------------------------
 // CONFIG
 // -------------------------------------------------------------------------
@@ -45,7 +77,7 @@ Playtomic.Log.View = function(swfid, guid, defaulturl)
 	
 	Playtomic.SourceURL = escape(defaulturl ? defaulturl : document.location);
 
-	if(Playtomic.SourceURL == null || Playtomic.SourceURL == "")
+	if(Playtomic.SourceURL == null || Playtomic.SourceURL == "" || Playtomic.SourceURL.indexOf("https://") == 0)
 	{
 		Playtomic.Enabled = false;
 		return;
@@ -94,7 +126,17 @@ Playtomic.Log.Ping = function()
 		Playtomic.Log.FirstPing = false;
 	}
 }
-		
+
+// links
+Playtomic.Log.Link = function(url, name, group, unique, total, fail)
+{
+	if(!Playtomic.Enabled)
+		return;
+	
+	Playtomic.Log.Send("l/" + Playtomic.Clean(name) + "/" + Playtomic.Clean(group) + "/" + Playtomic.Clean(url) + "/" + unique + "/" + total + "/" + fail);
+}
+	
+// custom metrics
 Playtomic.Log.CustomMetric = function(name, group, unique)
 {
 	if(!Playtomic.Enabled)
@@ -114,6 +156,7 @@ Playtomic.Log.CustomMetric = function(name, group, unique)
 	Playtomic.Log.Send("c/" + Playtomic.Clean(name) + "/" + Playtomic.Clean(group));
 }
 
+// level metrics
 Playtomic.Log.LevelCounterMetric = function(name, level, unique)
 {		
 	if(!Playtomic.Enabled)
@@ -162,6 +205,65 @@ Playtomic.Log.LevelAverageMetric = function(name, level, value, unique)
 	Playtomic.Log.Send("la/" + Playtomic.Clean(name) + "/" + Playtomic.Clean(level) + "/" + value);
 }
 
+// heatmaps
+Playtomic.Log.Heatmap = function(name, group, x, y)
+{
+	if(!Playtomic.Enabled)
+		return;
+
+	Playtomic.Log.Send("h/" + Playtomic.Clean(name) + "/" + Playtomic.Clean(group) + "/" + x + "/" + y);
+}
+
+// funnels
+Playtomic.Log.Funnel = function(name, step, stepnum)
+{
+	if(!Playtomic.Enabled)
+		return;
+
+	Playtomic.Log.Send("f/" + Playtomic.Clean(name) + "/" + Playtomic.Clean(step) + "/" + num);
+}
+
+// player levels
+Playtomic.Log.PlayerLevelStart = function(levelid)
+{
+	if(!Playtomic.Enabled)
+		return;
+
+	Playtomic.Log.Send("pls/" + levelid);
+}
+
+Playtomic.Log.PlayerLevelWin = function(levelid)
+{
+	if(!Playtomic.Enabled)
+		return;
+
+	Playtomic.Log.Send("plw/" + levelid);
+}
+
+Playtomic.Log.PlayerLevelQuit = function(levelid)
+{
+	if(!Playtomic.Enabled)
+		return;
+
+	Playtomic.Log.Send("plq/" + levelid);
+}
+
+Playtomic.Log.PlayerLevelRestart = function(levelid)
+{
+	if(!Playtomic.Enabled)
+		return;
+
+	Playtomic.Log.Send("plr/" + levelid);
+}
+
+Playtomic.Log.PlayerLevelFlag = function(levelid)
+{
+	if(!Playtomic.Enabled)
+		return;
+
+	Playtomic.Log.Send("plf/" + levelid);
+}
+
 Playtomic.Log.Send = function(data, forcesend)
 {
 	Playtomic.Log.Request.Queue(data);
@@ -175,6 +277,9 @@ Playtomic.Log.Send = function(data, forcesend)
 
 Playtomic.Log.ForceSend = function()
 {
+	if(!Playtomic.Enabled)
+		return;
+
 	Playtomic.Log.Request.Send();
 	Playtomic.Log.Request = new PlaytomicRequest();
 }
@@ -210,6 +315,149 @@ function PlaytomicRequest()
 }
 
 // -------------------------------------------------------------------------
+// LINKS
+// -------------------------------------------------------------------------
+Playtomic.Link = {};
+Playtomic.Link.Clicks = new Array();
+
+Playtomic.Link.Track = function(url, name, group)
+{
+	var unique = 0;
+	var bunique = 0;
+	var total = 0;
+	var btotal = 0;
+	var fail = 0;
+	var bfail = 0;
+	var key = url + "." + name;
+	var result;
+
+	var baseurl = url;
+	baseurl = baseurl.replace("http://", "");
+	
+	if(baseurl.indexOf("/") > -1)
+		baseurl = baseurl.substring(0, baseurl.indexOf("/"));
+
+	if(baseurl.indexOf("?") > -1)
+		baseurl = baseurl.substring(0, baseurl.indexOf("?"));
+	
+	baseurl = "http://" + baseurl + "/";
+
+	var baseurlname = baseurl;
+	
+	if(baseurlname.indexOf("//") > -1)
+		baseurlname = baseurlname.substring(baseurlname.indexOf("//") + 2);
+	
+	baseurlname = baseurlname.replace("www.", "");
+
+	if(baseurlname.indexOf("/") > -1)
+	{
+		baseurlname = baseurlname.substring(0, baseurlname.indexOf("/"));
+	}
+
+	if(Playtomic.Link.Clicks.indexOf(key) > -1)
+	{
+		total = 1;
+	}
+	else
+	{
+		total = 1;
+		unique = 1;
+		Playtomic.Link.Clicks.push(key);
+	}
+
+	if(Playtomic.Link.Clicks.indexOf(baseurlname) > -1)
+	{
+		btotal = 1;
+	}
+	else
+	{
+		btotal = 1;
+		bunique = 1;
+		Playtomic.Link.Clicks.push(baseurlname);
+	}
+				
+	Playtomic.Log.Link(baseurl, baseurlname.toLowerCase(), "DomainTotals", bunique, btotal, bfail);
+	Playtomic.Log.Link(url, name, group, unique, total, fail);
+	Playtomic.Log.ForceSend();
+}
+
+Playtomic.Link.Open = function(url, name, group)
+{
+	var unique = 0;
+	var bunique = 0;
+	var total = 0;
+	var btotal = 0;
+	var fail = 0;
+	var bfail = 0;
+	var key = url + "." + name;
+	var result;
+
+	var baseurl = url;
+	baseurl = baseurl.replace("http://", "");
+	
+	if(baseurl.indexOf("/") > -1)
+		baseurl = baseurl.substring(0, baseurl.indexOf("/"));
+
+	if(baseurl.indexOf("?") > -1)
+		baseurl = baseurl.substring(0, baseurl.indexOf("?"));
+		
+	baseurl = "http://" + baseurl + "/";
+
+	var baseurlname = baseurl;
+	
+	if(baseurlname.indexOf("//") > -1)
+		baseurlname = baseurlname.substring(baseurlname.indexOf("//") + 2);
+	
+	baseurlname = baseurlname.replace("www.", "");
+
+	if(baseurlname.indexOf("/") > -1)
+	{
+		baseurlname = baseurlname.substring(0, baseurlname.indexOf("/"));
+	}
+
+	try
+	{
+		var page = window.open(url, "_blank");
+
+		if(Playtomic.Link.Clicks.indexOf(key) > -1)
+		{
+			total = 1;
+		}
+		else
+		{
+			total = 1;
+			unique = 1;
+			Playtomic.Link.Clicks.push(key);
+		}
+
+		if(Playtomic.Link.Clicks.indexOf(baseurlname) > -1)
+		{
+			btotal = 1;
+		}
+		else
+		{
+			btotal = 1;
+			bunique = 1;
+			Playtomic.Link.Clicks.push(baseurlname);
+		}
+
+		result = true;
+	}
+	catch(err)
+	{
+		fail = 1;
+		bfail = 1;
+		result = false;
+	}
+				
+	Playtomic.Log.Link(baseurl, baseurlname.toLowerCase(), "DomainTotals", bunique, btotal, bfail);
+	Playtomic.Log.Link(url, name, group, unique, total, fail);
+	Playtomic.Log.ForceSend();
+
+	return result;
+}
+
+// -------------------------------------------------------------------------
 // LEVEL SHARING
 // -------------------------------------------------------------------------
 Playtomic.PlayerLevels = {};
@@ -218,21 +466,21 @@ Playtomic.PlayerLevels.Save = function(level, callback)
 {
 	var postdata = "nothumb=true" +
 					"&playerid=" + level.PlayerId + 
-					"&playersource=" + escape(level.PlayerSource) +
-					"&playername=" + escape(level.PlayerName) + 
-					"&name=" + escape(level.Name);
+					"&playersource=" + encodeURI(level.PlayerSource) +
+					"&playername=" + encodeURI(level.PlayerName) + 
+					"&name=" + encodeURI(level.Name);
 	
 	var c = 0;
 
 	for(var key in level.CustomData)
 	{
 		postdata += "&ckey" + c + "=" + key;
-		postdata += "&cdata" + c + "=" + escape(level.CustomData[key]);
+		postdata += "&cdata" + c + "=" + encodeURI(level.CustomData[key]);
 		c++;
 	}
 
 	postdata += "&customfields=" + c;
-	postdata += "&data=" + escape(level.Data);
+	postdata += "&data=" + encodeURI(level.Data);
 
 	var bridge = function(response)
 	{
@@ -302,6 +550,31 @@ Playtomic.PlayerLevels.Rate = function(levelid, rating, callback)
 	Playtomic.PostData("", Playtomic.APIUrl + "playerlevels/rate.aspx?swfid=" + Playtomic.SWFID + "&levelid=" + levelid + "&rating=" + rating + "&js=true", bridge, failvalue);
 }
 
+Playtomic.PlayerLevels.LogStart = function(levelid)
+{
+	Playtomic.Log.PlayerLevelStart(levelid);
+}
+
+Playtomic.PlayerLevels.LogQuit = function(levelid)
+{
+	Playtomic.Log.PlayerLevelQuit(levelid);
+}
+
+Playtomic.PlayerLevels.LogWin = function(levelid)
+{
+	Playtomic.Log.PlayerLevelWin(levelid);
+}
+
+Playtomic.PlayerLevels.LogRetry = function(levelid)
+{
+	Playtomic.Log.PlayerLevelRetry(levelid);
+}
+
+Playtomic.PlayerLevels.Flag = function(levelid)
+{
+	Playtomic.Log.PlayerLevelFlag(levelid);
+}
+
 // -------------------------------------------------------------------------
 // LEADERBOARDS
 // -------------------------------------------------------------------------
@@ -314,8 +587,10 @@ Playtomic.Leaderboards.List = function(table, callback, options)
 
 	var global = options.global || options.global == false ? options.global : true;
 	var highest = options.highest || options.highest == false ? options.highest : true;
+	var facebook = options.facebook || options.facebook == false ? options.facebook : false;
 	var mode = options.mode ? options.mode : "alltime";
 	var customfilters = options.customfilters ? options.customfilters : {};
+	var friendslist = options.friendslist ? options.friendslist : new Array();
 	var page = options.page ? options.page : 1;
 	var perpage = options.perpage ? options.perpage : 20;
 
@@ -338,22 +613,196 @@ Playtomic.Leaderboards.List = function(table, callback, options)
 	}
 
 	var failvalue = {Status: 0, ErrorCode: 1, Data: {Scores: [], NumScores: 0}};
+	
+	postdata += "&url=" + (global ? "global" : Playtomic.SourceURL);
+	postdata += "&table=" + encodeURI(table);
+	postdata += "&mode=" + mode;
+	postdata += "&numfilters=" + numcustomfilters;
+	postdata += "&page=" + page;
+	postdata += "&perpage=" + perpage;
+	
+	var url;
+	
+	if(facebook)
+	{
+		if(friendslist.length > 0)
+		{
+			postdata += "&friendslist=" + friendslist.join(",");
+		}
+		
+		url = Playtomic.APIUrl + "v2/leaderboards/listfb.aspx?swfid=" + Playtomic.SWFID + "&js=y";
+	}
+	else
+	{
+		url = Playtomic.APIUrl + "v2/leaderboards/list.aspx?swfid=" + Playtomic.SWFID + "&js=y";
+	}
 
-	Playtomic.PostData(postdata, Playtomic.APIUrl + "leaderboards/list.aspx?swfid=" + Playtomic.SWFID + "&js=true&url=" + (global ? "global" : Playtomic.SourceURL) + "&table=" + escape(table) + "&mode=" + mode + "&filters=" + numcustomfilters + "&page=" + page + "&perpage=" + perpage, bridge, failvalue);
+	Playtomic.PostData(postdata, url, bridge, failvalue);
 }
 
-Playtomic.Leaderboards.ListFB = function(table, callback, options)
+Playtomic.Leaderboards.ListComplete = function(response, callback)
+{
+	if(callback == null)
+		return;
+
+	var scores = [];
+	var arr = response.Data.Scores;
+	if(arr == undefined) arr = [];
+	for(var i=0; i<arr.length; i++)
+	{
+		var score = {};
+		score.Name = Playtomic.Unescape(arr[i].Name);
+		score.FBUserId = arr[i].FBUserId;
+		score.Points = arr[i].Points;
+		score.Website = arr[i].Website;
+		score.SDate = arr[i].SDate;
+		score.RDate = arr[i].RDate;
+		score.Rank = arr[i].Rank;
+		score.CustomData = {};
+		
+		for(x in arr[i].CustomData)
+			score.CustomData[x] = Playtomic.Unescape(arr[i].CustomData[x]);
+
+		scores[i] = score;
+	}
+
+	callback(scores, response.Data.NumScores, {Success: response.Status == 1, ErrorCode: response.ErrorCode});
+}
+
+Playtomic.Leaderboards.Save = function(score, table, callback, options)
 {
 	if(options == null)
 		options = new Object();
-	
-	var global = options.global || options.global == false ? options.global : true;
+		
+	var allowduplicates = options.allowduplicates || options.allowduplicates == false ? options.allowduplicates : false;
 	var highest = options.highest || options.highest == false ? options.highest : true;
+
+	var postdata = "table=" + encodeURI(table) + 
+					"&name=" + encodeURI(score.Name) + 
+					"&points=" + encodeURI.Points + 
+					"&allowduplicates=" + (allowduplicates ? "y" : "n") + 
+					"&highest=" + (highest ? "y" : "n") + 
+					"&auth=" + Playtomic.MD5(Playtomic.SourceURL + score.Points.toString()) + 
+					"&url=" + Playtomic.SourceURL
+	
+
+	if(score.FBUserId != "")
+	{
+		postdata += "&fbuserid=" + score.FBUserId;
+	}
+
+	var c = 0;
+
+	if(score.CustomData)
+	{
+		for(var key in score.CustomData)
+		{
+			postdata += "&ckey" + c + "=" + key;
+			postdata += "&cdata" + c + "=" + encodeURI(level.CustomData[key]);
+			c++;
+		}
+	}
+
+	postdata += "&numfields=" + c;
+
+	var bridge = function(response)
+	{
+		if(callback == null)
+			return;
+
+		callback({Success: response.Status == 1, ErrorCode: response.ErrorCode});
+	}
+
+	var failvalue = {Status: 0, ErrorCode: 1, Data: {}};
+
+	Playtomic.PostData(postdata, Playtomic.APIUrl + "v2/leaderboards/save.aspx?swfid=" + Playtomic.SWFID + "&js=y", bridge, failvalue);
+}
+
+Playtomic.Leaderboards.SaveAndList = function(score, table, callback, saveoptions, listoptions)
+{
+	// common data
+	var postdata = "table=" + encodeURI(table) + 
+			"&highest=" + (highest ? "y" : "n");
+	
+	// save data
+	if(saveoptions == null)
+		saveoptions = new Object();
+		
+	var allowduplicates = saveoptions.allowduplicates || saveoptions.allowduplicates == false ? saveoptions.allowduplicates : false;
+	var highest = saveoptions.highest || saveoptions.highest == false ? saveoptions.highest : true;
+	var facebook = saveoptions.facebook || saveoptions.facebook == false ? saveoptions.facebook : false;
+	alert(api.JSON2String(score));
+	/*var*/ postdata += 	"&name=" + encodeURI(score.Name) + 
+					"&points=" + encodeURI(score.Points) + 
+					"&allowduplicates=" + (allowduplicates ? "y" : "n") + 
+					"&auth=" + Playtomic.MD5(Playtomic.SourceURL + score.Points.toString()) + 
+					"&url=" + Playtomic.SourceURL
+	alert(postdata);
+
+	if(score.FBUserId != null && score.FBUserId != "")
+	{
+		postdata += "&fbuserid=" + score.FBUserId;
+	}
+
+	var c = 0;
+
+	if(score.CustomData)
+	{
+		for(var key in score.CustomData)
+		{
+			postdata += "&ckey" + c + "=" + key;
+			postdata += "&cdata" + c + "=" + encodeURI(level.CustomData[key]);
+			c++;
+		}
+	}
+
+	postdata += "&numfields=" + c;
+	
+	// list options
+	if(listoptions == null)
+		listoptions = new Object();
+		
+	var global = listoptions.global || listoptions.global == false ? listoptions.global : true;
+	var mode = listoptions.mode ? listoptions.mode : "alltime";
+	var customfilters = listoptions.customfilters ? listoptions.customfilters : {};
+	var perpage = listoptions.perpage ? listoptions.perpage : 20;
 	var friendslist = options.friendslist ? options.friendslist : new Array();
-	var mode = options.mode ? options.mode : "alltime";
-	var customfilters = options.customfilters ? options.customfilters : {};
-	var page = options.page ? options.page : 1;
-	var perpage = options.perpage ? options.perpage : 20;
+	
+	postdata += "&global=" + (global ? "y" : "n");
+	postdata += "&mode=" + mode;
+	postdata += "&numfilters=" + numcustomfilters;
+	postdata += "&perpage=" + perpage;
+	
+	var numcustomfilters = 0;
+	
+	if(customfilters != null)
+	{
+		for(var key in customfilters)
+		{
+			postdata["lkey" + numcustomfilters] = key;
+			postdata["ldata" + numcustomfilters] = escape(customfilters[key]);
+			numcustomfilters++;
+		}
+	}
+	
+	postdata["numfilters"] = numcustomfilters;
+	
+	// extra wranging for facebook
+	var url;
+	
+	if(facebook)
+	{
+		if(friendslist.length > 0)
+		{
+			postdata += friendslist.join(",");
+		}
+		
+		url = Playtomic.APIUrl + "v2/leaderboards/saveandlistfb.aspx?swfid=" + Playtomic.SWFID + "&js=y", bridge
+	}
+	else
+	{
+		url = Playtomic.APIUrl + "v2/leaderboards/saveandlist.aspx?swfid=" + Playtomic.SWFID + "&js=y", bridge
+	}
 
 	var bridge = function(response)
 	{
@@ -365,131 +814,43 @@ Playtomic.Leaderboards.ListFB = function(table, callback, options)
 
 	var failvalue = {Status: 0, ErrorCode: 1, Data: {Scores: [], NumScores: 0}};
 
-	var postdata = "friendslist=" + friendslist.join(",");
-	var numcustomfilters = 0;
-
-	for(var x in customfilters)
-	{
-		postdata += "&ckey" + numcustomfilters + "=" + x;
-		postdata += "&cdata" + numcustomfilters + "=" + customfilters[x];
-		numcustomfilters++;
-	}
-
-	Playtomic.PostData(postdata, Playtomic.APIUrl + "leaderboards/listfb.aspx?swfid=" + Playtomic.SWFID + "&js=true&url=" + (global ? "global" : Playtomic.SourceURL) + "&mode=" + mode + "&filters=" + numcustomfilters + "&table=" + escape(table) + "&page=" + page + "&perpage=" + perpage, bridge, failvalue);
+	Playtomic.PostData(postdata, url, bridge, failvalue);
 }
 
-Playtomic.Leaderboards.ListComplete = function(response, callback)
+Playtomic.Leaderboards.CreatePrivateLeaderboard = function(table, highest, permalink, callback)
 {
-	if(callback == null)
-		return;
-
-	var scores = [];
-	var arr = response.Data.Scores;
-
-	for(var i=0; i<arr.length; i++)
-	{
-		var score = {};
-		score.Name = Playtomic.Unescape(arr[i].Name);
-		score.FBUserId = arr[i].FBUserId;
-		score.Points = arr[i].Points;
-		score.Website = arr[i].Website;
-		score.SDate = arr[i].SDate;
-		score.RDate = arr[i].RDate;
-		score.CustomData = {};
-
-		for(x in arr[i].CustomData)
-			score.CustomData[x] = Playtomic.Unescape(arr[i].CustomData[x]);
-
-		scores[i] = score;
-	}
-
-	callback(scores, response.Data.NumScores, {Success: response.Status == 1, ErrorCode: response.ErrorCode});
-}
-
-Playtomic.Leaderboards.Submit = function(score, table, callback, options)
-{
-	if(options == null)
-		options = new Object();
-		
-	var allowduplicates = options.allowduplicates || options.allowduplicates == false ? options.allowduplicates : false;
-	var highest = options.highest || options.highest == false ? options.highest : true;
-
-	var postdata = "table=" + escape(table) + 
-					"&name=" + escape(score.Name) + 
-					"&points=" + score.Points + 
-					"&allowduplicates=" + (allowduplicates ? "y" : "n") + 
-					"&highest=" + (highest ? "y" : "n") + 
-					"&auth=" + Playtomic.MD5(Playtomic.SourceURL + score.Points.toString());
-	
-	var c = 0;
-
-	if(score.CustomData)
-	{
-		for(var key in score.CustomData)
-		{
-			postdata += "&ckey" + c + "=" + key;
-			postdata += "&cdata" + c + "=" + escape(level.CustomData[key]);
-			c++;
-		}
-	}
-
-	postdata += "&customfields=" + c;
-
+	var postdata = "table=" + encodeURI(table) + 
+			"&highest=" + (highest ? "y" : "n") + 
+			"&permalink=" + encodeURI(permalink);
+			
 	var bridge = function(response)
 	{
 		if(callback == null)
 			return;
 
-		callback({Success: response.Status == 1, ErrorCode: response.ErrorCode});
+		callback({Success: response.Status == 1, ErrorCode: response.ErrorCode, Data: { TableId: response.TableId, Name: table, Permalink: response.Permalink, Bitly: response.Bitly, RealName: response.RealName} });
 	}
 
-	var failvalue = {Status: 0, ErrorCode: 1, Data: {}};
+	var failvalue = {Status: 0, ErrorCode: 1, Data: {Name: "", RealName: "", Permalink: "", Bitly: ""}};
 
-	Playtomic.PostData(postdata, Playtomic.APIUrl + "leaderboards/save.aspx?swfid=" + Playtomic.SWFID + "&js=true&url=" + Playtomic.SourceURL, bridge, failvalue);
+	Playtomic.PostData(postdata, Playtomic.APIUrl + "v2/leaderboards/create.aspx?swfid=" + Playtomic.SWFID + "&js=y", bridge, failvalue);
 }
 
-Playtomic.Leaderboards.SubmitFB = function(score, table, callback, options)
+Playtomic.Leaderboards.LoadPrivateLeaderboard = function(tableid, callback)
 {
-	if(options == null)
-		options = new Object();
-		
-	var allowduplicates = options.allowduplicates || options.allowduplicates == false ? options.allowduplicates : false;
-	var highest = options.highest || options.highest == false ? options.highest : true;
-
-	var postdata = "table=" + escape(table) + 
-					"&name=" + escape(score.Name) + 
-					"&points=" + score.Points + 
-					"&allowduplicates=" + (allowduplicates ? "y" : "n") + 
-					"&auth=" + Playtomic.MD5(Playtomic.SourceURL + score.Points.toString()) +
-					"&fbuserid=" + score.FBUserId + 
-					"&highest=" + (highest ? "y" : "n") + 
-					"&fb=y";
+	var postdata = "tableid=" + tableid;
 	
-	var c = 0;
-
-	if(score.CustomData)
-	{
-		for(var key in score.CustomData)
-		{
-			postdata += "&ckey" + c + "=" + key;
-			postdata += "&cdata" + c + "=" + escape(score.CustomData[key]);
-			c++;
-		}
-	}
-
-	postdata += "&customfields=" + c;
-
 	var bridge = function(response)
 	{
 		if(callback == null)
 			return;
 
-		callback({Success: response.Status == 1, ErrorCode: response.ErrorCode});
+		callback({Success: response.Status == 1, ErrorCode: response.ErrorCode, Data: { Name: response.Name, Permalink: response.Permalink, Bitly: response.Bitly, RealName: response.RealName} });
 	}
 
-	var failvalue = {Status: 0, ErrorCode: 1, Data: {}};
+	var failvalue = {Status: 0, ErrorCode: 1, Data: {Name: "", RealName: "", Permalink: "", Bitly: ""}};
 
-	Playtomic.PostData(postdata, Playtomic.APIUrl + "leaderboards/save.aspx?swfid=" + Playtomic.SWFID + "&js=true&url=" + Playtomic.SourceURL, bridge, failvalue);
+	Playtomic.PostData(postdata, url, bridge, failvalue);
 }
 
 // -------------------------------------------------------------------------
@@ -632,7 +993,7 @@ Playtomic.Data.LevelAverageMetric = function(metric, level, callback, options)
 		if(callback == null)
 			return;
 
-		var data = {Name: "LevelAverageMetric", Metric: metric, Level: level, Day: day, Month: month, Year: year, Min: response.Data.Min, Max: response.Data.Max, Average: response.Data.Average};
+		var data = {Name: "LevelAverageMetric", Metric: metric, Level: level, Day: day, Month: month, Year: year, Min: response.Data.Min, Max: response.Data.Max, Average: response.Data.Average, Total: response.Data.Total};
 		callback(data, {Success: response.Status == 1, ErrorCode: response.ErrorCode});
 	}
 
@@ -788,12 +1149,18 @@ Playtomic.GetCookie = function(key)
 
 Playtomic.Clean = function(s)
 {
-	return escape(s.replace("/", "\\").replace("~", "-"));
+	while(s.indexOf("/") > -1)
+		s = s.replace("/", "\\");
+		
+	while(s.indexOf("~") > -1)
+		s = s.replace("~", "-");				
+
+	return escape(s);
 }
 
 Playtomic.Unescape = function(s)
 {
-	return unescape(s).replace(/\+/g, ' ');
+	return decodeURI(s).replace(/\+/g, " ");
 }
 
 /*
@@ -986,168 +1353,6 @@ Playtomic.MD5 = function(str)
 	return rhex(a) + rhex(b) + rhex(c) + rhex(d);
 }
 
-// json parsing from http://www.json.org
-/*
-    http://www.JSON.org/json2.js
-    2010-08-25
-
-    Public Domain.
-
-    NO WARRANTY EXPRESSED OR IMPLIED. USE AT YOUR OWN RISK.
-
-    See http://www.JSON.org/js.html
-
-
-    This code should be minified before deployment.
-    See http://javascript.crockford.com/jsmin.html
-
-    USE YOUR OWN COPY. IT IS EXTREMELY UNWISE TO LOAD CODE FROM SERVERS YOU DO
-    NOT CONTROL.
-
-
-    This file creates a global JSON object containing two methods: stringify
-    and parse.
-
-        JSON.stringify(value, replacer, space)
-            value       any JavaScript value, usually an object or array.
-
-            replacer    an optional parameter that determines how object
-                        values are stringified for objects. It can be a
-                        function or an array of strings.
-
-            space       an optional parameter that specifies the indentation
-                        of nested structures. If it is omitted, the text will
-                        be packed without extra whitespace. If it is a number,
-                        it will specify the number of spaces to indent at each
-                        level. If it is a string (such as '\t' or '&nbsp;'),
-                        it contains the characters used to indent at each level.
-
-            This method produces a JSON text from a JavaScript value.
-
-            When an object value is found, if the object contains a toJSON
-            method, its toJSON method will be called and the result will be
-            stringified. A toJSON method does not serialize: it returns the
-            value represented by the name/value pair that should be serialized,
-            or undefined if nothing should be serialized. The toJSON method
-            will be passed the key associated with the value, and this will be
-            bound to the value
-
-            For example, this would serialize Dates as ISO strings.
-
-                Date.prototype.toJSON = function (key) {
-                    function f(n) {
-                        // Format integers to have at least two digits.
-                        return n < 10 ? '0' + n : n;
-                    }
-
-                    return this.getUTCFullYear()   + '-' +
-                         f(this.getUTCMonth() + 1) + '-' +
-                         f(this.getUTCDate())      + 'T' +
-                         f(this.getUTCHours())     + ':' +
-                         f(this.getUTCMinutes())   + ':' +
-                         f(this.getUTCSeconds())   + 'Z';
-                };
-
-            You can provide an optional replacer method. It will be passed the
-            key and value of each member, with this bound to the containing
-            object. The value that is returned from your method will be
-            serialized. If your method returns undefined, then the member will
-            be excluded from the serialization.
-
-            If the replacer parameter is an array of strings, then it will be
-            used to select the members to be serialized. It filters the results
-            such that only members with keys listed in the replacer array are
-            stringified.
-
-            Values that do not have JSON representations, such as undefined or
-            functions, will not be serialized. Such values in objects will be
-            dropped; in arrays they will be replaced with null. You can use
-            a replacer function to replace those with JSON values.
-            JSON.stringify(undefined) returns undefined.
-
-            The optional space parameter produces a stringification of the
-            value that is filled with line breaks and indentation to make it
-            easier to read.
-
-            If the space parameter is a non-empty string, then that string will
-            be used for indentation. If the space parameter is a number, then
-            the indentation will be that many spaces.
-
-            Example:
-
-            text = JSON.stringify(['e', {pluribus: 'unum'}]);
-            // text is '["e",{"pluribus":"unum"}]'
-
-
-            text = JSON.stringify(['e', {pluribus: 'unum'}], null, '\t');
-            // text is '[\n\t"e",\n\t{\n\t\t"pluribus": "unum"\n\t}\n]'
-
-            text = JSON.stringify([new Date()], function (key, value) {
-                return this[key] instanceof Date ?
-                    'Date(' + this[key] + ')' : value;
-            });
-            // text is '["Date(---current time---)"]'
-
-
-        JSON.parse(text, reviver)
-            This method parses a JSON text to produce an object or array.
-            It can throw a SyntaxError exception.
-
-            The optional reviver parameter is a function that can filter and
-            transform the results. It receives each of the keys and values,
-            and its return value is used instead of the original value.
-            If it returns what it received, then the structure is not modified.
-            If it returns undefined then the member is deleted.
-
-            Example:
-
-            // Parse the text. Values that look like ISO date strings will
-            // be converted to Date objects.
-
-            myData = JSON.parse(text, function (key, value) {
-                var a;
-                if (typeof value === 'string') {
-                    a =
-/^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2}(?:\.\d*)?)Z$/.exec(value);
-                    if (a) {
-                        return new Date(Date.UTC(+a[1], +a[2] - 1, +a[3], +a[4],
-                            +a[5], +a[6]));
-                    }
-                }
-                return value;
-            });
-
-            myData = JSON.parse('["Date(09/09/2001)"]', function (key, value) {
-                var d;
-                if (typeof value === 'string' &&
-                        value.slice(0, 5) === 'Date(' &&
-                        value.slice(-1) === ')') {
-                    d = new Date(value.slice(5, -1));
-                    if (d) {
-                        return d;
-                    }
-                }
-                return value;
-            });
-
-
-    This is a reference implementation. You are free to copy, modify, or
-    redistribute.
-*/
-
-/*jslint evil: true, strict: false */
-
-/*members "", "\b", "\t", "\n", "\f", "\r", "\"", JSON, "\\", apply,
-    call, charCodeAt, getUTCDate, getUTCFullYear, getUTCHours,
-    getUTCMinutes, getUTCMonth, getUTCSeconds, hasOwnProperty, join,
-    lastIndex, length, parse, prototype, push, replace, slice, stringify,
-    test, toJSON, toString, valueOf
-*/
-
-
-// Create a JSON object only if one does not already exist. We create the
-// methods in a closure to avoid creating global variables.
-
 if (!this.JSON) {
     this.JSON = {};
 }
@@ -1155,7 +1360,6 @@ if (!this.JSON) {
 (function () {
 
     function f(n) {
-        // Format integers to have at least two digits.
         return n < 10 ? '0' + n : n;
     }
 
@@ -1183,7 +1387,7 @@ if (!this.JSON) {
         escapable = /[\\\"\x00-\x1f\x7f-\x9f\u00ad\u0600-\u0604\u070f\u17b4\u17b5\u200c-\u200f\u2028-\u202f\u2060-\u206f\ufeff\ufff0-\uffff]/g,
         gap,
         indent,
-        meta = {    // table of character substitutions
+        meta = {
             '\b': '\\b',
             '\t': '\\t',
             '\n': '\\n',
@@ -1196,11 +1400,6 @@ if (!this.JSON) {
 
 
     function quote(string) {
-
-// If the string contains no control characters, no quote characters, and no
-// backslash characters, then we can safely slap some quotes around it.
-// Otherwise we must also replace the offending characters with safe escape
-// sequences.
 
         escapable.lastIndex = 0;
         return escapable.test(string) ?
@@ -1215,31 +1414,25 @@ if (!this.JSON) {
 
     function str(key, holder) {
 
-// Produce a string from holder[key].
 
-        var i,          // The loop counter.
-            k,          // The member key.
-            v,          // The member value.
+        var i, 
+            k,  
+            v,    
             length,
             mind = gap,
             partial,
             value = holder[key];
-
-// If the value has a toJSON method, call it to obtain a replacement value.
 
         if (value && typeof value === 'object' &&
                 typeof value.toJSON === 'function') {
             value = value.toJSON(key);
         }
 
-// If we were called with a replacer function, then call the replacer to
-// obtain a replacement value.
 
         if (typeof rep === 'function') {
             value = rep.call(holder, key, value);
         }
 
-// What happens next depends on the value's type.
 
         switch (typeof value) {
         case 'string':
@@ -1247,50 +1440,36 @@ if (!this.JSON) {
 
         case 'number':
 
-// JSON numbers must be finite. Encode non-finite numbers as null.
 
             return isFinite(value) ? String(value) : 'null';
 
         case 'boolean':
         case 'null':
 
-// If the value is a boolean or null, convert it to a string. Note:
-// typeof null does not produce 'null'. The case is included here in
-// the remote chance that this gets fixed someday.
 
             return String(value);
 
-// If the type is 'object', we might be dealing with an object or an array or
-// null.
 
         case 'object':
 
-// Due to a specification blunder in ECMAScript, typeof null is 'object',
-// so watch out for that case.
 
             if (!value) {
                 return 'null';
             }
 
-// Make an array to hold the partial results of stringifying this object value.
 
             gap += indent;
             partial = [];
 
-// Is the value an array?
 
             if (Object.prototype.toString.apply(value) === '[object Array]') {
 
-// The value is an array. Stringify every element. Use null as a placeholder
-// for non-JSON values.
 
                 length = value.length;
                 for (i = 0; i < length; i += 1) {
                     partial[i] = str(i, value) || 'null';
                 }
 
-// Join all of the elements together, separated with commas, and wrap them in
-// brackets.
 
                 v = partial.length === 0 ? '[]' :
                     gap ? '[\n' + gap +
@@ -1301,7 +1480,6 @@ if (!this.JSON) {
                 return v;
             }
 
-// If the replacer is an array, use it to select the members to be stringified.
 
             if (rep && typeof rep === 'object') {
                 length = rep.length;
@@ -1316,7 +1494,6 @@ if (!this.JSON) {
                 }
             } else {
 
-// Otherwise, iterate through all of the keys in the object.
 
                 for (k in value) {
                     if (Object.hasOwnProperty.call(value, k)) {
@@ -1328,8 +1505,6 @@ if (!this.JSON) {
                 }
             }
 
-// Join all of the member texts together, separated with commas,
-// and wrap them in braces.
 
             v = partial.length === 0 ? '{}' :
                 gap ? '{\n' + gap + partial.join(',\n' + gap) + '\n' +
@@ -1339,37 +1514,24 @@ if (!this.JSON) {
         }
     }
 
-// If the JSON object does not yet have a stringify method, give it one.
 
     if (typeof JSON.stringify !== 'function') {
         JSON.stringify = function (value, replacer, space) {
 
-// The stringify method takes a value and an optional replacer, and an optional
-// space parameter, and returns a JSON text. The replacer can be a function
-// that can replace values, or an array of strings that will select the keys.
-// A default replacer method can be provided. Use of the space parameter can
-// produce text that is more easily readable.
 
             var i;
             gap = '';
             indent = '';
-
-// If the space parameter is a number, make an indent string containing that
-// many spaces.
 
             if (typeof space === 'number') {
                 for (i = 0; i < space; i += 1) {
                     indent += ' ';
                 }
 
-// If the space parameter is a string, it will be used as the indent string.
 
             } else if (typeof space === 'string') {
                 indent = space;
             }
-
-// If there is a replacer, it must be a function or an array.
-// Otherwise, throw an error.
 
             rep = replacer;
             if (replacer && typeof replacer !== 'function' &&
@@ -1378,28 +1540,20 @@ if (!this.JSON) {
                 throw new Error('JSON.stringify');
             }
 
-// Make a fake root object containing our value under the key of ''.
-// Return the result of stringifying the value.
-
             return str('', {'': value});
         };
     }
 
 
-// If the JSON object does not yet have a parse method, give it one.
 
     if (typeof JSON.parse !== 'function') {
         JSON.parse = function (text, reviver) {
 
-// The parse method takes a text and an optional reviver function, and returns
-// a JavaScript value if the text is a valid JSON text.
 
             var j;
 
             function walk(holder, key) {
 
-// The walk method is used to recursively walk the resulting structure so
-// that modifications can be made.
 
                 var k, v, value = holder[key];
                 if (value && typeof value === 'object') {
@@ -1418,10 +1572,6 @@ if (!this.JSON) {
             }
 
 
-// Parsing happens in four stages. In the first stage, we replace certain
-// Unicode characters with escape sequences. JavaScript handles many characters
-// incorrectly, either silently deleting them, or treating them as line endings.
-
             text = String(text);
             cx.lastIndex = 0;
             if (cx.test(text)) {
@@ -1431,39 +1581,19 @@ if (!this.JSON) {
                 });
             }
 
-// In the second stage, we run the text against regular expressions that look
-// for non-JSON patterns. We are especially concerned with '()' and 'new'
-// because they can cause invocation, and '=' because it can cause mutation.
-// But just to be safe, we want to reject all unexpected forms.
-
-// We split the second stage into 4 regexp operations in order to work around
-// crippling inefficiencies in IE's and Safari's regexp engines. First we
-// replace the JSON backslash pairs with '@' (a non-JSON character). Second, we
-// replace all simple value tokens with ']' characters. Third, we delete all
-// open brackets that follow a colon or comma or that begin the text. Finally,
-// we look to see that the remaining characters are only whitespace or ']' or
-// ',' or ':' or '{' or '}'. If that is so, then the text is safe for eval.
 
             if (/^[\],:{}\s]*$/
 .test(text.replace(/\\(?:["\\\/bfnrt]|u[0-9a-fA-F]{4})/g, '@')
 .replace(/"[^"\\\n\r]*"|true|false|null|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?/g, ']')
 .replace(/(?:^|:|,)(?:\s*\[)+/g, ''))) {
 
-// In the third stage we use the eval function to compile the text into a
-// JavaScript structure. The '{' operator is subject to a syntactic ambiguity
-// in JavaScript: it can begin a block or an object literal. We wrap the text
-// in parens to eliminate the ambiguity.
 
                 j = eval('(' + text + ')');
 
-// In the optional fourth stage, we recursively walk the new structure, passing
-// each name/value pair to a reviver function for possible transformation.
 
                 return typeof reviver === 'function' ?
                     walk({'': j}, '') : j;
             }
-
-// If the text is not JSON parseable, then a SyntaxError is thrown.
 
             throw new SyntaxError('JSON.parse');
         };

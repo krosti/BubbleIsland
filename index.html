@@ -706,6 +706,7 @@ body.sgds .clear {
 -->
 
 <script type="text/javascript" charset="utf-8">
+var firstRun = false;
 //setDebugEnv('debug');
 //setDebugEnv('initScreen');	  
 /*softgame = new softgameApi();
@@ -739,6 +740,7 @@ function connectToFacebook2(){
 		api.facebook.retrieveUserData();
 		api.facebook.loaded = function(){
 			api.ui.hideWaiting();
+			if(firstRun) api.facebook.postMessage(api.facebook.user.name + ' is now enjoying the Bubble Paradise, Come on! don\'t miss this oportunitie and join ' + (api.facebook.user.gender == 'male' ? 'him' : 'her') + ' on this trip`and get some relaxing time togheter!');
 		};
 };
 
@@ -765,7 +767,10 @@ $(window).load(function () {
 //GUID: 3689729b4f17433c
 	setTimeout(function(){ window.scrollTo(0,1); }, 0);
 	//ºloader.init();
-	
+	if(window.localStorage.getItem('runned') == null){
+		firstRun = true;
+		window.localStora.setItem('runned', 1);
+	};
 });
 
 var gameSize = "320x480";

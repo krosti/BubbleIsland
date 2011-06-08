@@ -1731,7 +1731,10 @@ function bubbleLevel(w, h, bubblesWidth, bubblesHeight, lvlnbr){
 
 	};
 
-	
+	this.dispose = function(){
+		//clear memory
+		//delete work
+	};
 
 	// event handler
 
@@ -1760,48 +1763,33 @@ function gameUI(w, h){
 	this.backElement = document.createElement('div');
 	this.pauseElement = document.createElement('div');
 
+	// new element
+	this.multiBubbleElement = document.createElement('div');
+	this.bombBubbleElement = document.createElement('div');
+	this.freezeBubbleElement = document.createElement('div');
+
+
 	$(this.element).addClass('pointsFrame');
 	$(this.element2).addClass('lifesFrame');
 	$(this.element3).addClass('levelsFrame');
 	$(this.pauseElement).addClass('uiPauseButton' + gameSize);
+
+	// add classes to new elements
+	$(this.multiBubbleElement).addClass('' + gameSize);
+	$(this.bombBubbleElement).addClass('' + gameSize);
+	$(this.freezeBubbleElement).addClass('' + gameSize);
 
 	animNav.append(this.element);
 	animNav.append(this.element2);
 	animNav.append(this.element3);
 	animNav.append(this.backElement);
 	animNav.append(this.pauseElement);
-	/*this.element.style.backgroundImage = 'url('+uiPointsFrame.src+')';
-	//alert(uiPointsFrame.width + ':' + uiPointsFrame.height)
-	this.element.style.width = uiPointsFrame.width + 'px';
-	this.element.style.maxWidth = uiPointsFrame.width + 'px';
-	this.element.style.height = uiPointsFrame.height + 'px';
-	this.element.style.position = 'absolute';
-	this.element.style.top = (h * .7) + 'px';
-	this.element.style.left = (w - uiPointsFrame.width + 5) + 'px';
-	this.element2.style.backgroundImage = 'url('+uiLifeFrame.src+')';
-	this.element2.style.width = uiLifeFrame.width + 'px';
-	this.element2.style.height = uiLifeFrame.height + 'px';
-	this.element2.style.position = 'absolute';
-	this.element2.style.top = '0px';
-	this.element2.style.left = (w * (2/3)) + 'px';
-	this.element3.style.backgroundImage = 'url('+uiLevelFrame.src+')';
-	this.element3.style.width = uiLevelFrame.width + 'px';
-	this.element3.style.height = uiLevelFrame.height + 'px';
-	this.element3.style.position = 'absolute';
-	this.element3.style.top = (h * .7) + uiLevelFrame.height + 'px';
-	this.element3.style.left = (w - uiLevelFrame.width + 5) + 'px';*/
+
 	$(this.element).addClass('pointsFrame'+ gameSize);
 	$(this.element2).addClass('lifesFrame'+ gameSize);
 	$(this.element3).addClass('levelsFrame'+ gameSize);
 	$(this.backElement).addClass('gobackFrame' + gameSize);
-	/*this.backElement.style.backgroundImage = 'url('+uiBackButton.src+')';
-	//alert(uiBackButton.src + ':' + uiBackButton.width + ':' + uiBackButton.height);
-	this.backElement.style.width = uiBackButton.width + 'px';
-	this.backElement.style.height = uiBackButton.height + 'px';
-	this.backElement.style.position = 'absolute';
-	this.backElement.style.top = uiLifeFrame.height + 'px';
-	this.backElement.style.left = (w * (2/3)) + 'px';*/
-	//alert((uiLifeFrame.height + 5) + 'px' + (w * (2/3)) + 'px');
+
 	$(this.backElement).click(function(){ game.showMenu(); });
 
 	$(this.pauseElement).click(function(){
@@ -1860,13 +1848,13 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 	this.cannon;
 
 	this.canvas = document.getElementById(canvasObj);//$(canvasObj)
-	this.painter = document.getElementById(canvasObj).getContext('2d');
+	//this.painter = document.getElementById(canvasObj).getContext('2d');
 	/*this.backgroundCanvas = document.getElementById(backgroundCanvasObj);
 	this.backgroundPainter = document.getElementById(backgroundCanvasObj).getContext('2d');*/
-	this.buffercanvas = document.createElement('canvas');
-	this.frameBuffer = this.buffercanvas.getContext('2d');
+	/*this.buffercanvas = document.createElement('canvas');
+	this.frameBuffer = this.buffercanvas.getContext('2d');*/
 	//frameBuffer = this.frameBuffer;
-	frameBuffer = this.painter;
+	//frameBuffer = this.painter;
 	this.menu = document.getElementById(menuObj);
 	this.backgroundImage = backgroundImage;
 	this.lvlFrame = lvlFrame;
@@ -1913,8 +1901,8 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 
 	/*this.backgroundCanvas.height = this.canvas.height;
 	this.backgroundCanvas.width = this.canvas.width;*/
-	this.buffercanvas.height = this.canvas.height;
-	this.buffercanvas.width = this.canvas.width;
+	/*this.buffercanvas.height = this.canvas.height;
+	this.buffercanvas.width = this.canvas.width;*/
 	
 	this.ui = new gameUI(this.canvas.width, this.canvas.height);
 

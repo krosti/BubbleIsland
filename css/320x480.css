@@ -8,128 +8,198 @@
 */
 
 .pointsFrame320x480{
-	position: fixed;
-	background-image: url(../320x480/points.png);
-	top: 340px;
-	left: 240px;
-	width: 87px;
-	height: 62px;
-	min-height: 62px;
+	background-image: url("../320x480/points.png");
+	color: #4E3E2D;
 	font-family: Bubblegum;
 	font-size: 0.8em;
-	padding-top: 25px;			
-	/*padding-left: 20px;*/
+	height: 75px;
+	left: 114px;
+	min-height: 62px;
+	padding-top: 39px;
+	position: fixed;
 	text-align: center;
-	color: #4e3e2d;
-	/*text-shadow: -2px 0 black, 0 2px black,	  2px 0 black, 0 -2px black;*/
+	top: 0;
+	width: 93px;
 }
 
 .levelsFrame320x480{
-	position: fixed;
-	background-image: url(../320x480/lvl.png);
-	top: 400px;
-	left: 245px;
-	width: 87px;
-	height: 62px;
-	min-height: 62px;
+	background-image: url("../320x480/lvl.png");
+	color: #4E3E2D;
 	font-family: Bubblegum;
 	font-size: 0.7em;
-	padding-top: 32px;
+	height: 60px;
+	left: 235px;
+	min-height: 62px;
 	padding-left: 37px;
-	color: #4e3e2d;
-	/*text-shadow: -2px 0 black, 0 2px black,	  2px 0 black, 0 -2px black;*/
+	padding-top: 32px;
+	position: fixed;
+	top: 410px;
+	width: 82px;
 }
 
 .lifesFrame320x480{
-	position: fixed;
-	background-image: url(../320x480/life.png);
-	top: 0px;
-	left: 215px;
-	width: 87px;
-	height: 62px;
-	min-height: 62px;
+	background-image: url("../320x480/life.png");
+	color: #FFFFFF;
 	font-family: Bubblegum;
 	font-size: 0.8em;
-	padding-top: 34px;
-	padding-left: 47px;
-	color: #ffffff;
-	/*text-shadow: -2px 0 black, 0 2px black,	  2px 0 black, 0 -2px black;*/
+	height: 62px;
+	left: 16px;
+	min-height: 62px;
+	padding-left: 5px;
+	padding-top: 5px;
+	position: fixed;
+	top: 0;
+	width: 87px;
 }
 
 .gobackFrame320x480{
-	position: fixed;
-	background-image: url(../320x480/backbutton.png);
-	top: 62px;
-	left: 210px;
-	width: 89px;
-	height: 27px;
-	min-height: 27px;
+	background-image: url("../320x480/backbutton.png");
+	color: #4E3E2D;
 	font-family: Bubblegum;
 	font-size: 0.8em;
-	color: #4e3e2d;
-	/*text-shadow: -2px 0 black, 0 2px black,	  2px 0 black, 0 -2px black;*/
+	height: 27px;
+	left: 5px;
+	min-height: 27px;
+	position: fixed;
+	top: 50px;
+	width: 89px;
+}
+
+.guiCoinsFrame320x480{
+	background-image: url("../320x480/guicoins.png");
+	color: #644000;
+	font-family: Bubblegum;
+	font-size: 0.8em;
+	height: 38px;
+	left: 220px;
+	padding-left: 15px;
+	padding-top: 11px;
+	position: fixed;
+	text-align: left;
+	top: 24px;
+	width: 94px;
+}
+
+.guiBuyCoinsFrame320x480{
+	background-image: url("../320x480/guibuycoins.png");
+	height: 29px;
+	left: 270px;
+	position: fixed;
+	top: 40px;
+	width: 30px;
+}
+
+.guiBuyFreezeFrame320x480{
+	background-image: url("../320x480/guibuyfreeze.png");
+	color: #644000;
+	font-family: Bubblegum;
+	font-size: 0.6em;
+	height: 36px;
+	left: 10px;
+	padding-left: 45px;
+	padding-top: 3px;
+	position: fixed;
+	top: 435px;
+	width: 61px;
+}
+
+.guiBuyBombFrame320x480{
+	background-image: url("../320x480/guibuybomb.png");
+	color: #644000;
+	font-family: Bubblegum;
+	font-size: 0.6em;
+	height: 34px;
+	left: 10px;
+	padding-left: 45px;
+	padding-top: 3px;
+	position: fixed;
+	top: 400px;
+	width: 57px;
+}
+
+.guiBuyMultiFrame320x480{
+	background-image: url("../320x480/guibuymulti.png");
+	color: #644000;
+	font-family: Bubblegum;
+	font-size: 0.6em;
+	height: 40px;
+	left: 10px;
+	padding-left: 44px;
+	padding-top: 8px;
+	position: fixed;
+	top: 360px;
+	width: 59px;
+}
+
+.guiPointsLeftFrame320x480{
+	background-color: #FFFFFF;
+	height: 215px;
+	left: 299px;
+	position: fixed;
+	top: 189px;
+	width: 5px;
 }
 
 .facebookFrame320x480{
-	position: fixed;
-	background-image: url(../320x480/facebook.png);
-	width: 87px;
+	background-image: url("../320x480/facebook.png");
 	height: 47px;
+	left: 233px;
 	min-height: 47px;
-	left: 235px;
-	top: 295px;
+	position: fixed;
+	top: 298px;
+	width: 87px;
 }
 
 .coinsFrame320x480{
-	position: fixed;
-	background-image: url(../320x480/coins.png);
-	width: 74px;
+	background-image: url("../320x480/coins.png");
 	height: 46px;
+	left: 246px;
 	min-height: 46px;
-	left: 250px;
-	top: 360px;
+	position: fixed;
+	top: 365px;
+	width: 74px;
 }
 
 .leaderboardFrame320x480{
-	position: fixed;
-	background-image: url(../320x480/leaderboards.png);
-	width: 86px;
+	background-image: url("../320x480/leaderboards.png");
 	height: 56px;
+	left: 234px;
 	min-height: 56px;
-	left: 235px;
-	top: 215px;
+	position: fixed;
+	top: 226px;
+	width: 86px;
 }
 
 .playImage320x480{
-	position: fixed;
-	background-image: url(../320x480/newbutton.png);
-	width: 160px;
+	background-image: url("../320x480/newbutton.png");
 	height: 65px;
+	left: 84px;
 	min-height: 65px;
-	left: 85px;
+	position: fixed;
 	right: auto;
-	top: 170px;
+	top: 175px;
+	width: 160px;
 }
 
 .continueImage320x480{
-	position: fixed;
-	background-image: url(../320x480/continuebutton.png);
-	width: 160px;
+	background-image: url("../320x480/continuebutton.png");
 	height: 65px;
+	left: 84px;
 	min-height: 65px;
-	left: 85px;
-	top: 250px;
+	position: fixed;
+	top: 247px;
+	width: 160px;
 }
 
 .optionsImage320x480{
-	position: fixed;
-	background-image: url(../320x480/optionbutton.png);
-	width: 160px;
+	background-image: url("../320x480/optionbutton.png");
 	height: 65px;
+	left: 103px;
 	min-height: 65px;
-	left: 100px;
+	position: fixed;
 	right: auto;
-	top: 335px;
+	top: 320px;
+	width: 160px;
 }
 
 .facebookButton320x480{
@@ -255,7 +325,7 @@
 	left: 42px;
 	top: 115px;
 }
-				
+
 .uiHighscoreImage320x480{
 	background-image: url("../320x480/highscorescreen.png");
 	position: fixed;
@@ -287,13 +357,13 @@
 }
 
 .uiPauseButton320x480{
+	background-image: url("../320x480/pausebutton.png");
+	height: 27px;
+	left: 285px;
+	min-height: 0;
 	position: fixed;
-	background-image: url(../320x480/pausebutton.png);
-	width: 53px;
-	height: 39px;
-	min-height: 39px;
-	top: 52px;
-	left: 140px;
+	top: 5px;
+	width: 37px;
 }
 
 .uiPauseScreen320x480{
@@ -323,42 +393,50 @@
 }
 
 .leaderboardTab320x480{ 
-	position: absolute;
-	top: 225px;
-	left: 67px;
-	width: 200px;
-	height: 97px;
+	color: #644000;
+	font-family: bubblegum;
+	font-size: 0.7em;
+	height: 130px;
+	left: 65px;
 	min-height: 97px;
+	position: absolute;
+	top: 230px;
+	width: 210px;
 }
 
 .leaderboardTabHighscore320x480 { 
-	position: absolute;
-	top: 180px;
-	left: 135px;
-	width: 79px;
-	height: 20px;
+	background-image: url("../320x480/leaderboardhighscore.png");
+	height: 26px;
+	left: 109px;
 	min-height: 20px;
-	background-image: url(../320x480/leaderboardhighscore.png);
+	position: absolute;
+	top: 175px;
+	width: 83px;
 }
 
 .leaderboardTabFriends320x480 { 
-	position: absolute;
-	top: 180px;
-	left: 215px;
-	width: 97px;
-	height: 20px;
+	background-image: url("../320x480/leaderboardfriends.png");
+	height: 26px;
+	left: 190px;
 	min-height: 20px;
-	background-image: url(../320x480/leaderboardfriends.png);
+	position: absolute;
+	top: 175px;
+	width: 83px;
+}
+
+.leaderboardTabHighlight320x480
+{
+	height: 40px;
 }
 
 .leaderboardBackMenu320x480 { 
+	background-image: url("../320x480/leaderboardmenu.png");
+	height: 265px;
+	left: 102px;
+	min-height: 65px;
 	position: absolute;
 	top: 380px;
-	left: 35px;
 	width: 116px;
-	height: 265px;
-	min-height: 65px;
-	background-image: url(../320x480/leaderboardmenu.png);
 }
 
 .optionsFacebook320x480 {

@@ -12,15 +12,14 @@
 	color: #4E3E2D;
 	font-family: Bubblegum;
 	font-size: 1.8em;
-	height: 103px;
-	left: 465px;
+	height: 140px;
+	left: 240px;
 	min-height: 62px;
-	padding-top: 40px;
+	padding-top: 77px;
 	position: fixed;
 	text-align: center;
-	top: 700px;
-	width: 179px;
-	/*text-shadow: -2px 0 black, 0 2px black,	  2px 0 black, 0 -2px black;*/
+	top: 0;
+	width: 182px;
 }
 
 .levelsFrame640x960{
@@ -29,14 +28,13 @@
 	font-family: Bubblegum;
 	font-size: 1.7em;
 	height: 121px;
-	left: 475px;
+	left: 470px;
 	min-height: 62px;
-	padding-left: 70px;
-	padding-top: 65px;
+	padding-left: 75px;
+	padding-top: 60px;
 	position: fixed;
-	top: 800px;
+	top: 820px;
 	width: 162px;
-	/*text-shadow: -2px 0 black, 0 2px black,	  2px 0 black, 0 -2px black;*/
 }
 
 .lifesFrame640x960{
@@ -45,14 +43,13 @@
 	font-family: Bubblegum;
 	font-size: 1.8em;
 	height: 129px;
-	left: 440px;
+	left: 40px;
 	min-height: 62px;
 	padding-left: 90px;
 	padding-top: 56px;
 	position: fixed;
 	top: 0;
-	width: 187px;
-	/*text-shadow: -2px 0 black, 0 2px black,	  2px 0 black, 0 -2px black;*/
+	width: 149px;
 }
 
 .gobackFrame640x960{
@@ -60,13 +57,87 @@
 	color: #4E3E2D;
 	font-family: Bubblegum;
 	font-size: 0.8em;
-	height: 47px;
-	left: 405px;
+	height: 56px;
+	left: 25px;
 	min-height: 27px;
 	position: fixed;
-	top: 130px;
-	width: 152px;
-	/*text-shadow: -2px 0 black, 0 2px black,	  2px 0 black, 0 -2px black;*/
+	top: 95px;
+	width: 173px;	
+}
+
+.guiCoinsFrame640x960{
+	background-image: url("../640x960/guicoins.png");
+	color: #644000;
+	font-family: Bubblegum;
+	font-size: 1.4em;
+	height: 75px;
+	left: 425px;
+	padding-left: 40px;
+	padding-top: 23px;
+	position: fixed;
+	text-align: left;
+	top: 51px;
+	width: 198px;
+}
+
+.guiBuyCoinsFrame640x960{
+	background-image: url("../640x960/guibuycoins.png");
+	height: 78px;
+	left: 525px;
+	position: fixed;
+	top: 73px;
+	width: 77px;
+}
+
+.guiBuyFreezeFrame640x960{
+	background-image: url("../640x960/guibuyfreeze.png");
+	color: #644000;
+	font-family: Bubblegum;
+	font-size: 1.1em;
+	height: 72px;
+	left: 20px;
+	padding-left: 87px;
+	padding-top: 13px;
+	position: fixed;
+	top: 855px;
+	width: 116px;
+}
+
+.guiBuyBombFrame640x960{
+	background-image: url("../640x960/guibuybomb.png");
+	color: #644000;
+	font-family: Bubblegum;
+	font-size: 1.1em;
+	height: 68px;
+	left: 20px;
+	padding-left: 88px;
+	padding-top: 9px;
+	position: fixed;
+	top: 785px;
+	width: 117px;
+}
+
+.guiBuyMultiFrame640x960{
+	background-image: url("../640x960/guibuymulti.png");
+	color: #644000;
+	font-family: Bubblegum;
+	font-size: 1.1em;
+	height: 71px;
+	left: 20px;
+	padding-left: 89px;
+	padding-top: 12px;
+	position: fixed;
+	top: 710px;
+	width: 119px;
+}
+
+.guiPointsLeftFrame640x960{
+	background-color: #FFFFFF;
+	height: 430px;
+	left: 598px;
+	position: fixed;
+	top: 379px;
+	width: 10px;
 }
 
 .facebookFrame640x960{
@@ -132,13 +203,13 @@
 }
 
 .facebookButton640x960{
-	position: fixed;
-	background-image: url(../640x960/facebookbutton.png);
-	width: 155px;
-	height: 25px;
+	background-image: url("../640x960/facebookbutton.png");
+	height: 51px;
+	left: 255px;
 	min-height: 25px;
-	left: 130px;
-	top: 300px;
+	position: fixed;
+	top: 605px;
+	width: 310px;
 }
 
 .loadingProgressBar640x960{
@@ -146,8 +217,8 @@
 	left: 203px;
 	min-height: 9px;
 	position: fixed;
-	top: 519px;
-	width: 257px;
+	top: 518px;
+	width: 265px;
 }
 
 .panda640x960{
@@ -241,13 +312,12 @@
 }
 
 .uiAlertText640x960{
-	height: 104px;
-	left: 85px;
-	min-height: 263px;
+	height: 195px;
+	left: 90px;
 	position: absolute;
 	text-align: center;
-	top: 250px;
-	width: 470px;
+	top: 240px;
+	width: 475px;
 }
 
 .uiHighscoreImage640x960{
@@ -281,12 +351,12 @@
 
 .uiPauseButton640x960{
 	background-image: url("../640x960/pausebutton.png");
-	height: 81px;
-	left: 261px;
+	height: 49px;
+	left: 555px;
 	min-height: 39px;
 	position: fixed;
-	top: 115px;
-	width: 118px;
+	top: 5px;
+	width: 84px;
 }
 
 .uiPauseScreen640x960{
@@ -316,12 +386,15 @@
 }
 
 .leaderboardTab640x960{ 
-	height: 97px;
-	left: 220px;
+	color: #644000;
+	font-family: bubblegum;
+	font-size: 1.5em;
+	height: 262px;
+	left: 130px;
 	min-height: 97px;
 	position: absolute;
-	top: 453px;
-	width: 200px;
+	top: 462px;
+	width: 425px;
 }
 
 .leaderboardTabHighscore640x960 { 
@@ -344,10 +417,14 @@
 	width: 164px;
 }
 
+.leaderboardTabHighlight640x960 {
+	height: 70px;
+}
+
 .leaderboardBackMenu640x960 { 
 	background-image: url("../640x960/leaderboardmenu.png");
 	height: 133px;
-	left: 45px;
+	left: 195px;
 	min-height: 65px;
 	position: absolute;
 	top: 770px;

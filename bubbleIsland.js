@@ -1767,17 +1767,11 @@ function gameUI(w, h){
 	this.multiBubbleElement = document.createElement('div');
 	this.bombBubbleElement = document.createElement('div');
 	this.freezeBubbleElement = document.createElement('div');
-
-
-	$(this.element).addClass('pointsFrame');
+	this.coinsElement = document.createElement('div'); 
+	this.addCoinsElement = document.createElement('div'); 
+	/*$(this.element).addClass('pointsFrame');
 	$(this.element2).addClass('lifesFrame');
-	$(this.element3).addClass('levelsFrame');
-	$(this.pauseElement).addClass('uiPauseButton' + gameSize);
-
-	// add classes to new elements
-	$(this.multiBubbleElement).addClass('' + gameSize);
-	$(this.bombBubbleElement).addClass('' + gameSize);
-	$(this.freezeBubbleElement).addClass('' + gameSize);
+	$(this.element3).addClass('levelsFrame');*/
 
 	animNav.append(this.element);
 	animNav.append(this.element2);
@@ -1785,10 +1779,23 @@ function gameUI(w, h){
 	animNav.append(this.backElement);
 	animNav.append(this.pauseElement);
 
+	animNav.append(this.multiBubbleElement);
+	animNav.append(this.bombBubbleElement);
+	animNav.append(this.freezeBubbleElement);
+	animNav.append(this.coinsElement);
+	animNav.append(this.addCoinsElement);
+
 	$(this.element).addClass('pointsFrame'+ gameSize);
 	$(this.element2).addClass('lifesFrame'+ gameSize);
 	$(this.element3).addClass('levelsFrame'+ gameSize);
 	$(this.backElement).addClass('gobackFrame' + gameSize);
+	$(this.pauseElement).addClass('uiPauseButton' + gameSize);
+	// add classes to new elements
+	$(this.multiBubbleElement).addClass('guiBuyMultiFrame' + gameSize);
+	$(this.bombBubbleElement).addClass('guiBuyBombFrame' + gameSize);
+	$(this.freezeBubbleElement).addClass('guiBuyFreezeFrame' + gameSize);
+	$(this.coinsElement).addClass('guiCoinsFrame' + gameSize);;
+	$(this.addCoinsElement).addClass('guiBuyCoinsFrame' + gameSize);
 
 	$(this.backElement).click(function(){ game.showMenu(); });
 
@@ -1805,6 +1812,8 @@ function gameUI(w, h){
 		$(document.body).append(cartel);
 		game.clock.stop();
 	});
+
+	this.coinsElement.innerHTML = api.softgame.user.balance;
 
 	this.savePoints = function(){ this.acumuledPoints = this.points;};
 
@@ -1846,8 +1855,8 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 	this.level = '';
 	this.animTimer;
 	this.cannon;
-
 	this.canvas = document.getElementById(canvasObj);//$(canvasObj)
+	//this.canvas = document.createElement('div');
 	//this.painter = document.getElementById(canvasObj).getContext('2d');
 	/*this.backgroundCanvas = document.getElementById(backgroundCanvasObj);
 	this.backgroundPainter = document.getElementById(backgroundCanvasObj).getContext('2d');*/
@@ -1908,7 +1917,7 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 
 	this.startLocalStorage = function(){};
 
-	this.loadState = function(){
+	/*this.loadState = function(){
 		this.filestate = 'loading';
 		var reader = new FileReader();
 		reader.onloadend = function(evt){
@@ -1927,7 +1936,7 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 			writer.onwrite = function(){ game.filestate = 'ok'};
 			writer.write(api.JSON2String(currentState));
 		});
-	};
+	};*/
 
 	//event listeners
 

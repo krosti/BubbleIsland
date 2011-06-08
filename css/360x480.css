@@ -8,66 +8,61 @@
 */
 
 .pointsFrame360x480{
-	position: fixed;
-	background-image: url(../360x480/points.png);
-	top: 340px;
-	left: 240px;
-	width: 87px;
-	height: 62px;
-	min-height: 62px;
+	background-image: url("../360x480/points.png");
+	color: #4E3E2D;
 	font-family: Bubblegum;
 	font-size: 0.8em;
-	padding-top: 25px;			
-	/*padding-left: 20px;*/
+	height: 54px;
+	left: 272px;
+	min-height: 54px;
+	padding-top: 25px;
+	position: fixed;
 	text-align: center;
-	color: #4e3e2d;
-	/*text-shadow: -2px 0 black, 0 2px black,	  2px 0 black, 0 -2px black;*/
+	top: 340px;
+	width: 90px;
 }
 
 .levelsFrame360x480{
-	position: fixed;
-	background-image: url(../360x480/lvl.png);
-	top: 400px;
-	left: 245px;
-	width: 87px;
-	height: 62px;
-	min-height: 62px;
+	background-image: url("../360x480/lvl.png");
+	color: #4E3E2D;
 	font-family: Bubblegum;
-	font-size: 0.7em;
-	padding-top: 32px;
-	padding-left: 37px;
-	color: #4e3e2d;
-	/*text-shadow: -2px 0 black, 0 2px black,	  2px 0 black, 0 -2px black;*/
+	font-size: 0.8em;
+	height: 54px;
+	left: 272px;
+	min-height: 20px;
+	padding-left: 41px;
+	padding-top: 31px;
+	position: fixed;
+	top: 400px;
+	width: 91px;
 }
 
 .lifesFrame360x480{
-	position: fixed;
-	background-image: url(../360x480/life.png);
-	top: 0px;
-	left: 215px;
-	width: 87px;
-	height: 62px;
-	min-height: 62px;
+	background-image: url("../360x480/life.png");
+	color: #FFFFFF;
 	font-family: Bubblegum;
 	font-size: 0.8em;
-	padding-top: 34px;
-	padding-left: 47px;
-	color: #ffffff;
-	/*text-shadow: -2px 0 black, 0 2px black,	  2px 0 black, 0 -2px black;*/
+	height: 57px;
+	left: 260px;
+	min-height: 20px;
+	padding-left: 35px;
+	padding-top: 22px;
+	position: fixed;
+	top: 0;
+	width: 71px;
 }
 
 .gobackFrame360x480{
-	position: fixed;
-	background-image: url(../360x480/backbutton.png);
-	top: 62px;
-	left: 210px;
-	width: 89px;
-	height: 27px;
-	min-height: 27px;
+	background-image: url("../360x480/backbutton.png");
+	color: #4E3E2D;
 	font-family: Bubblegum;
 	font-size: 0.8em;
-	color: #4e3e2d;
-	/*text-shadow: -2px 0 black, 0 2px black,	  2px 0 black, 0 -2px black;*/
+	height: 23px;
+	left: 240px;
+	min-height: 10px;
+	position: fixed;
+	top: 55px;
+	width: 75px;
 }
 
 .facebookFrame360x480{
@@ -133,22 +128,21 @@
 }
 
 .facebookButton360x480{
-	position: fixed;
-	background-image: url(../360x480/facebookbutton.png);
-	width: 155px;
-	height: 25px;
+	background-image: url("../360x480/facebookbutton.png");
+	height: 29px;
+	left: 143px;
 	min-height: 25px;
-	left: 130px;
-	top: 300px;
+	position: fixed;
+	top: 344px;
+	width: 177px;
 }
 
 .loadingProgressBar360x480{
+	height: 8px;
+	left: 117px;
 	position: fixed;
-	width: 130px;
-	height: 9px;
-	min-height: 9px;
-	left: 102px;
-	top: 260px;
+	top: 289px;
+	width: 146px;
 }
 
 .panda360x480{
@@ -161,17 +155,16 @@
 }
 
 .guiFinishPoints360x480{
+	color: #644000;
 	font-family: Bubblegum;
 	font-size: 1.1em;
-	color: #644000;
-	position: fixed;
-	width: 67px;
-	height: 40px;
-	top: 287px;
+	height: 30px;
+	left: 157px;
 	padding-top: 11px;
-	/*padding-left: 5px;*/
-	left: 130px;
+	position: fixed;
 	text-align: center;
+	top: 283px;
+	width: 65px;
 }
 
 .guiFinishPoints360x480 > p { 
@@ -179,23 +172,23 @@
 }
 
 .guiLooseContinue360x480{
-	position: fixed;
-	background-image: url(../360x480/guicontinue.png);
-	width: 137px;
-	height: 60px;
+	background-image: url("../360x480/guicontinue.png");
+	height: 62px;
+	left: 129px;
 	min-height: 60px;
-	left: 107px;
-	top: 335px;
+	position: fixed;
+	top: 340px;
+	width: 150px;
 }
 
 .guiLooseMenu360x480{
+	background-image: url("../360x480/guimenu.png");
+	height: 58px;
+	left: 107px;
+	min-height: 20px;
 	position: fixed;
-	background-image: url(../360x480/guimenu.png);
+	top: 402px;
 	width: 149px;
-	height: 55px;
-	min-height: 60px;
-	left: 80px;
-	top: 395px;
 }
 
 .uiAlert360x480{
@@ -259,23 +252,23 @@
 }
 
 .uiPauseButton360x480{
-	position: fixed;
-	background-image: url(../360x480/pausebutton.png);
-	width: 53px;
-	height: 39px;
+	background-image: url("../360x480/pausebutton.png");
+	height: 50px;
+	left: 145px;
 	min-height: 39px;
-	top: 52px;
-	left: 140px;
+	position: fixed;
+	top: 50px;
+	width: 70px;
 }
 
 .uiPauseScreen360x480{
-	position: fixed;
-	background-image: url(../360x480/pausecartel.png);
-	width: 320px;
+	background-image: url("../360x480/pausecartel.png");
 	height: 480px;
+	left: 0;
 	min-height: 480px;
-	left: 0px;
-	top: 0px;
+	position: fixed;
+	top: 0;
+	width: 360px;
 }
 
 .leaderboard360x480{
@@ -295,6 +288,9 @@
 }
 
 .leaderboardTab360x480{ 
+	color: #644000;
+	font-family: bubblegum;
+	font-size: 0.8em;
 	height: 133px;
 	left: 86px;
 	min-height: 40px;
@@ -326,11 +322,16 @@
 .leaderboardBackMenu360x480 { 
 	background-image: url("../360x480/leaderboardmenu.png");
 	height: 66px;
-	left: 47px;
+	left: 115px;
 	min-height: 65px;
 	position: absolute;
 	top: 388px;
 	width: 130px;
+}
+
+.leaderboardTabHighlight360x480
+{
+	height: 40px;
 }
 
 .optionsFacebook360x480 {

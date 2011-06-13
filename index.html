@@ -15,7 +15,6 @@
 	<link href="css/854x480.css" rel="stylesheet" type="text/css" />
 	
 	<script src="jquery.js" type="text/javascript" charset="utf-8"></script> 
-	<script src="jquerytab.js" type="text/javascript" charset="utf-8"></script> 
 	<script src="jquerymd5.js" type="text/javascript" charset="utf-8"></script> 
 	<script src="api.js" type="text/javascript" charset="utf-8"></script> 
 	
@@ -25,11 +24,11 @@
 	 <!-- game
 	 <script src="phonegap.js" type="text/javascript" charset="utf-8"></script> 
 	  	 -->
-	<script src="FBconnect.js" type="text/javascript" charset="utf-8"></script> 
+	<!--script src="FBconnect.js" type="text/javascript" charset="utf-8"></script--> 
 	<script src="leaderboard.js" type="text/javascript" charset="utf-8"></script> 
 	<script src="side.js" type="text/javascript" charset="utf-8"></script> 
 	<script src="bubbleIsland.js" type="text/javascript" charset="utf-8"></script> 	
-	<script src="coinsApi.js" type="text/javascript" charset="utf-8"></script> 	
+	<!--script src="coinsApi.js" type="text/javascript" charset="utf-8"></script--> 	
 	<script type="text/javascript" charset="utf-8">
 		//redirect_url = "http://www.facebook.com/connect/login_success.html";
 		document.addEventListener('deviceready', function(){
@@ -831,6 +830,7 @@ function postHighscoreOnFacebook(){
 
 loader.readyLoad = function(){	
 	//toda la intro del juego
+	alert('hola');
 	document.getElementById('backgroundNav').style.backgroundImage = 'url('+backgroundImage.src+')';
 	//alert('url('+backgroundImage.src+')');
 	//alert(gameSize.slice(0,3) + 'x' + gameSize.slice(4));

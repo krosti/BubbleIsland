@@ -2653,7 +2653,8 @@ api.levels.unserializeLevel = function(){
 	//alert('lvl: ' + lvl);
 	if(lvl.resolution != gameSize){
 		//alert('resolution wrong');
-		api.ui.alert('You have another session started with another phone resolution, we cannot arrange the bubbles in the same position, this will a mess!! please relogin with the original phone and try again', 'Ok, see you later');
+		//api.ui.alert('You have another session started with another phone resolution, we cannot arrange the bubbles in the same position, this will a mess!! please relogin with the original phone and try again', 'Ok, see you later');
+		api.ui.alertStyle('guiResolutionScreen', 'guiResolutionButton');
 		return false;
 	};
 	//var level = game.level;

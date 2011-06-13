@@ -808,7 +808,7 @@ function showCoins(){
 		api.ui.hideWaiting();
 		//api.ui.alert('You have ' + api.softgame.user.balance + ' coin/s to spend, you can buy more lifes when you run out of them', 'Ok, thanks for the advice', function(){ options.backToMenu(); });
 		//alert(api.JSON2String(api.softgame.user););
-		api.ui.alert2('You have ' + api.softgame.user.balance + ' coin/s to spend, you can buy more lifes when you run out of them',  [{'button': 'Ok, thanks for the advice',
+		/*api.ui.alert2('You have ' + api.softgame.user.balance + ' coin/s to spend, you can buy more lifes when you run out of them',  [{'button': 'Ok, thanks for the advice',
 																																			'action' : function(){
 																																				
 																																			}
@@ -817,7 +817,8 @@ function showCoins(){
 																																			'action' : function(){
 																																				window.location = api.softgame.getBuyingCoinsUrl();
 																																			}
-																																		}]);
+																																		}]);*/
+		api.ui.showBalance();
 	};
 	//options.showNav('softgameNav', 'gameMenu');
 	api.softgame.getUserInfo()

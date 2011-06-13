@@ -66,11 +66,11 @@
 	background-image: url("../854x480/guicoins.png");
 	color: #644000;
 	font-family: Bubblegum;
-	font-size: 1.1em;
+	font-size: 0.9em;
 	height: 59px;
 	left: 585px;
-	padding-left: 30px;
-	padding-top: 16px;
+	padding-left: 27px;
+	padding-top: 17px;
 	position: fixed;
 	text-align: left;
 	top: 10px;
@@ -201,12 +201,12 @@
 
 .facebookButton854x480{
 	background-image: url("../854x480/facebookbutton.png");
-	height: 29px;
-	left: 143px;
+	height: 25px;
+	left: 413px;
 	min-height: 25px;
 	position: fixed;
-	top: 344px;
-	width: 177px;
+	top: 334px;
+	width: 179px;
 }
 
 .loadingProgressBar854x480{
@@ -408,32 +408,32 @@
 
 .optionsFacebook854x480 {
 	background-image: url("../854x480/optionsfacebook.png");
-	height: 54px;
-	left: 132px;
+	height: 59px;
+	left: 409px;
 	min-height: 61px;
 	position: fixed;
-	top: 250px;
-	width: 90px;
+	top: 296px;
+	width: 105px;
 }
 
 .optionsCoins854x480 {
 	background-image: url("../854x480/optionscoins.png");
-	height: 104px;
-	left: 198px;
-	min-height: 115px;
+	height: 126px;
+	left: 482px;
+	min-height: 56px;
 	position: fixed;
-	top: 243px;
-	width: 104px;
+	top: 291px;
+	width: 128px;
 }
 
 .optionsLeaderboards854x480 {
 	background-image: url("../854x480/optionsleaderboard.png");
-	height: 78px;
-	left: 48px;
+	height: 97px;
+	left: 298px;
 	min-height: 92px;
 	position: fixed;
-	top: 265px;
-	width: 108px;
+	top: 314px;
+	width: 129px;
 }
 
 .optionsVolumeOn854x480 {
@@ -458,10 +458,10 @@
 
 .optionsMenu854x480 {
 	background-image: url("../854x480/optionsmenu.png");
-	height: 103px;
-	left: 150px;
+	height: 105px;
+	left: 432px;
 	min-height: 124px;
 	position: fixed;
-	top: 298px;
-	width: 85px;
+	top: 351px;
+	width: 122px;
 }

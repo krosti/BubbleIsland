@@ -23,31 +23,26 @@ function Loader(progress, size){
 	bubbleRedImage.onload = this.loaded;
 	bubblePurpleImage.onload = this.loaded;
 	bubbleYellowImage.onload = this.loaded;
-
 	bubbleBlueBombImage.onload = this.loaded;
 	bubbleGreenBombImage.onload = this.loaded;
 	bubbleRedBombImage.onload = this.loaded;
 	bubblePurpleBombImage.onload = this.loaded;
 	bubbleYellowBombImage.onload = this.loaded;
-
 	bubbleBlueFreezeImage.onload = this.loaded;
 	bubbleGreenFreezeImage.onload = this.loaded;
 	bubbleRedFreezeImage.onload = this.loaded;
 	bubblePurpleFreezeImage.onload = this.loaded;
 	bubbleYellowFreezeImage.onload = this.loaded;
-
 	bubbleBlueHalfImage.onload = this.loaded;
 	bubbleRedHalfImage.onload = this.loaded;
 	bubbleGreenHalfImage.onload = this.loaded;
 	bubblePurpleHalfImage.onload = this.loaded;
 	bubbleYellowHalfImage.onload = this.loaded;
-
 	bubbleBlueImageX2.onload = this.loaded;
 	bubbleGreenImageX2.onload = this.loaded;
 	bubbleRedImageX2.onload = this.loaded;
 	bubblePurpleImageX2.onload = this.loaded;
 	bubbleYellowImageX2.onload = this.loaded;
-
 	bubbleBlueImageX3.onload = this.loaded
 	bubbleGreenImageX3.onload = this.loaded;
 	bubbleRedImageX3.onload = this.loaded;
@@ -62,21 +57,31 @@ function Loader(progress, size){
 	bubbleX2Explode.onload = this.loaded;
 	bubbleX3Explode.onload = this.loaded;
 
-	lvlFrame.onload = this.loaded;
-	initImage.onload = this.loaded;
 	backgroundImage.onload = this.loaded
 	logoImage.onload = this.loaded;
-	uiPandaStandBy.onload = this.loaded;
-	uiPandaLoading.onload = this.loaded;
-	uiPandaBlinking.onload = this.loaded;
+
+	lvlFrame.onload = this.loaded;
+	initImage.onload = this.loaded;
+	uiMultiCountFrame.onload = this.loaded;
+	uiBombCountFrame.onload = this.loaded;
+	uiFreezeCountFrame.onload = this.loaded;
+
+	uiLooseFrame.onload = this.loaded;
+	uiWinFrame.onload = this.loaded;
+	uiWinContinueButton.onload = this.loaded;
+	uiLoseContinueButton.onload = this.loaded;
+	uiFinishAdd.onload = this.loaded;
+	uiPandaBag.onload = this.loaded;
 	uiPanda.onload = this.loaded;
+
 	uiLevelFrame.onload = this.loaded;
 	uiLifeFrame.onload = this.loaded;
 	uiPointsFrame.onload = this.loaded;
 	uiLooseFrame.onload = this.loaded;
 	uiWinFrame.onload = this.loaded;
-	uiFinishContinue.onload = this.loaded;
-	uiFinishMenu.onload = this.loaded;
+	uiWinContinueButton.onload = this.loaded;
+	uiLoseContinueButton.onload = this.loaded;
+	uiFinishAdd.onload = this.loaded;
 	uiCannon.onload = this.loaded;
 	uiCannonShoot.onload = this.loaded
 	uiOptionButton.onload = this.loaded;
@@ -107,6 +112,15 @@ function Loader(progress, size){
 	uiPauseCartel.onload = this.loaded;
 	facebookScreen.onload = this.loaded;
 	facebookButton.onload = this.loaded;
+
+	uiNoInetErrorScreen.onload = this.loaded;
+	uiNoInetErrorButton.onload = this.loaded;
+	uiResolutionErrorScreen.onload = this.loaded;
+	uiResolutionErrorButton.onload = this.loaded;
+
+	uiEndGameScreen.onload = this.loaded;
+	uiEndGameButton1.onload = this.loaded;
+	uiEndGameButton2.onload = this.loaded;
 		/*this.startLoad();
 	};*/
 
@@ -163,18 +177,22 @@ function Loader(progress, size){
 		logoImage.src = this.size + this.separator + 'logo.jpg';		
 		initImage.src = this.size + this.separator + 'initscreen.png';
 		//pandaBearAnim.src = this.size + this.separator + 'animacion.png';
-		uiPandaStandBy.src = this.size + this.separator + 'standbyanimacion.png';
+		/*uiPandaStandBy.src = this.size + this.separator + 'standbyanimacion.png';
 		uiPandaLoading.src = this.size + this.separator + 'loadinganimacion.png';
-		uiPandaBlinking.src = this.size + this.separator + 'blinkinganimacion.png';
+		uiPandaBlinking.src = this.size + this.separator + 'blinkinganimacion.png';*/
 		//uiPanda.src = this.size + this.separator + 'panda.png';
 		uiPanda.src = this.size + this.separator + 'flashanimacion.png';
 		uiLevelFrame.src = this.size + this.separator + 'lvl.png';
 		uiLifeFrame.src = this.size + this.separator + 'life.png';
 		uiPointsFrame.src = this.size + this.separator + 'points.png';
+		uiMultiCountFrame.src = this.size + this.separator + 'guibuymulti.png';
+		uiBombCountFrame.src = this.size + this.separator + 'guibuybomb.png';
+		uiFreezeCountFrame.src = this.size + this.separator + 'guibuyfreeze.png';
 		uiLooseFrame.src = this.size + this.separator + 'guiloose.png';
 		uiWinFrame.src = this.size + this.separator + 'guiwin.png';
-		uiFinishContinue.src = this.size + this.separator + 'guicontinue.png';
-		uiFinishMenu.src = this.size + this.separator + 'guimenu.png';
+		uiWinContinueButton.src = this.size + this.separator + 'guicontinuewin.png';
+		uiLoseContinueButton.src = this.size + this.separator + 'guicontinueloose.png';
+		uiFinishAdd.src = this.size + this.separator + 'guiaddbutton.png';
 		uiCannon.src = this.size + this.separator + 'cannon.png';
 		uiCannonShoot.src = this.size + this.separator + 'cannonanimacion.png';
 		uiOptionButton.src = this.size + this.separator + 'optionbutton.png';
@@ -207,6 +225,15 @@ function Loader(progress, size){
 
 		facebookScreen.src = this.size + this.separator + 'facebookscreen.png';
 		facebookButton.src = this.size + this.separator + 'facebookbutton.png';
+
+		uiNoInetErrorScreen.src = this.size + this.separator + 'guinoinetscreen.png';
+		uiNoInetErrorButton.src = this.size + this.separator + 'quinoinetbutton.png';
+		uiResolutionErrorScreen.src = this.size + this.separator + 'guiresolutionscreen.png';
+		uiResolutionErrorButton.src = this.size + this.separator + 'guiresolutionbutton.png';
+
+		uiEndGameScreen.src = this.size + this.separator + 'facebookbutton.png';
+		uiEndGameButton1.src = this.size + this.separator + 'facebookbutton.png';
+		uiEndGameButton2.src = this.size + this.separator + 'facebookbutton.png';
 	};
 
 };

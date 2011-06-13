@@ -1,129 +1,467 @@
+@font-face {
+	font-family: Bubblegum;
+	src: url(../grobold.ttf);
+}
+
 /*
 *		854x480
 */
 
 .pointsFrame854x480{
-	position: fixed;
-	background-image: url(854x480/points.png);
-	top: 340px;
-	left: 245px;
-	width: 87px;
-	height: 62px;
-	min-height: 62px;
+	background-image: url("../854x480/points.png");
+	color: #4E3E2D;
 	font-family: Bubblegum;
-	font-size: 0.8em;
-	padding-top: 25px;			
-	/*padding-left: 20px;*/
+	font-size: 1.1em;
+	height: 94px;
+	left: 361px;
+	min-height: 50px;
+	padding-top: 44px;
+	position: fixed;
 	text-align: center;
-	color: #eeeeee;
-	text-shadow: -2px 0 black, 0 2px black,	  2px 0 black, 0 -2px black;
+	top: 0;
+	width: 132px;
 }
 
 .levelsFrame854x480{
-	position: fixed;
-	background-image: url(854x480/lvl.png);
-	top: 400px;
-	left: 245px;
-	width: 87px;
-	height: 62px;
-	min-height: 62px;
+	background-image: url("../854x480/lvl.png");
+	color: #4E3E2D;
 	font-family: Bubblegum;
-	font-size: 0.8em;
-	padding-top: 37px;
-	padding-left: 35px;
-	color: #eeeeee;
-	text-shadow: -2px 0 black, 0 2px black,	  2px 0 black, 0 -2px black;
+	font-size: 1em;
+	height: 84px;
+	left: 685px;
+	min-height: 20px;
+	padding-top: 44px;
+	position: fixed;
+	text-align: center;
+	top: 370px;
+	width: 120px;
 }
 
 .lifesFrame854x480{
-	position: fixed;
-	background-image: url(854x480/life.png);
-	top: 0px;
-	left: 215px;
-	width: 87px;
-	height: 62px;
-	min-height: 62px;
+	background-image: url("../854x480/life.png");
+	color: #FFFFFF;
 	font-family: Bubblegum;
-	font-size: 0.8em;
-	padding-top: 31px;
-	padding-left: 46px;
-	color: #eeeeee;
-	text-shadow: -2px 0 black, 0 2px black,	  2px 0 black, 0 -2px black;
+	font-size: 1.1em;
+	height: 83px;
+	left: 115px;
+	min-height: 20px;
+	padding-left: 57px;
+	padding-top: 35px;
+	position: fixed;
+	top: 0;
+	width: 118px;
 }
 
 .gobackFrame854x480{
+	background-image: url("../854x480/backbutton.png");
+	height: 63px;
+	left: 0;
+	min-height: 10px;
 	position: fixed;
-	background-image: url(854x480/backbutton.png);
-	top: 62px;
-	left: 210px;
-	width: 89px;
-	height: 27px;
-	min-height: 27px;
+	top: 0;
+	width: 119px;
+}
+
+.guiCoinsFrame854x480{
+	background-image: url("../854x480/guicoins.png");
+	color: #644000;
+	font-family: Bubblegum;
+	font-size: 1.1em;
+	height: 59px;
+	left: 585px;
+	padding-left: 30px;
+	padding-top: 16px;
+	position: fixed;
+	text-align: left;
+	top: 10px;
+	width: 145px;
+}
+
+.guiBuyCoinsFrame854x480{
+	background-image: url("../854x480/guibuycoins.png");
+	height: 50px;
+	left: 654px;
+	position: fixed;
+	top: 24px;
+	width: 49px;
+}
+
+.guiBuyFreezeFrame854x480{
+	background-image: url("../854x480/guibuyfreeze.png");
+	color: #644000;
 	font-family: Bubblegum;
 	font-size: 0.8em;
-	color: #eeeeee;
-	text-shadow: -2px 0 black, 0 2px black,	  2px 0 black, 0 -2px black;
+	height: 50px;
+	left: 65px;
+	padding-left: 71px;
+	padding-top: 8px;
+	position: fixed;
+	top: 417px;
+	width: 96px;
+}
+
+.guiBuyBombFrame854x480{
+	background-image: url("../854x480/guibuybomb.png");
+	color: #644000;
+	font-family: Bubblegum;
+	font-size: 0.8em;
+	height: 60px;
+	left: 69px;
+	padding-left: 66px;
+	padding-top: 11px;
+	position: fixed;
+	top: 365px;
+	width: 87px;
+}
+
+.guiBuyMultiFrame854x480{
+	background-image: url("../854x480/guibuymulti.png");
+	color: #644000;
+	font-family: Bubblegum;
+	font-size: 0.8em;
+	height: 56px;
+	left: 65px;
+	padding-left: 69px;
+	padding-top: 7px;
+	position: fixed;
+	top: 322px;
+	width: 96px;
+}
+
+.guiPointsLeftFrame854x480{
+	background-color: #FFFFFF;
+	height: 231px;
+	left: 779px;
+	position: fixed;
+	top: 135px;
+	width: 6px;
 }
 
 .facebookFrame854x480{
+	background-image: url("../854x480/facebook.png");
+	height: 66px;
+	left: 536px;
+	min-height: 47px;
 	position: fixed;
-	background-image: url(854x480/facebook.png);
-	width: 81px;
-	height: 54px;
-	min-height: 54px;
-	left: 240px;
-	top: 261px;
+	top: 319px;
+	width: 179px;
 }
 
 .coinsFrame854x480{
+	background-image: url("../854x480/coins.png");
+	height: 63px;
+	left: 545px;
+	min-height: 46px;
 	position: fixed;
-	background-image: url(854x480/coins.png);
-	width: 67px;
-	height: 51px;
-	min-height: 51px;
-	left: 255px;
-	top: 315px;
+	top: 390px;
+	width: 153px;
 }
 
 .leaderboardFrame854x480{
-	position: fixed;
-	background-image: url(854x480/leaderboards.png);
-	width: 81px;
-	height: 56px;
+	background-image: url("../854x480/leaderboards.png");
+	height: 73px;
+	left: 540px;
 	min-height: 56px;
-	left: 240px;
-	top: 215px;
+	position: fixed;
+	top: 249px;
+	width: 163px;
 }
 
 .playImage854x480{
+	background-image: url("../854x480/newbutton.png");
+	height: 69px;
+	left: 298px;
+	min-height: 20px;
 	position: fixed;
-	background-image: url(854x480/newbutton.png);
-	width: 160px;
-	height: 65px;
-	min-height: 65px;
-	left: 85px;
 	right: auto;
-	top: 170px;
+	top: 193px;
+	width: 163px;
 }
 
 .continueImage854x480{
+	background-image: url("../854x480/continuebutton.png");
+	height: 71px;
+	left: 300px;
+	min-height: 20px;
 	position: fixed;
-	background-image: url(854x480/continuebutton.png);
-	width: 160px;
-	height: 65px;
-	min-height: 65px;
-	left: 85px;
-	right: auto;
-	top: 240px;
+	top: 277px;
+	width: 174px;
 }
 
 .optionsImage854x480{
+	background-image: url("../854x480/optionbutton.png");
+	height: 74px;
+	left: 316px;
+	min-height: 20px;
 	position: fixed;
-	background-image: url(854x480/optionbutton.png);
-	width: 160px;
-	height: 65px;
-	min-height: 65px;
-	left: 100px;
 	right: auto;
-	top: 315px;
+	top: 352px;
+	width: 169px;
+}
+
+.facebookButton854x480{
+	background-image: url("../854x480/facebookbutton.png");
+	height: 29px;
+	left: 143px;
+	min-height: 25px;
+	position: fixed;
+	top: 344px;
+	width: 177px;
+}
+
+.loadingProgressBar854x480{
+	height: 10px;
+	left: 354px;
+	position: fixed;
+	top: 284px;
+	width: 187px;
+}
+
+.panda854x480{
+	position: fixed;
+	/*width: 90px;
+	height: 111px;
+	min-height: 111px;*/
+	left: 80px;
+	top: 370px;
+}
+
+.guiFinishPoints854x480{
+	color: #644000;
+	font-family: Bubblegum;
+	font-size: 1.1em;
+	height: 30px;
+	left: 157px;
+	padding-top: 11px;
+	position: fixed;
+	text-align: center;
+	top: 283px;
+	width: 65px;
+}
+
+.guiFinishPoints854x480 > p { 
+	vertical-align: middle;
+}
+
+.guiLooseContinue854x480{
+	background-image: url("../854x480/guicontinue.png");
+	height: 62px;
+	left: 129px;
+	min-height: 60px;
+	position: fixed;
+	top: 340px;
+	width: 150px;
+}
+
+.guiLooseMenu854x480{
+	background-image: url("../854x480/guimenu.png");
+	height: 58px;
+	left: 107px;
+	min-height: 20px;
+	position: fixed;
+	top: 402px;
+	width: 149px;
+}
+
+.uiAlert854x480{
+	font-family: Bubblegum;
+	font-size: 1.1em;
+	color: #644000;
+	position: fixed;
+	background-image: url(../backgrounddiv.png);
+	background-repeat: repeat;
+	width: 100%;
+	height: 100%;
+	min-height: 100%;
+	left: 0px;
+	top: 0px;
+}
+
+.uiAlertImage854x480{
+	background-image: url("../854x480/alertscreen.png");
+	height: 324px;
+	left: 0;
+	min-height: 263px;
+	position: fixed;
+	top: 0;
+	width: 360px;
+}
+
+.uiAlertButton854x480{
+	background-image: url("../854x480/alertbutton.png");
+	display: table-cell;
+	height: 123px;
+	left: 73px;
+	max-width: 201px;
+	min-height: 117px;
+	position: fixed;
+	text-align: center;
+	top: 292px;
+	vertical-align: middle;
+	width: 213px;
+}
+
+.uiAlertButton854x480 > div {
+	height: 50px;
+	left: 30px;
+	position: absolute;
+	top: 40px;
+	width: 155px;
+}
+
+.uiAlertText854x480{
+	height: 104px;
+	left: 55px;
+	min-height: 50px;
+	position: absolute;
+	text-align: center;
+	top: 166px;
+	width: 247px;
+}
+
+.initScreen854x480{
+	background-image: url(../854x480/loadingscreen.png);
+}
+
+.uiPauseButton854x480{
+	background-image: url("../854x480/pausebutton.png");
+	height: 48px;
+	left: 785px;
+	min-height: 10px;
+	position: fixed;
+	top: 0;
+	width: 58px;
+}
+
+.uiPauseScreen854x480{
+	background-image: url("../854x480/pausecartel.png");
+	height: 480px;
+	left: 0;
+	min-height: 480px;
+	position: fixed;
+	top: 0;
+	width: 360px;
+}
+
+.leaderboard854x480{
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	background-image: url(../854x480/leaderboardscreen.png);
+}
+
+.leaderboardTabs854x480{
+	position: absolute;
+	top: 180px;
+	left: 135px;
+	width: 158px;
+	height: 20px;
+	min-height: 20px;
+}
+
+.leaderboardTab854x480{ 
+	color: #644000;
+	font-family: bubblegum;
+	font-size: 0.8em;
+	height: 133px;
+	left: 86px;
+	min-height: 40px;
+	position: absolute;
+	top: 238px;
+	width: 200px;
+}
+
+.leaderboardTabHighscore854x480 { 
+	background-image: url("../854x480/leaderboardhighscore.png");
+	height: 25px;
+	left: 132px;
+	min-height: 20px;
+	position: absolute;
+	top: 177px;
+	width: 83px;
+}
+
+.leaderboardTabFriends854x480 { 
+	background-image: url("../854x480/leaderboardfriends.png");
+	height: 24px;
+	left: 212px;
+	min-height: 20px;
+	position: absolute;
+	top: 177px;
+	width: 83px;
+}
+
+.leaderboardBackMenu854x480 { 
+	background-image: url("../854x480/leaderboardmenu.png");
+	height: 66px;
+	left: 115px;
+	min-height: 65px;
+	position: absolute;
+	top: 388px;
+	width: 130px;
+}
+
+.leaderboardTabHighlight854x480
+{
+	height: 40px;
+}
+
+.optionsFacebook854x480 {
+	background-image: url("../854x480/optionsfacebook.png");
+	height: 54px;
+	left: 132px;
+	min-height: 61px;
+	position: fixed;
+	top: 250px;
+	width: 90px;
+}
+
+.optionsCoins854x480 {
+	background-image: url("../854x480/optionscoins.png");
+	height: 104px;
+	left: 198px;
+	min-height: 115px;
+	position: fixed;
+	top: 243px;
+	width: 104px;
+}
+
+.optionsLeaderboards854x480 {
+	background-image: url("../854x480/optionsleaderboard.png");
+	height: 78px;
+	left: 48px;
+	min-height: 92px;
+	position: fixed;
+	top: 265px;
+	width: 108px;
+}
+
+.optionsVolumeOn854x480 {
+	position: fixed;
+	top: 380px;
+	left: 35px;
+	width: 92px;
+	height: 61px;
+	min-height: 61px;
+	background-image: url(../854x480/optionsvolumneon.png);
+}
+
+.optionsVolumeOff854x480 {
+	position: fixed;
+	top: 380px;
+	left: 35px;
+	width: 92px;
+	height: 61px;
+	min-height: 61px;
+	background-image: url(../854x480/optionsvolumneoff.png);
+}
+
+.optionsMenu854x480 {
+	background-image: url("../854x480/optionsmenu.png");
+	height: 103px;
+	left: 150px;
+	min-height: 124px;
+	position: fixed;
+	top: 298px;
+	width: 85px;
 }

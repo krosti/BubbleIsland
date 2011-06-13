@@ -12,14 +12,14 @@
 	color: #4E3E2D;
 	font-family: Bubblegum;
 	font-size: 0.8em;
-	height: 54px;
-	left: 272px;
-	min-height: 54px;
-	padding-top: 25px;
+	height: 76px;
+	left: 135px;
+	min-height: 50px;
+	padding-top: 35px;
 	position: fixed;
 	text-align: center;
-	top: 340px;
-	width: 90px;
+	top: 0;
+	width: 95px;
 }
 
 .levelsFrame360x480{
@@ -28,10 +28,10 @@
 	font-family: Bubblegum;
 	font-size: 0.8em;
 	height: 54px;
-	left: 272px;
+	left: 267px;
 	min-height: 20px;
-	padding-left: 41px;
-	padding-top: 31px;
+	padding-left: 44px;
+	padding-top: 33px;
 	position: fixed;
 	top: 400px;
 	width: 91px;
@@ -43,10 +43,10 @@
 	font-family: Bubblegum;
 	font-size: 0.8em;
 	height: 57px;
-	left: 260px;
+	left: 8px;
 	min-height: 20px;
-	padding-left: 35px;
-	padding-top: 22px;
+	padding-left: 36px;
+	padding-top: 18px;
 	position: fixed;
 	top: 0;
 	width: 71px;
@@ -54,15 +54,87 @@
 
 .gobackFrame360x480{
 	background-image: url("../360x480/backbutton.png");
-	color: #4E3E2D;
-	font-family: Bubblegum;
-	font-size: 0.8em;
-	height: 23px;
-	left: 240px;
+	height: 38px;
+	left: 0;
 	min-height: 10px;
 	position: fixed;
-	top: 55px;
-	width: 75px;
+	top: 38px;
+	width: 102px;
+}
+
+.guiCoinsFrame360x480{
+	background-image: url("../360x480/guicoins.png");
+	color: #644000;
+	font-family: Bubblegum;
+	font-size: 0.8em;
+	height: 39px;
+	left: 255px;
+	padding-left: 14px;
+	padding-top: 12px;
+	position: fixed;
+	text-align: left;
+	top: 24px;
+	width: 84px;
+}
+
+.guiBuyCoinsFrame360x480{
+	background-image: url("../360x480/guibuycoins.png");
+	height: 36px;
+	left: 293px;
+	position: fixed;
+	top: 34px;
+	width: 42px;
+}
+
+.guiBuyFreezeFrame360x480{
+	background-image: url("../360x480/guibuyfreeze.png");
+	color: #644000;
+	font-family: Bubblegum;
+	font-size: 0.6em;
+	height: 36px;
+	left: 6px;
+	padding-left: 50px;
+	padding-top: 8px;
+	position: fixed;
+	top: 432px;
+	width: 61px;
+}
+
+.guiBuyBombFrame360x480{
+	background-image: url("../360x480/guibuybomb.png");
+	color: #644000;
+	font-family: Bubblegum;
+	font-size: 0.6em;
+	height: 34px;
+	left: 10px;
+	padding-left: 46px;
+	padding-top: 8px;
+	position: fixed;
+	top: 396px;
+	width: 57px;
+}
+
+.guiBuyMultiFrame360x480{
+	background-image: url("../360x480/guibuymulti.png");
+	color: #644000;
+	font-family: Bubblegum;
+	font-size: 0.6em;
+	height: 35px;
+	left: 10px;
+	padding-left: 45px;
+	padding-top: 6px;
+	position: fixed;
+	top: 360px;
+	width: 60px;
+}
+
+.guiPointsLeftFrame360x480{
+	background-color: #FFFFFF;
+	height: 287px;
+	left: 338px;
+	position: fixed;
+	top: 110px;
+	width: 7px;
 }
 
 .facebookFrame360x480{
@@ -253,12 +325,12 @@
 
 .uiPauseButton360x480{
 	background-image: url("../360x480/pausebutton.png");
-	height: 50px;
-	left: 145px;
-	min-height: 39px;
+	height: 32px;
+	left: 310px;
+	min-height: 10px;
 	position: fixed;
-	top: 50px;
-	width: 70px;
+	top: 0;
+	width: 47px;
 }
 
 .uiPauseScreen360x480{

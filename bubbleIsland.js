@@ -1,4 +1,4 @@
-var VERSION = '0.9.072';
+var VERSION = '0.9.075';
 
 function rnd(top){ return Math.floor(Math.random()*(top + 1))};
 
@@ -35,42 +35,39 @@ function debug(txt){
 	$(console).html("" + $(console).text() + txt + "<br>");
 };
 
+//bubbles
 var bubbleBlueImage = new Image();
 var bubbleRedImage = new Image();
 var bubbleGreenImage = new Image();
 var bubblePurpleImage = new Image();
 var bubbleYellowImage = new Image();
-
 var bubbleBlueBombImage = new Image();
 var bubbleRedBombImage = new Image();
 var bubbleGreenBombImage = new Image();
 var bubblePurpleBombImage = new Image();
 var bubbleYellowBombImage = new Image();
-
 var bubbleBlueHalfImage = new Image();
 var bubbleRedHalfImage = new Image();
 var bubbleGreenHalfImage = new Image();
 var bubblePurpleHalfImage = new Image();
 var bubbleYellowHalfImage = new Image();
-
 var bubbleBlueFreezeImage = new Image();
 var bubbleRedFreezeImage = new Image();
 var bubbleGreenFreezeImage = new Image();
 var bubblePurpleFreezeImage = new Image();
 var bubbleYellowFreezeImage = new Image();
-
 var bubbleBlueImageX2 = new Image();
 var bubbleRedImageX2 = new Image();
 var bubbleGreenImageX2 = new Image();
 var bubblePurpleImageX2 = new Image();
 var bubbleYellowImageX2 = new Image();
-
 var bubbleBlueImageX3 = new Image();
 var bubbleRedImageX3 = new Image();
 var bubbleGreenImageX3 = new Image();
 var bubblePurpleImageX3 = new Image();
 var bubbleYellowImageX3 = new Image();
 
+//ingame animations
 var bubbleExplode = new Image();
 var bubbleEstela = new Image();
 var bubbleBombExplode = new Image();
@@ -79,25 +76,32 @@ var bubbleMultiColorExplode = new Image();
 var bubbleX2Explode = new Image();
 var bubbleX3Explode = new Image();
 
+var uiPandaBag = new Image();
+var uiPanda = new Image();
+var uiCannon = new Image();
+var uiCannonShoot = new Image();
+
 var lvlFrame = new Image();
 var backgroundImage = new Image();
 var initImage = new Image();
 var logoImage = new Image();
-//pandaBearAnim = new Image();
 
-var uiPandaStandBy = new Image();
-var uiPandaLoading = new Image();
-var uiPandaBlinking = new Image();
-var uiPanda = new Image();
+//interfaz
 var uiLevelFrame = new Image();
 var uiLifeFrame = new Image();
 var uiPointsFrame = new Image();
+var uiMultiCountFrame = new Image();
+var uiBombCountFrame = new Image();
+var uiFreezeCountFrame = new Image();
+
 var uiLooseFrame = new Image();
 var uiWinFrame = new Image();
-var uiFinishContinue = new Image();
-var uiFinishMenu = new Image();
-var uiCannon = new Image();
-var uiCannonShoot = new Image();
+var uiWinContinueButton = new Image();
+var uiLoseContinueButton = new Image();
+var uiFinishAdd = new Image();
+/*var uiFinishContinue = new Image();
+var uiFinishMenu = new Image();*/
+
 var uiOptionButton = new Image();
 var uiNewButton = new Image();
 var uiContinueButton = new Image();
@@ -129,6 +133,17 @@ var uiPauseCartel = new Image();
 
 var facebookScreen = new Image();
 var facebookButton = new Image();
+
+var uiNoInetErrorScreen = new Image();
+var uiNoInetErrorButton = new Image();
+var uiResolutionErrorScreen = new Image();
+var uiResolutionErrorButton = new Image();
+/*var uiErrorScreen = new Image();
+var uiErrorButton = new Image()*/
+
+var uiEndGameScreen = new Image();
+var uiEndGameButton1 = new Image();
+var uiEndGameButton2 = new Image();
 
 var game;
 var cartel;
@@ -936,19 +951,29 @@ function bubbleCannon(lvl){
 	this.currentBubble;/* = new bubble(this.lvl);
 	this.currentBubble.makeItRandom();*/
 	this.readyShoot = false;
+	this.loaded = false;
 	this.object = new standAnimation(uiCannon.width, uiCannon.height, uiCannon.src);
 	this.object.addState('shoot', uiCannonShoot.src, 8);
 	this.element = this.object.element;
 	this.object.setXY(((this.lvl.width - uiCannon.width) / 2) + this.lvl.leftBound - 5, (this.lvl.height - uiCannon.height) + this.lvl.topBound + 4);
 	/*style.top = this.lvl.height - cannonImage.height;
 	style.left = (this.lvl.width - cannonImage.width) / 2;*/
+	this.bufferBubble;
 
 	this.shoot = function(x, y){
 	//function shoot(x, y){
 		/*vecx = -((lvl.width / 2) - (x - this.lvl.left));
 		vecy = lvl.height - (y - this.lvl.top);*/
+		
 		if(!this.readyShoot) return;
+		if(!this.loaded) return;
+		this.currentBubble.x = ((lvl.width / 2) - (this.lvl.bubbleRadius / 2)) + this.lvl.leftBound;
+		this.currentBubble.y = (lvl.height - lvl.bubbleRadius) + this.lvl.topBound;
+		this.currentBubble.y -= 5;
+
 		this.readyShoot = false;
+		this.loaded = false;
+
 		var vecx = (x/* - this.lvl.left*/) - (this.currentBubble.x  + (this.lvl.bubbleRadius / 2));
 		var vecy = (y /*- this.lvl.top*/) - (this.currentBubble.y + (this.lvl.bubbleRadius / 2));
 
@@ -960,24 +985,63 @@ function bubbleCannon(lvl){
 		//this.lvl.addBubble(this.currentBubble);
 		this.lvl.setShootedBubble(this.currentBubble);	
 		this.object.setCurrentState('shoot');
+		if(this.currentBubble.bombBall) game.ui.addBombBubbleCount();
+		if(this.currentBubble.freezeBall) game.ui.addFreezeBubbleCount();
+		if(this.currentBubble.secondFlavor != '') game.ui.addMultiBubbleCount();
 		this.currentBubble = null;
+		this.chargeCannon();
 	};
 
 	this.setReadyShoot = function(){
-		this.currentBubble = new bubble(this.lvl);
+		/*this.currentBubble = new bubble(this.lvl);
 		this.currentBubble.makeItRandom();
 		this.currentBubble.x = ((lvl.width / 2) - (this.lvl.bubbleRadius / 2)) + this.lvl.leftBound;
 		this.currentBubble.y = (lvl.height - lvl.bubbleRadius) + this.lvl.topBound;
 		this.currentBubble.y -= 5;
 		this.currentBubble.element.style.top = this.currentBubble.y + 'px';
 		this.currentBubble.element.style.left = this.currentBubble.x + 'px';
-		animNav.append(this.currentBubble.element);
+		animNav.append(this.currentBubble.element);*/
+		/*this.currentBubble = this.bufferBubble;
+		this.bufferBubble = null;*/
+		//if(!this.loaded) this.chargeCannon();
 		this.readyShoot = true;
+	};
+
+	/*this.setReadyShoot = function(){
+		$(this.bufferBubble.element).animate({
+				left: ((this.lvl.width / 2) - (this.lvl.bubbleRadius / 2)) + this.lvl.leftBound,
+				top: ((lvl.height - lvl.bubbleRadius) + this.lvl.topBound) - 5
+			}, 450, function(){
+				game.cannon.setReadyShoot2();
+				game
+				game.cannon.addBuffer();
+		});
+	};*/
+
+	this.chargeCannon = function(){
+		$(this.bufferBubble.element).delay(500).animate({
+				left: ((this.lvl.width / 2) - (this.lvl.bubbleRadius / 2)) + this.lvl.leftBound,
+				top: ((lvl.height - lvl.bubbleRadius) + this.lvl.topBound) - 5
+			}, 450, function(){
+				game.cannon.loaded = true;
+				game.cannon.currentBubble = game.cannon.bufferBubble;
+				game.cannon.addBuffer();
+		});
+	};
+
+	this.addBuffer = function(){
+		this.bufferBubble = new bubble(this.lvl);
+		this.bufferBubble.makeItRandom(); 
+		animNav.append(this.bufferBubble.element);
+		$(this.bufferBubble.element).addClass('guiNextBallFrame' + gameSize);
 	};
 
 	this.draw = function(){
 		this.object.render();
 	};
+
+	this.addBuffer();
+	this.chargeCannon();
 };
 
 
@@ -1334,6 +1398,9 @@ function bubbleLevel(w, h, bubblesWidth, bubblesHeight, lvlnbr){
 	this.character.addState('load', 6, 27);
 	//this.character.addState('standby', uiPandaLoading.src, 5);
 	animNav.append(this.character.element);
+	var bag = document.createElement('div');
+	$(bag).addClass('guiPandaBag' + gameSize);
+	$(this.character.element).append(bag);
 	$(this.character.element).addClass('panda' + gameSize);
 
 	this.blinkTimer = setInterval('game.level.characterBlink()', 1500);
@@ -1685,8 +1752,10 @@ function bubbleLevel(w, h, bubblesWidth, bubblesHeight, lvlnbr){
 		$(this.character.element).remove();
 		$(this.cannon.element).remove();
 		if(this.cannon.currentBubble != null) $(this.cannon.currentBubble.element).remove();
+		if(this.cannon.bufferBubble != null) $(this.cannon.bufferBubble.element).remove();
 		if(this.shootedBubble != null) $(this.shootedBubble.element).remove();
 		$('.bubble').detach();
+		this.cannon = null;
 	};
 
 	
@@ -1756,6 +1825,10 @@ function gameUI(w, h){
 	this.acumuledPoints = 0;
 	this.lifes = 5;
 	this.initialLifes = lifesPerCoins;
+
+	this.multiBubbleCount = 0;
+	this.bombBubbleCount = 0;
+	this.freezeBubbleCount = 0;
 	//this.element = document.createElement('<div style=" @font-face: { font-family: \'The New Font\'; src: Bubblegum.ttf;}"></div>');
 	this.element = document.createElement('div');
 	this.element2 = document.createElement('div');
@@ -1815,6 +1888,10 @@ function gameUI(w, h){
 
 	this.coinsElement.innerHTML = api.softgame.user.balance;
 
+	this.multiBubbleElement.innerHTML = this.multiBubbleCount;
+	this.bombBubbleElement.innerHTML = this.bombBubbleCount;
+	this.freezeBubbleElement.innerHTML = this.freezeBubbleCount;
+
 	this.savePoints = function(){ this.acumuledPoints = this.points;};
 
 	this.restorePoints = function(){ this.points = this.acumuledPoints;}
@@ -1843,10 +1920,27 @@ function gameUI(w, h){
 		$(this.element).html(this.points);
 		$(this.element2).html(this.lifes);
 		$(this.element3).html(game.level.lvlnro);
+
+		this.multiBubbleElement.innerHTML = this.multiBubbleCount;
+		this.bombBubbleElement.innerHTML = this.bombBubbleCount;
+		this.freezeBubbleElement.innerHTML = this.freezeBubbleCount;
 	}
 
 	//this.
+	this.addMultiBubbleCount = function(){
+		this.multiBubbleCount++;
+		this.multiBubbleElement.innerHTML = this.multiBubbleCount;
+	};
 
+	this.addBombBubbleCount =  function(){
+		this.bombBubbleCount++;
+		this.bombBubbleElement.innerHTML = this.bombBubbleCount;	
+	};
+	
+	this.addFreezeBubbleCount = function(){
+		this.freezeBubbleCount++;
+		this.freezeBubbleElemenet.innerHTML = this.freezeBubbleCount;
+	};
 };
 
 
@@ -2154,7 +2248,7 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 																																	game.level = "";
 																																}}])
 		}else{
-			cartel = document.createElement('div');
+			/*cartel = document.createElement('div');
 			var image = document.createElement('img');
 			image.src = uiLooseFrame.src;
 			image.style.top = '0px';
@@ -2181,7 +2275,7 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 			$(continuebutton).addClass('guiLooseContinue' + game.size);
 			cartel.appendChild(continuebutton);
 
-			var tomenubutton = document.createElement('div');
+			/*var tomenubutton = document.createElement('div');
 			$(tomenubutton).addClass('guiLooseMenu' + game.size);
 			cartel.appendChild(tomenubutton);
 
@@ -2208,17 +2302,83 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 					$(cartel).remove();
 				});
 			});
-			$(tomenubutton).click(function(){
+			/*$(tomenubutton).click(function(){
 				//alert('test tomenu');
 				game.showMenu();	
 			});
 			$(cartel).fadeIn(150);
 			
-		};		
+				*/
+			cartel = document.createElement('div');
+			var uiScreen = document.createElement('div');
+			var uiCoins = document.createElement('div');
+			var uiLifes = document.createElement('div');
+			var uiPoints = document.createElement('div');
+			var uiRank = document.createElement('div');
+			var uiLevel = document.createElement('div');
+			var uiMultiCount = document.createElement('div');
+			var uiBombCount = document.createElement('div');
+			var uiFreezeCount = document.createElement('div');
+			var continueButton = document.createElement('div');
+
+			$(cartel).addClass('uiAlert' + gameSize);
+			$(uiScreen).addClass('guiLooseScreen' + gameSize);
+			$(uiCoins).addClass('guiFinishCoins' + gameSize);
+			$(uiLifes).addClass('guiFinishLifes' + gameSize);
+			$(uiPoints).addClass('guiFinishPoints' + gameSize);
+			$(uiRank).addClass('guiFinishRank' + gameSize);
+			$(uiLevel).addClass('guiFinishLevel' + gameSize);
+			$(uiMultiCount).addClass('guiFinishMultiCount' + gameSize);
+			$(uiBombCount).addClass('guiFinishBombCount' + gameSize);
+			$(uiFreezeCount).addClass('guiFinishFreezeCount' + gameSize);
+			$(continueButton).addClass('guiLooseContinue' + gameSize);
+			$(cartel).append(uiScreen);
+			$(cartel).append(uiCoins);
+			$(cartel).append(uiLifes);
+			$(cartel).append(uiPoints);
+			$(cartel).append(uiRank);
+			$(cartel).append(uiLevel);
+			$(cartel).append(uiMultiCount);
+			$(cartel).append(uiBombCount);
+			$(cartel).append(uiFreezeCount);
+			$(cartel).append(continueButton);
+
+			uiCoins.innerHTML = api.softgame.user.balance;
+			uiLifes.innerHTML = game.ui.lifes;
+			uiPoints.innerHTML = game.ui.points;
+			uiRank.innerHTML = 0;
+			uiLevel.innerHTML = game.level.lvlnro;
+			uiMultiCount.innerHTML = game.ui.multiBubbleCount;
+			uiBombCount.innerHTML = game.ui.bombBubbleCount;
+			uiFreezeCount.innerHTML = game.ui.freezeBubbleCount;
+
+			$(continueButton).click(function(){
+				$(cartel).fadeOut(300, function(){
+					game.ui.lifes -= 1;					
+					if(game.ui.lifes == -1){
+						game.level = {};
+						game.level = '';
+						game.ui.lifes = 5;
+						game.ui.points = 0;
+						game.ui.acumuledPoints = 0;
+						game.ui.pointsCounter = 0;
+						game.showMenu();
+					}else{
+						game.ui.points = game.ui.acumuledPoints;					 
+						game.ui.pointsCounter = game.ui.acumuledPoints;
+					};
+					game.doSerialize = true;
+					game.redoLevel();
+					$(cartel).remove();
+				});
+			});
+
+			$(document.body).append(cartel);
+		};
 	};
 
 	this.playerWin = function(){
-		game.level.clearBoard();
+		/*game.level.clearBoard();
 		cartel = document.createElement('div');
 		var image = document.createElement('img');
 		image.src = uiWinFrame.src;
@@ -2267,7 +2427,63 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 
 		$(tomenubutton).click(function(){
 			game.showMenu();	
+		});*/
+
+		cartel = document.createElement('div');
+		var uiScreen = document.createElement('div');
+		var uiCoins = document.createElement('div');
+		var uiLifes = document.createElement('div');
+		var uiPoints = document.createElement('div');
+		var uiRank = document.createElement('div');
+		var uiLevel = document.createElement('div');
+		var uiMultiCount = document.createElement('div');
+		var uiBombCount = document.createElement('div');
+		var uiFreezeCount = document.createElement('div');
+		var continueButton = document.createElement('div');
+
+		$(cartel).addClass('uiAlert' + gameSize);
+		$(uiScreen).addClass('guiWinScreen' + gameSize);
+		$(uiCoins).addClass('guiFinishCoins' + gameSize);
+		$(uiLifes).addClass('guiFinishLifes' + gameSize);
+		$(uiPoints).addClass('guiFinishPoints' + gameSize);
+		$(uiRank).addClass('guiFinishRank' + gameSize);
+		$(uiLevel).addClass('guiFinishLevel' + gameSize);
+		$(uiMultiCount).addClass('guiFinishMultiCount' + gameSize);
+		$(uiBombCount).addClass('guiFinishBombCount' + gameSize);
+		$(uiFreezeCount).addClass('guiFinishFreezeCount' + gameSize);
+		$(continueButton).addClass('guiWinContinue' + gameSize);
+		$(cartel).append(uiScreen);
+		$(cartel).append(uiCoins);
+		$(cartel).append(uiLifes);
+		$(cartel).append(uiPoints);
+		$(cartel).append(uiRank);
+		$(cartel).append(uiLevel);
+		$(cartel).append(uiMultiCount);
+		$(cartel).append(uiBombCount);
+		$(cartel).append(uiFreezeCount);
+		$(cartel).append(continueButton);
+
+		uiCoins.innerHTML = api.softgame.user.balance;
+		uiLifes.innerHTML = game.ui.lifes;
+		uiPoints.innerHTML = game.ui.points;
+		uiRank.innerHTML = 0;
+		uiLevel.innerHTML = game.level.lvlnro;
+		uiMultiCount.innerHTML = game.ui.multiBubbleCount;
+		uiBombCount.innerHTML = game.ui.bombBubbleCount;
+		uiFreezeCount.innerHTML = game.ui.freezeBubbleCount;
+
+		$(continueButton).click(function(){
+			$(cartel).fadeOut(300, function(){
+				game.level.clearBoard();
+				game.doSerialize = true;
+				api.facebook.postMessage(api.facebook.user.name + " has got " + game.ui.points + " points in Bubble Paradise! Come with him and enjoy togheter in the paradise!");
+				game.ui.acumuledPoints = game.ui.points;
+				game.ui.pointsCounter = game.ui.points;
+				game.nextLevel();
+				$(cartel).remove();
+			});
 		});
+		$(document.body).append(cartel);
 
 		if(LeaderBoard.highscore < game.ui.points) api.ui.showHighScore();
 	};
@@ -2425,6 +2641,9 @@ api.levels.serializeLevel = function(game){
 	lvl.cannon.readyShoot = game.level.cannon.readyShoot;
 	lvl.ui = {};
 	lvl.ui.lifes = game.ui.lifes;
+	lvl.ui.multiCount = game.ui.multiBubbleCount;
+	lvl.ui.bombCount = game.ui.bombBubbleCount;
+	lvl.ui.freezeCount = game.ui.freezeBubbleCount;
 
 	api.levels.jsonlevel = lvl;
 };
@@ -2513,6 +2732,9 @@ api.levels.unserializeLevel = function(){
 	game.level.win = game.playerWin;	
 
 	game.ui.lifes = lvl.ui.lifes;
+	game.ui.multiBubbleCount = lvl.ui.multiCount;
+	game.ui.bombBubbleCount = lvl.ui.bombCount;
+	game.ui.freezeBubbleCount = lvl.ui.freezeCount;
 
 	animNav.append(game.cannon.element);
 	return true;
@@ -2591,6 +2813,155 @@ api.ui.alert2 = function(msg, fns){
 		});
 		
 	};
+};
+
+//api.ui.alertStyleDiv  = '';
+api.ui.alertStyle = function(screenclass, buttonclass){
+	var alertui = document.createElement('div');
+	var alertuibackground = document.createElement('div');
+	var alertuibutton = document.createElement('div');
+	//alertuibackground.style.backgroundImage = 'url(' + uiAlertScreen.src + ')';
+	$(alertui).addClass('uiAlert' + gameSize);
+	$(alertuibackground).addClass(screenclass + gameSize);
+	$(alertuibutton).addClass(buttonclass + gameSize);
+	alertui.appendChild(alertuibackground);
+	alertui.appendChild(alertuibutton);
+	
+	if(api.ui.alertnav != null) $(api.ui.alertnav).remove();
+	api.ui.alertnav = null;
+	api.ui.alertnav = alertui;
+
+	$(document.body).append(api.ui.alertnav);
+	$(api.ui.alertnav).fadeIn(150);
+	$(alertuibutton).click(function(){
+		$(api.ui.alertnav).fadeOut(300, function(){
+			$(api.ui.alertnav).remove();
+			api.ui.alertnav = null;
+		});
+	});
+};
+
+api.ui.balancediv = '';
+api.ui.balancedivcoins = '';
+
+api.ui.showBalance = function(){
+	if(api.ui.balancediv == ''){
+		api.ui.balancediv = document.createElement('div');
+		$(api.ui.balancediv).addClass('uiAlert' + gameSize);
+		var cartel = document.createElement('div');
+		$(cartel).addClass('guiBalanceCartel' + gameSize);
+
+		var okbutton = document.createElement('div');
+		$(okbutton).addClass('guiBalanceOkButton' + gameSize);
+
+		var buybutton = document.createElement('div');
+		$(buybutton).addClass('guiBalanceBuyButton' + gameSize);
+
+		api.ui.balancedivcoins = document.createElement('div');
+		$(api.ui.balancedivcoins).addClass('guiBalanceCoins' + gameSize);
+
+		$(api.ui.balancediv).append(cartel);
+		$(api.ui.balancediv).append(okbutton);
+		$(api.ui.balancediv).append(buybutton);
+		$(api.ui.balancediv).append(api.ui.balancedivcoins);
+
+		$(okbutton).click(function(){
+			api.ui.balancediv.style.display = 'none';		
+			$(api.ui.balancediv).remove();
+		});
+		$(buybutton).click(function(){
+			api.ui.balancediv.style.display = 'none';		
+			$(api.ui.balancediv).remove();
+			window.location = api.softgame.getBuyingCoinsUrl();
+		});
+	};
+
+	api.ui.balancedivcoins.innerHTML =  api.softgame.user.balance;
+	api.ui.balancediv.style.display = 'block';
+	$(document.body).append(api.ui.balancediv);
+};
+
+api.ui.losescreendiv = '';
+
+api.ui.showLoseScreen = function(){
+	if(api.ui.losescreendiv == ''){
+		api.ui.losescreendiv = document.createElement('div');
+		$(api.ui.losescreendiv).addClass('uiAlert' + gameSize);
+
+		var cartel = document.createElement('div');
+		$(cartel).addClass('guiLoseAllLifes' + gameSize);
+
+		var okbutton = document.createElement('div');
+		$(okbutton).addClass('guiLoseAllLifesOk' + gameSize);
+
+		var buybutton = document.createElement('div');
+		$(buybutton).addClass('guiLoseAllLifesBuy' + gameSize);
+
+		$(okbutton).click(function(){
+			api.ui.losescreendiv.style.display = 'none';		
+		});
+		$(buybutton).click(function(){
+			//api.ui.losescreendiv.style.display = 'none';
+			api.softgame.buyFinalized = function(){
+				api.ui.hideWaiting();
+				api.ui.alert('You have ' + lifesPerCoins + ' more lifes!! or you are a cat or someone loves you up there :)', 'Thanks! Go on!', function(){
+					game.ui.lifes = lifesPerCoins;
+					$(cartel).remove();
+					cartel = document.createElement('div');
+					var image = document.createElement('img');
+					image.src = uiLooseFrame.src;
+					image.style.top = '0px';
+					image.style.left = ((game.canvas.width - uiLooseFrame.width) / 2) + 'px';
+					image.style.position = 'absolute';
+					cartel.appendChild(image);
+					cartel.style.width = game.canvas.width + 'px';
+					cartel.style.height = game.canvas.height + 'px';
+					cartel.style.maxHeight = game.canvas.height + 'px';
+					cartel.style.display = 'none';
+					cartel.style.position = 'fixed';
+					cartel.style.top = '0px';
+					cartel.style.left = '0px';
+					//cartel.style.zIndex = -99;
+					cartel.style.backgroundImage = 'url(backgrounddiv.png)';
+					cartel.style.backgroundRepeat = 'repeat';
+
+					var points = document.createElement('div');
+					cartel.appendChild(points);
+					$(points).addClass('guiFinishPoints' + game.size);
+					points.innerHTML = '<p>'+game.ui.points+'</p>';
+
+					var continuebutton = document.createElement('div');
+					$(continuebutton).addClass('guiLooseContinue' + game.size);
+					cartel.appendChild(continuebutton);
+
+					var tomenubutton = document.createElement('div');
+					$(tomenubutton).addClass('guiLooseMenu' + game.size);
+					cartel.appendChild(tomenubutton);
+
+					//cartel.style.backgroundImage = 'url('+uiLooseFrame.src+')';
+					//$(document.body).append(cartel);
+					animNav.append(cartel);
+					$(continuebutton).click(function(){
+						$(cartel).fadeOut(300, function(){
+							game.ui.points = game.ui.acumuledPoints;					 
+							game.ui.pointsCounter = game.ui.acumuledPoints;
+							game.doSerialize = true;
+							game.redoLevel();
+							$(cartel).remove();
+						});
+					});
+					$(cartel).fadeIn(150);
+					api.ui.losescreendiv.style.display = 'none';
+				});
+			};
+			api.ui.showWaiting();
+			api.softgame.startCoinsBuying('level', '3morelifes', '', 1, '', '');
+		});
+
+		$(document.body).append(api.ui.losescreendiv);
+	};
+
+	api.ui.losescreendiv.style.display = 'block';
 };
 
 api.ui.waitTimer = 0;

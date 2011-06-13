@@ -53,8 +53,6 @@ Playtomic.Log.Request = new PlaytomicRequest();
 Playtomic.Log.Plays = 0;
 Playtomic.Log.Pings = 0;
 Playtomic.Log.FirstPing = true;
-Playtomic.Log.Frozen = false;
-Playtomic.Log.FrozenQueue = [];
 
 // unique, logged metrics
 Playtomic.Log.Customs = new Array();
@@ -166,12 +164,10 @@ Playtomic.Log.LevelCounterMetric = function(name, level, unique)
 
 	if(unique)
 	{
-		var key = name + "." + level.toString();
-		
-		if(Playtomic.Log.LevelCounters.indexOf(key) > -1)
+		if(Playtomic.Log.LevelCounters.indexOf(name) > -1)
 			return;
 
-		Playtomic.Log.LevelCounters.push(key);
+		Playtomic.Log.LevelCounters.push(name);
 	}
 	
 	Playtomic.Log.Send("lc/" + Playtomic.Clean(name) + "/" + Playtomic.Clean(level));
@@ -184,12 +180,10 @@ Playtomic.Log.LevelRangedMetric = function(name, level, valu, uniquee)
 
 	if(unique)
 	{
-		var key = name + "." + level.toString();
-		
-		if(Playtomic.Log.LevelRangeds.indexOf(key) > -1)
+		if(Playtomic.Log.LevelRangeds.indexOf(name) > -1)
 			return;
 
-		Playtomic.Log.LevelRangeds.push(key);
+		Playtomic.Log.LevelRangeds.push(name);
 	}
 	
 	Playtomic.Log.Send("lr/" + Playtomic.Clean(name) + "/" + Playtomic.Clean(level) + "/" + value);
@@ -202,12 +196,10 @@ Playtomic.Log.LevelAverageMetric = function(name, level, value, unique)
 
 	if(unique)
 	{
-		var key = name + "." + level.toString();
-		
-		if(Playtomic.Log.LevelAverages.indexOf(key) > -1)
+		if(Playtomic.Log.LevelAverages.indexOf(name) > -1)
 			return;
 
-		Playtomic.Log.LevelAverages.push(key);
+		Playtomic.Log.LevelAverages.push(name);
 	}
 	
 	Playtomic.Log.Send("la/" + Playtomic.Clean(name) + "/" + Playtomic.Clean(level) + "/" + value);
@@ -273,16 +265,9 @@ Playtomic.Log.PlayerLevelFlag = function(levelid)
 }
 
 Playtomic.Log.Send = function(data, forcesend)
-{		
-	
-	if(Playtomic.Log.Frozen)
-	{
-		Playtomic.Log.Frozen,push(data);
-		return;
-	}
-
+{
 	Playtomic.Log.Request.Queue(data);
-	
+
 	if(Playtomic.Log.Request.Ready || forcesend)
 	{
 		Playtomic.Log.Request.Send();
@@ -297,21 +282,6 @@ Playtomic.Log.ForceSend = function()
 
 	Playtomic.Log.Request.Send();
 	Playtomic.Log.Request = new PlaytomicRequest();
-}
-
-Playtomic.Log.Freeze = function()
-{
-	Playtomic.Log.Frozen = true;
-}
-
-Playtomic.Log.UnFreeze = function()
-{
-	Playtomic.Log.Frozen = false;
-	
-	if(Playtomic.Log.FrozenQueue.length > 0)
-	{
-		Playtomic.Log.Request.MassQueue();
-	}
 }
 
 function PlaytomicRequest()
@@ -341,28 +311,6 @@ function PlaytomicRequest()
 		s.src = Playtomic.APIUrl + "tracker/q.aspx?swfid=" + Playtomic.SWFID + "&q=" + this.Data + "&url=" + Playtomic.SourceURL + "&" + Math.random() + "z";
 		Playtomic.ScriptHolder.innerHTML = "";
 		Playtomic.ScriptHolder.appendChild(s);
-	}
-	
-	this.MassQueue = function()
-	{
-		if(Playtomic.Log.FrozenQueue.length == 0)
-		{
-			Playtomic.Log.Request = this;
-			return;
-		}
-		
-		for(var i=Playtomic.Log.FrozenQueue.length-1; i>-1; i--)
-		{
-			this.Queue(Playtomic.Log.FrozenQueue[i]);
-			Playtomic.Log.FrozenQueue.splice(i, 1);
-			
-			if(this.Ready)
-			{
-				this.Send();
-				var request = new PlaytomicRequest();
-				request.MassQueue();
-			}
-		}
 	}
 }
 
@@ -699,7 +647,7 @@ Playtomic.Leaderboards.ListComplete = function(response, callback)
 
 	var scores = [];
 	var arr = response.Data.Scores;
-	if(arr == null) arr=[];
+	if(arr == undefined) arr = [];
 	for(var i=0; i<arr.length; i++)
 	{
 		var score = {};
@@ -783,13 +731,13 @@ Playtomic.Leaderboards.SaveAndList = function(score, table, callback, saveoption
 	var allowduplicates = saveoptions.allowduplicates || saveoptions.allowduplicates == false ? saveoptions.allowduplicates : false;
 	var highest = saveoptions.highest || saveoptions.highest == false ? saveoptions.highest : true;
 	var facebook = saveoptions.facebook || saveoptions.facebook == false ? saveoptions.facebook : false;
-
-	var postdata = 	"&name=" + encodeURI(score.Name) + 
-					"&points=" + encodeURI.Points + 
+	//alert(api.JSON2String(score));
+	/*var*/ postdata += 	"&name=" + encodeURI(score.Name) + 
+					"&points=" + encodeURI(score.Points) + 
 					"&allowduplicates=" + (allowduplicates ? "y" : "n") + 
 					"&auth=" + Playtomic.MD5(Playtomic.SourceURL + score.Points.toString()) + 
 					"&url=" + Playtomic.SourceURL
-	
+	//alert(postdata);
 
 	if(score.FBUserId != null && score.FBUserId != "")
 	{

@@ -154,7 +154,7 @@
 	left: 98px;
 	width: 60px;
 	height: 43px;
-	z-index: 100;
+	/*z-index: ;*/
 }
 
 .facebookFrame320x480{
@@ -236,6 +236,22 @@
 	position: fixed;
 	top: 260px;
 	width: 134px;
+}
+
+.guiProgressBar320x480{
+	position: fixed;
+	width: 5px;
+	height: 217px;
+	top: 187px;
+	left: 299px;
+}
+
+.guiProgressBar320x480 > div{
+	position: absolute;
+	background-color: #fff;
+	width: 100%;
+	bottom: 0px;
+	top: auto;
 }
 
 .panda320x480{

@@ -227,7 +227,7 @@ function Loader(progress, size){
 		facebookButton.src = this.size + this.separator + 'facebookbutton.png';
 
 		uiNoInetErrorScreen.src = this.size + this.separator + 'guinoinetscreen.png';
-		uiNoInetErrorButton.src = this.size + this.separator + 'quinoinetbutton.png';
+		uiNoInetErrorButton.src = this.size + this.separator + 'guinoinetbutton.png';
 		uiResolutionErrorScreen.src = this.size + this.separator + 'guiresolutionscreen.png';
 		uiResolutionErrorButton.src = this.size + this.separator + 'guiresolutionbutton.png';
 

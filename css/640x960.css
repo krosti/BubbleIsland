@@ -221,6 +221,22 @@
 	width: 265px;
 }
 
+.guiProgressBar640x960{
+	position: fixed;
+	width: 5px;
+	height: 217px;
+	top: 187px;
+	left: 299px;
+}
+
+.guiProgressBar640x960 > div{
+	position: absolute;
+	background-color: #fff;
+	width: 100%;
+	bottom: 0px;
+	top: auto;
+}
+
 .panda640x960{
 	left: 115px;
 	top: 830px;
@@ -229,6 +245,17 @@
 	height: 111px;
 	min-height: 111px;*/
 }
+
+.guiPandaBag640x960{
+	position: fixed;
+	background-image: url(../320x480/pandabag.png);
+	top: 440px;
+	left: 98px;
+	width: 60px;
+	height: 43px;
+	/*z-index: ;*/
+}
+
 
 .guiFinishPoints640x960{
 	color: #644000;

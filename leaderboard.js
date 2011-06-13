@@ -23,7 +23,7 @@ function SubmitScore()
     };
 
     //Playtomic.Leaderboards.SaveAndList(score, "highscores", SubmitComplete, saveoptions, listoptions);
-    Playtomic.Leaderboards.SaveAndList(score, "highscores", SubmitComplete, saveoptions, listoptions);
+    Playtomic.Leaderboards.Save(score, "highscores", SubmitComplete, saveoptions, listoptions);
     /*var simple_score = {};
     simple_score.Name = 'Shaka';//api.facebook.user.name;
     simple_score.FBUserId = 123456789//api.facebook.user.id;

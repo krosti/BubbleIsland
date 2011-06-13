@@ -154,7 +154,7 @@ var pointExplode = 10;
 var pointDrop = 5;
 var min_vel = .1;
 var freezeTime = 10 //en segundos
-var lifesPerCoins = 1;
+var lifesPerCoins = 0;
 var linesPerLevel = 4;
 
 var currentState = {
@@ -1842,6 +1842,8 @@ function gameUI(w, h){
 	this.freezeBubbleElement = document.createElement('div');
 	this.coinsElement = document.createElement('div'); 
 	this.addCoinsElement = document.createElement('div'); 
+	this.statusBar = document.createElement('div'); 
+	this.statusProgressBar = document.createElement('div');
 	/*$(this.element).addClass('pointsFrame');
 	$(this.element2).addClass('lifesFrame');
 	$(this.element3).addClass('levelsFrame');*/
@@ -1857,6 +1859,8 @@ function gameUI(w, h){
 	animNav.append(this.freezeBubbleElement);
 	animNav.append(this.coinsElement);
 	animNav.append(this.addCoinsElement);
+	animNav.append(this.statusBar);
+	$(this.statusBar).append(this.statusProgressBar);
 
 	$(this.element).addClass('pointsFrame'+ gameSize);
 	$(this.element2).addClass('lifesFrame'+ gameSize);
@@ -1869,6 +1873,7 @@ function gameUI(w, h){
 	$(this.freezeBubbleElement).addClass('guiBuyFreezeFrame' + gameSize);
 	$(this.coinsElement).addClass('guiCoinsFrame' + gameSize);;
 	$(this.addCoinsElement).addClass('guiBuyCoinsFrame' + gameSize);
+	$(this.statusBar).addClass('guiProgressBar' + gameSize);
 
 	$(this.backElement).click(function(){ game.showMenu(); });
 
@@ -1905,7 +1910,10 @@ function gameUI(w, h){
 		painter.fillRect(0, 0, 100, 25);
 		painter.font = "bold 12px sans-serif";
 		painter.fillStyle = '#000';*/
-		if(this.pointsCounter < this.points) this.pointsCounter += 10;
+		if(this.pointsCounter < this.points){
+			this.pointsCounter += 10;
+			this.statusProgressBar.style.height = ((this.pointsCounter / game.level.pointsToReach) * 100) + '%';
+		};
 		$(this.element).html(this.pointsCounter);
 		$(this.element2).html(this.lifes);
 		$(this.element3).html(game.level.lvlnro);
@@ -2901,12 +2909,15 @@ api.ui.showLoseScreen = function(){
 		var buybutton = document.createElement('div');
 		$(buybutton).addClass('guiLoseAllLifesBuy' + gameSize);
 
-		$(apì.ui.losescreendiv).append(cartel);
-		$(apì.ui.losescreendiv).append(okbutton);
-		$(apì.ui.losescreendiv).append(buybutton);
+		$(api.ui.losescreendiv).append(cartel);
+		$(api.ui.losescreendiv).append(okbutton);
+		$(api.ui.losescreendiv).append(buybutton);
 
 		$(okbutton).click(function(){
-			api.ui.losescreendiv.style.display = 'none';		
+			api.ui.losescreendiv.style.display = 'none';	
+			game.level = null;
+			game.level = '';
+			game.showMenu();
 		});
 		$(buybutton).click(function(){
 			//api.ui.losescreendiv.style.display = 'none';

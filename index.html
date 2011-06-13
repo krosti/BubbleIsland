@@ -734,7 +734,7 @@ function connectToFacebook2(){
 		$('#FBnav')[0].style.display = 'none';
 		//};
 		api.ui.showWaiting();
-		api.softgame.onLoginUser = function(){
+		api.softgame.onLogin = function(){
 			api.ui.hideWaiting();
 		};
 		api.softgame.startConnection();

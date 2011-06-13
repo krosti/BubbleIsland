@@ -734,10 +734,12 @@ function connectToFacebook2(){
 		$('#FBnav')[0].style.display = 'none';
 		//};
 		api.ui.showWaiting();
+		api.softgame.onLoginUser = function(){
+			api.ui.hideWaiting();
+		};
 		api.softgame.startConnection();
 		api.facebook.retrieveUserData();
-		api.facebook.loaded = function(){
-			api.ui.hideWaiting();
+		api.facebook.loaded = function(){			
 			if(firstRun) api.facebook.postMessage(api.facebook.user.name + ' is now enjoying the Bubble Paradise, Come on! don\'t miss this oportunitie and join ' + (api.facebook.user.gender == 'male' ? 'him' : 'her') + ' on this trip`and get some relaxing time togheter!');
 		};
 };
@@ -819,7 +821,7 @@ function showCoins(){
 		api.ui.showBalance();
 	};
 	//options.showNav('softgameNav', 'gameMenu');
-	api.softgame.getUserInfo()
+	api.softgame.getUserInfo();
 };
 
 function postHighscoreOnFacebook(){
@@ -829,7 +831,7 @@ function postHighscoreOnFacebook(){
 
 loader.readyLoad = function(){	
 	//toda la intro del juego
-	alert('hola');
+	//alert('hola');
 	document.getElementById('backgroundNav').style.backgroundImage = 'url('+backgroundImage.src+')';
 	//alert('url('+backgroundImage.src+')');
 	//alert(gameSize.slice(0,3) + 'x' + gameSize.slice(4));

@@ -734,12 +734,13 @@ function connectToFacebook2(){
 		$('#FBnav')[0].style.display = 'none';
 		//};
 		api.ui.showWaiting();
-		api.softgame.onLogin = function(){
-			api.ui.hideWaiting();
-		};
+		/*api.softgame.onLogin = function(){
+			
+		};*/
 		api.softgame.startConnection();
 		api.facebook.retrieveUserData();
-		api.facebook.loaded = function(){			
+		api.facebook.loaded = function(){	
+		api.ui.hideWaiting();		
 			if(firstRun) api.facebook.postMessage(api.facebook.user.name + ' is now enjoying the Bubble Paradise, Come on! don\'t miss this oportunitie and join ' + (api.facebook.user.gender == 'male' ? 'him' : 'her') + ' on this trip`and get some relaxing time togheter!');
 		};
 };

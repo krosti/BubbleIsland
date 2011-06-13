@@ -5,7 +5,7 @@ function Loader(progress, size){
 
 	this.readyLoad; // = function(){ alert('hola'); };
 	
-	this.toLoad = 76;
+	this.toLoad = 83;
 	//this.toLoad = 80;
 	this.isloaded = 0;
 	this.separator = '/';

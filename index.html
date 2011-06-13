@@ -20,7 +20,6 @@
 	
 	<script src="jqueryMobile.js" type="text/javascript" charset="utf-8"></script> 
 	<script src="playtomic.js" type="text/javascript" charset="utf-8"></script>
-	<script src="phonegap.js" type="text/javascript" charset="utf-8"></script> 
 	 <!-- game
 	 <script src="phonegap.js" type="text/javascript" charset="utf-8"></script> 
 	  	 -->
@@ -768,7 +767,7 @@ $(window).load(function () {
 	//ºloader.init();
 	if(window.localStorage.getItem('runned') == null){
 		firstRun = true;
-		window.localStora.setItem('runned', 1);
+		window.localStorage.setItem('runned', 1);
 	};
 });
 
@@ -866,7 +865,7 @@ loader.readyLoad = function(){
 	//$('#loadingScreen').fadeOut('fast', function(){
 	//FB.token = $_GET('access_token');
 	//if(FB.token != ''){	
-		game = new appEnviroment("gameCanvas", "gameMenu", "animCanvas", gameSize);	
+		game = new appEnviroment("gameMenu", "animCanvas", gameSize);	
 		//FB.element.style.display = 'none';
 		//FB.retrieveUserData();
 		//FB.retrieveFriendsData();
@@ -901,7 +900,7 @@ s.onload = function() {
     setInterval(stats.update, 1000 / 60);
 }
 */
-
+//loader.init();
 </script> 
 </body>
 </html>

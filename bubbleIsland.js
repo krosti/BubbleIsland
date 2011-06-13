@@ -2901,6 +2901,10 @@ api.ui.showLoseScreen = function(){
 		var buybutton = document.createElement('div');
 		$(buybutton).addClass('guiLoseAllLifesBuy' + gameSize);
 
+		$(apì.ui.losescreendiv).append(cartel);
+		$(apì.ui.losescreendiv).append(okbutton);
+		$(apì.ui.losescreendiv).append(buybutton);
+
 		$(okbutton).click(function(){
 			api.ui.losescreendiv.style.display = 'none';		
 		});

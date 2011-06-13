@@ -1,4 +1,4 @@
-var VERSION = '0.9.075';
+var VERSION = '0.9.082';
 
 function rnd(top){ return Math.floor(Math.random()*(top + 1))};
 
@@ -154,7 +154,7 @@ var pointExplode = 10;
 var pointDrop = 5;
 var min_vel = .1;
 var freezeTime = 10 //en segundos
-var lifesPerCoins = 5;
+var lifesPerCoins = 1;
 var linesPerLevel = 4;
 
 var currentState = {
@@ -2086,7 +2086,8 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 		//alert("loadPreviousGame");
 		if(api.levels.jsonlevel === ""){
 			//alert("wepa!");
-			api.ui.alert("I can't find any previous game, you need to start from the begginig!", 'Ok, lets go for it!');
+			//api.ui.alert("I can't find any previous game, you need to start from the begginig!", 'Ok, lets go for it!');
+			api.ui.alertStyle('guiPreviousScreen', 'guiPreviousButton');
 			return;
 		};
 		if(!api.levels.unserializeLevel()) return;
@@ -2179,7 +2180,8 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 		game.level.clearBoard();
 
 		if(game.ui.lifes == 0){ // ask for more lifes!
-				api.ui.alert2("You haven't any lifes left, Do you want to spend a coin for " + lifesPerCoins + " more lifes? It totally worth it!", [{'button': 'Oks, i want 3 more lifes',
+			api.ui.showLoseScreen();
+				/*api.ui.alert2("You haven't any lifes left, Do you want to spend a coin for " + lifesPerCoins + " more lifes? It totally worth it!", [{'button': 'Oks, i want 3 more lifes',
 																																'action': function(){
 																																	//$(this).onclick = function(){};
 																																	api.softgame.buyFinalized = function(){
@@ -2246,7 +2248,8 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 																																	game.menu.style.display = 'block';
 																																	game.level = null;
 																																	game.level = "";
-																																}}])
+																																}}])*/
+
 		}else{
 			/*cartel = document.createElement('div');
 			var image = document.createElement('img');

@@ -629,7 +629,7 @@ body.sgds .clear {
 </nav>
  <!--background-image: url('background.png')-->
 <!--canvas id="gameBackgroundCanvas" style="position: absolute; top: 0px; left: 0px"></canvas-->
-<!--canvas id="gameCanvas" style="position: absolute; top: 0px; left: 0px; display:none" ></canvas-->
+<canvas id="gameCanvas" style="position: absolute; top: 0px; left: 0px; display:none" ></canvas>
 <nav id="animCanvas" style="position: absolute; top: 0px; left: 0px; ">
 	<!--div onClick="game.showMenu()" style="postion: absolute; top: 10px; left: 100px; right: auto">Back To Menu</div-->
 </nav>
@@ -865,7 +865,7 @@ loader.readyLoad = function(){
 	//$('#loadingScreen').fadeOut('fast', function(){
 	//FB.token = $_GET('access_token');
 	//if(FB.token != ''){	
-		game = new appEnviroment("gameMenu", "animCanvas", gameSize);	
+		game = new appEnviroment("gameCanvas", "gameMenu", "animCanvas", gameSize);	
 		//FB.element.style.display = 'none';
 		//FB.retrieveUserData();
 		//FB.retrieveFriendsData();
@@ -900,6 +900,7 @@ s.onload = function() {
     setInterval(stats.update, 1000 / 60);
 }
 */
+//Playtomic.Log.View(2647, "3689729b4f17433c", document.location);
 //loader.init();
 </script> 
 </body>

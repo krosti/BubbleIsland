@@ -264,6 +264,7 @@
 }
 
 .guiFinishPoints320x480{
+	color: #644000;
 	font-family: Bubblegum;
 	font-size: 0.8em;
 	height: 20px;
@@ -456,6 +457,24 @@
 	width: 210px;
 }
 
+.guiNoSoftgamesScreen320x480{
+	background-image: url(../320x480/guisoftgamesscreen.png);
+	position: fixed;
+	height: 269px;
+	width: 320px;
+	top: 0px;
+	left: 0px;
+}
+
+.guiNoSoftgamesButton320x480{
+	background-image: url(../320x480/guisoftgamesbutton.png);
+	position: fixed;
+	height: 96px;
+	width: 182px;
+	top: 195px;
+	left: 100px;
+}
+
 .guiNoInetErrorScreen320x480{
 	background-image: url("../320x480/guinoinetscreen.png");
 	height: 285px;
@@ -468,10 +487,28 @@
 .guiNoInetErrorButton320x480{
 	background-image: url("../320x480/guinoinetbutton.png");
 	height: 76px;
-	left: 94px;
+	left: 125px;
 	position: fixed;
-	top: 188px;
+	top: 235px;
 	width: 159px;
+}
+
+.guiNoFaceErrorScreen320x480{
+	background-image: url("../320x480/guinofacescreen.png");
+	height: 285px;
+	left: 0;
+	position: fixed;
+	top: 0;
+	width: 320px;
+}
+
+.guiNoFaceErrorButton320x480{
+	background-image: url("../320x480/guinofacebutton.png");
+	height: 76px;
+	left: 100px;
+	position: fixed;
+	top: 180px;
+	width: 150px;
 }
 
 .guiPreviousScreen320x480{
@@ -489,7 +526,7 @@
 	height: 115px;
 	left: 50px;
 	position: fixed;
-	top: 232px;
+	top: 230px;
 	width: 222px;
 }
 
@@ -508,7 +545,25 @@
 	left: 124px;
 	position: fixed;
 	top: 176px;
-	width: 182px;
+	width: 193px;
+}
+
+.guiNewLifesErrorScreen320x480{
+	background-image: url("../320x480/guilifeserrorscreen.png");
+	height: 264px;
+	left: 0px;
+	position: fixed;
+	top: 0px;
+	width: 320px;
+}
+
+.guiNewLifesErrorButton320x480{
+	background-image: url("../320x480/guilifeserrorbutton.png");
+	height: 114px;
+	left: 124px;
+	position: fixed;
+	top: 230px;
+	width: 193px;
 }
 
 .guiLooseMenu320x480{

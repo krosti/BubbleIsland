@@ -5,7 +5,7 @@ function Loader(progress, size){
 
 	this.readyLoad; // = function(){ alert('hola'); };
 	
-	this.toLoad = 83;
+	this.toLoad = 88;
 	//this.toLoad = 80;
 	this.isloaded = 0;
 	this.separator = '/';
@@ -115,6 +115,8 @@ function Loader(progress, size){
 
 	uiNoInetErrorScreen.onload = this.loaded;
 	uiNoInetErrorButton.onload = this.loaded;
+	uiNoFaceErrorScreen.onload = this.loaded;
+	uiNoFaceErrorButton.onload = this.loaded;
 	uiResolutionErrorScreen.onload = this.loaded;
 	uiResolutionErrorButton.onload = this.loaded;
 
@@ -226,8 +228,12 @@ function Loader(progress, size){
 		facebookScreen.src = this.size + this.separator + 'facebookscreen.png';
 		facebookButton.src = this.size + this.separator + 'facebookbutton.png';
 
+		uiNoFaceErrorScreen.src = this.size + this.separator + 'guinofacescreen.png';
+		uiNoFaceErrorButton.src = this.size + this.separator + 'guinofacebutton.png';
+
 		uiNoInetErrorScreen.src = this.size + this.separator + 'guinoinetscreen.png';
 		uiNoInetErrorButton.src = this.size + this.separator + 'guinoinetbutton.png';
+		
 		uiResolutionErrorScreen.src = this.size + this.separator + 'guiresolutionscreen.png';
 		uiResolutionErrorButton.src = this.size + this.separator + 'guiresolutionbutton.png';
 

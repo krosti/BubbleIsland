@@ -140,6 +140,23 @@
 	width: 10px;
 }
 
+.guiNextBallFrame640x960
+{
+	left: 112px;
+	position: fixed;
+	top: 438px;
+}
+
+.guiPandaBag640x960{
+	position: fixed;
+	background-image: url(../640x960/pandabag.png);
+	top: 440px;
+	left: 98px;
+	width: 60px;
+	height: 43px;
+	/*z-index: ;*/
+}
+
 .facebookFrame640x960{
 	background-image: url("../640x960/facebook.png");
 	height: 95px;
@@ -246,53 +263,319 @@
 	min-height: 111px;*/
 }
 
-.guiPandaBag640x960{
-	position: fixed;
-	background-image: url(../320x480/pandabag.png);
-	top: 440px;
-	left: 98px;
-	width: 60px;
-	height: 43px;
-	/*z-index: ;*/
+.guiFinishPoints640x960{
+    color: #644000;
+    font-family: Bubblegum;
+    font-size: 0.8em;
+    height: 40px;
+    left: 40px;
+    padding-left: 5px;
+    padding-top: 11px;
+    position: fixed;
+    text-align: center;
+    top: 535px;
+    width: 160px;
 }
 
-
-.guiFinishPoints640x960{
-	color: #644000;
+.guiFinishRank640x960{
 	font-family: Bubblegum;
-	font-size: 1.8em;
-	height: 40px;
-	left: 290px;
-	padding-left: 5px;
-	padding-top: 11px;
+    font-size: 1.2em;
+    height: 40px;
+    left: 280px;
+    position: fixed;
+    text-align: center;
+    top: 548px;
+    width: 67px;
+}
+
+.guiFinishLevel640x960{
+    font-family: Bubblegum;
+    font-size: 0.9em;
+    height: 40px;
+    left: 440px;
+    position: fixed;
+    text-align: center;
+    top: 554px;
+    width: 100px;
+}
+
+.guiFinishLifes640x960{
+    color: #FFFFFF;
+    font-family: Bubblegum;
+    font-size: 1.2em;
+    height: 40px;
+    left: 152px;
+    padding-left: 13px;
+    padding-top: 5px;
+    position: fixed;
+    top: 410px;
+    width: 40px;
+}
+
+.guiFinishCoins640x960{
+	font-family: Bubblegum;
+    font-size: 0.9em;
+    height: 40px;
+    left: 354px;
+    position: fixed;
+    text-align: center;
+    top: 417px;
+    width: 148px;
+}
+
+.guiFinishMultiCount640x960{
+    font-family: Bubblegum;
+    font-size: 0.7em;
+    height: 25px;
+    left: 200px;
+    position: fixed;
+    top: 652px;
+    width: 30px;
+}
+
+.guiFinishBombCount640x960{
+    font-family: Bubblegum;
+    font-size: 0.7em;
+    height: 25px;
+    left: 380px;
+    position: fixed;
+    top: 652px;
+    width: 30px;
+}
+
+.guiFinishFreezeCount640x960{
+	font-family: Bubblegum;
+	font-size: 0.6em;
+	height: 12px;
+	left: 274px;
 	position: fixed;
-	text-align: center;
-	top: 564px;
-	width: 80px;
+	top: 326px;
+	width: 13px;
 }
 
 .guiFinishPoints640x960 > p { 
 	vertical-align: middle;
 }
 
-.guiLooseContinue640x960{
-	background-image: url("../640x960/guicontinue.png");
-	height: 123px;
-	left: 200px;
-	min-height: 60px;
+.guiLooseScreen640x960{
+	background-image: url(../640x960/guiloose.png);	
 	position: fixed;
-	top: 665px;
-	width: 314px;
+	top: 0px;
+	left: 0px;
+	width: 640px;
+	height: 750px;
+}	
+
+.guiWinScreen640x960{
+	background-image: url(../640x960/guiwin.png);	
+	position: fixed;
+	top: 0px;
+	left: 0px;
+	width: 640px;
+	height: 750px;
+}
+
+.guiLooseContinue640x960{
+	position: fixed;
+	background-image: url(../640x960/guicontinueloose.png);
+	width: 276px;
+	height: 218px;
+	min-height: 110px;
+	left: 180px;
+	top: 750px;
+}
+
+.guiWinContinue640x960{
+	position: fixed;
+	background-image: url(../640x960/guicontinuewin.png);
+	width: 276px;
+	height: 218px;
+	min-height: 218px;
+	left: 180px;
+	top: 7500px;
+}
+
+.guiBalanceCartel640x960{
+	position: fixed;
+	background-image: url(../640x960/guibalancescreen.png);
+	top: 0px;
+	left: 0px;
+	height: 292px;
+	width: 320px;
+}
+
+.guiBalanceBuyButton640x960{
+	background-image: url("../640x960/guibalancemore.png");
+	height: 70px;
+	left: 175px;
+	position: fixed;
+	top: 210px;
+	width: 140px;
+}
+
+.guiBalanceOkButton640x960{
+	background-image: url("../640x960/guibalanceok.png");
+	height: 70px;
+	left: 4px;
+	position: fixed;
+	top: 215px;
+	width: 140px;
+}
+
+.guiBalanceCoins640x960{
+	font-family: Bubblegum;
+	font-size: 0.9em;
+	position: fixed;
+	top: 103px;
+	left: 210px;
+	height: 30px;
+	width: 100px;
+}
+
+.guiLoseAllLifes640x960{
+	background-image: url("../640x960/guiendgame.png");
+	height: 255px;
+	left: 0;
+	position: fixed;
+	top: 0;
+	width: 320px;
+}
+
+.guiLoseAllLifesOk640x960{
+	background-image: url("../640x960/guiendgameok.png");
+	height: 54px;
+	left: 55px;
+	position: fixed;
+	top: 347px;
+	width: 209px;
+}
+
+.guiLoseAllLifesBuy640x960{
+	background-image: url("../640x960/guiendgamebuy.png");
+	height: 110px;
+	left: 55px;
+	position: fixed;
+	top: 238px;
+	width: 210px;
+}
+
+.guiNoSoftgamesScreen640x960{
+	background-image: url(../640x960/guisoftgamesscreen.png);
+	position: fixed;
+	height: 527px;
+	width: 640px;
+	top: 0px;
+	left: 0px;
+}
+
+.guiNoSoftgamesButton640x960{
+	background-image: url(../640x960/guisoftgamesbutton.png);
+	position: fixed;
+	height: 183px;
+	width: 363px;
+	top: 390px;
+	left: 200px;
+}
+
+.guiNoInetErrorScreen640x960{
+	background-image: url("../640x960/guinoinetscreen.png");
+	height: 557px;
+	left: 0;
+	position: fixed;
+	top: 0;
+	width: 6400px;
+}
+
+.guiNoInetErrorButton640x960{
+	background-image: url("../640x960/guinoinetbutton.png");
+	height: 168px;
+	left: 225px;
+	position: fixed;
+	top: 470px;
+	width: 280px;
+}
+
+.guiNoFaceErrorScreen640x960{
+	background-image: url("../640x960/guinofacescreen.png");
+	height: 557px;
+	left: 0;
+	position: fixed;
+	top: 0;
+	width: 640px;
+}
+
+.guiNoFaceErrorButton640x960{
+	background-image: url("../640x960/guinofacebutton.png");
+	height: 166px;
+	left: 200px;
+	position: fixed;
+	top: 370px;
+	width: 327px;
+}
+
+.guiPreviousScreen640x960{
+	background-image: url("../640x960/guipreviousscreen.png");
+	height: 553px;
+	left: 0;
+	position: fixed;
+	top: 0;
+	width: 640px;
+}
+
+
+.guiPreviousButton640x960{
+	background-image: url("../640x960/guipreviousbutton.png");
+	height: 186px;
+	left: 100px;
+	position: fixed;
+	top: 475px;
+	width: 389px;
+}
+
+.guiResolutionScreen640x960{
+	background-image: url("../640x960/guiresolutionscreen.png");
+	height: 527px;
+	left: 0px;
+	position: fixed;
+	top: 0px;
+	width: 640px;
+}
+
+.guiResolutionButton640x960{
+	background-image: url("../640x960/guiresolutionbutton.png");
+	height: 244px;
+	left: 248px;
+	position: fixed;
+	top: 355px;
+	width: 357px;
+}
+
+.guiNewLifesErrorScreen640x960{
+	background-image: url("../640x960/guilifeserrorscreen.png");
+	height: 527px;
+	left: 0px;
+	position: fixed;
+	top: 0px;
+	width: 640px;
+}
+
+.guiNewLifesErrorButton640x960{
+	background-image: url("../640x960/guilifeserrorbutton.png");
+	height: 185px;
+	left: 248px;
+	position: fixed;
+	top: 450px;
+	width: 291px;
 }
 
 .guiLooseMenu640x960{
-	background-image: url("../640x960/guimenu.png");
-	height: 110px;
-	left: 181px;
-	min-height: 60px;
 	position: fixed;
-	top: 789px;
-	width: 280px;
+	background-image: url(../640x960/guimenu.png);
+	width: 149px;
+	height: 55px;
+	min-height: 60px;
+	left: 80px;
+	top: 395px;
 }
 
 .uiAlert640x960{

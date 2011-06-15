@@ -136,6 +136,10 @@ var facebookButton = new Image();
 
 var uiNoInetErrorScreen = new Image();
 var uiNoInetErrorButton = new Image();
+
+var uiNoFaceErrorScreen = new Image();
+var uiNoFaceErrorButton = new Image();
+
 var uiResolutionErrorScreen = new Image();
 var uiResolutionErrorButton = new Image();
 /*var uiErrorScreen = new Image();
@@ -2187,7 +2191,7 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 		//alert('loose');
 		game.level.clearBoard();
 
-		if(game.ui.lifes == 0){ // ask for more lifes!
+		if(game.ui.lifes == 1){ // ask for more lifes!
 			api.ui.showLoseScreen();
 				/*api.ui.alert2("You haven't any lifes left, Do you want to spend a coin for " + lifesPerCoins + " more lifes? It totally worth it!", [{'button': 'Oks, i want 3 more lifes',
 																																'action': function(){

@@ -681,7 +681,7 @@ body.sgds .clear {
 	</div>
 </nav>
 <nav id = "FBnav" style="width: 100%; min-height: 100%; position: absolute; top: 0px; left: 0px; background-color: #fff">
-	<div id="FBbutton" onClick="connectToFacebook()"></div>
+	<div id="FBbutton" onClick="api.facebook.framework.style.display = 'block';/*connectToFacebook()*/"></div>
 </nav>
 <nav id = "initScreen" style="position: absolute; top: 0px; left: 0px; border: 1px solid black; width: 100%; min-height: 100%; background-color: #fff	">
 <div id="progressBar">
@@ -763,6 +763,8 @@ function connectToFacebook(){
 		error: function(data, error){FB.error(data, error) }
 	})*/
 };
+
+connectToFacebook();
 
 $(window).load(function () {	
 //SWFID: 2647

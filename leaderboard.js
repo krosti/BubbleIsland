@@ -26,24 +26,40 @@ function SubmitComplete(response)
 function retrieveLeaderboard(divFB, divGen){
 	LeaderBoard.divGen = document.getElementById(divGen);
 	LeaderBoard.divFB = document.getElementById(divFB);
-	Playtomic.Leaderboard.List("highscores", retrieveGeneralLeaderboard, { perpage: 5});
+    api.leaderboard.list(4, retrieveGeneralLeaderboard);
+    api.leaderboard.list(4, retrieveFacebookLeaderboard, [
+      {
+         "name": "Rezki Abdelali",
+         "id": "2"
+      },
+      {
+         "name": "Romina Botta",
+         "id": "3"
+      },
+      {
+         "name": "Eliana Hernandez",
+         "id": "0"
+      }]);
+	//Playtomic.Leaderboard.List("highscores", retrieveGeneralLeaderboard, { perpage: 5});
 	//Playtomic.Leaderboard.List("highscores", retrieveFacebookLeaderboard, { facebook: true, friendslist: api.facebook.friends, perpage: 5 });
 };
 
-function retrieveGeneralLeaderboard(scores, numscores, response){
+function retrieveGeneralLeaderboard(data){
 	//alert(api.JSON2String(scores));
-	if(response.Success)
+    var response = api.string2JSON(data);
+	if(response.status == 1)
     {
         //alert(scores.length + " scores returned out of " + numscores);
-        if(numscores == 0){ LeaderBoard.divGen.innerHTML('There is no scores to show'); };
+        //if(numscores == 0){ LeaderBoard.divGen.innerHTML('There is no scores to show'); };
 				
         var text = '';
+        scores = response.response;
         text = '<table style="width: 100%">';
         for(var i = 0; i<scores.length; i++)
         {
             var score = scores[i];
             //alert(" - " + score.Name + " got " + score.Points + " on " + score.SDate);
-            text += '<tr><td><img src="'+uiLeaderboardtar.src+'" alt="star"></td><td>' + score.Name + '</td><td style="text-align: right">' +score.Points+ '</td></tr>';
+            text += '<tr><td><img src="'+uiLeaderboardStar.src+'" alt="star"></td><td>' + score.name + '</td><td style="text-align: right">' +score.points+ '</td></tr>';
             // including custom data?  score.CustomPlaytomic.Data.Property
             if(i == 5) break;
         };
@@ -57,19 +73,21 @@ function retrieveGeneralLeaderboard(scores, numscores, response){
     }
 };
 
-function retrieveFacebookLeaderboard(scores, numscores, response){
+function retrieveFacebookLeaderboard(data){
 	//alert(api.JSON2String(scores));
-	if(response.Success)
+    var response = api.string2JSON(data);
+	if(response.status == 1)
     {
         //alert(scores.length + " scores returned out of " + numscores);
-        if(numscores == 0){ LeaderBoard.divFB.innerHTML('There is no scores to show'); };
-				
+        //if(numscores == 0){ LeaderBoard.divFB.innerHTML('There is no scores to show'); };
+		scores = response.response;		
         var text = '<table style="width: 100%">';
         for(var i = 0; i<scores.length; i++)
         {
             var score = scores[i];
+            alert(api.JSON2String(score));
             //alert(" - " + score.Name + " got " + score.Points + " on " + score.SDate);
-            text += '<tr><td><img src="'+uiLeaderboardtar.src+'" alt="star">' + score.Name + '</td><td style="text-align: right">' +score.Points+ '</td></tr>';
+            text += '<tr><td><img src="'+uiLeaderboardStar.src+'" alt="star">' + score.name + '</td><td style="text-align: right">' +score.points+ '</td></tr>';
             // including custom data?  score.CustomPlaytomic.Data.Property
             if(i == 5) break;
         };

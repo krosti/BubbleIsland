@@ -158,7 +158,7 @@ var pointExplode = 10;
 var pointDrop = 5;
 var min_vel = .1;
 var freezeTime = 10 //en segundos
-var lifesPerCoins = 0;
+var lifesPerCoins = 1;
 var linesPerLevel = 4;
 
 var currentState = {
@@ -1754,9 +1754,11 @@ function bubbleLevel(w, h, bubblesWidth, bubblesHeight, lvlnbr){
 			$(b.element).remove();
 		};
 		$(this.character.element).remove();
-		$(this.cannon.element).remove();
-		if(this.cannon.currentBubble != null) $(this.cannon.currentBubble.element).remove();
-		if(this.cannon.bufferBubble != null) $(this.cannon.bufferBubble.element).remove();
+		if(this.cannon != null){
+			$(this.cannon.element).remove();
+			if(this.cannon.currentBubble != null) $(this.cannon.currentBubble.element).remove();
+			if(this.cannon.bufferBubble != null) $(this.cannon.bufferBubble.element).remove();
+		};
 		if(this.shootedBubble != null) $(this.shootedBubble.element).remove();
 		$('.bubble').detach();
 		this.cannon = null;
@@ -1829,6 +1831,7 @@ function gameUI(w, h){
 	this.acumuledPoints = 0;
 	this.lifes = 5;
 	this.initialLifes = lifesPerCoins;
+	this.rank = -1;
 
 	this.multiBubbleCount = 0;
 	this.bombBubbleCount = 0;
@@ -1951,8 +1954,21 @@ function gameUI(w, h){
 	
 	this.addFreezeBubbleCount = function(){
 		this.freezeBubbleCount++;
-		this.freezeBubbleElemenet.innerHTML = this.freezeBubbleCount;
+		this.freezeBubbleElement.innerHTML = this.freezeBubbleCount;
 	};
+
+	this.setRank = function(response){
+		//var response = api.string2JSON(data);
+		/*alert('setRank');
+		alert(api.JSON2String(response));*/
+		if(response.status == 1){
+			game.ui.ranking = response.response.rank;
+			game.ui.onRank();
+		};
+	};
+
+	//events
+	this.onRank = function(){};
 };
 
 
@@ -2443,7 +2459,18 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 		$(tomenubutton).click(function(){
 			game.showMenu();	
 		});*/
-
+		api.leaderboard.saveok = game.ui.setRank;
+		game.ui.onRank = function(){
+			if(cartel){
+				//$('.guiFinishRank' + gameSize)[0].innerHTML = game.ui.ranking;
+				cartel.rankingdiv.innerHTML = game.ui.ranking;
+				if((game.ui.ranking <= 3) && (game.ui.ranking > 0)){
+					api.ui.showHighScore();
+					api.facebook.post(api.facebook.user.name + " has got the " + this.ranking + "position on the Leaderboard of Bubble Paradise! What are you waiting for to beat him and enjoy this paradise!");
+				};
+			};
+		};
+		api.leaderboard.save(4, 'Master of the Universe', game.ui.points);
 		cartel = document.createElement('div');
 		var uiScreen = document.createElement('div');
 		var uiCoins = document.createElement('div');
@@ -2455,6 +2482,7 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 		var uiBombCount = document.createElement('div');
 		var uiFreezeCount = document.createElement('div');
 		var continueButton = document.createElement('div');
+		cartel.rankingdiv = uiRank;
 
 		$(cartel).addClass('uiAlert' + gameSize);
 		$(uiScreen).addClass('guiWinScreen' + gameSize);
@@ -2481,7 +2509,7 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 		uiCoins.innerHTML = api.softgame.user.balance;
 		uiLifes.innerHTML = game.ui.lifes;
 		uiPoints.innerHTML = game.ui.points;
-		uiRank.innerHTML = 0;
+		uiRank.innerHTML = 'updating';
 		uiLevel.innerHTML = game.level.lvlnro;
 		uiMultiCount.innerHTML = game.ui.multiBubbleCount;
 		uiBombCount.innerHTML = game.ui.bombBubbleCount;
@@ -2857,11 +2885,11 @@ api.ui.alertStyle = function(screenclass, buttonclass){
 	});
 };
 
-api.ui.balancediv = '';
+api.ui.balancediv = null
 api.ui.balancedivcoins = '';
 
 api.ui.showBalance = function(){
-	if(api.ui.balancediv == ''){
+	if(api.ui.balancediv == null){
 		api.ui.balancediv = document.createElement('div');
 		$(api.ui.balancediv).addClass('uiAlert' + gameSize);
 		var cartel = document.createElement('div');
@@ -2884,6 +2912,7 @@ api.ui.showBalance = function(){
 		$(okbutton).click(function(){
 			api.ui.balancediv.style.display = 'none';		
 			$(api.ui.balancediv).remove();
+			api.ui.balancediv = null;
 		});
 		$(buybutton).click(function(){
 			api.ui.balancediv.style.display = 'none';		
@@ -2897,10 +2926,10 @@ api.ui.showBalance = function(){
 	$(document.body).append(api.ui.balancediv);
 };
 
-api.ui.losescreendiv = '';
+api.ui.losescreendiv = null
 
 api.ui.showLoseScreen = function(){
-	if(api.ui.losescreendiv == ''){
+	if(api.ui.losescreendiv == null){
 		api.ui.losescreendiv = document.createElement('div');
 		$(api.ui.losescreendiv).addClass('uiAlert' + gameSize);
 
@@ -2928,53 +2957,11 @@ api.ui.showLoseScreen = function(){
 			api.softgame.buyFinalized = function(){
 				api.ui.hideWaiting();
 				api.ui.alert('You have ' + lifesPerCoins + ' more lifes!! or you are a cat or someone loves you up there :)', 'Thanks! Go on!', function(){
-					game.ui.lifes = lifesPerCoins;
+					game.ui.lifes += lifesPerCoins;
 					$(cartel).remove();
-					cartel = document.createElement('div');
-					var image = document.createElement('img');
-					image.src = uiLooseFrame.src;
-					image.style.top = '0px';
-					image.style.left = ((game.canvas.width - uiLooseFrame.width) / 2) + 'px';
-					image.style.position = 'absolute';
-					cartel.appendChild(image);
-					cartel.style.width = game.canvas.width + 'px';
-					cartel.style.height = game.canvas.height + 'px';
-					cartel.style.maxHeight = game.canvas.height + 'px';
-					cartel.style.display = 'none';
-					cartel.style.position = 'fixed';
-					cartel.style.top = '0px';
-					cartel.style.left = '0px';
-					//cartel.style.zIndex = -99;
-					cartel.style.backgroundImage = 'url(backgrounddiv.png)';
-					cartel.style.backgroundRepeat = 'repeat';
-
-					var points = document.createElement('div');
-					cartel.appendChild(points);
-					$(points).addClass('guiFinishPoints' + game.size);
-					points.innerHTML = '<p>'+game.ui.points+'</p>';
-
-					var continuebutton = document.createElement('div');
-					$(continuebutton).addClass('guiLooseContinue' + game.size);
-					cartel.appendChild(continuebutton);
-
-					var tomenubutton = document.createElement('div');
-					$(tomenubutton).addClass('guiLooseMenu' + game.size);
-					cartel.appendChild(tomenubutton);
-
-					//cartel.style.backgroundImage = 'url('+uiLooseFrame.src+')';
-					//$(document.body).append(cartel);
-					animNav.append(cartel);
-					$(continuebutton).click(function(){
-						$(cartel).fadeOut(300, function(){
-							game.ui.points = game.ui.acumuledPoints;					 
-							game.ui.pointsCounter = game.ui.acumuledPoints;
-							game.doSerialize = true;
-							game.redoLevel();
-							$(cartel).remove();
-						});
-					});
-					$(cartel).fadeIn(150);
-					api.ui.losescreendiv.style.display = 'none';
+					$(api.ui.losescreendiv).remove();
+					api.ui.losescreendiv = null;
+					game.playerLoose();
 				});
 			};
 			api.ui.showWaiting();
@@ -3015,7 +3002,7 @@ api.ui.showHighScore = function(){
 	if(api.ui.highscore == null){
 		api.ui.highscore = document.createElement('div');
 		$(api.ui.highscore).addClass('uiAlert' + gameSize);
-		api.ui.waitdiv.style.backgroundRepeat = 'no-repeat';
+		//api.ui.waitdiv.style.backgroundRepeat = 'no-repeat';
 		var alertuibackground = document.createElement('div');
 		var alertuibutton = document.createElement('div');
 		//alertuibackground.style.backgroundImage = 'url(' + uiAlertScreen.src + ')';

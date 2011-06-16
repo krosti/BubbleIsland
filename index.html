@@ -35,6 +35,7 @@
 			//alert('in connect');
 			//Playtomic.Log.View(2647, "3689729b4f17433c", document.location);
 			loader.init();
+			connectToFacebook();
 			//alert('face');
 			/*FB = new FBConnect('FBnav');
 			//alert('softgame');
@@ -763,8 +764,6 @@ function connectToFacebook(){
 		error: function(data, error){FB.error(data, error) }
 	})*/
 };
-
-connectToFacebook();
 
 $(window).load(function () {	
 //SWFID: 2647

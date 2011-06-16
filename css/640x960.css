@@ -45,8 +45,8 @@
 	height: 129px;
 	left: 40px;
 	min-height: 62px;
-	padding-left: 90px;
-	padding-top: 56px;
+	padding-left: 67px;
+	padding-top: 42px;
 	position: fixed;
 	top: 0;
 	width: 149px;
@@ -240,10 +240,10 @@
 
 .guiProgressBar640x960{
 	position: fixed;
-	width: 5px;
-	height: 217px;
-	top: 187px;
-	left: 299px;
+	width: 10px;
+	height: 434px;
+	top: 376px;
+	left: 598px;
 }
 
 .guiProgressBar640x960 > div{
@@ -323,6 +323,15 @@
     width: 148px;
 }
 
+.guiFinishMoreCoins640x960{
+	background-image: url(../320x480/guiaddbutton.png);
+	height: 49px;
+	left: 177px;
+	position: fixed;
+	top: 207px;
+	width: 49px;
+}
+
 .guiFinishMultiCount640x960{
     font-family: Bubblegum;
     font-size: 0.7em;
@@ -400,26 +409,26 @@
 	background-image: url(../640x960/guibalancescreen.png);
 	top: 0px;
 	left: 0px;
-	height: 292px;
-	width: 320px;
+	height: 569px;
+	width: 640px;
 }
 
 .guiBalanceBuyButton640x960{
-	background-image: url("../640x960/guibalancemore.png");
-	height: 70px;
-	left: 175px;
-	position: fixed;
-	top: 210px;
-	width: 140px;
+    background-image: url("../640x960/guibalancemore.png");
+    height: 150px;
+    left: 270px;
+    position: fixed;
+    top: 410px;
+    width: 306px;
 }
 
 .guiBalanceOkButton640x960{
-	background-image: url("../640x960/guibalanceok.png");
-	height: 70px;
-	left: 4px;
-	position: fixed;
-	top: 215px;
-	width: 140px;
+    background-image: url("../640x960/guibalanceok.png");
+    height: 200px;
+    left: 15px;
+    position: fixed;
+    top: 385px;
+    width: 306px;
 }
 
 .guiBalanceCoins640x960{
@@ -433,30 +442,30 @@
 }
 
 .guiLoseAllLifes640x960{
-	background-image: url("../640x960/guiendgame.png");
-	height: 255px;
-	left: 0;
-	position: fixed;
-	top: 0;
-	width: 320px;
+    background-image: url("../640x960/guiendgame.png");
+    height: 551px;
+    left: 0;
+    position: fixed;
+    top: 0;
+    width: 640px;
 }
 
 .guiLoseAllLifesOk640x960{
-	background-image: url("../640x960/guiendgameok.png");
-	height: 54px;
-	left: 55px;
-	position: fixed;
-	top: 347px;
-	width: 209px;
+    background-image: url("../640x960/guiendgameok.png");
+    height: 95px;
+    left: 130px;
+    position: fixed;
+    top: 500px;
+    width: 519px;
 }
 
 .guiLoseAllLifesBuy640x960{
-	background-image: url("../640x960/guiendgamebuy.png");
-	height: 110px;
-	left: 55px;
-	position: fixed;
-	top: 238px;
-	width: 210px;
+    background-image: url("../640x960/guiendgamebuy.png");
+    height: 213px;
+    left: 130px;
+    position: fixed;
+    top: 570px;
+    width: 413px;
 }
 
 .guiNoSoftgamesScreen640x960{

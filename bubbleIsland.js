@@ -2343,6 +2343,7 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 			cartel = document.createElement('div');
 			var uiScreen = document.createElement('div');
 			var uiCoins = document.createElement('div');
+			var uiMoreCoins = document.createElement('div');
 			var uiLifes = document.createElement('div');
 			var uiPoints = document.createElement('div');
 			var uiRank = document.createElement('div');
@@ -2355,6 +2356,7 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 			$(cartel).addClass('uiAlert' + gameSize);
 			$(uiScreen).addClass('guiLooseScreen' + gameSize);
 			$(uiCoins).addClass('guiFinishCoins' + gameSize);
+			$(uiMoreCoins).addClass('guiFinishMoreCoins' + gameSize);
 			$(uiLifes).addClass('guiFinishLifes' + gameSize);
 			$(uiPoints).addClass('guiFinishPoints' + gameSize);
 			$(uiRank).addClass('guiFinishRank' + gameSize);
@@ -2365,6 +2367,7 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 			$(continueButton).addClass('guiLooseContinue' + gameSize);
 			$(cartel).append(uiScreen);
 			$(cartel).append(uiCoins);
+			$(cartel).append(uiMoreCoins);
 			$(cartel).append(uiLifes);
 			$(cartel).append(uiPoints);
 			$(cartel).append(uiRank);
@@ -2402,6 +2405,13 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 					game.redoLevel();
 					$(cartel).remove();
 				});
+			});
+
+			$(uiMoreCoins).click(function(){
+				api.levels.serializaDone = function(){
+					window.location = api.softgame.getBuyingCoinsUrl();
+				};
+				api.levels.serializeLevel();
 			});
 
 			$(document.body).append(cartel);
@@ -2474,6 +2484,7 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 		cartel = document.createElement('div');
 		var uiScreen = document.createElement('div');
 		var uiCoins = document.createElement('div');
+		var uiMoreCoins = document.createElement('div');
 		var uiLifes = document.createElement('div');
 		var uiPoints = document.createElement('div');
 		var uiRank = document.createElement('div');
@@ -2487,6 +2498,7 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 		$(cartel).addClass('uiAlert' + gameSize);
 		$(uiScreen).addClass('guiWinScreen' + gameSize);
 		$(uiCoins).addClass('guiFinishCoins' + gameSize);
+		$(uiMoreCoins).addClass('guiFinishMoreCoins' + gameSize);
 		$(uiLifes).addClass('guiFinishLifes' + gameSize);
 		$(uiPoints).addClass('guiFinishPoints' + gameSize);
 		$(uiRank).addClass('guiFinishRank' + gameSize);
@@ -2497,6 +2509,7 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 		$(continueButton).addClass('guiWinContinue' + gameSize);
 		$(cartel).append(uiScreen);
 		$(cartel).append(uiCoins);
+		$(cartel).append(uiMoreCoins);
 		$(cartel).append(uiLifes);
 		$(cartel).append(uiPoints);
 		$(cartel).append(uiRank);
@@ -2526,6 +2539,14 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 				$(cartel).remove();
 			});
 		});
+
+		$(uiMoreCoins).click(function(){
+			api.levels.serializaDone = function(){
+				window.location = api.softgame.getBuyingCoinsUrl();
+			};
+			api.levels.serializeLevel();
+		});
+
 		$(document.body).append(cartel);
 
 		if(LeaderBoard.highscore < game.ui.points) api.ui.showHighScore();

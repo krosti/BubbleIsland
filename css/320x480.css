@@ -321,6 +321,15 @@
 	width: 74px;
 }
 
+.guiFinishMoreCoins320x480{
+	background-image: url(../320x480/guiaddbutton.png);
+	height: 49px;
+	left: 235px;
+	position: fixed;
+	top: 207px;
+	width: 49px;
+}
+
 .guiFinishMultiCount320x480{
 	font-family: Bubblegum;
 	font-size: 0.6em;

@@ -2480,7 +2480,8 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 				};
 			};
 		};
-		api.leaderboard.save(4, 'Master of the Universe', game.ui.points);
+		//api.leaderboard.save(4, 'Master of the Universe', game.ui.points);
+		SubmitScore();
 		cartel = document.createElement('div');
 		var uiScreen = document.createElement('div');
 		var uiCoins = document.createElement('div');

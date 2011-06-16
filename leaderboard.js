@@ -20,26 +20,14 @@ function SubmitComplete(response)
     }else{
         
     };*/
-    alert(api.JSON2String(response));
+    //alert(api.JSON2String(response));
 }
 
 function retrieveLeaderboard(divFB, divGen){
 	LeaderBoard.divGen = document.getElementById(divGen);
 	LeaderBoard.divFB = document.getElementById(divFB);
     api.leaderboard.list(4, retrieveGeneralLeaderboard);
-    api.leaderboard.list(4, retrieveFacebookLeaderboard, [
-      {
-         "name": "Rezki Abdelali",
-         "id": "2"
-      },
-      {
-         "name": "Romina Botta",
-         "id": "3"
-      },
-      {
-         "name": "Eliana Hernandez",
-         "id": "0"
-      }]);
+    api.leaderboard.list(4, retrieveFacebookLeaderboard, api.facebook.friends);
 	//Playtomic.Leaderboard.List("highscores", retrieveGeneralLeaderboard, { perpage: 5});
 	//Playtomic.Leaderboard.List("highscores", retrieveFacebookLeaderboard, { facebook: true, friendslist: api.facebook.friends, perpage: 5 });
 };
@@ -59,7 +47,7 @@ function retrieveGeneralLeaderboard(data){
         {
             var score = scores[i];
             //alert(" - " + score.Name + " got " + score.Points + " on " + score.SDate);
-            text += '<tr><td><img src="'+uiLeaderboardStar.src+'" alt="star"></td><td>' + score.name + '</td><td style="text-align: right">' +score.points+ '</td></tr>';
+            text += '<tr><td><img src="'+uiLeaderboardStar.src+'" alt="star"></td><td>' + score.name.slice(0, leaderboardElided) + '</td><td style="text-align: right">' +score.points+ '</td></tr>';
             // including custom data?  score.CustomPlaytomic.Data.Property
             if(i == 5) break;
         };
@@ -85,9 +73,9 @@ function retrieveFacebookLeaderboard(data){
         for(var i = 0; i<scores.length; i++)
         {
             var score = scores[i];
-            alert(api.JSON2String(score));
+            //alert(api.JSON2String(score));
             //alert(" - " + score.Name + " got " + score.Points + " on " + score.SDate);
-            text += '<tr><td><img src="'+uiLeaderboardStar.src+'" alt="star">' + score.name + '</td><td style="text-align: right">' +score.points+ '</td></tr>';
+            text += '<tr><td><img src="'+uiLeaderboardStar.src+'" alt="star"></td><td>' + score.name.slice(0, leaderboardElided) + '</td><td style="text-align: right; overflow: hidden">' +score.points+ '</td></tr>';
             // including custom data?  score.CustomPlaytomic.Data.Property
             if(i == 5) break;
         };

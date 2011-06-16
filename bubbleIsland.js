@@ -2641,12 +2641,12 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 	api.softgame.buyFinalized = this.moreLifes;
 
 	//this.drawBackground(this.backgroundPainter);
-	var version = document.createElement('div');
+	/*var version = document.createElement('div');
 	version.innerHTML = VERSION;
 	version.style.position = 'fixed';
 	version.style.bottom = '15px';
 	version.style.left = '0px';
-	animNav.append(version);
+	animNav.append(version);*/
 	//$('#'+canvasObj).click(shoot);
 	//$('#'+canvasObj).click(this.mouseClick);
 	//$('#'+navObj).click(this.mouseClick);

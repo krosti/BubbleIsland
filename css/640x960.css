@@ -432,13 +432,13 @@
 }
 
 .guiBalanceCoins640x960{
-	font-family: Bubblegum;
-	font-size: 0.9em;
-	position: fixed;
-	top: 103px;
-	left: 210px;
-	height: 30px;
-	width: 100px;
+    font-family: Bubblegum;
+    font-size: 1em;
+    height: 40px;
+    left: 470px;
+    position: fixed;
+    top: 234px;
+    width: 100px;
 }
 
 .guiLoseAllLifes640x960{

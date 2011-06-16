@@ -2169,17 +2169,17 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 			case "360x480":
 				this.canvas.width = 360;
 				this.canvas.height = 480;
-				this.level = new bubbleLevel(250, 380, 10, 20, levelnumber);
+				this.level = new bubbleLevel(250, 380, 8, 20, levelnumber);
 				break;
 			case "640x960":
 				this.canvas.width = 640;
 				this.canvas.height = 960;
-				this.level = new bubbleLevel(475, 740, 8, 25, levelnumber);
+				this.level = new bubbleLevel(475, 740, 8, 20, levelnumber);
 				break;
 			case "480x800":
 				this.canvas.width = 480;
 				this.canvas.height = 800;
-				this.level = new bubbleLevel(480, 800, 11, 25, levelnumber);
+				this.level = new bubbleLevel(480, 800, 8, 20, levelnumber);
 				break;
 			case "854x480":
 				this.canvas.height = 480; 
@@ -2977,13 +2977,13 @@ api.ui.showLoseScreen = function(){
 			//api.ui.losescreendiv.style.display = 'none';
 			api.softgame.buyFinalized = function(){
 				api.ui.hideWaiting();
-				api.ui.alert('You have ' + lifesPerCoins + ' more lifes!! or you are a cat or someone loves you up there :)', 'Thanks! Go on!', function(){
+				//api.ui.alert('You have ' + lifesPerCoins + ' more lifes!! or you are a cat or someone loves you up there :)', 'Thanks! Go on!', function(){
 					game.ui.lifes += lifesPerCoins;
 					$(cartel).remove();
 					$(api.ui.losescreendiv).remove();
 					api.ui.losescreendiv = null;
 					game.playerLoose();
-				});
+				//});
 			};
 			api.ui.showWaiting();
 			api.softgame.startCoinsBuying('level', '3morelifes', '', 1, '', '');

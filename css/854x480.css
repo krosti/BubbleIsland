@@ -93,8 +93,8 @@
 	font-size: 0.8em;
 	height: 50px;
 	left: 65px;
-	padding-left: 71px;
-	padding-top: 8px;
+	padding-left: 69px;
+	padding-top: 18px;
 	position: fixed;
 	top: 417px;
 	width: 96px;
@@ -107,8 +107,8 @@
 	font-size: 0.8em;
 	height: 60px;
 	left: 69px;
-	padding-left: 66px;
-	padding-top: 11px;
+	padding-left: 69px;
+	padding-top: 18px;
 	position: fixed;
 	top: 365px;
 	width: 87px;
@@ -122,7 +122,7 @@
 	height: 56px;
 	left: 65px;
 	padding-left: 69px;
-	padding-top: 7px;
+	padding-top: 18px;
 	position: fixed;
 	top: 322px;
 	width: 96px;
@@ -135,6 +135,13 @@
 	position: fixed;
 	top: 135px;
 	width: 6px;
+}
+
+.guiNextBallFrame854x480
+{
+	left: 330px;
+	position: fixed;
+	top: 430px;
 }
 
 .facebookFrame854x480{
@@ -217,40 +224,343 @@
 	width: 187px;
 }
 
+.guiProgressBar854x480{
+	position: fixed;
+	width: 10px;
+	height: 434px;
+	top: 376px;
+	left: 598px;
+}
+
+.guiProgressBar854x480 > div{
+	position: absolute;
+	background-color: #fff;
+	width: 100%;
+	bottom: 0px;
+	top: auto;
+}
+
 .panda854x480{
 	position: fixed;
 	/*width: 90px;
 	height: 111px;
 	min-height: 111px;*/
-	left: 80px;
+	left: 300px;
 	top: 370px;
 }
 
 .guiFinishPoints854x480{
-	color: #644000;
-	font-family: Bubblegum;
-	font-size: 1.1em;
-	height: 30px;
-	left: 157px;
-	padding-top: 11px;
-	position: fixed;
-	text-align: center;
-	top: 283px;
-	width: 65px;
+    color: #644000;
+    font-family: Bubblegum;
+    font-size: 0.8em;
+    height: 20px;
+    left: 285px;
+    padding-left: 5px;
+    padding-top: 11px;
+    position: fixed;
+    text-align: center;
+    top: 260px;
+    width: 70px;
+}
+
+.guiFinishRank854x480{
+    font-family: Bubblegum;
+    font-size: 0.9em;
+    height: 20px;
+    left: 385px;
+    position: fixed;
+    text-align: center;
+    top: 270px;
+    width: 67px;
+}
+
+.guiFinishLevel854x480{
+    font-family: Bubblegum;
+    font-size: 0.9em;
+    height: 20px;
+    left: 485px;
+    position: fixed;
+    text-align: center;
+    top: 270px;
+    width: 60px;
+}
+
+.guiFinishLifes854x480{
+    color: #FFFFFF;
+    font-family: Bubblegum;
+    font-size: 1.2em;
+    height: 40px;
+    left: 333px;
+    padding-left: 13px;
+    padding-top: 5px;
+    position: fixed;
+    top: 195px;
+    width: 40px;
+}
+
+.guiFinishCoins854x480{
+    font-family: Bubblegum;
+    font-size: 0.9em;
+    height: 40px;
+    left: 440px;
+    position: fixed;
+    text-align: center;
+    top: 202px;
+    width: 100px;
+}
+
+.guiFinishMoreCoins854x480{
+    background-image: url("../320x480/guiaddbutton.png");
+    height: 49px;
+    left: 500px;
+    position: fixed;
+    top: 205px;
+    width: 49px;
+}
+
+.guiFinishMultiCount854x480{
+    font-family: Bubblegum;
+    font-size: 0.6em;
+    height: 15px;
+    left: 365px;
+    position: fixed;
+    top: 325px;
+    width: 20px;
+}
+
+.guiFinishBombCount854x480{
+    font-family: Bubblegum;
+    font-size: 0.6em;
+    height: 15px;
+    left: 457px;
+    position: fixed;
+    top: 325px;
+    width: 20px;
+}
+
+.guiFinishFreezeCount854x480{
+    font-family: Bubblegum;
+    font-size: 0.6em;
+    height: 15px;
+    left: 544px;
+    position: fixed;
+    top: 325px;
+    width: 20px;
 }
 
 .guiFinishPoints854x480 > p { 
 	vertical-align: middle;
 }
 
+.guiLooseScreen854x480{
+    background-image: url("../854x480/guiloose.png");
+    height: 389px;
+    left: 243px;
+    position: fixed;
+    top: 0;
+    width: 367px;
+}	
+
+.guiWinScreen854x480{
+    background-image: url("../854x480/guiwin.png");
+    height: 375px;
+    left: 251px;
+    position: fixed;
+    top: 0;
+    width: 351px;
+}
+
 .guiLooseContinue854x480{
-	background-image: url("../854x480/guicontinue.png");
-	height: 62px;
-	left: 129px;
-	min-height: 60px;
+    background-image: url("../854x480/guicontinueloose.png");
+    height: 111px;
+    left: 380px;
+    min-height: 110px;
+    position: fixed;
+    top: 360px;
+    width: 148px;
+}
+
+.guiWinContinue854x480{
+    background-image: url("../854x480/guicontinuewin.png");
+    height: 111px;
+    left: 330px;
+    min-height: 218px;
+    position: fixed;
+    top: 360px;
+    width: 180px;
+}
+
+.guiBalanceCartel854x480{
 	position: fixed;
-	top: 340px;
-	width: 150px;
+	background-image: url(../854x480/guibalancescreen.png);
+	top: 0px;
+	left: 150px;
+	height: 448px;
+	width: 504px;
+}
+
+.guiBalanceBuyButton854x480{
+    background-image: url("../854x480/guibalancemore.png");
+    height: 150px;
+    left: 400px;
+    position: fixed;
+    top: 330px;
+    width: 220px;
+}
+
+.guiBalanceOkButton854x480{
+    background-image: url("../854x480/guibalanceok.png");
+    height: 120px;
+    left: 150px;
+    position: fixed;
+    top: 330px;
+    width: 220px;
+}
+
+.guiBalanceCoins854x480{
+    font-family: Bubblegum;
+    font-size: 1.2em;
+    height: 40px;
+    left: 520px;
+    position: fixed;
+    top: 185px;
+    width: 100px;
+}
+
+.guiLoseAllLifes854x480{
+    background-image: url("../854x480/guiendgame.png");
+    height: 286px;
+    left: 241px;
+    position: fixed;
+    top: 0;
+    width: 374px;
+}
+
+.guiLoseAllLifesOk854x480{
+    background-image: url("../854x480/guiendgameok.png");
+    height: 50px;
+    left: 330px;
+    position: fixed;
+    top: 370px;
+    width: 227px;
+}
+
+.guiLoseAllLifesBuy854x480{
+    background-image: url("../854x480/guiendgamebuy.png");
+    height: 117px;
+    left: 330px;
+    position: fixed;
+    top: 265px;
+    width: 230px;
+}
+
+.guiNoSoftgamesScreen854x480{
+    background-image: url("../854x480/guisoftgamesscreen.png");
+    height: 350px;
+    left: 199px;
+    position: fixed;
+    top: 0;
+    width: 456px;
+}
+
+.guiNoSoftgamesButton854x480{
+    background-image: url("../854x480/guisoftgamesbutton.png");
+    height: 131px;
+    left: 350px;
+    position: fixed;
+    top: 255px;
+    width: 237px;
+}
+
+.guiNoInetErrorScreen854x480{
+    background-image: url("../854x480/guinoinetscreen.png");
+    height: 387px;
+    left: 186px;
+    position: fixed;
+    top: 0;
+    width: 482px;
+}
+
+.guiNoInetErrorButton854x480{
+    background-image: url("../854x480/guinoinetbutton.png");
+    height: 113px;
+    left: 340px;
+    position: fixed;
+    top: 322px;
+    width: 238px;
+}
+
+.guiNoFaceErrorScreen854x480{
+    background-image: url("../854x480/guinofacescreen.png");
+    height: 387px;
+    left: 208px;
+    position: fixed;
+    top: 0;
+    width: 437px;
+}
+
+.guiNoFaceErrorButton854x480{
+    background-image: url("../854x480/guinofacebutton.png");
+    height: 116px;
+    left: 340px;
+    position: fixed;
+    top: 240px;
+    width: 217px;
+}
+
+.guiPreviousScreen854x480{
+    background-image: url("../854x480/guipreviousscreen.png");
+    height: 326px;
+    left: 211px;
+    position: fixed;
+    top: 0;
+    width: 431px;
+}
+
+
+.guiPreviousButton854x480{
+    background-image: url("../854x480/guipreviousbutton.png");
+    height: 124px;
+    left: 300px;
+    position: fixed;
+    top: 275px;
+    width: 249px;
+}
+
+.guiResolutionScreen854x480{
+    background-image: url("../854x480/guiresolutionscreen.png");
+    height: 353px;
+    left: 205px;
+    position: fixed;
+    top: 0;
+    width: 444px;
+}
+
+.guiResolutionButton854x480{
+    background-image: url("../854x480/guiresolutionbutton.png");
+    height: 136px;
+    left: 400px;
+    position: fixed;
+    top: 250px;
+    width: 221px;
+}
+
+.guiNewLifesErrorScreen854x480{
+    background-image: url("../854x480/guilifeserrorscreen.png");
+    height: 378px;
+    left: 140px;
+    position: fixed;
+    top: 0;
+    width: 537px;
+}
+
+.guiNewLifesErrorButton854x480{
+    background-image: url("../854x480/guilifeserrorbutton.png");
+    height: 134px;
+    left: 350px;
+    position: fixed;
+    top: 330px;
+    width: 220px;
 }
 
 .guiLooseMenu854x480{
@@ -319,6 +629,31 @@
 	width: 247px;
 }
 
+.uiHighscoreImage854x480{
+    background-image: url("../854x480/highscorescreen.png");
+    height: 327px;
+    left: 194px;
+    min-height: 263px;
+    position: fixed;
+    top: 0;
+    width: 466px;
+}
+
+.uiHighscoreButton854x480{
+    background-image: url("../854x480/highscorebutton.png");
+    display: table-cell;
+    height: 157px;
+    left: 300px;
+    max-width: 383px;
+    min-height: 117px;
+    padding-top: 105px;
+    position: fixed;
+    text-align: center;
+    top: 285px;
+    vertical-align: middle;
+    width: 263px;
+}
+
 .initScreen854x480{
 	background-image: url(../854x480/loadingscreen.png);
 }
@@ -334,13 +669,13 @@
 }
 
 .uiPauseScreen854x480{
-	background-image: url("../854x480/pausecartel.png");
-	height: 480px;
-	left: 0;
-	min-height: 480px;
-	position: fixed;
-	top: 0;
-	width: 360px;
+    background-image: url("../854x480/pausecartel.png");
+    height: 480px;
+    left: 244px;
+    min-height: 480px;
+    position: fixed;
+    top: 0;
+    width: 366px;
 }
 
 .leaderboard854x480{

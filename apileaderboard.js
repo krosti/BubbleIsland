@@ -18,7 +18,7 @@ api.leaderboard.save = function(id, name, points){
 		url: api.leaderboard.url,
 		//contentType: 'application/x-www-form-urlencoded',
 		success: api.leaderboard.savecallback,
-		error: function(a, b, c){ alert(a+b+c);}//api.leaderboard.saveerror
+		error: function(a, b, c){ /*alert(a+b+c);*/}//api.leaderboard.saveerror
 	});
 };
 

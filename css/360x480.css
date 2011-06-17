@@ -228,20 +228,17 @@
 }
 
 .panda360x480{
-	position: fixed;
-	/*width: 90px;
-	height: 111px;
-	min-height: 111px;*/
-	left: 80px;
-	top: 370px;
+    left: 112px;
+    position: fixed;
+    top: 430px;
 }
 
 .guiProgressBar360x480{
 	position: fixed;
-	width: 5px;
-	height: 217px;
-	top: 187px;
-	left: 299px;
+	width: 9px;
+	height: 287px;
+	top: 111px;
+	left: 337px;
 }
 
 .guiProgressBar360x480 > div{
@@ -299,6 +296,7 @@
     font-family: Bubblegum;
     font-size: 0.9em;
     height: 20px;
+    color: #FFFFFF;
     left: 235px;
     position: fixed;
     text-align: center;
@@ -357,7 +355,7 @@
 }
 
 .guiLooseScreen360x480{
-	background-image: url(../320x480/guiloose.png);	
+	background-image: url(../360x480/guiloose.png);	
 	position: fixed;
 	top: 0px;
 	left: 0px;

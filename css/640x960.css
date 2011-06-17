@@ -142,9 +142,9 @@
 
 .guiNextBallFrame640x960
 {
-	left: 112px;
-	position: fixed;
-	top: 438px;
+    left: 180px;
+    position: fixed;
+    top: 860px;
 }
 
 .guiPandaBag640x960{
@@ -256,7 +256,7 @@
 
 .panda640x960{
 	left: 115px;
-	top: 830px;
+	top: 730px;
 	position: fixed;
 	/*width: 90px;
 	height: 111px;
@@ -278,14 +278,14 @@
 }
 
 .guiFinishRank640x960{
-	font-family: Bubblegum;
-    font-size: 1.2em;
+    font-family: Bubblegum;
+    font-size: 0.9em;
     height: 40px;
-    left: 280px;
+    left: 250px;
     position: fixed;
     text-align: center;
     top: 548px;
-    width: 67px;
+    width: 120px;
 }
 
 .guiFinishLevel640x960{
@@ -324,12 +324,12 @@
 }
 
 .guiFinishMoreCoins640x960{
-	background-image: url(../320x480/guiaddbutton.png);
-	height: 49px;
-	left: 177px;
-	position: fixed;
-	top: 207px;
-	width: 49px;
+    background-image: url("../640x960/guiaddbutton.png");
+    height: 68px;
+    left: 477px;
+    position: fixed;
+    top: 430px;
+    width: 68px;
 }
 
 .guiFinishMultiCount640x960{
@@ -353,13 +353,13 @@
 }
 
 .guiFinishFreezeCount640x960{
-	font-family: Bubblegum;
-	font-size: 0.6em;
-	height: 12px;
-	left: 274px;
-	position: fixed;
-	top: 326px;
-	width: 13px;
+    font-family: Bubblegum;
+    font-size: 0.7em;
+    height: 25px;
+    left: 550px;
+    position: fixed;
+    top: 652px;
+    width: 30px;
 }
 
 .guiFinishPoints640x960 > p { 
@@ -385,13 +385,13 @@
 }
 
 .guiLooseContinue640x960{
-	position: fixed;
-	background-image: url(../640x960/guicontinueloose.png);
-	width: 276px;
-	height: 218px;
-	min-height: 110px;
-	left: 180px;
-	top: 750px;
+    background-image: url("../640x960/guicontinueloose.png");
+    height: 218px;
+    left: 180px;
+    min-height: 110px;
+    position: fixed;
+    top: 715px;
+    width: 276px;
 }
 
 .guiWinContinue640x960{
@@ -401,7 +401,7 @@
 	height: 218px;
 	min-height: 218px;
 	left: 180px;
-	top: 7500px;
+	top: 715px;
 }
 
 .guiBalanceCartel640x960{
@@ -443,7 +443,7 @@
 
 .guiLoseAllLifes640x960{
     background-image: url("../640x960/guiendgame.png");
-    height: 551px;
+    height: 541px;
     left: 0;
     position: fixed;
     top: 0;
@@ -453,10 +453,10 @@
 .guiLoseAllLifesOk640x960{
     background-image: url("../640x960/guiendgameok.png");
     height: 95px;
-    left: 130px;
+    left: 140px;
     position: fixed;
-    top: 500px;
-    width: 519px;
+    top: 680px;
+    width: 419px;
 }
 
 .guiLoseAllLifesBuy640x960{
@@ -464,8 +464,8 @@
     height: 213px;
     left: 130px;
     position: fixed;
-    top: 570px;
-    width: 413px;
+    top: 480px;
+    width: 451px;
 }
 
 .guiNoSoftgamesScreen640x960{

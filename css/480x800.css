@@ -39,17 +39,17 @@
 
 .lifesFrame480x800{
 	background-image: url("../480x800/life.png");
-	color: #FFFFFF;
-	font-family: Bubblegum;
-	font-size: 1.2em;
-	height: 88px;
-	left: 15px;
-	min-height: 62px;
-	padding-left: 72px;
-	padding-top: 41px;
-	position: fixed;
-	top: 0;
-	width: 157px;
+    color: #FFFFFF;
+    font-family: Bubblegum;
+    font-size: 1.2em;
+    height: 88px;
+    left: 15px;
+    min-height: 62px;
+    padding-left: 60px;
+    padding-top: 41px;
+    position: fixed;
+    top: 0;
+    width: 157px;
 }
 
 .gobackFrame480x800{
@@ -141,6 +141,13 @@
 	width: 8px;
 }
 
+.guiNextBallFrame480x800
+{
+	left: 137px;
+	position: fixed;
+	top: 720px;
+}
+
 .facebookFrame480x800{
 	background-image: url("../480x800/facebook.png");
 	height: 85px;
@@ -222,146 +229,163 @@
 	width: 202px;
 }
 
+.guiProgressBar480x800{
+	position: fixed;
+	width: 10px;
+	height: 357px;
+	top: 290px;
+	left: 452px;
+}
+
+.guiProgressBar480x800 > div{
+	position: absolute;
+	background-color: #fff;
+	width: 100%;
+	bottom: 0px;
+	top: auto;
+}
+
 .panda480x800{
 	position: fixed;
 	/*width: 90px;
 	height: 111px;
 	min-height: 111px;*/
 	left: 80px;
-	top: 370px;
+	top: 620px;
 }
 
 .guiFinishPoints480x800{
     color: #644000;
     font-family: Bubblegum;
-    font-size: 0.8em;
+    font-size: 1em;
     height: 20px;
-    left: 45px;
+    left: 47px;
     position: fixed;
     text-align: center;
-    top: 260px;
-    width: 67px;
+    top: 380px;
+    width: 90px;
 }
 
 .guiFinishRank480x800{
     font-family: Bubblegum;
-    font-size: 0.9em;
+    font-size: 1.1em;
     height: 20px;
-    left: 145px;
+    left: 190px;
     position: fixed;
     text-align: center;
-    top: 260px;
-    width: 67px;
+    top: 380px;
+    width: 90px;
 }
 
 .guiFinishLevel480x800{
-	font-family: Bubblegum;
-	font-size: 0.9em;
-	height: 20px;
-	left: 214px;
-	position: fixed;
-	text-align: center;
-	top: 274px;
-	width: 65px;
+    font-family: Bubblegum;
+    font-size: 1.1em;
+    height: 20px;
+    left: 330px;
+    position: fixed;
+    text-align: center;
+    top: 383px;
+    width: 65px;
 }
 
 .guiFinishLifes480x800{
     font-family: Bubblegum;
-    font-size: 0.9em;
+    font-size: 1.4em;
     height: 20px;
-    left: 235px;
+    left: 100px;
     position: fixed;
     text-align: center;
-    top: 260px;
+    top: 280px;
     width: 65px;
+    color:  #fff;
 }
 
 .guiFinishCoins480x800{
     font-family: Bubblegum;
-    font-size: 0.9em;
+    font-size: 1.1em;
     height: 26px;
-    left: 200px;
+    left: 260px;
     position: fixed;
     text-align: center;
-    top: 190px;
-    width: 74px;
+    top: 282px;
+    width: 110px;
 }
 
 .guiFinishMoreCoins480x800{
     background-image: url("../480x800/guiaddbutton.png");
     height: 49px;
-    left: 245px;
+    left: 350px;
     position: fixed;
-    top: 200px;
+    top: 290px;
     width: 49px;
 }
 
 .guiFinishMultiCount480x800{
     font-family: Bubblegum;
-    font-size: 0.6em;
+    font-size: 0.8em;
     height: 12px;
-    left: 120px;
+    left: 150px;
     position: fixed;
-    top: 312px;
-    width: 13px;
+    top: 458px;
+    width: 30px;
 }
 
 .guiFinishBombCount480x800{
     font-family: Bubblegum;
-    font-size: 0.6em;
+    font-size: 0.8em;
     height: 12px;
-    left: 210px;
+    left: 282px;
     position: fixed;
-    top: 312px;
-    width: 13px;
+    top: 458px;
+    width: 30px;
 }
 
 .guiFinishFreezeCount480x800{
     font-family: Bubblegum;
-    font-size: 0.6em;
+    font-size: 0.8em;
     height: 12px;
-    left: 300px;
+    left: 415px;
     position: fixed;
-    top: 312px;
-    width: 13px;
+    top: 458px;
+    width: 30px;
 }
 
 .guiLooseScreen480x800{
-	background-image: url(../320x480/guiloose.png);	
-	position: fixed;
-	top: 0px;
-	left: 0px;
-	width: 360px;
-	height: 375px;
+    background-image: url("../480x800/guiloose.png");
+    height: 543px;
+    left: 0;
+    position: fixed;
+    top: 0;
+    width: 480px;
 }	
 
 .guiWinScreen480x800{
-	background-image: url(../480x800/guiwin.png);	
-	position: fixed;
-	top: 0px;
-	left: 0px;
-	width: 360px;
-	height: 365px;
+    background-image: url("../480x800/guiwin.png");
+    height: 533px;
+    left: 0;
+    position: fixed;
+    top: 0;
+    width: 480px;
 }
 
 .guiLooseContinue480x800{
-	position: fixed;
-	background-image: url(../480x800/guicontinueloose.png);
-	width: 157px;
-	height: 110px;
-	min-height: 110px;
-	left: 90px;
-	top: 360px;
+    background-image: url("../480x800/guicontinueloose.png");
+    height: 194px;
+    left: 120px;
+    min-height: 110px;
+    position: fixed;
+    top: 495px;
+    width: 219px;
 }
 
 .guiWinContinue480x800{
-	position: fixed;
-	background-image: url(../480x800/guicontinuewin.png);
-	width: 157px;
-	height: 110px;
-	min-height: 110px;
-	left: 90px;
-	top: 345px;
+    background-image: url("../480x800/guicontinuewin.png");
+    height: 198px;
+    left: 110px;
+    min-height: 110px;
+    position: fixed;
+    top: 500px;
+    width: 221px;
 }
 
 .guiBalanceCartel480x800{
@@ -392,40 +416,40 @@
 }
 
 .guiBalanceCoins480x800{
-	font-family: Bubblegum;
-	font-size: 0.9em;
-	position: fixed;
-	top: 103px;
-	left: 210px;
-	height: 30px;
-	width: 100px;
+    font-family: Bubblegum;
+    font-size: 1.2em;
+    height: 30px;
+    left: 345px;
+    position: fixed;
+    top: 140px;
+    width: 100px;
 }
 
 .guiLoseAllLifes480x800{
-	background-image: url("../480x800/guiendgame.png");
-	height: 255px;
-	left: 0;
-	position: fixed;
-	top: 0;
-	width: 360px;
+    background-image: url("../480x800/guiendgame.png");
+    height: 398px;
+    left: 0;
+    position: fixed;
+    top: 0;
+    width: 480px;
 }
 
 .guiLoseAllLifesOk480x800{
-	background-image: url("../480x800/guiendgameok.png");
-	height: 54px;
-	left: 55px;
-	position: fixed;
-	top: 347px;
-	width: 209px;
+    background-image: url("../480x800/guiendgameok.png");
+    height: 64px;
+    left: 90px;
+    position: fixed;
+    top: 485px;
+    width: 300px;
 }
 
 .guiLoseAllLifesBuy480x800{
-	background-image: url("../480x800/guiendgamebuy.png");
-	height: 110px;
-	left: 55px;
-	position: fixed;
-	top: 238px;
-	width: 210px;
+    background-image: url("../480x800/guiendgamebuy.png");
+    height: 155px;
+    left: 90px;
+    position: fixed;
+    top: 340px;
+    width: 303px;
 }
 
 .guiNoSoftgamesScreen480x800{

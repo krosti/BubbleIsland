@@ -159,7 +159,7 @@ var pointDrop = 5;
 var min_vel = .1;
 var freezeTime = 10 //en segundos
 var lifesPerCoins = 1;
-var linesPerLevel = 4;
+var linesPerLevel = 2;
 
 var currentState = {
 	level: 1,
@@ -2179,12 +2179,12 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 			case "480x800":
 				this.canvas.width = 480;
 				this.canvas.height = 800;
-				this.level = new bubbleLevel(480, 800, 8, 20, levelnumber);
+				this.level = new bubbleLevel(355, 620, 8, 20, levelnumber);
 				break;
 			case "854x480":
 				this.canvas.height = 480; 
 				this.canvas.width = 854;
-				this.level = new bubbleLevel(800, 400, 23, 20, levelnumber);
+				this.level = new bubbleLevel(620, 370, 16, 20, levelnumber);
 				break;
 		};
 		this.level.top = this.top;

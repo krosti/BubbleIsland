@@ -101,17 +101,17 @@
 }
 
 .guiBuyBombFrame854x480{
-	background-image: url("../854x480/guibuybomb.png");
-	color: #644000;
-	font-family: Bubblegum;
-	font-size: 0.8em;
-	height: 60px;
-	left: 69px;
-	padding-left: 69px;
-	padding-top: 18px;
-	position: fixed;
-	top: 365px;
-	width: 87px;
+    background-image: url("../854x480/guibuybomb.png");
+    color: #644000;
+    font-family: Bubblegum;
+    font-size: 0.8em;
+    height: 60px;
+    left: 65px;
+    padding-left: 69px;
+    padding-top: 18px;
+    position: fixed;
+    top: 370px;
+    width: 87px;
 }
 
 .guiBuyMultiFrame854x480{
@@ -139,9 +139,9 @@
 
 .guiNextBallFrame854x480
 {
-	left: 330px;
-	position: fixed;
-	top: 430px;
+    left: 340px;
+    position: fixed;
+    top: 415px;
 }
 
 .facebookFrame854x480{
@@ -226,10 +226,10 @@
 
 .guiProgressBar854x480{
 	position: fixed;
-	width: 10px;
+	width: 7px;
 	height: 434px;
-	top: 376px;
-	left: 598px;
+	top: 134px;
+	left: 779px;
 }
 
 .guiProgressBar854x480 > div{
@@ -241,12 +241,9 @@
 }
 
 .panda854x480{
-	position: fixed;
-	/*width: 90px;
-	height: 111px;
-	min-height: 111px;*/
-	left: 300px;
-	top: 370px;
+    left: 290px;
+    position: fixed;
+    top: 330px;
 }
 
 .guiFinishPoints854x480{
@@ -707,33 +704,33 @@
 }
 
 .leaderboardTabHighscore854x480 { 
-	background-image: url("../854x480/leaderboardhighscore.png");
-	height: 25px;
-	left: 132px;
-	min-height: 20px;
-	position: absolute;
-	top: 177px;
-	width: 83px;
+    background-image: url("../854x480/leaderboardhighscore.png");
+    height: 25px;
+    left: 390px;
+    min-height: 20px;
+    position: absolute;
+    top: 171px;
+    width: 95px;
 }
 
 .leaderboardTabFriends854x480 { 
-	background-image: url("../854x480/leaderboardfriends.png");
-	height: 24px;
-	left: 212px;
-	min-height: 20px;
-	position: absolute;
-	top: 177px;
-	width: 83px;
+    background-image: url("../854x480/leaderboardfriends.png");
+    height: 24px;
+    left: 480px;
+    min-height: 20px;
+    position: absolute;
+    top: 170px;
+    width: 95px;
 }
 
 .leaderboardBackMenu854x480 { 
-	background-image: url("../854x480/leaderboardmenu.png");
-	height: 66px;
-	left: 115px;
-	min-height: 65px;
-	position: absolute;
-	top: 388px;
-	width: 130px;
+    background-image: url("../854x480/leaderboardmenu.png");
+    height: 66px;
+    left: 270px;
+    min-height: 65px;
+    position: absolute;
+    top: 400px;
+    width: 130px;
 }
 
 .leaderboardTabHighlight854x480

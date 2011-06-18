@@ -36,6 +36,7 @@
 			//Playtomic.Log.View(2647, "3689729b4f17433c", document.location);
 			loader.init();
 			connectToFacebook();
+			
 			//alert('face');
 			/*FB = new FBConnect('FBnav');
 			//alert('softgame');
@@ -775,9 +776,8 @@ $(window).load(function () {
 		window.localStorage.setItem('runned', 1);
 	};
 });
-var gameSize = "320x480";
+var gameSize = "854x480";
 var leaderboardElided = 18;
-//gameSize = "480x800";
 if(screen.width >= 854) gameSize = "854x480";
 if(screen.width <= 640) gameSize = "640x960";
 if(screen.width <= 480) gameSize = "480x800";
@@ -806,7 +806,7 @@ $("#generalLeaderboardTab").addClass('leaderboardTabHighscore' + gameSize);
 $("#facebookLeaderboardTab").addClass('leaderboardTabFriends' + gameSize);
 $("#leaderboardBackMenu").addClass('leaderboardBackMenu' + gameSize);
 $("#leaderboardTabs").addClass('leaderboardTabs' + gameSize);
-
+document.getElementById('logoImg').src = gameSize + '/logo.jpg';
 function showCoins(){
 	api.ui.showWaiting();
 	api.softgame.onLoginUser = function(){

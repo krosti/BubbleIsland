@@ -35,7 +35,6 @@
 			//alert('in connect');
 			//Playtomic.Log.View(2647, "3689729b4f17433c", document.location);
 			loader.init();
-			connectToFacebook();
 			
 			//alert('face');
 			/*FB = new FBConnect('FBnav');
@@ -744,7 +743,7 @@ function connectToFacebook2(){
 		api.facebook.retrieveUserData();
 		api.facebook.loaded = function(){	
 		api.ui.hideWaiting();		
-			if(firstRun) api.facebook.postMessage(api.facebook.user.name + ' is now enjoying the Bubble Paradise, Come on! don\'t miss this oportunitie and join ' + (api.facebook.user.gender == 'male' ? 'him' : 'her') + ' on this trip`and get some relaxing time togheter!');
+			if(firstRun) api.facebook.postMessage(api.facebook.user.name + ' is now playing Bubble Paradise, join ' + (api.facebook.user.gender == 'male' ? 'him' : 'her') + ' on this link @' . api.facebook.appname + '!');
 		};
 };
 
@@ -882,6 +881,7 @@ loader.readyLoad = function(){
 		
 		$(this).delay(3000).fadeOut(100, function(){
 					$("#initScreen").remove();
+					connectToFacebook();
 			//game = new appEnviroment("gameCanvas", "gameMenu", "gameBackgroundCanvas", "320x480");
 			//alert(screen.width);
 			

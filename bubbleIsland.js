@@ -2534,7 +2534,8 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 				game.level.clearBoard();
 				game.doSerialize = true;
 				//api.facebook.postMessage(api.facebook.user.name + " has got " + game.ui.points + " points in Bubble Paradise! Come with him and enjoy togheter in the paradise!");
-				api.facebook.postMessage(api.facebook.user.name + " has got " + game.ui.points + " points in Bubble Paradise! Come with him and enjoy togheter in the paradise!");
+				//api.facebook.postMessage(api.facebook.user.name + " has got " + game.ui.points + " points in Bubble Paradise! Come with him and enjoy togheter in the paradise!");
+				api.facebook.postMessage(api.facebook.user.name + " has got " + game.ui.points + " points in Bubble Paradise ! join him in/on this @ " + api.facebook.appname + "!");
 				game.ui.acumuledPoints = game.ui.points;
 				game.ui.pointsCounter = game.ui.points;
 				game.nextLevel();

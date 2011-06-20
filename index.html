@@ -654,6 +654,7 @@ body.sgds .clear {
 	<div id="leaderboardBackMenu" onClick="options.exitLeaderboard()"></div>
 </nav>
 <nav id="optionMenu" style="position: absolute; top: 0px; left: 0px; width: 100%; min-height: 100%; display: none;" >
+	<div id="facebookLogoutButton" style="position: absolute; top: 1000px; left: 100px; width: 100px; height: 100px" onClick="api.facebook.logout(setInitState);">Logout</div>
 	<div id="optionsMenuButton" onClick="$('#gameMenu')[0].style.display = 'block'; $('#optionMenu')[0].style.display = 'none';options.exitOptions();"></div>
 	<div id="optionsFacebook" onClick="inviteFriends();"></div>
 	<div id="optionsCoins" onClick="showCoins();"></div>
@@ -809,23 +810,16 @@ document.getElementById('logoImg').src = gameSize + '/logo.jpg';
 function showCoins(){
 	api.ui.showWaiting();
 	api.softgame.onLoginUser = function(){
-		api.ui.hideWaiting();
-		//api.ui.alert('You have ' + api.softgame.user.balance + ' coin/s to spend, you can buy more lifes when you run out of them', 'Ok, thanks for the advice', function(){ options.backToMenu(); });
-		//alert(api.JSON2String(api.softgame.user););
-		/*api.ui.alert2('You have ' + api.softgame.user.balance + ' coin/s to spend, you can buy more lifes when you run out of them',  [{'button': 'Ok, thanks for the advice',
-																																			'action' : function(){
-																																				
-																																			}
-																																		},{
-																																			'button': 'Ups! i need more coins!',
-																																			'action' : function(){
-																																				window.location = api.softgame.getBuyingCoinsUrl();
-																																			}
-																																		}]);*/
+		api.ui.hideWaiting();		
 		api.ui.showBalance();
 	};
 	//options.showNav('softgameNav', 'gameMenu');
 	api.softgame.getUserInfo();
+};
+
+function setInitState() = {
+	$('#FBnav')[0].style.display = 'block';
+	connectToFacebook();
 };
 
 function postHighscoreOnFacebook(){

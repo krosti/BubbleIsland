@@ -23,12 +23,12 @@ api.leaderboard.save = function(id, name, points){
 };
 
 api.leaderboard.savecallback = function(data){
-	alert(data);
+	//alert(data);
 	var response = api.string2JSON(data);
 	if(response.status == 1){
 		api.leaderboard.saveok(response);
 	}else{
-		alert('error');
+		//alert('error');
 		api.leaderboard.saveerror();
 	};
 };
@@ -60,7 +60,7 @@ api.leaderboard.list = function(id, callback, friends, init, count){
 
 api.leaderboard.listcallback = function(data){
 	var response = api.string2JSON(data);
-	alert(data);
+	//alert(data);
 	if(status == 1){
 		api.leaderboard.listok(response);
 	}else{

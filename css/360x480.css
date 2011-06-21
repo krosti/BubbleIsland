@@ -282,25 +282,25 @@
 }
 
 .guiFinishLevel360x480{
-	font-family: Bubblegum;
-	font-size: 0.9em;
-	height: 20px;
-	left: 214px;
-	position: fixed;
-	text-align: center;
-	top: 274px;
-	width: 65px;
-}
-
-.guiFinishLifes360x480{
     font-family: Bubblegum;
     font-size: 0.9em;
     height: 20px;
-    color: #FFFFFF;
-    left: 235px;
+    left: 233px;
     position: fixed;
     text-align: center;
-    top: 260px;
+    top: 259px;
+    width: 65px;
+}
+
+.guiFinishLifes360x480{
+    color: #FFFFFF;
+    font-family: Bubblegum;
+    font-size: 0.9em;
+    height: 20px;
+    left: 73px;
+    position: fixed;
+    text-align: center;
+    top: 192px;
     width: 65px;
 }
 
@@ -330,7 +330,7 @@
     height: 12px;
     left: 120px;
     position: fixed;
-    top: 312px;
+    top: 309px;
     width: 13px;
 }
 
@@ -340,7 +340,7 @@
     height: 12px;
     left: 210px;
     position: fixed;
-    top: 312px;
+    top: 309px;
     width: 13px;
 }
 
@@ -350,7 +350,7 @@
     height: 12px;
     left: 300px;
     position: fixed;
-    top: 312px;
+    top: 309px;
     width: 13px;
 }
 
@@ -373,13 +373,13 @@
 }
 
 .guiLooseContinue360x480{
-	position: fixed;
-	background-image: url(../360x480/guicontinueloose.png);
-	width: 157px;
-	height: 110px;
-	min-height: 110px;
-	left: 90px;
-	top: 360px;
+    background-image: url("../360x480/guicontinueloose.png");
+    height: 110px;
+    left: 90px;
+    min-height: 110px;
+    position: fixed;
+    top: 344px;
+    width: 157px;
 }
 
 .guiWinContinue360x480{
@@ -431,7 +431,7 @@
 
 .guiLoseAllLifes360x480{
 	background-image: url("../360x480/guiendgame.png");
-	height: 255px;
+	height: 295px;
 	left: 0;
 	position: fixed;
 	top: 0;
@@ -439,21 +439,21 @@
 }
 
 .guiLoseAllLifesOk360x480{
-	background-image: url("../360x480/guiendgameok.png");
-	height: 54px;
-	left: 55px;
-	position: fixed;
-	top: 347px;
-	width: 209px;
+    background-image: url("../360x480/guiendgameok.png");
+    height: 54px;
+    left: 74px;
+    position: fixed;
+    top: 369px;
+    width: 209px;
 }
 
 .guiLoseAllLifesBuy360x480{
-	background-image: url("../360x480/guiendgamebuy.png");
-	height: 110px;
-	left: 55px;
-	position: fixed;
-	top: 238px;
-	width: 210px;
+    background-image: url("../360x480/guiendgamebuy.png");
+    height: 110px;
+    left: 75px;
+    position: fixed;
+    top: 263px;
+    width: 210px;
 }
 
 .guiNoSoftgamesScreen360x480{
@@ -588,6 +588,7 @@
 	min-height: 100%;
 	left: 0px;
 	top: 0px;
+	padding: 0 0 0 0;
 }
 
 .uiAlertImage360x480{

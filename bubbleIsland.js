@@ -159,7 +159,8 @@ var pointDrop = 5;
 var min_vel = .1;
 var freezeTime = 10 //en segundos
 var lifesPerCoins = 1;
-var linesPerLevel = 2;
+var linesPerLevel = 4;
+var specialCountBubbles = 100;
 
 var currentState = {
 	level: 1,
@@ -202,7 +203,7 @@ function bubble(l){
 	};
 
 	this.makeItRandom = function(){
-		var value = rnd(1000) / 10;
+		var value = rnd(specialCountBubbles) / 10;
 		if(value > this.lvl.bonus){
 			this.flavor = this.randomFlavor();
 			this.object = new standAnimation(this.lvl.bubbleRadius, this.lvl.bubbleRadius, this.meinBild.src);

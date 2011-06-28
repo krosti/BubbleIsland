@@ -1,4 +1,4 @@
-var VERSION = '0.9.082';
+var VERSION = '0.9.089';
 
 function rnd(top){ return Math.floor(Math.random()*(top + 1))};
 
@@ -156,10 +156,19 @@ var animNav;
 var fps = 24;
 var pointExplode = 10;
 var pointDrop = 5;
-var min_vel = .1;
+var min_vel = .05;
 var freezeTime = 10 //en segundos
 var lifesPerCoins = 1;
-var linesPerLevel = 4;
+var linesPerLevel = 1;
+
+var bombValue = 1;
+var freezeValue = 1;
+var multiValue = 1;
+
+var bombInit = 5;
+var freezeInit = 5;
+var multiInit = 5;
+
 var specialCountBubbles = 100;
 
 var currentState = {
@@ -214,7 +223,7 @@ function bubble(l){
 		fragment.appendChild(this.element);
 		this.element.appendChild(baseElement);
 		if(this.secondFlavor != ''){
-			var zweithBild = document.createElement('img');				
+			var zweithBild = new Image();				
 			switch(this.secondFlavor){
 				case 'blue':
 					zweithBild.src = bubbleBlueHalfImage.src;
@@ -233,7 +242,7 @@ function bubble(l){
 					break;
 			};
 			var baseElement2 = document.createElement('img');
-			baseElement2.src = this.meinBild.src;
+			baseElement2.src = zweithBild.src;
 			baseElement2.style.position = 'absolute';
 			baseElement2.style.top = '0px';
 			baseElement2.style.left = '0px';
@@ -253,6 +262,26 @@ function bubble(l){
 		this.makeElement();
 		$(this.element).addClass('bubble');
 		//this.object.fitNormalImage();
+	};
+
+	this.makeItMulti = function(){
+		this.flavor = this.randomFlavor();
+		do{
+			this.secondFlavor = this.randomFlavor(true);
+		}while(this.flavor == this.secondFlavor);
+		this.makeElement();
+	};
+
+	this.makeItBomb = function(){
+		this.flavor = this.randomBombFlavor();
+		this.makeElement();
+		this.bombBall = true;
+	};
+
+	this.makeItFreeze = function(){
+		this.flavor = this.randomFreezeFlavor();
+		this.makeElement();
+		this.freezeBall = true;
 	};
 
 	this.makeItRandom = function(){
@@ -311,29 +340,30 @@ function bubble(l){
 		this.element.style.overflow = 'show'
 	};
 
-	this.randomFlavor = function(){
+	this.randomFlavor = function(isSecond){
 		var flavor;
 		var value = rnd(4);
+		var second = (isSecond ? isSecond : false);
 		switch (value){
 			case 0:
 				flavor = "blue"; 
-				this.meinBild = bubbleBlueImage;
+				if(!second) this.meinBild = bubbleBlueImage;
 				break;
 			case 1:
 				flavor = "yellow"; 
-				this.meinBild = bubbleYellowImage;
+				if(!second) this.meinBild = bubbleYellowImage;
 				break;
 			case 2:
 				flavor = "purple"; 
-				this.meinBild = bubblePurpleImage;
+				if(!second) this.meinBild = bubblePurpleImage;
 				break;
 			case 3:
 				flavor = "red"; 
-				this.meinBild = bubbleRedImage;
+				if(!second) this.meinBild = bubbleRedImage;
 				break;
 			case 4:
 				flavor = "green";
-				this.meinBild = bubbleGreenImage;
+				if(!second) this.meinBild = bubbleGreenImage;
 				break;
 		};
 		return flavor;
@@ -1025,25 +1055,14 @@ function bubbleCannon(lvl){
 		this.lvl.setShootedBubble(this.currentBubble);	
 		this.currentBubble.element.style.zIndex = 'auto';
 		this.object.setCurrentState('shoot');
-		if(this.currentBubble.bombBall) game.ui.addBombBubbleCount();
+		/*if(this.currentBubble.bombBall) game.ui.addBombBubbleCount();
 		if(this.currentBubble.freezeBall) game.ui.addFreezeBubbleCount();
-		if(this.currentBubble.secondFlavor != '') game.ui.addMultiBubbleCount();
+		if(this.currentBubble.secondFlavor != '') game.ui.addMultiBubbleCount();*/
 		this.currentBubble = null;
 		this.chargeCannon();
 	};
 
 	this.setReadyShoot = function(){
-		/*this.currentBubble = new bubble(this.lvl);
-		this.currentBubble.makeItRandom();
-		this.currentBubble.x = ((lvl.width / 2) - (this.lvl.bubbleRadius / 2)) + this.lvl.leftBound;
-		this.currentBubble.y = (lvl.height - lvl.bubbleRadius) + this.lvl.topBound;
-		this.currentBubble.y -= 5;
-		this.currentBubble.element.style.top = this.currentBubble.y + 'px';
-		this.currentBubble.element.style.left = this.currentBubble.x + 'px';
-		animNav.append(this.currentBubble.element);*/
-		/*this.currentBubble = this.bufferBubble;
-		this.bufferBubble = null;*/
-		//if(!this.loaded) this.chargeCannon();
 		this.readyShoot = true;
 	};
 
@@ -1080,6 +1099,32 @@ function bubbleCannon(lvl){
 		this.object.render();
 	};
 
+	this.chargeMultiBuffer = function(){		
+		$(this.bufferBubble.element).remove();
+		this.bufferBubble = null;
+		this.bufferBubble = new bubble(this.lvl);
+		this.bufferBubble.makeItMulti();
+		animNav.append(this.bufferBubble.element);
+		$(this.bufferBubble.element).addClass('guiNextBallFrame' + gameSize);
+	};
+
+	this.chargeBombBuffer = function(){		
+		$(this.bufferBubble.element).remove();
+		this.bufferBubble = null;
+		this.bufferBubble = new bubble(this.lvl);
+		this.bufferBubble.makeItBomb();
+		animNav.append(this.bufferBubble.element);
+		$(this.bufferBubble.element).addClass('guiNextBallFrame' + gameSize);
+	};
+
+	this.chargeFreezeBuffer = function(){		
+		$(this.bufferBubble.element).remove();
+		this.bufferBubble = null;
+		this.bufferBubble = new bubble(this.lvl);
+		this.bufferBubble.makeItFreeze();
+		animNav.append(this.bufferBubble.element);
+		$(this.bufferBubble.element).addClass('guiNextBallFrame' + gameSize);
+	};
 	/*this.addBuffer();
 	this.chargeCannon();*/
 };
@@ -1686,6 +1731,8 @@ function bubbleLevel(w, h, bubblesWidth, bubblesHeight, lvlnbr){
 		};
 		//$(b.element).remove();
 		if(b != 'nada' && b != 'vacio' && b != 'techo') b.explode();
+		if(this.bubbles_array.lenght != 0) return;
+		this.addRandomRow();
 	};
 	
 	this.setReadyShoot = function(){
@@ -1807,7 +1854,10 @@ function bubbleLevel(w, h, bubblesWidth, bubblesHeight, lvlnbr){
 		this.freezeTimeout = fps * freezeTime;
 	};
 
-	
+	this.levelCleared = function(){
+		if(this.bubbles_array.lenght != 0) return;
+		this.addRandomRow();
+	};
 
 	this.detonateBomb = function(detonated, neighbour){
 		//alert(detonated.i + ' : ' + detonated.j + '  neighbour: ' + neighbour);
@@ -1848,13 +1898,8 @@ function bubbleLevel(w, h, bubblesWidth, bubblesHeight, lvlnbr){
 	};
 
 	// event handler
-
-	
-
 	this.loose;
-
 	this.win;
-
 }
 
 
@@ -1869,9 +1914,9 @@ function gameUI(w, h){
 	this.initialLifes = lifesPerCoins;
 	this.rank = -1;
 
-	this.multiBubbleCount = 0;
-	this.bombBubbleCount = 0;
-	this.freezeBubbleCount = 0;
+	this.multiBubbleCount = multiInit;
+	this.bombBubbleCount = bombInit;
+	this.freezeBubbleCount = freezeInit;
 	//this.element = document.createElement('<div style=" @font-face: { font-family: \'The New Font\'; src: Bubblegum.ttf;}"></div>');
 	this.element = document.createElement('div');
 	this.element2 = document.createElement('div');
@@ -1916,6 +1961,33 @@ function gameUI(w, h){
 	$(this.statusBar).addClass('guiProgressBar' + gameSize);
 
 	$(this.backElement).click(function(){ game.showMenu(); });
+
+	$(this.multiBubbleElement).click(function(e){
+		if(this.multiBubbleCount != 0){
+			this.multiBubbleCount -= 1;
+			game.cannon.chargeMultiBuffer();
+			this.multiBubbleElement.innerHTML = this.multiBubbleCount;	
+		};
+		e.stopPropagation();
+	});
+
+	$(this.bombBubbleElement).click(function(e){
+		if(this.multiBubbleCount != 0){
+			this.multiBubbleCount -= 1;
+			game.cannon.chargeBombBuffer();
+			this.multiBubbleElement.innerHTML = this.multiBubbleCount;	
+		};
+		e.stopPropagation();
+	});
+
+	$(this.freezeBubbleElement).click(function(e){
+		if(this.freezeBubbleCount != 0){
+			this.freezeiBubbleCount -= 1;
+			game.cannon.chargeFreezeBuffer();
+			this.freezeBubbleElement.innerHTML = this.freezeBubbleCount;	
+		};
+		e.stopPropagation();
+	});
 
 	$(this.pauseElement).click(function(){
 		cartel = document.createElement('div');
@@ -1975,6 +2047,7 @@ function gameUI(w, h){
 	}
 
 	//this.
+
 	this.addMultiBubbleCount = function(){
 		this.multiBubbleCount++;
 		this.multiBubbleElement.innerHTML = this.multiBubbleCount;
@@ -2200,7 +2273,7 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 		//alert('loose');
 		game.level.clearBoard();
 
-		if(game.ui.lifes == 1){ // ask for more lifes!
+		if(game.ui.lifes == 0){ // ask for more lifes!
 			api.ui.showLoseScreen();
 		}else{		
 			cartel = document.createElement('div');
@@ -2361,6 +2434,22 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 				window.location = api.softgame.getBuyingCoinsUrl();
 			};
 			api.levels.serializeLevel();
+		});
+
+		$(uiMultiCount).click(function(){
+			//api.ui.losescreendiv.style.display = 'none';
+			api.softgame.buyFinalized = function(){
+				api.ui.hideWaiting();
+				//api.ui.alert('You have ' + lifesPerCoins + ' more lifes!! or you are a cat or someone loves you up there :)', 'Thanks! Go on!', function(){
+					game.ui.lifes += lifesPerCoins;
+					$(cartel).remove();
+					$(api.ui.losescreendiv).remove();
+					api.ui.losescreendiv = null;
+					game.playerLoose();
+				//});
+			};
+			api.ui.showWaiting();
+			api.softgame.startCoinsBuying('multi', 'multibomb', '', multiValue, '', '');
 		});
 
 		$(document.body).append(cartel);

@@ -46,23 +46,23 @@
 	left: 8px;
 	min-height: 20px;
     padding-left: 35px;
-    padding-top: 22px;
+    padding-top: 17px;
 	position: fixed;
 	top: 0;
 	width: 71px;
 }
 
 .gobackFrame360x480{
-	background-image: url("../360x480/backbutton.png");
-	color: #4E3E2D;
-	font-family: Bubblegum;
-	font-size: 0.8em;
-	height: 38px;
-	left: 10px;
-	min-height: 10px;
-	position: fixed;
-	top: 50px;
-	width: 102px;
+    background-image: url("../360x480/backbutton.png");
+    color: #4E3E2D;
+    font-family: Bubblegum;
+    font-size: 0.8em;
+    height: 38px;
+    left: 4px;
+    min-height: 10px;
+    position: fixed;
+    top: 35px;
+    width: 102px;
 }
 
 .guiCoinsFrame360x480{
@@ -95,9 +95,9 @@
 	font-family: Bubblegum;
 	font-size: 0.6em;
 	height: 36px;
-	left: 6px;
-	padding-left: 50px;
-	padding-top: 8px;
+	left: 10px;
+	padding-left: 47px;
+	padding-top: 7px;
 	position: fixed;
 	top: 432px;
 	width: 61px;
@@ -110,8 +110,8 @@
 	font-size: 0.6em;
 	height: 34px;
 	left: 10px;
-	padding-left: 46px;
-	padding-top: 8px;
+	padding-left: 47px;
+	padding-top: 7px;
 	position: fixed;
 	top: 396px;
 	width: 57px;
@@ -124,8 +124,8 @@
 	font-size: 0.6em;
 	height: 35px;
 	left: 10px;
-	padding-left: 45px;
-	padding-top: 6px;
+	padding-left: 47px;
+	padding-top: 7px;
 	position: fixed;
 	top: 360px;
 	width: 60px;
@@ -145,6 +145,16 @@
 	left: 112px;
 	position: fixed;
 	top: 438px;
+}
+
+.guiPandaBag360x480{
+	position: fixed;
+	background-image: url(../360x480/pandabag.png);
+	top: 440px;
+	left: 98px;
+	width: 60px;
+	height: 43px;
+	/*z-index: ;*/
 }
 
 .facebookFrame360x480{
@@ -316,12 +326,12 @@
 }
 
 .guiFinishMoreCoins360x480{
-    background-image: url("../360x480/guiaddbutton.png");
-    height: 49px;
-    left: 245px;
+    /*background-image: url("../360x480/guiaddbutton.png");*/
+    height: 33px;
+    left: 276px;
     position: fixed;
-    top: 200px;
-    width: 49px;
+    top: 198px;
+    width: 33px;
 }
 
 .guiFinishMultiCount360x480{

@@ -185,7 +185,8 @@ function bubble(l){
 	this.dx = 0; //incremental in the x direction
 	this.dy = 0; //incremental in the x direction
 	this.meinBild = new Image();
-	this.object = null;
+	//this.object = null;
+	this.element = document.createElement('div');
 	//this.meinBild.src = 'bubble.png';
 
 	this.secondFlavor = '';
@@ -194,85 +195,118 @@ function bubble(l){
 	this.wasDetonated = false;
 	this.pointsMultiplier = 1;
 
+	this.makeElement = function(){
+		var fragment = document.createDocumentFragment();
+		//this.element.style.backgroundImage = 'url(' + this.meinBild.src + ')';
+		this.element.style.height = this.lvl.bubbleRadius + 'px';	
+		this.element.style.width = this.lvl.bubbleRadius + 'px';
+		this.element.style.overflow = 'hidden';
+		this.element.style.position = 'absolute';
+		var baseElement = document.createElement('img');
+		baseElement.src = this.meinBild.src;
+		baseElement.style.position = 'absolute';
+		baseElement.style.top = '0px';
+		baseElement.style.left = '0px';
+		baseElement.style.overflow = 'hidden';
+		baseElement.style.width = this.lvl.bubbleRadius + 'px';
+		baseElement.style.height = this.lvl.bubbleRadius + 'px';
+		baseElement.style.minHeight = this.lvl.bubbleRadius + 'px';
+		fragment.appendChild(this.element);
+		this.element.appendChild(baseElement);
+		if(this.secondFlavor != ''){
+			var zweithBild = document.createElement('img');				
+			switch(this.secondFlavor){
+				case 'blue':
+					zweithBild.src = bubbleBlueHalfImage.src;
+					break;
+				case 'green':
+					zweithBild.src = bubbleGreenHalfImage.src;
+					break;
+				case 'red':
+					zweithBild.src = bubbleRedHalfImage.src;
+					break;
+				case 'purple':
+					zweithBild.src = bubblePurpleHalfImage.src;
+					break;
+				case 'yellow':
+					zweithBild.src = bubbleYellowHalfImage.src;
+					break;
+			};
+			var baseElement2 = document.createElement('img');
+			baseElement2.src = this.meinBild.src;
+			baseElement2.style.position = 'absolute';
+			baseElement2.style.top = '0px';
+			baseElement2.style.left = '0px';
+			baseElement2.style.overflow = 'hidden';
+			baseElement2.style.width = this.lvl.bubbleRadius + 'px';
+			baseElement2.style.height = this.lvl.bubbleRadius + 'px';
+			baseElement2.style.minHeight = this.lvl.bubbleRadius + 'px';
+			this.element.appendChild(baseElement2);
+		};
+
+	};
+
 	this.makeItRandomNormal = function(){
 		this.flavor = this.randomFlavor();
-		this.object = new standAnimation(this.lvl.bubbleRadius, this.lvl.bubbleRadius, this.meinBild.src);
-		this.element = this.object.element;
+		//this.object = new standAnimation(this.lvl.bubbleRadius, this.lvl.bubbleRadius, this.meinBild.src);
+		//this.element = this.object.element;
+		this.makeElement();
 		$(this.element).addClass('bubble');
-		this.object.fitNormalImage();
+		//this.object.fitNormalImage();
 	};
 
 	this.makeItRandom = function(){
 		var value = rnd(specialCountBubbles) / 10;
 		if(value > this.lvl.bonus){
 			this.flavor = this.randomFlavor();
-			this.object = new standAnimation(this.lvl.bubbleRadius, this.lvl.bubbleRadius, this.meinBild.src);
-			this.element = this.object.element;
+			/*this.object = new standAnimation(this.lvl.bubbleRadius, this.lvl.bubbleRadius, this.meinBild.src);
+			this.element = this.object.element;*/
+			this.makeElement();
 		}else{
 			var second = rnd(18);
 			if((second >= 0) && ( second <4)){
 				this.flavor = this.randomX2Flavor();
 				this.pointsMultiplier = 2;
-				this.object = new standAnimation(this.lvl.bubbleRadius, this.lvl.bubbleRadius, this.meinBild.src);
-				this.element = this.object.element;				
+				/*this.object = new standAnimation(this.lvl.bubbleRadius, this.lvl.bubbleRadius, this.meinBild.src);
+				this.element = this.object.element;	*/
+				this.makeElement();
 			};
 			if((second >= 4) && ( second < 7)){
 				this.flavor = this.randomX3Flavor();
 				this.pointsMultiplier = 3;
-				this.object = new standAnimation(this.lvl.bubbleRadius, this.lvl.bubbleRadius, this.meinBild.src);
-				this.element = this.object.element;				
+				/*this.object = new standAnimation(this.lvl.bubbleRadius, this.lvl.bubbleRadius, this.meinBild.src);
+				this.element = this.object.element;	*/
+				this.makeElement();
 			};
 
 			if((second >= 7) && ( second < 10)){
 				this.flavor = this.randomBombFlavor();
-				this.object = new standAnimation(this.lvl.bubbleRadius, this.lvl.bubbleRadius, this.meinBild.src);
-				this.element = this.object.element;
+				/*this.object = new standAnimation(this.lvl.bubbleRadius, this.lvl.bubbleRadius, this.meinBild.src);
+				this.element = this.object.element;*/
+				this.makeElement();
 				this.bombBall = true;
 			};
 
 			if((second >= 10) && ( second < 14)){
 				this.flavor = this.randomFreezeFlavor();
-				this.object = new standAnimation(this.lvl.bubbleRadius, this.lvl.bubbleRadius, this.meinBild.src);
-				this.element = this.object.element;
+				/*this.object = new standAnimation(this.lvl.bubbleRadius, this.lvl.bubbleRadius, this.meinBild.src);
+				this.element = this.object.element;*/
+				this.makeElement();
 				this.freezeBall = true;
 			};
 
 			if((second >= 14) && ( second <= 18)){
 				this.flavor = this.randomFlavor();
-				this.object = new standAnimation(this.lvl.bubbleRadius, this.lvl.bubbleRadius, this.meinBild.src);
-				this.element = this.object.element;
+				/*this.object = new standAnimation(this.lvl.bubbleRadius, this.lvl.bubbleRadius, this.meinBild.src);
+				this.element = this.object.element;*/
 				do{
 					this.secondFlavor = this.randomFlavor();
 				}while(this.flavor == this.secondFlavor);
-
-				var zweithBild = document.createElement('img');				
-				switch(this.secondFlavor){
-					case 'blue':
-						zweithBild.src = bubbleBlueHalfImage.src;
-						break;
-					case 'green':
-						zweithBild.src = bubbleGreenHalfImage.src;
-						break;
-					case 'red':
-						zweithBild.src = bubbleRedHalfImage.src;
-						break;
-					case 'purple':
-						zweithBild.src = bubblePurpleHalfImage.src;
-						break;
-					case 'yellow':
-						zweithBild.src = bubbleYellowHalfImage.src;
-						break;
-				};
-				this.object.element.appendChild(zweithBild);
-				zweithBild.style.width = this.lvl.bubbleRadius + 'px';
-				zweithBild.style.heigth = (this.lvl.bubbleRadius / 2) + 'px';
-				zweithBild.style.position = 'absolute';
-				zweithBild.style.top = '0px';
-				zweithBild.style.left = '0px';
+				this.makeElement();
 			};
 		};
 
-		this.object.fitNormalImage();
+		//this.object.fitNormalImage();
 		$(this.element).addClass('bubble');
 		this.element.style.overflow = 'show'
 	};
@@ -989,6 +1023,7 @@ function bubbleCannon(lvl){
 		this.currentBubble.dy = velocity * (vecy/hip);//;/Math.sin(ang);
 		//this.lvl.addBubble(this.currentBubble);
 		this.lvl.setShootedBubble(this.currentBubble);	
+		this.currentBubble.element.style.zIndex = 'auto';
 		this.object.setCurrentState('shoot');
 		if(this.currentBubble.bombBall) game.ui.addBombBubbleCount();
 		if(this.currentBubble.freezeBall) game.ui.addFreezeBubbleCount();
@@ -1045,8 +1080,8 @@ function bubbleCannon(lvl){
 		this.object.render();
 	};
 
-	this.addBuffer();
-	this.chargeCannon();
+	/*this.addBuffer();
+	this.chargeCannon();*/
 };
 
 
@@ -1611,7 +1646,7 @@ function bubbleLevel(w, h, bubblesWidth, bubblesHeight, lvlnbr){
 		this.shootedBubble = bubble;
 		this.character.setCurrentState('load');
 		//this.shootedBubble.object.setCurrentState('estela', true);
-		this.shootedBubble.object.baseElement.style.display = 'block';
+		//this.shootedBubble.object.baseElement.style.display = 'block';
 		//this.shootedBubble.object.animationEnds = function(){ this.setCurrentState('estela'); }
 	}
 
@@ -1632,7 +1667,7 @@ function bubbleLevel(w, h, bubblesWidth, bubblesHeight, lvlnbr){
 
 	this.drawLevel = function(){
 		this.character.render();	
-		if(this.shootedBubble != undefined) this.shootedBubble.object.render();
+		//if(this.shootedBubble != undefined) this.shootedBubble.object.render();
 	};
 	
 	this.addBubble = function(b){
@@ -1852,10 +1887,7 @@ function gameUI(w, h){
 	this.addCoinsElement = document.createElement('div'); 
 	this.statusBar = document.createElement('div'); 
 	this.statusProgressBar = document.createElement('div');
-	/*$(this.element).addClass('pointsFrame');
-	$(this.element2).addClass('lifesFrame');
-	$(this.element3).addClass('levelsFrame');*/
-
+	
 	animNav.append(this.element);
 	animNav.append(this.element2);
 	animNav.append(this.element3);
@@ -1899,7 +1931,7 @@ function gameUI(w, h){
 		game.clock.stop();
 	});
 
-	this.coinsElement.innerHTML = api.softgame.user.balance;
+	this.coinsElement.innerHTML = (api.softgame.user.balance == undefined ? "-" : api.softgames.user.balance);
 
 	this.multiBubbleElement.innerHTML = this.multiBubbleCount;
 	this.bombBubbleElement.innerHTML = this.bombBubbleCount;
@@ -1979,14 +2011,6 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 	this.animTimer;
 	this.cannon;
 	this.canvas = document.getElementById(canvasObj);//$(canvasObj)
-	//this.canvas = document.createElement('div');
-	//this.painter = document.getElementById(canvasObj).getContext('2d');
-	/*this.backgroundCanvas = document.getElementById(backgroundCanvasObj);
-	this.backgroundPainter = document.getElementById(backgroundCanvasObj).getContext('2d');*/
-	/*this.buffercanvas = document.createElement('canvas');
-	this.frameBuffer = this.buffercanvas.getContext('2d');*/
-	//frameBuffer = this.frameBuffer;
-	//frameBuffer = this.painter;
 	this.menu = document.getElementById(menuObj);
 	this.backgroundImage = backgroundImage;
 	this.lvlFrame = lvlFrame;
@@ -2021,45 +2045,11 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 	};
 
 	this.clock = new Timeline(fps);
-	//this.clock = clock;
-	//this.clock.connect(tick, 'tick');
-	/*performance = new performanceStatus(5, this.painter);
-	performance.addChecker('clear painter');
-	performance.addChecker('move balls');
-	performance.addChecker('colisiones');
-	performance.addChecker('draw balls');
-	performance.addChecker('draw ui');	*/
 	this.loadedLevel = false;
-
-	/*this.backgroundCanvas.height = this.canvas.height;
-	this.backgroundCanvas.width = this.canvas.width;*/
-	/*this.buffercanvas.height = this.canvas.height;
-	this.buffercanvas.width = this.canvas.width;*/
 	
 	this.ui = new gameUI(this.canvas.width, this.canvas.height);
 
 	this.startLocalStorage = function(){};
-
-	/*this.loadState = function(){
-		this.filestate = 'loading';
-		var reader = new FileReader();
-		reader.onloadend = function(evt){
-			game.filestate = 'ok';
-			currentState = api.string2JSON(this.result);	
-			game.level = currentState.level;
-			game.ui.acumuledPoints = currentState.points;
-		};
-		reader.readAsText(datafile);
-	};
-
-	this.saveState = function(){
-		this.filestate = 'writing';
-		datafile.createWriter(function(writer){
-			writer.seek(0);
-			writer.onwrite = function(){ game.filestate = 'ok'};
-			writer.write(api.JSON2String(currentState));
-		});
-	};*/
 
 	//event listeners
 
@@ -2199,6 +2189,8 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 		this.cannon = new bubbleCannon(this.level);
 		this.level.cannon = this.cannon;
 		animNav.append(this.cannon.element);
+		this.cannon.addBuffer();
+		this.cannon.chargeCannon();
 		this.cannon.setReadyShoot();
 	};
 
@@ -2210,137 +2202,7 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 
 		if(game.ui.lifes == 1){ // ask for more lifes!
 			api.ui.showLoseScreen();
-				/*api.ui.alert2("You haven't any lifes left, Do you want to spend a coin for " + lifesPerCoins + " more lifes? It totally worth it!", [{'button': 'Oks, i want 3 more lifes',
-																																'action': function(){
-																																	//$(this).onclick = function(){};
-																																	api.softgame.buyFinalized = function(){
-																																		api.ui.hideWaiting();
-																																		api.ui.alert('You have ' + lifesPerCoins + ' more lifes!! or you are a cat or someone loves you up there :)', 'Thanks! Go on!', function(){
-																																			game.ui.lifes = lifesPerCoins;
-																																			$(cartel).remove();
-																																			cartel = document.createElement('div');
-																																			var image = document.createElement('img');
-																																			image.src = uiLooseFrame.src;
-																																			image.style.top = '0px';
-																																			image.style.left = ((game.canvas.width - uiLooseFrame.width) / 2) + 'px';
-																																			image.style.position = 'absolute';
-																																			cartel.appendChild(image);
-																																			cartel.style.width = game.canvas.width + 'px';
-																																			cartel.style.height = game.canvas.height + 'px';
-																																			cartel.style.maxHeight = game.canvas.height + 'px';
-																																			cartel.style.display = 'none';
-																																			cartel.style.position = 'fixed';
-																																			cartel.style.top = '0px';
-																																			cartel.style.left = '0px';
-																																			//cartel.style.zIndex = -99;
-																																			cartel.style.backgroundImage = 'url(backgrounddiv.png)';
-																																			cartel.style.backgroundRepeat = 'repeat';
-
-																																			var points = document.createElement('div');
-																																			cartel.appendChild(points);
-																																			$(points).addClass('guiFinishPoints' + game.size);
-																																			points.innerHTML = '<p>'+game.ui.points+'</p>';
-
-																																			var continuebutton = document.createElement('div');
-																																			$(continuebutton).addClass('guiLooseContinue' + game.size);
-																																			cartel.appendChild(continuebutton);
-
-																																			var tomenubutton = document.createElement('div');
-																																			$(tomenubutton).addClass('guiLooseMenu' + game.size);
-																																			cartel.appendChild(tomenubutton);
-
-																																			//cartel.style.backgroundImage = 'url('+uiLooseFrame.src+')';
-																																			//$(document.body).append(cartel);
-																																			animNav.append(cartel);
-																																			$(continuebutton).click(function(){
-																																				$(cartel).fadeOut(300, function(){
-																																					game.ui.points = game.ui.acumuledPoints;					 
-																																					game.ui.pointsCounter = game.ui.acumuledPoints;
-																																					game.doSerialize = true;
-																																					game.redoLevel();
-																																					$(cartel).remove();
-																																				});
-																																			});
-																																			$(tomenubutton).click(function(){
-																																				//alert('test tomenu');
-																																				game.showMenu();	
-																																			});
-																																			$(cartel).fadeIn(150);
-																																			$(api.ui.alert2nav).remove();
-																																		});
-																																	};
-																																	api.ui.showWaiting();
-																																	api.softgame.startCoinsBuying('level', '3morelifes', '', 1, '', '');																																	
-																																}, 'noclose': true},
-																																{'button': "No, it's ok, i'm done",
-																																'action': function(){
-																																	game.menu.style.display = 'block';
-																																	game.level = null;
-																																	game.level = "";
-																																}}])*/
-
-		}else{
-			/*cartel = document.createElement('div');
-			var image = document.createElement('img');
-			image.src = uiLooseFrame.src;
-			image.style.top = '0px';
-			image.style.left = ((game.canvas.width - uiLooseFrame.width) / 2) + 'px';
-			image.style.position = 'absolute';
-			cartel.appendChild(image);
-			cartel.style.width = game.canvas.width + 'px';
-			cartel.style.height = game.canvas.height + 'px';
-			cartel.style.maxHeight = game.canvas.height + 'px';
-			cartel.style.display = 'none';
-			cartel.style.position = 'fixed';
-			cartel.style.top = '0px';
-			cartel.style.left = '0px';
-			//cartel.style.zIndex = -99;
-			cartel.style.backgroundImage = 'url(backgrounddiv.png)';
-			cartel.style.backgroundRepeat = 'repeat';
-
-			var points = document.createElement('div');
-			cartel.appendChild(points);
-			$(points).addClass('guiFinishPoints' + game.size);
-			points.innerHTML = '<p>'+game.ui.points+'</p>';
-
-			var continuebutton = document.createElement('div');
-			$(continuebutton).addClass('guiLooseContinue' + game.size);
-			cartel.appendChild(continuebutton);
-
-			/*var tomenubutton = document.createElement('div');
-			$(tomenubutton).addClass('guiLooseMenu' + game.size);
-			cartel.appendChild(tomenubutton);
-
-			//cartel.style.backgroundImage = 'url('+uiLooseFrame.src+')';
-			//$(document.body).append(cartel);
-			animNav.append(cartel);
-			$(continuebutton).click(function(){
-				$(cartel).fadeOut(300, function(){
-					game.ui.lifes -= 1;					
-					if(game.ui.lifes == -1){
-						game.level = {};
-						game.level = '';
-						game.ui.lifes = 5;
-						game.ui.points = 0;
-						game.ui.acumuledPoints = 0;
-						game.ui.pointsCounter = 0;
-						game.showMenu();
-					}else{
-						game.ui.points = game.ui.acumuledPoints;					 
-						game.ui.pointsCounter = game.ui.acumuledPoints;
-					};
-					game.doSerialize = true;
-					game.redoLevel();
-					$(cartel).remove();
-				});
-			});
-			/*$(tomenubutton).click(function(){
-				//alert('test tomenu');
-				game.showMenu();	
-			});
-			$(cartel).fadeIn(150);
-			
-				*/
+		}else{		
 			cartel = document.createElement('div');
 			var uiScreen = document.createElement('div');
 			var uiCoins = document.createElement('div');
@@ -2378,7 +2240,7 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 			$(cartel).append(uiFreezeCount);
 			$(cartel).append(continueButton);
 
-			uiCoins.innerHTML = api.softgame.user.balance;
+			uiCoins.innerHTML = (api.softgame.user.balance == undefined ? "-" : api.softgames.user.balance);
 			uiLifes.innerHTML = game.ui.lifes;
 			uiPoints.innerHTML = game.ui.points;
 			uiRank.innerHTML = 0;
@@ -2420,56 +2282,6 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 	};
 
 	this.playerWin = function(){
-		/*game.level.clearBoard();
-		cartel = document.createElement('div');
-		var image = document.createElement('img');
-		image.src = uiWinFrame.src;
-		image.style.top = '0px';
-		image.style.left = ((game.canvas.width - uiWinFrame.width) / 2) + 'px';
-		image.style.position = 'absolute';
-		cartel.appendChild(image);
-		cartel.style.width = game.canvas.width + 'px';
-		cartel.style.height = game.canvas.height + 'px';
-		cartel.style.maxHeight = game.canvas.height + 'px';
-		cartel.style.display = 'none';
-		cartel.style.position = 'fixed';
-		cartel.style.top = '0px';
-		cartel.style.left = '0px';
-		points = document.createElement('div');
-		cartel.appendChild(points);
-		$(points).addClass('guiFinishPoints' + game.size);
-		points.innerHTML = '<p>'+game.ui.points+'</p>';
-		//cartel.style.zIndex = -99;
-		cartel.style.backgroundImage = 'url(backgrounddiv.png)';
-		cartel.style.backgroundRepeat = 'repeat';
-
-		var continuebutton = document.createElement('div');
-		$(continuebutton).addClass('guiLooseContinue' + game.size);
-		cartel.appendChild(continuebutton);
-
-		var tomenubutton = document.createElement('div');
-		$(tomenubutton).addClass('guiLooseMenu' + game.size);
-		cartel.appendChild(tomenubutton);
-		//cartel.style.backgroundImage = 'url('+uiLooseFrame.src+')';
-		//$(document.body).append(cartel);
-		animNav.append(cartel);
-		SubmitScore();
-		$(cartel).fadeIn(150);
-		$(continuebutton).click(function(){
-			$(cartel).fadeOut(300, function(){
-				game.level.clearBoard();
-				game.doSerialize = true;
-				api.facebook.postMessage(api.facebook.user.name + " has got " + game.ui.points + " points in Bubble Paradise! Come with him and enjoy togheter in the paradise!");
-				game.ui.acumuledPoints = game.ui.points;
-				game.ui.pointsCounter = game.ui.points;
-				game.nextLevel();
-				$(cartel).remove();
-			});
-		});
-
-		$(tomenubutton).click(function(){
-			game.showMenu();	
-		});*/
 		api.leaderboard.saveok = game.ui.setRank;
 		game.ui.onRank = function(){
 			if(cartel){
@@ -2521,7 +2333,7 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 		$(cartel).append(uiFreezeCount);
 		$(cartel).append(continueButton);
 
-		uiCoins.innerHTML = api.softgame.user.balance;
+		uiCoins.innerHTML = (api.softgame.user.balance == undefined ? "-" : api.softgames.user.balance);
 		uiLifes.innerHTML = game.ui.lifes;
 		uiPoints.innerHTML = game.ui.points;
 		uiRank.innerHTML = 'updating';

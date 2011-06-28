@@ -279,7 +279,7 @@ function setInitState(response){
 };
 
 function postOnFacebook(){
-	var msg = api.facebook.userdata.name ' is playing Bubble Paradise! Come on and enjoy it with ' + (api.facebook.user.gender == 'male' ? 'him' : 'her') + ' on this link @' . api.facebook.appname + '!';
+	var msg = api.facebook.userdata.name + ' is playing Bubble Paradise! Come on and enjoy it with ' + (api.facebook.user.gender == 'male' ? 'him' : 'her') + ' on this link @' . api.facebook.appname + '!';
 	api.facebook.postMessage(msg);
 };
 
@@ -332,33 +332,11 @@ loader.readyLoad = function(){
 		$(this).delay(3000).fadeOut(100, function(){
 					$("#initScreen").remove();
 					connectToFacebook();
-			//game = new appEnviroment("gameCanvas", "gameMenu", "gameBackgroundCanvas", "320x480");
-			//alert(screen.width);
-			
-			//options = new Options('optionMenu', 'leaderboardMenu');
-			//game = new appEnviroment("gameCanvas", "gameMenu", "animCanvas", gameSize);
 		});
 	});
 	//});
 };
 
-// fps
-/*var s = document.createElement('script');
-s.src = 'https://github.com/mrdoob/stats.js/raw/master/build/Stats.js';
-document.body.appendChild(s);
-s.onload = function() {
-
-    var stats = new Stats(),
-        ss = stats.domElement.style;
-    ss.position = 'fixed';
-    ss.left = '0px';
-    ss.top = '0px';
-    document.body.appendChild(stats.domElement);
-    setInterval(stats.update, 1000 / 60);
-}
-*/
-//Playtomic.Log.View(2647, "3689729b4f17433c", document.location);
-//loader.init();
 </script> 
 </body>
 </html>

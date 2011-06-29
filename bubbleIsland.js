@@ -1540,7 +1540,8 @@ function bubbleLevel(w, h, bubblesWidth, bubblesHeight, lvlnbr){
 		var masBaja = this.grilla.returnLowest();
 		/*alert(this.looseLine);*/
 		//alert(masBaja.y + this.bubbleRadius);
-		if(masBaja.y + this.bubbleRadius > this.looseLine){
+		
+		if((masBaja.y - (game.canvas.height - this.looseLine)) + this.bubbleRadius > this.looseLine){
 			//alert('perdiste');
 			/*alert(this.looseLine);
 			alert(masBaja.x + this.bubbleRadius);*/
@@ -2024,7 +2025,8 @@ function gameUI(w, h){
 		painter.fillStyle = '#000';*/
 		if(this.pointsCounter < this.points){
 			this.pointsCounter += 10;
-			this.statusProgressBar.style.height = ((this.pointsCounter / game.level.pointsToReach) * 100) + '%';
+			var percent = ((this.pointsCounter / game.level.pointsToReach) * 100);
+			this.statusProgressBar.style.height = (percent > 100 ? 100 : percent)  + '%';
 		};
 		$(this.element).html(this.pointsCounter);
 		$(this.element2).html(this.lifes);

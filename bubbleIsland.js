@@ -1540,7 +1540,7 @@ function bubbleLevel(w, h, bubblesWidth, bubblesHeight, lvlnbr){
 		var masBaja = this.grilla.returnLowest();
 		/*alert(this.looseLine);*/
 		//alert(masBaja.y + this.bubbleRadius);
-		
+
 		if((masBaja.y - (game.canvas.height - this.looseLine)) + this.bubbleRadius > this.looseLine){
 			//alert('perdiste');
 			/*alert(this.looseLine);
@@ -1732,7 +1732,8 @@ function bubbleLevel(w, h, bubblesWidth, bubblesHeight, lvlnbr){
 		};
 		//$(b.element).remove();
 		if(b != 'nada' && b != 'vacio' && b != 'techo') b.explode();
-		if(this.bubbles_array.lenght != 0) return;
+		if(this.bubbles_array.length != 0) return;
+		this.fpscount = 0;
 		this.addRandomRow();
 	};
 	
@@ -1756,7 +1757,14 @@ function bubbleLevel(w, h, bubblesWidth, bubblesHeight, lvlnbr){
 				var b = new bubble(this);
 				//b.makeItRandom();
 				//b.flavor = b.randomFlavor();
-				b.makeItRandomNormal();
+				//b.makeItRandomNormal();
+				b.flavor = "red"//b.randomFlavor();
+				b.meinBild = bubbleRedImage;;
+				//this.object = new standAnimation(this.lvl.bubbleRadius, this.lvl.bubbleRadius, this.meinBild.src);
+				//this.element = this.object.element;
+				b.makeElement();
+				$(b.element).addClass('bubble');
+
 				b.i = i;
 				b.j = j;
 				b.dy = this.bubbleVelocity;
@@ -1964,28 +1972,28 @@ function gameUI(w, h){
 	$(this.backElement).click(function(){ game.showMenu(); });
 
 	$(this.multiBubbleElement).click(function(e){
-		if(this.multiBubbleCount != 0){
-			this.multiBubbleCount -= 1;
+		if(game.ui.multiBubbleCount != 0){
+			game.ui.multiBubbleCount -= 1;
 			game.cannon.chargeMultiBuffer();
-			this.multiBubbleElement.innerHTML = this.multiBubbleCount;	
+			game.ui.multiBubbleElement.innerHTML = this.multiBubbleCount;	
 		};
 		e.stopPropagation();
 	});
 
 	$(this.bombBubbleElement).click(function(e){
-		if(this.multiBubbleCount != 0){
-			this.multiBubbleCount -= 1;
+		if(game.ui.multiBubbleCount != 0){
+			game.ui.multiBubbleCount -= 1;
 			game.cannon.chargeBombBuffer();
-			this.multiBubbleElement.innerHTML = this.multiBubbleCount;	
+			game.ui.multiBubbleElement.innerHTML = this.multiBubbleCount;	
 		};
 		e.stopPropagation();
 	});
 
 	$(this.freezeBubbleElement).click(function(e){
 		if(this.freezeBubbleCount != 0){
-			this.freezeiBubbleCount -= 1;
+			game.ui.freezeiBubbleCount -= 1;
 			game.cannon.chargeFreezeBuffer();
-			this.freezeBubbleElement.innerHTML = this.freezeBubbleCount;	
+			game.ui.freezeBubbleElement.innerHTML = this.freezeBubbleCount;	
 		};
 		e.stopPropagation();
 	});
@@ -2947,4 +2955,31 @@ api.ui.showHighScore = function(){
 		});
 	};
 	$(api.ui.highscore).show();
+};
+
+api.ui.showBubbleBuyElement = null;
+
+api.ui.showBubbleBuy = function(cartel, button1, button2, callback1, callback2){
+	if(callback2 == undefined){
+		callback2 = function(){
+			
+		};
+	};
+	if(api.ui.showBubbleBuyElement == null){
+		var fragment = document.createDocumentFragment();
+		var base = document.create
+	};	
+	$(api.ui.showBubbleBuyElement).show();
+};
+
+api.ui.showMultiBubbleBuy = function(){
+	
+};
+
+api.ui.showBombBubbleBuy = function(){
+	
+};
+
+api.ui.showFreezeBubbleBuy = function(){
+	
 };

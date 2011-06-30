@@ -2962,24 +2962,66 @@ api.ui.showBubbleBuyElement = null;
 api.ui.showBubbleBuy = function(cartel, button1, button2, callback1, callback2){
 	if(callback2 == undefined){
 		callback2 = function(){
-			
+			$(api.ui.showBubbleBuyElement).remove();
+			api.ui.showBubbleBuyElement = null;
 		};
 	};
 	if(api.ui.showBubbleBuyElement == null){
+		api.ui.showBubbleBuyElement = document.createElement('div');
 		var fragment = document.createDocumentFragment();
-		var base = document.create
+		var cartel = document.createElement('div');
+		var button1  = document.createElement('div');
+		var button2 =  document.createElement('div');
+		$(api.ui.showBubbleBuyElement).addClass('uiAlert' + gameSize);
+		$(cartel).addClass(cartel + gameSize);
+		$(button1).addClass(button1 + gameSize);
+		$(button2).addClass(button2 + gameSize);
+		fragment.appendChild(cartel);
+		fragment.appendChild(button1);
+		fragment.appendChild(button2);
+		api.ui.showBubbleBuyElement.appendChild(fragment);
 	};	
 	$(api.ui.showBubbleBuyElement).show();
 };
 
 api.ui.showMultiBubbleBuy = function(){
-	
+	var fn = function(){
+		api.softgame.buyFinalized = function(){
+			api.ui.hideWaiting();
+			game.ui.multiBubbleCount += 1;
+			$(api.ui.showBubbleBuyElement).remove();
+			api.ui.showBubbleBuyElement = null;
+		};
+		api.ui.showWaiting();
+		api.softgame.startCoinsBuying('multiBubble', '3moremultiBubble', '', 1, '', '');
+	};
+	api.ui.showBubbleBuy('guiBuyMultiScreen', 'guiBuyMultiOk', 'guiBuyMultiNo', fn);
 };
 
 api.ui.showBombBubbleBuy = function(){
-	
+	var fn = function(){
+		api.softgame.buyFinalized = function(){
+			api.ui.hideWaiting();
+			game.ui.bombBubbleCount += 1;
+			$(api.ui.showBubbleBuyElement).remove();
+			api.ui.showBubbleBuyElement = null;
+		};
+		api.ui.showWaiting();
+		api.softgame.startCoinsBuying('bombBubble', '3morebombBubble', '', 1, '', '');
+	};
+	api.ui.showBubbleBuy('guiBuyBombScreen', 'guiBuyBombOk', 'guiBuyBombNo', fn);
 };
 
 api.ui.showFreezeBubbleBuy = function(){
-	
+	var fn = function(){
+		api.softgame.buyFinalized = function(){
+			api.ui.hideWaiting();
+			game.ui.freezeBubbleCount += 1;
+			$(api.ui.showBubbleBuyElement).remove();
+			api.ui.showBubbleBuyElement = null;
+		};
+		api.ui.showWaiting();
+		api.softgame.startCoinsBuying('freezeBubble', '3morefreezeBubble', '', 1, '', '');
+	};
+	api.ui.showBubbleBuy('guiBuyFreezeScreen', 'guiBuyFreezeOk', 'guiBuyFreezeNo', fn);
 };

@@ -585,6 +585,33 @@
 	top: 395px;
 }
 
+.guiBuyBombScreen320x480{
+	position: fixed;
+	background-image: url(../320x480/buybombcartel.png);
+	width: 320px;
+	height: 285px;
+	left: 0px;
+	top: 0px;
+}
+
+.guiBuyBombOk320x480{
+	position: fixed;
+	background-image: url(../320x480/buybombok.png);
+	width: 175px;
+	height: 78px;
+	left: 0px;
+	top: 0px;
+}
+
+.guiBuyBombNo320x480{
+	position: fixed;
+	background-image: url(../320x480/buybombno.png);
+	width: 175px;
+	height: 78px;
+	left: 0px;
+	top: 0px;
+}
+
 .uiAlert320x480{
 	font-family: Bubblegum;
 	font-size: 1.1em;

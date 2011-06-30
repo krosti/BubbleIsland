@@ -1467,7 +1467,7 @@ function bubbleLevel(w, h, bubblesWidth, bubblesHeight, lvlnbr){
 	this.points = 0;
 	this.pointsToReach = game.ui.points + (1000 * this.lvlnro * 2);
 	this.pointsMultiplier = 0;
-	this.looseLine = this.height - this.bubbleRadius;
+	this.looseLine = this.height - (this.bubbleRadius * 3.5);
 	this.currentTop = 0;
 	this.h = Math.sqrt((this.bubbleRadius*this.bubbleRadius) - ((this.bubbleRadius / 2) * (this.bubbleRadius / 2)));
 	this.bonus = .2 * this.lvlnro;
@@ -1541,7 +1541,7 @@ function bubbleLevel(w, h, bubblesWidth, bubblesHeight, lvlnbr){
 		/*alert(this.looseLine);*/
 		//alert(masBaja.y + this.bubbleRadius);
 
-		if((masBaja.y - (game.canvas.height - this.looseLine)) + this.bubbleRadius > this.looseLine){
+		if((masBaja.y - (game.canvas.height - this.height)) + this.bubbleRadius > this.looseLine){
 			//alert('perdiste');
 			/*alert(this.looseLine);
 			alert(masBaja.x + this.bubbleRadius);*/
@@ -1981,10 +1981,10 @@ function gameUI(w, h){
 	});
 
 	$(this.bombBubbleElement).click(function(e){
-		if(game.ui.multiBubbleCount != 0){
-			game.ui.multiBubbleCount -= 1;
+		if(game.ui.bombBubbleCount != 0){
+			game.ui.bombBubbleCount -= 1;
 			game.cannon.chargeBombBuffer();
-			game.ui.multiBubbleElement.innerHTML = this.multiBubbleCount;	
+			game.ui.bombBubbleElement.innerHTML = this.bombBubbleCount;	
 		};
 		e.stopPropagation();
 	});
@@ -2323,6 +2323,21 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 			$(cartel).append(uiFreezeCount);
 			$(cartel).append(continueButton);
 
+			var buymultibutton = document.createElement('div');
+			$(buymultibutton).addClass('guiFinishBuyMulti' + gameSize);
+			var buybombbutton = document.createElement('div');
+			$(buybombbutton).addClass('guiFinishBuyBomb' + gameSize);
+			var buyfreezebutton = document.createElement('div');
+			$(buyfreezebutton).addClass('guiFinishBuyFreeze' + gameSize);
+
+			$(cartel).append(buymultibutton);
+			$(cartel).append(buyfreezebutton);
+			$(cartel).append(buybombbutton);
+
+			$(buymultibutton).click(api.ui.showMultiBubbleBuy);
+			$(buybombbutton).click(api.ui.showBombBubbleBuy);
+			$(buyfreezebutton).click(api.ui.showFreezeBubbleBuy);
+
 			uiCoins.innerHTML = (api.softgame.user.balance == undefined ? "-" : api.softgames.user.balance);
 			uiLifes.innerHTML = game.ui.lifes;
 			uiPoints.innerHTML = game.ui.points;
@@ -2415,6 +2430,21 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 		$(cartel).append(uiBombCount);
 		$(cartel).append(uiFreezeCount);
 		$(cartel).append(continueButton);
+
+		var buymultibutton = document.createElement('div');
+		$(buymultibutton).addClass('guiFinishBuyMulti' + gameSize);
+		var buybombbutton = document.createElement('div');
+		$(buybombbutton).addClass('guiFinishBuyBomb' + gameSize);
+		var buyfreezebutton = document.createElement('div');
+		$(buyfreezebutton).addClass('guiFinishBuyFreeze' + gameSize);
+
+		$(cartel).append(buymultibutton);
+		$(cartel).append(buyfreezebutton);
+		$(cartel).append(buybombbutton);
+
+		$(buymultibutton).click(api.ui.showMultiBubbleBuy);
+		$(buybombbutton).click(api.ui.showBombBubbleBuy);
+		$(buyfreezebutton).click(api.ui.showFreezeBubbleBuy);
 
 		uiCoins.innerHTML = (api.softgame.user.balance == undefined ? "-" : api.softgames.user.balance);
 		uiLifes.innerHTML = game.ui.lifes;
@@ -2969,17 +2999,21 @@ api.ui.showBubbleBuy = function(cartel, button1, button2, callback1, callback2){
 	if(api.ui.showBubbleBuyElement == null){
 		api.ui.showBubbleBuyElement = document.createElement('div');
 		var fragment = document.createDocumentFragment();
-		var cartel = document.createElement('div');
-		var button1  = document.createElement('div');
-		var button2 =  document.createElement('div');
+		var carteldiv = document.createElement('div');
+		var button1div  = document.createElement('div');
+		var button2div =  document.createElement('div');
 		$(api.ui.showBubbleBuyElement).addClass('uiAlert' + gameSize);
-		$(cartel).addClass(cartel + gameSize);
-		$(button1).addClass(button1 + gameSize);
-		$(button2).addClass(button2 + gameSize);
-		fragment.appendChild(cartel);
-		fragment.appendChild(button1);
-		fragment.appendChild(button2);
+		$(carteldiv).addClass(cartel + gameSize);
+		$(button1div).addClass(button1 + gameSize);
+		$(button2div).addClass(button2 + gameSize);
+		fragment.appendChild(carteldiv);
+		fragment.appendChild(button1div);
+		fragment.appendChild(button2div);
 		api.ui.showBubbleBuyElement.appendChild(fragment);
+		$(document.body).append(api.ui.showBubbleBuyElement);
+
+		$(button1div).click(callback1);
+		$(button2div).click(callback2);
 	};	
 	$(api.ui.showBubbleBuyElement).show();
 };

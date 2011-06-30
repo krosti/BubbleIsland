@@ -402,6 +402,32 @@
 	top: 360px;
 }
 
+.guiFinishBuyMulti320x480{
+    background-image: url("../320x480/guibuycoins.png");
+    left: 75px;
+    height: 30px;
+    position: fixed;
+    top: 335px;
+    width: 30px;
+}
+
+.guiFinishBuyFreeze320x480{
+    background-image: url("../320x480/guibuycoins.png");
+    height: 30px;
+    left: 250px;
+    position: fixed;
+    top: 335px;
+}
+
+.guiFinishBuyBomb320x480{
+    background-image: url("../320x480/guibuycoins.png");
+    height: 30px;
+    left: 165px;
+    position: fixed;
+    top: 335px;
+    width: 30px;
+}
+
 .guiBalanceCartel320x480{
 	position: fixed;
 	background-image: url(../320x480/guibalancescreen.png);
@@ -595,21 +621,75 @@
 }
 
 .guiBuyBombOk320x480{
+    background-image: url("../320x480/buybombok.png");
+    height: 78px;
+    left: 15px;
+    position: fixed;
+    top: 210px;
+    width: 175px;
+}
+
+.guiBuyBombNo320x480{
+    background-image: url("../320x480/buybombno.png");
+    height: 78px;
+    left: 160px;
+    position: fixed;
+    top: 205px;
+    width: 175px;
+}
+
+.guiBuyMultiScreen320x480{
 	position: fixed;
-	background-image: url(../320x480/buybombok.png);
-	width: 175px;
-	height: 78px;
+	background-image: url(../320x480/buymulticartel.png);
+	width: 320px;
+	height: 285px;
 	left: 0px;
 	top: 0px;
 }
 
-.guiBuyBombNo320x480{
+.guiBuyMultiOk320x480{
+    background-image: url("../320x480/buymultiok.png");
+    height: 78px;
+    left: 15px;
+    position: fixed;
+    top: 210px;
+    width: 175px;
+}
+
+.guiBuyMultiNo320x480{
+    background-image: url("../320x480/buymultino.png");
+    height: 78px;
+    left: 160px;
+    position: fixed;
+    top: 205px;
+    width: 175px;
+}
+
+.guiBuyFreezeScreen320x480{
 	position: fixed;
-	background-image: url(../320x480/buybombno.png);
-	width: 175px;
-	height: 78px;
+	background-image: url(../320x480/buyfreezecartel.png);
+	width: 320px;
+	height: 285px;
 	left: 0px;
 	top: 0px;
+}
+
+.guiBuyFreezeOk320x480{
+    background-image: url("../320x480/buyfreezeok.png");
+    height: 78px;
+    left: 15px;
+    position: fixed;
+    top: 210px;
+    width: 175px;
+}
+
+.guiBuyFreezeNo320x480{
+    background-image: url("../320x480/buyfreezeno.png");
+    height: 78px;
+    left: 160px;
+    position: fixed;
+    top: 205px;
+    width: 175px;
 }
 
 .uiAlert320x480{

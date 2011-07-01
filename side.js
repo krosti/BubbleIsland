@@ -6,6 +6,7 @@ function Loader(progress, size){
 	this.readyLoad; // = function(){ alert('hola'); };
 	
 	this.toLoad = 88;
+	//this.toLoad += 11;
 	//this.toLoad = 80;
 	this.isloaded = 0;
 	this.separator = '/';
@@ -240,6 +241,22 @@ function Loader(progress, size){
 		uiEndGameScreen.src = this.size + this.separator + 'facebookbutton.png';
 		uiEndGameButton1.src = this.size + this.separator + 'facebookbutton.png';
 		uiEndGameButton2.src = this.size + this.separator + 'facebookbutton.png';
+
+		soundengine.soundloaded = this.loaded;
+
+		soundengine.addSound('bounce', 'sounds/fx/bounce.mp3');
+		soundengine.addSound('bubblethrow', 'sounds/fx/bubblethrow.mp3');
+		soundengine.addSound('losesound', 'sounds/fx/losesound.mp3');
+		soundengine.addSound('winsound', 'sounds/fx/winsound.mp3');
+		soundengine.addSound('touch', 'sounds/fx/touch.mp3');
+		soundengine.addSound('normalpoints', 'sounds/fx/normalpoints.mp3');
+		soundengine.addSound('pause', 'sounds/fx/pause.mp3');
+		soundengine.addSound('specialpoints', 'sounds/fx/specialpoints.mp3');
+		soundengine.addSound('optionin', 'sounds/fx/optionin.mp3');
+		soundengine.addTheme('nacional', 'sounds/music/nacional.mp3');
+
+		soundengine.addTheme('maintheme', 'sounds/music/maintheme.mp3');
+		soundengine.addTheme('background', 'sounds/music/backgroundmusic.mp3');
 	};
 
 };
@@ -315,114 +332,6 @@ function Timeline(fps){
 	};
 
 };
-
-// one div, multiple imgs
-
-/*function Animation(duration, width, height, image){
-
-	this.duration = duration;
-
-	this.width = width;
-
-	this.height = height;
-
-	this.internalClock = duration / fps;
-
-	this.finished = false;
-
-	this.element = document.createElement('div');
-
-	this.frames = new Array();
-
-	for(var i = 0; i < duration; ++i){
-
-		//alert(i);
-
-		div = document.createElement('img');
-
-		div.style.width = width + 'px';
-
-		div.style.minHeight = height + 'px';
-
-		div.style.minWidth = width + 'px';
-
-		div.style.position = 'absolute';
-
-		div.style.top = '0px';
-
-		div.style.left = '0px';
-
-		div.style.backgroundPosition = i * this.width + 'px 0px';
-
-		div.style.display = 'none';
-
-		//div.style.backgroundImage = 'url(' + image + ')';
-
-		div.src = image[i];
-
-		this.frames.push(div);
-
-		$(this.element).append(div);
-
-	};
-
-	this.frames[0].style.display = 'block';
-
-
-
-	this.element.style.width = width + 'px';
-
-	this.element.style.minHeight = height + 'px';
-
-	this.element.style.minWidth = width + 'px';
-
-	this.element.style.position = 'absolute';
-
-	//this.element.style.backgroundImage = 'url(' + image + ')'
-
-	this.tick = 0;
-
-	
-
-	this.addMoment = function(img, stage){
-
-
-
-	};
-
-
-
-	this.setX = function(x){ this.element.style.left = x + 'px'; };
-
-	this.setY = function(y){ this.element.style.top = y + 'px'; };
-
-	
-
-	this.render = function(){
-
-		//alert(this.tick);
-
-		this.tick += 1;// % duration; 
-
-		this.tick = this.tick % this.duration;
-
-		//this.element.style.backgroundPosition = this.tick * this.width + 'px 0px';*
-
-		this.frames[this.tick].style.display = 'none';
-
-		this.tick += 1;// % duration; 
-
-		this.tick = this.tick % this.duration;
-
-		this.frames[this.tick].style.display = 'block';
-
-	};
-
-	
-
-};*/
-
-
 
 // one div, moving background
 

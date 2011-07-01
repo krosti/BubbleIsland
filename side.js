@@ -105,6 +105,7 @@ function Loader(progress, size){
 	uiOptionsFacebook.onload = this.loaded;
 	uiOptionsLeaderboard.onload = this.loaded;
 	uiOptionsCoins.onload = this.loaded;
+	uiOptionsLogout.onload = this.loaded;
 
 	uiAlertScreen.onload = this.loaded;
 	uiAlertButton.onload = this.loaded;

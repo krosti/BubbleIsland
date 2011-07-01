@@ -91,44 +91,44 @@
 
 .guiBuyFreezeFrame320x480{
 	background-image: url("../320x480/guibuyfreeze.png");
-	color: #211915;
-	font-family: Bubblegum;
-	font-size: 0.6em;
-	height: 36px;
-	left: 10px;
-	padding-left: 52px;
-	padding-top: 20px;
-	position: fixed;
-	top: 429px;
-	width: 61px;
+    color: #211915;
+    font-family: Bubblegum;
+    font-size: 0.6em;
+    height: 59px;
+    left: 270px;
+    padding-left: 23px;
+    padding-top: 35px;
+    position: fixed;
+    top: 100px;
+    width: 48px;
 }
 
 .guiBuyBombFrame320x480{
 	background-image: url("../320x480/guibuybomb.png");
-	color: #211915;
-	font-family: Bubblegum;
-	font-size: 0.6em;
-	height: 34px;
-	left: 10px;
-	padding-left: 54px;
-	padding-top: 16px;
-	position: fixed;
-	top: 395px;
-	width: 57px;
+    color: #211915;
+    font-family: Bubblegum;
+    font-size: 0.6em;
+    height: 59px;
+    left: 270px;
+    padding-left: 23px;
+    padding-top: 35px;
+    position: fixed;
+    top: 100px;
+    width: 48px;
 }
 
 .guiBuyMultiFrame320x480{
-	background-image: url("../320x480/guibuymulti.png");
-	color: #211915;
-	font-family: Bubblegum;
-	font-size: 0.6em;
-	height: 40px;
-	left: 10px;
-	padding-left: 53px;
-	padding-top: 11px;
-	position: fixed;
-	top: 360px;
-	width: 59px;
+    background-image: url("../320x480/guibuymulti.png");
+    color: #211915;
+    font-family: Bubblegum;
+    font-size: 0.6em;
+    height: 59px;
+    left: 270px;
+    padding-left: 23px;
+    padding-top: 35px;
+    position: fixed;
+    top: 100px;
+    width: 48px;
 }
 
 .guiPointsLeftFrame320x480{
@@ -175,6 +175,16 @@
 	position: fixed;
 	top: 365px;
 	width: 74px;
+}
+
+.addFriends320x480{
+    background-image: url("../320x480/addfriends.png");
+    height: 72px;
+    left: 242px;
+    min-height: 46px;
+    position: fixed;
+    top: 345px;
+    width: 78px;
 }
 
 .leaderboardFrame320x480{

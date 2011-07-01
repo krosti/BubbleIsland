@@ -122,6 +122,7 @@ var uiOptionsVolumenOff = new Image();
 var uiOptionsFacebook = new Image();
 var uiOptionsLeaderboard = new Image();
 var uiOptionsCoins = new Image();
+var uiOptionsLogout = new Image();
 
 var uiAlertScreen = new Image();
 var uiAlertButton = new Image();

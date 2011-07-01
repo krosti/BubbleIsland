@@ -126,7 +126,8 @@
 		<div id="optionbutton" onClick="options.showOptions('gameMenu')" ></div>
 
 		<div id="facebookFrame" onClick="inviteFriends()"></div>
-		<div id="coinsFrame" onClick="showCoins();"></div>
+		<!--div id="coinsFrame" onClick="showCoins();"></div-->
+		<div id="addFriends" onClick="inviteFriends();"></div>
 		<div id="leaderboardFrame" onClick="options.showLeaderboard('gameMenu'); retrieveLeaderboard('facebookLeaderboard', 'generalLeaderboard');"></div>
 	</div>
 </nav>
@@ -187,7 +188,7 @@ function connectToFacebook2(){
 		$('#FBnav')[0].style.display = 'none';
 		//};
 		api.ui.showWaiting();
-		alert(document.cookie);
+		//alert(document.cookie);
 		/*api.softgame.onLogin = function(){
 			
 		};*/
@@ -302,7 +303,8 @@ loader.readyLoad = function(){
 	$('#optionbutton')[0].src = uiOptionButton.src;
 
 	$('#facebookFrame').addClass('facebookFrame' + gameSize);
-	$('#coinsFrame').addClass('coinsFrame' + gameSize);
+	//$('#coinsFrame').addClass('coinsFrame' + gameSize);
+	$('#addFriends').addClass('addFriends' + gameSize);
 	$('#leaderboardFrame').addClass('leaderboardFrame' + gameSize);
 
 	$('#newbutton').addClass('playImage' + gameSize);

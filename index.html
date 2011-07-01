@@ -20,6 +20,7 @@
 	<script src="apileaderboard.js" type="text/javascript" charset="utf-8"></script>
 	<script src="apisoftgames.js" type="text/javascript" charset="utf-8"></script>
 	<script src="jqueryMobile.js" type="text/javascript" charset="utf-8"></script>
+	<script src="soundengine.js" type="text/javascript" charset="utf-8"></script>
 	 <!-- game
 	 <script src="jqueryMobile.js" type="text/javascript" charset="utf-8"></script> 
 	<script src="playtomic.js" type="text/javascript" charset="utf-8"></script>
@@ -124,7 +125,7 @@
 		<div id="continuebutton" onClick="game.continueGame();" ></div>
 		<div id="optionbutton" onClick="options.showOptions('gameMenu')" ></div>
 
-		<div id="facebookFrame" onClick="/*postOnFacebook();*/inviteFriends()"></div>
+		<div id="facebookFrame" onClick="inviteFriends()"></div>
 		<div id="coinsFrame" onClick="showCoins();"></div>
 		<div id="leaderboardFrame" onClick="options.showLeaderboard('gameMenu'); retrieveLeaderboard('facebookLeaderboard', 'generalLeaderboard');"></div>
 	</div>
@@ -280,7 +281,7 @@ function setInitState(response){
 };
 
 function postOnFacebook(){
-	var msg = api.facebook.userdata.name + ' is playing Bubble Paradise! Come on and enjoy it with ' + (api.facebook.user.gender == 'male' ? 'him' : 'her') + ' on this link @' . api.facebook.appname + '!';
+	var msg = api.facebook.user.name + ' is playing Bubble Paradise! Come on and enjoy it with ' + (api.facebook.user.gender == 'male' ? 'him' : 'her') + ' on this link @' . api.facebook.appname + '!';
 	api.facebook.postMessage(msg);
 };
 

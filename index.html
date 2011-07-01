@@ -13,6 +13,7 @@
 	<link href="css/480x800.css" rel="stylesheet" type="text/css" />
 	<link href="css/640x960.css" rel="stylesheet" type="text/css" />
 	<link href="css/854x480.css" rel="stylesheet" type="text/css" />
+
 <script src="phonegap.js" type="text/javascript" charset="utf-8"></script> 
 	<script src="jquery.js" type="text/javascript" charset="utf-8"></script> 
 	<script src="soundmanager2.js" type="text/javascript" charset="utf-8"></script> 
@@ -126,7 +127,7 @@
 		<div id="continuebutton" onClick="game.continueGame();" ></div>
 		<div id="optionbutton" onClick="options.showOptions('gameMenu')" ></div>
 
-		<div id="facebookFrame" onClick="inviteFriends()"></div>
+		<div id="facebookFrame" onClick="postOnFacebook()"></div>
 		<!--div id="coinsFrame" onClick="showCoins();"></div-->
 		<div id="addFriends" onClick="inviteFriends();"></div>
 		<div id="leaderboardFrame" onClick="options.showLeaderboard('gameMenu'); retrieveLeaderboard('facebookLeaderboard', 'generalLeaderboard');"></div>
@@ -141,6 +142,7 @@
 	<div id="progress" style="width: 0%; height: 100%; background-color: #ffffff">
 	</div>
 </div>
+<img id="softgamesLogoImg" src="logo.jpg" alt="logo" style="position: absolute; display: none; margin-left:auto; margin-right:auto; "/>	
 <img id="logoImg" src="logo.jpg" alt="logo" style="position: absolute; display: none; margin-left:auto; margin-right:auto; "/>	
 
 <!--div id = "loadingScreen" style="position: absolute; top: 0px; left: 0px; width: 100%; min-height: 100%; background-color: #fff">
@@ -266,6 +268,7 @@ $("#facebookLeaderboardTab").addClass('leaderboardTabFriends' + gameSize);
 $("#leaderboardBackMenu").addClass('leaderboardBackMenu' + gameSize);
 $("#leaderboardTabs").addClass('leaderboardTabs' + gameSize);
 document.getElementById('logoImg').src = gameSize + '/logo.jpg';
+document.getElementById('softgamesLogoImg').src = gameSize + '/softgame.png';
 function showCoins(){
 	api.ui.showWaiting();
 	api.softgame.onLoginUser = function(){
@@ -333,19 +336,19 @@ loader.readyLoad = function(){
 		//FB.retrieveFriendsData();
 	//};
 
-	$('#logoImg').show(1000, function(){
-		
-		$(this).delay(3000).fadeOut(100, function(){
-					$("#initScreen").remove();
-					connectToFacebook();
+	$('#softgamesLogoImg').show(1000, function(){
+		$(this).delay(3000, function(){
+			$('#logoImg').show(1000, function(){
+				$(this).delay(3000).fadeOut(100, function(){
+							$("#initScreen").remove();
+							connectToFacebook();
+				});
+			});
 		});
 	});
 	//});
 };
 soundengine.startTheme('background');
-
-var media = new Media('sounds/music/background.mp4');
-media.play();
 
 
 </script> 

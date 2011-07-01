@@ -91,44 +91,44 @@
 
 .guiBuyFreezeFrame360x480{
 	background-image: url("../360x480/guibuyfreeze.png");
-	color: #644000;
-	font-family: Bubblegum;
-	font-size: 0.6em;
-	height: 36px;
-	left: 10px;
-	padding-left: 47px;
-	padding-top: 7px;
-	position: fixed;
-	top: 432px;
-	width: 61px;
+    color: #644000;
+    font-family: Bubblegum;
+    font-size: 0.6em;
+    height: 70px;
+    left: 300px;
+    padding-left: 30px;
+    padding-top: 45px;
+    position: fixed;
+    top: 170px;
+    width: 62px;
 }
 
 .guiBuyBombFrame360x480{
 	background-image: url("../360x480/guibuybomb.png");
-	color: #644000;
-	font-family: Bubblegum;
-	font-size: 0.6em;
-	height: 34px;
-	left: 10px;
-	padding-left: 47px;
-	padding-top: 7px;
-	position: fixed;
-	top: 396px;
-	width: 57px;
+    color: #644000;
+    font-family: Bubblegum;
+    font-size: 0.6em;
+    height: 70px;
+    left: 300px;
+    padding-left: 32px;
+    padding-top: 51px;
+    position: fixed;
+    top: 230px;
+    width: 62px;
 }
 
 .guiBuyMultiFrame360x480{
-	background-image: url("../360x480/guibuymulti.png");
-	color: #644000;
-	font-family: Bubblegum;
-	font-size: 0.6em;
-	height: 35px;
-	left: 10px;
-	padding-left: 47px;
-	padding-top: 7px;
-	position: fixed;
-	top: 360px;
-	width: 60px;
+    background-image: url("../360x480/guibuymulti.png");
+    color: #644000;
+    font-family: Bubblegum;
+    font-size: 0.6em;
+    height: 70px;
+    left: 300px;
+    padding-left: 32px;
+    padding-top: 38px;
+    position: fixed;
+    top: 110px;
+    width: 62px;
 }
 
 .guiPointsLeftFrame360x480{
@@ -244,19 +244,20 @@
 }
 
 .guiProgressBar360x480{
-	position: fixed;
-	width: 9px;
-	height: 287px;
-	top: 111px;
-	left: 337px;
+    height: 292px;
+    left: -7px;
+    position: fixed;
+    top: 160px;
+    width: 60px;
 }
 
 .guiProgressBar360x480 > div{
-	position: absolute;
-	background-color: #fff;
-	width: 100%;
-	bottom: 0px;
-	top: auto;
+    background-image: url("../360x480/progressbar.png");
+    background-position: center top;
+    bottom: 0;
+    position: absolute;
+    top: auto;
+    width: 100%;
 }
 
 .panda360x480{

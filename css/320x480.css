@@ -250,15 +250,16 @@
 
 .guiProgressBar320x480{
 	position: fixed;
-	width: 5px;
-	height: 217px;
+	width: 49px;
+	height: 293px;
 	top: 187px;
 	left: 299px;
 }
 
 .guiProgressBar320x480 > div{
+	background-image: url(../320x480/progressbar.png);
+	background-position: center top;
 	position: absolute;
-	background-color: #fff;
 	width: 100%;
 	bottom: 0px;
 	top: auto;

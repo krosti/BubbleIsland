@@ -107,7 +107,7 @@ api.softgame.connectionEstablished = function(data){
 			api.softgame.onLogin();
 			api.softgame.getUserInfo();
 		}else{
-
+			api.softgame.getUserInfo();
 		};
 	};
 	//var d = data.slice(data.indexOf("<body"), data.indexOf('</html>'));
@@ -151,11 +151,12 @@ api.softgame.userRequest = function(data){
 				uid: "2a6d77d5d35741e96947ae53d2685742", 
 				name: "Foo Bar", 
 				gender: "M", 
-				balance: 10, 
+				balance: 10000, 
 				country: "DE", 
 				created: "2000-01-01T15:20:08+01:00", 
 				last_visit: "2000-01-02T08:36:38+01:00", 
 				};
+	userdata.balancedata.balance = 10000;
 	//alert(userdata);
 	//alert(userdata.status);
 	if(userdata.status == 1){		
@@ -165,12 +166,14 @@ api.softgame.userRequest = function(data){
 };
 
 api.softgame.coinsRequest = function(data){
-	api.softgame.userCoins = 10;
+	api.softgame.userCoins = 10000;
+	api.softgame.user.balance = 10000;
 };
 
 api.softgame.balanceRequest = function(data){
 	//alert(data);
 	var balancedata = eval('(' + data + ')');
+	api.softgame.user.balance = 10000;
 };
 
 api.softgame.billingRequest = function(data){

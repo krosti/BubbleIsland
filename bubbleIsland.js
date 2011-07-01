@@ -161,7 +161,7 @@ var pointDrop = 5;
 var min_vel = .05;
 var freezeTime = 10 //en segundos
 var lifesPerCoins = 1;
-var linesPerLevel = 1;
+var linesPerLevel = 4;
 
 var bombValue = 1;
 var freezeValue = 1;
@@ -929,6 +929,7 @@ function bubbleCannon(lvl){
 	this.currentBubble;/* = new bubble(this.lvl);
 	this.currentBubble.makeItRandom();*/
 	this.readyShoot = false;
+	this.charging = false;
 	this.loaded = false;
 	this.object = new standAnimation(uiCannon.width, uiCannon.height, uiCannon.src);
 	this.object.addState('shoot', uiCannonShoot.src, 8);
@@ -988,6 +989,7 @@ function bubbleCannon(lvl){
 	};*/
 
 	this.chargeCannon = function(){
+		this.charging = true;
 		$(this.bufferBubble.element).delay(500).animate({
 				left: ((this.lvl.width / 2) - (this.lvl.bubbleRadius / 2)) + this.lvl.leftBound,
 				top: ((lvl.height - lvl.bubbleRadius) + this.lvl.topBound) - 5
@@ -995,6 +997,7 @@ function bubbleCannon(lvl){
 				game.cannon.loaded = true;
 				game.cannon.currentBubble = game.cannon.bufferBubble;
 				game.cannon.addBuffer();
+				game.cannon.charging = false;
 		});
 	};
 
@@ -1009,31 +1012,37 @@ function bubbleCannon(lvl){
 		this.object.render();
 	};
 
-	this.chargeMultiBuffer = function(){		
+	this.chargeMultiBuffer = function(){	
+		if(this.charging) return false;	
 		$(this.bufferBubble.element).remove();
 		this.bufferBubble = null;
 		this.bufferBubble = new bubble(this.lvl);
 		this.bufferBubble.makeItMulti();
 		animNav.append(this.bufferBubble.element);
 		$(this.bufferBubble.element).addClass('guiNextBallFrame' + gameSize);
+		return true;
 	};
 
-	this.chargeBombBuffer = function(){		
+	this.chargeBombBuffer = function(){	
+		if(this.charging) return false;		
 		$(this.bufferBubble.element).remove();
 		this.bufferBubble = null;
 		this.bufferBubble = new bubble(this.lvl);
 		this.bufferBubble.makeItBomb();
 		animNav.append(this.bufferBubble.element);
 		$(this.bufferBubble.element).addClass('guiNextBallFrame' + gameSize);
+		return true;
 	};
 
 	this.chargeFreezeBuffer = function(){		
+		if(this.charging) return false;	
 		$(this.bufferBubble.element).remove();
 		this.bufferBubble = null;
 		this.bufferBubble = new bubble(this.lvl);
 		this.bufferBubble.makeItFreeze();
 		animNav.append(this.bufferBubble.element);
 		$(this.bufferBubble.element).addClass('guiNextBallFrame' + gameSize);
+		return true;
 	};
 	/*this.addBuffer();
 	this.chargeCannon();*/
@@ -1666,14 +1675,14 @@ function bubbleLevel(w, h, bubblesWidth, bubblesHeight, lvlnbr){
 			for(var j = 0; j < this.grilla.ancho; ++j){
 				if((j == this.grilla.ancho - 1) && isShort) continue;
 				var b = new bubble(this);
-				//b.makeItRandom();
+				b.makeItRandom();
 				//b.flavor = b.randomFlavor();
 				//b.makeItRandomNormal();
-				b.flavor = "red"//b.randomFlavor();
-				b.meinBild = bubbleRedImage;;
+				//b.flavor = "red"//b.randomFlavor();
+				//b.meinBild = bubbleRedImage;;
 				//this.object = new standAnimation(this.lvl.bubbleRadius, this.lvl.bubbleRadius, this.meinBild.src);
 				//this.element = this.object.element;
-				b.makeElement();
+				//b.makeElement();
 				$(b.element).addClass('bubble');
 
 				b.i = i;
@@ -1885,27 +1894,30 @@ function gameUI(w, h){
 
 	$(this.multiBubbleElement).click(function(e){
 		if(game.ui.multiBubbleCount != 0){
-			game.ui.multiBubbleCount -= 1;
-			game.cannon.chargeMultiBuffer();
-			game.ui.multiBubbleElement.innerHTML = game.ui.multiBubbleCount;	
+			if(game.cannon.chargeMultiBuffer()){
+				game.ui.multiBubbleCount -= 1;
+				game.ui.multiBubbleElement.innerHTML = game.ui.multiBubbleCount;					
+			};
 		};
 		e.stopPropagation();
 	});
 
 	$(this.bombBubbleElement).click(function(e){
 		if(game.ui.bombBubbleCount != 0){
-			game.ui.bombBubbleCount -= 1;
-			game.cannon.chargeBombBuffer();
-			game.ui.bombBubbleElement.innerHTML = game.ui.bombBubbleCount;	
+			if(game.cannon.chargeBombBuffer()){
+				game.ui.bombBubbleCount -= 1;
+				game.ui.bombBubbleElement.innerHTML = game.ui.bombBubbleCount;	
+			};
 		};
 		e.stopPropagation();
 	});
 
 	$(this.freezeBubbleElement).click(function(e){
 		if(this.freezeBubbleCount != 0){
-			game.ui.freezeBubbleCount -= 1;
-			game.cannon.chargeFreezeBuffer();
-			game.ui.freezeBubbleElement.innerHTML = game.ui.freezeBubbleCount;	
+			if(game.cannon.chargeFreezeBuffer()){
+				game.ui.freezeBubbleCount -= 1;
+				game.ui.freezeBubbleElement.innerHTML = game.ui.freezeBubbleCount;	
+			};
 		};
 		e.stopPropagation();
 	});

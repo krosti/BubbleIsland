@@ -91,44 +91,44 @@
 
 .guiBuyFreezeFrame640x960{
 	background-image: url("../640x960/guibuyfreeze.png");
-	color: #644000;
-	font-family: Bubblegum;
-	font-size: 1.1em;
-	height: 72px;
-	left: 20px;
-	padding-left: 87px;
-	padding-top: 13px;
-	position: fixed;
-	top: 855px;
-	width: 116px;
+    color: #644000;
+    font-family: Bubblegum;
+    font-size: 1.1em;
+    height: 140px;
+    left: 543px;
+    padding-left: 44px;
+    padding-top: 80px;
+    position: fixed;
+    top: 420px;
+    width: 94px;
 }
 
 .guiBuyBombFrame640x960{
-	background-image: url("../640x960/guibuybomb.png");
-	color: #644000;
-	font-family: Bubblegum;
-	font-size: 1.1em;
-	height: 68px;
-	left: 20px;
-	padding-left: 88px;
-	padding-top: 9px;
-	position: fixed;
-	top: 785px;
-	width: 117px;
+    background-image: url("../640x960/guibuybomb.png");
+    color: #644000;
+    font-family: Bubblegum;
+    font-size: 1.1em;
+    height: 140px;
+    left: 543px;
+    padding-left: 47px;
+    padding-top: 100px;
+    position: fixed;
+    top: 290px;
+    width: 94px;
 }
 
 .guiBuyMultiFrame640x960{
-	background-image: url("../640x960/guibuymulti.png");
-	color: #644000;
-	font-family: Bubblegum;
-	font-size: 1.1em;
-	height: 71px;
-	left: 20px;
-	padding-left: 89px;
-	padding-top: 12px;
-	position: fixed;
-	top: 710px;
-	width: 119px;
+    background-image: url("../640x960/guibuymulti.png");
+    color: #644000;
+    font-family: Bubblegum;
+    font-size: 1.1em;
+    height: 140px;
+    left: 543px;
+    padding-left: 45px;
+    padding-top: 85px;
+    position: fixed;
+    top: 190px;
+    width: 119px;
 }
 
 .guiPointsLeftFrame640x960{
@@ -239,16 +239,17 @@
 }
 
 .guiProgressBar640x960{
-	position: fixed;
-	width: 10px;
-	height: 434px;
-	top: 376px;
-	left: 598px;
+    height: 633px;
+    left: 2px;
+    position: fixed;
+    top: 210px;
+    width: 108px;
 }
 
 .guiProgressBar640x960 > div{
 	position: absolute;
-	background-color: #fff;
+	background-image: url(../640x960/progressbar.png);
+	background-position: center top;
 	width: 100%;
 	bottom: 0px;
 	top: auto;

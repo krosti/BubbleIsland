@@ -87,17 +87,17 @@
 }
 
 .guiBuyFreezeFrame854x480{
-	background-image: url("../854x480/guibuyfreeze.png");
-	color: #644000;
-	font-family: Bubblegum;
-	font-size: 0.8em;
-	height: 50px;
-	left: 65px;
-	padding-left: 69px;
-	padding-top: 18px;
-	position: fixed;
-	top: 417px;
-	width: 96px;
+    background-image: url("../854x480/guibuyfreeze.png");
+    color: #644000;
+    font-family: Bubblegum;
+    font-size: 0.8em;
+    height: 95px;
+    left: 745px;
+    padding-left: 30px;
+    padding-top: 55px;
+    position: fixed;
+    top: 270px;
+    width: 64px;
 }
 
 .guiBuyBombFrame854x480{
@@ -105,27 +105,27 @@
     color: #644000;
     font-family: Bubblegum;
     font-size: 0.8em;
-    height: 60px;
-    left: 65px;
-    padding-left: 69px;
-    padding-top: 18px;
+    height: 95px;
+    left: 745px;
+    padding-left: 30px;
+    padding-top: 66px;
     position: fixed;
-    top: 370px;
-    width: 87px;
+    top: 185px;
+    width: 64px;
 }
 
 .guiBuyMultiFrame854x480{
-	background-image: url("../854x480/guibuymulti.png");
-	color: #644000;
-	font-family: Bubblegum;
-	font-size: 0.8em;
-	height: 56px;
-	left: 65px;
-	padding-left: 69px;
-	padding-top: 18px;
-	position: fixed;
-	top: 322px;
-	width: 96px;
+    background-image: url("../854x480/guibuymulti.png");
+    color: #644000;
+    font-family: Bubblegum;
+    font-size: 0.8em;
+    height: 94px;
+    left: 730px;
+    padding-left: 42px;
+    padding-top: 58px;
+    position: fixed;
+    top: 110px;
+    width: 64px;
 }
 
 .guiPointsLeftFrame854x480{
@@ -225,19 +225,19 @@
 }
 
 .guiProgressBar854x480{
-	position: fixed;
-	width: 7px;
-	height: 434px;
-	top: 134px;
-	left: 779px;
+    height: 351px;
+    left: 15px;
+    position: fixed;
+    top: 110px;
+    width: 78px;
 }
 
 .guiProgressBar854x480 > div{
-	position: absolute;
-	background-color: #fff;
-	width: 100%;
-	bottom: 0px;
-	top: auto;
+    background-image: url("../854x480/progressbar.png");
+    bottom: 0;
+    position: absolute;
+    top: auto;
+    width: 100%;
 }
 
 .panda854x480{

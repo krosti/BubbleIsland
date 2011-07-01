@@ -795,8 +795,8 @@ function bubble(l){
 		var trace = document.createElement('img');
 		trace.src = bubbleTrace.src;
 		trace.style.position = 'fixed';
-		trace.style.top = (this.x + ((this.lvl.bubbleRadius - this.lvl.traceRadius) / 2)) + 'px';
-		trace.style.left = (this.y + ((this.lvl.bubbleRadius - this.lvl.traceRadius) / 2)) + 'px';
+		trace.style.top = (this.y + ((this.lvl.bubbleRadius - this.lvl.traceRadius) / 2)) + 'px';
+		trace.style.left = (this.x + ((this.lvl.bubbleRadius - this.lvl.traceRadius) / 2)) + 'px';
 		trace.style.width = this.lvl.traceRadius + 'px'
 		trace.style.height = this.lvl.traceRadius + 'px'
 		$(trace).addClass('trace');
@@ -1763,6 +1763,7 @@ function bubbleLevel(w, h, bubblesWidth, bubblesHeight, lvlnbr){
 		};
 		if(this.shootedBubble != null) $(this.shootedBubble.element).remove();
 		$('.bubble').detach();
+		$('.trace').detach();
 		this.cannon = null;
 	};
 

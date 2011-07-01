@@ -1887,7 +1887,7 @@ function gameUI(w, h){
 		if(game.ui.multiBubbleCount != 0){
 			game.ui.multiBubbleCount -= 1;
 			game.cannon.chargeMultiBuffer();
-			game.ui.multiBubbleElement.innerHTML = this.multiBubbleCount;	
+			game.ui.multiBubbleElement.innerHTML = game.ui.multiBubbleCount;	
 		};
 		e.stopPropagation();
 	});
@@ -1896,16 +1896,16 @@ function gameUI(w, h){
 		if(game.ui.bombBubbleCount != 0){
 			game.ui.bombBubbleCount -= 1;
 			game.cannon.chargeBombBuffer();
-			game.ui.bombBubbleElement.innerHTML = this.bombBubbleCount;	
+			game.ui.bombBubbleElement.innerHTML = game.ui.bombBubbleCount;	
 		};
 		e.stopPropagation();
 	});
 
 	$(this.freezeBubbleElement).click(function(e){
 		if(this.freezeBubbleCount != 0){
-			game.ui.freezeiBubbleCount -= 1;
+			game.ui.freezeBubbleCount -= 1;
 			game.cannon.chargeFreezeBuffer();
-			game.ui.freezeBubbleElement.innerHTML = this.freezeBubbleCount;	
+			game.ui.freezeBubbleElement.innerHTML = game.ui.freezeBubbleCount;	
 		};
 		e.stopPropagation();
 	});

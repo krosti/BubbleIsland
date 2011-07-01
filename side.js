@@ -258,8 +258,8 @@ function Loader(progress, size){
 		soundengine.addSound('optionin', 'sounds/fx/optionin.ogg');
 		soundengine.addTheme('nacional', 'sounds/music/nacional.ogg');
 
-		soundengine.addTheme('maintheme', 'sounds/music/maintheme.ogg');
-		soundengine.addTheme('background', 'sounds/music/backgroundmusic.ogg');
+		soundengine.addTheme('maintheme', 'sounds/music/maintheme.aac');
+		soundengine.addTheme('background', 'sounds/music/backgroundmusic.aac');
 	};
 
 };

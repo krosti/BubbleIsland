@@ -172,8 +172,8 @@ function $_GET(q) {
 } 
 
 function inviteFriends(){
-	//window.location = 'http://www.facebook.com/dialog/apprequests?app_id=' + api.facebook.appid + '&message=testing&redirect_uri=http://www.facebook.com/connect/login_success.html';
-	$.mobile.loadPage('http://www.facebook.com/dialog/apprequests?app_id=' + api.facebook.appid + '&message=testing&redirect_uri=http://www.facebook.com/connect/login_success.html');
+	window.location = 'http://www.facebook.com/dialog/apprequests?app_id=' + api.facebook.appid + '&message=testing&redirect_uri=http://www.facebook.com/connect/login_success.html';
+	//$.mobile.loadPage('http://www.facebook.com/dialog/apprequests?app_id=' + api.facebook.appid + '&message=testing&redirect_uri=http://www.facebook.com/connect/login_success.html');
 }
 
 function connectToFacebook2(){
@@ -187,6 +187,7 @@ function connectToFacebook2(){
 		$('#FBnav')[0].style.display = 'none';
 		//};
 		api.ui.showWaiting();
+		alert(document.cookie);
 		/*api.softgame.onLogin = function(){
 			
 		};*/

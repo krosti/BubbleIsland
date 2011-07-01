@@ -5,8 +5,8 @@ function Loader(progress, size){
 
 	this.readyLoad; // = function(){ alert('hola'); };
 	
-	this.toLoad = 88;
-	this.toLoad += 11;
+	this.toLoad = 89;
+	this.toLoad += 11; //sounds
 	//this.toLoad = 80;
 	this.isloaded = 0;
 	this.separator = '/';
@@ -57,6 +57,7 @@ function Loader(progress, size){
 	bubbleMultiColorExplode.onload = this.loaded;
 	bubbleX2Explode.onload = this.loaded;
 	bubbleX3Explode.onload = this.loaded;
+	bubbleTrace.onload = this.loaded;
 
 	backgroundImage.onload = this.loaded
 	logoImage.onload = this.loaded;
@@ -172,6 +173,7 @@ function Loader(progress, size){
 		bubbleMultiColorExplode.src = this.size + this.separator + 'multicolorexplosion.png';
 		bubbleX2Explode.src = this.size + this.separator + 'x2explosion.png';
 		bubbleX3Explode.src = this.size + this.separator + 'x3explosion.png';
+		bubbleTrace.src = 'bubbles/bubblepos.png';
 
 		lvlFrame.src = this.size + this.separator + 'lvlframe.png';
 		//alert(this.size + this.separator + 'lvlframe.png');

@@ -75,6 +75,7 @@ var bubbleFreezeExplode = new Image();
 var bubbleMultiColorExplode = new Image();
 var bubbleX2Explode = new Image();
 var bubbleX3Explode = new Image();
+var bubbleTrace = new Image();
 
 var uiPandaBag = new Image();
 var uiPanda = new Image();
@@ -789,110 +790,17 @@ function bubble(l){
 		//if((currentBubble.dx == 0) || (currentBubble.dy == this.lvl.bubbleVelocity)) alert('es un hijo de puta a fuera: ' + culo);
 		if(this.y < (this.lvl.topBound + this.lvl.currentTop)){
 			var currentBubble = this;
-			/*if((currentBubble.dx == 0) || (currentBubble.dy == this.lvl.bubbleVelocity)) alert('es un hijo de puta antes de arrancar1: ' + culo);
-			this.lvl.mutex = true;
-			game.clock.stop();
-			var inPlace = false;
-			
-			this.lvl.shootedBubble = null;
-			this.lvl.cannon.currentBubble = null
-			if((currentBubble.dx == 0) || (currentBubble.dy == this.lvl.bubbleVelocity)) alert('es un hijo de puta antes de arrancar2: ' + culo);
-			var delta = this.lvl.grilla.isShortRow(0) * (this.lvl.bubbleRadius / 2);
-			delta = delta / 2;
-			var culo = 0;
-			do{					
-				//currentBubble.j = Math.floor(((currentBubble.x + ( currentBubble.lvl.bubbleRadius / 2)) - currentBubble.lvl.leftBound) / currentBubble.lvl.bubbleRadius);
-
-				currentBubble.j = Math.floor((((currentBubble.x + delta) - currentBubble.lvl.leftBound) + ( currentBubble.lvl.bubbleRadius / 2)) / currentBubble.lvl.bubbleRadius);
-				currentBubble.i = 0;
-				inPlace = (currentBubble.lvl.grilla.Table[currentBubble.i][currentBubble.j] == 'vacio');
-				currentBubble.x -= (currentBubble.dx / 4);
-				currentBubble.y -= (currentBubble.dy / 4);
-				if((currentBubble.x <= currentBubble.lvl.leftBound) || (currentBubble.x >= currentBubble.lvl.width)) currentBubble.dx = -currentBubble.dx;
-				if((currentBubble.dx == 0) || (currentBubble.dy == this.lvl.bubbleVelocity)) alert('es un hijo de puta: ' + culo);
-				culo++;
-			}while(!inPlace);		
-			//alert('stop');
-			this.stopMove();
-			this.recalcXY();
-			this.y += this.lvl.currentTop;
-			this.dy = this.lvl.bubbleVelocity;			
-			this.lvl.addBubble(this);
-			this.lvl.grilla.Table[this.i][this.j] = this;
-			var c = this.lvl.grilla.checkForCompatibility(this, this);
-			//debug('    c   :' + c + '   ');
-			//this.lvl.mutex = true;
-			if(c >= 3){				
-				//alert(c);
-				var mult = this.pointsMultiplier;
-				this.lvl.pointsMultiplier =  c * c * pointExplode * mult;
-				//alert(this.lvl.pointsMultiplier);
-				this.lvl.grilla.exploded = c;
-				this.lvl.grilla.explodeMarked();			
-				this.lvl.addPoints();
-				this.lvl.pointsMultiplier = pointDrop * mult;
-				this.lvl.grilla.checkForOrphans();
-			}else{				
-				this.lvl.grilla.clearMarks();
-			};
-			this.lvl.grilla.touchedBubbles = null;
-			this.lvl.grilla.touchedBubbles = new Array();*/
-
-			/*this.lvl.mutex = true;
-			game.clock.stop();
-			var inPlace = false;
-			
-			this.lvl.shootedBubble = null;
-			this.lvl.cannon.currentBubble = null
-			var delta = this.lvl.grilla.isShortRow(0) * (this.lvl.bubbleRadius / 2);
-			delta = delta / 2;
-			currentBubble.j = Math.floor((((currentBubble.x + delta) - currentBubble.lvl.leftBound) + ( currentBubble.lvl.bubbleRadius / 2)) / currentBubble.lvl.bubbleRadius);
-			currentBubble.i = 0;
-			inPlace = (currentBubble.lvl.grilla.Table[currentBubble.i][currentBubble.j] == 'vacio');
-
-			if(!inPlace){
-				//var me = this;
-				//this.lvl.shootedBubble = null;
-				//this.lvl.setReadyShoot();
-				this.lvl.grilla.addBubble(currentBubble, [{bubble: this.lvl.grilla.Table[this.i][this.j], dis: 0}]);
-				currentBubble.stopMove();
-				currentBubble.dy = currentBubble.lvl.bubbleVelocity;
-				this.lvl.addBubble(currentBubble);
-			}else{
-				this.stopMove();
-				this.recalcXY();
-				this.y += this.lvl.currentTop;
-				this.dy = this.lvl.bubbleVelocity;			
-				this.lvl.addBubble(this);
-				this.lvl.grilla.Table[this.i][this.j] = this;				
-			};
-
-			var c = this.lvl.grilla.checkForCompatibility(this, this);
-			//debug('    c   :' + c + '   ');
-			this.lvl.mutex = true;
-			if(c >= 3){				
-				//alert(c);
-				var mult = this.pointsMultiplier;
-				this.lvl.pointsMultiplier =  c * c * pointExplode * mult;
-				//alert(this.lvl.pointsMultiplier);
-				this.lvl.grilla.exploded = c;
-				this.lvl.grilla.explodeMarked();			
-				this.lvl.addPoints();
-				this.lvl.pointsMultiplier = pointDrop * mult;
-				this.lvl.grilla.checkForOrphans();
-			}else{				
-				this.lvl.grilla.clearMarks();
-			};
-			this.lvl.grilla.touchedBubbles = null;
-			this.lvl.grilla.touchedBubbles = new Array();
-
-			this.lvl.shootedBubble = null;
-
-			this.lvl.setReadyShoot();
-
-			game.clock.start();
-			this.lvl.mutex = false;*/
 		}; 
+		//add trace img
+		var trace = document.createElement('img');
+		trace.src = bubbleTrace.src;
+		trace.style.position = 'fixed';
+		trace.style.top = (this.x + ((this.lvl.bubbleRadius - this.lvl.traceRadius) / 2)) + 'px';
+		trace.style.left = (this.y + ((this.lvl.bubbleRadius - this.lvl.traceRadius) / 2)) + 'px';
+		trace.style.width = this.lvl.traceRadius + 'px'
+		trace.style.height = this.lvl.traceRadius + 'px'
+		$(trace).addClass('trace');
+		animNav.append(trace);
 	};
 
 	this.draw = function(painter){
@@ -1055,6 +963,7 @@ function bubbleCannon(lvl){
 		this.lvl.setShootedBubble(this.currentBubble);	
 		this.currentBubble.element.style.zIndex = 'auto';
 		this.object.setCurrentState('shoot');
+		$('.trace').detach();
 		/*if(this.currentBubble.bombBall) game.ui.addBombBubbleCount();
 		if(this.currentBubble.freezeBall) game.ui.addFreezeBubbleCount();
 		if(this.currentBubble.secondFlavor != '') game.ui.addMultiBubbleCount();*/
@@ -1462,6 +1371,7 @@ function bubbleLevel(w, h, bubblesWidth, bubblesHeight, lvlnbr){
 	this.finished = false;
 	this.freezeTimeout = 0;
 	this.bubbleRadius = this.width / bubblesWidth;
+	this.traceRadius = Math.round(25 * (this.bubbleRadius / 100));
 	this.shootedBubble = null;
 	this.bubbles_array = new Array();
 	this.points = 0;
@@ -1506,8 +1416,8 @@ function bubbleLevel(w, h, bubblesWidth, bubblesHeight, lvlnbr){
 		//si esta ocupado, evitar movimiento (normalmente no se mueve, solo evita check de mas)
 		if(game.level.mutex) return;
 		if(this.shootedBubble != null){
-			//this.shootedBubble.moveShooted();
-			this.shootedBubble.move();//Shooted();
+			this.shootedBubble.moveShooted();
+			//this.shootedBubble.move();//Shooted();
 			this.checkColisions();
 		};
 		for(var i = 0; i < this.animations.length; ++i){

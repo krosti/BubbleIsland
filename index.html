@@ -15,6 +15,7 @@
 	<link href="css/854x480.css" rel="stylesheet" type="text/css" />
 <script src="phonegap.js" type="text/javascript" charset="utf-8"></script> 
 	<script src="jquery.js" type="text/javascript" charset="utf-8"></script> 
+	<script src="soundmanager2.js" type="text/javascript" charset="utf-8"></script> 
 	<script src="jquerymd5.js" type="text/javascript" charset="utf-8"></script> 
 	<script src="api.js" type="text/javascript" charset="utf-8"></script> 
 	<script src="apileaderboard.js" type="text/javascript" charset="utf-8"></script>
@@ -342,6 +343,9 @@ loader.readyLoad = function(){
 	//});
 };
 soundengine.startTheme('background');
+
+var media = new Media('sounds/music/background.mp4');
+media.play();
 
 
 </script> 

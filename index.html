@@ -298,11 +298,11 @@ function setInitState(response){
         var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
         document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
     }*/
-    var cookies = $.cookie();
+    /*var cookies = $.cookie();
     for(var i = 0; i < cookies.length; ++i){
     	alert(cookies[i].name + ' : ' + cookies[i].value);
     };
-    alert(document.cookie);
+    alert(document.cookie);*/
     $.cookie('.m_user', null);
     $.cookie('m_user', null);
     $.cookie('e', null);
@@ -393,7 +393,7 @@ loader.readyLoad = function(){
 		});
 	});
 	//});
-	soundengine.startThemes('background');
+	soundengine.startTheme('background');
 		//soundengine.reproduceSound('background');
 };
 

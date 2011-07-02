@@ -900,23 +900,23 @@
 }
 
 .optionsVolumeOn320x480 {
-	position: fixed;
-	top: 380px;
-	left: 35px;
-	width: 92px;
-	height: 61px;
-	min-height: 61px;
-	background-image: url(../320x480/optionsvolumneon.png);
+    background-image: url("../320x480/optionsvolumenon.png");
+    height: 61px;
+    left: 107px;
+    min-height: 61px;
+    position: fixed;
+    top: 203px;
+    width: 92px;
 }
 
 .optionsVolumeOff320x480 {
-	position: fixed;
-	top: 380px;
-	left: 35px;
-	width: 92px;
-	height: 61px;
-	min-height: 61px;
-	background-image: url(../320x480/optionsvolumneoff.png);
+    background-image: url("../320x480/optionsvolumenoff.png");
+    height: 61px;
+    left: 164px;
+    min-height: 61px;
+    position: fixed;
+    top: 197px;
+    width: 92px;
 }
 
 .optionsMenu320x480 {

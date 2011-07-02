@@ -106,6 +106,9 @@
 	<div id="leaderboardBackMenu" onClick="options.exitLeaderboard()"></div>
 </nav>
 <nav id="optionMenu" style="position: absolute; top: 0px; left: 0px; width: 100%; min-height: 100%; display: none;" >
+	<div id="optionsVolumeOn" onClick=""></div>
+	<div id="optionsVolumeOff" onClick=""></div>
+
 	<div id="facebookLogoutButton" onClick="api.facebook.logout(setInitState);"></div>
 	<div id="optionsMenuButton" onClick="$('#gameMenu')[0].style.display = 'block'; $('#optionMenu')[0].style.display = 'none';options.exitOptions();"></div>
 	<div id="optionsFacebook" onClick="postOnFacebook();//inviteFriends();"></div>
@@ -336,6 +339,8 @@ loader.readyLoad = function(){
 	$('#optionsFacebook').addClass('optionsFacebook' + gameSize);
 	$('#optionsCoins').addClass('optionsCoins' + gameSize);
 	$('#optionsLeaderboards').addClass('optionsLeaderboards' + gameSize);
+	$('#optionsVolumeOn').addClass('optionsVolumeOn' + gameSize);
+	$('#optionsVolumeOff').addClass('optionsVolumeOff' + gameSize);
 	
 	$('#FBnav')[0].style.backgroundImage = 'url('+facebookScreen.src+')';
 	$('#FBbutton').addClass('facebookButton'+gameSize)
@@ -379,7 +384,7 @@ loader.readyLoad = function(){
 	//});
 };
 soundengine.startTheme('background');
-
+soundengine.reproduceSound('background');
 
 </script> 
 </body>

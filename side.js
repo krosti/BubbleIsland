@@ -259,6 +259,7 @@ function Loader(progress, size){
 		soundengine.addSound('specialpoints', 'sounds/fx/specialpoints.ogg');
 		soundengine.addSound('optionin', 'sounds/fx/optionin.ogg');
 		soundengine.addTheme('nacional', 'sounds/music/nacional.ogg');*/
+		soundengine.addSound('background', 'sounds/music/backgroundmusic.mp3');
 
 		soundengine.addTheme('maintheme', 'sounds/music/maintheme.mp3', 8000);
 		soundengine.addTheme('background', 'sounds/music/backgroundmusic.mp3', 62000);

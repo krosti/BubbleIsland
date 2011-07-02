@@ -245,7 +245,7 @@ function Loader(progress, size){
 		uiEndGameButton1.src = this.size + this.separator + 'facebookbutton.png';
 		uiEndGameButton2.src = this.size + this.separator + 'facebookbutton.png';
 
-		soundengine.soundloaded = this.loaded;
+		/*soundengine.soundloaded = this.loaded;
 
 		soundengine.addSound('bounce', 'sounds/fx/bounce.ogg');
 		soundengine.addSound('bubblethrow', 'sounds/fx/bubblethrow.ogg');
@@ -259,7 +259,7 @@ function Loader(progress, size){
 		soundengine.addTheme('nacional', 'sounds/music/nacional.ogg');
 
 		soundengine.addTheme('maintheme', 'sounds/music/maintheme.aac');
-		soundengine.addTheme('background', 'sounds/music/backgroundmusic.aac');
+		soundengine.addTheme('background', 'sounds/music/backgroundmusic.aac');*/
 	};
 
 };

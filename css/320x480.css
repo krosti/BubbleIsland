@@ -249,11 +249,11 @@
 }
 
 .guiProgressBar320x480{
-	position: fixed;
-	width: 49px;
-	height: 293px;
-	top: 187px;
-	left: 299px;
+    height: 293px;
+    left: -1px;
+    position: fixed;
+    top: 158px;
+    width: 49px;
 }
 
 .guiProgressBar320x480 > div{
@@ -428,6 +428,7 @@
     left: 250px;
     position: fixed;
     top: 335px;
+    width: 30px;
 }
 
 .guiFinishBuyBomb320x480{

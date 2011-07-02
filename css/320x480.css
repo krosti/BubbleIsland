@@ -927,3 +927,13 @@
 	min-height: 124px;
 	background-image: url(../320x480/optionsmenu.png);
 }
+
+.optionsLogout320x480 {
+    background-image: url("../320x480/optionslogout.png");
+    height: 124px;
+    left: 33px;
+    min-height: 124px;
+    position: fixed;
+    top: 354px;
+    width: 109px;
+}

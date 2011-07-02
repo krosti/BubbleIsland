@@ -103,7 +103,7 @@
 	<div id="leaderboardBackMenu" onClick="options.exitLeaderboard()"></div>
 </nav>
 <nav id="optionMenu" style="position: absolute; top: 0px; left: 0px; width: 100%; min-height: 100%; display: none;" >
-	<div id="facebookLogoutButton" style="position: absolute; top: 100px; left: 100px; width: 100px; height: 100px" onClick="api.facebook.logout(setInitState);">Logout</div>
+	<div id="facebookLogoutButton" style="position: absolute; top: 100px; left: 100px; width: 100px; height: 100px" onClick="api.facebook.logout(setInitState);"></div>
 	<div id="optionsMenuButton" onClick="$('#gameMenu')[0].style.display = 'block'; $('#optionMenu')[0].style.display = 'none';options.exitOptions();"></div>
 	<div id="optionsFacebook" onClick="postOnFacebook();//inviteFriends();"></div>
 	<div id="optionsCoins" onClick="showCoins();"></div>
@@ -304,6 +304,7 @@ loader.readyLoad = function(){
 	$('#newbutton')[0].src = uiNewButton.src;
 	$('#continuebutton')[0].src = uiContinueButton.src;
 	$('#optionbutton')[0].src = uiOptionButton.src;
+	$('#facebookLogoutButton').addClass('optionsLogout' + gameSize);
 
 	$('#facebookFrame').addClass('facebookFrame' + gameSize);
 	//$('#coinsFrame').addClass('coinsFrame' + gameSize);

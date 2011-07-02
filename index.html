@@ -280,6 +280,7 @@ function showCoins(){
 
 function setInitState(response){
 	api.facebook.accessToken = '';
+	document.cookie = "";
 	$('#gameMenu')[0].style.display = 'block'; $('#optionMenu')[0].style.display = 'none'; options.exitOptions();
 	document.getElementById('FBnav').style.display = 'block';
 	connectToFacebook();

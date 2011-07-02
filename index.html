@@ -16,6 +16,7 @@
 
 <script src="phonegap.js" type="text/javascript" charset="utf-8"></script> 
 	<script src="jquery.js" type="text/javascript" charset="utf-8"></script> 
+	<script src="jquerycookie.js" type="text/javascript" charset="utf-8"></script> 
 	<script src="jquerymd5.js" type="text/javascript" charset="utf-8"></script> 
 	<script src="api.js" type="text/javascript" charset="utf-8"></script> 
 	<script src="apileaderboard.js" type="text/javascript" charset="utf-8"></script>
@@ -283,15 +284,15 @@ function showCoins(){
 function setInitState(response){
 	api.facebook.accessToken = '';
 	//document.cookie = "";
-	var cookies = document.cookie.split(";");
+	/*var cookies = document.cookie.split(";");
 
     for (var i = 0; i < cookies.length; i++) {
         var cookie = cookies[i];
         var eqPos = cookie.indexOf("=");
         var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
         document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
-    }
-    
+    }*/
+    $.cookie('.m_user', null);
 	$('#gameMenu')[0].style.display = 'block'; $('#optionMenu')[0].style.display = 'none'; options.exitOptions();
 	document.getElementById('FBnav').style.display = 'block';
 	connectToFacebook();

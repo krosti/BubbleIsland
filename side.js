@@ -16,7 +16,7 @@ function Loader(progress, size){
 		//alert(this.isloaded);
 		loader.isloaded++;
 		//alert(loader.isloaded + ':' + this.src);
-		var percert = (loader.isloaded / loader.toLoad) * 100;
+		var percent = (loader.isloaded / loader.toLoad) * 100;
 		loader.progressBar.style.width = (percent <= 100 ? percent : 100)+ '%';
 		if(loader.isloaded == loader.toLoad) loader.readyLoad();
 	};

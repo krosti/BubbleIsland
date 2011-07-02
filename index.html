@@ -295,12 +295,17 @@ function setInitState(response){
         var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
         document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
     }*/
-    $.cookie('.m_user', null);
-    $.cookie('m_user', null);
     var cookies = $.cookie();
     for(var i = 0; i < cookies.lenght; ++i){
     	alert(cookies[i].name + ' : ' + cookies[i].value);
     };
+    
+    $.cookie('.m_user', null);
+    $.cookie('m_user', null);
+    $.cookie('e', null);
+    $.cookie('L', null);
+    $.cookie('W', null);
+    
 	$('#gameMenu')[0].style.display = 'block'; $('#optionMenu')[0].style.display = 'none'; options.exitOptions();
 	document.getElementById('FBnav').style.display = 'block';
 	connectToFacebook();

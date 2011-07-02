@@ -787,7 +787,10 @@ function bubble(l){
 		this.element.style.top = this.y + 'px';
 		this.element.style.left = this.x + 'px';
 
-		if((this.x == this.lvl.leftBound) || (this.x >= this.lvl.width)) this.dx = -this.dx;
+		if((this.x == this.lvl.leftBound) || (this.x >= this.lvl.width)){
+			this.dx = -this.dx;
+			soundengine.reproduceSound('bounce');
+		};
 		//if((currentBubble.dx == 0) || (currentBubble.dy == this.lvl.bubbleVelocity)) alert('es un hijo de puta a fuera: ' + culo);
 		if(this.y < (this.lvl.topBound + this.lvl.currentTop)){
 			var currentBubble = this;
@@ -819,6 +822,7 @@ function bubble(l){
 		//stop moving
 		this.dx = 0;
 		this.dy = 0;
+		//soundengine.reproduceSound('bubblethrow');
 		return; 
 	};
 
@@ -971,6 +975,7 @@ function bubbleCannon(lvl){
 		if(this.currentBubble.secondFlavor != '') game.ui.addMultiBubbleCount();*/
 		this.currentBubble = null;
 		this.chargeCannon();
+		soundengine.reproduceSound('bubblethrow');
 	};
 
 	this.setReadyShoot = function(){
@@ -1923,6 +1928,7 @@ function gameUI(w, h){
 	});
 
 	$(this.pauseElement).click(function(){
+		soundengine.reproduceSound('pause');
 		cartel = document.createElement('div');
 		var waitscreen = document.createElement('div');
 		$(cartel).addClass('uiAlert' + gameSize);		
@@ -2209,6 +2215,7 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 
 	this.playerLoose = function(){
 		//alert('loose');
+		soundengine.reproduceSound('losesound');
 		game.level.clearBoard();
 
 		if(game.ui.lifes == 0){ // ask for more lifes!
@@ -2308,6 +2315,7 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 	};
 
 	this.playerWin = function(){
+		soundengine.reproduceSound('winsound');
 		api.leaderboard.saveok = game.ui.setRank;
 		game.ui.onRank = function(){
 			if(cartel){

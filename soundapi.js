@@ -145,4 +145,13 @@ soundengine.enableSound = function(){
 };
 soundengine.disableSound = function(){
 	soundengine.enable = false;
+	if(soundengine.currentTheme != null){
+		if(typeof(soundengine.currentTheme) == "array"){
+			for(var j = 0; j < soundengine.currentTheme.length; ++j){
+				soundengine.currentTheme[j].element.stop();
+			};
+		}else{
+			soundengine.currentTheme.element.stop();
+		};
+	};
 };

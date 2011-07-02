@@ -30,11 +30,13 @@
 	<script src="FB.js" type="text/javascript" charset="utf-8"></script> 
 	<script src="coinsApi.js" type="text/javascript" charset="utf-8"></script> 		 
 	  	 -->
+	<script src="FB.js" type="text/javascript" charset="utf-8"></script> 
 	<script src="leaderboard.js" type="text/javascript" charset="utf-8"></script> 
 	<script src="side.js" type="text/javascript" charset="utf-8"></script> 
 	<script src="bubbleIsland.js" type="text/javascript" charset="utf-8"></script> 	
 	<script type="text/javascript" charset="utf-8">
 		//redirect_url = "http://www.facebook.com/connect/login_success.html";
+		FB.init();
 		document.addEventListener('deviceready', function(){			
 			loader.init();
 			/*var media = new Media('sounds/music/backgroundmusic.mp3');
@@ -130,7 +132,7 @@
 		</div-->		
 		<div id="newbutton" onClick="game.startNewGame();"></div>
 		<div id="continuebutton" onClick="game.continueGame();" ></div>
-		<div id="optionbutton" onClick="options.showOptions('gameMenu')" ></div>
+		<div id="optionbutton" onClick="options.showOptions('gameMenu');soundengine.reproduceSound('optionin');" ></div>
 
 		<div id="facebookFrame" onClick="postOnFacebook()"></div>
 		<!--div id="coinsFrame" onClick="showCoins();"></div-->

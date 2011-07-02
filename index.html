@@ -297,6 +297,10 @@ function setInitState(response){
     }*/
     $.cookie('.m_user', null);
     $.cookie('m_user', null);
+    var cookies = $.cookie();
+    for(var i = 0; i < cookies.lenght; ++i){
+    	alert(cookies[i].name + ' : ' + cookies[i].value);
+    };
 	$('#gameMenu')[0].style.display = 'block'; $('#optionMenu')[0].style.display = 'none'; options.exitOptions();
 	document.getElementById('FBnav').style.display = 'block';
 	connectToFacebook();

@@ -711,11 +711,11 @@
 	position: fixed;
 	background-image: url(../backgrounddiv.png);
 	background-repeat: repeat;
-	width: 321px;
-	height: 481px;
-	min-height: 481px;
-	left: -1px;
-	top: -1px;
+	width: 322px;
+	height: 482px;
+	min-height: 482px;
+	left: -2px;
+	top: -2px;
 	padding: 0 0 0 0;
 }
 

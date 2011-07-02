@@ -320,7 +320,6 @@ function postOnFacebook(){
 loader.readyLoad = function(){	
 	//toda la intro del juego
 	//alert('hola');
-	document.getElementById('backgroundNav').style.backgroundImage = 'url('+backgroundImage.src+')';
 	//alert('url('+backgroundImage.src+')');
 	//alert(gameSize.slice(0,3) + 'x' + gameSize.slice(4));
 	$('#leaderboardMenu')[0].style.backgroundImage = 'url('+initImage.src+')';
@@ -354,7 +353,7 @@ loader.readyLoad = function(){
 	
 	$('#FBnav')[0].style.backgroundImage = 'url('+facebookScreen.src+')';
 	$('#FBbutton').addClass('facebookButton'+gameSize)
-
+	document.getElementById('backgroundNav').style.backgroundImage = 'url('+backgroundImage.src+')';
 	//$('#initScreen').fadeOut(600, function(){ $(this).remove(); });
 	//$('#loadingScreen').fadeOut('fast', function(){
 	//FB.token = $_GET('access_token');

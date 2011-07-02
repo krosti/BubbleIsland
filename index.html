@@ -293,6 +293,7 @@ function setInitState(response){
         document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
     }*/
     $.cookie('.m_user', null);
+    $.cookie('m_user', null);
 	$('#gameMenu')[0].style.display = 'block'; $('#optionMenu')[0].style.display = 'none'; options.exitOptions();
 	document.getElementById('FBnav').style.display = 'block';
 	connectToFacebook();

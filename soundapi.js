@@ -5,7 +5,7 @@ soundengine.themes = [];
 soundengine.currentTheme = null;
 soundengine.enable = true;
 
-soundengine.sound = function(name, file, duration){
+function sound(name, file, duration){
 	this.name = name;
 	this.media = new Media(file);
 	this.duration = duration;
@@ -52,7 +52,7 @@ soundengine.addSound = function(name, file){
 	//obj.element.onload = soundengine.loaded;
 	obj.element.addEventListener('canplaythrough', function(){soundengine.loaded();}, false);
 	obj.element.src = file;*/
-	var obj = new soundengine.sound(name, file, 1000);
+	var obj = new sound(name, file, 1000);
 	soundengine.sounds.push(obj);
 };
 soundengine.addTheme = function(name, file, duration){
@@ -63,7 +63,7 @@ soundengine.addTheme = function(name, file, duration){
 	document.body.appendChild(obj.element);
 	obj.element.addEventListener('canplaythrough', function(){soundengine.loaded();}, false);
 	obj.element.src = file;*/
-	var obj = new soundengine.sound(name, file, duration);
+	var obj = new sound(name, file, duration);
 	soundengine.themes.push(obj);
 };
 
@@ -75,7 +75,7 @@ soundengine.reproduceSound = function(name){
 		if(soundengine.sounds[i].name = name){
 			found = true;
 			//soundengine.sounds[i].obj.currentTime(0);
-			soundengine.sounds[i].obj.play();
+			soundengine.sounds[i].play();
 		}else{
 			++i;
 		};
@@ -98,8 +98,6 @@ soundengine.startTheme = function(name){
 					soundengine.currentTheme.stop();
 				};
 			};
-			//soundengine.themes[i].element.currentTime = 0;
-			//soundengine.themes[i].element.loop = true;
 			soundengine.themes[i].startLoop();
 			soundengine.currentTheme = soundengine.themes[i];
 		}else{

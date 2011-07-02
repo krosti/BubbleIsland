@@ -168,6 +168,16 @@
 	width: 117px;
 }
 
+.addFriends480x800{
+    background-image: url("../480x800/addfriends.png");
+    height: 96px;
+    left: 363px;
+    min-height: 46px;
+    position: fixed;
+    top: 543px;
+    width: 131px;
+}
+
 .leaderboardFrame480x800{
 	background-image: url("../480x800/leaderboards.png");
 	height: 88px;
@@ -573,6 +583,137 @@
 	width: 149px;
 }
 
+.guiBuyBombScreen480x800{
+	position: fixed;
+	background-image: url(../480x800/buybombcartel.png);
+    height: 422px;
+    left: 0;
+    position: fixed;
+    top: 0;
+    width: 480px;
+}
+
+.guiBuyBombOk480x800{
+    background-image: url("../480x800/buybombok.png");
+    height: 121px;
+    left: 15px;
+    position: fixed;
+    top: 308px;
+    width: 215px;
+}
+
+.guiBuyBombNo480x800{
+    background-image: url("../480x800/buybombno.png");
+    height: 107px;
+    left: 219px;
+    position: fixed;
+    top: 298px;
+    width: 219px;
+}
+
+.guiBuyMultiScreen480x800{
+    background-image: url("../480x800/buymulticartel.png");
+    height: 422px;
+    left: 0;
+    position: fixed;
+    top: 0;
+    width: 480px;
+}
+
+.guiBuyMultiOk480x800{
+    background-image: url("../480x800/buymultiok.png");
+    height: 121px;
+    left: 15px;
+    position: fixed;
+    top: 308px;
+    width: 215px;
+}
+
+.guiBuyMultiNo480x800{
+    background-image: url("../480x800/buymultino.png");
+    height: 107px;
+    left: 219px;
+    position: fixed;
+    top: 298px;
+    width: 219px;
+}
+
+.guiBuyFreezeScreen480x800{
+	position: fixed;
+	background-image: url(../480x800/buyfreezecartel.png);
+    height: 422px;
+    left: 0;
+    position: fixed;
+    top: 0;
+    width: 480px;
+}
+
+.guiBuyFreezeOk480x800{
+    background-image: url("../480x800/buyfreezeok.png");
+    height: 121px;
+    left: 15px;
+    position: fixed;
+    top: 308px;
+    width: 215px;
+}
+
+.guiBuyFreezeNo480x800{
+    background-image: url("../480x800/buyfreezeno.png");
+    height: 107px;
+    left: 219px;
+    position: fixed;
+    top: 298px;
+    width: 219px;
+}
+
+.uiAlert480x800{
+	font-family: Bubblegum;
+	font-size: 1.1em;
+	color: #644000;
+	position: fixed;
+	background-image: url(../backgrounddiv.png);
+	background-repeat: repeat;
+	width: 100%;
+	height: 100%;
+	min-height: 100%;
+	left: 0px;
+	top: 0px;
+	padding: 0 0 0 0;
+}
+
+.uiAlertImage480x800{
+	background-image: url("../480x800/alertscreen.png");
+	height: 324px;
+	left: 0;
+	min-height: 263px;
+	position: fixed;
+	top: 0;
+	width: 360px;
+}
+
+.uiAlertButton480x800{
+	background-image: url("../480x800/alertbutton.png");
+	display: table-cell;
+	height: 123px;
+	left: 73px;
+	max-width: 201px;
+	min-height: 117px;
+	position: fixed;
+	text-align: center;
+	top: 292px;
+	vertical-align: middle;
+	width: 213px;
+}
+
+.uiAlertButton480x800 > div {
+	height: 50px;
+	left: 30px;
+	position: absolute;
+	top: 40px;
+	width: 155px;
+}
+
+
 .uiAlert480x800{
 	font-family: Bubblegum;
 	font-size: 1.1em;
@@ -768,23 +909,23 @@
 }
 
 .optionsVolumeOn480x800 {
-	position: fixed;
-	top: 380px;
-	left: 35px;
-	width: 92px;
-	height: 61px;
-	min-height: 61px;
-	background-image: url(../480x800/optionsvolumneon.png);
+    height: 76px;
+    left: 185px;
+    min-height: 61px;
+    position: fixed;
+    top: 361px;
+    width: 92px;
+	background-image: url(../480x800/optionsvolumenon.png);
 }
 
 .optionsVolumeOff480x800 {
-	position: fixed;
-	top: 380px;
-	left: 35px;
-	width: 92px;
-	height: 61px;
-	min-height: 61px;
-	background-image: url(../480x800/optionsvolumneoff.png);
+    height: 73px;
+    left: 291px;
+    min-height: 61px;
+    position: fixed;
+    top: 353px;
+    width: 92px;
+	background-image: url(../480x800/optionsvolumenoff.png);
 }
 
 .optionsMenu480x800 {
@@ -795,4 +936,14 @@
 	position: fixed;
 	top: 547px;
 	width: 143px;
+}
+
+.optionsLogout480x800 {
+    background-image: url("../480x800/optionslogout.png");
+    height: 149px;
+    left: 45px;
+    min-height: 124px;
+    position: fixed;
+    top: 539px;
+    width: 151px;
 }

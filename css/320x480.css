@@ -626,7 +626,7 @@
 .guiBuyBombScreen320x480{
 	position: fixed;
 	background-image: url(../320x480/buybombcartel.png);
-	width: 320px;
+	width: 360px;
 	height: 285px;
 	left: 0px;
 	top: 0px;
@@ -653,7 +653,7 @@
 .guiBuyMultiScreen320x480{
 	position: fixed;
 	background-image: url(../320x480/buymulticartel.png);
-	width: 320px;
+	width: 360px;
 	height: 285px;
 	left: 0px;
 	top: 0px;

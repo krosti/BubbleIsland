@@ -1,6 +1,6 @@
 api.leaderboard = {};
-//api.leaderboard.url = 'http://betatester.borealdev.com.ar/api/leaderboard/index.php';
-api.leaderboard.url = 'http://puzzlebubble.eudaimonia.com.ar/api/leaderboard/index.php';
+api.leaderboard.url = 'http://betatester.borealdev.com.ar/api/leaderboard/index.php';
+//api.leaderboard.url = 'http://puzzlebubble.eudaimonia.com.ar/api/leaderboard/index.php';
 api.leaderboard.xhr = null;
 
 api.leaderboard.save = function(id, name, points){

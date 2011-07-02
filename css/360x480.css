@@ -177,6 +177,16 @@
 	width: 98px;
 }
 
+.addFriends360x480{
+    background-image: url("../360x480/addfriends.png");
+    height: 74px;
+    left: 254px;
+    min-height: 46px;
+    position: fixed;
+    top: 379px;
+    width: 111px;
+}
+
 .leaderboardFrame360x480{
 	background-image: url("../360x480/leaderboards.png");
 	height: 57px;
@@ -587,6 +597,87 @@
 	width: 149px;
 }
 
+.guiBuyBombScreen360x480{
+	position: fixed;
+	background-image: url(../360x480/buybombcartel.png);
+	width: 360px;
+	height: 285px;
+	left: 0px;
+	top: 0px;
+}
+
+.guiBuyBombOk360x480{
+    background-image: url("../360x480/buybombok.png");
+    height: 78px;
+    left: 15px;
+    position: fixed;
+    top: 210px;
+    width: 175px;
+}
+
+.guiBuyBombNo360x480{
+    background-image: url("../360x480/buybombno.png");
+    height: 78px;
+    left: 160px;
+    position: fixed;
+    top: 205px;
+    width: 175px;
+}
+
+.guiBuyMultiScreen360x480{
+	position: fixed;
+	background-image: url(../360x480/buymulticartel.png);
+	width: 360px;
+	height: 285px;
+	left: 0px;
+	top: 0px;
+}
+
+.guiBuyMultiOk360x480{
+    background-image: url("../360x480/buymultiok.png");
+    height: 78px;
+    left: 15px;
+    position: fixed;
+    top: 210px;
+    width: 175px;
+}
+
+.guiBuyMultiNo360x480{
+    background-image: url("../360x480/buymultino.png");
+    height: 78px;
+    left: 160px;
+    position: fixed;
+    top: 205px;
+    width: 175px;
+}
+
+.guiBuyFreezeScreen360x480{
+	position: fixed;
+	background-image: url(../360x480/buyfreezecartel.png);
+	width: 360px;
+	height: 285px;
+	left: 0px;
+	top: 0px;
+}
+
+.guiBuyFreezeOk360x480{
+    background-image: url("../360x480/buyfreezeok.png");
+    height: 78px;
+    left: 15px;
+    position: fixed;
+    top: 210px;
+    width: 175px;
+}
+
+.guiBuyFreezeNo360x480{
+    background-image: url("../360x480/buyfreezeno.png");
+    height: 78px;
+    left: 160px;
+    position: fixed;
+    top: 205px;
+    width: 175px;
+}
+
 .uiAlert360x480{
 	font-family: Bubblegum;
 	font-size: 1.1em;
@@ -782,23 +873,23 @@
 }
 
 .optionsVolumeOn360x480 {
-	position: fixed;
-	top: 380px;
-	left: 35px;
-	width: 92px;
-	height: 61px;
-	min-height: 61px;
-	background-image: url(../360x480/optionsvolumneon.png);
+    background-image: url("../360x480/optionsvolumenon.png");
+    height: 61px;
+    left: 132px;
+    min-height: 61px;
+    position: fixed;
+    top: 185px;
+    width: 92px;
 }
 
 .optionsVolumeOff360x480 {
-	position: fixed;
-	top: 380px;
-	left: 35px;
-	width: 92px;
-	height: 61px;
-	min-height: 61px;
-	background-image: url(../360x480/optionsvolumneoff.png);
+    background-image: url("../360x480/optionsvolumenoff.png");
+    height: 61px;
+    left: 194px;
+    min-height: 61px;
+    position: fixed;
+    top: 175px;
+    width: 92px;
 }
 
 .optionsMenu360x480 {
@@ -809,4 +900,14 @@
 	position: fixed;
 	top: 298px;
 	width: 85px;
+}
+
+.optionsLogout360x480 {
+    background-image: url("../360x480/optionslogout.png");
+    height: 124px;
+    left: 45px;
+    min-height: 124px;
+    position: fixed;
+    top: 313px;
+    width: 109px;
 }

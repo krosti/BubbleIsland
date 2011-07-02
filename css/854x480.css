@@ -164,6 +164,16 @@
 	width: 153px;
 }
 
+.addFriends854x480{
+    background-image: url("../854x480/addfriends.png");
+    height: 116px;
+    left: 541px;
+    min-height: 46px;
+    position: fixed;
+    top: 378px;
+    width: 175px;
+}
+
 .leaderboardFrame854x480{
 	background-image: url("../854x480/leaderboards.png");
 	height: 73px;
@@ -570,6 +580,90 @@
 	width: 149px;
 }
 
+
+.guiBuyBombScreen854x480{
+    position: fixed;
+    background-image: url(../854x480/buybombcartel.png);
+    height: 372px;
+    left: 258px;
+    position: fixed;
+    top: 0;
+    width: 444px;
+}
+
+.guiBuyBombOk854x480{
+    background-image: url("../854x480/buybombok.png");
+    height: 109px;
+    left: 267px;
+    position: fixed;
+    top: 269px;
+    width: 280px;
+}
+
+.guiBuyBombNo854x480{
+    background-image: url("../854x480/buybombno.png");
+    height: 90px;
+    left: 473px;
+    position: fixed;
+    top: 268px;
+    width: 188px;
+}
+
+.guiBuyMultiScreen854x480{
+    background-image: url("../854x480/buymulticartel.png");
+    height: 372px;
+    left: 258px;
+    position: fixed;
+    top: 0;
+    width: 444px;
+}
+
+.guiBuyMultiOk854x480{
+    background-image: url("../854x480/buymultiok.png");
+    height: 109px;
+    left: 267px;
+    position: fixed;
+    top: 269px;
+    width: 280px;
+}
+
+.guiBuyMultiNo854x480{
+    background-image: url("../854x480/buymultino.png");
+    height: 90px;
+    left: 473px;
+    position: fixed;
+    top: 268px;
+    width: 188px;
+}
+
+.guiBuyFreezeScreen854x480{
+    position: fixed;
+    background-image: url(../854x480/buyfreezecartel.png);
+    height: 372px;
+    left: 258px;
+    position: fixed;
+    top: 0;
+    width: 444px;
+}
+
+.guiBuyFreezeOk854x480{
+    background-image: url("../854x480/buyfreezeok.png");
+    height: 109px;
+    left: 267px;
+    position: fixed;
+    top: 269px;
+    width: 280px;
+}
+
+.guiBuyFreezeNo854x480{
+    background-image: url("../854x480/buyfreezeno.png");
+    height: 90px;
+    left: 473px;
+    position: fixed;
+    top: 268px;
+    width: 188px;
+}
+
 .uiAlert854x480{
 	font-family: Bubblegum;
 	font-size: 1.1em;
@@ -770,23 +864,23 @@
 }
 
 .optionsVolumeOn854x480 {
-	position: fixed;
-	top: 380px;
-	left: 35px;
-	width: 92px;
-	height: 61px;
-	min-height: 61px;
-	background-image: url(../854x480/optionsvolumneon.png);
+    background-image: url("../854x480/optionsvolumenon.png");
+    height: 61px;
+    left: 374px;
+    min-height: 61px;
+    position: fixed;
+    top: 220px;
+    width: 92px;
 }
 
 .optionsVolumeOff854x480 {
-	position: fixed;
-	top: 380px;
-	left: 35px;
-	width: 92px;
-	height: 61px;
-	min-height: 61px;
-	background-image: url(../854x480/optionsvolumneoff.png);
+    background-image: url("../854x480/optionsvolumenoff.png");
+    height: 61px;
+    left: 464px;
+    min-height: 61px;
+    position: fixed;
+    top: 211px;
+    width: 92px;
 }
 
 .optionsMenu854x480 {
@@ -797,4 +891,14 @@
 	position: fixed;
 	top: 351px;
 	width: 122px;
+}
+
+.optionsLogout854x480 {
+    background-image: url("../854x480/optionslogout.png");
+    height: 203px;
+    left: 306px;
+    min-height: 142px;
+    position: fixed;
+    top: 362px;
+    width: 103px;
 }

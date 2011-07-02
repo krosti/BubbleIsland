@@ -296,10 +296,10 @@ function setInitState(response){
         document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
     }*/
     var cookies = $.cookie();
-    for(var i = 0; i < cookies.lenght; ++i){
+    for(var i = 0; i < cookies.length; ++i){
     	alert(cookies[i].name + ' : ' + cookies[i].value);
     };
-    
+
     $.cookie('.m_user', null);
     $.cookie('m_user', null);
     $.cookie('e', null);

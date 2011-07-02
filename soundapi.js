@@ -72,7 +72,7 @@ soundengine.reproduceSound = function(name){
 	var i = 0;
 	var found = false;
 	while((i < soundengine.sounds.length) && (!found)){
-		if(soundengine.sounds[i].name = name){
+		if(soundengine.sounds[i].name == name){
 			found = true;
 			//soundengine.sounds[i].obj.currentTime(0);
 			soundengine.sounds[i].play();

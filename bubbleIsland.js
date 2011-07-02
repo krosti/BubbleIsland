@@ -161,7 +161,7 @@ var pointDrop = 5;
 var min_vel = .05;
 var freezeTime = 10 //en segundos
 var lifesPerCoins = 1;
-var linesPerLevel = 4;
+var linesPerLevel = 5;
 
 var bombValue = 1;
 var freezeValue = 1;
@@ -1936,7 +1936,7 @@ function gameUI(w, h){
 		game.clock.stop();
 	});
 
-	this.coinsElement.innerHTML = (api.softgame.user.balance == undefined ? "-" : api.softgames.user.balance);
+	this.coinsElement.innerHTML = (api.softgame.user.balance == undefined ? "-" : api.softgame.user.balance);
 
 	this.multiBubbleElement.innerHTML = this.multiBubbleCount;
 	this.bombBubbleElement.innerHTML = this.bombBubbleCount;
@@ -1978,6 +1978,8 @@ function gameUI(w, h){
 		this.multiBubbleElement.innerHTML = this.multiBubbleCount;
 		this.bombBubbleElement.innerHTML = this.bombBubbleCount;
 		this.freezeBubbleElement.innerHTML = this.freezeBubbleCount;
+
+		this.coinsElement.innerHTML = api.softgame.user.balance;
 	}
 
 	//this.
@@ -2072,6 +2074,7 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 	}
 
 	this.startNewGame = function(){
+		game.ui.refresh();
 		if(this.level != '') this.level.clearBoard();
 		//$(cartel).remove();
 		if(cartel) $(cartel).remove();
@@ -2091,6 +2094,7 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 	};
 
 	this.continueGame = function(){
+		game.ui.refresh();
 		if(game.level == ''){
 			//alert('level = nada');
 			if(!this.loadedLevel){
@@ -2262,7 +2266,7 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 			$(buybombbutton).click(api.ui.showBombBubbleBuy);
 			$(buyfreezebutton).click(api.ui.showFreezeBubbleBuy);
 
-			uiCoins.innerHTML = (api.softgame.user.balance == undefined ? "-" : api.softgames.user.balance);
+			uiCoins.innerHTML = (api.softgame.user.balance == undefined ? "-" : api.softgame.user.balance);
 			uiLifes.innerHTML = game.ui.lifes;
 			uiPoints.innerHTML = game.ui.points;
 			uiRank.innerHTML = 0;
@@ -2370,7 +2374,7 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 		$(buybombbutton).click(api.ui.showBombBubbleBuy);
 		$(buyfreezebutton).click(api.ui.showFreezeBubbleBuy);
 
-		uiCoins.innerHTML = (api.softgame.user.balance == undefined ? "-" : api.softgames.user.balance);
+		uiCoins.innerHTML = (api.softgame.user.balance == undefined ? "-" : api.softgame.user.balance);
 		uiLifes.innerHTML = game.ui.lifes;
 		uiPoints.innerHTML = game.ui.points;
 		uiRank.innerHTML = 'updating';

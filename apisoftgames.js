@@ -156,7 +156,7 @@ api.softgame.userRequest = function(data){
 				created: "2000-01-01T15:20:08+01:00", 
 				last_visit: "2000-01-02T08:36:38+01:00", 
 				};
-	userdata.balancedata.balance = 10000;
+	//userdata.balancedata.balance = 10000;
 	//alert(userdata);
 	//alert(userdata.status);
 	if(userdata.status == 1){		
@@ -196,6 +196,8 @@ api.softgame.confirmDoCoinsBuying = function(data, uri){
 };
 
 api.softgame.finalizeCoinsRequest = function(data){
+	api.softgame.user.balance -= 1;
+	if(game.ui) game.ui.refresh();
 	api.softgame.buyFinalized();
 };
 

@@ -195,6 +195,7 @@ function connectToFacebook2(){
 		//api.softgame.onLoginUser = function(){			
 		$('#FBnav')[0].style.display = 'none';
 		//};
+		soundengine.startThemes(['background', 'maintheme']);
 		api.ui.hideWaiting();
 		//alert(document.cookie);
 		/*api.softgame.onLogin = function(){
@@ -299,7 +300,7 @@ function setInitState(response){
     for(var i = 0; i < cookies.length; ++i){
     	alert(cookies[i].name + ' : ' + cookies[i].value);
     };
-
+    alert(document.cookie);
     $.cookie('.m_user', null);
     $.cookie('m_user', null);
     $.cookie('e', null);
@@ -391,8 +392,8 @@ loader.readyLoad = function(){
 		});
 	});
 	//});
-	soundengine.startTheme('background');
-	soundengine.reproduceSound('background');
+	soundengine.startThemes('background');
+		//soundengine.reproduceSound('background');
 };
 
 

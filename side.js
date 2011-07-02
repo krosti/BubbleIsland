@@ -247,19 +247,19 @@ function Loader(progress, size){
 		uiEndGameButton1.src = this.size + this.separator + 'facebookbutton.png';
 		uiEndGameButton2.src = this.size + this.separator + 'facebookbutton.png';
 
-		/*soundengine.soundloaded = this.loaded;
+		/*soundengine.soundloaded = this.loaded;*/
 
-		soundengine.addSound('bounce', 'sounds/fx/bounce.ogg');
-		soundengine.addSound('bubblethrow', 'sounds/fx/bubblethrow.ogg');
-		soundengine.addSound('losesound', 'sounds/fx/losesound.ogg');
-		soundengine.addSound('winsound', 'sounds/fx/winsound.ogg');
-		soundengine.addSound('touch', 'sounds/fx/touch.ogg');
-		soundengine.addSound('normalpoints', 'sounds/fx/normalpoints.ogg');
-		soundengine.addSound('pause', 'sounds/fx/pause.ogg');
-		soundengine.addSound('specialpoints', 'sounds/fx/specialpoints.ogg');
-		soundengine.addSound('optionin', 'sounds/fx/optionin.ogg');
-		soundengine.addTheme('nacional', 'sounds/music/nacional.ogg');*/
-		soundengine.addSound('background', 'sounds/music/backgroundmusic.mp3');
+		soundengine.addSound('bounce', 'sounds/fx/bounce.mp3');
+		soundengine.addSound('bubblethrow', 'sounds/fx/bubblethrow.mp3');
+		soundengine.addSound('losesound', 'sounds/fx/losesound.mp3');
+		soundengine.addSound('winsound', 'sounds/fx/winsound.mp3');
+		soundengine.addSound('touch', 'sounds/fx/touch.mp3');
+		soundengine.addSound('normalpoints', 'sounds/fx/normalpoints.mp3');
+		soundengine.addSound('pause', 'sounds/fx/pause.mp3');
+		soundengine.addSound('specialpoints', 'sounds/fx/specialpoints.mp3');
+		soundengine.addSound('optionin', 'sounds/fx/optionin.mp3');
+		soundengine.addTheme('nacional', 'sounds/music/nacional.mp3');
+		//soundengine.addSound('background', 'sounds/music/backgroundmusic.mp3');
 
 		soundengine.addTheme('maintheme', 'sounds/music/maintheme.mp3', 8000);
 		soundengine.addTheme('background', 'sounds/music/backgroundmusic.mp3', 62000);

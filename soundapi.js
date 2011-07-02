@@ -5,6 +5,37 @@ soundengine.themes = [];
 soundengine.currentTheme = null;
 soundengine.enable = true;
 
+soundengine.sound = function(name, file, duration){
+	this.name = name;
+	this.media = new Media(file);
+	this.duration = duration;
+	this.timer = null;
+
+	this.play =function(){
+		this.media.play();
+	};
+
+	this.stop = function(){
+		this.media.stop();
+	};
+
+	this.loop = function(){
+		this.stop();
+		this.play();
+	};
+
+	this.startLoop = function(){
+		if(this.timer == null){
+			this.play();
+			this.timer = setInterval(this.loop, duration);
+		};
+	};
+	this.stopLoop = function(){
+		clearInterval(this.timer);
+		this.timer = null;
+	};
+};
+
 soundengine.soundloaded = function(name){};
 
 soundengine.loaded = function(){
@@ -13,24 +44,26 @@ soundengine.loaded = function(){
 };
 
 soundengine.addSound = function(name, file){
-	var obj = {};
+	/*var obj = {};
 	obj.name = name;
 	obj.filename = file;
 	obj.element = document.createElement('audio');	
 	document.body.appendChild(obj.element);
 	//obj.element.onload = soundengine.loaded;
 	obj.element.addEventListener('canplaythrough', function(){soundengine.loaded();}, false);
-	obj.element.src = file;
+	obj.element.src = file;*/
+	var obj = new soundengine.sound(name, file, 1000);
 	soundengine.sounds.push(obj);
 };
-soundengine.addTheme = function(name, file){
-	var obj = {};
+soundengine.addTheme = function(name, file, duration){
+	/*var obj = {};
 	obj.name = name;
 	obj.filename = file;
 	obj.element = document.createElement('audio');
 	document.body.appendChild(obj.element);
 	obj.element.addEventListener('canplaythrough', function(){soundengine.loaded();}, false);
-	obj.element.src = file;
+	obj.element.src = file;*/
+	var obj = new soundengine.sound(name, file, duration);
 	soundengine.themes.push(obj);
 };
 
@@ -41,7 +74,7 @@ soundengine.reproduceSound = function(name){
 	while((i < soundengine.sounds.length) && (!found)){
 		if(soundengine.sounds[i].name = name){
 			found = true;
-			soundengine.sounds[i].obj.currentTime(0);
+			//soundengine.sounds[i].obj.currentTime(0);
 			soundengine.sounds[i].obj.play();
 		}else{
 			++i;
@@ -59,15 +92,15 @@ soundengine.startTheme = function(name){
 			if(soundengine.currentTheme != null){
 				if(typeof(soundengine.currentTheme) == "array"){
 					for(var j = 0; j < soundengine.currentTheme.length; ++j){
-						soundengine.currentTheme[j].element.pause();
+						soundengine.currentTheme[j].stop();
 					};
 				}else{
-					soundengine.currentTheme.obj.pause();
+					soundengine.currentTheme.stop();
 				};
 			};
 			//soundengine.themes[i].element.currentTime = 0;
-			soundengine.themes[i].element.loop = true;
-			soundengine.themes[i].element.play();
+			//soundengine.themes[i].element.loop = true;
+			soundengine.themes[i].startLoop();
 			soundengine.currentTheme = soundengine.themes[i];
 		}else{
 			++i;
@@ -85,23 +118,23 @@ soundengine.startThemes = function(names){
 	if(soundengine.currentTheme != null){
 		if(typeof(soundengine.currentTheme) == "array"){
 			for(var j = 0; j < soundengine.currentTheme.length; ++j){
-				soundengine.currentTheme[j].element.pause();
+				soundengine.currentTheme[j].element.stop();
 			};
 		}else{
-			soundengine.currentTheme.element.pause();
+			soundengine.currentTheme.element.stop();
 		};
 	};
-
+	soundengine.currentTheme = [];
 	while((i < soundengine.themes.length) && (!found)){
 		j = 0;
 		found2 = false;
 		while((j < soundengine.themes.length) && (!found2)){
 			if(soundengine.themes[i].name == names[j]){
 				found2 = true;
-				soundengine.themes[i].obj.currentTime(0);
-				soundengine.themes[i].obj.loop = true;
-				soundengine.themes[i].obj.play();
-				soundengine.currentTheme = soundengine.themes[i];
+				/*soundengine.themes[i].obj.currentTime(0);
+				soundengine.themes[i].obj.loop = true;*/
+				soundengine.themes[i].startLoop();
+				soundengine.currentTheme.push(soundengine.themes[i]);
 			}else{
 				++i;
 			};	

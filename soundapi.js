@@ -1,6 +1,7 @@
 var soundengine = {};
 
 soundengine.sounds = [];
+//soundengine.sounds2 = {};
 soundengine.themes = [];
 soundengine.currentTheme = null;
 soundengine.enable = true;
@@ -27,7 +28,7 @@ function sound(name, file, duration){
 	this.startLoop = function(){
 		if(this.timer == null){
 			this.play();
-			this.timer = setInterval(this.loop, duration);
+			this.timer = setInterval(this.loop, this.duration);
 		};
 	};
 	this.stopLoop = function(){
@@ -54,6 +55,7 @@ soundengine.addSound = function(name, file){
 	obj.element.src = file;*/
 	var obj = new sound(name, file, 1000);
 	soundengine.sounds.push(obj);
+	//soundengine.sounds2[name] = obj;
 };
 soundengine.addTheme = function(name, file, duration){
 	/*var obj = {};

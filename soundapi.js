@@ -118,10 +118,10 @@ soundengine.startThemes = function(names){
 	if(soundengine.currentTheme != null){
 		if(typeof(soundengine.currentTheme) == "array"){
 			for(var j = 0; j < soundengine.currentTheme.length; ++j){
-				soundengine.currentTheme[j].element.stop();
+				soundengine.currentTheme[j].stopLoop();
 			};
 		}else{
-			soundengine.currentTheme.element.stop();
+			soundengine.currentTheme.stopLoop();
 		};
 	};
 	soundengine.currentTheme = [];
@@ -136,9 +136,10 @@ soundengine.startThemes = function(names){
 				soundengine.themes[i].startLoop();
 				soundengine.currentTheme.push(soundengine.themes[i]);
 			}else{
-				++i;
+				++j;
 			};	
 		};
+		++i;
 	};	
 };
 

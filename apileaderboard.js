@@ -44,7 +44,7 @@ api.leaderboard.list = function(id, callback, friends, init, count){
 
 	var postdata = {
 		to: 'list',
-		id: 0,
+		id: id,
 		friends: friendsarray,
 		init: initpage,
 		count: perpage

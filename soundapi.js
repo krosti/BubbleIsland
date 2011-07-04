@@ -145,16 +145,63 @@ soundengine.startThemes = function(names){
 
 soundengine.enableSound = function(){
 	soundengine.enable = true;
+	soundengine.backgroundsound.loop();
+	soundengine.starttheme();
+	window.localStorage.setItem('enablesound', 1);
 };
 soundengine.disableSound = function(){
 	soundengine.enable = false;
-	if(soundengine.currentTheme != null){
-		if(typeof(soundengine.currentTheme) == "array"){
-			for(var j = 0; j < soundengine.currentTheme.length; ++j){
-				soundengine.currentTheme[j].element.stop();
-			};
-		}else{
-			soundengine.currentTheme.element.stop();
-		};
-	};
+	soundengine.stopbackground();
+	soundengine.stoptheme();
+	window.localStorage.setItem('enablesound', 0);
+};
+
+soundengine.backgroundsound = {};
+soundengine.backgroundsound.duration = 1000;
+soundengine.backgroundsound.media = null;
+soundengine.backgroundsound.timer = null;
+
+soundengine.startbackground = function(file, duration){
+	soundengine.backgroundsound.media = new Media(file);
+	soundengine.backgroundsound.duration = duration;
+	soundengine.backgroundsound.loop();
+};
+
+soundengine.stopbackground = function(){
+	clearInterval(soundengine.backgroundsound.timer);
+	soundengine.backgroundsound.media.stop();
+};
+
+soundengine.backgroundsound.loop = function(){
+	soundengine.backgroundsound.media.stop();
+	soundengine.backgroundsound.media.play();
+	soundengine.backgroundsound.timer = setInterval('soundengine.backgroundsound.loop()', soundengine.backgroundsound.duration);
+};
+
+soundengine.maintheme = {};
+
+soundengine.themesound = {};
+soundengine.themesound.duration = 1000;
+soundengine.themesound.media = null;
+soundengine.themesound.timer = null;
+
+soundengine.setuptheme = function(file, duration){
+	soundengine.themesound.media = new Media(file);
+	soundengine.themesound.duration = duration;
+};
+
+soundengine.starttheme = function(){
+	soundengine.themesound.loop();
+}; 
+
+soundengine.stoptheme = function(){
+	clearInterval(soundengine.themesound.timer);
+	soundengine.themesound.media.stop();
+
+};
+
+soundengine.themesound.loop = function(){
+	soundengine.themesound.media.stop();
+	soundengine.themesound.media.play();
+	soundengine.themesound.timer = setInterval('soundengine.themesound.loop()', soundengine.themesound.duration);
 };

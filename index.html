@@ -119,8 +119,8 @@ window.fbAsyncInit = function() {
 	<div id="leaderboardBackMenu" onClick="options.exitLeaderboard()"></div>
 </nav>
 <nav id="optionMenu" style="position: absolute; top: 0px; left: 0px; width: 100%; min-height: 100%; display: none;" >
-	<div id="optionsVolumeOn" onClick=""></div>
-	<div id="optionsVolumeOff" onClick=""></div>
+	<div id="optionsVolumeOn" onClick="soundengine.enableSound();"></div>
+	<div id="optionsVolumeOff" onClick="soundengine.disableSound();"></div>
 
 	<!--div id="facebookLogoutButton" onClick="/*api.facebook.logout(setInitState);*/FB.logout(setInitState);"></div-->
 	<div id="optionsMenuButton" onClick="$('#gameMenu')[0].style.display = 'block'; $('#optionMenu')[0].style.display = 'none';options.exitOptions();"></div>
@@ -209,6 +209,7 @@ function connectToFacebook2(){
 		$('#FBnav')[0].style.display = 'none';
 		//};
 		api.ui.hideWaiting();
+		soundengine.starttheme();
 		//alert(document.cookie);
 		/*api.softgame.onLogin = function(){
 			
@@ -253,6 +254,17 @@ $(window).load(function () {
 	if(window.localStorage.getItem('runned') == null){
 		firstRun = true;
 		window.localStorage.setItem('runned', 1);
+	};
+
+	if(window.localStorage.getItem('enablesound') == null){
+		window.localStorage.setItem('enablesound', 1);
+		soundengine.enable = true;
+	}else{
+		if(window.localStorage.getItem('enablesound')){
+			soundengine.enable = true;
+		}else{
+			soundengine.enable = false;			
+		};
 	};
 });
 var gameSize = "320x480";
@@ -366,7 +378,6 @@ loader.readyLoad = function(){
 	
 	$('#FBnav')[0].style.backgroundImage = 'url('+facebookScreen.src+')';
 	$('#FBbutton').addClass('facebookButton'+gameSize)
-	document.getElementById('backgroundNav').style.backgroundImage = 'url('+backgroundImage.src+')';
 	//$('#initScreen').fadeOut(600, function(){ $(this).remove(); });
 	//$('#loadingScreen').fadeOut('fast', function(){
 	//FB.token = $_GET('access_token');
@@ -394,8 +405,9 @@ loader.readyLoad = function(){
 				$('#logoImg').delay(10000, function(){
 					//$("#initScreen").remove();
 					$("#initScreen").delay(2000).hide(0, function(){
+						document.getElementById('backgroundNav').style.backgroundImage = 'url('+backgroundImage.src+')';
 						$('#frameBackground')[0].style.display = 'block';
-					connectToFacebook();
+						connectToFacebook();
 						
 					});
 					//alert('hola');
@@ -404,7 +416,9 @@ loader.readyLoad = function(){
 		});
 	});
 	//});
-	soundengine.startTheme('background');
+	//soundengine.startTheme('background');
+	soundengine.startbackground('sounds//music/backgroundmusic.mp3', 62000);
+	soundengine.setuptheme('sounds//music/maintheme.mp3', 12000);
 		//soundengine.reproduceSound('background');
 };
 

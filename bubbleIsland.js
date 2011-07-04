@@ -2114,6 +2114,7 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 		//this.menu.style.zIndex = this.menu.style.zIndex - 1;
 		this.menu.style.display = 'none';
 		soundengine.stoptheme();
+		soundengine.stopbackground();
 		//alert('hola');
 	};
 
@@ -2135,6 +2136,7 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 			this.menu.style.display = 'none';			
 		};
 		soundengine.stoptheme();
+		soundengine.stopbackground();
 	};
 
 	this.loadPreviousGame = function(){
@@ -2457,6 +2459,7 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 		//this.menu.style.zIndex = 90//this.menu.style.zIndex + 2;
 		this.menu.style.display = 'block';
 		soundengine.starttheme();
+		soundengine.stopbackground.loop();
 		if(this.doSerialize){
 			api.levels.serializeLevel(game);
 			api.levels.putLevel(api.facebook.user.id);

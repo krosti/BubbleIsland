@@ -2692,6 +2692,9 @@ api.levels.unserializeLevel = function(){
 	game.cannon = new bubbleCannon(game.level);
 	game.level.cannon = game.cannon;
 	game.level.cannon.currentBubble = null;
+	game.level.cannon.addBuffer();
+	game.level.cannon.chargeCannon();
+	game.level.cannon.setReadyShoot();
 	/*if(lvl.cannon.currentBubble != null){
 		game.level.cannon.currentBubble = new bubble(game.level);
 		game.level.cannon.currentBubble.unserialize(lvl.cannon.currentBubble);

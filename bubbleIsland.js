@@ -877,11 +877,13 @@ function bubble(l){
 		//do explode animation and remove element
 		//this.object.animationEnds = this.removeBubble;
 		var anim = '';
+		this.lvl.pointsMade = true;
 		if(this.freezeBall){
 			anim = new Animation(14, bubbleFreezeExplode.width / 14, bubbleFreezeExplode.height, bubbleFreezeExplode.src);		
 			anim.element.style.position = 'absolute';
 			anim.element.style.top = ( (game.height / 2) - (bubbleFreezeExplode.height / 2)) + 'px';
 			anim.element.style.left = ( (game.width / 2)  - ((bubbleFreezeExplode.width / 14) / 2)) + 'px';
+			this.lvl.specialPointsMade = true;
 		};
 
 		if(this.wasDetonated){
@@ -889,6 +891,7 @@ function bubble(l){
 			anim.element.style.position = 'absolute';
 			anim.element.style.top = ((this.y + (this.lvl.bubbleRadius / 2) ) - (bubbleBombExplode.height / 2)) + 'px';
 			anim.element.style.left = ((this.x + (this.lvl.bubbleRadius / 2) ) - ((bubbleBombExplode.width / 14) / 2)) + 'px';
+			this.lvl.specialPointsMade = true;
 		};
 
 		if(this.secondFlavor != ''){
@@ -896,6 +899,7 @@ function bubble(l){
 			anim.element.style.position = 'absolute';
 			anim.element.style.top = ((this.y + (this.lvl.bubbleRadius / 2) ) - (bubbleMultiColorExplode.height / 2)) + 'px';
 			anim.element.style.left = ((this.x + (this.lvl.bubbleRadius / 2) ) - ((bubbleMultiColorExplode.width / 14) / 2)) + 'px';
+			this.lvl.specialPointsMade = true;
 		};
 
 		if(this.pointsMultiplier == 2){			
@@ -903,6 +907,7 @@ function bubble(l){
 			anim.element.style.position = 'absolute';
 			anim.element.style.top = ((this.y + (this.lvl.bubbleRadius / 2) ) - (bubbleX2Explode.height / 2)) + 'px';
 			anim.element.style.left = ((this.x + (this.lvl.bubbleRadius / 2) ) - ((bubbleX2Explode.width / 7) / 2)) + 'px';
+			this.lvl.specialPointsMade = true;
 		};
 
 		if(this.pointsMultiplier == 3){			
@@ -910,6 +915,7 @@ function bubble(l){
 			anim.element.style.position = 'absolute';
 			anim.element.style.top = ((this.y + (this.lvl.bubbleRadius / 2) ) - (bubbleX3Explode.height / 2)) + 'px';
 			anim.element.style.left = ((this.x + (this.lvl.bubbleRadius / 2) ) - ((bubbleX3Explode.width / 9) / 2)) + 'px';
+			this.lvl.specialPointsMade = true;
 		};	
 
 		if(anim == ''){
@@ -1929,7 +1935,7 @@ function gameUI(w, h){
 	});
 
 	$(this.freezeBubbleElement).click(function(e){
-		if(this.freezeBubbleCount != 0){
+		if(game.ui.freezeBubbleCount != 0){
 			if(game.cannon.chargeFreezeBuffer()){
 				game.ui.freezeBubbleCount -= 1;
 				game.ui.freezeBubbleElement.innerHTML = game.ui.freezeBubbleCount;	

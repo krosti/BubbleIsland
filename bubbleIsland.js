@@ -1,5 +1,10 @@
-var VERSION = '0.9.089';
-
+var VERSION = '0.9.093';
+/*
+[ ] bajar calidad sonido
+[ ] cuando le erras la contraseña de Fb y despues la pones bien
+[ ] tocando nose que en algun momento el sonido de la musica se reproduce en el juego
+[ ] los botones de sound on/off estan mal y no andan, deberia ser un solo boton que alterna
+*/
 function rnd(top){ return Math.floor(Math.random()*(top + 1))};
 
 /*touchMove = function(event) {

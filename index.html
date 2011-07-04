@@ -145,7 +145,7 @@ window.fbAsyncInit = function() {
 		<div id="continuebutton" onClick="game.continueGame();soundengine.reproduceSound('optionin');" ></div>
 		<div id="optionbutton" onClick="options.showOptions('gameMenu');soundengine.reproduceSound('optionin');" ></div>
 
-		<div id="facebookFrame" onClick="postOnFacebook(); api.ui.alert('Thanks for sharing!', 'Ok!');"></div>
+		<div id="facebookFrame" onClick=" postOnFacebook(); api.ui.alert('Thanks for sharing!', 'Ok!');"></div>
 		<!--div id="coinsFrame" onClick="showCoins();"></div-->
 		<div id="addFriends" onClick="inviteFriends();"></div>
 		<div id="leaderboardFrame" onClick="options.showLeaderboard('gameMenu'); retrieveLeaderboard('facebookLeaderboard', 'generalLeaderboard');"></div>

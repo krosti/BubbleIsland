@@ -164,6 +164,7 @@ soundengine.backgroundsound.timer = null;
 soundengine.startbackground = function(file, duration){
 	soundengine.backgroundsound.media = new Media(file);
 	soundengine.backgroundsound.duration = duration;
+	if(!soundengine.enable) return;
 	soundengine.backgroundsound.loop();
 };
 
@@ -173,6 +174,7 @@ soundengine.stopbackground = function(){
 };
 
 soundengine.backgroundsound.loop = function(){
+	if(!soundengine.enable) return;
 	soundengine.backgroundsound.media.stop();
 	soundengine.backgroundsound.media.play();
 	soundengine.backgroundsound.timer = setInterval('soundengine.backgroundsound.loop()', soundengine.backgroundsound.duration);
@@ -191,6 +193,7 @@ soundengine.setuptheme = function(file, duration){
 };
 
 soundengine.starttheme = function(){
+	if(!soundengine.enable) return;
 	soundengine.themesound.loop();
 }; 
 

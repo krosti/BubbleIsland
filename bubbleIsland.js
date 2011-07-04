@@ -2596,7 +2596,7 @@ api.levels.serializeLevel = function(game){
 	};
 
 	lvl.cannon = {};
-	lvl.cannon.currentBubble = (game.level.cannon.currentBubble == null)? null : game.level.cannon.currentBubble.serialize();
+	//lvl.cannon.currentBubble = (game.level.cannon.currentBubble == null)? null : game.level.cannon.currentBubble.serialize();
 	lvl.cannon.readyShoot = game.level.cannon.readyShoot;
 	lvl.ui = {};
 	lvl.ui.lifes = game.ui.lifes;
@@ -2683,10 +2683,10 @@ api.levels.unserializeLevel = function(){
 	game.cannon = new bubbleCannon(game.level);
 	game.level.cannon = game.cannon;
 	game.level.cannon.currentBubble = null;
-	if(lvl.cannon.currentBubble != null){
+	/*if(lvl.cannon.currentBubble != null){
 		game.level.cannon.currentBubble = new bubble(game.level);
 		game.level.cannon.currentBubble.unserialize(lvl.cannon.currentBubble);
-	};
+	};*/
 	game.cannon.readyShoot = lvl.cannon.readyShoot;
 	game.level.loose = game.playerLoose;
 	game.level.win = game.playerWin;	

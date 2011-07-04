@@ -205,6 +205,7 @@ soundengine.stoptheme = function(){
 
 soundengine.themesound.loop = function(){
 	soundengine.themesound.media.stop();
+	if(!soundengine.enable) return;
 	soundengine.themesound.media.play();
 	soundengine.themesound.timer = setInterval('soundengine.themesound.loop()', soundengine.themesound.duration);
 };

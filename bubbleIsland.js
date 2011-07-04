@@ -2254,6 +2254,12 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 			var uiBombCount = document.createElement('div');
 			var uiFreezeCount = document.createElement('div');
 			var continueButton = document.createElement('div');
+			cartel.rankingdiv = uiRank;
+			cartel.coins = uiCoins;
+			cartel.lifes = uiLifes;
+			cartel.multi = uiMultiCount;
+			cartel.bomb = uiBombCount;
+			cartel.freeze = uiFreezeCount;
 
 			$(cartel).addClass('uiAlert' + gameSize);
 			$(uiScreen).addClass('guiLooseScreen' + gameSize);
@@ -2302,6 +2308,14 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 			uiMultiCount.innerHTML = game.ui.multiBubbleCount;
 			uiBombCount.innerHTML = game.ui.bombBubbleCount;
 			uiFreezeCount.innerHTML = game.ui.freezeBubbleCount;
+
+			cartel.refresh = function(){
+				cartel.coins.innerHTML = (api.softgame.user.balance == undefined ? "-" : api.softgame.user.balance);
+				cartel.lifes.innerHTML = game.ui.lifes;
+				cartel.multi.innerHTML = game.ui.multiBubbleCount;
+				cartel.bomb.innerHTML = game.ui.bombBubbleCount;
+				cartel.freeze.innerHTML = game.ui.freezeBubbleCount;
+			};
 
 			$(continueButton).click(function(){
 				$(cartel).fadeOut(300, function(){
@@ -2363,6 +2377,11 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 		var uiFreezeCount = document.createElement('div');
 		var continueButton = document.createElement('div');
 		cartel.rankingdiv = uiRank;
+		cartel.coins = uiCoins;
+		cartel.lifes = uiLifes;
+		cartel.multi = uiMultiCount;
+		cartel.bomb = uiBombCount;
+		cartel.freeze = uiFreezeCount;
 
 		$(cartel).addClass('uiAlert' + gameSize);
 		$(uiScreen).addClass('guiWinScreen' + gameSize);
@@ -2411,6 +2430,14 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 		uiMultiCount.innerHTML = game.ui.multiBubbleCount;
 		uiBombCount.innerHTML = game.ui.bombBubbleCount;
 		uiFreezeCount.innerHTML = game.ui.freezeBubbleCount;
+
+		cartel.refresh = function(){
+			cartel.coins.innerHTML = (api.softgame.user.balance == undefined ? "-" : api.softgame.user.balance);
+			cartel.lifes.innerHTML = game.ui.lifes;
+			cartel.multi.innerHTML = game.ui.multiBubbleCount;
+			cartel.bomb.innerHTML = game.ui.bombBubbleCount;
+			cartel.freeze.innerHTML = game.ui.freezeBubbleCount;
+		};
 
 		$(continueButton).click(function(){
 			$(cartel).fadeOut(300, function(){
@@ -2987,6 +3014,7 @@ api.ui.showMultiBubbleBuy = function(){
 			game.ui.multiBubbleCount += 1;
 			$(api.ui.showBubbleBuyElement).remove();
 			api.ui.showBubbleBuyElement = null;
+			cartel.refresh();
 		};
 		api.ui.showWaiting();
 		api.softgame.startCoinsBuying('multiBubble', '3moremultiBubble', '', 1, '', '');
@@ -3001,6 +3029,7 @@ api.ui.showBombBubbleBuy = function(){
 			game.ui.bombBubbleCount += 1;
 			$(api.ui.showBubbleBuyElement).remove();
 			api.ui.showBubbleBuyElement = null;
+			cartel.refresh();
 		};
 		api.ui.showWaiting();
 		api.softgame.startCoinsBuying('bombBubble', '3morebombBubble', '', 1, '', '');
@@ -3015,6 +3044,7 @@ api.ui.showFreezeBubbleBuy = function(){
 			game.ui.freezeBubbleCount += 1;
 			$(api.ui.showBubbleBuyElement).remove();
 			api.ui.showBubbleBuyElement = null;
+			cartel.refresh();
 		};
 		api.ui.showWaiting();
 		api.softgame.startCoinsBuying('freezeBubble', '3morefreezeBubble', '', 1, '', '');

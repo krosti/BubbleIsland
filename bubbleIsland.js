@@ -1397,6 +1397,8 @@ function bubbleLevel(w, h, bubblesWidth, bubblesHeight, lvlnbr){
 	this.h = Math.sqrt((this.bubbleRadius*this.bubbleRadius) - ((this.bubbleRadius / 2) * (this.bubbleRadius / 2)));
 	this.bonus = .2 * this.lvlnro;
 
+	this.pointsMade = false;
+	this.specialPointsMade = false;
 	//this.character = new standAnimation(uiPanda.width, uiPanda.height, uiPanda.src, game.clock);
 	//this.character.setXY((w / 2), (game.canvas.height - uiPanda.height) - 7);
 	/*this.character.addState('load', uiPandaLoading.src, 21);
@@ -1434,6 +1436,15 @@ function bubbleLevel(w, h, bubblesWidth, bubblesHeight, lvlnbr){
 			this.shootedBubble.moveShooted();
 			//this.shootedBubble.move();//Shooted();
 			this.checkColisions();
+			if(this.pointsMade){
+				if(this.specialPointsMade){
+					soundengine.reproduceSound('specialpoints');
+				}else{
+					soundengine.reproduceSound('normalpoints');
+				};
+			};
+			this.pointsMade = false;
+			this.specialPointsMade = false;
 		};
 		for(var i = 0; i < this.animations.length; ++i){
 			this.animations[i].render();

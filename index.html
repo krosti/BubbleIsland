@@ -122,7 +122,7 @@ window.fbAsyncInit = function() {
 	<div id="optionsVolumeOn" onClick=""></div>
 	<div id="optionsVolumeOff" onClick=""></div>
 
-	<div id="facebookLogoutButton" onClick="/*api.facebook.logout(setInitState);*/FB.logout(setInitState);"></div>
+	<!--div id="facebookLogoutButton" onClick="/*api.facebook.logout(setInitState);*/FB.logout(setInitState);"></div-->
 	<div id="optionsMenuButton" onClick="$('#gameMenu')[0].style.display = 'block'; $('#optionMenu')[0].style.display = 'none';options.exitOptions();"></div>
 	<div id="optionsFacebook" onClick="postOnFacebook();//inviteFriends();"></div>
 	<div id="optionsCoins" onClick="showCoins();"></div>
@@ -343,7 +343,7 @@ loader.readyLoad = function(){
 	$('#newbutton')[0].src = uiNewButton.src;
 	$('#continuebutton')[0].src = uiContinueButton.src;
 	$('#optionbutton')[0].src = uiOptionButton.src;
-	$('#facebookLogoutButton').addClass('optionsLogout' + gameSize);
+	//$('#facebookLogoutButton').addClass('optionsLogout' + gameSize);
 
 	$('#facebookFrame').addClass('facebookFrame' + gameSize);
 	//$('#coinsFrame').addClass('coinsFrame' + gameSize);

@@ -249,7 +249,7 @@ function Loader(progress, size){
 
 		/*soundengine.soundloaded = this.loaded;*/
 
-		soundengine.addSound('bounce', 'sounds/fx/bounce.mp3');
+		/*soundengine.addSound('bounce', 'sounds/fx/bounce.mp3');
 		soundengine.addSound('bubblethrow', 'sounds/fx/bubblethrow.mp3');
 		soundengine.addSound('losesound', 'sounds/fx/losesound.mp3');
 		soundengine.addSound('winsound', 'sounds/fx/winsound.mp3');
@@ -262,7 +262,7 @@ function Loader(progress, size){
 		//soundengine.addSound('background', 'sounds/music/backgroundmusic.mp3');
 
 		soundengine.addTheme('maintheme', 'sounds/music/maintheme.mp3', 8000);
-		soundengine.addTheme('background', 'sounds/music/backgroundmusic.mp3', 62000);
+		soundengine.addTheme('background', 'sounds/music/backgroundmusic.mp3', 62000)*/
 	};
 
 };

@@ -116,7 +116,7 @@ window.fbAsyncInit = function() {
 	<div id="generalLeaderboard"></div>
 	<div id="facebookLeaderboard" style="display: none"></div>
 
-	<div id="leaderboardBackMenu" onClick="options.exitLeaderboard()"></div>
+	<div id="leaderboardBackMenu" onClick="options.exitLeaderboard(); $('#optionMenu')[0].style.display = 'block'"></div>
 </nav>
 <nav id="optionMenu" style="position: absolute; top: 0px; left: 0px; width: 100%; min-height: 100%; display: none;" >
 	<div id="optionsVolumeOn" onClick="soundengine.reproduceSound('optionin');soundengine.enableSound();"></div>

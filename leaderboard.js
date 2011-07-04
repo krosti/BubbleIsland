@@ -26,8 +26,8 @@ function SubmitComplete(response)
 function retrieveLeaderboard(divFB, divGen){
 	LeaderBoard.divGen = document.getElementById(divGen);
 	LeaderBoard.divFB = document.getElementById(divFB);
-    api.leaderboard.list(4, retrieveGeneralLeaderboard);
-    api.leaderboard.list(4, retrieveFacebookLeaderboard, api.facebook.friends);
+    api.leaderboard.list(api.facebook.user.id, retrieveGeneralLeaderboard);
+    api.leaderboard.list(api.facebook.user.id, retrieveFacebookLeaderboard, api.facebook.friends);
 	//Playtomic.Leaderboard.List("highscores", retrieveGeneralLeaderboard, { perpage: 5});
 	//Playtomic.Leaderboard.List("highscores", retrieveFacebookLeaderboard, { facebook: true, friendslist: api.facebook.friends, perpage: 5 });
 };

@@ -220,7 +220,7 @@ function connectToFacebook2(){
 			api.ui.hideWaiting();		
 			if(firstRun) api.facebook.postMessage(api.facebook.user.name + ' is now playing Bubble Paradise, join ' + (api.facebook.user.gender == 'male' ? 'him' : 'her') + ' on this link @' . api.facebook.appname + '!');
 		};
-		soundengine.startThemes(['background', 'maintheme']);
+		//soundengine.startThemes(['background', 'maintheme']);
 };
 
 function needLogin(){

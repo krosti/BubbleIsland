@@ -246,6 +246,7 @@ $(window).load(function () {
 	if(window.localStorage.getItem('enablesound') == null){
 		window.localStorage.setItem('enablesound', 1);
 		soundengine.enable = true;
+		document.getElementById("optionsVolumeOn").style.display = 'none';
 	}else{
 		if(window.localStorage.getItem('enablesound') == 1){
 			soundengine.enable = true;

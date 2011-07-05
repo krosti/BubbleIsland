@@ -827,7 +827,7 @@ function bubble(l){
 		//stop moving
 		this.dx = 0;
 		this.dy = 0;
-		//soundengine.reproduceSound('bubblethrow');
+		soundengine.reproduceSound('hit');
 		return; 
 	};
 

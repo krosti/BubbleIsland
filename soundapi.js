@@ -148,13 +148,17 @@ soundengine.enableSound = function(){
 	soundengine.backgroundsound.loop();
 	soundengine.starttheme();
 	window.localStorage.setItem('enablesound', 1);
+	soundsengine.soundToggled();
 };
 soundengine.disableSound = function(){
 	soundengine.enable = false;
 	soundengine.stopbackground();
 	soundengine.stoptheme();
 	window.localStorage.setItem('enablesound', 0);
+	soundsengine.soundToggled();
 };
+
+soundengine.soundToggled = function(){};
 
 soundengine.backgroundsound = {};
 soundengine.backgroundsound.duration = 1000;

@@ -77,19 +77,6 @@
 	</style>
 </head>
 <body>
-<div id="fb-root"></div>
-<script>
-window.fbAsyncInit = function() {
-		    FB.init({appId: api.facebook.appid, status: true, cookie: true,
-		             xfbml: true});
-		  };
-		  (function() {
-		    var e = document.createElement('script'); e.async = true;
-		    e.src = document.location.protocol +
-		      '//connect.facebook.net/en_US/all.js';
-		    document.getElementById('fb-root').appendChild(e);
-		  }());
-</script>
 <nav id="backgroundNav" style="position: absolute; top: 0px; left: 0px;" ontouchmove="touchMove(event);">
 
 <nav id="frameBackground" style="width: 100%; height: 300px; background-position: bottom center; position: absolute; top: 0px; left: 0px; display: none">
@@ -262,8 +249,10 @@ $(window).load(function () {
 	}else{
 		if(window.localStorage.getItem('enablesound')){
 			soundengine.enable = true;
+			document.getElementById("optionsVolumeOff").style.display = 'none';
 		}else{
 			soundengine.enable = false;			
+			document.getElementById("optionsVolumeOn").style.display = 'none';
 		};
 	};
 });
@@ -417,12 +406,20 @@ loader.readyLoad = function(){
 	});
 	//});
 	//soundengine.startTheme('background');
-	/*soundengine.startbackground('sounds/music/backgroundmusic.mp3', 62000);
-	soundengine.setuptheme('sounds/music/maintheme.mp3', 8000);*/
+	soundengine.startbackground('sounds/music/backgroundmusic.mp3', 62000);
+	soundengine.setuptheme('sounds/music/maintheme.mp3', 8000);
 		//soundengine.reproduceSound('background');
 };
 
-
+soundengine.soundToggled = function(){
+	if(soundengine.enable){
+		document.getElementById('optionsVolumeOn').style.display = "none";
+		document.getElementById('optionsVolumeOff').style.display = "block";
+	}else{
+		document.getElementById('optionsVolumeOff').style.display = "none";
+		document.getElementById('optionsVolumeOn').style.display = "block";
+	};
+};
 </script> 
 </body>
 </html>

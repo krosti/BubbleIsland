@@ -258,12 +258,12 @@ function Loader(progress, size){
 		soundengine.addSound('pause', 'sounds/fx/pause.mp3');
 		soundengine.addSound('specialpoints', 'sounds/fx/specialpoints.mp3');
 		soundengine.addSound('optionin', 'sounds/fx/optionin.mp3');
-		soundengine.addTheme('nacional', 'sounds/music/nacional.mp3');
+		//soundengine.addTheme('nacional', 'sounds/music/nacional.mp3');
 		soundengine.addSound('hit', 'sounds/fx/hit.mp3');
 		//soundengine.addSound('background', 'sounds/music/backgroundmusic.mp3');
 
-		soundengine.addTheme('maintheme', 'sounds/music/maintheme.mp3', 8000);
-		soundengine.addTheme('background', 'sounds/music/backgroundmusic.mp3', 62000)
+		/*soundengine.addTheme('maintheme', 'sounds/music/maintheme.mp3', 8000);
+		soundengine.addTheme('background', 'sounds/music/backgroundmusic.mp3', 62000)*/
 	};
 
 };

@@ -8,7 +8,7 @@ soundengine.enable = true;
 
 function sound(name, file, duration){
 	this.name = name;
-	this.media = new Media(file);
+	//this.media = new Media(file);
 	this.duration = duration;
 	this.timer = null;
 

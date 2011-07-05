@@ -958,7 +958,7 @@ function bubbleCannon(lvl){
 	//function shoot(x, y){
 		/*vecx = -((lvl.width / 2) - (x - this.lvl.left));
 		vecy = lvl.height - (y - this.lvl.top);*/
-		
+		if(y > (this.lvl.looseLine + (game.canvas.height - this.lvl.height))) return
 		if(!this.readyShoot) return;
 		if(!this.loaded) return;
 		this.currentBubble.x = ((lvl.width / 2) - (this.lvl.bubbleRadius / 2)) + this.lvl.leftBound;

@@ -176,7 +176,7 @@ var bombInit = 5;
 var freezeInit = 5;
 var multiInit = 5;
 
-var specialCountBubbles = 100;
+var specialCountBubbles = 1000;
 
 var currentState = {
 	level: 1,
@@ -1702,7 +1702,7 @@ function bubbleLevel(w, h, bubblesWidth, bubblesHeight, lvlnbr){
 			for(var j = 0; j < this.grilla.ancho; ++j){
 				if((j == this.grilla.ancho - 1) && isShort) continue;
 				var b = new bubble(this);
-				b.makeItRandom();
+				b.makeItRandomNormal();
 				//b.flavor = b.randomFlavor();
 				//b.makeItRandomNormal();
 				//b.flavor = "red"//b.randomFlavor();
@@ -2491,7 +2491,7 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 		//this.menu.style.zIndex = 90//this.menu.style.zIndex + 2;
 		this.menu.style.display = 'block';
 		soundengine.starttheme();
-		soundengine.stopbackground.loop();
+		soundengine.backgroundsound.loop();
 		if(this.doSerialize){
 			api.levels.serializeLevel(game);
 			api.levels.putLevel(api.facebook.user.id);

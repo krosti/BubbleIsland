@@ -247,12 +247,12 @@ $(window).load(function () {
 		window.localStorage.setItem('enablesound', 1);
 		soundengine.enable = true;
 	}else{
-		if(window.localStorage.getItem('enablesound')){
+		if(window.localStorage.getItem('enablesound') == 1){
 			soundengine.enable = true;
-			document.getElementById("optionsVolumeOff").style.display = 'none';
+			document.getElementById("optionsVolumeOn").style.display = 'none';
 		}else{
 			soundengine.enable = false;			
-			document.getElementById("optionsVolumeOn").style.display = 'none';
+			document.getElementById("optionsVolumeOff").style.display = 'none';
 		};
 	};
 });

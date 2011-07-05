@@ -8,7 +8,7 @@ soundengine.enable = true;
 
 function sound(name, file, duration){
 	this.name = name;
-	//this.media = new Media(file);
+	this.media = new Media(file);
 	this.duration = duration;
 	this.timer = null;
 
@@ -148,14 +148,14 @@ soundengine.enableSound = function(){
 	soundengine.backgroundsound.loop();
 	soundengine.starttheme();
 	window.localStorage.setItem('enablesound', 1);
-	soundsengine.soundToggled();
+	soundengine.soundToggled();
 };
 soundengine.disableSound = function(){
 	soundengine.enable = false;
 	soundengine.stopbackground();
 	soundengine.stoptheme();
 	window.localStorage.setItem('enablesound', 0);
-	soundsengine.soundToggled();
+	soundengine.soundToggled();
 };
 
 soundengine.soundToggled = function(){};

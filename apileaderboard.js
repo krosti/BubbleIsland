@@ -52,12 +52,21 @@ api.leaderboard.list = function(id, callback, friends, init, count){
 		count: perpage
 	};	
 
+	api.leaderboard.listcomplete = callback;
+
 	$.ajax({
 		url: api.leaderboard.url,
 		type: 'POST',
 		data: postdata,
+		dataType: "text json",
 		success: callback,//api.leaderboard.listcallback,
 		error: api.leaderboard.listerror
+		/*complete: function(result){
+			if(result.status == 200){
+				alert(api.JSON2String(result);
+			};	
+			alert(api.JSON2String(result);
+		};*/
 	});	
 };
 

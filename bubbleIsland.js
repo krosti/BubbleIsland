@@ -2392,18 +2392,7 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 	this.playerWin = function(){
 		soundengine.reproduceSound('winsound');
 		api.leaderboard.saveok = game.ui.setRank;
-		game.ui.onRank = function(){
-			if(cartel){
-				//$('.guiFinishRank' + gameSize)[0].innerHTML = game.ui.ranking;
-				cartel.rankingdiv.innerHTML = game.ui.ranking;
-				if((game.ui.ranking <= 3) && (game.ui.ranking > 0)){
-					api.ui.showHighScore();
-					api.facebook.post(api.facebook.user.name + " has got the " + this.ranking + "position on the Leaderboard of Bubble Paradise! What are you waiting for to beat him and enjoy this paradise!");
-				};
-			};
-		};
-		//api.leaderboard.save(4, 'Master of the Universe', game.ui.points);
-		SubmitScore();
+		
 		cartel = document.createElement('div');
 		var uiScreen = document.createElement('div');
 		var uiCoins = document.createElement('div');
@@ -2521,6 +2510,19 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 		$(document.body).append(cartel);
 
 		if(LeaderBoard.highscore < game.ui.points) api.ui.showHighScore();
+
+		game.ui.onRank = function(){
+			if(cartel){
+				//$('.guiFinishRank' + gameSize)[0].innerHTML = game.ui.ranking;
+				cartel.rankingdiv.innerHTML = game.ui.ranking;
+				if((game.ui.ranking <= 3) && (game.ui.ranking > 0)){
+					api.ui.showHighScore();
+					api.facebook.post(api.facebook.user.name + " has got the " + this.ranking + "position on the Leaderboard of Bubble Paradise! What are you waiting for to beat him and enjoy this paradise!");
+				};
+			};
+		};
+		//api.leaderboard.save(4, 'Master of the Universe', game.ui.points);
+		SubmitScore();
 	};
 
 	this.showMenu = function(){

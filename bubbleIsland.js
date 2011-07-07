@@ -980,7 +980,7 @@ function bubbleCannon(lvl){
 		this.lvl.setShootedBubble(this.currentBubble);	
 		this.currentBubble.element.style.zIndex = 'auto';
 		this.object.setCurrentState('shoot');
-		$('.trace').detach();
+		$('.trace').remove();
 		/*if(this.currentBubble.bombBall) game.ui.addBombBubbleCount();
 		if(this.currentBubble.freezeBall) game.ui.addFreezeBubbleCount();
 		if(this.currentBubble.secondFlavor != '') game.ui.addMultiBubbleCount();*/
@@ -1376,6 +1376,23 @@ function bubbleTable(ancho, alto, lvl){
 			};
 			return result;
 		};
+	
+	this.dispose = function(){
+		for(var i = 0; i < this.Table.length; ++i){
+			for(var j = 0; j < this.Table[i].length; ++j){
+				delete this.Table[i][j];
+				this.Table[i][j] = null;
+			}
+		};
+		delete this.Table;
+		this.Table = null;
+		for(var i = 0; i < this.touchedBubbles.length; ++i){
+			delete this.touchedBubbles[i];
+			this.touchedBubbles[i] = null;
+		};
+		delete this.touchedBubbles;
+		this.touchedBubbles = null;
+	}; 
 }
 
 function bubbleLevel(w, h, bubblesWidth, bubblesHeight, lvlnbr){
@@ -1787,10 +1804,18 @@ function bubbleLevel(w, h, bubblesWidth, bubblesHeight, lvlnbr){
 			var b = this.bubbles_array[i];
 			b.stopMove();
 			$(b.element).remove();
+			delete b.element;
+			b.element = null;
+			delete b;
+			b = null;
 		};
 		for(var i = 0; i < this.animations.length; ++i){
 			var b = this.animations[i];
 			$(b.element).remove();
+			delete b.element;
+			b.element = null;
+			delete b;
+			b = null;
 		};
 		$(this.character.element).remove();
 		if(this.cannon != null){
@@ -1799,9 +1824,13 @@ function bubbleLevel(w, h, bubblesWidth, bubblesHeight, lvlnbr){
 			if(this.cannon.bufferBubble != null) $(this.cannon.bufferBubble.element).remove();
 		};
 		if(this.shootedBubble != null) $(this.shootedBubble.element).remove();
-		$('.bubble').detach();
-		$('.trace').detach();
+		$('.bubble').remove();
+		$('.trace').remove();
+		if(this.grilla != null) this.grilla.dispose();
+		delete this.cannon;
+		delete this.grilla;
 		this.cannon = null;
+		this.grilla = null;
 	};
 
 	
@@ -2194,6 +2223,11 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 	};
 
 	this.createLvl = function(levelnumber){
+		if((game.level != "") && (game.level != null)){
+			game.level.clearBoard();
+			delete game.level;
+			game.level = null;
+		};
 		switch(this.size){
 			case "320x480":
 				this.canvas.width = 320;
@@ -2326,7 +2360,8 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 				$(cartel).fadeOut(300, function(){
 					game.ui.lifes -= 1;					
 					if(game.ui.lifes == -1){
-						game.level = {};
+						game.level.clearBoard();
+						//game.level = {};
 						game.level = '';
 						game.ui.lifes = 5;
 						game.ui.points = 0;
@@ -2455,6 +2490,7 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 				game.ui.pointsCounter = game.ui.points;
 				game.nextLevel();
 				$(cartel).remove();
+				delete cartel;
 			});
 		});
 
@@ -2473,6 +2509,7 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 					game.ui.lifes += lifesPerCoins;
 					$(cartel).remove();
 					$(api.ui.losescreendiv).remove();
+					delete api.ui.losescreendiv;
 					api.ui.losescreendiv = null;
 					game.playerLoose();
 				//});
@@ -2589,7 +2626,7 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 	//animNav.tap(this.mouseClick);
 	animNav.click(this.mouseClick);
 
-	retrieveHighScore();
+	//retrieveHighScore();
 }
 
 function tick(){
@@ -2813,6 +2850,8 @@ api.ui.alert2 = function(msg, fns){
 		$(button).click(function(){
 			$(api.ui.alert2nav).fadeOut(300, function(){
 				$(api.ui.alert2nav).remove();
+				delete api.ui.alert2nav;
+				api.ui.alert2nav = null;
 			});
 		});
 		
@@ -2877,6 +2916,8 @@ api.ui.showBalance = function(){
 		$(buybutton).click(function(){
 			api.ui.balancediv.style.display = 'none';		
 			$(api.ui.balancediv).remove();
+			delete api.ui.balancediv;
+			api.ui.balancediv = null;
 			window.location = api.softgame.getBuyingCoinsUrl();
 		});
 	};
@@ -2908,6 +2949,8 @@ api.ui.showLoseScreen = function(){
 
 		$(okbutton).click(function(){
 			api.ui.losescreendiv.style.display = 'none';	
+			if(game.level) game.level.clearBoard();
+			delete game.level;
 			game.level = null;
 			game.level = '';
 			game.showMenu();
@@ -2920,6 +2963,7 @@ api.ui.showLoseScreen = function(){
 					game.ui.lifes += lifesPerCoins;
 					$(cartel).remove();
 					$(api.ui.losescreendiv).remove();
+					delete api.ui.losescreendiv;
 					api.ui.losescreendiv = null;
 					game.playerLoose();
 				//});
@@ -2935,17 +2979,18 @@ api.ui.showLoseScreen = function(){
 };
 
 api.ui.waitTimer = 0;
-api.ui.waitdiv = '';
+api.ui.waitdiv = null;
 api.ui.highscore = null;
 
 api.ui.showWaiting = function(){
-	if(api.ui.waitdiv == ''){
+	if(api.ui.waitdiv == null){
 		api.ui.waitdiv = document.createElement('div');
 		$(api.ui.waitdiv).addClass('uiAlert' + gameSize);
 		var waiting = document.createElement('div');
 		$(waiting).addClass('uiAlert' + gameSize);
 		waiting.style.backgroundRepeat = 'no-repeat';
 		waiting.style.backgroundImage = 'url(' + gameSize + '/waitscreen.png)';
+		waiting.style.backgroundPosition = 'center top';
 		api.ui.waitdiv.appendChild(waiting);
 		$(document.body).append(api.ui.waitdiv);
 	};
@@ -2955,6 +3000,9 @@ api.ui.showWaiting = function(){
 
 api.ui.hideWaiting = function(){
 	api.ui.waitdiv.style.display = 'none';
+	$(api.ui.waitdiv).remove();
+	delete api.ui.waitdiv;
+	api.ui.waitdiv = null;
 	//clearTimeout(api.ui.waitTimer);
 };
 
@@ -2976,6 +3024,8 @@ api.ui.showHighScore = function(){
 		//$(api.ui.highscore).show();
 		$(alertuibutton).click(function(){
 			$(api.ui.highscore).remove();
+			delete api.ui.highscore;
+			api.ui.highscore = null;
 		});
 	};
 	$(api.ui.highscore).show();
@@ -2987,6 +3037,7 @@ api.ui.showBubbleBuy = function(cartel, button1, button2, callback1, callback2){
 	if(callback2 == undefined){
 		callback2 = function(){
 			$(api.ui.showBubbleBuyElement).remove();
+			delete api.ui.showBubbleBuyElement;
 			api.ui.showBubbleBuyElement = null;
 		};
 	};

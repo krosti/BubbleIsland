@@ -196,7 +196,7 @@ function connectToFacebook2(){
 		$('#FBnav')[0].style.display = 'none';
 		//};
 		api.ui.hideWaiting();
-		soundengine.starttheme();
+		//soundengine.starttheme();
 		//alert(document.cookie);
 		/*api.softgame.onLogin = function(){
 			
@@ -259,11 +259,16 @@ $(window).load(function () {
 });
 var gameSize = "320x480";
 var leaderboardElided = 18;
-if(screen.width >= 854) gameSize = "854x480";
-if(screen.width <= 640) gameSize = "640x960";
-if(screen.width <= 480) gameSize = "480x800";
-if(screen.width <= 360) gameSize = "360x480";
-if(screen.width <= 320) gameSize = "320x480";
+if((screen.width == "854" && screen.height == "480") || (screen.width == "854" && screen.height == "480")){
+	gameSize = "854x480";
+}else{
+	if(screen.width <= 640) gameSize = "640x960";
+	if(screen.width <= 480) gameSize = "480x800";
+	if(screen.width <= 360) gameSize = "360x480";
+	if(screen.width <= 320) gameSize = "320x480";
+};
+//if(screen.width >= 854) gameSize = "854x480";
+gameSize = "320x480";
 /*if(screen.width <= 640) gameSize = "640x960";
 if(screen.width <= 320) gameSize = "320x480";*/
 //var gameSize = "320x480";

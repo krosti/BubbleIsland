@@ -415,6 +415,33 @@
 	top: 715px;
 }
 
+.guiFinishBuyMulti640x960{
+    background-image: url("../640x960/guibuycoins.png");
+    left: 147px;
+	height: 65px;
+	position: fixed;
+	top: 662px;
+	width: 65px;
+}
+
+.guiFinishBuyFreeze640x960{
+    background-image: url("../640x960/guibuycoins.png");
+	height: 79px;
+	left: 500px;
+	position: fixed;
+	top: 662px;
+	width: 79px;
+}
+
+.guiFinishBuyBomb640x960{
+    background-image: url("../640x960/guibuycoins.png");
+	height: 70px;
+	left: 315px;
+	position: fixed;
+	top: 659px;
+	width: 70px;
+}
+
 .guiBalanceCartel640x960{
 	position: fixed;
 	background-image: url(../640x960/guibalancescreen.png);
@@ -674,11 +701,11 @@
 
 .guiBuyFreezeNo640x960{
     background-image: url("../640x960/buyfreezeno.png");
-    height: 107px;
-    left: 219px;
-    position: fixed;
-    top: 298px;
-    width: 219px;
+    height: 134px;
+	left: 289px;
+	position: fixed;
+	top: 409px;
+	width: 287px;
 }
 
 .uiAlert640x960{

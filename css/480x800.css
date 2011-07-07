@@ -74,7 +74,7 @@
 	height: 59px;
 	left: 327px;
 	padding-left: 25px;
-	padding-top: 18px;
+	padding-top: 21px;
 	position: fixed;
 	text-align: left;
 	top: 51px;
@@ -98,7 +98,7 @@
     height: 69px;
     left: 415px;
     padding-left: 30px;
-    padding-top: 50px;
+    padding-top: 60px;
     position: fixed;
     top: 190px;
     width: 89px;
@@ -337,7 +337,7 @@
     height: 12px;
     left: 150px;
     position: fixed;
-    top: 458px;
+    top: 462px;
     width: 30px;
 }
 
@@ -347,7 +347,7 @@
     height: 12px;
     left: 282px;
     position: fixed;
-    top: 458px;
+    top: 462px;
     width: 30px;
 }
 
@@ -357,7 +357,7 @@
     height: 12px;
     left: 415px;
     position: fixed;
-    top: 458px;
+    top: 462px;
     width: 30px;
 }
 
@@ -397,6 +397,34 @@
     position: fixed;
     top: 500px;
     width: 221px;
+}
+
+
+.guiFinishBuyMulti480x800{
+    background-image: url("../480x800/guibuycoins.png");
+    left: 102px;
+	height: 60px;
+	position: fixed;
+	top: 466px;
+	width: 60px;
+}
+
+.guiFinishBuyFreeze480x800{
+    background-image: url("../480x800/guibuycoins.png");
+	height: 50px;
+	left: 365px;
+	position: fixed;
+	top: 465px;
+	width: 58px;
+}
+
+.guiFinishBuyBomb480x800{
+    background-image: url("../480x800/guibuycoins.png");
+    height: 60px;
+	left: 231px;
+	position: fixed;
+	top: 467px;
+	width: 60px;
 }
 
 .guiBalanceCartel480x800{

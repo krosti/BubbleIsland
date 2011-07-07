@@ -1,5 +1,7 @@
 api.leaderboard = {};
 api.leaderboard.url = 'http://betatester.borealdev.com.ar/api/leaderboard/index.php';
+//api.leaderboard.url = 'http://www.nestororiolo.com.ar/bb/index.php';
+
 //api.leaderboard.url = 'http://puzzlebubble.eudaimonia.com.ar/api/leaderboard/index.php';
 api.leaderboard.xhr = null;
 

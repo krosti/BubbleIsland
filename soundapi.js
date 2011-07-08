@@ -17,7 +17,7 @@ function sound(name, file, duration){
 		if(playing) return;
 		this.media.play();
 		var mahself = this;
-		this.media.timer = setTimeout(function(){ mahself.stop(); }, this.duration);
+		this.timer = setTimeout(function(){ mahself.stop(); }, this.duration);
 		//this.media.play();
 	};
 

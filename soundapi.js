@@ -11,18 +11,19 @@ function sound(name, file, duration){
 	this.media = new Media(file);
 	this.duration = duration;
 	this.timer = null;
+	this.playing = false;
 
 	this.play =function(){
-		this.media.getCurrentPosition(function(pos){
-			if(!(pos > -1)){
-				this.play();
-			};
-		});
+		if(playing) return;
+		this.media.play();
+		var mahself = this;
+		this.media.timer = setTimeout(function(){ mahself.stop(); }, this.duration);
 		//this.media.play();
 	};
 
 	this.stop = function(){
 		this.media.stop();
+		this.playing = false;
 	};
 
 	this.loop = function(){

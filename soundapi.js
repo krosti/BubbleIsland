@@ -14,10 +14,11 @@ function sound(name, file, duration){
 	this.playing = false;
 
 	this.play =function(){
-		if(this.playing) return;
+		//if(this.playing) return;
+		this.media.stop();
 		this.media.play();
-		var mahself = this;
-		this.timer = setTimeout(function(){ mahself.playing = false; }, this.duration);
+		//var mahself = this;
+		//this.timer = setTimeout(function(){ mahself.playing = false; }, this.duration);
 		//this.media.play();
 	};
 

@@ -933,7 +933,6 @@ function bubble(l){
 		anim.animationEnd = function(){};
 		animNav.append(anim.element);
 		$(this.element).remove();
-		//animNav[0].removeChild(this.element);
 		this.lvl.animations.push(anim);
 	};
 };
@@ -1333,7 +1332,7 @@ function bubbleTable(ancho, alto, lvl){
 						if(b.freezeBall) this.lvl.freezeMovement();
 						if(b.bombBall){
 							this.lvl.detonateBomb(b, 3);
-							this.explodeMarked();
+							//this.explodeMarked();
 						};
 						this.lvl.removeBubble(b);						
 						this.Table[i][j] = "vacio";
@@ -1472,26 +1471,13 @@ function bubbleLevel(w, h, bubblesWidth, bubblesHeight, lvlnbr){
 					soundengine.reproduceSound('normalpoints');
 				};
 			};
-			var masBaja = this.grilla.returnLowest();
-			/*alert(this.looseLine);*/
-			//alert(masBaja.y + this.bubbleRadius);
-
-			if((masBaja.y - (game.canvas.height - this.height)) + this.bubbleRadius > this.looseLine){
-				//alert('perdiste');
-				/*alert(this.looseLine);
-				alert(masBaja.x + this.bubbleRadius);*/
-				this.freeze = true;
-				this.finished = true;
-				this.loose();
-			};
 			this.pointsMade = false;
 			this.specialPointsMade = false;
 		};
 		for(var i = 0; i < this.animations.length; ++i){
 			this.animations[i].render();
 			if(this.animations[i].tick > this.animations[i].duration){
-				//$(this.animations[i].element).remove();
-				animNav[0].removeChild(this.animations[i].element);
+				$(this.animations[i].element).remove();
 				this.animations.remove(this.animations[i]);
 			};
 		};
@@ -1509,24 +1495,24 @@ function bubbleLevel(w, h, bubblesWidth, bubblesHeight, lvlnbr){
 		this.fpscount = Math.round(this.fpscount %  this.fallvelocity);
 		if(this.fpscount == 0) this.addRandomRow();
 
-		/*for(var i = 0; i < this.bubbles_array.length; ++i){
+		for(var i = 0; i < this.bubbles_array.length; ++i){
 			this.bubbles_array[i].move();
-		};*/
+		};
 
 		this.currentTop += this.bubbleVelocity;
 		//performance.check('move balls');
-		/*var masBaja = this.grilla.returnLowest();
-		/*alert(this.looseLine);*
+		var masBaja = this.grilla.returnLowest();
+		/*alert(this.looseLine);*/
 		//alert(masBaja.y + this.bubbleRadius);
 
 		if((masBaja.y - (game.canvas.height - this.height)) + this.bubbleRadius > this.looseLine){
 			//alert('perdiste');
 			/*alert(this.looseLine);
-			alert(masBaja.x + this.bubbleRadius);*
+			alert(masBaja.x + this.bubbleRadius);*/
 			this.freeze = true;
 			this.finished = true;
 			this.loose();
-		};*/
+		};
 	};
 
 
@@ -1709,12 +1695,7 @@ function bubbleLevel(w, h, bubblesWidth, bubblesHeight, lvlnbr){
 			};
 		};
 		//$(b.element).remove();
-		if(b != 'nada' && b != 'vacio' && b != 'techo'){ 
-			b.explode();
-			delete b.element;
-			delete b;
-			b= null;
-		};
+		if(b != 'nada' && b != 'vacio' && b != 'techo') b.explode();
 		if(this.bubbles_array.length != 0) return;
 		this.fpscount = 0;
 		this.addRandomRow();
@@ -1780,8 +1761,6 @@ function bubbleLevel(w, h, bubblesWidth, bubblesHeight, lvlnbr){
 
 		for(var i = 0; i < this.bubbles_array.length; ++i){			
 			this.bubbles_array[i].i += 1;
-			this.bubbles_array[i].y = this.h * this.bubbles_array[i].i;
-			this.bubbles_array[i].element.style.top = this.bubbles_array[i].y + 'px';
 		};
 		var i = 0;
 		while(i < ancho){
@@ -1801,20 +1780,22 @@ function bubbleLevel(w, h, bubblesWidth, bubblesHeight, lvlnbr){
 				i++;
 			};			
 		};
-	
-		this.currentTop = 0;	
-		var masBaja = this.grilla.returnLowest();
-		/*alert(this.looseLine);*/
-		//alert(masBaja.y + this.bubbleRadius);
 
-		if((masBaja.y - (game.canvas.height - this.height)) + this.bubbleRadius > this.looseLine){
-			//alert('perdiste');
-			/*alert(this.looseLine);
-			alert(masBaja.x + this.bubbleRadius);*/
-			this.freeze = true;
-			this.finished = true;
-			this.loose();
-		};
+		/*for(i = 0; i < ancho; ++i){
+			//alert(i);
+			b = new bubble(this);
+			//b.makeItRandom();
+		//b.flavor = b.randomFlavor();
+			b.makeItRandomNormal();
+			b.i = 0;
+			b.j = i;
+			b.dy = this.bubbleVelocity;
+			b.recalcXY();
+			newrow[i] = b;
+			this.addBubble(b);
+			animNav.append(b.element);
+		};	*/		
+		this.currentTop = 0;	
 	};
 	
 	this.clearBoard = function(){
@@ -1822,21 +1803,20 @@ function bubbleLevel(w, h, bubblesWidth, bubblesHeight, lvlnbr){
 		for(var i = 0; i < this.bubbles_array.length; ++i){
 			var b = this.bubbles_array[i];
 			//b.stopMove();
-			//$(b.element).remove();
 			if(b.element){
-				animNav[0].removeChild(b.element);
+				$(b.element).remove();
 				delete b.element;
 				b.element = null;
-			};			
+			};
 			delete b;
 			b = null;
 		};
 		for(var i = 0; i < this.animations.length; ++i){
 			var b = this.animations[i];
 			if(b.element){
-				animNav[0].removeChild(b.element);
+				$(b.element).remove();
 				delete b.element;
-				b.element = null;
+				b.element = null;	
 			};
 			delete b;
 			b = null;
@@ -2415,6 +2395,7 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 
 	this.playerWin = function(){
 		soundengine.reproduceSound('winsound');
+		api.leaderboard.saveok = game.ui.setRank;
 		
 		cartel = document.createElement('div');
 		var uiScreen = document.createElement('div');
@@ -2502,7 +2483,7 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 				game.ui.pointsCounter = game.ui.points;
 				game.nextLevel();
 				$(cartel).remove();
-				//delete cartel;
+				delete cartel;
 			});
 		});
 
@@ -2513,28 +2494,11 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 			api.levels.serializeLevel();
 		});
 
-		/*$(uiMultiCount).click(function(){
-			//api.ui.losescreendiv.style.display = 'none';
-			api.softgame.buyFinalized = function(){
-				api.ui.hideWaiting();
-				//api.ui.alert('You have ' + lifesPerCoins + ' more lifes!! or you are a cat or someone loves you up there :)', 'Thanks! Go on!', function(){
-					game.ui.lifes += lifesPerCoins;
-					$(cartel).remove();
-					$(api.ui.losescreendiv).remove();
-					delete api.ui.losescreendiv;
-					api.ui.losescreendiv = null;
-					game.playerLoose();
-				//});
-			};
-			api.ui.showWaiting();
-			api.softgame.startCoinsBuying('multi', 'multibomb', '', multiValue, '', '');
-		});*/
-
 		$(document.body).append(cartel);
 
 		if(LeaderBoard.highscore < game.ui.points) api.ui.showHighScore();
 
-		game.ui.onRank = function(data){
+		game.ui.onRank = function(){
 			if(cartel){
 				//$('.guiFinishRank' + gameSize)[0].innerHTML = game.ui.ranking;
 				cartel.rankingdiv.innerHTML = game.ui.ranking;
@@ -2544,7 +2508,6 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 				};
 			};
 		};
-		api.leaderboard.saveok = game.ui.setRank;
 		//api.leaderboard.save(4, 'Master of the Universe', game.ui.points);
 		SubmitScore();
 	};
@@ -3027,7 +2990,7 @@ api.ui.showWaiting = function(){
 api.ui.hideWaiting = function(){
 	api.ui.waitdiv.style.display = 'none';
 	$(api.ui.waitdiv).remove();
-	delete api.ui.waitdiv;
+	/*delete api.ui.waitdiv;*/
 	api.ui.waitdiv = null;
 	//clearTimeout(api.ui.waitTimer);
 };

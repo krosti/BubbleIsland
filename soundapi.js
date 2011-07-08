@@ -77,7 +77,12 @@ soundengine.reproduceSound = function(name){
 		if(soundengine.sounds[i].name == name){
 			found = true;
 			//soundengine.sounds[i].obj.currentTime(0);
-			soundengine.sounds[i].play();
+			//soundengine.sounds[i].play();
+			soundengine.sounds[i].getCurrentPosition(function(pos){
+				if(!(pos > -1)){
+					this.play();
+				};
+			});
 		}else{
 			++i;
 		};

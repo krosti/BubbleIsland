@@ -200,12 +200,16 @@ function connectToFacebook2(){
 		/*api.softgame.onLogin = function(){
 			
 		};*/
-		api.softgame.startConnection();
-		api.facebook.retrieveUserData();
+
 		api.facebook.loaded = function(){	
 			api.ui.hideWaiting();		
 			if(firstRun) api.facebook.postMessage(api.facebook.user.name + ' is now playing Bubble Paradise, join ' + (api.facebook.user.gender == 'male' ? 'him' : 'her') + ' on this link @' + api.facebook.appname + '!');
 		};
+
+		api.softgame.startConnection();
+		
+		api.facebook.retrieveUserData();
+		
 		soundengine.starttheme();
 		//soundengine.startThemes(['background', 'maintheme']);
 };

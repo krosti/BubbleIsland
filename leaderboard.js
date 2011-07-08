@@ -6,7 +6,7 @@ var LeaderBoard = {
 
 function SubmitScore()
 {
-    api.leaderboard.saveok = SubmitComplete;
+    //api.leaderboard.saveok = SubmitComplete;
     api.leaderboard.save(api.facebook.user.id, api.facebook.user.name, game.ui.points);
 }
 

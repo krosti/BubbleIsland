@@ -672,261 +672,131 @@ standAnimation.prototype.render = function() {
 
 //flashAnimation = function(image, width, height, totalFrames){
 function flashAnimation(image, width, height, totalFrames){
-
 	this.width = width;
-
 	this.height = height;
-
 	this.states = {};
-
 	this.currentAnim = '';
-
 	this.image = image;
-
 	this.totalFrames = totalFrames;
-
 	this.tick = 0;
-
 	var self = this;
-
 	//this.meinSpat.connect(self.render, 'tick');
-
 	//init
-
 	this.element = document.createElement('div');
-
 	//this.element.appendChild(this.baseElement);
-
 	//this.baseImage = document.createElement('img');
-
 	//this.baseImage.src = image;
-
 	//this.baseElement.src = image;
-
 	//this.setBaseStyle(this.element);
-
 	this.element.style.position = 'absolute';
-
 	/*this.element.style.top = '0px';
-
 	this.element.style.left = '0px';*/
-
 	this.element.style.overflow = 'hidden';
-
 	this.element.style.backgroundImage = 'url(' + this.image + ')';
-
 	this.element.style.width = this.width + 'px';
-
 	this.element.style.height = this.height + 'px';
-
 	this.element.style.minHeight = this.height + 'px';
-
 	//this.addState('normal', 0, 0);
-
 	this.duration = 0;
-
 };
-
-
-
-
 
 flashAnimation.prototype.setXY = function(x, y) {
-
 	this.element.style.top = y + 'px';
-
 	this.element.style.left = x + 'px';
-
 };
-
-
 
 flashAnimation.prototype.addState = function(name, start, end) {
-
 	var anim = {
-
 		start: start,
-
 		end: end
-
 	};
-
 	this.states[name] = anim;
-
 };
-
-
 
 flashAnimation.prototype.setCurrentState = function(name, repeat) {
-
-	
-
 	if(repeat == undefined) repeat = false;
-
 	if(name == ''){
-
 		this.tick = 0;
-
 		this.duration = 0;
-
 		this.element.style.backgroundPosition = '0px 0px';
-
 	};
-
 	this.currentAnim = name;
-
 	for(animName in this.states){
-
 		//alert(animName + ':' + name);
-
 		if(animName === name){		    
-
 			//this.states[animName].element.style.display = 'block';
-
 			this.tick = this.states[animName].start;
-
 			this.duration = this.states[animName].end;
-
 			var self = this;
-
 			if(!repeat){
-
 				this.animationEnd = (function(){ self.setCurrentState(''); });
-
 			}else{
-
 				this.animationEnd = (function(){});
-
 			};
-
 			break;
-
 		};
-
 	};
-
 	//this.baseElement.style.display = 'none';
-
 };
-
-
 
 flashAnimation.prototype.animationEnds = function(){
-
 	//alert('animation end');
-
 	this.setCurrentState('');
-
 };
-
-
 
 flashAnimation.prototype.render = function() {
-
 	if(this.currentAnim == '') return;
-
 	if(this.tick > this.duration){
-
 		//alert('hola');
-
 		this.animationEnd();
-
 		return
-
 	};
-
 	this.element.style.backgroundPosition = '-' + this.tick * this.width + 'px 0px';
-
 	this.tick += 1;// % duration; 
-
 	//alert('tick' + this.tick);
-
 	//this.tick = this.tick % this.duration;
-
 };
-
 //multiple div, an div per frame
-
 /*function Animation(duration, width, height, image){
-
 	this.duration = duration;
-
 	this.width = width;
-
 	this.height = height;
-
 	this.internalClock = duration / fps;
-
 	this.finished = false;
-
 	this.element = document.createElement('div');
-
 	this.frames = new Array();
-
 	for(var i = 0; i < duration; ++i){
-
 		//alert(i);
-
 		div = document.createElement('div');
-
 		div.style.width = width + 'px';
-
 		div.style.minHeight = height + 'px';
-
 		div.style.minWidth = width + 'px';
-
 		div.style.position = 'absolute';
-
 		div.style.top = '0px';
-
 		div.style.left = '0px';
-
 		div.style.backgroundPosition = i * this.width + 'px 0px';
-
 		div.style.display = 'none';
-
 		div.style.backgroundImage = 'url(' + image + ')';
-
 		this.frames.push(div);
-
 		$(this.element).append(div);
-
 	};
-
 	this.frames[0].style.display = 'block';
 
-
-
 	this.element.style.width = width + 'px';
-
 	this.element.style.minHeight = height + 'px';
-
 	this.element.style.minWidth = width + 'px';
-
 	this.element.style.position = 'absolute';
-
 	//this.element.style.backgroundImage = 'url(' + image + ')'
-
 	this.tick = 0;
-
 	
-
 	this.addMoment = function(img, stage){
-
 		/*this.ticks.push({
-
 			image: img;
-
 			i: stage
-
 		});*
-
 	};
 
-
-
 	this.setX = function(x){ this.element.style.left = x + 'px'; };
-
 	this.setY = function(y){ this.element.style.top = y + 'px'; };
 
 	

@@ -15,23 +15,29 @@ api.leaderboard.save = function(id, name, points){
 		points: points
 	};	
 
-	api.leaderboard.xhr = $.ajax({
-		type: 'POST',
-		data: postdata,
+	$.ajax({
 		url: api.leaderboard.url,
+		type: 'POST',
+		data: postdata,		
+		dataType: "text",
 		//contentType: 'application/x-www-form-urlencoded',
 		success: api.leaderboard.savecallback,
-		error: api.leaderboard.saveerror//function(a, b, c){ /*alert(a+b+c);*/}//api.leaderboard.saveerror
+		error: api.leaderboard.saveerror, //function(a, b, c){ /*alert(a+b+c);*/}//api.leaderboard.saveerror
+		/*complete: function(response){
+			alert(response);
+			if(response.status == 200){
+				//api.leaderboard.savecallback(response.responseText);
+			};
+		}*/
 	});
 };
 
 api.leaderboard.savecallback = function(data){
-	//alert(data);
 	var response = api.string2JSON(data);
+	//alert(response.status);
 	if(response.status == 1){
 		api.leaderboard.saveok(response);
 	}else{
-		//alert('error');
 		api.leaderboard.saveerror();
 	};
 };
@@ -58,15 +64,9 @@ api.leaderboard.list = function(id, callback, friends, init, count){
 		url: api.leaderboard.url,
 		type: 'POST',
 		data: postdata,
-		dataType: "text json",
+		dataType: "text",
 		success: callback,//api.leaderboard.listcallback,
 		error: api.leaderboard.listerror
-		/*complete: function(result){
-			if(result.status == 200){
-				alert(api.JSON2String(result);
-			};	
-			alert(api.JSON2String(result);
-		};*/
 	});	
 };
 
@@ -95,6 +95,7 @@ api.leaderboard.rank = function(){
 		url: api.leaderboard.url,
 		type: 'POST',
 		data: postdata,
+		dataType: "text",
 		success: api.leaderboard.rankcallback,
 		error: api.leaderboard.rankerror
 	});	

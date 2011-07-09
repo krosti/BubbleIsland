@@ -2600,11 +2600,11 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 		// call this every 1/24 seconds to make all work
 		this.ui.points = this.level.points;
 		//n = $('#'+animNav);
-		//animNav[0].style.display = 'none';
+		animNav[0].style.display = 'none';
 		this.level.moveBalls();
 		this.draw();
 		//var animTimer = setInterval(this.draw, 42);
-		//animNav[0].style.display = 'block';
+		animNav[0].style.display = 'block';
 	}
 
 	//init

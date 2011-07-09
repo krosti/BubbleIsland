@@ -194,9 +194,7 @@ function connectToFacebook2(){
 		//softgame.startConnection();
 		//alert('connectToFacebook2');
 		//api.softgame.onLoginUser = function(){			
-		$('#FBnav')[0].style.display = 'none';
 		//};
-		api.ui.hideWaiting();
 		//alert(document.cookie);
 		/*api.softgame.onLogin = function(){
 			
@@ -212,6 +210,8 @@ function connectToFacebook2(){
 		api.facebook.retrieveUserData();
 
 		soundengine.starttheme();
+		api.ui.hideWaiting();
+		$('#FBnav')[0].style.display = 'none';
 		//soundengine.startThemes(['background', 'maintheme']);
 };
 

@@ -343,332 +343,170 @@ function Timeline(fps){
 // one div, moving background
 
 function Animation(duration, width, height, image){
-
 	this.duration = duration;
-
 	this.width = width;
-
 	this.height = height;
-
 	this.internalClock = duration / fps;
-
 	this.finished = false;
-
 	this.element = document.createElement('div');
 
-
-
 	this.element.style.width = width + 'px';
-
 	this.element.style.height = height + 'px';
-
 	this.element.style.minHeight = height + 'px';
-
 	this.element.style.minWidth = width + 'px';
-
 	this.element.style.backgroundImage = 'url(' + image + ')';
-
 	//this.element.style.border = 'black solid 5px';
-
 	this.element.style.position = 'relative';
-
 	this.element.style.overflow = 'hidden';
-
 	this.tick = 0;
-
 	
-
 	this.addMoment = function(img, stage){
 
-
-
 	};
-
-
 
 	this.setX = function(x){ this.element.style.left = x + 'px'; };
-
 	this.setY = function(y){ this.element.style.top = y + 'px'; };
-
 	
-
 	this.render = function(){
-
 		//alert(this.tick);		
-
 		this.tick += 1;// % duration; 
-
 		//alert('tick' + this.tick);
-
 		if(this.tick > this.duration){
-
 			//alert('hola');
-
 			this.animationEnd();
-
 			return
-
 		};
-
 		//this.tick = this.tick % this.duration;
-
 		this.element.style.backgroundPosition = '-' + this.tick * this.width + 'px 0px';
-
 		//alert(this.element.style.backgroundPosition);
-
 		//this.frames[this.tick].style.display = 'none';
-
 	};
-
 	
-
 	this.animationEnd;
-
 };
-
 
 
 function standAnimation(width, height, image, timeline){
-
 	this.width = width;
-
 	this.height = height;
-
 	this.line = timeline;
-
 	this.self = this;
-
 	this.states = {};
-
 	this.currentAnim = '';
-
 	this.normalImage = image;
-
 	this.meinSpat = timeline;
-
 	//var self = this;
-
 	//this.meinSpat.connect(self.render, 'tick');
 
-
-
 	//init
-
 	this.element = document.createElement('div');
-
 	this.baseElement = document.createElement('img');
-
 	this.element.appendChild(this.baseElement);
-
 	//this.baseImage = document.createElement('img');
-
 	//this.baseImage.src = image;
-
 	this.baseElement.src = image;
-
 	//this.setBaseStyle(this.element);
-
 	this.element.style.position = 'absolute';
-
 	/*this.element.style.top = '0px';
-
 	this.element.style.left = '0px';*/
-
 	this.element.style.overflow = 'hidden';
 
 	//this.element.style.backgroundImage = 'url(' + this.normalImage + ')';
-
 	this.element.style.width = this.width + 'px';
-
 	this.element.style.height = this.height + 'px';
-
 	this.element.style.minHeight = this.height + 'px';
-
 	//this.setBaseStyle(this.baseImage);
-
 	//this.baseImage.style.position = 'relative';	
-
 	/*this.baseElement.style.width = this.width+'px';
-
 	this.baseElement.style.height = this.height+'px';*/
-
 	this.baseElement.style.position = 'absolute';
-
 	this.baseElement.style.top = '0px';
-
 	this.baseElement.style.left = '0px';
-
 	this.baseElement.style.overflow = 'hidden';
-
 	//this.element.style.backgroundImage = 'url(' + this.normalImage + ')';
-
 	this.baseElement.style.width = this.width + 'px';
-
 	this.baseElement.style.height = this.height + 'px';
-
 	this.baseElement.style.minHeight = this.height + 'px';
-
 };
-
-
 
 standAnimation.prototype.setBaseStyle = function(obj) {
-
 	//var style = obj.style;
-
 	this.element.style.position = 'absolute';
-
 	this.element.style.top = '0px';
-
 	this.element.style.left = '0px';
-
 	//this.element.style.overflow = 'hidden';
-
 	//this.element.style.backgroundImage = 'url(' + this.normalImage + ')';
-
 	this.element.style.width = this.width + 'px';
-
 	this.element.style.height = this.height + 'px';
-
 	this.element.style.minHeight = this.height + 'px';
-
 };
-
-
 
 standAnimation.prototype.fitNormalImage = function(){
-
 	this.baseElement.style.width = this.width + 'px';
-
 	this.baseElement.style.height = this.height + 'px';
-
 	//this.baseElement.width = this.width +'';
-
 	//this.baseElement.height = this.height +'';
-
 };
-
-
 
 /*standAnimation.prototype.setXY = function(obj, x, y) {
-
 	var style = obj.style;
-
 	style.top = y + 'px';
-
 	style.left = x + 'px';
-
 };*/
 
-
-
 standAnimation.prototype.setXY = function(x, y) {
-
 	this.element.style.top = y + 'px';
-
 	this.element.style.left = x + 'px';
-
 };
-
-
 
 standAnimation.prototype.addState = function(name, image, duration) {
-
 	var anim = new Animation(duration, this.width, this.height, image);
-
 	this.element.appendChild(anim.element);
-
 	$(this.element).append(anim.element);
-
 	anim.element.style.display = 'none';
-
 	this.states[name] = anim;
-
 };
-
-
 
 standAnimation.prototype.setCurrentState = function(name, repeat) {
-
 	
-
 	if(repeat == undefined) repeat = false;
-
 	if(name == ''){
-
 		this.baseElement.style.display = 'block';
-
 		//for(animName in this.states){
-
 			this.states[this.currentAnim].element.style.display = 'none';
-
 		//};
-
 		this.currentAnim = name;
-
 		return;
-
 	};
-
 	this.currentAnim = name;
-
 	for(animName in this.states){
-
 		//alert(animName + ':' + name);
-
 		if(animName === name){		    
-
 			this.states[animName].element.style.display = 'block';
-
 			this.states[animName].tick = 0;
-
 			var self = this;
-
 			if(!repeat){
-
 				this.states[animName].animationEnd = (function(){ self.setCurrentState(''); });
-
 			}else{
-
 				this.states[animName].animationEnd = (function(){});
-
 			};
-
 		}else{
-
 			this.states[animName].element.style.display = 'none';
-
 		};
-
 	};
-
 	this.baseElement.style.display = 'none';
-
 };
-
-
 
 standAnimation.prototype.animationEnds = function(){
-
 	//alert('animation end');
-
 	this.setCurrentState('');
-
 };
-
-
 
 standAnimation.prototype.render = function() {
-
 	//alert('render!');
-
 	if(this.currentAnim == '') return;
-
 	this.states[this.currentAnim].render();
-
 };
-
-
 
 //flashAnimation = function(image, width, height, totalFrames){
 function flashAnimation(image, width, height, totalFrames){

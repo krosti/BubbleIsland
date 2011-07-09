@@ -160,7 +160,7 @@ var game;
 var cartel;
 var frameBuffer;
 var animNav;
-var fps = 24;
+var fps = 18;
 var pointExplode = 10;
 var pointDrop = 5;
 var min_vel = .05;

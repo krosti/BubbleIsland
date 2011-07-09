@@ -783,7 +783,7 @@
 }
 
 .initScreen320x480{
-	background-image: url(../320x480/loadingscreen.png);
+	background-image: url(../320x480/loadingscreen.jpg);
 }
 
 .uiPauseButton320x480{
@@ -810,7 +810,7 @@
 	position: absolute;
 	top: 0px;
 	left: 0px;
-	background-image: url(../320x480/leaderboardscreen.png);
+	background-image: url(../320x480/leaderboardscreen.jpg);
 }
 
 .leaderboardTabs320x480{

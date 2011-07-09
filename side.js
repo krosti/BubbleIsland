@@ -180,10 +180,10 @@ function Loader(progress, size){
 
 		lvlFrame.src = this.size + this.separator + 'lvlframe.png';
 		//alert(this.size + this.separator + 'lvlframe.png');
-		backgroundImage.src = this.size + this.separator + 'background.png';
+		backgroundImage.src = this.size + this.separator + 'background.jpg';
 		//alert(backgroundImage.src);
 		logoImage.src = this.size + this.separator + 'logo.jpg';		
-		initImage.src = this.size + this.separator + 'initscreen.png';
+		initImage.src = this.size + this.separator + 'initscreen.jpg';
 		//pandaBearAnim.src = this.size + this.separator + 'animacion.png';
 		/*uiPandaStandBy.src = this.size + this.separator + 'standbyanimacion.png';
 		uiPandaLoading.src = this.size + this.separator + 'loadinganimacion.png';
@@ -209,12 +209,12 @@ function Loader(progress, size){
 		uiBackButton.src = this.size + this.separator + 'backbutton.png';
 		//uiLoadingScreen.src = this.size + this.separator + 'loadingscreen.png';
 
-		uiLeaderboardScreen.src = this.size + this.separator + 'leaderboardscreen.png';
+		uiLeaderboardScreen.src = this.size + this.separator + 'leaderboardscreen.jpg';
 		uiLeaderboardMenu.src = this.size + this.separator + 'leaderboardmenu.png';
 		uiLeaderboardHighscore.src = this.size + this.separator + 'leaderboardhighscore.png';
 		uiLeaderboardFriends.src = this.size + this.separator + 'leaderboardfriends.png';
 		uiLeaderboardStar.src = this.size + this.separator + 'leaderboardstar.png';
-		uiOptionsBackground.src = this.size + this.separator + 'optionsbackground.png';
+		uiOptionsBackground.src = this.size + this.separator + 'optionsbackground.jpg';
 		uiOptionsMenu.src = this.size + this.separator + 'optionsmenu.png';
 		uiOptionsVolumenOn.src = this.size + this.separator + 'optionsvolumenon.png';
 		uiOptionsVolumenOff.src = this.size + this.separator + 'optionsvolumenoff.png';
@@ -231,7 +231,7 @@ function Loader(progress, size){
 		uiPauseButton.src = this.size + this.separator + 'pausebutton.png';
 		uiPauseCartel.src = this.size + this.separator + 'pausecartel.png';
 
-		facebookScreen.src = this.size + this.separator + 'facebookscreen.png';
+		facebookScreen.src = this.size + this.separator + 'facebookscreen.jpg';
 		facebookButton.src = this.size + this.separator + 'facebookbutton.png';
 
 		uiNoFaceErrorScreen.src = this.size + this.separator + 'guinofacescreen.png';

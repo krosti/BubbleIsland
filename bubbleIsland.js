@@ -808,8 +808,9 @@ function bubble(l){
 		trace.style.left = (this.x + ((this.lvl.bubbleRadius - this.lvl.traceRadius) / 2)) + 'px';
 		trace.style.width = this.lvl.traceRadius + 'px'
 		trace.style.height = this.lvl.traceRadius + 'px'
-		$(trace).addClass('trace');
+		//$(trace).addClass('trace');
 		animNav.append(trace);
+		this.lvl.traces.push(trace);
 	};
 
 	this.draw = function(painter){
@@ -979,8 +980,9 @@ function bubbleCannon(lvl){
 		//this.lvl.addBubble(this.currentBubble);
 		this.lvl.setShootedBubble(this.currentBubble);	
 		this.currentBubble.element.style.zIndex = 'auto';
-		this.object.setCurrentState('shoot');
-		$('.trace').remove();
+		//this.object.setCurrentState('shoot');
+		//$('.trace').remove();
+		this.lvl.removeTraces();
 		/*if(this.currentBubble.bombBall) game.ui.addBombBubbleCount();
 		if(this.currentBubble.freezeBall) game.ui.addFreezeBubbleCount();
 		if(this.currentBubble.secondFlavor != '') game.ui.addMultiBubbleCount();*/
@@ -1407,6 +1409,7 @@ function bubbleLevel(w, h, bubblesWidth, bubblesHeight, lvlnbr){
 	this.leftBound;
 
 	this.animations = new Array();
+	this.traces = new Array();
 	
 	this.blinkTimer;
 	this.mutex = false;
@@ -1797,6 +1800,17 @@ function bubbleLevel(w, h, bubblesWidth, bubblesHeight, lvlnbr){
 		};	*/		
 		this.currentTop = 0;	
 	};
+
+	this.removeTraces = function(){
+		for(var i = 0; i < this.traces.length; ++i){
+			animNav[0].removeChild(this.traces[i]);
+			delete this.traces[i];
+			this.traces[i] = null;
+		};
+		delete this.traces;
+		this.traces = null;
+		this.traces = new Array();
+	};
 	
 	this.clearBoard = function(){
 		clearInterval(this.blinkTimer);
@@ -1828,8 +1842,9 @@ function bubbleLevel(w, h, bubblesWidth, bubblesHeight, lvlnbr){
 			if(this.cannon.bufferBubble != null) $(this.cannon.bufferBubble.element).remove();
 		};
 		if(this.shootedBubble != null) $(this.shootedBubble.element).remove();
-		$('.bubble').remove();
-		$('.trace').remove();
+		//$('.bubble').remove();
+		//$('.trace').remove();
+		this.removeTraces();
 		if(this.grilla != null) this.grilla.dispose();
 		delete this.cannon;
 		delete this.grilla;

@@ -22,7 +22,7 @@ api.leaderboard.save = function(id, name, points){
 		dataType: "text",
 		//contentType: 'application/x-www-form-urlencoded',
 		success: api.leaderboard.savecallback,
-		error: api.leaderboard.saveerror, //function(a, b, c){ /*alert(a+b+c);*/}//api.leaderboard.saveerror
+		error: api.leaderboard.saveerror //function(a, b, c){ /*alert(a+b+c);*/}//api.leaderboard.saveerror
 		/*complete: function(response){
 			alert(response);
 			if(response.status == 200){

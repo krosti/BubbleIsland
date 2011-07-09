@@ -154,7 +154,7 @@ api.softgame.userRequest = function(data){
 				balance: 10000, 
 				country: "DE", 
 				created: "2000-01-01T15:20:08+01:00", 
-				last_visit: "2000-01-02T08:36:38+01:00", 
+				last_visit: "2000-01-02T08:36:38+01:00"
 				};
 	//userdata.balancedata.balance = 10000;
 	//alert(userdata);

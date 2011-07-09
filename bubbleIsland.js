@@ -160,7 +160,7 @@ var game;
 var cartel;
 var frameBuffer;
 var animNav;
-var fps = 18;
+var fps = 22;
 var pointExplode = 10;
 var pointDrop = 5;
 var min_vel = .05;
@@ -1499,7 +1499,11 @@ function bubbleLevel(w, h, bubblesWidth, bubblesHeight, lvlnbr){
 		if(this.fpscount == 0) this.addRandomRow();
 
 		for(var i = 0; i < this.bubbles_array.length; ++i){
-			this.bubbles_array[i].move();
+			var bubble = this.bubbles_array[i];
+			var b = $(bubble.element).detach();
+			bubble.move();
+			b.appendTo(animNav);
+			//animNav.append(bubble.element);
 		};
 
 		this.currentTop += this.bubbleVelocity;

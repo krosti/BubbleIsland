@@ -292,7 +292,7 @@ function Timeline(fps){
 			return;
 		};
 		this.trigger(this.onStart);
-		this.timerId = setInterval("this.tick()", 1000/this.fps);
+		this.timerId = setInterval("this.tick()", Math.round(1000/this.fps));
 		//this.timerId = setTimeout("this.tick()", 1);
 	};
 	

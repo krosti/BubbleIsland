@@ -1497,16 +1497,22 @@ function bubbleLevel(w, h, bubblesWidth, bubblesHeight, lvlnbr){
 		//this.fpscount = Math.round(this.fpscount % (fps / this.fallvelocity));
 		this.fpscount = Math.round(this.fpscount %  this.fallvelocity);
 		if(this.fpscount == 0) this.addRandomRow();
-		//var bubbles = document.createDocumentFragment();
+		// bubblesFragment = document.createDocumentFragment();
 		for(var i = 0; i < this.bubbles_array.length; ++i){
 			var bubble = this.bubbles_array[i];
 			//var b = $(bubble.element).detach();
+			//alert('bubble: ' + bubble.flavor);
+			//bubble.element = animNav[0].removeChild(bubble.element);
 			bubble.move();
+			//alert(bubble.element.firstChild);
 			//b.appendTo(bubbles);
+			//bubblesFragment.appendChild(bubble.element);
+			//alert(bubbles.firstChild);
 			//animNav.append(bubble.element);
 		};
-		//animNav[0].appendChild(bubbles.cloneNode(true));
-		//delete bubbles;
+		/*alert('sali, pase por todos y los agregue al fragment');
+		animNav[0].appendChild(bubblesFragment.cloneNode(true));
+		delete bubblesFragment;*/
 
 		this.currentTop += this.bubbleVelocity;
 		//performance.check('move balls');
@@ -2042,9 +2048,12 @@ function gameUI(w, h){
 			var percent = ((this.pointsCounter / game.level.pointsToReach) * 100);
 			this.statusProgressBar.style.height = (percent > 100 ? 100 : percent)  + '%';
 		};
-		$(this.element).html(this.pointsCounter);
-		$(this.element2).html(this.lifes);
-		$(this.element3).html(game.level.lvlnro);
+		//$(this.element).html(this.pointsCounter);
+		this.element.innerHTML = this.pointsCounter;
+		this.element2.innerHTML = this.lifes;
+		this.element3.innerHTML = game.level.lvlnro;
+		//$(this.element2).html(this.lifes);
+		//$(this.element3).html(game.level.lvlnro);
 		/*painter.fillText(this.pointsCounter , 10, 10);
 		painter.restore();*/
 		//performance.check('draw ui');
@@ -2606,11 +2615,16 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 		// call this every 1/24 seconds to make all work
 		this.ui.points = this.level.points;
 		//n = $('#'+animNav);
-		animNav[0].style.display = 'none';
+		var span = new Date;
+		animNav[0].style.display = 'none';				
 		this.level.moveBalls();
 		this.draw();
+		
 		//var animTimer = setInterval(this.draw, 42);
 		animNav[0].style.display = 'block';
+		var span2 = new Date;
+		//console.log(span2 - span);
+		this.version.innerHTML = 'anim timer: ' + (span2 - span);
 	}
 
 	//init
@@ -2624,12 +2638,12 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 	api.softgame.buyFinalized = this.moreLifes;
 
 	//this.drawBackground(this.backgroundPainter);
-	/*var version = document.createElement('div');
-	version.innerHTML = VERSION;
-	version.style.position = 'fixed';
-	version.style.bottom = '15px';
-	version.style.left = '0px';
-	animNav.append(version);*/
+	this.version = document.createElement('div');
+	this.version.innerHTML = 'anim timer: ';
+	this.version.style.position = 'fixed';
+	this.version.style.bottom = '15px';
+	this.version.style.left = '0px';
+	animNav.append(this.version);
 	//$('#'+canvasObj).click(shoot);
 	//$('#'+canvasObj).click(this.mouseClick);
 	//$('#'+navObj).click(this.mouseClick);

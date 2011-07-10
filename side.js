@@ -665,95 +665,57 @@ flashAnimation.prototype.render = function() {
 
 
 
-function performanceStatus(updateTime, painter){
-
+function performanceStatus(updateTime){
 	this.updateEvery = updateTime;
-
 	this.checkers = {};
-
 	this.painter = painter;
-
 	this.fpsCount = 0;
-
+	this.base = 10;
 	this.timer = new Date();
 
-
-
 	this.addChecker = function(name){
-
 		this.checkers[name] = new Object();
-
 		this.checkers[name].lastStamp = this.timer.getTime();
-
 		this.checkers[name].span = 0;
-
+		this.checkers[name].element = document.createElement('div');
+		this.checkers[name].element.style.position = 'fixed';
+		this.checkers[name].element.style.zIndex = '9999';
+		this.checkers[name].element.style.top = this.base + 'px';
+		this.checkers[name].element.style.left = '20px';
+		this.base += 15;
 	};
-
-
 
 	this.check = function(name){
-
-		stop = new Date().getTime();
-
+		var stop = new Date().getTime();
 		/*alert(this.checkers[name].lastStamp);
-
 		alert(stop);*/
-
 		this.checkers[name].span = stop - this.checkers[name].lastStamp;
-
 		this.checkers[name].lastStamp = stop;
-
 	};
-
-
 
 	this.update = function(){
-
 		/*this.fpsCount++;
-
 		this.fpsCount = this.fpsCount % this.updateEvery;
-
 		if(this.fpsCount == 0) this.draw();	*/
-
 		this.draw();
-
 	};
-
-
 
 	this.draw = function(){
-
-		this.painter.save();
-
-		base = 10;
-
+		//this.painter.save();
+		var base = 10;
 		//alert('performance draw');
-
 		for(i in this.checkers){
-
 			//alert(i);
-
 			current = this.checkers[i];
-
-			this.painter.font = "bold 12px sans-serif";
-
-			this.painter.fillStyle = '#000';
-
-			this.painter.fillText(i + ' : ' + current.span , 100, base);
-
-			base += 15
-
+			current.element.innerHMTL = i + ' : ' + current.span;
+			//this.painter.font = "bold 12px sans-serif";
+			//this.painter.fillStyle = '#000';
+			//this.painter.fillText(i + ' : ' + current.span , 100, base);
+			//base += 15
 		};
-
-		this.painter.restore();
-
+		//this.painter.restore();
 	};
-
-	
-
 };
-
-
 
 function Options(menuNav, leaderNav){
 	this.sound = true;

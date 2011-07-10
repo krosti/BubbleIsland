@@ -1446,7 +1446,7 @@ function bubbleLevel(w, h, bubblesWidth, bubblesHeight, lvlnbr){
 	$(this.character.element).append(bag);
 	$(this.character.element).addClass('panda' + gameSize);
 
-	this.blinkTimer = setInterval('game.level.characterBlink()', 1500);
+	//this.blinkTimer = setInterval('game.level.characterBlink()', 1500);
 
 	//alert(this.pointsToReach);
 	//this.fallvelocity = 0.2; //balls per seccond
@@ -1691,7 +1691,7 @@ function bubbleLevel(w, h, bubblesWidth, bubblesHeight, lvlnbr){
 	
 
 	this.drawLevel = function(){
-		this.character.render();	
+		//this.character.render();	
 		//if(this.shootedBubble != undefined) this.shootedBubble.object.render();
 	};
 	

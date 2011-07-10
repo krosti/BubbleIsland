@@ -176,15 +176,18 @@ soundengine.backgroundsound = {};
 soundengine.backgroundsound.duration = 1000;
 soundengine.backgroundsound.media = null;
 soundengine.backgroundsound.timer = null;
+soundengine.backgroundsound.playing = false;
 
 soundengine.startbackground = function(file, duration){
 	soundengine.backgroundsound.media = new Media(file);
 	soundengine.backgroundsound.duration = duration;
+	soundengine.backgroundsound.playing = true;
 	if(!soundengine.enable) return;
 	soundengine.backgroundsound.loop();
 };
 
 soundengine.stopbackground = function(){
+	soundengine.backgroundsound.playing = false;
 	clearTimeout(soundengine.backgroundsound.timer);
 	soundengine.backgroundsound.media.stop();
 };
@@ -192,6 +195,7 @@ soundengine.stopbackground = function(){
 soundengine.backgroundsound.loop = function(){
 	soundengine.backgroundsound.media.stop();
 	if(!soundengine.enable) return;
+	if(!soundengine.backgroundsound.playing) return;
 	soundengine.backgroundsound.media.play();
 	soundengine.backgroundsound.timer = setTimeout('soundengine.backgroundsound.loop()', soundengine.backgroundsound.duration);
 };
@@ -202,6 +206,7 @@ soundengine.themesound = {};
 soundengine.themesound.duration = 1000;
 soundengine.themesound.media = null;
 soundengine.themesound.timer = null;
+soundengine.themesound.playing = false;
 
 soundengine.setuptheme = function(file, duration){
 	soundengine.themesound.media = new Media(file);
@@ -210,10 +215,12 @@ soundengine.setuptheme = function(file, duration){
 
 soundengine.starttheme = function(){
 	if(!soundengine.enable) return;
+	soundengine.themesound.playing = true;
 	soundengine.themesound.loop();
 }; 
 
 soundengine.stoptheme = function(){
+	soundengine.themesound.playing = false;
 	clearTimeout(soundengine.themesound.timer);
 	soundengine.themesound.media.stop();
 
@@ -222,6 +229,7 @@ soundengine.stoptheme = function(){
 soundengine.themesound.loop = function(){
 	soundengine.themesound.media.stop();
 	if(!soundengine.enable) return;
+	if(!soundengine.themesound.playing) return;
 	soundengine.themesound.media.play();
 	soundengine.themesound.timer = setTimeout('soundengine.themesound.loop()', soundengine.themesound.duration);
 };

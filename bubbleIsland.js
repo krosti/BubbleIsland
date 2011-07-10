@@ -1497,7 +1497,7 @@ function bubbleLevel(w, h, bubblesWidth, bubblesHeight, lvlnbr){
 		//this.fpscount = Math.round(this.fpscount % (fps / this.fallvelocity));
 		this.fpscount = Math.round(this.fpscount %  this.fallvelocity);
 		if(this.fpscount == 0) this.addRandomRow();
-		// bubblesFragment = document.createDocumentFragment();
+		//bubblesFragment = document.createDocumentFragment();
 		for(var i = 0; i < this.bubbles_array.length; ++i){
 			var bubble = this.bubbles_array[i];
 			//var b = $(bubble.element).detach();

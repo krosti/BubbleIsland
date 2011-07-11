@@ -248,6 +248,9 @@ $(window).load(function () {
 //SWFID: 2647
 //GUID: 3689729b4f17433c
 	setTimeout(function(){ window.scrollTo(0,1); }, 0);
+	soundengine.setuptheme('sounds/music/maintheme.mp3', 7000);
+	soundengine.setupbackground('sounds/music/backgroundmusic.mp3', 62000);
+	loader.init();
 	//ºloader.init();
 	if(window.localStorage.getItem('runned') == null){
 		firstRun = true;

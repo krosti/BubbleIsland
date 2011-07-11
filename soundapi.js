@@ -157,7 +157,7 @@ soundengine.startThemes = function(names){
 
 soundengine.enableSound = function(){
 	soundengine.enable = true;
-	soundengine.backgroundsound.loop();
+	soundengine.startbackground();
 	soundengine.starttheme();
 	window.localStorage.setItem('enablesound', 1);
 	soundengine.soundToggled();
@@ -186,19 +186,20 @@ soundengine.setupbackground = function(file, duration){
 
 soundengine.startbackground = function(){
 	if(!soundengine.enable) return;
-	soundengine.backgroundsound.timer = setInterval('soundengine.backgroundsound.loop()', soundengine.backgroundsound.duration);
+	//soundengine.backgroundsound.timer = setTimeout('soundengine.backgroundsound.loop()', soundengine.backgroundsound.duration);
 	soundengine.backgroundsound.loop();
 };
 
 soundengine.stopbackground = function(){
-	//clearTimeout(soundengine.backgroundsound.timer);
-	clearInterval(soundengine.backgroundsound.timer);
+	clearTimeout(soundengine.backgroundsound.timer);
+	//clearInterval(soundengine.backgroundsound.timer);
 	soundengine.backgroundsound.media.stop();
 };
 
 soundengine.backgroundsound.loop = function(){
 	soundengine.backgroundsound.media.stop();
 	if(!soundengine.enable) return;
+	soundengine.backgroundsound.timer = setTimeout('soundengine.backgroundsound.loop()', soundengine.backgroundsound.duration);
 	soundengine.backgroundsound.media.play();
 };
 
@@ -217,12 +218,13 @@ soundengine.setuptheme = function(file, duration){
 
 soundengine.starttheme = function(){
 	if(!soundengine.enable) return;
-	soundengine.themesound.timer = setInterval('soundengine.themesound.loop()', soundengine.themesound.duration);
+	//soundengine.themesound.timer = setInterval('soundengine.themesound.loop()', soundengine.themesound.duration);
 	soundengine.themesound.loop();
 }; 
 
 soundengine.stoptheme = function(){
-	clearInterval(soundengine.themesound.timer);
+	//clearInterval(soundengine.themesound.timer);
+	clearTimeout(soundengine.themesound.timer);
 	soundengine.themesound.media.stop();
 
 };
@@ -231,4 +233,21 @@ soundengine.themesound.loop = function(){
 	soundengine.themesound.media.stop();
 	if(!soundengine.enable) return;
 	soundengine.themesound.media.play();
+	soundengine.themesound.timer = setTimeout('soundengine.themesound.loop()', soundengine.themesound.duration);
 };
+
+/*function Media(file){
+	this.element = /*new Audio(file)*document.createElement('audio');
+	this.element.setAttribute('src', file);
+	this.element.load();
+	//document.body.appendChild(this.element);
+	
+	this.play = function(){
+		this.element.play();
+	};
+
+	this.stop = function(){
+		this.element.pause();
+		this.element.currentTime = 0;
+	};
+};*/

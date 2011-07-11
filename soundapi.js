@@ -197,7 +197,7 @@ soundengine.stopbackground = function(){
 };
 
 soundengine.backgroundsound.loop = function(){
-	//alert('loop');
+	alert('loop');
 	soundengine.backgroundsound.media.stop();
 	if(!soundengine.enable) return;
 	soundengine.backgroundsound.media.play();
@@ -231,24 +231,9 @@ soundengine.stoptheme = function(){
 };
 
 soundengine.themesound.loop = function(){
+	alert('loop theme');
 	soundengine.themesound.media.stop();
 	if(!soundengine.enable) return;
 	soundengine.themesound.media.play();
 	soundengine.themesound.timer = setTimeout('soundengine.themesound.loop()', soundengine.themesound.duration);
 };
-
-/*function Media(file){
-	this.element = /*new Audio(file)*document.createElement('audio');
-	this.element.setAttribute('src', file);
-	this.element.load();
-	//document.body.appendChild(this.element);
-	
-	this.play = function(){
-		this.element.play();
-	};
-
-	this.stop = function(){
-		this.element.pause();
-		this.element.currentTime = 0;
-	};
-};*/

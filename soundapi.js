@@ -197,7 +197,7 @@ soundengine.stopbackground = function(){
 };
 
 soundengine.backgroundsound.loop = function(){
-	alert('loop');
+	//alert('loop');
 	soundengine.backgroundsound.media.stop();
 	if(!soundengine.enable) return;
 	soundengine.backgroundsound.media.play();

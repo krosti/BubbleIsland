@@ -2639,14 +2639,6 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 	animNav.height(this.height);
 
 	api.softgame.buyFinalized = this.moreLifes;
-
-	//this.drawBackground(this.backgroundPainter);
-	/*this.version = document.createElement('div');
-	this.version.innerHTML = 'anim timer: ';
-	this.version.style.position = 'fixed';
-	this.version.style.bottom = '15px';
-	this.version.style.left = '0px';
-	animNav.append(this.version);*/
 	//$('#'+canvasObj).click(shoot);
 	//$('#'+canvasObj).click(this.mouseClick);
 	//$('#'+navObj).click(this.mouseClick);

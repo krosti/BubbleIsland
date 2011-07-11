@@ -197,10 +197,11 @@ soundengine.stopbackground = function(){
 };
 
 soundengine.backgroundsound.loop = function(){
+	alert('loop');
 	soundengine.backgroundsound.media.stop();
 	if(!soundengine.enable) return;
-	soundengine.backgroundsound.timer = setTimeout(soundengine.backgroundsound.loop, soundengine.backgroundsound.duration);
 	soundengine.backgroundsound.media.play();
+	soundengine.backgroundsound.timer = setTimeout('soundengine.backgroundsound.loop()', soundengine.backgroundsound.duration);
 };
 
 soundengine.maintheme = {};

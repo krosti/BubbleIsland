@@ -1446,7 +1446,7 @@ function bubbleLevel(w, h, bubblesWidth, bubblesHeight, lvlnbr){
 	$(this.character.element).append(bag);
 	$(this.character.element).addClass('panda' + gameSize);
 
-	//this.blinkTimer = setInterval('game.level.characterBlink()', 1500);
+	this.blinkTimer = setInterval('game.level.characterBlink()', 1500);
 
 	//alert(this.pointsToReach);
 	//this.fallvelocity = 0.2; //balls per seccond
@@ -2550,6 +2550,7 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 		//this.menu.style.zIndex = 90//this.menu.style.zIndex + 2;
 		this.menu.style.display = 'block';
 		soundengine.starttheme();
+		soundengine.backgroundsound.playing = true;
 		soundengine.backgroundsound.loop();
 		if(this.doSerialize){
 			api.levels.serializeLevel(game);

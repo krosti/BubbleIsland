@@ -192,6 +192,8 @@ soundengine.startbackground = function(){
 
 soundengine.stopbackground = function(){
 	clearTimeout(soundengine.backgroundsound.timer);
+	delete soundengine.backgroundsound.timer;
+	soundengine.backgroundsound.timer = null;
 	//clearInterval(soundengine.backgroundsound.timer);
 	soundengine.backgroundsound.media.stop();
 };
@@ -226,6 +228,8 @@ soundengine.starttheme = function(){
 soundengine.stoptheme = function(){
 	//clearInterval(soundengine.themesound.timer);
 	clearTimeout(soundengine.themesound.timer);
+	delete soundengine.themesound.timer;
+	soundengine.themesound.timer = null;
 	soundengine.themesound.media.stop();
 
 };

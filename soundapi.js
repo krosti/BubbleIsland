@@ -197,7 +197,7 @@ soundengine.stopbackground = function(){
 };
 
 soundengine.backgroundsound.loop = function(){
-	alert('loop');
+	//alert('loop');
 	soundengine.backgroundsound.media.stop();
 	if(!soundengine.enable) return;
 	soundengine.backgroundsound.media.play();
@@ -231,7 +231,7 @@ soundengine.stoptheme = function(){
 };
 
 soundengine.themesound.loop = function(){
-	alert('loop theme');
+	//alert('loop theme');
 	soundengine.themesound.media.stop();
 	if(!soundengine.enable) return;
 	soundengine.themesound.media.play();

@@ -197,7 +197,7 @@ soundengine.stopbackground = function(){
 };
 
 soundengine.backgroundsound.loop = function(){
-	soundengine.backgroundsound.media.stop();
+	//soundengine.backgroundsound.media.stop();
 	if(!soundengine.enable) return;
 	soundengine.backgroundsound.timer = setTimeout('soundengine.backgroundsound.loop()', soundengine.backgroundsound.duration);
 	soundengine.backgroundsound.media.play();
@@ -230,7 +230,7 @@ soundengine.stoptheme = function(){
 };
 
 soundengine.themesound.loop = function(){
-	soundengine.themesound.media.stop();
+	//soundengine.themesound.media.stop();
 	if(!soundengine.enable) return;
 	soundengine.themesound.media.play();
 	soundengine.themesound.timer = setTimeout('soundengine.themesound.loop()', soundengine.themesound.duration);

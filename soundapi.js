@@ -177,16 +177,21 @@ soundengine.backgroundsound.duration = 1000;
 soundengine.backgroundsound.media = null;
 soundengine.backgroundsound.timer = null;
 
-soundengine.startbackground = function(file, duration){
+soundengine.setupbackground = function(file, duration){
 	soundengine.backgroundsound.media = new Media(file);
 	soundengine.backgroundsound.duration = duration;
+};
+
+soundengine.startbackground = function(){
 	if(!soundengine.enable) return;
+	soundengine.backgroundsound.timer = setInterval(function(){ soundengine.backgroundsound.loop() }, soundengine.backgroundsound.duration);
 	soundengine.backgroundsound.loop();
 };
 
 soundengine.stopbackground = function(){
 	soundengine.backgroundsound.playing = false;
-	clearTimeout(soundengine.backgroundsound.timer);
+	//clearTimeout(soundengine.backgroundsound.timer);
+	clearInterval(soundengine.backgroundsound.timer);
 	soundengine.backgroundsound.media.stop();
 };
 
@@ -194,7 +199,7 @@ soundengine.backgroundsound.loop = function(){
 	soundengine.backgroundsound.media.stop();
 	if(!soundengine.enable) return;
 	soundengine.backgroundsound.media.play();
-	soundengine.backgroundsound.timer = setTimeout(function(){ soundengine.backgroundsound.loop() }, soundengine.backgroundsound.duration);
+	//soundengine.backgroundsound.timer = setTimeout(function(){ soundengine.backgroundsound.loop() }, soundengine.backgroundsound.duration);
 };
 
 soundengine.maintheme = {};

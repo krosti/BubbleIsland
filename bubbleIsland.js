@@ -1691,7 +1691,7 @@ function bubbleLevel(w, h, bubblesWidth, bubblesHeight, lvlnbr){
 	
 
 	this.drawLevel = function(){
-		//this.character.render();	
+		this.character.render();	
 		//if(this.shootedBubble != undefined) this.shootedBubble.object.render();
 	};
 	
@@ -2618,16 +2618,16 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 		// call this every 1/24 seconds to make all work
 		this.ui.points = this.level.points;
 		//n = $('#'+animNav);
-		var span = new Date;
+		//var span = new Date;
 		animNav[0].style.display = 'none';				
 		this.level.moveBalls();
 		this.draw();
 		
 		//var animTimer = setInterval(this.draw, 42);
 		animNav[0].style.display = 'block';
-		var span2 = new Date;
+		//var span2 = new Date;
 		//console.log(span2 - span);
-		this.version.innerHTML = 'anim timer: ' + (span2 - span);
+		//this.version.innerHTML = 'anim timer: ' + (span2 - span);
 	}
 
 	//init
@@ -2641,12 +2641,12 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 	api.softgame.buyFinalized = this.moreLifes;
 
 	//this.drawBackground(this.backgroundPainter);
-	this.version = document.createElement('div');
+	/*this.version = document.createElement('div');
 	this.version.innerHTML = 'anim timer: ';
 	this.version.style.position = 'fixed';
 	this.version.style.bottom = '15px';
 	this.version.style.left = '0px';
-	animNav.append(this.version);
+	animNav.append(this.version);*/
 	//$('#'+canvasObj).click(shoot);
 	//$('#'+canvasObj).click(this.mouseClick);
 	//$('#'+navObj).click(this.mouseClick);

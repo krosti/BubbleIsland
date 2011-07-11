@@ -42,6 +42,8 @@
 		//redirect_url = "http://www.facebook.com/connect/login_success.html";
 		document.addEventListener('deviceready', function(){			
 			loader.init();
+			soundengine.setuptheme('sounds/music/maintheme.mp3', 7000);
+			soundengine.setupbackground('sounds/music/backgroundmusic.mp3', 62000);
 			/*var media = new Media('sounds/music/backgroundmusic.mp3');
 			media.play();*/
 		}, false);
@@ -403,9 +405,8 @@ loader.readyLoad = function(){
 			});
 		});
 	});*/
-	soundengine.setuptheme('sounds/music/maintheme.mp3', 7000);
 	$('#softgamesLogoImg').show(1000, function(){
-		soundengine.startbackground('sounds/music/backgroundmusic.mp3', 62000);
+		soundengine.startbackground();
 		$('#softgamesLogoImg').delay(20000, function(){
 			//$('#softgamesLogoImg').hide();
 			/*$('#logoImg').show(1000, function(){

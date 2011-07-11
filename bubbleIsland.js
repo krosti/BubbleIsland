@@ -2550,8 +2550,8 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 		//this.menu.style.zIndex = 90//this.menu.style.zIndex + 2;
 		this.menu.style.display = 'block';
 		soundengine.starttheme();
-		soundengine.backgroundsound.playing = true;
-		soundengine.backgroundsound.loop();
+		//soundengine.backgroundsound.playing = true;
+		soundengine.startbackground();
 		if(this.doSerialize){
 			api.levels.serializeLevel(game);
 			api.levels.putLevel(api.facebook.user.id);

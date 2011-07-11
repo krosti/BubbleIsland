@@ -15,7 +15,6 @@
 	<link href="css/854x480.css" rel="stylesheet" type="text/css" />
 
 <script src="phonegap.js" type="text/javascript" charset="utf-8"></script> 
-	 <!-- 
 	<script src="jquery.js" type="text/javascript" charset="utf-8"></script> 
 	<script src="jquerycookie.js" type="text/javascript" charset="utf-8"></script> 
 	<script src="jquerymd5.js" type="text/javascript" charset="utf-8"></script> 
@@ -24,26 +23,25 @@
 	<script src="apisoftgames.js" type="text/javascript" charset="utf-8"></script>
 	<script src="jqueryMobile.js" type="text/javascript" charset="utf-8"></script>
 	<script src="soundapi.js" type="text/javascript" charset="utf-8"></script>
+	 <!-- 
 	 game
 	 <script src="jqueryMobile.js" type="text/javascript" charset="utf-8"></script> 
 	<script src="playtomic.js" type="text/javascript" charset="utf-8"></script>
 	 <script src="phonegap.js" type="text/javascript" charset="utf-8"></script> 
 	<script src="FB.js" type="text/javascript" charset="utf-8"></script> 
 	<script src="coinsApi.js" type="text/javascript" charset="utf-8"></script> 		 
-
+	  	 -->
 	<script src="leaderboard.js" type="text/javascript" charset="utf-8"></script> 
 	<script src="side.js" type="text/javascript" charset="utf-8"></script> 
 	<script src="bubbleIsland.js" type="text/javascript" charset="utf-8"></script>
-	--> 	
-
+	<!--
 	<script src="gamemin.js" type="text/javascript" charset="utf-8"></script>
+	--> 	
 
 	<script type="text/javascript" charset="utf-8">
 		//redirect_url = "http://www.facebook.com/connect/login_success.html";
 		document.addEventListener('deviceready', function(){			
 			loader.init();
-			soundengine.setuptheme('sounds/music/maintheme.mp3', 9000);
-			soundengine.setupbackground('sounds/music/backgroundmusic.mp3', 64000);
 			/*var media = new Media('sounds/music/backgroundmusic.mp3');
 			media.play();*/
 		}, false);
@@ -248,9 +246,6 @@ $(window).load(function () {
 //SWFID: 2647
 //GUID: 3689729b4f17433c
 	setTimeout(function(){ window.scrollTo(0,1); }, 0);
-	/*soundengine.setuptheme('sounds/music/maintheme.mp3', 7000);
-	soundengine.setupbackground('sounds/music/backgroundmusic.mp3', 62000);
-	loader.init();*/
 	//ºloader.init();
 	if(window.localStorage.getItem('runned') == null){
 		firstRun = true;
@@ -408,8 +403,9 @@ loader.readyLoad = function(){
 			});
 		});
 	});*/
+	soundengine.setuptheme('sounds/music/maintheme.mp3', 7000);
 	$('#softgamesLogoImg').show(1000, function(){
-		soundengine.startbackground();
+		soundengine.startbackground('sounds/music/backgroundmusic.mp3', 62000);
 		$('#softgamesLogoImg').delay(20000, function(){
 			//$('#softgamesLogoImg').hide();
 			/*$('#logoImg').show(1000, function(){

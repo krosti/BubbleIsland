@@ -2297,12 +2297,15 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 		this.level.loose = this.playerLoose;
 		this.level.win = this.playerWin;
 		this.level.makeMeRandom(linesPerLevel);
+		this.level.finished = true;
 		this.cannon = new bubbleCannon(this.level);
 		this.level.cannon = this.cannon;
 		animNav.append(this.cannon.element);
 		this.cannon.addBuffer();
 		this.cannon.chargeCannon();
 		this.cannon.setReadyShoot();
+		api.ui.showWaiting();
+		setTimeout(function(){ game.level.finished = false; api.ui.hideWaiting(); }, 1200);
 	};
 
 	

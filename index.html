@@ -418,7 +418,8 @@ loader.readyLoad = function(){
 						document.getElementById('backgroundNav').style.backgroundImage = 'url('+backgroundImage.src+')';
 						$('#frameBackground')[0].style.display = 'block';
 						connectToFacebook();
-						$("#initScreen").remove();
+						var p = $("#initScreen").remove();
+						delete p;
 							/*});
 							//alert('hola');
 						});*/

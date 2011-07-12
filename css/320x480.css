@@ -16,7 +16,7 @@
 	left: 114px;
 	min-height: 62px;
 	padding-top: 39px;
-	position: fixed;
+	position: absolute;
 	text-align: center;
 	top: 0;
 	width: 93px;
@@ -32,7 +32,7 @@
 	min-height: 62px;
 	padding-left: 37px;
 	padding-top: 32px;
-	position: fixed;
+	position: absolute;
 	top: 410px;
 	width: 82px;
 }
@@ -47,7 +47,7 @@
 	min-height: 62px;
 	padding-left: 34px;
 	padding-top: 20px;
-	position: fixed;
+	position: absolute;
 	top: 0;
 	width: 87px;
 }
@@ -60,7 +60,7 @@
 	height: 27px;
 	left: 5px;
 	min-height: 27px;
-	position: fixed;
+	position: absolute;
 	top: 50px;
 	width: 89px;
 }
@@ -74,7 +74,7 @@
 	left: 220px;
 	padding-left: 12px;
 	padding-top: 11px;
-	position: fixed;
+	position: absolute;
 	text-align: left;
 	top: 24px;
 	width: 94px;
@@ -84,7 +84,7 @@
 	background-image: url("../320x480/guibuycoins.png");
 	height: 29px;
 	left: 270px;
-	position: fixed;
+	position: absolute;
 	top: 40px;
 	width: 30px;
 }
@@ -172,7 +172,7 @@
 	height: 46px;
 	left: 246px;
 	min-height: 46px;
-	position: fixed;
+	position: absolute;
 	top: 365px;
 	width: 74px;
 }

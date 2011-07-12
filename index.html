@@ -122,17 +122,7 @@
 </nav>
 
 <nav id="gameMenu" style="width: 100%; min-height: 100%; position: absolute; top: 0px; left: 0px; text-align: center; ">
-	<div style="position: absolute; display: table; top: 20%; bottom: auto; margin: auto; width: 100%">
-		<!--span style="font: bold 20px verdana, sans-serif; text-align: center">Bubble Paradise</span><br>
-		<div style="margin-top: 20px">
-		<nav style="font: bold 15px verdana, sans-serif; margin-top: 10px" onClick="alert('why? i dont have any sound yet!')">Sounds Enable (touch for disable it)</nav>
-		<nav style="font: bold 15px verdana, sans-serif; margin-top: 10px" onCLick="alert('when you make some real points, you will want to post it')">Post my Highscore on Facebook!</nav>
-		<nav style="font: bold 15px verdana, sans-serif; margin-top: 10px" onClick="alert('oh, rly?')">Get more coins!</nav>
-		<nav style="font: bold 15px verdana, sans-serif; margin-top: 10px" onClick="options.exitOptions()">get back to Main Menu</nav>
-		<img id="newbutton" alt="" onClick="game.startNewGame();" style="margin-top: 60px"/><br>
-		<img id="continuebutton" alt="" onClick="game.continueGame();" /><br>
-		<img id="optionbutton" alt="" onClick="options.showOptions('gameMenu')" style="margin-top: 40px"/><br>
-		</div-->		
+	<div style="position: absolute; display: table; top: 20%; bottom: auto; margin: auto; width: 100%">	
 		<div id="newbutton" onClick="game.startNewGame();soundengine.reproduceSound('optionin');"></div>
 		<div id="continuebutton" onClick="game.continueGame();soundengine.reproduceSound('optionin');" ></div>
 		<div id="optionbutton" onClick="options.showOptions('gameMenu');soundengine.reproduceSound('optionin');" ></div>
@@ -356,6 +346,7 @@ loader.readyLoad = function(){
 	$('#optionMenu')[0].style.backgroundImage = 'url('+initImage.src+')';
 	$('#gameMenu')[0].style.backgroundImage = 'url('+initImage.src+')';
 	$('#frameBackground')[0].style.backgroundImage = 'url('+lvlFrame.src+')';
+	document.getElementById('backgroundNav').style.backgroundImage = 'url('+backgroundImage.src+')';
 
 	$('#newbutton')[0].src = uiNewButton.src;
 	$('#continuebutton')[0].src = uiContinueButton.src;
@@ -403,16 +394,16 @@ loader.readyLoad = function(){
 			});
 		});
 	});*/
-	/*soundengine.setuptheme('sounds/music/maintheme.mp3', 9500);
-	soundengine.setupbackground('sounds/music/backgroundmusic.mp3', 64500);*/
-	soundengine.setuptheme('/android_asset/www/sounds/music/maintheme.mp3', 9500);
-	soundengine.setupbackground('/android_asset/www/sounds/music/backgroundmusic.mp3', 64500);
-	/*$('#softgamesLogoImg').show(1000, function(){
+	soundengine.setuptheme('sounds/music/maintheme.mp3', 9500);
+	soundengine.setupbackground('sounds/music/backgroundmusic.mp3', 64500);
+	/*soundengine.setuptheme('/android_asset/www/sounds/music/maintheme.mp3', 9500);
+	soundengine.setupbackground('/android_asset/www/sounds/music/backgroundmusic.mp3', 64500);*/
+	$('#softgamesLogoImg').show(1000, function(){
 		soundengine.startbackground();
 		$('#softgamesLogoImg').delay(20000, function(){
 			//$('#softgamesLogoImg').hide();
-	º		/*$('#logoImg').show(1000, function(){
-				$('#logoImg').delay(10000, function(){*
+			/*$('#logoImg').show(1000, function(){
+				$('#logoImg').delay(10000, function(){*/
 					//$("#initScreen").remove();
 					//$("#initScreen").delay(2000, function(){
 						document.getElementById('backgroundNav').style.backgroundImage = 'url('+backgroundImage.src+')';
@@ -422,18 +413,21 @@ loader.readyLoad = function(){
 						delete p;
 							/*});
 							//alert('hola');
-						});*
+						});*/
 					//});
 		});
-	});*/
-	$('#softgamesLogoImg').show(1000);
+	});
+	/*$('#softgamesLogoImg').show(1000);
 	setTimeout(function(){
-		document.getElementById('backgroundNav').style.backgroundImage = 'url('+backgroundImage.src+')';
+		//document.getElementById('backgroundNav').style.backgroundImage = 'url('+backgroundImage.src+')';
+		document.getElementById('FBnav').style.display = 'block';
 		$('#frameBackground')[0].style.display = 'block';
-		connectToFacebook();
-		var p = $("#initScreen").remove();
-		delete p;
-	}, 10000);
+		setTimeout(function(){
+			var p = $("#initScreen").remove();
+			delete p;
+			connectToFacebook();
+		},1000);
+	}, 10000);*/
 	//});
 	//soundengine.startTheme('background');
 	

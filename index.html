@@ -414,15 +414,15 @@ loader.readyLoad = function(){
 			/*$('#logoImg').show(1000, function(){
 				$('#logoImg').delay(10000, function(){*/
 					//$("#initScreen").remove();
-					$("#initScreen").delay(2000).hide(0, function(){
+					$("#initScreen").delay(2000, function(){
 						document.getElementById('backgroundNav').style.backgroundImage = 'url('+backgroundImage.src+')';
 						$('#frameBackground')[0].style.display = 'block';
 						connectToFacebook();
-						
-					/*});
-					//alert('hola');
-				});*/
-			});
+						$(this).remove();
+							/*});
+							//alert('hola');
+						});*/
+					});
 		});
 	});
 	//});

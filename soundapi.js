@@ -184,6 +184,7 @@ soundengine.setupbackground = function(file, duration){
 
 soundengine.startbackground = function(){
 	if(!soundengine.enable) return;
+	soundengine.backgroundsound.playing = true;
 	soundengine.backgroundsound.timer = setInterval(function(){ soundengine.backgroundsound.loop() }, soundengine.backgroundsound.duration);
 	soundengine.backgroundsound.loop();
 };
@@ -198,6 +199,7 @@ soundengine.stopbackground = function(){
 soundengine.backgroundsound.loop = function(){
 	soundengine.backgroundsound.media.stop();
 	if(!soundengine.enable) return;
+	if(!soundengine.backgroundsound.playing) return;
 	soundengine.backgroundsound.media.play();
 	//soundengine.backgroundsound.timer = setTimeout(function(){ soundengine.backgroundsound.loop() }, soundengine.backgroundsound.duration);
 };

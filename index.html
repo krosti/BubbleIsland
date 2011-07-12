@@ -416,10 +416,10 @@ loader.readyLoad = function(){
 					//$("#initScreen").remove();
 					//$("#initScreen").delay(2000, function(){
 						document.getElementById('backgroundNav').style.backgroundImage = 'url('+backgroundImage.src+')';
-						$('#frameBackground')[0].style.display = 'block';
-						connectToFacebook();
-						var p = $("#initScreen").remove();
+						$('#frameBackground')[0].style.display = 'block';						
+						var p = $("#initScreen").delay(1000).remove();
 						delete p;
+						connectToFacebook();
 							/*});
 							//alert('hola');
 						});*/

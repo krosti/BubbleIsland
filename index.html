@@ -407,25 +407,33 @@ loader.readyLoad = function(){
 	soundengine.setupbackground('sounds/music/backgroundmusic.mp3', 64500);*/
 	soundengine.setuptheme('/android_asset/www/sounds/music/maintheme.mp3', 9500);
 	soundengine.setupbackground('/android_asset/www/sounds/music/backgroundmusic.mp3', 64500);
-	$('#softgamesLogoImg').show(1000, function(){
+	/*$('#softgamesLogoImg').show(1000, function(){
 		soundengine.startbackground();
 		$('#softgamesLogoImg').delay(20000, function(){
 			//$('#softgamesLogoImg').hide();
-			/*$('#logoImg').show(1000, function(){
-				$('#logoImg').delay(10000, function(){*/
+	º		/*$('#logoImg').show(1000, function(){
+				$('#logoImg').delay(10000, function(){*
 					//$("#initScreen").remove();
 					//$("#initScreen").delay(2000, function(){
 						document.getElementById('backgroundNav').style.backgroundImage = 'url('+backgroundImage.src+')';
-						$('#frameBackground')[0].style.display = 'block';						
-						var p = $("#initScreen").delay(1000).remove();
-						delete p;
+						$('#frameBackground')[0].style.display = 'block';
 						connectToFacebook();
+						var p = $("#initScreen").remove();
+						delete p;
 							/*});
 							//alert('hola');
-						});*/
+						});*
 					//});
 		});
-	});
+	});*/
+	$('#softgamesLogoImg').show(1000);
+	setTimeout(function(){
+		document.getElementById('backgroundNav').style.backgroundImage = 'url('+backgroundImage.src+')';
+		$('#frameBackground')[0].style.display = 'block';
+		connectToFacebook();
+		var p = $("#initScreen").remove();
+		delete p;
+	}, 10000);
 	//});
 	//soundengine.startTheme('background');
 	

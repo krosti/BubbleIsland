@@ -403,8 +403,10 @@ loader.readyLoad = function(){
 			});
 		});
 	});*/
-	soundengine.setuptheme('sounds/music/maintheme.mp3', 9500);
-	soundengine.setupbackground('sounds/music/backgroundmusic.mp3', 64500);
+	/*soundengine.setuptheme('sounds/music/maintheme.mp3', 9500);
+	soundengine.setupbackground('sounds/music/backgroundmusic.mp3', 64500);*/
+	soundengine.setuptheme('/android_asset/www/sounds/music/maintheme.mp3', 9500);
+	soundengine.setupbackground('/android_asset/www/sounds/music/backgroundmusic.mp3', 64500);
 	$('#softgamesLogoImg').show(1000, function(){
 		soundengine.startbackground();
 		$('#softgamesLogoImg').delay(20000, function(){

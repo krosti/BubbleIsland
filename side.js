@@ -258,7 +258,7 @@ function Loader(progress, size){
 		soundengine.addSound('pause', 'sounds/fx/pause.mp3');
 		soundengine.addSound('specialpoints', 'sounds/fx/specialpoints.mp3');
 		soundengine.addSound('optionin', 'sounds/fx/optionin.mp3');
-		soundengine.addSound('hit', 'sounds/fx/hit.mp3');
+		soundengine.addSound('hit', 'sounds/fx/hit.mp3');*/
 		/*soundengine.addSound('bounce', '/android_asset/www/sounds/fx/bounce.mp3');
 		soundengine.addSound('bubblethrow', '/android_asset/www/sounds/fx/bubblethrow.mp3');
 		soundengine.addSound('losesound', '/android_asset/www/sounds/fx/losesound.mp3');

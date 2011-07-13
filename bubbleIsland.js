@@ -794,7 +794,7 @@ function bubble(l){
 
 		if((this.x == this.lvl.leftBound) || (this.x >= this.lvl.width)){
 			this.dx = -this.dx;
-			soundengine.reproduceSound('bounce');
+			//soundengine.reproduceSound('bounce');
 		};
 		//if((currentBubble.dx == 0) || (currentBubble.dy == this.lvl.bubbleVelocity)) alert('es un hijo de puta a fuera: ' + culo);
 		if(this.y < (this.lvl.topBound + this.lvl.currentTop)){
@@ -828,7 +828,7 @@ function bubble(l){
 		//stop moving
 		this.dx = 0;
 		this.dy = 0;
-		soundengine.reproduceSound('hit');
+		//soundengine.reproduceSound('hit');
 		return; 
 	};
 
@@ -988,7 +988,7 @@ function bubbleCannon(lvl){
 		if(this.currentBubble.secondFlavor != '') game.ui.addMultiBubbleCount();*/
 		this.currentBubble = null;
 		this.chargeCannon();
-		soundengine.reproduceSound('bubblethrow');
+		//soundengine.reproduceSound('bubblethrow');
 	};
 
 	this.setReadyShoot = function(){
@@ -1467,13 +1467,13 @@ function bubbleLevel(w, h, bubblesWidth, bubblesHeight, lvlnbr){
 			this.shootedBubble.moveShooted();
 			//this.shootedBubble.move();//Shooted();
 			this.checkColisions();
-			if(this.pointsMade){
+			/*if(this.pointsMade){
 				if(this.specialPointsMade){
 					soundengine.reproduceSound('specialpoints');
 				}else{
 					soundengine.reproduceSound('normalpoints');
 				};
-			};
+			};*/
 			this.pointsMade = false;
 			this.specialPointsMade = false;
 		};
@@ -2010,7 +2010,7 @@ function gameUI(w, h){
 	});
 
 	$(this.pauseElement).click(function(){
-		soundengine.reproduceSound('pause');
+		//soundengine.reproduceSound('pause');
 		cartel = document.createElement('div');
 		var waitscreen = document.createElement('div');
 		$(cartel).addClass('uiAlert' + gameSize);		
@@ -2181,8 +2181,8 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 		//hide menu
 		//this.menu.style.zIndex = this.menu.style.zIndex - 1;
 		this.menu.style.display = 'none';
-		soundengine.stoptheme();
-		soundengine.stopbackground();
+		//soundengine.stoptheme();
+		//soundengine.stopbackground();
 		//alert('hola');
 	};
 
@@ -2203,8 +2203,8 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 			this.clock.start();
 			this.menu.style.display = 'none';			
 		};
-		soundengine.stoptheme();
-		soundengine.stopbackground();
+		//soundengine.stoptheme();
+		//soundengine.stopbackground();
 	};
 
 	this.loadPreviousGame = function(){
@@ -2312,7 +2312,7 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 
 	this.playerLoose = function(){
 		//alert('loose');
-		soundengine.reproduceSound('losesound');
+		//soundengine.reproduceSound('losesound');
 		game.level.clearBoard();
 
 		if(game.ui.lifes == 0){ // ask for more lifes!
@@ -2427,7 +2427,7 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 	};
 
 	this.playerWin = function(){
-		soundengine.reproduceSound('winsound');
+		//soundengine.reproduceSound('winsound');
 		api.leaderboard.saveok = game.ui.setRank;
 		
 		cartel = document.createElement('div');
@@ -2549,8 +2549,8 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 		game.clock.stop();
 		//this.menu.style.zIndex = 90//this.menu.style.zIndex + 2;
 		this.menu.style.display = 'block';
-		soundengine.starttheme();
-		soundengine.startbackground();
+		//soundengine.starttheme();
+		//soundengine.startbackground();
 		/*soundengine.backgroundsound.playing = true;
 		soundengine.backgroundsound.loop();*/
 		if(this.doSerialize){

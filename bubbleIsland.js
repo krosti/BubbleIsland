@@ -2009,7 +2009,7 @@ function gameUI(w, h){
 	});
 
 	$(this.pauseElement).click(function(){
-		//soundengine.reproduceSound('pause');
+		soundengine.reproduceSound('pause');
 		cartel = document.createElement('div');
 		var waitscreen = document.createElement('div');
 		$(cartel).addClass('uiAlert' + gameSize);		
@@ -2180,7 +2180,7 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 		//hide menu
 		//this.menu.style.zIndex = this.menu.style.zIndex - 1;
 		this.menu.style.display = 'none';
-		//soundengine.stoptheme();
+		soundengine.stoptheme();
 		//soundengine.stopbackground();
 		//alert('hola');
 	};
@@ -2202,7 +2202,7 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 			this.clock.start();
 			this.menu.style.display = 'none';			
 		};
-		//soundengine.stoptheme();
+		soundengine.stoptheme();
 		//soundengine.stopbackground();
 	};
 
@@ -2548,7 +2548,7 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 		game.clock.stop();
 		//this.menu.style.zIndex = 90//this.menu.style.zIndex + 2;
 		this.menu.style.display = 'block';
-		//soundengine.starttheme();
+		soundengine.starttheme();
 		//soundengine.startbackground();
 		/*soundengine.backgroundsound.playing = true;
 		soundengine.backgroundsound.loop();*/

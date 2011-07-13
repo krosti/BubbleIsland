@@ -157,7 +157,7 @@ soundengine.startThemes = function(names){
 
 soundengine.enableSound = function(){
 	soundengine.enable = true;
-	soundengine.backgroundsound.loop();
+	soundengine.startbackground();
 	soundengine.starttheme();
 	window.localStorage.setItem('enablesound', 1);
 	soundengine.soundToggled();

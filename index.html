@@ -191,7 +191,7 @@ function connectToFacebook2(){
 			
 		};*/
 		soundengine.starttheme();
-
+		setTimeout(function(){ window.scrollTo(0,1); }, 0);
 		api.facebook.loaded = function(){	
 			api.ui.hideWaiting();		
 			if(firstRun) api.facebook.postMessage(api.facebook.user.name + ' is now playing Bubble Paradise, join ' + (api.facebook.user.gender == 'male' ? 'him' : 'her') + ' on this link @' + api.facebook.appname + '!');

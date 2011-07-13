@@ -15,7 +15,7 @@
 	<link href="css/854x480.css" rel="stylesheet" type="text/css" />
 
 <script src="phonegap.js" type="text/javascript" charset="utf-8"></script> 
-	<script src="jquery.js" type="text/javascript" charset="utf-8"></script> 
+	<!--script src="jquery.js" type="text/javascript" charset="utf-8"></script> 
 	<script src="jquerycookie.js" type="text/javascript" charset="utf-8"></script> 
 	<script src="jquerymd5.js" type="text/javascript" charset="utf-8"></script> 
 	<script src="api.js" type="text/javascript" charset="utf-8"></script> 
@@ -23,20 +23,19 @@
 	<script src="apisoftgames.js" type="text/javascript" charset="utf-8"></script>
 	<script src="jqueryMobile.js" type="text/javascript" charset="utf-8"></script>
 	<script src="soundapi.js" type="text/javascript" charset="utf-8"></script>
-	 <!-- 
+
 	 game
 	 <script src="jqueryMobile.js" type="text/javascript" charset="utf-8"></script> 
 	<script src="playtomic.js" type="text/javascript" charset="utf-8"></script>
 	 <script src="phonegap.js" type="text/javascript" charset="utf-8"></script> 
 	<script src="FB.js" type="text/javascript" charset="utf-8"></script> 
 	<script src="coinsApi.js" type="text/javascript" charset="utf-8"></script> 		 
-	  	 -->
+
 	<script src="leaderboard.js" type="text/javascript" charset="utf-8"></script> 
 	<script src="side.js" type="text/javascript" charset="utf-8"></script> 
 	<script src="bubbleIsland.js" type="text/javascript" charset="utf-8"></script>
-	<!--
+	  	 -->
 	<script src="gamemin.js" type="text/javascript" charset="utf-8"></script>
-	--> 	
 
 	<script type="text/javascript" charset="utf-8">
 		//redirect_url = "http://www.facebook.com/connect/login_success.html";
@@ -103,29 +102,29 @@
 		<li><a href="#generalLeaderboard"><div id="generalLeaderboardTab"></div></a></li>
 		<li><a href="#facebookLeaderboard"><div id="facebookLeaderboardTab"></div></a></li>
 	</ul-->
-	<div id="generalLeaderboardTab" onClick="$('#generalLeaderboard')[0].style.display = 'block'; $('#facebookLeaderboard')[0].style.display = 'none';/*soundengine.reproduceSound('optionin');*/"></div>
-	<div id="facebookLeaderboardTab" onClick="$('#generalLeaderboard')[0].style.display = 'none'; $('#facebookLeaderboard')[0].style.display = 'block';/*soundengine.reproduceSound('optionin');*/"></div>
+	<div id="generalLeaderboardTab" onClick="$('#generalLeaderboard')[0].style.display = 'block'; $('#facebookLeaderboard')[0].style.display = 'none';soundengine.reproduceSound('optionin');"></div>
+	<div id="facebookLeaderboardTab" onClick="$('#generalLeaderboard')[0].style.display = 'none'; $('#facebookLeaderboard')[0].style.display = 'block'; soundengine.reproduceSound('optionin');"></div>
 	<div id="generalLeaderboard"></div>
 	<div id="facebookLeaderboard" style="display: none"></div>
 
-	<div id="leaderboardBackMenu" onClick="options.exitLeaderboard(); $('#optionMenu')[0].style.display = 'none'; $('#gameMenu')[0].style.display = 'block';/*soundengine.reproduceSound('optionin');*/"></div>
+	<div id="leaderboardBackMenu" onClick="options.exitLeaderboard(); $('#optionMenu')[0].style.display = 'none'; $('#gameMenu')[0].style.display = 'block';soundengine.reproduceSound('optionin');"></div>
 </nav>
 <nav id="optionMenu" style="position: absolute; top: 0px; left: 0px; width: 100%; min-height: 100%; display: none;" >
-	<div id="optionsVolumeOn" onClick="/*soundengine.reproduceSound('optionin');soundengine.enableSound();*/"></div>
-	<div id="optionsVolumeOff" onClick="/*soundengine.reproduceSound('optionin');soundengine.disableSound();*/"></div>
+	<div id="optionsVolumeOn" onClick="soundengine.reproduceSound('optionin');soundengine.enableSound();"></div>
+	<div id="optionsVolumeOff" onClick="soundengine.reproduceSound('optionin');soundengine.disableSound();"></div>
 
 	<!--div id="facebookLogoutButton" onClick="/*api.facebook.logout(setInitState);*/FB.logout(setInitState);"></div-->
-	<div id="optionsMenuButton" onClick="$('#gameMenu')[0].style.display = 'block'; $('#optionMenu')[0].style.display = 'none';options.exitOptions();/*soundengine.reproduceSound('optionin');*/"></div>
-	<div id="optionsFacebook" onClick="postOnFacebook();/*soundengine.reproduceSound('optionin');*/ //inviteFriends();"></div>
-	<div id="optionsCoins" onClick="showCoins();/*soundengine.reproduceSound('optionin');*/"></div>
-	<div id="optionsLeaderboards" onClick="options.showLeaderboard('optionMenu'); retrieveLeaderboard('facebookLeaderboard', 'generalLeaderboard');/*soundengine.reproduceSound('optionin');*/"></div>
+	<div id="optionsMenuButton" onClick="$('#gameMenu')[0].style.display = 'block'; $('#optionMenu')[0].style.display = 'none';options.exitOptions();soundengine.reproduceSound('optionin');"></div>
+	<div id="optionsFacebook" onClick="postOnFacebook();soundengine.reproduceSound('optionin');//inviteFriends();"></div>
+	<div id="optionsCoins" onClick="showCoins();soundengine.reproduceSound('optionin');"></div>
+	<div id="optionsLeaderboards" onClick="options.showLeaderboard('optionMenu'); retrieveLeaderboard('facebookLeaderboard', 'generalLeaderboard');soundengine.reproduceSound('optionin');"></div>
 </nav>
 
 <nav id="gameMenu" style="width: 100%; min-height: 100%; position: absolute; top: 0px; left: 0px; text-align: center; ">
 	<div style="position: absolute; display: table; top: 20%; bottom: auto; margin: auto; width: 100%">	
-		<div id="newbutton" onClick="game.startNewGame();/*soundengine.reproduceSound('optionin');*/"></div>
-		<div id="continuebutton" onClick="game.continueGame();/*soundengine.reproduceSound('optionin');*/" ></div>
-		<div id="optionbutton" onClick="options.showOptions('gameMenu');/*soundengine.reproduceSound('optionin');*/" ></div>
+		<div id="newbutton" onClick="game.startNewGame();soundengine.reproduceSound('optionin');"></div>
+		<div id="continuebutton" onClick="game.continueGame();soundengine.reproduceSound('optionin');" ></div>
+		<div id="optionbutton" onClick="options.showOptions('gameMenu');soundengine.reproduceSound('optionin');" ></div>
 
 		<div id="facebookFrame" onClick=" postOnFacebook(); api.ui.alert('Thanks for sharing!', 'Ok!');"></div>
 		<!--div id="coinsFrame" onClick="showCoins();"></div-->
@@ -242,7 +241,7 @@ $(window).load(function () {
 		window.localStorage.setItem('runned', 1);
 	};
 
-	/*if(window.localStorage.getItem('enablesound') == null){
+	if(window.localStorage.getItem('enablesound') == null){
 		window.localStorage.setItem('enablesound', 1);
 		soundengine.enable = true;
 		document.getElementById("optionsVolumeOn").style.display = 'none';
@@ -254,7 +253,7 @@ $(window).load(function () {
 			soundengine.enable = false;			
 			document.getElementById("optionsVolumeOff").style.display = 'none';
 		};
-	};*/
+	};
 });
 var gameSize = "320x480";
 var leaderboardElided = 18;
@@ -394,16 +393,16 @@ loader.readyLoad = function(){
 			});
 		});
 	});*/
-	/*soundengine.setuptheme('sounds/music/maintheme.mp3', 9500);
-	soundengine.setupbackground('sounds/music/backgroundmusic.mp3', 64500);*/
+	soundengine.setuptheme('sounds/music/maintheme.mp3', 9500);
+	soundengine.setupbackground('sounds/music/backgroundmusic.mp3', 64500);
 	/*soundengine.setuptheme('/android_asset/www/sounds/music/maintheme.mp3', 9500);
 	soundengine.setupbackground('/android_asset/www/sounds/music/backgroundmusic.mp3', 64500);*/
-	/*$('#softgamesLogoImg').show(1000, function(){
+	$('#softgamesLogoImg').show(1000, function(){
 		soundengine.startbackground();
 		$('#softgamesLogoImg').delay(20000, function(){
 			//$('#softgamesLogoImg').hide();
 			/*$('#logoImg').show(1000, function(){
-				$('#logoImg').delay(10000, function(){*
+				$('#logoImg').delay(10000, function(){*/
 					//$("#initScreen").remove();
 					//$("#initScreen").delay(2000, function(){
 						document.getElementById('backgroundNav').style.backgroundImage = 'url('+backgroundImage.src+')';
@@ -413,14 +412,14 @@ loader.readyLoad = function(){
 						delete p;
 							/*});
 							//alert('hola');
-						});*
+						});*/
 					//});
 		});
-	});*/
+	});
 	/*soundengine.setuptheme('/android_asset/www/sounds/music/maintheme.mp3', 9500);
-	soundengine.setupbackground('/android_asset/www/sounds/music/backgroundmusic.mp3', 64500);*/
+	soundengine.setupbackground('/android_asset/www/sounds/music/backgroundmusic.mp3', 64500);
 	$('#softgamesLogoImg').show(1000, function(){
-		//soundengine.startbackground();
+		soundengine.startbackground();
 		$('#softgamesLogoImg').delay(20000, function(){
 			document.getElementById('backgroundNav').style.backgroundImage = 'url('+backgroundImage.src+')';
 			$('#frameBackground')[0].style.display = 'block';
@@ -428,17 +427,17 @@ loader.readyLoad = function(){
 			var p = $("#initScreen").remove();
 			delete p;
 		});
-	});
+	});*/
 
 	//$('#softgamesLogoImg').show(1000);
 	/*document.getElementById('softgamesLogoImg').style.display = 'block';
 	setTimeout(function(){
 		//document.getElementById('backgroundNav').style.backgroundImage = 'url('+backgroundImage.src+')';
-		document.getElementById('FBnav').style.display = 'block';
+		//document.getElementById('FBnav').style.display = 'block';
 		$('#frameBackground')[0].style.display = 'block';
 		setTimeout(function(){
-			var p = $("#initScreen").remove();
-			delete p;
+			$("#initScreen").remove();
+			//delete p;
 			connectToFacebook();
 		},1000);
 	}, 6000);*/

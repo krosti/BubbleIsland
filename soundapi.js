@@ -157,13 +157,9 @@ soundengine.startThemes = function(names){
 
 soundengine.enableSound = function(){
 	soundengine.enable = true;
-	alert('1');
 	soundengine.startbackground();
-	alert('2');
 	setTimeout(function(){ soundengine.starttheme(); }, 1000);
-	alert('3');
 	window.localStorage.setItem('enablesound', 1);
-	alert('4');
 	soundengine.soundToggled();
 };
 soundengine.disableSound = function(){

@@ -794,7 +794,7 @@ function bubble(l){
 
 		if((this.x == this.lvl.leftBound) || (this.x >= this.lvl.width)){
 			this.dx = -this.dx;
-			//soundengine.reproduceSound('bounce');
+			soundengine.reproduceSound('bounce');
 		};
 		//if((currentBubble.dx == 0) || (currentBubble.dy == this.lvl.bubbleVelocity)) alert('es un hijo de puta a fuera: ' + culo);
 		if(this.y < (this.lvl.topBound + this.lvl.currentTop)){
@@ -828,7 +828,7 @@ function bubble(l){
 		//stop moving
 		this.dx = 0;
 		this.dy = 0;
-		//soundengine.reproduceSound('hit');
+		soundengine.reproduceSound('hit');
 		return; 
 	};
 
@@ -988,7 +988,7 @@ function bubbleCannon(lvl){
 		if(this.currentBubble.secondFlavor != '') game.ui.addMultiBubbleCount();*/
 		this.currentBubble = null;
 		this.chargeCannon();
-		//soundengine.reproduceSound('bubblethrow');
+		soundengine.reproduceSound('bubblethrow');
 	};
 
 	this.setReadyShoot = function(){
@@ -1466,7 +1466,7 @@ function bubbleLevel(w, h, bubblesWidth, bubblesHeight, lvlnbr){
 			this.shootedBubble.moveShooted();
 			//this.shootedBubble.move();//Shooted();
 			this.checkColisions();
-			/*if(this.pointsMade){
+			if(this.pointsMade){
 				if(this.specialPointsMade){
 					soundengine.reproduceSound('specialpoints');
 				}else{
@@ -1474,7 +1474,7 @@ function bubbleLevel(w, h, bubblesWidth, bubblesHeight, lvlnbr){
 				};
 			};
 			this.pointsMade = false;
-			this.specialPointsMade = false;*/
+			this.specialPointsMade = false;
 		};
 		for(var i = 0; i < this.animations.length; ++i){
 			this.animations[i].render();
@@ -2181,7 +2181,7 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 		//this.menu.style.zIndex = this.menu.style.zIndex - 1;
 		this.menu.style.display = 'none';
 		soundengine.stoptheme();
-		//soundengine.stopbackground();
+		soundengine.stopbackground();
 		//alert('hola');
 	};
 
@@ -2203,7 +2203,7 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 			this.menu.style.display = 'none';			
 		};
 		soundengine.stoptheme();
-		//soundengine.stopbackground();
+		soundengine.stopbackground();
 	};
 
 	this.loadPreviousGame = function(){
@@ -2549,7 +2549,7 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 		//this.menu.style.zIndex = 90//this.menu.style.zIndex + 2;
 		this.menu.style.display = 'block';
 		soundengine.starttheme();
-		//soundengine.startbackground();
+		soundengine.startbackground();
 		/*soundengine.backgroundsound.playing = true;
 		soundengine.backgroundsound.loop();*/
 		if(this.doSerialize){

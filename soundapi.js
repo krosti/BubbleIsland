@@ -225,7 +225,7 @@ soundengine.starttheme = function(){
 }; 
 
 soundengine.stoptheme = function(){
-	soundengine.themesound.playing = false;
+	//soundengine.themesound.playing = false;
 	clearInterval(soundengine.themesound.timer);
 	soundengine.themesound.media.stop();
 

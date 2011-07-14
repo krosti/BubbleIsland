@@ -1794,6 +1794,18 @@ function bubbleLevel(w, h, bubblesWidth, bubblesHeight, lvlnbr){
 				i++;
 			};			
 		};
+		var erase = this.grilla.Table[this.grilla.Table.length - 1];
+		var deleteMe = true;
+		for(var i = 0; i < erase.length; ++i){
+			deleteMe = deleteMe && ((erase[i] == "vacio") || (erase[i] == "nada"));
+		};
+
+		if(deleteMe && (this.grilla.alto > 18)){
+			var toDelete = this.grilla.Table.pop();
+			this.grilla.alto -= 1;
+			delete toDelete;
+			toDelete = null;
+		};
 
 		/*for(i = 0; i < ancho; ++i){
 			//alert(i);
@@ -2169,18 +2181,12 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 		//$(cartel).remove();
 		if(cartel) $(cartel).remove();
 		this.level = null; //dispose
-		this.ui.acumuledPoints = 42000;//0;
-		this.ui.points = 42000;//0;
-		this.ui.pointsCounter = 42000;//0;
-		this.pointsCounter = 42000;//0;
+		this.ui.acumuledPoints = 0;
+		this.ui.points = 0;
+		this.ui.pointsCounter = 0;
+		this.pointsCounter = 0;
 		this.ui.lifes = this.ui.initialLifes;
-		this.createLvl(7);
-
-		this.ui.acumuledPoints = 55000;//0;
-		this.ui.points = 55000;//0;
-		this.ui.pointsCounter = 55000;//0;
-		this.pointsCounter = 55000;//0;
-		this.level.points = 55000;
+		this.createLvl(1);
 
 		this.ui.refresh();
 		this.clock.start();

@@ -2169,12 +2169,19 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 		//$(cartel).remove();
 		if(cartel) $(cartel).remove();
 		this.level = null; //dispose
-		this.ui.acumuledPoints = 0;
-		this.ui.points = 0;
-		this.ui.pointsCounter = 0;
-		this.pointsCounter = 0;
+		this.ui.acumuledPoints = 42000;//0;
+		this.ui.points = 42000;//0;
+		this.ui.pointsCounter = 42000;//0;
+		this.pointsCounter = 42000;//0;
 		this.ui.lifes = this.ui.initialLifes;
-		this.createLvl(1);
+		this.createLvl(7);
+
+		this.ui.acumuledPoints = 55000;//0;
+		this.ui.points = 55000;//0;
+		this.ui.pointsCounter = 55000;//0;
+		this.pointsCounter = 55000;//0;
+		this.level.points = 55000;
+
 		this.ui.refresh();
 		this.clock.start();
 		//hide menu

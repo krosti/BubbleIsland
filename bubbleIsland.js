@@ -1847,7 +1847,11 @@ function bubbleLevel(w, h, bubblesWidth, bubblesHeight, lvlnbr){
 			};
 			delete b;
 			b = null;
+			delete this.bubbles_array[i];
+			this.bubbles_array[i] = null;
 		};
+		delete this.bubbles_array;
+		this.bubbles_array = null;
 		for(var i = 0; i < this.animations.length; ++i){
 			var b = this.animations[i];
 			if(b.element){
@@ -1889,9 +1893,13 @@ function bubbleLevel(w, h, bubblesWidth, bubblesHeight, lvlnbr){
 
 	this.detonateBomb = function(detonated, neighbour){
 		//alert(detonated.i + ' : ' + detonated.j + '  neighbour: ' + neighbour);
-		if(neighbour == 0) return;
 		if(detonated == "nada" || detonated == "vacio") return;
-		if(detonated.flavor == "nula" || detonated == "techo") return;
+		if(detonated == "techo") return;
+		if(detonated.flavor == "nula") return;
+		if(neighbour == 0){
+			this.touchedBubbles.push(detonated);
+			return;
+		}; 
 		//alert(detonated.i + ' : ' + detonated.j + '  neighbour: ' + neighbour);
 		//if(detonated.marked) return;
 		

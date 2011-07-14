@@ -1897,7 +1897,7 @@ function bubbleLevel(w, h, bubblesWidth, bubblesHeight, lvlnbr){
 		if(detonated == "techo") return;
 		if(detonated.flavor == "nula") return;
 		if(neighbour == 0){
-			this.touchedBubbles.push(detonated);
+			this.grilla.touchedBubbles.push(detonated);
 			return;
 		}; 
 		//alert(detonated.i + ' : ' + detonated.j + '  neighbour: ' + neighbour);

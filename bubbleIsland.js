@@ -2417,8 +2417,8 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 				$(cartel).fadeOut(300, function(){
 					game.ui.lifes -= 1;					
 					if(game.ui.lifes == -1){
-						game.level.clearBoard();
-						//game.level = {};
+						/*game.level.clearBoard();
+						game.level = null;*/
 						game.level = '';
 						game.ui.lifes = 5;
 						game.ui.points = 0;
@@ -2527,7 +2527,8 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 
 		$(continueButton).click(function(){
 			$(cartel).fadeOut(300, function(){
-				game.level.clearBoard();
+				/*game.level.clearBoard();
+				game.level = null;*/
 				game.doSerialize = true;
 				//api.facebook.postMessage(api.facebook.user.name + " has got " + game.ui.points + " points in Bubble Paradise! Come with him and enjoy togheter in the paradise!");
 				//api.facebook.postMessage(api.facebook.user.name + " has got " + game.ui.points + " points in Bubble Paradise! Come with him and enjoy togheter in the paradise!");

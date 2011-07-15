@@ -2238,7 +2238,7 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 			return;
 		};
 		if(!api.levels.unserializeLevel()){
-			alert('hola');
+			//alert('hola');
 			return;
 		};// return;
 		//chequeo si esta en ganar o perder

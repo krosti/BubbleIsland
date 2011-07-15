@@ -2211,6 +2211,7 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 		if(game.level == ''){
 			//alert('level = nada');
 			if(!this.loadedLevel){
+				api.ui.showWaiting();
 				api.levels.onGetLevel = this.loadPreviousGame;
 				this.loadedLevel = true;				
 				api.levels.getLevel(api.facebook.user.id);
@@ -2229,13 +2230,17 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 
 	this.loadPreviousGame = function(){
 		//alert("loadPreviousGame");
+		api.ui.hideWaiting();
 		if(api.levels.jsonlevel === ""){
 			//alert("wepa!");
 			//api.ui.alert("I can't find any previous game, you need to start from the begginig!", 'Ok, lets go for it!');
 			api.ui.alertStyle('guiPreviousScreen', 'guiPreviousButton');
 			return;
 		};
-		if(!api.levels.unserializeLevel()) return;
+		if(!api.levels.unserializeLevel()){
+			alert('hola');
+			return;
+		};// return;
 		//chequeo si esta en ganar o perder
 		//gano
 		//alert('check win');

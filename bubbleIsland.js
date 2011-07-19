@@ -1592,7 +1592,7 @@ function bubbleLevel(w, h, bubblesWidth, bubblesHeight, lvlnbr){
 				this.addBubble(this.shootedBubble);	
 
 				var currentBubble = this.shootedBubble;
-				if((currentBubble.dx == 0) || (currentBubble.dy == this.bubbleVelocity)) alert('es un hijo de puta antes de arrancar2: ' + culo);
+				//if((currentBubble.dx == 0) || (currentBubble.dy == this.bubbleVelocity)) alert('es un hijo de puta antes de arrancar2: ' + culo);
 				var delta = this.grilla.isShortRow(0) * (this.bubbleRadius / 2);
 				delta = delta / 2;
 				//var culo = 0;
@@ -1606,7 +1606,7 @@ function bubbleLevel(w, h, bubblesWidth, bubblesHeight, lvlnbr){
 					currentBubble.x -= (currentBubble.dx / 4);
 					currentBubble.y -= (currentBubble.dy / 4);
 					if((currentBubble.x <= currentBubble.lvl.leftBound) || (currentBubble.x >= currentBubble.lvl.width)) currentBubble.dx = -currentBubble.dx;
-					if((currentBubble.dx == 0) || (currentBubble.dy == this.bubbleVelocity)) alert('es un hijo de puta: ' + culo);
+					//if((currentBubble.dx == 0) || (currentBubble.dy == this.bubbleVelocity)) alert('es un hijo de puta: ' + culo);
 					//culo++;
 				}while(!inPlace);	
 

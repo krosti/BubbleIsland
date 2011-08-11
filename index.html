@@ -277,7 +277,7 @@ function connectToFacebook2(){
 		
 		api.facebook.retrieveUserData();
 		
-		api.facebook.user = {
+		/*api.facebook.user = {
 		   "id": "1454082351",
 		   "name": "Jorge Capoduri",
 		   "first_name": "Jorge",
@@ -286,7 +286,7 @@ function connectToFacebook2(){
 		   "username": "jorge.capoduri",
 		   "gender": "male",
 		   "locale": "en_US"
-		};
+		};*/
 		
 		api.levels.getLevel(api.facebook.user.id);
 		api.levels.onGetLevel = game.loadPreviousGame;
@@ -528,7 +528,7 @@ loader.readyLoad = function(){
 					//$("#initScreen").delay(2000, function(){
 						document.getElementById('backgroundNav').style.backgroundImage = 'url('+backgroundImage.src+')';
 						$('#frameBackground')[0].style.display = 'block';
-						//connectToFacebook();
+						connectToFacebook();
 						var p = $("#initScreen").remove();
 						delete p;
 							/*});
@@ -593,7 +593,7 @@ soundengine.soundToggled = function(){
 	};
 };
 //api.ui.showChooseBooster();
-loader.init();
+//loader.init();
 </script> 
 </body>
 </html>

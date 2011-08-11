@@ -3030,6 +3030,8 @@ api.levels.unserializeLevel = function(){
 	//alert('hola1');
 	game.ui.level = lvl.lvlnumber;
 	game.ui.score = lvl.points;
+	game.ui.points = lvl.points;
+	game.ui.pointsCounter = lvl.points;
 	
 	if(lvl.lvlnumber == 0){
 		game.cannon = null;

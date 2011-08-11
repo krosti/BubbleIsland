@@ -6,6 +6,34 @@
 /*
 *		480x800
 */
+/*==========================pantalla highscore ==========================================================================================================*/
+.guihighscoretabmyscore480x800 img{width: 42px;height: 42px;}
+.guihighscoretabeveryone480x800 img{width: 42px;height: 42px;}
+.guihighscoretabmyscore480x800 td{   font-family: bubblegum !important;    font-size: 1.3em !important;}
+.guihighscoretabeveryone480x800 td{ font-family: bubblegum !important;    font-size: 1.3em !important;}
+.guihighscoretabmyscore480x800{}
+.guihighscoretabeveryone480x800 {margin-top:52px;}
+.guihighscoretabeveryone480x800 td{padding-bottom:12px;}
+/*.leaderboardTab480x800 { left: 63px !important;top: 225px !important;}*/
+.nick480x800{padding-left:11px;width: 190px;}
+.hhighscorealltime480x800{left: 68px;top: 274px;width: 117px;height:26px;position: absolute;background-image: url(../480x800/alltime.png); }
+.hhighscoretoday480x800{left:200px;top: 274px;width: 116px;height:26px;position: absolute;background-image: url(../480x800/today.png); }
+.hhighscorethisweek480x800{left: 326px;top: 274px;width: 117px;height:26px;position: absolute;background-image: url(../480x800/thisweek.png); }
+.highscorealltimeapretado480x800{left: 68px;top: 264px;width: 117px;height:36px;position: absolute;background-image: url(../480x800/alltime.png); }
+.highscoretodayapretado480x800{left:200px;top: 264px;width: 116px;height:36px;position: absolute;background-image: url(../480x800/today.png); }
+.highscorethisweekapretado480x800{left: 326px;top: 264px;width: 117px;height:36px;position: absolute;background-image: url(../480x800/thisweek.png); }
+/* #leaderboardMenu{display:block !important;}
+#gameMenu{display:none !important;}
+*/
+.backahigscore480x800{width: 127px;height: 69px;position: fixed;left: 326px;top: 0px;background-image: url(../480x800/backahigscore.png);}
+/*======================pantalla ingame==============================================*/
+#frameBackground{ width: 360px; height: 391px; background-position: center 64px; position: absolute;  left: 0px; }
+#guicanon320x480{background-image: url("../320x480/cannon.png");position: absolute;width: 90px;height: 70px;left:108px;top: 343px;	}
+.awesome480x800{ width: 100%;height: 115px;background-image: url("../480x800/awesome.png") ;  position:absolute;background-position: center ; top:250px;}
+.great480x800{ width: 100%;height: 109px;background-image: url("../480x800/great.png") ;  position:absolute;background-position: center ; top:250px;}
+.combo480x800{ width: 100%;height: 102px;background-image: url("../480x800/combo.png") ;  position:absolute;background-position: center ; top:250px;}
+.onfire480x800{ width: 100%;height: 105px;background-image: url("../480x800/onfire.png") ;  position:absolute;background-position: center ; top:250px;}
+.going480x800{ width: 100%;height: 110px;background-image: url("../480x800/going.png") ;  position:absolute;background-position: center ; top:250px;}
 /*=========================pantalla achievement=================================================================================================================*/
 .containerachievement480x800{position: absolute;width: 480px;height: 800px;background-image: url(../480x800/achievement.png); background-repeat:no-repeat ;}
 .generalLeaderboardachievement480x800{left: 70px;top: 271px; width: 360px;position: absolute;}
@@ -708,15 +736,15 @@ min-height: 62px;	padding-left: 17px;	padding-top: 32px;	position: fixed;	width:
 .guiBuyBombNo480x800{
     background-image: url("../480x800/buybombno.png");
     height: 107px;
-    left: 219px;
+    left: 236px;
     position: fixed;
-    top: 298px;
+    top: 286px;
     width: 219px;
 }
 
 .guiBuyMultiScreen480x800{
     background-image: url("../480x800/buymulticartel.png");
-    height: 422px;
+    height: 389px;
     left: 0;
     position: fixed;
     top: 0;
@@ -725,7 +753,7 @@ min-height: 62px;	padding-left: 17px;	padding-top: 32px;	position: fixed;	width:
 
 .guiBuyMultiOk480x800{
     background-image: url("../480x800/buymultiok.png");
-    height: 121px;
+    height: 80px;
     left: 15px;
     position: fixed;
     top: 308px;
@@ -735,16 +763,16 @@ min-height: 62px;	padding-left: 17px;	padding-top: 32px;	position: fixed;	width:
 .guiBuyMultiNo480x800{
     background-image: url("../480x800/buymultino.png");
     height: 107px;
-    left: 219px;
+    left: 243px;
     position: fixed;
-    top: 298px;
+    top: 288px;
     width: 219px;
 }
 
 .guiBuyFreezeScreen480x800{
 	position: fixed;
 	background-image: url(../480x800/buyfreezecartel.png);
-    height: 422px;
+    height: 366px;
     left: 0;
     position: fixed;
     top: 0;
@@ -754,18 +782,18 @@ min-height: 62px;	padding-left: 17px;	padding-top: 32px;	position: fixed;	width:
 .guiBuyFreezeOk480x800{
     background-image: url("../480x800/buyfreezeok.png");
     height: 121px;
-    left: 15px;
+    left: 20px;
     position: fixed;
-    top: 308px;
+    top: 300px;
     width: 215px;
 }
 
 .guiBuyFreezeNo480x800{
     background-image: url("../480x800/buyfreezeno.png");
     height: 107px;
-    left: 219px;
+    left: 242px;
     position: fixed;
-    top: 298px;
+    top: 280px;
     width: 219px;
 }
 
@@ -938,32 +966,32 @@ min-height: 62px;	padding-left: 17px;	padding-top: 32px;	position: fixed;	width:
 	color: #644000;
 	font-family: bubblegum;
 	font-size: 1.1em;
-	height: 195px;
-	left: 100px;
+	height: 210px;
+	left: 88px;
 	min-height: 97px;
 	position: absolute;
-	top: 390px;
-	width: 305px;
+	top: 354px;
+	width: 340px;
 }
 
 .leaderboardTabHighscore480x800 { 
 	background-image: url("../480x800/leaderboardhighscore.png");
-	height: 34px;
-	left: 169px;
-	min-height: 20px;
+	height: 96px;
+	left: 24px;
+	min-height: 96px;
 	position: absolute;
-	top: 305px;
-	width: 122px;
+	top: 600px;
+	width: 157px;
 }
 
 .leaderboardTabFriends480x800 { 
 	background-image: url("../480x800/leaderboardfriends.png");
-	height: 33px;
-	left: 286px;
-	min-height: 20px;
+	height: 95px;
+	left: 296px;
+	min-height: 95px;
 	position: absolute;
-	top: 305px;
-	width: 122px;
+	top: 600px;
+	width: 149px;
 }
 
 .leaderboardTabHighlight480x800

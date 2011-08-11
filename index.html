@@ -261,6 +261,16 @@ function connectToFacebook2(){
 		soundengine.starttheme();
 		setTimeout(function(){ window.scrollTo(0,-5); }, 0);
 		api.facebook.loaded = function(){	
+			api.leaderboard.rankme(api.facebook.user.id, function(data){
+				var rank = 0;
+				alert(data);
+				var response = api.string2JSON(data);
+				if(response.status == 1){
+					rank = response.response.rank;
+				};
+				game.ui.rank = rank;
+				game.ui.refresh();
+			});
 			api.ui.hideWaiting();		
 			if(firstRun) api.facebook.postMessage(api.facebook.user.name + ' is now playing Bubble Paradise, join ' + (api.facebook.user.gender == 'male' ? 'him' : 'her') + ' on this link @' + api.facebook.appname + '!');
 		};
@@ -280,16 +290,6 @@ function connectToFacebook2(){
 		
 		api.levels.getLevel(api.facebook.user.id);
 		api.levels.onGetLevel = game.loadPreviousGame;
-		
-		api.leaderboard.rankme(api.facebook.user.id, function(data){
-			var rank = 0;
-			var response = api.string2JSON(data);
-			if(response.status == 1){
-				rank = response.response.rank;
-			};
-			game.ui.rank = rank;
-			game.ui.refresh();
-		});
 
 		api.softgame.startConnection();
 		menues.showMenu('mainMenu');

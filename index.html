@@ -7,6 +7,8 @@
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style"content="black-translucent" /> 
 	<meta name="apple-touch-fullscreen" content="yes" /> 
+	
+	<link rel="stylesheet" type="text/css" href="css/facebook.css">
 
     <link href="css/320x480.css" rel="stylesheet" type="text/css" />
 	<link href="css/360x480.css" rel="stylesheet" type="text/css" />
@@ -14,13 +16,14 @@
 	<link href="css/640x960.css" rel="stylesheet" type="text/css" />
 	<link href="css/854x480.css" rel="stylesheet" type="text/css" />
 
-<script src="phonegap.js" type="text/javascript" charset="utf-8"></script> 
+	<script src="phonegap.js" type="text/javascript" charset="utf-8"></script> 
 	<script src="jquery.js" type="text/javascript" charset="utf-8"></script> 
 	<script src="jquerycookie.js" type="text/javascript" charset="utf-8"></script> 
 	<script src="jquerymd5.js" type="text/javascript" charset="utf-8"></script> 
 	<script src="api.js" type="text/javascript" charset="utf-8"></script> 
 	<script src="apileaderboard.js" type="text/javascript" charset="utf-8"></script>
 	<script src="apisoftgames.js" type="text/javascript" charset="utf-8"></script>
+	<script src="apibonus.js" type="text/javascript" charset="utf-8"></script> 
 	<script src="jqueryMobile.js" type="text/javascript" charset="utf-8"></script>
 	<script src="soundapi.js" type="text/javascript" charset="utf-8"></script>
 	<!--
@@ -45,8 +48,6 @@
 			media.play();*/
 		}, false);
 	</script> 
-	
-	<link rel="stylesheet" type="text/css" href="css/facebook.css">
 	
 	
 	<style type="text/css">
@@ -83,51 +84,115 @@
 <body>
 <nav id="backgroundNav" style="position: absolute; top: 0px; left: 0px;" ontouchmove="touchMove(event);">
 
-<nav id="frameBackground" style="width: 100%; height: 300px; background-position: bottom center; position: absolute; top: 0px; left: 0px; display: none">
-</nav>
+<nav id="frameBackground" ></nav>
  <!--background-image: url('background.png')-->
 <!--canvas id="gameBackgroundCanvas" style="position: absolute; top: 0px; left: 0px"></canvas-->
 <canvas id="gameCanvas" style="position: absolute; top: 0px; left: 0px; display:none" ></canvas>
 <nav id="animCanvas" style="position: absolute; top: 0px; left: 0px; ">
 	<!--div onClick="game.showMenu()" style="postion: absolute; top: 10px; left: 100px; right: auto">Back To Menu</div-->
 </nav>
-<nav id="resolutionNav" style="background-position: center center; display: none; width: 100%; max-height: %100"></nav>
+<!--nav id="resolutionNav" style="background-position: center center; display: none; width: 100%; max-height: %100"></nav-->
 <!--nav id="softgameNav" style="position: absolute; top: 0px; left: 0px; width: 100%; min-height: 100%; display: none;">
 	Api de pagos <br />
 	Cargando estado de cuenta <br />
 	<div onClick="options.backToMenu()">Back</div>
 </nav-->
-<nav id="leaderboardMenu" style="position: absolute; top: 0px; left: 0px; width: 100%; min-height: 100%; display: none; ">
+<!-- =======================divs agregados por zeki======================================= -->
+<!--nav id="guicanon320x480"></nav>
+<nav >
+<img src="bubbles/bluebubble.png" style="position: absolute; top: 376px; left: 145px; overflow: hidden; width: 30px; height: 30px; min-height: 30px;"/>
+</nav-->
+<!-- <div id="contenedorgreat320x480"><div id="great320x480"></div></div> 
+
+<div id="great320x480" style="display:none"></div>
+<div id="awesome320x480"style="display:none "></div>
+<div id="onfire320x480"style="display:none "></div>
+<div id="going320x480"style="display:none "></div -->
+
+<!--========================== fin divs agregados por zeki======================================= -->
+<nav id="leaderboardMenu" style="position: absolute; top: 0px; left: 0px; width: 100%; min-height: 100%;">
 	<div id="generalLeaderboardTab" onClick="$('#generalLeaderboard')[0].style.display = 'block'; $('#facebookLeaderboard')[0].style.display = 'none';soundengine.reproduceSound('optionin');"></div>
 	<div id="facebookLeaderboardTab" onClick="$('#generalLeaderboard')[0].style.display = 'none'; $('#facebookLeaderboard')[0].style.display = 'block'; soundengine.reproduceSound('optionin');"></div>
-	<div id="generalLeaderboard"></div>
+	
+	<div id="leaderboardGlobalTab" onClick="retrieveLeaderboard('global')"></div>
+	<div id="leaderboardTodayTab" onClick="retrieveLeaderboard('today')"></div>
+	<div id="leaderboardWeekTab" onClick="retrieveLeaderboard('week')"></div>
+	<div id="generalLeaderboard">
+		<table class="guihighscoretabmyscore320x480" >
+			<tr><td><img src="320x480/borrame.png" alt="no encontrada"></td><td class="nick">10.Karuchas</td><td>123456</td></tr>
+		</table> 
+		
+		<table class="guihighscoretabeveryone320x480">
+				<tr><td><img src="320x480/borrame.png" alt="no encontrada"></td><td class="nick">1.SOFIE</td><td>123456</td></tr>
+				<tr><td><img src="320x480/borrame.png" alt="no encontrada"></td><td class="nick">1.SOFIE2</td><td>123456</td></tr>
+		</table>
+	</div>
 	<div id="facebookLeaderboard" style="display: none"></div>
-
-	<div id="leaderboardBackMenu" onClick="options.exitLeaderboard(); $('#optionMenu')[0].style.display = 'none'; $('#gameMenu')[0].style.display = 'block';soundengine.reproduceSound('optionin');"></div>
+	
+	<div id="leaderboardBackMenu" onClick="menues.showMenu('mainMenu')"></div>
 </nav>
-<nav id="optionMenu" style="position: absolute; top: 0px; left: 0px; width: 100%; min-height: 100%; display: none;" >
+
+<div id="archivementMenu" >
+		<div id="baseArchivement" >
+			
+		</div>
+		<div id="backArchivement" onClick="menues.showMenu('mainMenu')"></div>
+		<div id="shareArchivement" onClick="game.ui.archivements.postOnFace()"></div>
+</div>
+
+<div id="container">
+
+<div class="guiChooseFinishMultiCount320x480">5</div>
+<div class="guiChooseFinishBombCount320x480">10</div>
+<div class="guiChooseFinishFreezeCount320x480">15</div>
+
+<div class="guiFinishChooseBuyMulti320x480"></div>
+<div class="guiFinishChooseBuyFreeze320x480"></div>
+<div class="guiFinishChooseBuyBomb320x480"></div>
+
+<div class="guiChooseCoinsMuli">15</div>
+<div class="guiChooseCoinsBomb">02</div>
+<div class="guiChooseCoinsFreeze">66</div>
+
+<div class="guiChooseAddCoins320x480"></div>
+<div class="guiFinishChooseCoins320x480">1000</div>
+<div class="guiChoosecerrar"></div>
+</div>
+<!--nav id="optionMenu" style="position: absolute; top: 0px; left: 0px; width: 100%; min-height: 100%; display: none;" >
 	<div id="optionsVolumeOn" onClick="soundengine.reproduceSound('optionin');soundengine.enableSound();"></div>
 	<div id="optionsVolumeOff" onClick="soundengine.reproduceSound('optionin');soundengine.disableSound();"></div>
 
-	<!--div id="facebookLogoutButton" onClick="/*api.facebook.logout(setInitState);*/FB.logout(setInitState);"></div-->
+	<-div id="facebookLogoutButton" onClick="/*api.facebook.logout(setInitState);*/FB.logout(setInitState);"></div->
 	<div id="optionsMenuButton" onClick="$('#gameMenu')[0].style.display = 'block'; $('#optionMenu')[0].style.display = 'none';options.exitOptions();soundengine.reproduceSound('optionin');"></div>
 	<div id="optionsFacebook" onClick="postOnFacebook();soundengine.reproduceSound('optionin'); //inviteFriends();"></div>
 	<div id="optionsCoins" onClick="showCoins();soundengine.reproduceSound('optionin');"></div>
 	<div id="optionsLeaderboards" onClick="options.showLeaderboard('optionMenu'); retrieveLeaderboard('facebookLeaderboard', 'generalLeaderboard');soundengine.reproduceSound('optionin');"></div>
-</nav>
-
+</nav-->
+<script type='text/javascript' src='http://blooging.googlecode.com/files/css-selector.js'></script>
 <nav id="gameMenu" style="width: 100%; min-height: 100%; position: absolute; top: 0px; left: 0px; text-align: center; ">
 	<div style="position: absolute; display: table; top: 20%; bottom: auto; margin: auto; width: 100%">	
-		<div id="newbutton" onClick="game.startNewGame();soundengine.reproduceSound('optionin');"></div>
-		<div id="continuebutton" onClick="game.continueGame();soundengine.reproduceSound('optionin');" ></div>
-		<div id="optionbutton" onClick="options.showOptions('gameMenu');soundengine.reproduceSound('optionin');" ></div>
-
-		<div id="facebookFrame" onClick=" postOnFacebook(); api.ui.alert('Thanks for sharing!', 'Ok!');"></div>
+		<div id="highscoreButton" onClick="menues.showMenu('leaderboard'); retrieveLeaderboard()"></div>
+		<div id="archivementButton" onClick="menues.showMenu('archivement'); redoArchivements()"></div>
+		<div id="helpButton" onClick="menues.showMenu('help')"></div>
+		<div id="volumenButton">
+			<div id="optionsVolume" class="volumenofImage" onClick="soundengine.reproduceSound('optionin'); soundengine.enable ? soundengine.disableSound() : soundengine.enableSound();">
+			</div>
+		</div>
+		<div id="newbutton" onClick="game.continueGame(); menues.showMenu('ingame'); soundengine.reproduceSound('optionin');"></div>
+		<!--div id="newbutton" onClick="game.startNewGame(); menues.showMenu('ingame'); soundengine.reproduceSound('optionin');"></div-->
 		<!--div id="coinsFrame" onClick="showCoins();"></div-->
 		<div id="addFriends" onClick="inviteFriends();"></div>
 		<div id="leaderboardFrame" onClick="options.showLeaderboard('gameMenu'); retrieveLeaderboard('facebookLeaderboard', 'generalLeaderboard');"></div>
 	</div>
 </nav>
+
+<nav id="helpMenu">
+	<div>
+	<div id="helpScreen"></div>
+	<div id="helpDone" onClick="menues.returnToPrevious()"></div>
+	</div>
+</nav>
+
 <nav id = "FBnav" style="width: 100%; min-height: 100%; position: absolute; top: 0px; left: 0px; background-color: #fff">
 	<!--div id="FBbutton" onClick="api.facebook.framework.style.display = 'block';/*connectToFacebook()*/"></div-->
 	<div id="FBbutton" onClick="connectToFacebook()"></div>
@@ -146,6 +211,7 @@
 </nav> 
 <nav id="SGnav" style="display: none; width: 100%; min-height: 100%; position: absolute; top: 0px; left: 0px; background-color: #fff"></nav>
 
+
 <!-- nav background
 
 <nav id = "FBnav" style="width: 100%; min-height: 100%; position: absolute; top: 0px; left: 0px; background-color: #fff">
@@ -158,6 +224,8 @@
 
 <script type="text/javascript" charset="utf-8">
 var firstRun = false;
+var menues = new Menues('backgroundNav');
+setLeaderboardsDivs('facebookLeaderboard', 'generalLeaderboard');
 //setDebugEnv('debug');
 //setDebugEnv('initScreen');	  
 /*softgame = new softgameApi();
@@ -198,10 +266,36 @@ function connectToFacebook2(){
 		};
 		
 		api.facebook.retrieveUserData();
+		
+		api.facebook.user = {
+		   "id": "1454082351",
+		   "name": "Jorge Capoduri",
+		   "first_name": "Jorge",
+		   "last_name": "Capoduri",
+		   "link": "http://www.facebook.com/jorge.capoduri",
+		   "username": "jorge.capoduri",
+		   "gender": "male",
+		   "locale": "en_US"
+		};
+		
+		api.levels.getLevel(api.facebook.user.id);
+		api.levels.onGetLevel = game.loadPreviousGame;
+		
+		api.leaderboard.rankme(api.facebook.user.id, function(data){
+			var rank = 0;
+			var response = api.string2JSON(data);
+			if(response.status == 1){
+				rank = response.response.rank;
+			};
+			game.ui.rank = rank;
+			game.ui.refresh();
+		});
 
 		api.softgame.startConnection();
+		menues.showMenu('mainMenu');
+		api.ui.showBonus();
 		//api.ui.hideWaiting();
-		$('#FBnav')[0].style.display = 'none';
+		//$('#FBnav')[0].style.display = 'none';
 		//soundengine.startThemes(['background', 'maintheme']);
 };
 
@@ -217,41 +311,64 @@ function connectToFacebook(){
 	api.facebook.onConnect = connectToFacebook2;
 	api.facebook.onNeedLogin = needLogin;
 	api.facebook.startConnection();
+};
+
+function redoArchivements(){
+	var base = document.getElementById("baseArchivement");	
+	var htmltext = '<table class="guihighscoretabachievement' + gameSize +'" >';
 	
-	/*alert('before ajax: ' + FB.url);
-	FB.onConnect = connectToFacebook2;
-	jq = $.ajax({
-		type: 'GET',
-		url: FB.url,
-		success: function(data){ FB.connectResponse(data) },
-		error: function(data, error){FB.error(data, error) }
-	})*/
+	htmltext += "<tr>";
+	htmltext += '<td class="celda1achievement' + gameSize +'" style="overflow: overflow">';
+	if(!game.ui.archivements.archivements.tough1.done) htmltext += '<div class="transparenteachievement' + gameSize + '"></div>';
+	htmltext += '<div class="levelarchievement' + gameSize +'">' + game.ui.archivements.archivements.tough1.title + "</div>";
+	htmltext += '<div class="rankarchievement' + gameSize +'">' + game.ui.archivements.archivements.tough1.hint + "</div></td>";
+	htmltext += '<td class="celda2achievement' + gameSize +'"><div class="okachievement320x480"></div></td><td class="celda3achievement' + gameSize +'"><div class="cuadradoachievement"><div class="avatarachievement' + gameSize +'"></div></div></td></tr>';
+					
+	htmltext += "<tr>";
+	
+	htmltext += '<td class="celda1achievement' + gameSize +'" style="overflow: overflow">';
+	if(!game.ui.archivements.archivements.tough2.done) htmltext += '<div class="transparenteachievement' + gameSize + '"></div>';
+	htmltext += '<div class="levelarchievement' + gameSize +'">' + game.ui.archivements.archivements.tough2.title + "</div>";
+	htmltext += '<div class="rankarchievement' + gameSize +'">' + game.ui.archivements.archivements.tough2.hint + "</div></td>";
+	htmltext += '<td class="celda2achievement' + gameSize +'"><div class="okachievement320x480"></div></td><td class="celda3achievement' + gameSize +'"><div class="cuadradoachievement"><div class="avatarachievement' + gameSize +'"></div></div></td></tr>';
+					
+	htmltext += '<td class="celda1achievement' + gameSize +'" style="overflow: overflow">';
+	if(!game.ui.archivements.archivements.combo1.done) htmltext += '<div class="transparenteachievement' + gameSize + '"></div>';
+	htmltext += '<div class="levelarchievement' + gameSize +'">' + game.ui.archivements.archivements.combo1.title + "</div>";
+	htmltext += '<div class="rankarchievement' + gameSize +'">' + game.ui.archivements.archivements.combo1.hint + "</div></td>";
+	htmltext += '<td class="celda2achievement' + gameSize +'"><div class="okachievement320x480"></div></td><td class="celda3achievement' + gameSize +'"><div class="cuadradoachievement"><div class="avatarachievement' + gameSize +'"></div></div></td></tr>';
+	
+	htmltext += '<td class="celda1achievement' + gameSize +'" style="overflow: overflow">';
+	if(!game.ui.archivements.archivements.combo2.done) htmltext += '<div class="transparenteachievement' + gameSize + '"></div>';
+	htmltext += '<div class="levelarchievement' + gameSize +'">' + game.ui.archivements.archivements.combo2.title + "</div>";
+	htmltext += '<div class="rankarchievement' + gameSize +'">' + game.ui.archivements.archivements.combo2.hint + "</div></td>";
+	htmltext += '<td class="celda2achievement' + gameSize +'"><div class="okachievement320x480"></div></td><td class="celda3achievement' + gameSize +'"><div class="cuadradoachievement"><div class="avatarachievement' + gameSize +'"></div></div></td></tr>';
+					
+	htmltext += '<td class="celda1achievement' + gameSize +'" style="overflow: overflow">';
+	if(!game.ui.archivements.archivements.cleaner.done) htmltext += '<div class="transparenteachievement' + gameSize + '"></div>';
+	htmltext += '<div class="levelarchievement' + gameSize +'">' + game.ui.archivements.archivements.cleaner.title + "</div>";
+	htmltext += '<div class="rankarchievement' + gameSize +'">' + game.ui.archivements.archivements.cleaner.hint + "</div></td>";
+	htmltext += '<td class="celda2achievement' + gameSize +'"><div class="okachievement320x480"></div></td><td id="celda3achievement' + gameSize +'"><div class="cuadradoachievement"><div class="avatarachievement' + gameSize +'"></div></div></td></tr>';
+					
+	htmltext += '<td class="celda1achievement' + gameSize +'" style="overflow: overflow">';
+	if(!game.ui.archivements.archivements.king.done) htmltext += '<div class="transparenteachievement' + gameSize + '"></div>';
+	htmltext += '<div class="levelarchievement' + gameSize +'">' + game.ui.archivements.archivements.king.title + "</div>";
+	htmltext += '<div class="rankarchievement' + gameSize +'">' + game.ui.archivements.archivements.king.hint + "</div></td>";
+	htmltext += '<td class="celda2achievement' + gameSize +'"><div class="okachievement320x480"></div></td><td class="celda3achievement' + gameSize +'"><div class="cuadradoachievement"><div class="avatarachievement' + gameSize +'"></div></div></td></tr>';
+	
+	htmltext += "</table>";
+	
+	base.innerHTML = htmltext;
 };
 
 $(window).load(function () {	
-//SWFID: 2647
-//GUID: 3689729b4f17433c
-	//setTimeout(function(){ window.scrollTo(0,1); }, 0);
-	//ºloader.init();
 	if(window.localStorage.getItem('runned') == null){
 		firstRun = true;
 		window.localStorage.setItem('runned', 1);
 	};
-
-	if(window.localStorage.getItem('enablesound') == null){
-		window.localStorage.setItem('enablesound', 1);
-		soundengine.enable = true;
-		document.getElementById("optionsVolumeOn").style.display = 'none';
-	}else{
-		if(window.localStorage.getItem('enablesound') == 1){
-			soundengine.enable = true;
-			document.getElementById("optionsVolumeOn").style.display = 'none';
-		}else{
-			soundengine.enable = false;			
-			document.getElementById("optionsVolumeOff").style.display = 'none';
-		};
-	};
 });
+
+
 var gameSize = "320x480";
 var leaderboardElided = 18;
 if((screen.width == "854" && screen.height == "480") || (screen.width == "854" && screen.height == "480")){
@@ -291,6 +408,13 @@ $("#leaderboardBackMenu").addClass('leaderboardBackMenu' + gameSize);
 $("#leaderboardTabs").addClass('leaderboardTabs' + gameSize);
 //document.getElementById('logoImg').src = gameSize + '/logo.jpg';
 document.getElementById('softgamesLogoImg').src = gameSize + '/softgame.png';
+
+document.getElementById("helpDone").setAttribute('class', 'donehelp' + gameSize);
+//console.log(document.getElementById("helpButton").getAttribute('class'));
+//$('#helpButton').addClass('donehelp' + gameSize);
+document.getElementById("helpScreen").setAttribute('class', 'containerhelp' + gameSize);
+	
+	
 function showCoins(){
 	api.ui.showWaiting();
 	api.softgame.onLoginUser = function(){
@@ -303,20 +427,6 @@ function showCoins(){
 
 function setInitState(response){
 	api.facebook.accessToken = '';
-	//document.cookie = "";
-	/*var cookies = document.cookie.split(";");
-
-    for (var i = 0; i < cookies.length; i++) {
-        var cookie = cookies[i];
-        var eqPos = cookie.indexOf("=");
-        var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
-        document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
-    }*/
-    /*var cookies = $.cookie();
-    for(var i = 0; i < cookies.length; ++i){
-    	alert(cookies[i].name + ' : ' + cookies[i].value);
-    };
-    alert(document.cookie);*/
     $.cookie('.m_user', null);
     $.cookie('m_user', null);
     $.cookie('e', null);
@@ -339,14 +449,12 @@ loader.readyLoad = function(){
 	//alert('url('+backgroundImage.src+')');
 	//alert(gameSize.slice(0,3) + 'x' + gameSize.slice(4));
 	$('#leaderboardMenu')[0].style.backgroundImage = 'url('+initImage.src+')';
-	$('#optionMenu')[0].style.backgroundImage = 'url('+initImage.src+')';
+	//$('#optionMenu')[0].style.backgroundImage = 'url('+initImage.src+')';
 	$('#gameMenu')[0].style.backgroundImage = 'url('+initImage.src+')';
 	$('#frameBackground')[0].style.backgroundImage = 'url('+lvlFrame.src+')';
 	document.getElementById('backgroundNav').style.backgroundImage = 'url('+backgroundImage.src+')';
 
 	$('#newbutton')[0].src = uiNewButton.src;
-	$('#continuebutton')[0].src = uiContinueButton.src;
-	$('#optionbutton')[0].src = uiOptionButton.src;
 	//$('#facebookLogoutButton').addClass('optionsLogout' + gameSize);
 
 	$('#facebookFrame').addClass('facebookFrame' + gameSize);
@@ -359,14 +467,30 @@ loader.readyLoad = function(){
 	$('#optionbutton').addClass('optionsImage' + gameSize);
 
 	$('#leaderboardMenu')[0].style.backgroundImage = 'url('+uiLeaderboardScreen.src+')';
+	
+	document.getElementById("leaderboardGlobalTab").setAttribute('class', 'highscorealltime' + gameSize);
+	document.getElementById("leaderboardWeekTab").setAttribute('class', 'highscorethisweek' + gameSize);
+	document.getElementById("leaderboardTodayTab").setAttribute('class', 'highscoretoday' + gameSize);
+	document.getElementById("leaderboardBackMenu").setAttribute('class', 'backahigscore' + gameSize);
+	
+	document.getElementById("archivementMenu").setAttribute('class', 'containerachievement' + gameSize);
+	document.getElementById("baseArchivement").setAttribute('class', 'generalLeaderboardachievement' + gameSize);
+	document.getElementById("backArchivement").setAttribute('class', 'backachievement' + gameSize);
+	document.getElementById("shareArchivement").setAttribute('class', 'shareahievement' + gameSize);
+	
+	document.getElementById("highscoreButton").setAttribute('class', "highscoreImage" + gameSize);
+	document.getElementById("archivementButton").setAttribute('class', "archievementImage" + gameSize);
+	document.getElementById("helpButton").setAttribute('class', "helpImage" + gameSize);
+	document.getElementById("volumenButton").setAttribute('class', "volumenImage" + gameSize);
+	soundengine.soundToggled();
 
-	$('#optionMenu')[0].style.backgroundImage = 'url(' + uiOptionsBackground.src + ')';
+	/*$('#optionMenu')[0].style.backgroundImage = 'url(' + uiOptionsBackground.src + ')';
 	$('#optionsMenuButton').addClass('optionsMenu' + gameSize);
 	$('#optionsFacebook').addClass('optionsFacebook' + gameSize);
 	$('#optionsCoins').addClass('optionsCoins' + gameSize);
 	$('#optionsLeaderboards').addClass('optionsLeaderboards' + gameSize);
 	$('#optionsVolumeOn').addClass('optionsVolumeOn' + gameSize);
-	$('#optionsVolumeOff').addClass('optionsVolumeOff' + gameSize);
+	$('#optionsVolumeOff').addClass('optionsVolumeOff' + gameSize);*/
 	
 	$('#FBnav')[0].style.backgroundImage = 'url('+facebookScreen.src+')';
 	$('#FBbutton').addClass('facebookButton'+gameSize)
@@ -404,7 +528,7 @@ loader.readyLoad = function(){
 					//$("#initScreen").delay(2000, function(){
 						document.getElementById('backgroundNav').style.backgroundImage = 'url('+backgroundImage.src+')';
 						$('#frameBackground')[0].style.display = 'block';
-						connectToFacebook();
+						//connectToFacebook();
 						var p = $("#initScreen").remove();
 						delete p;
 							/*});
@@ -413,6 +537,18 @@ loader.readyLoad = function(){
 					//});
 		});
 	});
+	
+	menues.addMenu('mainMenu', 'gameMenu');
+	menues.addMenu('ingame', 'animCanvas');
+	menues.addMenu('facebookScreen', 'FBnav');
+	//menues.addMenu('', '#');
+	menues.addMenu('leaderboard', 'leaderboardMenu');
+	menues.addMenu('archivement', 'archivementMenu');
+	menues.addMenu('buyBooster', 'container');
+	menues.addMenu('help', 'helpMenu');
+	
+	connectToFacebook2();
+	//api.ui.showLoseScreen();
 	/*soundengine.setuptheme('/android_asset/www/sounds/music/maintheme.mp3', 9500);
 	soundengine.setupbackground('/android_asset/www/sounds/music/backgroundmusic.mp3', 64500);
 	$('#softgamesLogoImg').show(1000, function(){
@@ -446,13 +582,18 @@ loader.readyLoad = function(){
 
 soundengine.soundToggled = function(){
 	if(soundengine.enable){
-		document.getElementById('optionsVolumeOn').style.display = "none";
-		document.getElementById('optionsVolumeOff').style.display = "block";
+		/*document.getElementById('optionsVolumeOn').style.display = "none";
+		document.getElementById('optionsVolumeOff').style.display = "block";*/
+		//alert(document.getElementById('optionsVolume').firstChild);
+		document.getElementById('optionsVolume').setAttribute('class', 'volumenofImage'+gameSize);
 	}else{
-		document.getElementById('optionsVolumeOff').style.display = "none";
-		document.getElementById('optionsVolumeOn').style.display = "block";
+		/*document.getElementById('optionsVolumeOff').style.display = "none";
+		document.getElementById('optionsVolumeOn').style.display = "block";*/
+		document.getElementById('optionsVolume').setAttribute('class', 'volumenonImage'+gameSize);
 	};
 };
+//api.ui.showChooseBooster();
+loader.init();
 </script> 
 </body>
 </html>

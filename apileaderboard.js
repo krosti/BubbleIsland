@@ -45,17 +45,19 @@ api.leaderboard.savecallback = function(data){
 api.leaderboard.saveok = function(){};
 api.leaderboard.saveerror = function(){};
 
-api.leaderboard.list = function(id, callback, friends, init, count){
+api.leaderboard.list = function(id, callback, friends, init, count, type_span){
 	var initpage = (init ? init : 0);
 	var perpage = (count ? count : 5);
 	var friendsarray  = (friends != undefined) ? friends : [];
+	var span = (type_span ? type_span : "");
 
 	var postdata = {
 		to: 'list',
 		id: id,
 		friends: friendsarray,
 		init: initpage,
-		count: perpage
+		count: perpage,
+		type_span: span
 	};	
 
 	api.leaderboard.listcomplete = callback;
@@ -83,12 +85,15 @@ api.leaderboard.listcallback = function(data){
 api.leaderboard.listok = function(){};
 api.leaderboard.listerror = function(){};
 
-api.leaderboard.rank = function(){
+api.leaderboard.rank = function(type_span){
+	var span = (type_span ? type_span : "");
+
 	var postdata = {
 		to: 'rank',
 		FBid: id,
 		name: name,
-		points: points
+		points: points,
+		type_span: span
 	};	
 
 	$.ajax({
@@ -101,8 +106,31 @@ api.leaderboard.rank = function(){
 	});	
 };
 
+api.leaderboard.rankme = function(id, type_span, callback){
+	var span = (type_span ? type_span : "");
+	var postdata = {
+		to: 'rank',
+		type_span: span,
+		id: id
+	};	
+
+	$.ajax({
+		url: api.leaderboard.url,
+		type: 'POST',
+		data: postdata,
+		dataType: "text",
+		success: callback,
+		error: api.leaderboard.rankerror
+	});	
+};
+
 api.leaderboard.rankcallback = function(data){
-	
+	var result = api.string2JSON(data);
+	if(result.status == 1){
+		api.leaderboard.rankok(result.response);
+	}else{
+		api.leaderboard.rankerror();
+	};
 };
 
 api.leaderboard.rankok = function(){};

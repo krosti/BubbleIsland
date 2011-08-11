@@ -477,7 +477,6 @@ standAnimation.prototype.addState = function(name, image, duration) {
 };
 
 standAnimation.prototype.setCurrentState = function(name, repeat) {
-	
 	if(repeat == undefined) repeat = false;
 	if(name == ''){
 		this.baseElement.style.display = 'block';
@@ -775,4 +774,175 @@ function Options(menuNav, leaderNav){
 	};
 	
 	this.setSound = function(v){ this.sound = v; };
+};
+
+
+
+function Menues(basenav){
+	this.navs = {};
+	this.currentMenu = null;
+	this.previousDiv = null
+	this.first = true;
+	this.basenav = document.getElementById(basenav);//$(basenav);
+	
+	this.addMenu = function(name, elementName){
+		this.navs[name] = document.getElementById(elementName);//basenav.removeChild(this.basenav.getChildById(elementName));//$(elementName).detach();
+		//this.basenav.removeChild(this.navs[name]);
+		//document.removeChild(this.navs[name]);
+		this.navs[name].parentNode.removeChild(this.navs[name]);
+	};
+	
+	this.showMenu = function(name, replacement){
+		/*if(this.currentMenu != ''){
+			this.navs[this.currentMenu] = this.navs[this.currentMenu].detach();
+		};
+		//this.navs[name].appendTo(this.basenav);
+		this.basenav.append(this.navs[name]);*/
+		//alert(replacement);
+		if(this.first){
+			this.basenav.appendChild(this.navs[name]);
+			this.first = false;
+		}else{
+			if(replacement == undefined){
+				this.previousDiv = this.basenav.replaceChild(this.navs[name], this.currentMenu);
+			}else{
+				this.previousDiv = this.basenav.replaceChild(this.navs[name], replacement);
+			};
+		};
+		this.currentMenu = this.navs[name];
+	};
+	
+	this.returnToPrevious = function(){
+		var t = this.previousDiv;
+		this.previousDiv = this.basenav.replaceChild(this.previousDiv, this.currentMenu);
+		this.currentMenu = t;
+	};
+};
+
+function afterEffect(){
+	this.toExplode = new Array();
+	this.toDrop = new Array();
+	//this.animdivs = new Array();
+	this.animdiv = null;
+	this.currentFps = 0;
+	this.modulo = 3;
+	
+	this.addExplode = function(bubble){
+		this.toExplode.push(bubble);
+	};
+	
+	this.addDrop = function(bubble){
+		this.toDrop.push(bubble);		
+	};
+	
+	this.dropNext = function(){
+		while(this.toDrop.length != 0){
+			var bubble = this.toDrop.shift();
+			$(bubble.element).animate({
+				top: bubble.x + 250,
+				opacity: 0
+			}, 1000, function(){ 
+				$(this).remove(); 
+			});//.remove();
+		};
+		
+	};
+	
+	this.explodeNext = function(){
+		if(this.toExplode.length == 0) return;
+		var bubble = this.toExplode.shift();
+		bubble.explode();
+	};
+	
+	this.checkExplode = function(){
+		var points = this.toExplode.length * this.toExplode.length * pointExplode;
+		for(var i = 0; i < this.toExplode.length; ++i){
+			if(this.toExplode[i].pointsMultiplier != 1){
+				points = points * this.toExplode[i].pointsMultiplier;
+			};
+		};
+		
+		if(this.toExplode.length == 4){
+			this.showInfo('great');
+			points += 20;
+		};
+		if(this.toExplode.length == 5){
+			this.showInfo('awesome');
+			points += 50;
+		};
+		if(this.toExplode.length == 6){
+			this.showInfo('going');
+			points += 100;
+		};
+		if(this.toExplode.length == 7){
+			this.showInfo('combo');
+			points += 200;
+		};
+		if(this.toExplode.length >= 8){
+			//this.showInfo('OnFire! <br/> +500 points');
+			this.showInfo('onfire');
+			points += 500;
+		};
+		
+		game.level.pointsMultiplier = points;
+	};
+	
+	this.checkDrop = function(){
+		var points = this.toDrop.length * pointDrop;
+		
+		game.level.pointsMultiplier = points;
+	};
+	
+	this.showInfo = function(data){
+		if(this.animdiv != null){
+			$(this.animdiv).remove();
+			delete this.animdiv;
+			this.animdiv = null;
+		};
+		this.animdiv = document.createElement('div');
+		/*this.animdiv.style.position = 'absolute';
+		this.animdiv.style.textAlign = 'center';
+		//this.animdiv.style.display = 'none';
+		this.animdiv.style.top = '150px';
+		this.animdiv.style.height = '70px';
+		this.animdiv.style.width = '100%';
+		this.animdiv.innerHTML = data;*/
+		this.animdiv.setAttribute('class', data + gameSize);
+		
+		$(document.body).append(this.animdiv);
+		//$(this.animdiv).delay(1500).remove();
+		setTimeout(function(){$(game.after.animdiv).remove()}, 1500);
+	};
+	
+	this.render = function(){
+		this.currentFps++;
+		this.currentFps = (this.currentFps % this.modulo);
+		if(this.currentFps == 0){
+			this.dropNext();
+			this.explodeNext();
+		};
+	};
+	
+	this.dispose = function(){
+		for(var i = 0; i < this.toExplode.length; ++i){
+			delete this.toExplode[i];
+			this.toExplode[i] = null;
+		};
+		delete this.toExplode;
+		this.toExplode = false;
+		
+		for(var i = 0; i < this.toDrop.length; ++i){
+			delete this.toDrop[i];
+			this.toDrop[i] = null;
+		};
+		delete this.toDrop;
+		this.toDrop = false;
+		
+		/*for(var i = 0; i < this.animdivs.length; ++i){
+			delete this.animdivs[i];
+			this.animdivs[i] = null;
+		};*/
+		delete this.animdiv;
+		this.animdivs = false;
+	};
 };

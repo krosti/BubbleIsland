@@ -4,6 +4,11 @@ var LeaderBoard = {
     highscore: 10000000
 };
 
+function setLeaderboardsDivs(divFB, divGen){
+	LeaderBoard.divGen = document.getElementById(divGen);
+	LeaderBoard.divFB = document.getElementById(divFB);
+};
+
 function SubmitScore()
 {
     //api.leaderboard.saveok = SubmitComplete;
@@ -12,22 +17,21 @@ function SubmitScore()
 
 function SubmitComplete(response)
 {
-    /*alert(api.JSON2String(score));
-    alert(api.JSON2String(num));
-    alert(api.JSON2String(response));
-    if(response.Success){
-        
-    }else{
-        
-    };*/
-    //alert(api.JSON2String(response));
+
 }
 
-function retrieveLeaderboard(divFB, divGen){
-	LeaderBoard.divGen = document.getElementById(divGen);
-	LeaderBoard.divFB = document.getElementById(divFB);
+/*function retrieveLeaderboard(divFB, divGen){
     api.leaderboard.list(api.facebook.user.id, retrieveGeneralLeaderboard);
     api.leaderboard.list(api.facebook.user.id, retrieveFacebookLeaderboard, api.facebook.friends);
+};*/
+
+function retrieveLeaderboard(type_span){
+	type_span = type_span ? 'global' : type_span;
+    api.leaderboard.list(api.facebook.user.id, retrieveGeneralLeaderboard, [], 0, 2, type_span);
+    api.leaderboard.list(api.facebook.user.id, retrieveFacebookLeaderboard, api.facebook.friends, 0, 2, type_span);
+	
+	//LeaderBoard.divGen.innerHTML = '<table class=""><tr><td><img src="loading.gif"></td></tr></table>';
+	//LeaderBoard.divFB.innerHTML = '<table class=""><tr><td><img src="loading.gif"></td></tr></table>';
 	//Playtomic.Leaderboard.List("highscores", retrieveGeneralLeaderboard, { perpage: 5});
 	//Playtomic.Leaderboard.List("highscores", retrieveFacebookLeaderboard, { facebook: true, friendslist: api.facebook.friends, perpage: 5 });
 };
@@ -42,17 +46,31 @@ function retrieveGeneralLeaderboard(data){
 				
         var text = '';
         scores = response.response;
-        text = '<table style="width: 100%">';
+        text = '<table class="guihighscoretabeveryone' + gameSize + '">';
         for(var i = 0; i<scores.length; i++)
         {
             var score = scores[i];
             //alert(" - " + score.Name + " got " + score.Points + " on " + score.SDate);
-            text += '<tr><td><img src="'+uiLeaderboardStar.src+'" alt="star"></td><td>' + score.name.slice(0, leaderboardElided) + '</td><td style="text-align: right">' +score.points+ '</td></tr>';
+            text += '<tr><td><img src="https://graph.facebook.com/'+score.id+'/picture" alt="star"></td><td class="nick' + gameSize + '">' + score.name.slice(0, leaderboardElided) + '</td><td style="text-align: right">' +score.points+ '</td></tr>';
             // including custom data?  score.CustomPlaytomic.Data.Property
             if(i == 5) break;
         };
         text += '</table>';
         LeaderBoard.divGen.innerHTML = text;
+		
+		api.leaderboard.rankme(api.facebook.user.id, function(data){
+			var result = api.string2JSON(data);
+			if(result.status == 1){
+				//api.leaderboard.rankok(result.response);
+				var text = '<table class="guihighscoretabmyscore' + gameSize + '" >';
+				text += '<tr><td><img src="https://graph.facebook.com/'+api.facebook.user.id+'/picture" alt="no encontrada"></td><td class="nick' + gameSize + '">' + api.facebook.user.name + '</td><td>' + result.response.points + '</td></tr>';
+				text += '</table>';
+				var score = document.createElement('div');
+				score.innerHTML = text;
+				//LeaderBoard.divGen.innerHTML = LeaderBoard.divGen.innerHTML + text;
+				LeaderBoard.divGen.insertBefore(score, LeaderBoard.divGen.firstChild);
+			};
+		});
     }
     else
     {
@@ -68,19 +86,30 @@ function retrieveFacebookLeaderboard(data){
     {
         //alert(scores.length + " scores returned out of " + numscores);
         //if(numscores == 0){ LeaderBoard.divFB.innerHTML('There is no scores to show'); };
-		scores = response.response;		
-        var text = '<table style="width: 100%">';
+		var text = '';
+        scores = response.response;
+        text = '<table class="guihighscoretabeveryone' + gameSize + '">';
         for(var i = 0; i<scores.length; i++)
         {
             var score = scores[i];
-            //alert(api.JSON2String(score));
             //alert(" - " + score.Name + " got " + score.Points + " on " + score.SDate);
-            text += '<tr><td><img src="'+uiLeaderboardStar.src+'" alt="star"></td><td>' + score.name.slice(0, leaderboardElided) + '</td><td style="text-align: right; overflow: hidden">' +score.points+ '</td></tr>';
+            text += '<tr><td><img src="https://graph.facebook.com/'+score.id+'/picture" alt="star"></td><td class="nick' + gameSize + '">' + score.name.slice(0, leaderboardElided) + '</td><td style="text-align: right">' +score.points+ '</td></tr>';
             // including custom data?  score.CustomPlaytomic.Data.Property
             if(i == 5) break;
         };
         text += '</table>';
-        LeaderBoard.divFB.innerHTML = text;
+        LeaderBoard.divGen.innerHTML = text;
+		
+		api.leaderboard.rankme(api.facebook.user.id, function(data){
+			var result = api.string2JSON(data);
+			if(result.status == 1){
+				//api.leaderboard.rankok(result.response);
+				var text = '<table class="guihighscoretabmyscore' + gameSize + '" >';
+				text += '<tr><td><img src="https://graph.facebook.com/'+api.facebook.user.id+'/picture" alt="no encontrada"></td><td class="nick' + gameSize + '">' + api.facebook.user.name + '</td><td>' + result.response.points + '</td></tr>';
+				text += '</table>';
+				LeaderBoard.divFB.innerHTML = LeaderBoard.divFB.innerHTML + text;
+			};
+		});
     }
     else
     {

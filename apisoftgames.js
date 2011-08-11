@@ -31,10 +31,11 @@ api.softgame.connected = false;
 api.softgame.user = {};
 api.softgame.userCoins = 0;
 api.softgame.otoken = '';
+api.softgame.currentBuy = 0;
 
 api.softgame.startSignature = function(type){	 
 	(type == 'RESTApi')? api.softgame.split = '|' : api.softgame.split = '||';
-	api.softgame.signature = api.softgame.game_id;
+	//api.softgame.signature = api.softgame.game_id;
 };
 
 api.softgame.addSignatureParm = function(p){
@@ -42,6 +43,7 @@ api.softgame.addSignatureParm = function(p){
 };
 
 api.softgame.getSignature = function(){
+	api.softgame.addSignatureParm(api.softgame.game_id);
 	api.softgame.addSignatureParm(api.softgame.game_secret);
 	api.softgame.signature = api.softgame.signature.toUpperCase();
 	api.softgame.signature = $.md5(api.softgame.signature).toUpperCase();
@@ -84,6 +86,10 @@ api.softgame.getBilling = function(){
 
 api.softgame.startCoinsBuying = function(id, title, desc, price, img_url, obj){
 	api.softgame.startOrderRequest("data"); 
+	api.softgame.currentBuy = price;
+	if(price <= game.ui.innerCoins){
+		api.softgame.finalizeCoinsBuying();
+	};
 	//api.softgame.errorResponse
 };
 
@@ -93,7 +99,7 @@ api.softgame.doCoinsBuying = function(){
 };
 
 api.softgame.finalizeCoinsBuying = function(){
-	api.softgame.finalizeCoinsRequest("data"); 
+	api.softgame.finalizeCoinsRequest('{"status": 1, "response" : { "amount" : ' + api.softgame.currentBuy + '}}'); 
 	// api.softgame.errorResponse
 };
 
@@ -196,7 +202,15 @@ api.softgame.confirmDoCoinsBuying = function(data, uri){
 };
 
 api.softgame.finalizeCoinsRequest = function(data){
-	api.softgame.user.balance -= 1;
+	var response = api.string2JSON(data);
+	if(response.status == 1){
+		if(response.response.amount > game.ui.innerCoins){
+			response.response.amount -= game.ui.innerCoins;
+			api.softgame.user.balance -= response.response.amount;
+		}else{
+			game.ui.innerCoins -= response.response.amount;
+		};
+	};	
 	if(game.ui) game.ui.refresh();
 	api.softgame.buyFinalized();
 };

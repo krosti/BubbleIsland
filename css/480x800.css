@@ -6,6 +6,79 @@
 /*
 *		480x800
 */
+/*=========================pantalla achievement=================================================================================================================*/
+.containerachievement480x800{position: absolute;width: 480px;height: 800px;background-image: url(../480x800/achievement.png); background-repeat:no-repeat ;}
+.generalLeaderboardachievement480x800{left: 70px;top: 271px; width: 360px;position: absolute;}
+.guihighscoretabachievement480x800 {color: #644000; }
+.guihighscoretabachievement480x800 td{padding-bottom:20px;padding-left:2px; }
+.levelarchievement480x800{font-family: Bubblegum;font-size:18px;color: #644000;}
+.rankarchievement480x800{font-family: Bubblegum;font-size:14px;color: #644000;}
+.celda1achievement480x800{width: 290px;}
+.celda2achievement480x800{}
+.celda3achievement480x800{}
+.transparenteachievement480x800{ width: 368px; height: 32px; position: absolute; top: 0px: left: 0px;background-image: url(../480x800/transparencia.png);}
+.okachievement480x800{width: 28px; height: 25px;background-image: url(../480x800/okachievement.png);background-repeat:no-repeat ;}
+.avatarachievement480x800{width: 30px; height: 31px;background-image: url(../480x800/borrame.png);}
+.cuadradoachievement480x800{width: 46px; height: 47px;background-image: url(../480x800/cuadradoachievement.png);}
+.backachievement480x800{width: 124px;height: 63px;position: fixed;left: 342px;top: 160px;background-image: url("../480x800/backachievement.png");}
+.shareahievement480x800{width: 198px;height: 85px;position: fixed;left: 250px;top: 642px;background-image: url("../480x800/shareachievement.png");}
+/*======================pantalla loose==============================================*/
+.guiLooseContinuepostonwall480x800{	width: 176px;height: 66px;min-height: 66px;left: 32px;top: 682px;position: fixed;background-image: url(../480x800/guicontinuepostonwall.png);	}
+.guiCoinsMuli480x800{position: fixed;width: 35px;height: 20px;left: 250px;top: 472px;color:#4e3e2d;font-family: Bubblegum;	font-size: 1.3em;}
+.guiCoinsBomb480x800{position: fixed;width: 35px;height: 20px;left: 250px;top: 532px;color:#4e3e2d;font-family: Bubblegum;	font-size: 1.3em;}
+.guiCoinsFreeze480x800{position: fixed;width: 35px;height: 20px;left: 250px;top: 592px;color:#4e3e2d;font-family: Bubblegum;	font-size: 1.3em;}
+.guiLoosecerrar480x800{position: fixed;width: 45px;height: 40px;left: 394px;top: 96px;background-image: url("../480x800/btncerrar.png");}
+/*======================pantalla win==============================================*/
+.guiwincerrar480x800{position: fixed;width: 41px;height: 39px;left:396px;top: 76px;background-image: url("../480x800/btncerrar.png");}
+.guiWinContinuepostonwall480x800{width: 179px;height: 70px;min-height:70px;left: 26px;top: 671px;position: fixed;background-image: url(../480x800/guicontinuepostonwall.png);}
+/*======================pantalla pause==============================================*/	
+.pausecontinue480x800{top: 350px;left: 140px;	width: 233px;height:135px; background-image: url("../480x800/pausecontinue.png");min-height: 135px;	position: absolute;}
+.pausehelp480x800{top: 548px;left: 160px;	width: 244px;height: 187px;min-height:187px; background-image: url("../480x800/pausehelp.png");		position: absolute;}
+.pausemenu480x800{top: 440px;	left: 150px;width: 224px;  min-height: 165px;	height: 165px; background-image: url("../480x800/pausemenu.png");	position: absolute;}
+/* =========== pantalla life======================================================================================================*/
+.lifecontainer480x800{width: 480px;height: 550px; background-image: url("../480x800/lifebackground.png");position: absolute;background-repeat:no-repeat;}
+.lifeaddcoins480x800{width: 180px;height:68px; top:522px;left:273px;background-image: url("../480x800/lifeaddcoins.png");position: absolute;background-repeat:no-repeat;}
+.lifegiveme480x800{width: 177px;height: 76px; top:519px;left:35px;background-image: url("../480x800/lifegiveme.png");position: absolute;background-repeat:no-repeat;}
+.lifecoins480x800{font-family: Bubblegum;	font-size: 1.3em;color:#644000;height: 12px;	left: 300px;	position: fixed;top: 83px;	width: 13px;}
+/*======================pantalla chooser =============================================================================================*/
+.container480x800{position: absolute;width: 480px;height: 544px;background-image: url(../480x800/bg-choose.png); background-repeat:no-repeat ;}
+.guiChooseFinishMultiCount480x800{font-family: Bubblegum;	font-size: 1.3em;color:#644000;height: 12px;	left: 154px;	position: fixed;top: 176px;	width: 13px;}
+.guiChooseFinishBombCount480x800{font-family: Bubblegum;	font-size: 1.3em;color:#644000;height: 12px;	left: 149px;	position: fixed;top: 268px;	width: 13px;}
+.guiChooseFinishFreezeCount480x800{	font-family: Bubblegum;	font-size: 1.3em;color:#644000;	height: 12px;	left: 153px;	position: fixed;top: 358px;	width: 13px;}
+
+.guiFinishChooseBuyMulti480x800{background-image: url("../480x800/guigetx3.png");left: 300px;top: 160px;height: 39px;position: fixed;width: 96px;}
+.guiFinishChooseBuyFreeze480x800{background-image: url("../480x800/guigetx3.png");left: 300px;top: 255px;height: 39px;position: fixed;width: 96px;}
+.guiFinishChooseBuyBomb480x800{background-image: url("../480x800/guigetx3.png");left: 300px;top: 342px;height: 39px;position: fixed;  width: 96px;}
+
+.guiChooseCoinsMuli480x800{position: fixed;width: 35px;height: 20px;left: 248px;top: 176px;font-family: Bubblegum;color:#644000;}
+.guiChooseCoinsBomb480x800{position: fixed;width: 35px;height: 20px;left: 248px;top: 270;font-family: Bubblegum;color:#644000;}
+.guiChooseCoinsFreeze480x800{position: fixed;width: 35px;height: 20px;left: 248px;top:360px;font-family: Bubblegum;color:#644000;}
+
+.guiChooseAddCoins480x800{background-image: url("../480x800/add-coins.png");left: 310px;top: 472px;height: 42px;position: fixed;  width: 98px; background-repeat:no-repeat ;}
+.guiFinishChooseCoins480x800{height: 26px;	left:123px;position: fixed;text-align: center;	top: 482px;	width: 74px;color:#644000;font-family: Bubblegum;	font-size: 1.3em;}
+.guiChoosecerrar480x800{position: fixed;width: 41px;height: 39px;left: 394px;top: 68px;background-image: url("../480x800/btncerrar.png");}
+/*======================pantalla home==============================================*/
+.homelevel480x800{color: #4E3E2D;	font-family: Bubblegum;	font-size: 1.0em;	height: 60px;	top: 16px;	left: 26px;	
+min-height: 62px;	padding-left: 17px;	padding-top: 32px;	position: fixed;	width: 82px;}
+.homescore480x800{color: #4E3E2D;	font-family: Bubblegum;	font-size: 1.3em;	height: 75px;	left: 199px;
+	min-height: 62px;	padding-top: 28px;	position: fixed;	text-align: center;	top: 18px;	width: 93px;}
+.homerank480x800{color: #4E3E2D;	font-family: Bubblegum;	font-size: 1.3em;	height: 62px;	left: 310px;	min-height: 62px;	padding-left: 34px;	padding-top: 24px;
+	position: fixed;	top: 16px;	width: 87px;}
+.highscoreImage480x800{	background-image: url("../480x800/highscore.png");	height: 76px;left: 113px;min-height:76px;	position: fixed;top: 375px;	width: 215px;}
+.archievementImage480x800{	background-image: url("../480x800/homeachievement.png");	height: 88px;left: 123px;min-height: 88px;	position: fixed;top: 466px;	width: 223px;}
+.helpImage480x800{	background-image: url("../480x800/help.png");	height:94px;left: 353px;min-height: 94px;	position: fixed;top: 545px;	width: 127px;}
+ .volumenofImage480x800{	background-image: url("../480x800/volumen.png");	height: 58px;left: 12px;min-height: 58px;	position: fixed;top: 728px;	width: 58px;}
+.volumenonImage480x800{	background-image: url("../480x800/volumenon.png");	height: 61px;left: 10px;min-height: 61px;	position: fixed;top: 726px;	width: 62px;}
+
+/* =========== pantalla bonus======================================================================================================*/
+.containerbonus480x800{width:480px;height: 800px; background-image: url("../480x800/bonus.png");position: absolute;background-repeat:no-repeat;}
+.bonusaccepyshare480x800{width: 171px;height: 95px; top:640px;left:170px;background-image: url("../480x800/bonusacept.png");position: absolute;background-repeat:no-repeat;}
+.bonuscerrar480x800{position: absolute;width: 41px;height: 39px;left: 386px;top: 110px;background-image: url("../480x800/btncerrar.png");}
+.bonusyouwon480x800{position: absolute;width: 100%;height: 110px;top:400px;background-position: center;background-repeat:no-repeat;}
+/*======================pantalla help==================================================================================*/
+.containerhelp480x800{width: 480px;height: 800px; background-image: url("../480x800/helpbackground.png");position: absolute;}
+.donehelp480x800{width: 201px;height: 83px; top:635px;left:250px;background-image: url("../480x800/helpdone.png");position: absolute;background-repeat:no-repeat;}
+/*==============================================================================================================================*/
 
 .pointsFrame480x800{
 	background-image: url("../480x800/points.png");
@@ -181,22 +254,22 @@
 .leaderboardFrame480x800{
 	background-image: url("../480x800/leaderboards.png");
 	height: 88px;
-	left: 351px;
-	min-height: 56px;
+	left: 109px;
+	min-height: 88px;
 	position: fixed;
-	top: 360px;
-	width: 129px;
+	top: 568px;
+	width: 225px;
 }
 
 .playImage480x800{
 	background-image: url("../480x800/newbutton.png");
-	height: 81px;
+	height: 82px;
 	left: 122px;
-	min-height: 65px;
+	min-height: 82px;
 	position: fixed;
 	right: auto;
-	top: 270px;
-	width: 202px;
+	top: 282px;
+	width: 192px;
 }
 
 .continueImage480x800{
@@ -264,7 +337,7 @@
 	left: 80px;
 	top: 620px;
 }
-
+/*
 .guiFinishPoints480x800{
     color: #644000;
     font-family: Bubblegum;
@@ -276,18 +349,18 @@
     top: 380px;
     width: 90px;
 }
-
+*/
 .guiFinishRank480x800{
     font-family: Bubblegum;
     font-size: 1.1em;
     height: 20px;
-    left: 190px;
+    left: 90px;
     position: fixed;
     text-align: center;
-    top: 380px;
+    top: 314px;
     width: 90px;
 }
-
+/*
 .guiFinishLevel480x800{
     font-family: Bubblegum;
     font-size: 1.1em;
@@ -298,7 +371,8 @@
     top: 383px;
     width: 65px;
 }
-
+*/
+/*
 .guiFinishLifes480x800{
     font-family: Bubblegum;
     font-size: 1.4em;
@@ -310,15 +384,16 @@
     width: 65px;
     color:  #fff;
 }
+*/
 
 .guiFinishCoins480x800{
     font-family: Bubblegum;
-    font-size: 1.1em;
+    font-size: 1.3em;
     height: 26px;
-    left: 260px;
+    left: 268px;
     position: fixed;
     text-align: center;
-    top: 282px;
+    top: 302px;
     width: 110px;
 }
 
@@ -332,38 +407,38 @@
 }
 
 .guiFinishMultiCount480x800{
-    font-family: Bubblegum;
-    font-size: 0.8em;
-    height: 12px;
-    left: 150px;
-    position: fixed;
-    top: 462px;
-    width: 30px;
+	font-family: Bubblegum;
+	font-size: 1.3em;
+	height: 12px;
+	left: 148px;
+	position: fixed;
+	top: 472px;
+	width: 13px;
 }
 
 .guiFinishBombCount480x800{
-    font-family: Bubblegum;
-    font-size: 0.8em;
-    height: 12px;
-    left: 282px;
-    position: fixed;
-    top: 462px;
-    width: 30px;
+	font-family: Bubblegum;
+	font-size: 1.3em;
+	height: 12px;
+	left: 146px;
+	position: fixed;
+	top: 533px;
+	width: 13px;
 }
 
 .guiFinishFreezeCount480x800{
-    font-family: Bubblegum;
-    font-size: 0.8em;
-    height: 12px;
-    left: 415px;
-    position: fixed;
-    top: 462px;
-    width: 30px;
+	font-family: Bubblegum;
+	font-size: 1.3em;
+	height: 12px;
+	left: 148px;
+	position: fixed;
+	top: 596px;
+	width: 13px;
 }
 
 .guiLooseScreen480x800{
     background-image: url("../480x800/guiloose.png");
-    height: 543px;
+    height: 699px;
     left: 0;
     position: fixed;
     top: 0;
@@ -372,7 +447,7 @@
 
 .guiWinScreen480x800{
     background-image: url("../480x800/guiwin.png");
-    height: 533px;
+    height: 692px;
     left: 0;
     position: fixed;
     top: 0;
@@ -381,50 +456,50 @@
 
 .guiLooseContinue480x800{
     background-image: url("../480x800/guicontinueloose.png");
-    height: 194px;
-    left: 120px;
-    min-height: 110px;
+    height: 64px;
+    left: 262px;
+    min-height: 64px;
     position: fixed;
-    top: 495px;
-    width: 219px;
+    top: 680px;
+    width: 176px;
 }
 
 .guiWinContinue480x800{
-    background-image: url("../480x800/guicontinuewin.png");
-    height: 198px;
-    left: 110px;
-    min-height: 110px;
-    position: fixed;
-    top: 500px;
-    width: 221px;
+	position: fixed;
+	background-image: url(../480x800/guicontinueloose.png);
+	width: 183px;
+	height: 68px;
+	min-height: 68px;
+	left: 260px;
+	top: 670px;
 }
 
 
 .guiFinishBuyMulti480x800{
-    background-image: url("../480x800/guibuycoins.png");
-    left: 102px;
-	height: 60px;
-	position: fixed;
-	top: 466px;
-	width: 60px;
+    background-image: url("../480x800/guigetx3.png");
+    left: 318px;
+    height: 39px;
+    position: fixed;
+    top: 456px;
+    width: 99px;
 }
 
 .guiFinishBuyFreeze480x800{
-    background-image: url("../480x800/guibuycoins.png");
-	height: 50px;
-	left: 365px;
-	position: fixed;
-	top: 465px;
-	width: 58px;
+    background-image: url("../480x800/guigetx3.png");
+    height: 39px;
+    left: 318px;
+    position: fixed;
+    top: 578px;
+     width: 99px;
 }
 
 .guiFinishBuyBomb480x800{
-    background-image: url("../480x800/guibuycoins.png");
-    height: 60px;
-	left: 231px;
-	position: fixed;
-	top: 467px;
-	width: 60px;
+     background-image: url("../480x800/guigetx3.png");
+    height: 39px;
+    left: 318px;
+    position: fixed;
+    top: 516px;
+     width: 99px;
 }
 
 .guiBalanceCartel480x800{
@@ -835,9 +910,9 @@
 
 .uiPauseScreen480x800{
 	background-image: url("../480x800/pausecartel.png");
-	height: 665px;
+	height: 398px;
 	left: 0;
-	min-height: 480px;
+	min-height: 398px;
 	position: fixed;
 	top: 0;
 	width: 480px;

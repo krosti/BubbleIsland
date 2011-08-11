@@ -1,10 +1,5 @@
-var VERSION = '0.9.093';
-/*
-[x] bajar calidad sonido
-[x] cuando le erras la contraseña de Fb y despues la pones bien
-[x] tocando nose que en algun momento el sonido de la musica se reproduce en el juego
-[x] los botones de sound on/off estan mal y no andan, deberia ser un solo boton que alterna
-*/
+var VERSION = '3.0.123';
+
 function rnd(top){ return Math.floor(Math.random()*(top + 1))};
 
 /*touchMove = function(event) {
@@ -168,9 +163,9 @@ var freezeTime = 10 //en segundos
 var lifesPerCoins = 3;
 var linesPerLevel = 5;
 
-var bombValue = 1;
-var freezeValue = 1;
-var multiValue = 1;
+var bombValue = 5;
+var freezeValue = 5;
+var multiValue = 5;
 
 var bombInit = 5;
 var freezeInit = 5;
@@ -403,8 +398,6 @@ function bubble(l){
 		};
 		return flavor;
 	};
-
-
 
 	this.randomBombFlavor = function(){
 		var flavor;
@@ -938,8 +931,6 @@ function bubble(l){
 	};
 };
 
-
-
 function bubbleCannon(lvl){
 	this.lvl = lvl;
 	this.currentBubble;/* = new bubble(this.lvl);
@@ -950,7 +941,7 @@ function bubbleCannon(lvl){
 	this.object = new standAnimation(uiCannon.width, uiCannon.height, uiCannon.src);
 	this.object.addState('shoot', uiCannonShoot.src, 8);
 	this.element = this.object.element;
-	this.object.setXY(((this.lvl.width - uiCannon.width) / 2) + this.lvl.leftBound - 5, (this.lvl.height - uiCannon.height) + this.lvl.topBound + 4);
+	this.object.setXY(((this.lvl.width - uiCannon.width) / 2) + this.lvl.leftBound - 5, /*(this.lvl.height - uiCannon.height) + this.lvl.topBound + 4)*/ this.lvl.height + this.lvl.topBound);
 	/*style.top = this.lvl.height - cannonImage.height;
 	style.left = (this.lvl.width - cannonImage.width) / 2;*/
 	this.bufferBubble;
@@ -963,8 +954,10 @@ function bubbleCannon(lvl){
 		if(!this.readyShoot) return;
 		if(!this.loaded) return;
 		this.currentBubble.x = ((lvl.width / 2) - (this.lvl.bubbleRadius / 2)) + this.lvl.leftBound;
-		this.currentBubble.y = (lvl.height - lvl.bubbleRadius) + this.lvl.topBound;
-		this.currentBubble.y -= 5;
+		//this.currentBubble.y = (lvl.height - lvl.bubbleRadius) + this.lvl.topBound;
+		/*this.currentBubble.y = lvl.height/* + lvl.looseLine* + this.lvl.topBound;
+		this.currentBubble.y -= 5;*/
+		this.currentBubble.y =((this.lvl.height /*- lvl.bubbleRadius*/) + this.lvl.topBound) + this.lvl.bubbleRadius
 
 		this.readyShoot = false;
 		this.loaded = false;
@@ -1009,21 +1002,25 @@ function bubbleCannon(lvl){
 	this.chargeCannon = function(){
 		this.charging = true;
 		$(this.bufferBubble.element).delay(500).animate({
-				left: ((this.lvl.width / 2) - (this.lvl.bubbleRadius / 2)) + this.lvl.leftBound,
-				top: ((lvl.height - lvl.bubbleRadius) + this.lvl.topBound) - 5
-			}, 450, function(){
-				game.cannon.loaded = true;
-				game.cannon.currentBubble = game.cannon.bufferBubble;
-				game.cannon.addBuffer();
-				game.cannon.charging = false;
+			left: ((this.lvl.width / 2) - (this.lvl.bubbleRadius / 2)) + this.lvl.leftBound,
+			top: ((lvl.height /*- lvl.bubbleRadius*/) + this.lvl.topBound) + this.lvl.bubbleRadius
+		}, 450, function(){
+			game.cannon.loaded = true;
+			game.cannon.currentBubble = game.cannon.bufferBubble;
+			console.log('before add buffer');
+			game.cannon.addBuffer();
+			console.log('after add buffer');
+			game.cannon.charging = false;
 		});
 	};
 
 	this.addBuffer = function(){
-		this.bufferBubble = new bubble(this.lvl);
+		console.log('begin add buffer');
+		this.bufferBubble = new bubble(game.level);
 		this.bufferBubble.makeItRandom(); 
 		animNav.append(this.bufferBubble.element);
 		$(this.bufferBubble.element).addClass('guiNextBallFrame' + gameSize);
+		console.log('end add buffer');
 	};
 
 	this.draw = function(){
@@ -1065,8 +1062,6 @@ function bubbleCannon(lvl){
 	/*this.addBuffer();
 	this.chargeCannon();*/
 };
-
-
 
 function bubbleTable(ancho, alto, lvl){
 	// 15 x 10 pelotitas
@@ -1122,38 +1117,6 @@ function bubbleTable(ancho, alto, lvl){
 		//debug(dx +':'+ dy + '; &nbsp;');
 		var radius = this.lvl.bubbleRadius / 2;
 		var halfradius = this.lvl.bubbleRadius / 3;
-		/*var tableBubble = 'vacio';
-		//$('#debug')[0].innerHTML = $('#debug')[0].innerHTML + ' &nbsp; Collide i: ' + collided.i + ' j: '+ collided.j;
-		
-		do{
-			var deltax = (collided.x + radius) - (bubble.x + radius);
-			var deltay = (collided.y + radius) - (bubble.y + radius);
-			var isShort = this.isShortRow(collided.i); 
-			var dx = 0;
-			var dy = 0;
-			if(deltay < -(halfradius / 2)) dy = 1;
-			if(deltay >= (halfradius / 2)) dy = -1;
-			if(dy == 0){
-				if(deltax >= 0) dx = -1;
-				if(deltax < 0) dx = 1;
-			}else{
-				if(isShort){
-					if(deltax > 0) dx = 0;
-					if(deltax < 0) dx = 1;
-				}else{
-					if(deltax > 0) dx = -1;
-					if(deltax < 0) dx = 0;
-				};
-			};
-			//alert(dx + ':' + dy);
-			bubble.i = collided.i + dy;
-			bubble.j = collided.j + dx;
-			bubble.x -= bubble.dx;
-			bubble.y -= bubble.dy;
-			if((bubble.x <= bubble.lvl.leftBound) || (bubble.x >= bubble.lvl.width)) bubble.dx = -bubble.dx;
-			tableBubble = this.Table[bubble.i][bubble.j];
-			//$('#debug')[0].innerHTML = $('#debug')[0].innerHTML + ' &nbsp; tableBubble = ' + tableBubble;
-		}while(tableBubble != "vacio");*/
 
 		var inPlace = false;
 		var currentBubble;
@@ -1203,14 +1166,17 @@ function bubbleTable(ancho, alto, lvl){
 		this.lvl.mutex = true;
 		if(c >= 3){				
 			//alert(c);
-			var mult = bubble.pointsMultiplier;
+			/*var mult = bubble.pointsMultiplier;
 			this.lvl.pointsMultiplier =  c * c * pointExplode * mult;
-			//alert(this.lvl.pointsMultiplier);
+			//alert(this.lvl.pointsMultiplier);*/
 			this.exploded = c;
-			this.explodeMarked();			
-			this.lvl.addPoints();
-			this.lvl.pointsMultiplier = pointDrop * mult;
+			this.explodeMarked();
+			game.after.checkExplode(false);
+			this.lvl.addPoints();	
+			
 			this.checkForOrphans();
+			game.after.checkDrop();
+			this.lvl.addPoints();		
 		}else{				
 			this.clearMarks();
 		};
@@ -1313,16 +1279,18 @@ function bubbleTable(ancho, alto, lvl){
 		while(this.touchedBubbles.length > 0){
 			var toCheck = this.touchedBubbles.shift();
 			if(this.checkNeighbours(toCheck)){				
-				this.explodeMarked(); // <------------- por ahora, cambiar a drop de las bolitas
-				this.lvl.pointsMultiplier = this.exploded * 10;
-				this.lvl.addPoints();
+				this.explodeMarked(true); // <------------- por ahora, cambiar a drop de las bolitas
+				//game.after.addDrop(toCheck);
+				/*this.lvl.pointsMultiplier = this.exploded * 10;
+				this.lvl.addPoints();*/
 			}else{
 				this.clearMarks();
 			};
 		};
 	}
 	
-	this.explodeMarked = function(){
+	this.explodeMarked = function(toDrop){
+		toDrop = toDrop == undefined ? false : toDrop;
 		//bubbles marked as exploded, explode
 		//debug( ' explode!!!  ' + this.alto + ':' + this.ancho );
 		for(var i = 0; i < this.alto; ++i){
@@ -1335,13 +1303,26 @@ function bubbleTable(ancho, alto, lvl){
 							this.lvl.detonateBomb(b, 3);
 							//this.explodeMarked();
 						};
-						this.lvl.removeBubble(b);						
+						this.lvl.removeBubble(b, toDrop);						
 						this.Table[i][j] = "vacio";
 						this.touchedBubbles.remove(b);
 					};
 				}; 
 			};
 		};
+		/*for(var i = 0; i < this.lvl.bubbles_array.length; ++i){
+			var b = this.lvl.bubbles_array[i];
+			if(b.marked){
+				if(b.freezeBall) this.lvl.freezeMovement();
+				if(b.bombBall){
+					this.lvl.detonateBomb(b, 3);
+					i = 0;
+				};
+				this.lvl.removeBubble(b, toDrop);						
+				this.Table[b.i][b.j] = "vacio";
+				this.touchedBubbles.remove(b);
+			};
+		};*/
 	};
 
 	this.clearMarks  = function(){
@@ -1422,7 +1403,7 @@ function bubbleLevel(w, h, bubblesWidth, bubblesHeight, lvlnbr){
 	this.points = 0;
 	this.pointsToReach = game.ui.points + (1000 * this.lvlnro * 2);
 	this.pointsMultiplier = 0;
-	this.looseLine = this.height - (this.bubbleRadius * 3.5);
+	this.looseLine = this.height - (this.bubbleRadius * 5);
 	this.currentTop = 0;
 	this.h = Math.sqrt((this.bubbleRadius*this.bubbleRadius) - ((this.bubbleRadius / 2) * (this.bubbleRadius / 2)));
 	this.bonus = .2 * this.lvlnro;
@@ -1440,9 +1421,9 @@ function bubbleLevel(w, h, bubblesWidth, bubblesHeight, lvlnbr){
 	this.character.addState('load', 6, 27);
 	//this.character.addState('standby', uiPandaLoading.src, 5);
 	animNav.append(this.character.element);
-	var bag = document.createElement('div');
+	/*var bag = document.createElement('div');
 	$(bag).addClass('guiPandaBag' + gameSize);
-	$(this.character.element).append(bag);
+	$(this.character.element).append(bag);*/
 	$(this.character.element).addClass('panda' + gameSize);
 
 	this.blinkTimer = setInterval('game.level.characterBlink()', 1500);
@@ -1528,8 +1509,6 @@ function bubbleLevel(w, h, bubblesWidth, bubblesHeight, lvlnbr){
 			this.loose();
 		};
 	};
-
-
 
 	this.checkColisions = function(){
 		//check colisions
@@ -1664,8 +1643,6 @@ function bubbleLevel(w, h, bubblesWidth, bubblesHeight, lvlnbr){
 		};
 	};
 
-	
-
 	this.setShootedBubble = function(bubble){
 		this.shootedBubble = bubble;
 		this.character.setCurrentState('load');
@@ -1687,8 +1664,6 @@ function bubbleLevel(w, h, bubblesWidth, bubblesHeight, lvlnbr){
 		if(this.shootedBubble != null) this.shootedBubble.draw(painter);
 	};
 
-	
-
 	this.drawLevel = function(){
 		this.character.render();	
 		//if(this.shootedBubble != undefined) this.shootedBubble.object.render();
@@ -1698,9 +1673,10 @@ function bubbleLevel(w, h, bubblesWidth, bubblesHeight, lvlnbr){
 		this.bubbles_array.push(b);	
 	};
 	
-	this.removeBubble = function(b){
+	this.removeBubble = function(b, toDrop){
 		//debug('called remover');
 		//debug(b.i + ':' + b.j);
+		toDrop = toDrop == undefined ? false : toDrop;
 		for(var i = 0; i < this.bubbles_array.length; ++i){
 			//debug(' bubble : ' + this.bubbles_array[i].i +':'+this.bubbles_array[i].j);
 			if((this.bubbles_array[i].i == b.i) && (this.bubbles_array[i].j == b.j)){
@@ -1709,7 +1685,13 @@ function bubbleLevel(w, h, bubblesWidth, bubblesHeight, lvlnbr){
 			};
 		};
 		//$(b.element).remove();
-		if(b != 'nada' && b != 'vacio' && b != 'techo') b.explode();
+		//if(b != 'nada' && b != 'vacio' && b != 'techo') b.explode()
+		if(toDrop){
+			game.after.addDrop(b);
+		}else{
+			game.after.addExplode(b);
+		};
+		
 		if(this.bubbles_array.length != 0) return;
 		this.fpscount = 0;
 		this.addRandomRow();
@@ -1879,8 +1861,6 @@ function bubbleLevel(w, h, bubblesWidth, bubblesHeight, lvlnbr){
 		this.grilla = null;
 	};
 
-	
-
 	this.freezeMovement = function(){
 		this.freeze = true;
 		this.freezeTimeout = fps * freezeTime;
@@ -1938,7 +1918,153 @@ function bubbleLevel(w, h, bubblesWidth, bubblesHeight, lvlnbr){
 	this.win;
 }
 
+function bubbleArchivement(user){
+	/*
+	"Tough Bear" hit level 10 without any booster
+"Really Tough Bear" hit level 20 without any booster
+"Master of the Combinations" made 5 "MegaCombo" combo in one level
+"The Paradise is on Fire!" made 5 "On Fire!" combo in one level
+"Call Mr Plow, That's my name, That name again is Mr Plow" clean the
+board 5 times in one level
+"King-Bear of the Paradise" hit rank 1 globally
+	*/
 
+	this.archivement = function(){
+		this.title = "";
+		this.hint = "";
+		this.done = false;
+		this.posted = false;
+		this.checkDone = function(){
+			if(this.done == false) game.ui.innerCoins += 1;
+			this.done = true;
+		};
+		
+		this.postMe = function(){
+			if(this.posted) return;
+			api.facebook.post(api.facebook.user.name + ' has reach "' + this.title + '" archivement in @' + api.facebook.appname + ' and won 1 coins!');
+			game.ui.innerCoins += 1;
+			this.posted = true;
+		};
+		/*this.toReach = 0;
+		this.reached = 0;
+		this.percent = 0;
+		this.checkDone(d){
+			if(this.done) return;
+			if(this.reached > data) return;
+			this.reached = data;
+			this.checkPercent();
+			if(this.toReach == this.reached){
+				//archivement complete
+				this.done = true;
+				game.ui.innerCoins += 1;
+			};
+		};*/
+		/*
+		this.checkPercent(){
+			this.percent = parseInt((this.reached / this.toReach)*100);
+		};*/
+	};
+	
+	this.archivements = {};
+	
+	this.archivements.tough1 = new this.archivement();
+	this.archivements.tough1.title = "Tough Bear!";
+	this.archivements.tough1.hint = "Hit level 10 without any booster";
+	this.archivements.tough2 = new this.archivement();
+	this.archivements.tough2.title = "Really Tough Bear!";
+	this.archivements.tough2.hint = "Hit level 20 without any booster";
+	this.archivements.combo1 = new this.archivement();
+	this.archivements.combo1.title = "Combination Master!";
+	this.archivements.combo1.hint = "Made 5 'MegaCombo' combo in one level";
+	this.archivements.combo2 = new this.archivement();
+	this.archivements.combo2.title = "Paradise on Fire!";
+	this.archivements.combo2.hint = "Made 5 'OnFire' combo in one level";
+	this.archivements.cleaner = new this.archivement();
+	this.archivements.cleaner.title = "Call Mr Plow!";
+	this.archivements.cleaner.hint = "Clean the board 5 times in one level";
+	this.archivements.king = new this.archivement();
+	this.archivements.king.title = "King-Bear of the Paradise";
+	this.archivements.king.hint = "Hit number 1 in the global ranking";
+	
+	this.user = user;
+	this.cleansInLevel = 0;
+	this.megaComboInLevel = 0;
+	this.onFireInLevel = 0;
+	this.boosterUsed = false;
+	
+	this.checkLevel = function(){
+		if(game.level.lvlnro == 10 && (!this.boosterUsed)) this.archivements.tough1.checkDone();	
+		if(game.level.lvlnro == 20 && (!this.boosterUsed)) this.archivements.tough2.checkDone();
+		if(this.megaComboInLevel >= 5) this.archimenets.combo1.checkDone();
+		if(this.onFireInLevel >= 5) this.archimenets.combo2.checkDone();
+		if(this.cleansInLevel >= 5) this.archimenets.cleans.checkDone();
+		
+		this.clearLevelData();
+	};
+	
+	this.clearLevelData = function(){
+		this.cleansInLevel = 0;
+		this.megaComboInLevel = 0;
+		this.onFireInLevel = 0;
+	};
+	
+	this.postOnFace = function(){
+		this.archivements.tough1.postMe();
+		this.archivements.tough2.postMe();
+		this.archivements.combo1.postMe();
+		this.archivements.combo2.postMe();
+		this.archivements.cleaner.postMe();
+		this.archivements.king.postMe();
+	};
+	
+	this.serialize = function(){
+		var result = {};
+		result.archivements = {};
+		result.archivements.tough1done = this.archivements.tough1.done;
+		result.archivements.tough2done = this.archivements.tough2.done;
+		result.archivements.combo1done = this.archivements.combo1.done;
+		result.archivements.combo2done = this.archivements.combo2.done;
+		result.archivements.cleanerdone = this.archivements.cleaner.done;
+		result.archivements.kingdone = this.archivements.king.done;
+		
+		result.archivements.tough1posted = this.archivements.tough1.posted;
+		result.archivements.tough2posted = this.archivements.tough2.posted;
+		result.archivements.combo1posted = this.archivements.combo1.posted;
+		result.archivements.combo2posted = this.archivements.combo2.posted;
+		result.archivements.cleanerposted = this.archivements.cleaner.posted;
+		result.archivements.kingposted = this.archivements.king.posted;
+		
+		result.user = this.user;
+		result.cleansInLevel = this.cleansInLevel;
+		result.megaComboInLevel = this.megaComboInLevel;
+		result.onFireInLevel = this.onFireInLevel;
+		result.boosterUsed = this.boosterUsed;
+		
+		return result;
+	};
+	
+	this.unserialize = function(result){
+		this.archivements.tough1.done = result.archivements.tough1done;
+		this.archivements.tough2.done = result.archivements.tough2done;
+		this.archivements.combo1.done = result.archivements.combo1done;
+		this.archivements.combo2.done = result.archivements.combo2done;
+		this.archivements.cleaner.done = result.archivements.cleanerdone;
+		this.archivements.king.done = result.archivements.kingdone;
+		
+		this.archivements.tough1.posted = result.archivements.tough1posted;
+		this.archivements.tough2.posted = result.archivements.tough2posted;
+		this.archivements.combo1.posted = result.archivements.combo1posted;
+		this.archivements.combo2.posted = result.archivements.combo2posted;
+		this.archivements.cleaner.posted = result.archivements.cleanerposted;
+		this.archivements.king.posted = result.archivements.kingdoneposted;
+		
+		this.user = result.user;
+		this.cleansInLevel = result.cleansInLevel;
+		this.megaComboInLevel = result.megaComboInLevel;
+		this.onFireInLevel = result.onFireInLevel;
+		this.boosterUsed = result.boosterUsed;
+	};
+};
 
 function gameUI(w, h){
 	this.width = w;
@@ -1948,11 +2074,17 @@ function gameUI(w, h){
 	this.acumuledPoints = 0;
 	this.lifes = 5;
 	this.initialLifes = lifesPerCoins;
-	this.rank = -1;
+	this.rank = "none";
+	this.level = 0;
+	this.score = 0;
 
 	this.multiBubbleCount = multiInit;
 	this.bombBubbleCount = bombInit;
 	this.freezeBubbleCount = freezeInit;
+	
+	this.innerCoins = 0;
+	this.archivements = new bubbleArchivement(api.facebook.user);
+	
 	//this.element = document.createElement('<div style=" @font-face: { font-family: \'The New Font\'; src: Bubblegum.ttf;}"></div>');
 	this.element = document.createElement('div');
 	this.element2 = document.createElement('div');
@@ -1966,8 +2098,26 @@ function gameUI(w, h){
 	this.freezeBubbleElement = document.createElement('div');
 	this.coinsElement = document.createElement('div'); 
 	this.addCoinsElement = document.createElement('div'); 
+	
+	this.statusBarContainer = document.createElement('div'); 
 	this.statusBar = document.createElement('div'); 
 	this.statusProgressBar = document.createElement('div');
+	
+	this.lvlFrame = document.createElement('div');
+	this.rankFrame = document.createElement('div');
+	this.scoreFrame = document.createElement('div');
+	
+	document.getElementById('gameMenu').appendChild(this.lvlFrame);
+	document.getElementById('gameMenu').appendChild(this.rankFrame);
+	document.getElementById('gameMenu').appendChild(this.scoreFrame);
+	
+	this.lvlFrame.setAttribute('class', 'homelevel' + gameSize);
+	this.rankFrame.setAttribute('class', 'homerank' + gameSize);
+	this.scoreFrame.setAttribute('class', 'homescore' + gameSize);
+	
+	this.statusBarContainer.setAttribute('class', 'guiProgressBartrofeo' + gameSize);
+	this.statusBar.setAttribute('class', 'guiProgressBarmedio' + gameSize);
+	this.statusProgressBar.setAttribute('class', 'guiProgressBarinterna' + gameSize);
 	
 	animNav.append(this.element);
 	animNav.append(this.element2);
@@ -1980,8 +2130,10 @@ function gameUI(w, h){
 	animNav.append(this.freezeBubbleElement);
 	animNav.append(this.coinsElement);
 	animNav.append(this.addCoinsElement);
-	animNav.append(this.statusBar);
-	$(this.statusBar).append(this.statusProgressBar);
+	animNav.append(this.statusBarContainer);
+	//$(this.statusBar).append(this.statusProgressBar);
+	this.statusBarContainer.appendChild(this.statusBar);
+	this.statusBar.appendChild(this.statusProgressBar);
 
 	$(this.element).addClass('pointsFrame'+ gameSize);
 	$(this.element2).addClass('lifesFrame'+ gameSize);
@@ -1994,7 +2146,7 @@ function gameUI(w, h){
 	$(this.freezeBubbleElement).addClass('guiBuyFreezeFrame' + gameSize);
 	$(this.coinsElement).addClass('guiCoinsFrame' + gameSize);;
 	$(this.addCoinsElement).addClass('guiBuyCoinsFrame' + gameSize);
-	$(this.statusBar).addClass('guiProgressBar' + gameSize);
+	//$(this.statusBar).addClass('guiProgressBar' + gameSize);
 
 	$(this.backElement).click(function(){ game.showMenu(); });
 
@@ -2002,8 +2154,11 @@ function gameUI(w, h){
 		if(game.ui.multiBubbleCount != 0){
 			if(game.cannon.chargeMultiBuffer()){
 				game.ui.multiBubbleCount -= 1;
-				game.ui.multiBubbleElement.innerHTML = game.ui.multiBubbleCount;					
+				game.ui.multiBubbleElement.innerHTML = 'x' + game.ui.multiBubbleCount;					
 			};
+		}else{
+			$(game.ui.pauseElement).click();
+			api.ui.showChooseBooster();
 		};
 		e.stopPropagation();
 	});
@@ -2012,8 +2167,11 @@ function gameUI(w, h){
 		if(game.ui.bombBubbleCount != 0){
 			if(game.cannon.chargeBombBuffer()){
 				game.ui.bombBubbleCount -= 1;
-				game.ui.bombBubbleElement.innerHTML = game.ui.bombBubbleCount;	
+				game.ui.bombBubbleElement.innerHTML = 'x' + game.ui.bombBubbleCount;	
 			};
+		}else{
+			$(game.ui.pauseElement).click();
+			api.ui.showChooseBooster();
 		};
 		e.stopPropagation();
 	});
@@ -2022,25 +2180,56 @@ function gameUI(w, h){
 		if(game.ui.freezeBubbleCount != 0){
 			if(game.cannon.chargeFreezeBuffer()){
 				game.ui.freezeBubbleCount -= 1;
-				game.ui.freezeBubbleElement.innerHTML = game.ui.freezeBubbleCount;	
+				game.ui.freezeBubbleElement.innerHTML = 'x' + game.ui.freezeBubbleCount;	
 			};
+		}else{
+			$(game.ui.pauseElement).click();
+			api.ui.showChooseBooster();
 		};
 		e.stopPropagation();
 	});
 
-	$(this.pauseElement).click(function(){
+	$(this.pauseElement).click(function(event){
 		soundengine.reproduceSound('pause');
 		cartel = document.createElement('div');
 		var waitscreen = document.createElement('div');
+		
+		var continueButton = document.createElement('div');
+		continueButton.setAttribute('class', 'pausecontinue' + gameSize);
+		var helpButton = document.createElement('div');
+		helpButton.setAttribute('class', 'pausehelp' + gameSize);
+		var menuButton = document.createElement('div');
+		menuButton.setAttribute('class', 'pausemenu' + gameSize);
+		
 		$(cartel).addClass('uiAlert' + gameSize);		
 		$(waitscreen).addClass('uiPauseScreen' + gameSize);
-		$(waitscreen).click(function(){
+		
+		$(continueButton).click(function(){
 			$(cartel).remove();
 			game.clock.start();
 		});
+		
+		$(helpButton).click(function(){
+			menues.showMenu('help', cartel);
+		});
+		
+		$(menuButton).click(function(){
+			game.ui.score = game.ui.points;
+			$(cartel).remove();
+			game.showMenu();
+			game.ui.refresh();
+		});
+		
 		cartel.appendChild(waitscreen);
-		$(document.body).append(cartel);
+		cartel.appendChild(continueButton);
+		cartel.appendChild(menuButton);
+		cartel.appendChild(helpButton);
+		
+		//$(document.body).append(cartel);
+		menues.basenav.appendChild(cartel);
 		game.clock.stop();
+		
+		event.stopPropagation()
 	});
 
 	this.coinsElement.innerHTML = (api.softgame.user.balance == undefined ? "-" : api.softgame.user.balance);
@@ -2085,11 +2274,15 @@ function gameUI(w, h){
 		$(this.element2).html(this.lifes);
 		$(this.element3).html(game.level.lvlnro);
 
-		this.multiBubbleElement.innerHTML = this.multiBubbleCount;
-		this.bombBubbleElement.innerHTML = this.bombBubbleCount;
-		this.freezeBubbleElement.innerHTML = this.freezeBubbleCount;
+		this.multiBubbleElement.innerHTML = 'x' + this.multiBubbleCount;
+		this.bombBubbleElement.innerHTML = 'x' + this.bombBubbleCount;
+		this.freezeBubbleElement.innerHTML = 'x' + this.freezeBubbleCount;
 
 		this.coinsElement.innerHTML = api.softgame.user.balance;
+		
+		this.lvlFrame.innerHTML = this.level;
+		this.rankFrame.innerHTML = this.rank;
+		this.scoreFrame.innerHTML = this.score;
 	}
 
 	//this.
@@ -2123,12 +2316,11 @@ function gameUI(w, h){
 	this.onRank = function(){};
 };
 
-
-
 function appEnviroment(canvasObj, menuObj, navObj, size){
 	this.level = '';
-	this.animTimer;
-	this.cannon;
+	this.animTimer = null;
+	this.cannon = null;
+	this.after = new afterEffect();
 	this.canvas = document.getElementById(canvasObj);//$(canvasObj)
 	this.menu = document.getElementById(menuObj);
 	this.backgroundImage = backgroundImage;
@@ -2200,7 +2392,7 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 		this.clock.start();
 		//hide menu
 		//this.menu.style.zIndex = this.menu.style.zIndex - 1;
-		this.menu.style.display = 'none';
+		//this.menu.style.display = 'none';
 		soundengine.stoptheme();
 		//soundengine.stopbackground();
 		//alert('hola');
@@ -2209,62 +2401,56 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 	this.continueGame = function(){
 		game.ui.refresh();
 		if(game.level == ''){
-			//alert('level = nada');
-			if(!this.loadedLevel){
-				api.ui.showWaiting();
-				api.levels.onGetLevel = this.loadPreviousGame;
-				this.loadedLevel = true;				
-				api.levels.getLevel(api.facebook.user.id);
-			}else{
-				//alert('start new game');
-				this.startNewGame();
-			};
+			this.startNewGame();
 		}else{
 			//this.menu.style.zIndex = this.menu.style.zIndex + 1;
 			this.clock.start();
-			this.menu.style.display = 'none';			
+			//this.menu.style.display = 'none';			
 		};
 		soundengine.stoptheme();
 		//soundengine.stopbackground();
 	};
 
-	this.loadPreviousGame = function(){
+	this.loadPreviousGame = function(doContinue){
 		//alert("loadPreviousGame");
+		doContinue = doContinue == undefined ? true : doContinue;
 		api.ui.hideWaiting();
-		if(api.levels.jsonlevel === ""){
+		/*if(api.levels.jsonlevel === ""){
 			//alert("wepa!");
 			//api.ui.alert("I can't find any previous game, you need to start from the begginig!", 'Ok, lets go for it!');
 			api.ui.alertStyle('guiPreviousScreen', 'guiPreviousButton');
 			return;
-		};
+		};*/
 		if(!api.levels.unserializeLevel()){
 			//alert('hola');
+			console.log('unserialize fail');
 			return;
 		};// return;
 		//chequeo si esta en ganar o perder
 		//gano
 		//alert('check win');
-		if(game.level.points >= game.level.pointsToReach){
+		/*if(game.level.points >= game.level.pointsToReach){
 			//alert('win');
 			game.level.freeze = true;
 			game.level.finished = true;
 			game.ui.points = this.points;
 			game.level.win();
-		};
+		};*/
 		//perdio
 		//alert('check lose');
-		var masBaja = game.level.grilla.returnLowest();
-		/*alert(this.looseLine);*/
+		/*var masBaja = game.level.grilla.returnLowest();
+		/*alert(this.looseLine);*
 		//alert(masBaja.y + this.bubbleRadius);
-		if(masBaja.y + game.level.bubbleRadius > game.level.looseLine){
+		//if(masBaja.y + game.level.bubbleRadius > game.level.looseLine){
+		if((masBaja.y - (game.canvas.height - this.height)) + this.bubbleRadius > this.looseLine){
 			//alert('perdiste');
 			/*alert(this.looseLine);
-			alert(masBaja.x + this.bubbleRadius);*/
+			alert(masBaja.x + this.bubbleRadius);*
 			game.level.freeze = true;
 			game.level.finished = true;
 			game.level.loose();
-		};
-		game.continueGame();
+		};*/
+		//if(doContinue) game.continueGame();
 	};
 
 	this.nextLevel = function(){
@@ -2291,7 +2477,7 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 			case "320x480":
 				this.canvas.width = 320;
 				this.canvas.height = 480;
-				this.level = new bubbleLevel(240, 380, 8, 20, levelnumber);
+				this.level = new bubbleLevel(240, 250, 8, 20, levelnumber);
 				break;
 			case "360x480":
 				this.canvas.width = 360;
@@ -2316,7 +2502,7 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 		};
 		this.level.top = this.top;
 		this.level.left = this.left;	
-		this.level.topBound = this.canvas.height - this.level.height;
+		this.level.topBound = 100;//(this.canvas.height - this.level.height) / 2;
 		this.level.leftBound = (this.canvas.width - this.level.width) / 2;
 		this.level.points = this.ui.points;
 		this.level.loose = this.playerLoose;
@@ -2355,6 +2541,16 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 			var uiBombCount = document.createElement('div');
 			var uiFreezeCount = document.createElement('div');
 			var continueButton = document.createElement('div');
+			var continuePostButton = document.createElement('div');
+			
+			var multiValueFrame = document.createElement('div');
+			var bombValueFrame = document.createElement('div');
+			var freezeValueFrame = document.createElement('div');
+			
+			multiValueFrame.innerHTML = multiValue;
+			bombValueFrame.innerHTML = bombValue;
+			freezeValueFrame.innerHTML = freezeValue;
+			
 			cartel.rankingdiv = uiRank;
 			cartel.coins = uiCoins;
 			cartel.lifes = uiLifes;
@@ -2374,6 +2570,12 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 			$(uiBombCount).addClass('guiFinishBombCount' + gameSize);
 			$(uiFreezeCount).addClass('guiFinishFreezeCount' + gameSize);
 			$(continueButton).addClass('guiLooseContinue' + gameSize);
+			$(continuePostButton).addClass('guiLooseContinuepostonwall' + gameSize);
+			
+			multiValueFrame.setAttribute('class', 'guiCoinsMuli' + gameSize);
+			bombValueFrame.setAttribute('class', 'guiCoinsBomb' + gameSize);
+			freezeValueFrame.setAttribute('class', 'guiCoinsFreeze' + gameSize);
+			
 			$(cartel).append(uiScreen);
 			$(cartel).append(uiCoins);
 			$(cartel).append(uiMoreCoins);
@@ -2385,6 +2587,11 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 			$(cartel).append(uiBombCount);
 			$(cartel).append(uiFreezeCount);
 			$(cartel).append(continueButton);
+			$(cartel).append(continuePostButton);
+			
+			cartel.appendChild(multiValueFrame);
+			cartel.appendChild(bombValueFrame);
+			cartel.appendChild(freezeValueFrame);
 
 			var buymultibutton = document.createElement('div');
 			$(buymultibutton).addClass('guiFinishBuyMulti' + gameSize);
@@ -2406,9 +2613,9 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 			uiPoints.innerHTML = game.ui.points;
 			uiRank.innerHTML = 0;
 			uiLevel.innerHTML = game.level.lvlnro;
-			uiMultiCount.innerHTML = game.ui.multiBubbleCount;
-			uiBombCount.innerHTML = game.ui.bombBubbleCount;
-			uiFreezeCount.innerHTML = game.ui.freezeBubbleCount;
+			uiMultiCount.innerHTML = 'x' + game.ui.multiBubbleCount;
+			uiBombCount.innerHTML = 'x' + game.ui.bombBubbleCount;
+			uiFreezeCount.innerHTML = 'x' + game.ui.freezeBubbleCount;
 
 			cartel.refresh = function(){
 				cartel.coins.innerHTML = (api.softgame.user.balance == undefined ? "-" : api.softgame.user.balance);
@@ -2439,6 +2646,29 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 					$(cartel).remove();
 				});
 			});
+			
+			$(continuePostButton).click(function(){
+				$(cartel).fadeOut(300, function(){
+					game.ui.lifes -= 1;					
+					if(game.ui.lifes == -1){
+						/*game.level.clearBoard();
+						game.level = null;*/
+						game.level = '';
+						game.ui.lifes = 5;
+						game.ui.points = 0;
+						game.ui.acumuledPoints = 0;
+						game.ui.pointsCounter = 0;
+						game.showMenu();
+					}else{
+						game.ui.points = game.ui.acumuledPoints;					 
+						game.ui.pointsCounter = game.ui.acumuledPoints;
+					};
+					game.doSerialize = true;
+					game.redoLevel();
+					$(cartel).remove();
+				});
+				api.facebook.postMessage(api.facebook.user.name + " has got " + game.ui.points + " points in Bubble Paradise ! join him in this @ " + api.facebook.appname + "!");
+			});
 
 			$(uiMoreCoins).click(function(){
 				api.levels.serializaDone = function(){
@@ -2467,12 +2697,21 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 		var uiBombCount = document.createElement('div');
 		var uiFreezeCount = document.createElement('div');
 		var continueButton = document.createElement('div');
+		var continuePostButton = document.createElement('div');
 		cartel.rankingdiv = uiRank;
 		cartel.coins = uiCoins;
 		cartel.lifes = uiLifes;
 		cartel.multi = uiMultiCount;
 		cartel.bomb = uiBombCount;
 		cartel.freeze = uiFreezeCount;
+		
+		var multiValueFrame = document.createElement('div');
+		var bombValueFrame = document.createElement('div');
+		var freezeValueFrame = document.createElement('div');
+		
+		multiValueFrame.innerHTML = multiValue;
+		bombValueFrame.innerHTML = bombValue;
+		freezeValueFrame.innerHTML = freezeValue;
 
 		$(cartel).addClass('uiAlert' + gameSize);
 		$(uiScreen).addClass('guiWinScreen' + gameSize);
@@ -2486,6 +2725,12 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 		$(uiBombCount).addClass('guiFinishBombCount' + gameSize);
 		$(uiFreezeCount).addClass('guiFinishFreezeCount' + gameSize);
 		$(continueButton).addClass('guiWinContinue' + gameSize);
+		$(continuePostButton).addClass('guiWinContinuepostonwall' + gameSize);
+		
+		multiValueFrame.setAttribute('class', 'guiCoinsMuli' + gameSize);
+		bombValueFrame.setAttribute('class', 'guiCoinsBomb' + gameSize);
+		freezeValueFrame.setAttribute('class', 'guiCoinsFreeze' + gameSize);
+			
 		$(cartel).append(uiScreen);
 		$(cartel).append(uiCoins);
 		$(cartel).append(uiMoreCoins);
@@ -2497,7 +2742,12 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 		$(cartel).append(uiBombCount);
 		$(cartel).append(uiFreezeCount);
 		$(cartel).append(continueButton);
+		$(cartel).append(continuePostButton);
 
+		cartel.appendChild(multiValueFrame);
+		cartel.appendChild(bombValueFrame);
+		cartel.appendChild(freezeValueFrame);
+			
 		var buymultibutton = document.createElement('div');
 		$(buymultibutton).addClass('guiFinishBuyMulti' + gameSize);
 		var buybombbutton = document.createElement('div');
@@ -2518,9 +2768,9 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 		uiPoints.innerHTML = game.ui.points;
 		uiRank.innerHTML = 'updating';
 		uiLevel.innerHTML = game.level.lvlnro;
-		uiMultiCount.innerHTML = game.ui.multiBubbleCount;
-		uiBombCount.innerHTML = game.ui.bombBubbleCount;
-		uiFreezeCount.innerHTML = game.ui.freezeBubbleCount;
+		uiMultiCount.innerHTML = 'x' + game.ui.multiBubbleCount;
+		uiBombCount.innerHTML = 'x' + game.ui.bombBubbleCount;
+		uiFreezeCount.innerHTML = 'x' + game.ui.freezeBubbleCount;
 
 		cartel.refresh = function(){
 			cartel.coins.innerHTML = (api.softgame.user.balance == undefined ? "-" : api.softgame.user.balance);
@@ -2531,6 +2781,22 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 		};
 
 		$(continueButton).click(function(){
+			$(cartel).fadeOut(300, function(){
+				/*game.level.clearBoard();
+				game.level = null;*/
+				game.doSerialize = true;
+				//api.facebook.postMessage(api.facebook.user.name + " has got " + game.ui.points + " points in Bubble Paradise! Come with him and enjoy togheter in the paradise!");
+				//api.facebook.postMessage(api.facebook.user.name + " has got " + game.ui.points + " points in Bubble Paradise! Come with him and enjoy togheter in the paradise!");
+				//api.facebook.postMessage(api.facebook.user.name + " has got " + game.ui.points + " points in Bubble Paradise ! join him in this @ " + api.facebook.appname + "!");
+				game.ui.acumuledPoints = game.ui.points;
+				game.ui.pointsCounter = game.ui.points;
+				game.nextLevel();
+				$(cartel).remove();
+				delete cartel;
+			});
+		});
+		
+		$(continuePostButton).click(function(){
 			$(cartel).fadeOut(300, function(){
 				/*game.level.clearBoard();
 				game.level = null;*/
@@ -2562,7 +2828,7 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 				//$('.guiFinishRank' + gameSize)[0].innerHTML = game.ui.ranking;
 				cartel.rankingdiv.innerHTML = game.ui.ranking;
 				if((game.ui.ranking <= 3) && (game.ui.ranking > 0)){
-					api.ui.showHighScore();
+					//api.ui.showHighScore();
 					api.facebook.post(api.facebook.user.name + " has got the " + this.ranking + "position on the Leaderboard of Bubble Paradise! What are you waiting for to beat him and enjoy this paradise!");
 				};
 			};
@@ -2574,7 +2840,8 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 	this.showMenu = function(){
 		game.clock.stop();
 		//this.menu.style.zIndex = 90//this.menu.style.zIndex + 2;
-		this.menu.style.display = 'block';
+		//this.menu.style.display = 'block';
+		menues.showMenu('mainMenu');
 		soundengine.starttheme();
 		//soundengine.startbackground();
 		/*soundengine.backgroundsound.playing = true;
@@ -2635,6 +2902,7 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 		this.ui.draw(this.painter);
 		this.level.drawLevel();
 		this.cannon.draw();
+		this.after.render();
 		//this.clearPainter(this.painter);
 		//this.painter.putImageData(this.frameBuffer.getImageData(0, 0, this.buffercanvas.width, this.buffercanvas.height), 0, 0);
 		//this.canvas.style.display = 'block';
@@ -2686,145 +2954,196 @@ api.levels.serializeLevel = function(game){
 	//api.levels.jsonlevel = {};
 	var lvl = {};
 	lvl.resolution = gameSize;
-	lvl.lvlnumber = game.level.lvlnro;
+	if(game.level.lvlnro == undefined){
+		lvl.lvlnumber = 0;
+	}else{
+		lvl.lvlnumber = game.level.lvlnro;
 
-	//this.grilla = new bubbleTable(bubblesWidth, bubblesHeight, this);
-	//this.cannon;
-	lvl.width = game.level.width;
-	lvl.height = game.level.height;
-	lvl.top = game.level.top;
-	lvl.left = game.level.left;
-	lvl.topBound = game.level.topBound;
-	lvl.leftBound = game.level.leftBound;
-	
-	lvl.mutex = game.level.mutex;
-	lvl.freeze = game.level.freeze
-	lvl.finished = game.level.finished;
-	lvl.freezeTimeout = game.level.frezeeTimeout;
-	lvl.bubbleRadius = game.level.bubbleRadius
-	lvl.shootedBubble = game.level.shootedBubble;
-	//lvl.bubbles_array = new Array();
-	lvl.points = game.level.points;
-	lvl.pointsToReach = game.level.pointsToReach;
-	lvl.pointsMultiplier = game.level.pointsMultiplier;
-	lvl.looseLine = game.level.looseLine;
-	lvl.currentTop = game.level.currentTop;
-	lvl.h = game.level.h
-	lvl.bonus = game.level.bonus;
-	lvl.bubble_array = [];
-	//salvo las bubbles del array, son las mismas que la grilla
-	for(var i = 0; i < game.level.bubbles_array.length; ++i){
-		var current = game.level.bubbles_array[i];
-		var bubble = current.serialize();
-		lvl.bubble_array.push(bubble);
-		//current = null;
+		//this.grilla = new bubbleTable(bubblesWidth, bubblesHeight, this);
+		//this.cannon;
+		lvl.width = game.level.width;
+		lvl.height = game.level.height;
+		lvl.top = game.level.top;
+		lvl.left = game.level.left;
+		lvl.topBound = game.level.topBound;
+		lvl.leftBound = game.level.leftBound;
+		
+		lvl.mutex = game.level.mutex;
+		lvl.freeze = game.level.freeze
+		lvl.finished = game.level.finished;
+		lvl.freezeTimeout = game.level.frezeeTimeout;
+		lvl.bubbleRadius = game.level.bubbleRadius
+		lvl.shootedBubble = game.level.shootedBubble;
+		//lvl.bubbles_array = new Array();
+		lvl.points = game.level.points;
+		lvl.pointsToReach = game.level.pointsToReach;
+		lvl.pointsMultiplier = game.level.pointsMultiplier;
+		lvl.looseLine = game.level.looseLine;
+		lvl.currentTop = game.level.currentTop;
+		lvl.h = game.level.h
+		lvl.bonus = game.level.bonus;
+		lvl.bubble_array = [];
+		//salvo las bubbles del array, son las mismas que la grilla
+		for(var i = 0; i < game.level.bubbles_array.length; ++i){
+			var current = game.level.bubbles_array[i];
+			var bubble = current.serialize();
+			lvl.bubble_array.push(bubble);
+			//current = null;
+		};
+
+		lvl.cannon = {};
+		//lvl.cannon.currentBubble = (game.level.cannon.currentBubble == null)? null : game.level.cannon.currentBubble.serialize();
+		lvl.cannon.readyShoot = game.level.cannon.readyShoot;
 	};
-
-	lvl.cannon = {};
-	//lvl.cannon.currentBubble = (game.level.cannon.currentBubble == null)? null : game.level.cannon.currentBubble.serialize();
-	lvl.cannon.readyShoot = game.level.cannon.readyShoot;
 	lvl.ui = {};
 	lvl.ui.lifes = game.ui.lifes;
 	lvl.ui.multiCount = game.ui.multiBubbleCount;
 	lvl.ui.bombCount = game.ui.bombBubbleCount;
 	lvl.ui.freezeCount = game.ui.freezeBubbleCount;
+	lvl.ui.innerCoins = game.ui.innerCoins;
+	
+	lvl.ui.archivements = game.ui.archivements.serialize();
 
 	api.levels.jsonlevel = lvl;
 };
 
 api.levels.unserializeLevel = function(){
 	var lvl = api.levels.jsonlevel;
+	
+	if(lvl == ""){ //there isnt any previuos game
+		game.ui.score = 0;
+		game.ui.level = 0;
+		game.ui.refresh();
+		console.log('no level');
+		return false;
+		//game.
+	};
 	//alert('lvl: ' + lvl);
 	if(lvl.resolution != gameSize){
 		//alert('resolution wrong');
 		//api.ui.alert('You have another session started with another phone resolution, we cannot arrange the bubbles in the same position, this will a mess!! please relogin with the original phone and try again', 'Ok, see you later');
 		api.ui.alertStyle('guiResolutionScreen', 'guiResolutionButton');
+		console.log('wrong resolution');
 		return false;
 	};
 	//var level = game.level;
 	//alert('hola1');
+	game.ui.level = lvl.lvlnumber;
+	game.ui.score = lvl.points;
+	
+	if(lvl.lvlnumber == 0){
+		game.cannon = null;
+		game.level = "";
+		switch(lvl.resolution){
+			case "320x480":
+				game.canvas.width = 320;
+				game.canvas.height = 480;	
+				break;
+			case "360x480":
+				game.canvas.width = 360;
+				game.canvas.height = 480;
+				break;
+			case "640x960":
+				game.canvas.width = 640;
+				game.canvas.height = 960;
+				break;
+			case "480x800":
+				game.canvas.width = 480;
+				game.canvas.height = 800;
+				break;
+			case "854x480":
+				game.canvas.height = 480; 
+				game.canvas.width = 854;
+				break;
+		};
+		return false;
+	}else{
 
-	switch(lvl.resolution){
-		case "320x480":
-			game.canvas.width = 320;
-			game.canvas.height = 480;	
-			game.level = new bubbleLevel(240, 380, 8, 20, lvl.lvlnumber);
-			break;
-		case "360x480":
-			game.canvas.width = 360;
-			game.canvas.height = 480;
-			game.level = new bubbleLevel(360, 480, 10, 20, lvl.lvlnumber);
-			break;
-		case "640x960":
-			game.canvas.width = 640;
-			game.canvas.height = 960;
-			game.level = new bubbleLevel(640, 960, 13, 30, lvl.lvlnumber);
-			break;
-		case "480x800":
-			game.canvas.width = 480;
-			game.canvas.height = 800;
-			game.level = new bubbleLevel(480, 800, 11, 25, lvl.lvlnumber);
-			break;
-		case "854x480":
-			game.canvas.height = 480; 
-			game.canvas.width = 854;
-			game.level = new bubbleLevel(800, 400, 23, 20, lvl.lvlnumber);
-			break;
+		switch(lvl.resolution){
+			case "320x480":
+				game.canvas.width = 320;
+				game.canvas.height = 480;	
+				game.level = new bubbleLevel(240, 250, 8, 20, lvl.lvlnumber);
+				break;
+			case "360x480":
+				game.canvas.width = 360;
+				game.canvas.height = 480;
+				game.level = new bubbleLevel(360, 480, 10, 20, lvl.lvlnumber);
+				break;
+			case "640x960":
+				game.canvas.width = 640;
+				game.canvas.height = 960;
+				game.level = new bubbleLevel(640, 960, 13, 30, lvl.lvlnumber);
+				break;
+			case "480x800":
+				game.canvas.width = 480;
+				game.canvas.height = 800;
+				game.level = new bubbleLevel(480, 800, 11, 25, lvl.lvlnumber);
+				break;
+			case "854x480":
+				game.canvas.height = 480; 
+				game.canvas.width = 854;
+				game.level = new bubbleLevel(800, 400, 23, 20, lvl.lvlnumber);
+				break;
+		};
+		//alert('hola2');
+		game.level.top = lvl.top;
+		game.level.left = lvl.left;
+		game.level.topBound = lvl.topBound;
+		game.level.leftBound = lvl.leftBound;
+		//alert('hola2');
+		game.level.mutex = lvl.mutex;
+		game.level.freeze = lvl.freeze
+		game.level.finished = lvl.finished;
+		game.level.freezeTimeout = lvl.frezeeTimeout;
+		game.level.bubbleRadius = lvl.bubbleRadius
+		game.level.shootedBubble = lvl.shootedBubble;
+		//game.level.bubbles_array = new Array();
+		game.level.points = lvl.points;
+		game.level.pointsToReach = lvl.pointsToReach;
+		game.level.pointsMultiplier = lvl.pointsMultiplier;
+		game.level.looseLine = lvl.looseLine;
+		game.level.currentTop = lvl.currentTop;
+		game.level.h = lvl.h
+		game.level.bonus = lvl.bonus;
+		//alert('hola2');
+		for(var i = 0; i < lvl.bubble_array.length; ++i){
+			//alert('i: ' + i);
+			var current = lvl.bubble_array[i];
+			//alert(current);
+			var b = new bubble(game.level);
+			//alert('unserialize bubble');
+			b.unserialize(current);
+			//alert('fin unserialize bubble');
+			game.level.bubbles_array.push(b);
+			game.level.grilla.Table[b.i][b.j] = b;
+			current = null;
+		};
+		//alert('hola3');
+		game.cannon = new bubbleCannon(game.level);
+		game.level.cannon = game.cannon;
+		game.level.cannon.currentBubble = null;
+		game.level.cannon.addBuffer();
+		game.level.cannon.chargeCannon();
+		game.level.cannon.setReadyShoot();
+		/*if(lvl.cannon.currentBubble != null){
+			game.level.cannon.currentBubble = new bubble(game.level);
+			game.level.cannon.currentBubble.unserialize(lvl.cannon.currentBubble);
+		};*/
+		game.cannon.readyShoot = lvl.cannon.readyShoot;
+		game.level.loose = game.playerLoose;
+		game.level.win = game.playerWin;	
+		
+		animNav.append(game.cannon.element);
 	};
-	//alert('hola2');
-	game.level.top = lvl.top;
-	game.level.left = lvl.left;
-	game.level.topBound = lvl.topBound;
-	game.level.leftBound = lvl.leftBound;
-	//alert('hola2');
-	game.level.mutex = lvl.mutex;
-	game.level.freeze = lvl.freeze
-	game.level.finished = lvl.finished;
-	game.level.freezeTimeout = lvl.frezeeTimeout;
-	game.level.bubbleRadius = lvl.bubbleRadius
-	game.level.shootedBubble = lvl.shootedBubble;
-	//game.level.bubbles_array = new Array();
-	game.level.points = lvl.points;
-	game.level.pointsToReach = lvl.pointsToReach;
-	game.level.pointsMultiplier = lvl.pointsMultiplier;
-	game.level.looseLine = lvl.looseLine;
-	game.level.currentTop = lvl.currentTop;
-	game.level.h = lvl.h
-	game.level.bonus = lvl.bonus;
-	//alert('hola2');
-	for(var i = 0; i < lvl.bubble_array.length; ++i){
-		//alert('i: ' + i);
-		var current = lvl.bubble_array[i];
-		//alert(current);
-		var b = new bubble(game.level);
-		//alert('unserialize bubble');
-		b.unserialize(current);
-		//alert('fin unserialize bubble');
-		game.level.bubbles_array.push(b);
-		game.level.grilla.Table[b.i][b.j] = b;
-		current = null;
-	};
-	//alert('hola3');
-	game.cannon = new bubbleCannon(game.level);
-	game.level.cannon = game.cannon;
-	game.level.cannon.currentBubble = null;
-	game.level.cannon.addBuffer();
-	game.level.cannon.chargeCannon();
-	game.level.cannon.setReadyShoot();
-	/*if(lvl.cannon.currentBubble != null){
-		game.level.cannon.currentBubble = new bubble(game.level);
-		game.level.cannon.currentBubble.unserialize(lvl.cannon.currentBubble);
-	};*/
-	game.cannon.readyShoot = lvl.cannon.readyShoot;
-	game.level.loose = game.playerLoose;
-	game.level.win = game.playerWin;	
-
 	game.ui.lifes = lvl.ui.lifes;
 	game.ui.multiBubbleCount = lvl.ui.multiCount;
 	game.ui.bombBubbleCount = lvl.ui.bombCount;
 	game.ui.freezeBubbleCount = lvl.ui.freezeCount;
-
-	animNav.append(game.cannon.element);
+	game.ui.innerCoins = lvl.ui.innerCoins;
+	game.ui.refresh();
+	game.ui.archivements.unserialize(lvl.ui.archivements);
+	
 	return true;
 };
 
@@ -2982,28 +3301,45 @@ api.ui.showLoseScreen = function(){
 		$(api.ui.losescreendiv).addClass('uiAlert' + gameSize);
 
 		var cartel = document.createElement('div');
-		$(cartel).addClass('guiLoseAllLifes' + gameSize);
+		//$(cartel).addClass('guiLoseAllLifes' + gameSize);
+		cartel.setAttribute('class', 'lifecontainer' + gameSize);
 
 		var okbutton = document.createElement('div');
-		$(okbutton).addClass('guiLoseAllLifesOk' + gameSize);
+		//$(okbutton).addClass('guiLoseAllLifesOk' + gameSize);
+		okbutton.setAttribute('class', 'lifegiveme' + gameSize);
 
 		var buybutton = document.createElement('div');
-		$(buybutton).addClass('guiLoseAllLifesBuy' + gameSize);
-
-		$(api.ui.losescreendiv).append(cartel);
+		//$(buybutton).addClass('guiLoseAllLifesBuy' + gameSize);
+		buybutton.setAttribute('class', 'lifeaddcoins' + gameSize);
+		
+		var coinsFrame = document.createElement('div');
+		coinsFrame.setAttribute('class', 'lifecoins' + gameSize);
+		coinsFrame.innerHTML = api.softgame.user.balance + game.ui.innerCoins;
+		/*$(api.ui.losescreendiv).append(cartel);
 		$(api.ui.losescreendiv).append(okbutton);
-		$(api.ui.losescreendiv).append(buybutton);
+		$(api.ui.losescreendiv).append(buybutton);*/
+		api.ui.losescreendiv.appendChild(cartel);
+		api.ui.losescreendiv.appendChild(okbutton);
+		api.ui.losescreendiv.appendChild(buybutton);
+		api.ui.losescreendiv.appendChild(coinsFrame);
 
 		$(okbutton).click(function(){
-			api.ui.losescreendiv.style.display = 'none';	
+			//api.ui.losescreendiv.style.display = 'none';	
+			api.ui.losescreendiv.parentNode.removeChild(api.ui.losescreendiv);
+			delete api.ui.losescreendiv;
+			api.ui.losescreendiv = null;
 			if(game.level) game.level.clearBoard();
 			delete game.level;
 			game.level = null;
 			game.level = '';
 			game.showMenu();
 		});
+		
 		$(buybutton).click(function(){
 			//api.ui.losescreendiv.style.display = 'none';
+			api.ui.losescreendiv.parentNode.removeChild(api.ui.losescreendiv);
+			delete api.ui.losescreendiv;
+			api.ui.losescreendiv = null;
 			api.softgame.buyFinalized = function(){
 				api.ui.hideWaiting();
 				//api.ui.alert('You have ' + lifesPerCoins + ' more lifes!! or you are a cat or someone loves you up there :)', 'Thanks! Go on!', function(){
@@ -3019,10 +3355,21 @@ api.ui.showLoseScreen = function(){
 			api.softgame.startCoinsBuying('level', '3morelifes', '', 1, '', '');
 		});
 
-		$(document.body).append(api.ui.losescreendiv);
+		//$(document.body).append(api.ui.losescreendiv);
 	};
 
-	api.ui.losescreendiv.style.display = 'block';
+	//api.ui.losescreendiv.style.display = 'block';
+	$(document.body).append(api.ui.losescreendiv);
+};
+
+api.ui.boosterScreen = null;
+
+api.ui.showBooster = function(){
+	if(api.ui.boosterScreen == null){
+		api.ui.boosterScreen  = document.createElement('div');
+		var mahself = $(api.ui.boosterScreen);
+		mahself.addClass('uiAlert' + gameSize);
+	};
 };
 
 api.ui.waitTimer = 0;
@@ -3046,6 +3393,7 @@ api.ui.showWaiting = function(){
 };
 
 api.ui.hideWaiting = function(){
+	if(api.ui.waitdiv == null) return;
 	api.ui.waitdiv.style.display = 'none';
 	$(api.ui.waitdiv).remove();
 	/*delete api.ui.waitdiv;*/
@@ -3114,13 +3462,13 @@ api.ui.showMultiBubbleBuy = function(){
 	var fn = function(){
 		api.softgame.buyFinalized = function(){
 			api.ui.hideWaiting();
-			game.ui.multiBubbleCount += 1;
+			game.ui.multiBubbleCount += 3;
 			$(api.ui.showBubbleBuyElement).remove();
 			api.ui.showBubbleBuyElement = null;
-			cartel.refresh();
+			if(cartel.refresh) cartel.refresh();
 		};
 		api.ui.showWaiting();
-		api.softgame.startCoinsBuying('multiBubble', '3moremultiBubble', '', 1, '', '');
+		api.softgame.startCoinsBuying('multiBubble', '3moremultiBubble', '', multiValue, '', '');
 	};
 	api.ui.showBubbleBuy('guiBuyMultiScreen', 'guiBuyMultiOk', 'guiBuyMultiNo', fn);
 };
@@ -3129,13 +3477,13 @@ api.ui.showBombBubbleBuy = function(){
 	var fn = function(){
 		api.softgame.buyFinalized = function(){
 			api.ui.hideWaiting();
-			game.ui.bombBubbleCount += 1;
+			game.ui.bombBubbleCount += 3;
 			$(api.ui.showBubbleBuyElement).remove();
 			api.ui.showBubbleBuyElement = null;
 			cartel.refresh();
 		};
 		api.ui.showWaiting();
-		api.softgame.startCoinsBuying('bombBubble', '3morebombBubble', '', 1, '', '');
+		api.softgame.startCoinsBuying('bombBubble', '3morebombBubble', '', bombValue, '', '');
 	};
 	api.ui.showBubbleBuy('guiBuyBombScreen', 'guiBuyBombOk', 'guiBuyBombNo', fn);
 };
@@ -3144,13 +3492,173 @@ api.ui.showFreezeBubbleBuy = function(){
 	var fn = function(){
 		api.softgame.buyFinalized = function(){
 			api.ui.hideWaiting();
-			game.ui.freezeBubbleCount += 1;
+			game.ui.freezeBubbleCount += 3;
 			$(api.ui.showBubbleBuyElement).remove();
 			api.ui.showBubbleBuyElement = null;
 			cartel.refresh();
 		};
 		api.ui.showWaiting();
-		api.softgame.startCoinsBuying('freezeBubble', '3morefreezeBubble', '', 1, '', '');
+		api.softgame.startCoinsBuying('freezeBubble', '3morefreezeBubble', '', freezeValue, '', '');
 	};
 	api.ui.showBubbleBuy('guiBuyFreezeScreen', 'guiBuyFreezeOk', 'guiBuyFreezeNo', fn);
+};
+
+api.ui.chooseBoosterdiv = null;
+
+api.ui.showChooseBooster = function(){
+	if(api.ui.chooseBoosterdiv == null){
+		api.ui.chooseBoosterdiv = document.createElement('div');
+		api.ui.chooseBoosterdiv.setAttribute('class', 'container' + gameSize);
+		
+		var multiCountFrame = document.createElement('div');
+		multiCountFrame.setAttribute('class', 'guiChooseFinishMultiCount' + gameSize);
+		var bombCountFrame = document.createElement('div');
+		bombCountFrame.setAttribute('class', 'guiChooseFinishBombCount' + gameSize);
+		var freezeCountFrame = document.createElement('div');
+		freezeCountFrame.setAttribute('class', 'guiChooseFinishFreezeCount' + gameSize);
+		
+		var multiBuyButton = document.createElement('div');
+		multiBuyButton.setAttribute('class', 'guiFinishChooseBuyMulti' + gameSize);
+		var bombBuyButton = document.createElement('div');
+		bombBuyButton.setAttribute('class', 'guiFinishChooseBuyBomb' + gameSize);
+		var freezeBuyButton = document.createElement('div');
+		freezeBuyButton.setAttribute('class', 'guiFinishChooseBuyFreeze' + gameSize);
+
+		var multiValueFrame = document.createElement('div');
+		multiValueFrame.setAttribute('class', 'guiChooseCoinsMuli' + gameSize);
+		multiValueFrame.innerHTML = multiValue;
+		var bombValueFrame = document.createElement('div');
+		bombValueFrame.setAttribute('class', 'guiChooseCoinsBomb' + gameSize);
+		bombValueFrame.innerHTML = bombValue;
+		var freezeValueFrame = document.createElement('div');
+		freezeValueFrame.setAttribute('class', 'guiChooseCoinsFreeze' + gameSize);
+		freezeValueFrame.innerHTML = freezeValue;
+		
+		var addCoinsButton = document.createElement('div');
+		addCoinsButton.setAttribute('class', 'guiChooseAddCoins' + gameSize);
+		var coinsFrame = document.createElement('div');
+		coinsFrame.setAttribute('class', 'guiFinishChooseCoins' + gameSize);
+		var closeButton = document.createElement('div');
+		closeButton.setAttribute('class', 'guiChoosecerrar' + gameSize);
+		
+		api.ui.chooseBoosterdiv.appendChild(multiCountFrame);
+		api.ui.chooseBoosterdiv.appendChild(bombCountFrame);
+		api.ui.chooseBoosterdiv.appendChild(freezeCountFrame);
+		
+		api.ui.chooseBoosterdiv.appendChild(multiBuyButton);
+		api.ui.chooseBoosterdiv.appendChild(bombBuyButton);
+		api.ui.chooseBoosterdiv.appendChild(freezeBuyButton);
+		
+		api.ui.chooseBoosterdiv.appendChild(multiValueFrame);
+		api.ui.chooseBoosterdiv.appendChild(bombValueFrame);
+		api.ui.chooseBoosterdiv.appendChild(freezeValueFrame);
+		
+		api.ui.chooseBoosterdiv.appendChild(addCoinsButton);
+		api.ui.chooseBoosterdiv.appendChild(coinsFrame);
+		api.ui.chooseBoosterdiv.appendChild(closeButton);
+		
+		$(addCoinsButton).click(function(){
+			api.levels.serializaDone = function(){
+				window.location = api.softgame.getBuyingCoinsUrl();
+			};
+			api.levels.serializeLevel();
+		});
+		
+		$(multiBuyButton).click(api.ui.showMultiBubbleBuy);
+		$(bombBuyButton).click(api.ui.showBombBubbleBuy);
+		$(freezeBuyButton).click(api.ui.showFreezeBubbleBuy);
+		
+		$(closeButton).click(function(){
+			api.ui.chooseBoosterdiv.parentNode.removeChild(api.ui.chooseBoosterdiv);
+			delete api.ui.chooseBoosterdiv;
+			api.ui.chooseBoosterdiv = null;
+			game.ui.refresh();
+		});
+		
+	};
+	
+	$(document.body).append(api.ui.chooseBoosterdiv);
+};
+
+api.ui.bonusDiv = null;
+api.ui.bonusRetrieved = 0;
+
+api.ui.showBonusScreen = function(bonus){
+	if(bonus == 0) return;
+	if(api.ui.bonusDiv == null){
+		api.ui.bonusDiv = document.createElement('div');
+		api.ui.bonusDiv.setAttribute('class', 'uiAlert' + gameSize);
+		var container = document.createElement('div');
+		var closeButton = document.createElement('div')
+		var okButton = document.createElement('div');
+		
+		container.setAttribute('class', 'containerbonus' + gameSize);
+		closeButton.setAttribute('class', 'bonuscerrar' + gameSize);
+		okButton.setAttribute('class', 'bonusaccepyshare' + gameSize);
+		/*.setAttribute('class', '' + gameSize);
+		.setAttribute('class', '' + gameSize);
+		
+		1.jocker
+		2.granade
+		3.time
+		4.life
+		5.coins
+		6.score
+		*/
+		var imageDiv = document.createElement('div');
+		imageDiv.setAttribute('class', 'bonusyouwon' + gameSize);
+		
+		switch(bonus){
+			case "1":
+				imageDiv.style.backgroundImage = 'url(' + gameSize + '/bonusjocker.png)';
+				break;
+			case "2":
+				imageDiv.style.backgroundImage = 'url(' + gameSize + '/bonusgrenade.png)';
+				break;
+			case "3":
+				imageDiv.style.backgroundImage = 'url(' + gameSize + '/bonustime.png)';
+				break;
+			case "4":
+				imageDiv.style.backgroundImage = 'url(' + gameSize + '/bonuslife.png)';
+				break;
+			case "5":
+				imageDiv.style.backgroundImage = 'url(' + gameSize + '/bonuscoins.png)';
+				break;
+			case "6":
+				imageDiv.style.backgroundImage = 'url(' + gameSize + '/bonusscore.png)';
+				break;
+		};
+		
+		api.ui.bonusDiv.appendChild(imageDiv);
+		api.ui.bonusDiv.appendChild(container);
+		//api.ui.bonusDiv.appendChild();
+		api.ui.bonusDiv.appendChild(closeButton);
+		api.ui.bonusDiv.appendChild(okButton);
+		
+		$(closeButton).click(function(){
+			api.ui.bonusDiv.parentNode.removeChild(api.ui.bonusDiv);
+			delete api.ui.bonusDiv;
+			api.ui.bonusDiv = null;
+		});
+		
+		$(okButton).click(function(){
+			api.facebook.post();
+			
+			api.ui.bonusDiv.parentNode.removeChild(api.ui.bonusDiv);
+			delete api.ui.bonusDiv;
+			api.ui.bonusDiv = null;
+		});
+	};
+	
+	$(document.body).append(api.ui.bonusDiv);
+};
+
+api.ui.showBonus = function(data){
+	api.bonus.getBonus(api.facebook.user.id, function(data){
+		var response = api.string2JSON(data);
+		if(response.status == 1){
+			api.ui.bonusRetrieved = response.response.bonus;
+			api.ui.showBonusScreen(api.ui.bonusRetrieved);
+		};
+	});
 };

@@ -113,14 +113,23 @@ api.leaderboard.rankme = function(id, type_span, callback){
 		type_span: span,
 		id: id
 	};	
+	
+	api.leaderboard.rankcallback = callback;
 
 	$.ajax({
 		url: api.leaderboard.url,
 		type: 'POST',
 		data: postdata,
 		dataType: "text",
-		success: callback,
-		error: api.leaderboard.rankerror
+		success: api.leaderboard.rankcallback, //callback,
+		error: api.leaderboard.rankerror,
+		complete: function(response){
+			if(response.status == 200){
+				api.leaderboard.rankcallback(response.responseText);
+			}else{
+				api.levels.responseError();
+			};
+		}
 	});	
 };
 

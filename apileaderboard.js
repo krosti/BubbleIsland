@@ -117,11 +117,11 @@ api.leaderboard.rankme = function(id, type_span, callback){
 	api.leaderboard.rankcallback = callback;
 
 	$.ajax({
+		url: api.leaderboard.url,
 		type: 'POST',
 		data: postdata,
-		url: api.leaderboard.url,
 		dataType: "text",
-		success: api.leaderboard.rankcallback, //callback,
+		success: callback,
 		error: api.leaderboard.rankerror,
 		complete: function(response){
 			alert(api.JSON2String(response));

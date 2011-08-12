@@ -246,18 +246,6 @@ function inviteFriends(){
 }
 
 function connectToFacebook2(){
-		//window.location = 'https://www.facebook.com/dialog/oauth?client_id=' + APPID + '&scope=publish_stream&redirect_uri='+window.location+'&response_type=token';
-		//softgame.onLoad = connectToFacebook2;
-		
-		//softgame.onLoginUser = connectToFacebook2;
-		//softgame.startConnection();
-		//alert('connectToFacebook2');
-		//api.softgame.onLoginUser = function(){			
-		//};
-		//alert(document.cookie);
-		/*api.softgame.onLogin = function(){
-			
-		};*/
 		soundengine.starttheme();
 		setTimeout(function(){ window.scrollTo(0,-5); }, 0);
 		api.facebook.loaded = function(){	
@@ -294,9 +282,6 @@ function connectToFacebook2(){
 		api.softgame.startConnection();
 		menues.showMenu('mainMenu');
 		api.ui.showBonus();
-		//api.ui.hideWaiting();
-		//$('#FBnav')[0].style.display = 'none';
-		//soundengine.startThemes(['background', 'maintheme']);
 };
 
 function needLogin(){

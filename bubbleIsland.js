@@ -2154,7 +2154,8 @@ function gameUI(w, h){
 		if(game.ui.multiBubbleCount != 0){
 			if(game.cannon.chargeMultiBuffer()){
 				game.ui.multiBubbleCount -= 1;
-				game.ui.multiBubbleElement.innerHTML = 'x' + game.ui.multiBubbleCount;					
+				game.ui.multiBubbleElement.innerHTML = 'x' + game.ui.multiBubbleCount;
+				game.ui.archivements.boosterUsed = true;
 			};
 		}else{
 			$(game.ui.pauseElement).click();
@@ -2168,6 +2169,7 @@ function gameUI(w, h){
 			if(game.cannon.chargeBombBuffer()){
 				game.ui.bombBubbleCount -= 1;
 				game.ui.bombBubbleElement.innerHTML = 'x' + game.ui.bombBubbleCount;	
+				game.ui.archivements.boosterUsed = true;
 			};
 		}else{
 			$(game.ui.pauseElement).click();
@@ -2181,6 +2183,7 @@ function gameUI(w, h){
 			if(game.cannon.chargeFreezeBuffer()){
 				game.ui.freezeBubbleCount -= 1;
 				game.ui.freezeBubbleElement.innerHTML = 'x' + game.ui.freezeBubbleCount;	
+				game.ui.archivements.boosterUsed = true;
 			};
 		}else{
 			$(game.ui.pauseElement).click();
@@ -2311,6 +2314,27 @@ function gameUI(w, h){
 			game.ui.onRank();
 		};
 	};
+	
+	this.clearUi = function(){
+		delete this.archivements;
+		this.archivements = null;
+		
+		this.points = 0;
+		this.pointsCounter = 0;
+		this.acumuledPoints = 0;
+		this.lifes = 5;
+		this.initialLifes = lifesPerCoins;
+		this.rank = "none";
+		this.level = 0;
+		this.score = 0;
+
+		this.multiBubbleCount = multiInit;
+		this.bombBubbleCount = bombInit;
+		this.freezeBubbleCount = freezeInit;
+		
+		this.innerCoins = 0;
+		this.archivements = new bubbleArchivement(api.facebook.user);
+	};
 
 	//events
 	this.onRank = function(){};
@@ -2377,6 +2401,7 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 
 	this.startNewGame = function(){
 		game.ui.refresh();
+		game.ui.clearUi();
 		if(this.level != '') this.level.clearBoard();
 		//$(cartel).remove();
 		if(cartel) $(cartel).remove();
@@ -2519,11 +2544,11 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 		setTimeout(function(){ game.level.finished = false; api.ui.hideWaiting(); }, 1200);
 	};
 
-	
-
 	this.playerLoose = function(){
 		//alert('loose');
 		//soundengine.reproduceSound('losesound');
+		game.ui.archivements.checkLevel();
+		
 		game.level.clearBoard();
 
 		if(game.ui.lifes == 0){ // ask for more lifes!
@@ -2683,6 +2708,8 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 
 	this.playerWin = function(){
 		//soundengine.reproduceSound('winsound');
+		game.ui.archivements.checkLevel();
+		
 		api.leaderboard.saveok = game.ui.setRank;
 		
 		cartel = document.createElement('div');
@@ -2852,8 +2879,6 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 			this.doSerialize = false;
 		};		
 	};
-
-	
 
 	//animation functions
 

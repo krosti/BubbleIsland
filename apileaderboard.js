@@ -90,7 +90,7 @@ api.leaderboard.rank = function(type_span){
 
 	var postdata = {
 		to: 'rank',
-		FBid: id,
+		id: id,
 		name: name,
 		points: points,
 		type_span: span
@@ -109,9 +109,9 @@ api.leaderboard.rank = function(type_span){
 api.leaderboard.rankme = function(id, type_span, callback){
 	var span = (type_span ? type_span : "");
 	var postdata = {
+		id: id,
 		to: 'rank',
-		type_span: span,
-		id: id
+		type_span: span
 	};	
 	
 	api.leaderboard.rankcallback = callback;

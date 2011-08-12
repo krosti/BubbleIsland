@@ -106,7 +106,7 @@ api.leaderboard.rank = function(type_span){
 	});	
 };
 
-api.leaderboard.rankme = function(id, type_span, callback){
+api.leaderboard.rankme = function(id, callback, type_span){
 	var span = (type_span ? type_span : "");
 	var postdata = {
 		id: id,

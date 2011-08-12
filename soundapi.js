@@ -6,11 +6,11 @@ soundengine.themes = [];
 soundengine.currentTheme = null;
 soundengine.enable = true;
 
-function Media(file){
+/*function Media(file){
 	this.file = file;
 	this.play = function(){}
 	this.stop = function(){}
-};
+};*/
 
 function sound(name, file, duration){
 	this.name = name;

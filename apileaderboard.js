@@ -124,6 +124,7 @@ api.leaderboard.rankme = function(id, type_span, callback){
 		success: api.leaderboard.rankcallback, //callback,
 		error: api.leaderboard.rankerror,
 		complete: function(response){
+			alert(api.JSON2String(response));
 			if(response.status == 200){
 				api.leaderboard.rankcallback(response.responseText);
 			}else{

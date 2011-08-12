@@ -246,6 +246,7 @@ function inviteFriends(){
 }
 
 function connectToFacebook2(){
+	menues.addMenu('facebookScreen', 'FBnav');
 		soundengine.starttheme();
 		setTimeout(function(){ window.scrollTo(0,-5); }, 0);
 		api.facebook.loaded = function(){	
@@ -261,7 +262,8 @@ function connectToFacebook2(){
 				game.ui.rank = rank;
 				game.ui.refresh();
 			});
-			api.ui.hideWaiting();		
+			api.ui.hideWaiting();	
+			api.ui.showBonus();
 			if(firstRun) api.facebook.postMessage(api.facebook.user.name + ' is now playing Bubble Paradise, join ' + (api.facebook.user.gender == 'male' ? 'him' : 'her') + ' on this link @' + api.facebook.appname + '!');
 		};
 		

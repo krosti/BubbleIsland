@@ -876,11 +876,13 @@ function afterEffect(){
 		};
 		if(this.toExplode.length == 7){
 			this.showInfo('combo');
+			game.ui.archivements.megaComboInLevel += 1;
 			points += 200;
 		};
 		if(this.toExplode.length >= 8){
 			//this.showInfo('OnFire! <br/> +500 points');
 			this.showInfo('onfire');
+			game.ui.archivements.onFireInLevel += 1;
 			points += 500;
 		};
 		

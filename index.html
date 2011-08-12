@@ -251,7 +251,7 @@ function connectToFacebook2(){
 		api.facebook.loaded = function(){	
 			api.leaderboard.rankme(api.facebook.user.id, function(data){
 				var rank = 0;
-				alert(data);
+				//fmrockandalert(data);
 				var response = api.string2JSON(data);
 				if(response.status == 1){
 					rank = response.response.rank;
@@ -265,7 +265,7 @@ function connectToFacebook2(){
 		
 		api.facebook.retrieveUserData();
 		
-		api.facebook.user = {
+		/*api.facebook.user = {
 		   "id": "1454082351",
 		   "name": "Jorge Capoduri",
 		   "first_name": "Jorge",
@@ -274,7 +274,7 @@ function connectToFacebook2(){
 		   "username": "jorge.capoduri",
 		   "gender": "male",
 		   "locale": "en_US"
-		};
+		};*/
 		
 		api.levels.getLevel(api.facebook.user.id);
 		api.levels.onGetLevel = game.loadPreviousGame;
@@ -578,7 +578,7 @@ soundengine.soundToggled = function(){
 	};
 };
 //api.ui.showChooseBooster();
-loader.init();
+//loader.init();
 </script> 
 </body>
 </html>

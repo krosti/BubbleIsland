@@ -1694,6 +1694,7 @@ function bubbleLevel(w, h, bubblesWidth, bubblesHeight, lvlnbr){
 		
 		if(this.bubbles_array.length != 0) return;
 		this.fpscount = 0;
+		game.ui.archivements.cleansInLevel += 1;
 		this.addRandomRow();
 	};
 	
@@ -2856,7 +2857,7 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 				cartel.rankingdiv.innerHTML = game.ui.ranking;
 				if((game.ui.ranking <= 3) && (game.ui.ranking > 0)){
 					//api.ui.showHighScore();
-					api.facebook.post(api.facebook.user.name + " has got the " + this.ranking + "position on the Leaderboard of Bubble Paradise! What are you waiting for to beat him and enjoy this paradise!");
+					api.facebook.postMessage(api.facebook.user.name + " has got the " + this.ranking + "position on the Leaderboard of Bubble Paradise! What are you waiting for to beat him and enjoy this paradise!");
 				};
 			};
 		};
@@ -3669,7 +3670,30 @@ api.ui.showBonusScreen = function(bonus){
 		});
 		
 		$(okButton).click(function(){
-			api.facebook.post();
+			var msg = api.facebook.user.name + ' just got ';
+			switch(api.ui.bonusRetrieved){
+				case "1":
+					msg += ' Jocker bubble bonus';
+					break;
+				case "2":
+					msg += ' Grenade bubble bonus';
+					break;
+				case "3":
+					msg += ' Time bubble bonus';
+					break;
+				case "4":
+					msg += ' Life bonus';
+					break;
+				case "5":
+					msg += ' Coins bonus';
+					break;
+				case "6":
+					msg += ' Score bonus';
+					break;
+			};
+		
+			msg += ' on @' + api.facebook.appname;
+			api.facebook.postMessage(msg);
 			
 			api.ui.bonusDiv.parentNode.removeChild(api.ui.bonusDiv);
 			delete api.ui.bonusDiv;

@@ -2218,7 +2218,7 @@ function gameUI(w, h){
 		});
 		
 		$(menuButton).click(function(){
-			game.ui.score = game.ui.points;
+			//game.ui.score = game.ui.points;
 			$(cartel).remove();
 			game.showMenu();
 			game.ui.refresh();
@@ -2286,7 +2286,7 @@ function gameUI(w, h){
 		
 		this.lvlFrame.innerHTML = this.level;
 		this.rankFrame.innerHTML = this.rank;
-		this.scoreFrame.innerHTML = this.score;
+		this.scoreFrame.innerHTML = this.points;
 	}
 
 	//this.
@@ -3670,7 +3670,7 @@ api.ui.showBonusScreen = function(bonus){
 				break;
 			case "6":
 				imageDiv.style.backgroundImage = 'url(../' + gameSize + '/bonusscore.png)';
-				game.ui.score += 500;
+				//game.ui.score += 500;
 				game.ui.points += 500;
 				break;
 		};

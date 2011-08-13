@@ -116,7 +116,7 @@ min-height: 62px;	padding-left: 17px;	padding-top: 32px;	position: fixed;	width:
  .volumenofImage320x480{	background-image: url("../320x480/volumen.png");	height: 40px;left: 4px;min-height: 65px;	position: fixed;top: 432px;	width: 40px;}
 .volumenonImage320x480{	background-image: url("../320x480/volumenon.png");	height: 40px;left: 4px;min-height: 65px;	position: fixed;top: 432px;	width: 40px;}
 /*======================pantalla ingame==============================================*/
-#frameBackground{ width: 320px; height: 391px; background-position: center 64px; position: absolute;  left: 0px; }
+.frameBackground320x480{ width: 320px; height: 391px; background-position: center 64px; position: absolute;  left: 0px; }
 /*style=" background-position: bottom center; position: absolute; top: 0px; left: 0px; display: none" */
 #guicanon320x480{background-image: url("../320x480/cannon.png");position: absolute;width: 90px;height: 70px;left:108px;top: 343px;	}
 /*.guiNextBall2Frame320x480{background-image: url("../bubbles/greenbubble.png");position: fixed;width: 30px;height: 30px;left: 112px;top: 373px;}*/

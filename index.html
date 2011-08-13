@@ -449,6 +449,7 @@ loader.readyLoad = function(){
 	$('#gameMenu')[0].style.backgroundImage = 'url('+initImage.src+')';
 	$('#frameBackground')[0].style.backgroundImage = 'url('+lvlFrame.src+')';
 	document.getElementById('backgroundNav').style.backgroundImage = 'url('+backgroundImage.src+')';
+	document.getElementById('frameBackground').setAttribute('class', 'frameBackground' + gameSize);
 
 	$('#newbutton')[0].src = uiNewButton.src;
 	//$('#facebookLogoutButton').addClass('optionsLogout' + gameSize);

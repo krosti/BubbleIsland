@@ -3717,6 +3717,7 @@ api.ui.showBonus = function(data){
 		if(response.status == 1){
 			api.ui.bonusRetrieved = response.response.bonus;
 			api.ui.showBonusScreen(api.ui.bonusRetrieved);
+			game.ui.refresh();
 		};
 	});
 };

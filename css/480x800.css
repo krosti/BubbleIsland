@@ -8,8 +8,7 @@
 */
 
 /*======================pantalla ingame==============================================*/
-/*#frameBackground{ width: 480px !important; height: 800px !important; background-position: center 140px !important; position: absolute; !important; left: 0px; }
-*/
+.frameBackground480x800{ width: 480px !important; height: 800px !important; background-position: center 140px !important; position: absolute; !important; left: 0px; }
 #guicanon480x800{background-image: url("../480x800/cannon.png");position: absolute;width: 160px;height: 130px;left:164px;top: 590px;	}
 .awesome480x800{ width: 100%;height: 75px;background-image: url("../480x800/awesome.png") ;  position:absolute;background-position: center ; top:158px;}
 .great480x800{ width: 100%;height: 75px;background-image: url("../480x800/great.png") ;  position:absolute;background-position: center ; top:158px;}

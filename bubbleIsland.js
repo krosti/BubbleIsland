@@ -2026,7 +2026,7 @@ board 5 times in one level
 		result.archivements.combo1done = this.archivements.combo1.done;
 		result.archivements.combo2done = this.archivements.combo2.done;
 		result.archivements.cleanerdone = this.archivements.cleaner.done;
-		result.archivements.kingdone = this.archivements.king.done;
+		result.archivements.kingdone =    this.archivements.king.done;
 		
 		result.archivements.tough1posted = this.archivements.tough1.posted;
 		result.archivements.tough2posted = this.archivements.tough2.posted;
@@ -2073,7 +2073,7 @@ function gameUI(w, h){
 	this.points = 0;
 	this.pointsCounter = 0;
 	this.acumuledPoints = 0;
-	this.lifes = 5;
+	this.lifes = 0;//5;
 	this.initialLifes = lifesPerCoins;
 	this.rank = "none";
 	this.level = 0;
@@ -3136,7 +3136,7 @@ api.levels.unserializeLevel = function(){
 		game.level.h = lvl.h
 		game.level.bonus = lvl.bonus;
 		game.level.fpscount = lvl.fpscount;
-		//alert('hola2');
+
 		for(var i = 0; i < lvl.bubble_array.length; ++i){
 			//alert('i: ' + i);
 			var current = lvl.bubble_array[i];
@@ -3156,10 +3156,7 @@ api.levels.unserializeLevel = function(){
 		game.level.cannon.addBuffer();
 		game.level.cannon.chargeCannon();
 		game.level.cannon.setReadyShoot();
-		/*if(lvl.cannon.currentBubble != null){
-			game.level.cannon.currentBubble = new bubble(game.level);
-			game.level.cannon.currentBubble.unserialize(lvl.cannon.currentBubble);
-		};*/
+
 		game.cannon.readyShoot = lvl.cannon.readyShoot;
 		game.level.loose = game.playerLoose;
 		game.level.win = game.playerWin;	

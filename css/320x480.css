@@ -83,6 +83,7 @@ font-family: Grobold;
 .lifeaddcoins320x480{width: 135px;height: 59px; top:347px;left:181px;background-image: url("../320x480/lifeaddcoins.png");position: absolute;background-repeat:no-repeat;}
 .lifegiveme320x480{width: 135px;height: 59px; top:346px;left:19px;background-image: url("../320x480/lifegiveme.png");position: absolute;background-repeat:no-repeat;}
 .lifecoins320x480{font-family: Bubblegum;	font-size: 0.9em;color:#644000;height: 12px;	left: 200px;	position: fixed;top: 52px;	width: 13px;}
+/* add by shaka */ .lifecerrar320x480{position: fixed;width: 30px;height: 29px;left: 265px;top: 12px;background-image: url("../320x480/btncerrar.png");}
 /* =========== pantalla bonus======================================================================================================*/
 .containerbonus320x480{width: 320px;height: 480px; background-image: url("../320x480/bonus.png");position: absolute;}
 .bonusaccepyshare320x480{width: 114px;height: 45px; top:429px;left:113px;background-image: url("../320x480/bonusacept.png");position: absolute;background-repeat:no-repeat;}

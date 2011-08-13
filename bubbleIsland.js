@@ -2073,7 +2073,7 @@ function gameUI(w, h){
 	this.points = 0;
 	this.pointsCounter = 0;
 	this.acumuledPoints = 0;
-	this.lifes = 0;//5;
+	this.lifes = 5;
 	this.initialLifes = lifesPerCoins;
 	this.rank = "none";
 	this.level = 0;
@@ -3342,6 +3342,11 @@ api.ui.showLoseScreen = function(){
 		var coinsFrame = document.createElement('div');
 		coinsFrame.setAttribute('class', 'lifecoins' + gameSize);
 		coinsFrame.innerHTML = api.softgame.user.balance + game.ui.innerCoins;
+		
+		var closeButton = document.createElement('div')
+		
+		closeButton.setAttribute('class', 'lifecerrar' + gameSize);
+		
 		/*$(api.ui.losescreendiv).append(cartel);
 		$(api.ui.losescreendiv).append(okbutton);
 		$(api.ui.losescreendiv).append(buybutton);*/
@@ -3349,24 +3354,28 @@ api.ui.showLoseScreen = function(){
 		api.ui.losescreendiv.appendChild(okbutton);
 		api.ui.losescreendiv.appendChild(buybutton);
 		api.ui.losescreendiv.appendChild(coinsFrame);
-
-		$(okbutton).click(function(){
-			//api.ui.losescreendiv.style.display = 'none';	
+		
+		$(buybutton).click(function(){
 			api.ui.losescreendiv.parentNode.removeChild(api.ui.losescreendiv);
 			delete api.ui.losescreendiv;
 			api.ui.losescreendiv = null;
+			window.location = api.softgame.getBuyingCoinsUrl();
+		});
+
+		$(closeButton).click(function(){
+			//api.ui.losescreendiv.style.display = 'none';	
+			api.ui.losescreendiv.parentNode.removeChild(api.ui.losescreendiv);
 			if(game.level) game.level.clearBoard();
 			delete game.level;
 			game.level = null;
 			game.level = '';
 			game.showMenu();
-		});
-		
-		$(buybutton).click(function(){
-			//api.ui.losescreendiv.style.display = 'none';
-			api.ui.losescreendiv.parentNode.removeChild(api.ui.losescreendiv);
 			delete api.ui.losescreendiv;
 			api.ui.losescreendiv = null;
+		});
+		
+		$(okbutton).click(function(){
+			//api.ui.losescreendiv.style.display = 'none';
 			api.softgame.buyFinalized = function(){
 				api.ui.hideWaiting();
 				//api.ui.alert('You have ' + lifesPerCoins + ' more lifes!! or you are a cat or someone loves you up there :)', 'Thanks! Go on!', function(){
@@ -3380,6 +3389,10 @@ api.ui.showLoseScreen = function(){
 			};
 			api.ui.showWaiting();
 			api.softgame.startCoinsBuying('level', '3morelifes', '', 1, '', '');
+			
+			api.ui.losescreendiv.parentNode.removeChild(api.ui.losescreendiv);
+			delete api.ui.losescreendiv;
+			api.ui.losescreendiv = null;
 		});
 
 		//$(document.body).append(api.ui.losescreendiv);

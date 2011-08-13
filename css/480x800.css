@@ -6,6 +6,31 @@
 /*
 *		480x800
 */
+
+/*======================pantalla ingame==============================================*/
+/*#frameBackground{ width: 480px !important; height: 800px !important; background-position: center 140px !important; position: absolute; !important; left: 0px; }
+*/
+#guicanon480x800{background-image: url("../480x800/cannon.png");position: absolute;width: 160px;height: 130px;left:164px;top: 590px;	}
+.awesome480x800{ width: 100%;height: 75px;background-image: url("../480x800/awesome.png") ;  position:absolute;background-position: center ; top:158px;}
+.great480x800{ width: 100%;height: 75px;background-image: url("../480x800/great.png") ;  position:absolute;background-position: center ; top:158px;}
+.combo480x800{ width: 100%;height: 75px;background-image: url("../480x800/combo.png") ;  position:absolute;background-position: center ; top:158px;}
+.onfire480x800{ width: 100%;height: 75px;background-image: url("../480x800/onfire.png") ;  position:absolute;background-position: center ; top:158px;}
+.going480x800{ width: 100%;height: 75px;background-image: url("../480x800/going.png") ;  position:absolute;background-position: center ; top:158px;}
+.guipelotapanda480x800{	left: 135px;position: fixed;top: 656px;}
+.guipelotapanda480x800 img {width:  44.375px; height: 44.375px; min-height: 44.375px;}
+.guipelotacanon480x800{	left: 230px;position: fixed;top: 660px;}
+.guipelotacanon480x800 img  {width:  44.375px; height: 44.375px; min-height: 44.375px;}
+
+/* #contenedorgreat320x480{position: absolute;width: 100%;top:164px;}
+#great320x480{ width: 135px;height: 75px;background-image: url("../320x480/great320.png"); margin: 0 auto;}
+*/
+/* =========== ingame para el trofeo======================================================================================================*/
+.containerborrar480x800{width: 480px;height: 800px; background-image: url("../480x800/background.jpg");position: absolute;}
+.guiProgressBartrofeo480x800{height: 364px;  left: -1px; position: fixed; top: 330px; width: 40px;background-image: url(../480x800/progressbar.png);background-repeat:no-repeat;}
+/*.guiProgressBarmedio480x800{width: 12px;height: 280px;bottom: 0px;left: 7px;position: absolute;}*/
+.guiProgressBarmedio480x800{width: 7px;height: 270px;margin-left:13px;margin-top:48px}
+.guiProgressBarinterna480x800{margin-left:3px;width: 9px;height: 312px;background-image: url("../480x800/progressbarinterna.png");background-repeat:no-repeat;}
+
 /*==========================pantalla highscore ==========================================================================================================*/
 .guihighscoretabmyscore480x800 img{width: 42px;height: 42px;}
 .guihighscoretabeveryone480x800 img{width: 42px;height: 42px;}
@@ -26,14 +51,7 @@
 #gameMenu{display:none !important;}
 */
 .backahigscore480x800{width: 127px;height: 69px;position: fixed;left: 326px;top: 0px;background-image: url(../480x800/backahigscore.png);}
-/*======================pantalla ingame==============================================*/
-#frameBackground{ width: 360px; height: 391px; background-position: center 64px; position: absolute;  left: 0px; }
-#guicanon320x480{background-image: url("../320x480/cannon.png");position: absolute;width: 90px;height: 70px;left:108px;top: 343px;	}
-.awesome480x800{ width: 100%;height: 115px;background-image: url("../480x800/awesome.png") ;  position:absolute;background-position: center ; top:250px;}
-.great480x800{ width: 100%;height: 109px;background-image: url("../480x800/great.png") ;  position:absolute;background-position: center ; top:250px;}
-.combo480x800{ width: 100%;height: 102px;background-image: url("../480x800/combo.png") ;  position:absolute;background-position: center ; top:250px;}
-.onfire480x800{ width: 100%;height: 105px;background-image: url("../480x800/onfire.png") ;  position:absolute;background-position: center ; top:250px;}
-.going480x800{ width: 100%;height: 110px;background-image: url("../480x800/going.png") ;  position:absolute;background-position: center ; top:250px;}
+
 /*=========================pantalla achievement=================================================================================================================*/
 .containerachievement480x800{position: absolute;width: 480px;height: 800px;background-image: url(../480x800/achievement.png); background-repeat:no-repeat ;}
 .generalLeaderboardachievement480x800{left: 70px;top: 271px; width: 360px;position: absolute;}
@@ -102,57 +120,54 @@ min-height: 62px;	padding-left: 17px;	padding-top: 32px;	position: fixed;	width:
 .containerbonus480x800{width:480px;height: 800px; background-image: url("../480x800/bonus.png");position: absolute;background-repeat:no-repeat;}
 .bonusaccepyshare480x800{width: 171px;height: 95px; top:640px;left:170px;background-image: url("../480x800/bonusacept.png");position: absolute;background-repeat:no-repeat;}
 .bonuscerrar480x800{position: absolute;width: 41px;height: 39px;left: 386px;top: 110px;background-image: url("../480x800/btncerrar.png");}
-.bonusyouwon480x800{position: absolute;width: 100%;height: 110px;top:400px;background-position: center;background-repeat:no-repeat;}
+.bonusyouwon480x800{position: absolute;width: 100%;height: 110px;top:400px;background-position: center center;background-repeat:no-repeat;}
 /*======================pantalla help==================================================================================*/
 .containerhelp480x800{width: 480px;height: 800px; background-image: url("../480x800/helpbackground.png");position: absolute;}
 .donehelp480x800{width: 201px;height: 83px; top:635px;left:250px;background-image: url("../480x800/helpdone.png");position: absolute;background-repeat:no-repeat;}
 /*==============================================================================================================================*/
 
 .pointsFrame480x800{
-	background-image: url("../480x800/points.png");
-	color: #4E3E2D;
-	font-family: Bubblegum;
-	font-size: 1.2em;
-	height: 110px;
-	left: 170px;
-	min-height: 62px;
-	padding-top: 57px;
-	position: fixed;
-	text-align: center;
-	top: 0;
-	width: 165px;
+    color: #4E3E2D;
+    font-family: Bubblegum;
+    font-size: 1.2em;
+    height: 110px;
+    left: 120px;
+    min-height: 62px;
+    padding-top: 57px;
+    position: fixed;
+    text-align: center;
+    top: 4px;
+    width: 165px;
 }
 
 .levelsFrame480x800{
-	background-image: url("../480x800/lvl.png");
-	color: #4E3E2D;
-	font-family: Bubblegum;
-	font-size: 1.2em;
-	height: 76px;
-	left: 353px;
-	min-height: 62px;
-	padding-left: 59px;
-	padding-top: 45px;
-	position: fixed;
-	top: 661px;
-	width: 118px;
+   color: #4E3E2D;
+    font-family: Bubblegum;
+    font-size: 1.2em;
+    height: 76px;
+    left: 11px;
+    min-height: 62px;
+    padding-left: 59px;
+    padding-top: 45px;
+    position: fixed;
+    top: 18px;
+    width: 118px;
 }
 
 .lifesFrame480x800{
-	background-image: url("../480x800/life.png");
     color: #FFFFFF;
     font-family: Bubblegum;
     font-size: 1.2em;
     height: 88px;
-    left: 15px;
+    left: 250px;
     min-height: 62px;
     padding-left: 60px;
     padding-top: 41px;
     position: fixed;
-    top: 0;
+    top: 19px;
     width: 157px;
 }
-
+/*
 .gobackFrame480x800{
 	background-image: url("../480x800/backbutton.png");
 	color: #4E3E2D;
@@ -165,72 +180,71 @@ min-height: 62px;	padding-left: 17px;	padding-top: 32px;	position: fixed;	width:
 	top: 95px;
 	width: 144px;
 }
-
+*/
 
 .guiCoinsFrame480x800{
-	background-image: url("../480x800/guicoins.png");
-	color: #644000;
-	font-family: Bubblegum;
-	font-size: 1.4em;
-	height: 59px;
-	left: 327px;
-	padding-left: 25px;
-	padding-top: 21px;
-	position: fixed;
-	text-align: left;
-	top: 51px;
-	width: 152px;
+  color: #644000;
+    font-family: Bubblegum;
+    font-size: 1.2em;
+    height: 59px;
+    left: 348px;
+    padding-left: 25px;
+    padding-top: 21px;
+    position: fixed;
+    text-align: left;
+    top: 41px;
+    width: 152px;
 }
 
 .guiBuyCoinsFrame480x800{
 	background-image: url("../480x800/guibuycoins.png");
-	height: 60px;
-	left: 394px;
+	height: 45px;
+	left: 416px;
 	position: fixed;
 	top: 73px;
-	width: 68px;
+	width: 46px;
 }
 
 .guiBuyFreezeFrame480x800{
 	background-image: url("../480x800/guibuyfreeze.png");
-    color: #644000;
+  color: #644000;
     font-family: Bubblegum;
-    font-size: 0.8em;
-    height: 69px;
-    left: 415px;
-    padding-left: 30px;
-    padding-top: 60px;
+    font-size: 1.3em;
+    height: 82px;
+    left: 310px;
+    padding-left: 60px;
+    padding-top: 43px;
     position: fixed;
-    top: 190px;
-    width: 89px;
+    top: 722px;
+    width: 280px;
 }
 
 .guiBuyBombFrame480x800{
 	background-image: url("../480x800/guibuybomb.png");
     color: #644000;
     font-family: Bubblegum;
-    font-size: 0.8em;
-    height: 69px;
-    left: 398px;
-    padding-left: 47px;
-    padding-top: 67px;
+    font-size: 1.3em;
+    height: 82px;
+    left: 184px;
+    padding-left: 60px;
+    padding-top: 43px;
     position: fixed;
-    top: 260px;
-    width: 89px;
+    top: 718px;
+    width: 180px;
 }
 
-.guiBuyMultiFrame480x800{
-    background-image: url("../480x800/guibuyfreeze.png");
+.guiBuyMultiFrame480x800 {
+    background-image: url("../480x800/guibuymulti.png");
     color: #644000;
     font-family: Bubblegum;
-    font-size: 0.8em;
-    height: 69px;
-    left: 415px;
-    padding-left: 30px;
-    padding-top: 60px;
+    font-size: 1.3em;
+    height: 82px;
+    left: 66px;
+    padding-left: 60px;
+    padding-top: 43px;
     position: fixed;
-    top: 345px;
-    width: 89px;
+    top: 718px;
+    width: 106px;
 }
 
 .guiPointsLeftFrame480x800{
@@ -363,7 +377,7 @@ min-height: 62px;	padding-left: 17px;	padding-top: 32px;	position: fixed;	width:
 	height: 111px;
 	min-height: 111px;*/
 	left: 80px;
-	top: 620px;
+	top: 530px;
 }
 /*
 .guiFinishPoints480x800{
@@ -927,9 +941,9 @@ min-height: 62px;	padding-left: 17px;	padding-top: 32px;	position: fixed;	width:
 }
 
 .uiPauseButton480x800{
-	background-image: url("../480x800/pausebutton.png");
+	
 	height: 50px;
-	left: 410px;
+	left: 402px;
 	min-height: 9px;
 	position: fixed;
 	top: 5px;

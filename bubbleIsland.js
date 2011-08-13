@@ -2236,7 +2236,7 @@ function gameUI(w, h){
 		event.stopPropagation()
 	});
 
-	this.coinsElement.innerHTML = (api.softgame.user.balance == undefined ? "-" : api.softgame.user.balance);
+	this.coinsElement.innerHTML = (api.softgame.user.balance == undefined ? "-" : api.softgame.user.balance + game.ui.innerCoins);
 
 	this.multiBubbleElement.innerHTML = this.multiBubbleCount;
 	this.bombBubbleElement.innerHTML = this.bombBubbleCount;
@@ -2282,7 +2282,7 @@ function gameUI(w, h){
 		this.bombBubbleElement.innerHTML = 'x' + this.bombBubbleCount;
 		this.freezeBubbleElement.innerHTML = 'x' + this.freezeBubbleCount;
 
-		this.coinsElement.innerHTML = api.softgame.user.balance;
+		this.coinsElement.innerHTML = api.softgame.user.balance  + game.ui.innerCoins;
 		
 		this.lvlFrame.innerHTML = this.level;
 		this.rankFrame.innerHTML = this.rank;
@@ -2634,7 +2634,7 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 			$(buybombbutton).click(api.ui.showBombBubbleBuy);
 			$(buyfreezebutton).click(api.ui.showFreezeBubbleBuy);
 
-			uiCoins.innerHTML = (api.softgame.user.balance == undefined ? "-" : api.softgame.user.balance);
+			uiCoins.innerHTML = (api.softgame.user.balance == undefined ? "-" : api.softgame.user.balance + game.ui.innerCoins);
 			uiLifes.innerHTML = game.ui.lifes;
 			uiPoints.innerHTML = game.ui.points;
 			uiRank.innerHTML = 0;
@@ -2644,7 +2644,7 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 			uiFreezeCount.innerHTML = 'x' + game.ui.freezeBubbleCount;
 
 			cartel.refresh = function(){
-				cartel.coins.innerHTML = (api.softgame.user.balance == undefined ? "-" : api.softgame.user.balance);
+				cartel.coins.innerHTML = (api.softgame.user.balance == undefined ? "-" : api.softgame.user.balance + game.ui.innerCoins);
 				cartel.lifes.innerHTML = game.ui.lifes;
 				cartel.multi.innerHTML = game.ui.multiBubbleCount;
 				cartel.bomb.innerHTML = game.ui.bombBubbleCount;
@@ -2791,7 +2791,7 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 		$(buybombbutton).click(api.ui.showBombBubbleBuy);
 		$(buyfreezebutton).click(api.ui.showFreezeBubbleBuy);
 
-		uiCoins.innerHTML = (api.softgame.user.balance == undefined ? "-" : api.softgame.user.balance);
+		uiCoins.innerHTML = (api.softgame.user.balance == undefined ? "-" : api.softgame.user.balance + game.ui.innerCoins);
 		uiLifes.innerHTML = game.ui.lifes;
 		uiPoints.innerHTML = game.ui.points;
 		uiRank.innerHTML = 'updating';
@@ -2801,7 +2801,7 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 		uiFreezeCount.innerHTML = 'x' + game.ui.freezeBubbleCount;
 
 		cartel.refresh = function(){
-			cartel.coins.innerHTML = (api.softgame.user.balance == undefined ? "-" : api.softgame.user.balance);
+			cartel.coins.innerHTML = (api.softgame.user.balance == undefined ? "-" : api.softgame.user.balance + game.ui.innerCoins);
 			cartel.lifes.innerHTML = game.ui.lifes;
 			cartel.multi.innerHTML = game.ui.multiBubbleCount;
 			cartel.bomb.innerHTML = game.ui.bombBubbleCount;
@@ -3316,7 +3316,7 @@ api.ui.showBalance = function(){
 		});
 	};
 
-	api.ui.balancedivcoins.innerHTML =  api.softgame.user.balance;
+	api.ui.balancedivcoins.innerHTML =  api.softgame.user.balance + game.ui.innerCoins;
 	api.ui.balancediv.style.display = 'block';
 	$(document.body).append(api.ui.balancediv);
 };
@@ -3638,22 +3638,29 @@ api.ui.showBonusScreen = function(bonus){
 		
 		switch(bonus){
 			case "1":
-				imageDiv.style.backgroundImage = 'url(' + gameSize + '/bonusjocker.png)';
+				imageDiv.style.backgroundImage = 'url(../' + gameSize + '/bonusjocker.png)';
+				game.ui.multiBubbleCount += 3;
 				break;
 			case "2":
-				imageDiv.style.backgroundImage = 'url(' + gameSize + '/bonusgrenade.png)';
+				imageDiv.style.backgroundImage = 'url(../' + gameSize + '/bonusgrenade.png)';
+				game.ui.bombBubbleCount += 3;
 				break;
 			case "3":
-				imageDiv.style.backgroundImage = 'url(' + gameSize + '/bonustime.png)';
+				imageDiv.style.backgroundImage = 'url(../' + gameSize + '/bonustime.png)';
+				game.ui.freezeBubbleCount += 3;
 				break;
 			case "4":
-				imageDiv.style.backgroundImage = 'url(' + gameSize + '/bonuslife.png)';
+				imageDiv.style.backgroundImage = 'url(../' + gameSize + '/bonuslife.png)';
+				game.ui.lifes += 1;
 				break;
 			case "5":
-				imageDiv.style.backgroundImage = 'url(' + gameSize + '/bonuscoins.png)';
+				imageDiv.style.backgroundImage = 'url(../' + gameSize + '/bonuscoins.png)';
+				game.ui.innerCoins += 3;
 				break;
 			case "6":
-				imageDiv.style.backgroundImage = 'url(' + gameSize + '/bonusscore.png)';
+				imageDiv.style.backgroundImage = 'url(../' + gameSize + '/bonusscore.png)';
+				game.ui.score += 500;
+				game.ui.points += 500;
 				break;
 		};
 		

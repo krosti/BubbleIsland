@@ -2546,15 +2546,16 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 	};
 
 	this.playerLoose = function(){
-		//alert('loose');
+		alert('loose');
 		//soundengine.reproduceSound('losesound');
 		game.ui.archivements.checkLevel();
-		
+		alert('clear');
 		game.level.clearBoard();
-
+		alert('clear');
 		if(game.ui.lifes == 0){ // ask for more lifes!
 			api.ui.showLoseScreen();
 		}else{		
+			alert('clear');
 			cartel = document.createElement('div');
 			var uiScreen = document.createElement('div');
 			var uiCoins = document.createElement('div');
@@ -2601,7 +2602,7 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 			multiValueFrame.setAttribute('class', 'guiCoinsMuli' + gameSize);
 			bombValueFrame.setAttribute('class', 'guiCoinsBomb' + gameSize);
 			freezeValueFrame.setAttribute('class', 'guiCoinsFreeze' + gameSize);
-			
+			alert('clear');
 			$(cartel).append(uiScreen);
 			$(cartel).append(uiCoins);
 			$(cartel).append(uiMoreCoins);
@@ -2702,7 +2703,7 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 				};
 				api.levels.serializeLevel();
 			});
-
+			alert('clear');
 			$(document.body).append(cartel);
 		};
 	};

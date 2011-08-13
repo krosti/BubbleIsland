@@ -3354,6 +3354,7 @@ api.ui.showLoseScreen = function(){
 		api.ui.losescreendiv.appendChild(okbutton);
 		api.ui.losescreendiv.appendChild(buybutton);
 		api.ui.losescreendiv.appendChild(coinsFrame);
+		api.ui.losescreendiv.appendChild(closeButton);
 		
 		$(buybutton).click(function(){
 			api.ui.losescreendiv.parentNode.removeChild(api.ui.losescreendiv);
@@ -3380,8 +3381,7 @@ api.ui.showLoseScreen = function(){
 				api.ui.hideWaiting();
 				//api.ui.alert('You have ' + lifesPerCoins + ' more lifes!! or you are a cat or someone loves you up there :)', 'Thanks! Go on!', function(){
 					game.ui.lifes += lifesPerCoins;
-					$(cartel).remove();
-					$(api.ui.losescreendiv).remove();
+					api.ui.losescreendiv.parentNode.removeChild(api.ui.losescreendiv);
 					delete api.ui.losescreendiv;
 					api.ui.losescreendiv = null;
 					game.playerLoose();

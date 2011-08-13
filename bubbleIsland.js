@@ -3008,6 +3008,7 @@ api.levels.serializeLevel = function(game){
 		lvl.currentTop = game.level.currentTop;
 		lvl.h = game.level.h
 		lvl.bonus = game.level.bonus;
+		lvl.fpscount = game.level.fpscount;
 		lvl.bubble_array = [];
 		//salvo las bubbles del array, son las mismas que la grilla
 		for(var i = 0; i < game.level.bubbles_array.length; ++i){
@@ -3134,6 +3135,7 @@ api.levels.unserializeLevel = function(){
 		game.level.currentTop = lvl.currentTop;
 		game.level.h = lvl.h
 		game.level.bonus = lvl.bonus;
+		game.level.fpscount = lvl.fpscount;
 		//alert('hola2');
 		for(var i = 0; i < lvl.bubble_array.length; ++i){
 			//alert('i: ' + i);
@@ -3664,11 +3666,11 @@ api.ui.showBonusScreen = function(bonus){
 				break;
 		};
 		
-		api.ui.bonusDiv.appendChild(imageDiv);
 		api.ui.bonusDiv.appendChild(container);
 		//api.ui.bonusDiv.appendChild();
 		api.ui.bonusDiv.appendChild(closeButton);
 		api.ui.bonusDiv.appendChild(okButton);
+		api.ui.bonusDiv.appendChild(imageDiv);
 		
 		$(closeButton).click(function(){
 			api.ui.bonusDiv.parentNode.removeChild(api.ui.bonusDiv);

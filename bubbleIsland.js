@@ -2208,20 +2208,23 @@ function gameUI(w, h){
 		$(cartel).addClass('uiAlert' + gameSize);		
 		$(waitscreen).addClass('uiPauseScreen' + gameSize);
 		
-		$(continueButton).click(function(){
+		$(continueButton).click(function(event){
 			$(cartel).remove();
 			game.clock.start();
+			event.stopPropagation()
 		});
 		
-		$(helpButton).click(function(){
+		$(helpButton).click(function(event){
 			menues.showMenu('help', cartel);
+			event.stopPropagation();
 		});
 		
-		$(menuButton).click(function(){
+		$(menuButton).click(function(event){
 			//game.ui.score = game.ui.points;
 			$(cartel).remove();
 			game.showMenu();
 			game.ui.refresh();
+			event.stopPropagation();
 		});
 		
 		cartel.appendChild(waitscreen);
@@ -3375,6 +3378,7 @@ api.ui.showLoseScreen = function(){
 			game.ui.clearUi();
 			delete api.ui.losescreendiv;
 			api.ui.losescreendiv = null;
+			game.ui.refresh();
 		});
 		
 		$(okbutton).click(function(){

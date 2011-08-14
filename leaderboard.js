@@ -89,7 +89,7 @@ function retrieveFacebookLeaderboard(data){
 		var text = '';
         scores = response.response;
         text = '<table class="guihighscoretabeveryone' + gameSize + '">';
-        for(var i = 0; i<scores.length; i++)
+        for(var i = 0; i</*scores.length*/ 1; i++)
         {
             var score = scores[i];
             //alert(" - " + score.Name + " got " + score.Points + " on " + score.SDate);

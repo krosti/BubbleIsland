@@ -1942,7 +1942,7 @@ board 5 times in one level
 		
 		this.postMe = function(){
 			if(this.posted) return;
-			api.facebook.post(api.facebook.user.name + ' has reach "' + this.title + '" archivement in @' + api.facebook.appname + ' and won 1 coins!');
+			api.facebook.postMessage(api.facebook.user.name + ' has reach "' + this.title + '" archivement in @' + api.facebook.appname + ' and won 1 coins!');
 			game.ui.innerCoins += 1;
 			this.posted = true;
 		};

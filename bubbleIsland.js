@@ -2554,7 +2554,7 @@ function appEnviroment(canvasObj, menuObj, navObj, size){
 		if(game.ui.lifes == 0){ // ask for more lifes!
 			api.ui.showLoseScreen();
 		}else{		
-			game.level.clearBoard();
+			//game.level.clearBoard();
 			//alert('clear');
 			cartel = document.createElement('div');
 			var uiScreen = document.createElement('div');

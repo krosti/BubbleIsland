@@ -29,6 +29,16 @@ function retrieveLeaderboard(type_span){
 	type_span = type_span ? 'global' : type_span;
     api.leaderboard.list(api.facebook.user.id, retrieveGeneralLeaderboard, [], 0, 2, type_span);
     api.leaderboard.list(api.facebook.user.id, retrieveFacebookLeaderboard, api.facebook.friends, 0, 2, type_span);
+	var text = '<table class="guihighscoretabmyscore' + gameSize + '" >';
+	text += '<tr><td><img src="https://loading.gif" alt="no encontrada"></td><td class="nick' + gameSize + '"> Loading... </td><td>0</td></tr>';
+	text += '</table>';
+	text += '<table class="guihighscoretabeveryone' + gameSize + '">';
+	text += '<tr><td><img src="https://loading.gif" alt="no encontrada"></td><td class="nick' + gameSize + '"> Loading... </td><td>0</td></tr>';
+	text += '<tr><td><img src="https://loading.gif" alt="no encontrada"></td><td class="nick' + gameSize + '"> Loading... </td><td>0</td></tr>';
+	text += '</table>';
+	
+	LeaderBoard.divGen.innerHTML = text;
+	LeaderBoard.divFB.innerHTML = text;
 	
 	//LeaderBoard.divGen.innerHTML = '<table class=""><tr><td><img src="loading.gif"></td></tr></table>';
 	//LeaderBoard.divFB.innerHTML = '<table class=""><tr><td><img src="loading.gif"></td></tr></table>';
@@ -98,7 +108,7 @@ function retrieveFacebookLeaderboard(data){
             if(i == 5) break;
         };
         text += '</table>';
-        LeaderBoard.divGen.innerHTML = text;
+        LeaderBoard.divFB.innerHTML = text;
 		
 		api.leaderboard.rankme(api.facebook.user.id, function(data){
 			var result = api.string2JSON(data);

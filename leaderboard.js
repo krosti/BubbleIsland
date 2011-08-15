@@ -110,20 +110,22 @@ function retrieveFacebookLeaderboard(data){
 
 function doRank(){
 	LeaderBoard.ready -= 1;
-	
+	//console.log(LeaderBoard.ready);
 	if(LeaderBoard.ready != 0) return;
-	
+	//console.log('to add');
 	api.leaderboard.rankme(api.facebook.user.id, function(data){
 		var result = api.string2JSON(data);
 		if(result.status == 1){
 			var text = '<table class="guihighscoretabmyscore' + gameSize + '" >';
 			text += '<tr><td><img src="https://graph.facebook.com/'+api.facebook.user.id+'/picture" alt="no encontrada"></td><td class="nick' + gameSize + '">' + api.facebook.user.name + '</td><td>' + result.response.points + '</td></tr>';
 			text += '</table>';
-			var score = document.createElement('div');
-			score.innerHTML = text;
+			var scoreFB = document.createElement('div');
+			var scoreGen = document.createElement('div');
+			scoreFB.innerHTML = text;
+			scoreGen.innerHTML = text;
 			//LeaderBoard.divGen.innerHTML = LeaderBoard.divGen.innerHTML + text;
-			LeaderBoard.divFB.insertBefore(score.cloneNode(), LeaderBoard.divFB.firstChild);
-			LeaderBoard.divGen.insertBefore(score.cloneNode(), LeaderBoard.divFB.firstChild);
+			LeaderBoard.divFB.insertBefore(scoreFB, LeaderBoard.divFB.firstChild);
+			LeaderBoard.divGen.insertBefore(scoreGen, LeaderBoard.divGen.firstChild);
 		};
 	});
 };

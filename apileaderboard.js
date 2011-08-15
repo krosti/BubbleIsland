@@ -125,11 +125,11 @@ api.leaderboard.rankme = function(id, callback, type_span){
 		error: api.leaderboard.rankerror,
 		complete: function(response){
 			//alert(api.JSON2String(response));
-			if(response.status == 200){
+			/*if(response.status == 200){
 				api.leaderboard.rankcallback(response.responseText);
 			}else{
 				api.levels.responseError();
-			};
+			};*/
 		}
 	});	
 };

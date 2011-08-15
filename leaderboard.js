@@ -30,11 +30,11 @@ function retrieveLeaderboard(type_span){
     api.leaderboard.list(api.facebook.user.id, retrieveGeneralLeaderboard, [], 0, 2, type_span);
     api.leaderboard.list(api.facebook.user.id, retrieveFacebookLeaderboard, api.facebook.friends, 0, 2, type_span);
 	var text = '<table class="guihighscoretabmyscore' + gameSize + '" >';
-	text += '<tr><td><img src="https://loading.gif" alt="no encontrada"></td><td class="nick' + gameSize + '"> Loading... </td><td>0</td></tr>';
+	text += '<tr><td><img src="loading.gif" alt="no encontrada"></td><td class="nick' + gameSize + '"> Loading... </td><td>0</td></tr>';
 	text += '</table>';
 	text += '<table class="guihighscoretabeveryone' + gameSize + '">';
-	text += '<tr><td><img src="https://loading.gif" alt="no encontrada"></td><td class="nick' + gameSize + '"> Loading... </td><td>0</td></tr>';
-	text += '<tr><td><img src="https://loading.gif" alt="no encontrada"></td><td class="nick' + gameSize + '"> Loading... </td><td>0</td></tr>';
+	text += '<tr><td><img src="loading.gif" alt="no encontrada"></td><td class="nick' + gameSize + '"> Loading... </td><td>0</td></tr>';
+	text += '<tr><td><img src="loading.gif" alt="no encontrada"></td><td class="nick' + gameSize + '"> Loading... </td><td>0</td></tr>';
 	text += '</table>';
 	
 	LeaderBoard.divGen.innerHTML = text;
@@ -113,11 +113,13 @@ function retrieveFacebookLeaderboard(data){
 		api.leaderboard.rankme(api.facebook.user.id, function(data){
 			var result = api.string2JSON(data);
 			if(result.status == 1){
-				//api.leaderboard.rankok(result.response);
 				var text = '<table class="guihighscoretabmyscore' + gameSize + '" >';
 				text += '<tr><td><img src="https://graph.facebook.com/'+api.facebook.user.id+'/picture" alt="no encontrada"></td><td class="nick' + gameSize + '">' + api.facebook.user.name + '</td><td>' + result.response.points + '</td></tr>';
 				text += '</table>';
-				LeaderBoard.divFB.innerHTML = LeaderBoard.divFB.innerHTML + text;
+				var score = document.createElement('div');
+				score.innerHTML = text;
+				//LeaderBoard.divGen.innerHTML = LeaderBoard.divGen.innerHTML + text;
+				LeaderBoard.divFB.insertBefore(score, LeaderBoard.divFB.firstChild);
 			};
 		});
     }

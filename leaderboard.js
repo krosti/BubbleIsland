@@ -1,7 +1,7 @@
 var LeaderBoard = {
 	divGen: '',
 	divFB: '',
-    highscore: 10000000
+    ready: 2
 };
 
 function setLeaderboardsDivs(divFB, divGen){
@@ -27,6 +27,8 @@ function SubmitComplete(response)
 
 function retrieveLeaderboard(type_span){
 	type_span = type_span ? 'global' : type_span;
+	
+	LeaderBoard.ready = 2;
     api.leaderboard.list(api.facebook.user.id, retrieveGeneralLeaderboard, [], 0, 2, type_span);
     api.leaderboard.list(api.facebook.user.id, retrieveFacebookLeaderboard, api.facebook.friends, 0, 2, type_span);
 	var text = '<table class="guihighscoretabmyscore' + gameSize + '" >';
@@ -67,20 +69,7 @@ function retrieveGeneralLeaderboard(data){
         };
         text += '</table>';
         LeaderBoard.divGen.innerHTML = text;
-		
-		api.leaderboard.rankme(api.facebook.user.id, function(data){
-			var result = api.string2JSON(data);
-			if(result.status == 1){
-				//api.leaderboard.rankok(result.response);
-				var text = '<table class="guihighscoretabmyscore' + gameSize + '" >';
-				text += '<tr><td><img src="https://graph.facebook.com/'+api.facebook.user.id+'/picture" alt="no encontrada"></td><td class="nick' + gameSize + '">' + api.facebook.user.name + '</td><td>' + result.response.points + '</td></tr>';
-				text += '</table>';
-				var score = document.createElement('div');
-				score.innerHTML = text;
-				//LeaderBoard.divGen.innerHTML = LeaderBoard.divGen.innerHTML + text;
-				LeaderBoard.divGen.insertBefore(score, LeaderBoard.divGen.firstChild);
-			};
-		});
+		doRank();
     }
     else
     {
@@ -110,24 +99,33 @@ function retrieveFacebookLeaderboard(data){
         text += '</table>';
         LeaderBoard.divFB.innerHTML = text;
 		
-		api.leaderboard.rankme(api.facebook.user.id, function(data){
-			var result = api.string2JSON(data);
-			if(result.status == 1){
-				var text = '<table class="guihighscoretabmyscore' + gameSize + '" >';
-				text += '<tr><td><img src="https://graph.facebook.com/'+api.facebook.user.id+'/picture" alt="no encontrada"></td><td class="nick' + gameSize + '">' + api.facebook.user.name + '</td><td>' + result.response.points + '</td></tr>';
-				text += '</table>';
-				var score = document.createElement('div');
-				score.innerHTML = text;
-				//LeaderBoard.divGen.innerHTML = LeaderBoard.divGen.innerHTML + text;
-				LeaderBoard.divFB.insertBefore(score, LeaderBoard.divFB.firstChild);
-			};
-		});
+		doRank();
     }
     else
     {
         // score listing failed because of response.ErrorCode
         api.ui.alert('Sorry, now we have a little problem with the Leaderboard, please check it later', 'Ok');
     }
+};
+
+function doRank(){
+	LeaderBoard.ready -= 1;
+	
+	if(LeaderBoard.ready != 0) return;
+	
+	api.leaderboard.rankme(api.facebook.user.id, function(data){
+		var result = api.string2JSON(data);
+		if(result.status == 1){
+			var text = '<table class="guihighscoretabmyscore' + gameSize + '" >';
+			text += '<tr><td><img src="https://graph.facebook.com/'+api.facebook.user.id+'/picture" alt="no encontrada"></td><td class="nick' + gameSize + '">' + api.facebook.user.name + '</td><td>' + result.response.points + '</td></tr>';
+			text += '</table>';
+			var score = document.createElement('div');
+			score.innerHTML = text;
+			//LeaderBoard.divGen.innerHTML = LeaderBoard.divGen.innerHTML + text;
+			LeaderBoard.divFB.insertBefore(score.cloneNode(), LeaderBoard.divFB.firstChild);
+			LeaderBoard.divGen.insertBefore(score.cloneNode(), LeaderBoard.divFB.firstChild);
+		};
+	});
 };
 
 function retrieveHighScore(){

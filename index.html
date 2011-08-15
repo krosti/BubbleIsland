@@ -142,20 +142,20 @@
 
 <div id="container">
 
-<div class="guiChooseFinishMultiCount320x480">5</div>
-<div class="guiChooseFinishBombCount320x480">10</div>
-<div class="guiChooseFinishFreezeCount320x480">15</div>
+<div class="guiChooseFinishMultiCount320x480"></div>
+<div class="guiChooseFinishBombCount320x480"></div>
+<div class="guiChooseFinishFreezeCount320x480"></div>
 
 <div class="guiFinishChooseBuyMulti320x480"></div>
 <div class="guiFinishChooseBuyFreeze320x480"></div>
 <div class="guiFinishChooseBuyBomb320x480"></div>
 
-<div class="guiChooseCoinsMuli">15</div>
-<div class="guiChooseCoinsBomb">02</div>
-<div class="guiChooseCoinsFreeze">66</div>
+<div class="guiChooseCoinsMuli"></div>
+<div class="guiChooseCoinsBomb"></div>
+<div class="guiChooseCoinsFreeze"></div>
 
 <div class="guiChooseAddCoins320x480"></div>
-<div class="guiFinishChooseCoins320x480">1000</div>
+<div class="guiFinishChooseCoins320x480"></div>
 <div class="guiChoosecerrar"></div>
 </div>
 <!--nav id="optionMenu" style="position: absolute; top: 0px; left: 0px; width: 100%; min-height: 100%; display: none;" >
@@ -526,6 +526,14 @@ loader.readyLoad = function(){
 						document.getElementById('backgroundNav').style.backgroundImage = 'url('+backgroundImage.src+')';
 						$('#frameBackground')[0].style.display = 'block';
 						connectToFacebook();
+						menues.addMenu('mainMenu', 'gameMenu');
+						menues.addMenu('ingame', 'animCanvas');
+						//menues.addMenu('facebookScreen', 'FBnav');
+						//menues.addMenu('', '#');
+						menues.addMenu('leaderboard', 'leaderboardMenu');
+						menues.addMenu('archivement', 'archivementMenu');
+						menues.addMenu('buyBooster', 'container');
+						menues.addMenu('help', 'helpMenu');
 						var p = $("#initScreen").remove();
 						delete p;
 							/*});
@@ -534,15 +542,6 @@ loader.readyLoad = function(){
 					//});
 		});
 	});
-	
-	menues.addMenu('mainMenu', 'gameMenu');
-	menues.addMenu('ingame', 'animCanvas');
-	//menues.addMenu('facebookScreen', 'FBnav');
-	//menues.addMenu('', '#');
-	menues.addMenu('leaderboard', 'leaderboardMenu');
-	menues.addMenu('archivement', 'archivementMenu');
-	menues.addMenu('buyBooster', 'container');
-	menues.addMenu('help', 'helpMenu');
 	
 	//connectToFacebook2();
 	//api.ui.showLoseScreen();

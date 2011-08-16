@@ -3653,27 +3653,27 @@ api.ui.showBonusScreen = function(bonus){
 		
 		switch(bonus){
 			case "1":
-				imageDiv.style.backgroundImage = 'url(../' + gameSize + '/bonusjocker.png)';
+				imageDiv.style.backgroundImage = 'url(' + gameSize + '/bonusjocker.png)';
 				game.ui.multiBubbleCount += 3;
 				break;
 			case "2":
-				imageDiv.style.backgroundImage = 'url(../' + gameSize + '/bonusgrenade.png)';
+				imageDiv.style.backgroundImage = 'url(' + gameSize + '/bonusgrenade.png)';
 				game.ui.bombBubbleCount += 3;
 				break;
 			case "3":
-				imageDiv.style.backgroundImage = 'url(../' + gameSize + '/bonustime.png)';
+				imageDiv.style.backgroundImage = 'url(' + gameSize + '/bonustime.png)';
 				game.ui.freezeBubbleCount += 3;
 				break;
 			case "4":
-				imageDiv.style.backgroundImage = 'url(../' + gameSize + '/bonuslife.png)';
+				imageDiv.style.backgroundImage = 'url(' + gameSize + '/bonuslife.png)';
 				game.ui.lifes += 1;
 				break;
 			case "5":
-				imageDiv.style.backgroundImage = 'url(../' + gameSize + '/bonuscoins.png)';
+				imageDiv.style.backgroundImage = 'url(' + gameSize + '/bonuscoins.png)';
 				game.ui.innerCoins += 3;
 				break;
 			case "6":
-				imageDiv.style.backgroundImage = 'url(../' + gameSize + '/bonusscore.png)';
+				imageDiv.style.backgroundImage = 'url(' + gameSize + '/bonusscore.png)';
 				//game.ui.score += 500;
 				game.ui.points += 500;
 				break;

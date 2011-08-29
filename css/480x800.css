@@ -33,16 +33,16 @@
 /*==========================pantalla highscore ==========================================================================================================*/
 .guihighscoretabmyscore480x800 img{width: 42px;height: 42px;}
 .guihighscoretabeveryone480x800 img{width: 42px;height: 42px;}
-.guihighscoretabmyscore480x800 td{   font-family: bubblegum !important;    font-size: 1.3em !important;}
-.guihighscoretabeveryone480x800 td{ font-family: bubblegum !important;    font-size: 1.3em !important;}
+.guihighscoretabmyscore480x800 td{   font-family: bubblegum !important;    font-size: 1.3em }
+.guihighscoretabeveryone480x800 td{ font-family: bubblegum !important;    font-size: 1.3em }
 .guihighscoretabmyscore480x800{}
 .guihighscoretabeveryone480x800 {margin-top:52px;}
 .guihighscoretabeveryone480x800 td{padding-bottom:12px;}
 /*.leaderboardTab480x800 { left: 63px !important;top: 225px !important;}*/
 .nick480x800{padding-left:11px;width: 190px;}
-.hhighscorealltime480x800{left: 68px;top: 274px;width: 117px;height:26px;position: absolute;background-image: url(../480x800/alltime.png); }
-.hhighscoretoday480x800{left:200px;top: 274px;width: 116px;height:26px;position: absolute;background-image: url(../480x800/today.png); }
-.hhighscorethisweek480x800{left: 326px;top: 274px;width: 117px;height:26px;position: absolute;background-image: url(../480x800/thisweek.png); }
+.highscorealltime480x800{left: 68px;top: 274px;width: 117px;height:26px;position: absolute;background-image: url(../480x800/alltime.png); }
+.highscoretoday480x800{left:200px;top: 274px;width: 116px;height:26px;position: absolute;background-image: url(../480x800/today.png); }
+.highscorethisweek480x800{left: 326px;top: 274px;width: 117px;height:26px;position: absolute;background-image: url(../480x800/thisweek.png); }
 .highscorealltimeapretado480x800{left: 68px;top: 264px;width: 117px;height:36px;position: absolute;background-image: url(../480x800/alltime.png); }
 .highscoretodayapretado480x800{left:200px;top: 264px;width: 116px;height:36px;position: absolute;background-image: url(../480x800/today.png); }
 .highscorethisweekapretado480x800{left: 326px;top: 264px;width: 117px;height:36px;position: absolute;background-image: url(../480x800/thisweek.png); }
@@ -74,8 +74,8 @@
 .guiCoinsFreeze480x800{position: fixed;width: 35px;height: 20px;left: 250px;top: 592px;color:#4e3e2d;font-family: Bubblegum;	font-size: 1.3em;}
 .guiLoosecerrar480x800{position: fixed;width: 45px;height: 40px;left: 394px;top: 96px;background-image: url("../480x800/btncerrar.png");}
 /*======================pantalla win==============================================*/
-.guiwincerrar480x800{position: fixed;width: 41px;height: 39px;left:396px;top: 76px;background-image: url("../480x800/btncerrar.png");}
-.guiWinContinuepostonwall480x800{width: 179px;height: 70px;min-height:70px;left: 26px;top: 671px;position: fixed;background-image: url(../480x800/guicontinuepostonwall.png);}
+.guiwincerrar480x800{position: fixed;width: 41px;height: 39px;left:396px;top: 86px;background-image: url("../480x800/btncerrar.png");}
+.guiWinContinuepostonwall480x800{width: 179px;height: 70px;min-height:70px;left: 26px;top: 681px;position: fixed;background-image: url(../480x800/guicontinuepostonwall.png);}
 /*======================pantalla pause==============================================*/	
 .pausecontinue480x800{top: 350px;left: 140px;	width: 233px;height:135px; background-image: url("../480x800/pausecontinue.png");min-height: 135px;	position: absolute;}
 .pausehelp480x800{top: 548px;left: 160px;	width: 244px;height: 187px;min-height:187px; background-image: url("../480x800/pausehelp.png");		position: absolute;}
@@ -440,12 +440,12 @@ min-height: 62px;	padding-left: 17px;	padding-top: 32px;	position: fixed;	width:
 
 .guiFinishMoreCoins480x800{
     background-image: url("../480x800/guiaddbutton.png");
-    height: 49px;
-    left: 350px;
+  height: 49px;
+    left: 340px;
     position: fixed;
-    top: 290px;
+    top: 310px;
     width: 49px;
-}
+	}
 
 .guiFinishMultiCount480x800{
 	font-family: Bubblegum;
@@ -488,10 +488,10 @@ min-height: 62px;	padding-left: 17px;	padding-top: 32px;	position: fixed;	width:
 
 .guiWinScreen480x800{
     background-image: url("../480x800/guiwin.png");
-    height: 692px;
+ height: 692px;
     left: 0;
     position: fixed;
-    top: 0;
+    top: 13px;
     width: 480px;
 }
 
@@ -512,7 +512,7 @@ min-height: 62px;	padding-left: 17px;	padding-top: 32px;	position: fixed;	width:
 	height: 68px;
 	min-height: 68px;
 	left: 260px;
-	top: 670px;
+	top: 680px;
 }
 
 

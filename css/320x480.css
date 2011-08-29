@@ -83,7 +83,6 @@ font-family: Grobold;
 .lifeaddcoins320x480{width: 135px;height: 59px; top:347px;left:181px;background-image: url("../320x480/lifeaddcoins.png");position: absolute;background-repeat:no-repeat;}
 .lifegiveme320x480{width: 135px;height: 59px; top:346px;left:19px;background-image: url("../320x480/lifegiveme.png");position: absolute;background-repeat:no-repeat;}
 .lifecoins320x480{font-family: Bubblegum;	font-size: 0.9em;color:#644000;height: 12px;	left: 200px;	position: fixed;top: 52px;	width: 13px;}
-/* add by shaka */ .lifecerrar320x480{position: fixed;width: 30px;height: 29px;left: 265px;top: 12px;background-image: url("../320x480/btncerrar.png");}
 /* =========== pantalla bonus======================================================================================================*/
 .containerbonus320x480{width: 320px;height: 480px; background-image: url("../320x480/bonus.png");position: absolute;}
 .bonusaccepyshare320x480{width: 114px;height: 45px; top:429px;left:113px;background-image: url("../320x480/bonusacept.png");position: absolute;background-repeat:no-repeat;}
@@ -94,7 +93,7 @@ font-family: Grobold;
 .guiProgressBartrofeo320x480{height: 314px;  left: -1px; position: fixed; top: 123px; width: 43px;background-image: url(../320x480/progressbar.png);background-repeat:no-repeat;}
 /*.guiProgressBarmedio320x480{width: 12px;height: 280px;bottom: 0px;left: 7px;position: absolute;}*/
 .guiProgressBarmedio320x480{width: 7px;height: 270px;margin-left:13px;margin-top:36px}
-.guiProgressBarinterna320x480{margin-left:-7px;width: 13px;height: 270px;background-image: url("../320x480/progressbarinterna.png");background-repeat:no-repeat;}
+.guiProgressBarinterna320x480{position: absolute; bottom: 8px; margin-left:-7px;width: 13px;height: 270px;background-image: url("../320x480/progressbarinterna.png");background-repeat:no-repeat;}
 /*======================pantalla help==============================================*/
 .containerhelp320x480{width: 320px;height: 480px; background-image: url("../320x480/help320x480.png");position: absolute;}
 .donehelp320x480{width: 135px;height: 59px; top:421px;left:160px;background-image: url("../320x480/helpdone320x480.png");position: absolute;background-repeat:no-repeat;}
@@ -119,7 +118,7 @@ min-height: 62px;	padding-left: 17px;	padding-top: 32px;	position: fixed;	width:
 /*======================pantalla ingame==============================================*/
 .frameBackground320x480{ width: 320px; height: 391px; background-position: center 64px; position: absolute;  left: 0px; }
 /*style=" background-position: bottom center; position: absolute; top: 0px; left: 0px; display: none" */
-#guicanon320x480{background-image: url("../320x480/cannon.png");position: absolute;width: 90px;height: 70px;left:108px;top: 343px;	}
+.guicanon320x480{background-image: url("../320x480/cannon.png");position: absolute;width: 90px;height: 70px;left:108px;top: 343px;	}
 /*.guiNextBall2Frame320x480{background-image: url("../bubbles/greenbubble.png");position: fixed;width: 30px;height: 30px;left: 112px;top: 373px;}*/
 
 /* #contenedorgreat320x480{position: absolute;width: 100%;top:164px;}
@@ -132,9 +131,9 @@ min-height: 62px;	padding-left: 17px;	padding-top: 32px;	position: fixed;	width:
 .going320x480{ width: 100%;height: 75px;background-image: url("../320x480/going320.png") ;  position:absolute;background-position: center ; top:158px;}
 /*======================pantalla loose==============================================*/
 .guiLooseContinuepostonwall320x480{	width: 126px;height: 48px;min-height: 110px;left: 12px;top: 430px;position: fixed;background-image: url(../320x480/guicontinuepostonwall.png);	}
-.guiCoinsMuli320x480{position: fixed;width: 35px;height: 20px;left: 170px;top: 280px;color:#4e3e2d;}
-.guiCoinsBomb320x480{position: fixed;width: 35px;height: 20px;left: 170px;top: 322px;}
-.guiCoinsFreeze320x480{position: fixed;width: 35px;height: 20px;left: 170px;top: 364px;}
+.guiCoinsMuli320x480{position: fixed;width: 35px;height: 20px;left: 170px;top: 280px;color:#4e3e2d;font-size: 0.8em;font-color#644000;}
+.guiCoinsBomb320x480{position: fixed;width: 35px;height: 20px;left: 170px;top: 322px;font-size: 0.8em;font-color#644000;}
+.guiCoinsFreeze320x480{position: fixed;width: 35px;height: 20px;left: 170px;top: 364px;font-size: 0.8em;font-color#644000;}
 .guiLoosecerrar320x480{position: fixed;width: 30px;height: 29px;left: 266px;top: 26px;background-image: url("../320x480/btncerrar.png");}
 /*======================pantalla win==============================================*/
 .guiwincerrar320x480{position: fixed;width: 30px;height: 29px;left: 266px;top: 26px;background-image: url("../320x480/btncerrar.png");}
@@ -169,9 +168,9 @@ min-height: 62px;	padding-left: 17px;	padding-top: 32px;	position: fixed;	width:
 .highscorealltime320x480{left: 68px;top: 176px;width: 76px;height:18px;position: absolute;background-image: url(../320x480/alltime320.png); }
 .highscoretoday320x480{left: 145px;top: 176px;width: 76px;height:18px;position: absolute;background-image: url(../320x480/today320.png); }
 .highscorethisweek320x480{left: 220px;top: 176px;width: 77px;height:18px;position: absolute;background-image: url(../320x480/thisweek320.png); }
-.highscorealltimeapretado320x480{left: 68px;top: 176px;width: 76px;height:25px;position: absolute;background-image: url(../320x480/alltime320.png); }
-.highscoretodayapretado320x480{left: 145px;top: 176px;width: 76px;height:25px;position: absolute;background-image: url(../320x480/today320.png); }
-.highscorethisweekapretado320x480{left: 220px;top: 176px;width: 77px;height:25px;position: absolute;background-image: url(../320x480/thisweek320.png); }
+.highscorealltimeapretado320x480{left: 68px;top: 171px;width: 76px;height:22px;position: absolute;background-image: url(../320x480/alltime320.png); }
+.highscoretodayapretado320x480{left: 145px;top: 170px;width: 76px;height:22px;position: absolute;background-image: url(../320x480/today320.png); }
+.highscorethisweekapretado320x480{left: 220px;top: 170px;width: 77px;height:22px;position: absolute;background-image: url(../320x480/thisweek320.png); }
 /* #leaderboardMenu{display:block !important;}
 #gameMenu{display:none !important;}
 */
@@ -519,7 +518,7 @@ index.html #2 (línea 55)
 	height: 12px;
 	left: 100px;
 	position: fixed;
-	top: 286px;
+	top: 284px;
 	width: 13px;
 }
 
@@ -529,7 +528,7 @@ index.html #2 (línea 55)
 	height: 12px;
 	left: 97px;
 	position: fixed;
-	top: 329px;
+	top: 326px;
 	width: 13px;
 }
 
@@ -539,7 +538,7 @@ index.html #2 (línea 55)
 	height: 12px;
 	left: 99px;
 	position: fixed;
-	top: 370px;
+	top: 366px;
 	width: 13px;
 }
 /*.guiFinishPoints320x480{

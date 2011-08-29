@@ -2119,6 +2119,9 @@ function gameUI(w, h){
 	this.statusBarContainer.setAttribute('class', 'guiProgressBartrofeo' + gameSize);
 	this.statusBar.setAttribute('class', 'guiProgressBarmedio' + gameSize);
 	this.statusProgressBar.setAttribute('class', 'guiProgressBarinterna' + gameSize);
+	this.statusProgressBar.style.position = 'absolute';
+	this.statusProgressBar.style.bottom = '0px';
+	this.statusProgressBar.style.top = 'auto';
 	
 	animNav.append(this.element);
 	animNav.append(this.element2);

@@ -1,3 +1,16 @@
+/*
+* last bugs
+
+[ ] Chequear el sonido
+[x] revisar menu pausa
+[ ] juego se clava contra pelotas congtra la derecha
+[-] rehacer cartel de choose booster
+[ ] chequear main-windows
+[ ] chequear highscore
+[ ] daily bonus a UTC
+
+*/
+
 var VERSION = '3.0.123';
 
 function rnd(top){ return Math.floor(Math.random()*(top + 1))};
@@ -2158,11 +2171,15 @@ function gameUI(w, h){
 		if(game.ui.multiBubbleCount != 0){
 			if(game.cannon.chargeMultiBuffer()){
 				game.ui.multiBubbleCount -= 1;
-				game.ui.multiBubbleElement.innerHTML = 'x' + game.ui.multiBubbleCount;
+				if(game.ui.multiBubbleCount == 0){
+					game.ui.multiBubbleElement.innerHTML = "Add";
+				}else{
+					game.ui.multiBubbleElement.innerHTML = 'x' + game.ui.multiBubbleCount;
+				};				
 				game.ui.archivements.boosterUsed = true;
 			};
 		}else{
-			$(game.ui.pauseElement).click();
+			//$(game.ui.pauseElement).click();
 			api.ui.showChooseBooster();
 		};
 		e.stopPropagation();
@@ -2172,11 +2189,15 @@ function gameUI(w, h){
 		if(game.ui.bombBubbleCount != 0){
 			if(game.cannon.chargeBombBuffer()){
 				game.ui.bombBubbleCount -= 1;
-				game.ui.bombBubbleElement.innerHTML = 'x' + game.ui.bombBubbleCount;	
+				if(game.ui.bombBubbleCount == 0){
+					game.ui.bombBubbleElement.innerHTML = "Add";
+				}else{
+					game.ui.bombBubbleElement.innerHTML = 'x' + game.ui.bombBubbleCount;	
+				};	
 				game.ui.archivements.boosterUsed = true;
 			};
 		}else{
-			$(game.ui.pauseElement).click();
+			//$(game.ui.pauseElement).click();
 			api.ui.showChooseBooster();
 		};
 		e.stopPropagation();
@@ -2186,11 +2207,15 @@ function gameUI(w, h){
 		if(game.ui.freezeBubbleCount != 0){
 			if(game.cannon.chargeFreezeBuffer()){
 				game.ui.freezeBubbleCount -= 1;
-				game.ui.freezeBubbleElement.innerHTML = 'x' + game.ui.freezeBubbleCount;	
+				if(game.ui.freezeBubbleCount == 0){
+					game.ui.freezeBubbleElement = "Add";
+				}else{
+					game.ui.freezeBubbleElement.innerHTML = 'x' + game.ui.freezeBubbleCount;	
+				};
 				game.ui.archivements.boosterUsed = true;
 			};
 		}else{
-			$(game.ui.pauseElement).click();
+			//$(game.ui.pauseElement).click();
 			api.ui.showChooseBooster();
 		};
 		e.stopPropagation();
@@ -3558,10 +3583,13 @@ api.ui.showChooseBooster = function(){
 		
 		var multiCountFrame = document.createElement('div');
 		multiCountFrame.setAttribute('class', 'guiChooseFinishMultiCount' + gameSize);
+		multiCountFrame.innerHTML = game.ui.multiBubbleCount;
 		var bombCountFrame = document.createElement('div');
 		bombCountFrame.setAttribute('class', 'guiChooseFinishBombCount' + gameSize);
+		bombCountFrame.innerHTML = game.ui.bombBubbleCount;
 		var freezeCountFrame = document.createElement('div');
 		freezeCountFrame.setAttribute('class', 'guiChooseFinishFreezeCount' + gameSize);
+		freezeCountFrame.innerHTML = game.ui.freezeBubbleCount;
 		
 		var multiBuyButton = document.createElement('div');
 		multiBuyButton.setAttribute('class', 'guiFinishChooseBuyMulti' + gameSize);
@@ -3584,6 +3612,8 @@ api.ui.showChooseBooster = function(){
 		addCoinsButton.setAttribute('class', 'guiChooseAddCoins' + gameSize);
 		var coinsFrame = document.createElement('div');
 		coinsFrame.setAttribute('class', 'guiFinishChooseCoins' + gameSize);
+		coinsFrame.innerText = (api.softgame.user.balance == undefined ? "-" : " " + api.softgame.user.balance + game.ui.innerCoins);
+		//console.log(api.softgame.user.balance == undefined ? "-" : api.softgame.user.balance + game.ui.innerCoins);
 		var closeButton = document.createElement('div');
 		closeButton.setAttribute('class', 'guiChoosecerrar' + gameSize);
 		
@@ -3603,11 +3633,16 @@ api.ui.showChooseBooster = function(){
 		api.ui.chooseBoosterdiv.appendChild(coinsFrame);
 		api.ui.chooseBoosterdiv.appendChild(closeButton);
 		
+		var alertdiv = document.createElement('div');
+		alertdiv.setAttribute('class', 'uiAlert' + gameSize);
+		alertdiv.appendChild(api.ui.chooseBoosterdiv);
+		api.ui.chooseBoosterdiv = alertdiv;
+		
 		$(addCoinsButton).click(function(){
 			api.levels.serializaDone = function(){
 				window.location = api.softgame.getBuyingCoinsUrl();
 			};
-			api.levels.serializeLevel();
+			api.levels.serializeLevel(game);
 		});
 		
 		$(multiBuyButton).click(api.ui.showMultiBubbleBuy);
@@ -3619,10 +3654,11 @@ api.ui.showChooseBooster = function(){
 			delete api.ui.chooseBoosterdiv;
 			api.ui.chooseBoosterdiv = null;
 			game.ui.refresh();
+			game.clock.start();
 		});
 		
 	};
-	
+	game.clock.stop();
 	$(document.body).append(api.ui.chooseBoosterdiv);
 };
 

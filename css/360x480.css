@@ -77,7 +77,7 @@ min-height: 62px;	padding-left: 17px;	padding-top: 32px;	position: fixed;	width:
 .guiProgressBartrofeo360x480{height: 314px;  left: -1px; position: fixed; top: 123px; width: 43px;background-image: url(../360x480/progressbar.png);background-repeat:no-repeat;}
 /*.guiProgressBarmedio360x480{width: 12px;height: 280px;bottom: 0px;left: 7px;position: absolute;}*/
 .guiProgressBarmedio360x480{width: 7px;height: 270px;margin-left:13px;margin-top:33px}
-.guiProgressBarinterna360x480{margin-left:0px;width: 6px;height: 270px;background-image: url("../360x480/progressbarinterna.png");background-repeat:no-repeat;}
+.guiProgressBarinterna360x480{position: absolute; bottom: 8px; margin-left:0px;width: 6px;height: 270px;background-image: url("../360x480/progressbarinterna.png");background-repeat:no-repeat;}
 /* =========== pantalla bonus======================================================================================================*/
 .containerbonus360x480{width: 360px;height: 480px; background-image: url("../360x480/bonus.png");position: absolute;}
 .bonusaccepyshare360x480{width: 114px;height: 45px; top:423px;left:126px;background-image: url("../360x480/bonusacept.png");position: absolute;background-repeat:no-repeat;}

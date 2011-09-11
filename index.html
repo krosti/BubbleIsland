@@ -22,12 +22,13 @@
 	<script src="jquerymd5.js" type="text/javascript" charset="utf-8"></script> 
 	<script src="api.js" type="text/javascript" charset="utf-8"></script> 
 	<script src="apileaderboard.js" type="text/javascript" charset="utf-8"></script>
-	<script src="apisoftgames.js" type="text/javascript" charset="utf-8"></script>
+	
 	<script src="apibonus.js" type="text/javascript" charset="utf-8"></script> 
 	<script src="jqueryMobile.js" type="text/javascript" charset="utf-8"></script>
 	<script src="soundapi.js" type="text/javascript" charset="utf-8"></script>
 	<!--
 	 game
+	 <script src="apisoftgames.js" type="text/javascript" charset="utf-8"></script>
 	 <script src="jqueryMobile.js" type="text/javascript" charset="utf-8"></script> 
 	<script src="playtomic.js" type="text/javascript" charset="utf-8"></script>
 	 <script src="phonegap.js" type="text/javascript" charset="utf-8"></script> 
@@ -358,6 +359,7 @@ if((screen.width == "854" && screen.height == "480") || (screen.width == "854" &
 /*if(screen.width <= 640) gameSize = "640x960";
 if(screen.width <= 320) gameSize = "320x480";*/
 //var gameSize = "320x480";
+var gameSize = "320x480";
 if(gameSize == "854x480") linesPerLevel = 3;
 
 var loader = new Loader('progress', gameSize);

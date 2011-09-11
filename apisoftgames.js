@@ -35,7 +35,7 @@ api.softgame.currentBuy = 0;
 
 api.softgame.startSignature = function(type){	 
 	(type == 'RESTApi')? api.softgame.split = '|' : api.softgame.split = '||';
-	//api.softgame.signature = api.softgame.game_id;
+	api.softgame.signature = api.softgame.game_id;
 };
 
 api.softgame.addSignatureParm = function(p){
@@ -43,7 +43,7 @@ api.softgame.addSignatureParm = function(p){
 };
 
 api.softgame.getSignature = function(){
-	api.softgame.addSignatureParm(api.softgame.game_id);
+	//api.softgame.addSignatureParm(api.softgame.game_id);
 	api.softgame.addSignatureParm(api.softgame.game_secret);
 	api.softgame.signature = api.softgame.signature.toUpperCase();
 	api.softgame.signature = $.md5(api.softgame.signature).toUpperCase();
